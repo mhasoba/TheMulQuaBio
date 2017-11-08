@@ -1,0 +1,280 @@
+\chapter{Using \LaTeX~for scientific documents}
+\label{chap:latex}
+
+\section{What's \LaTeX?} 
+
+In your research, you will produce papers, reports and -- very 
+importantly -- your thesis. These documents can be written using a 
+WYSIWYG (What You See Is What You Get) editor (e.g., Word). However, an 
+alternative especially suited for scientific publications is \LaTeX. In 
+\LaTeX, the document is simply a text file ({\tt .tex}). Text 
+formatting is using markups (like HTML). The file is then ``compiled'' 
+(like source code of a programming language) into a file -- typically 
+{\tt .pdf}. 
+
+\section{Why \LaTeX?}
+
+\begin{compactitem}
+  \item The input is a small, portable text file
+  \item \LaTeX~compilers are freely available for all OS'
+  \item Exactly the same result on any computer (not true for Word)
+  \item \LaTeX~produces beautiful, professional looking docs (e.g., like 
+this one!)
+  \item Mathematical formulas (esp complex ones) are easy to write
+  \item \LaTeX~is very stable -- current version basically same since 1994! 
+(9 major versions of MS Word since 1994 -- with compatibility issues)
+    \item \LaTeX~is free!  
+    \item Many journals provide \LaTeX~templates, making formatting quicker 
+    \item Bibliographies are a breeze and work with Mendeley and Zotero
+    \item Plenty of online support available -- your question has probably 
+already been answered
+    \item You can integrate \LaTeX~into a workflow to auto-generate lengthy 
+and complex documents (like your thesis).  
+\end{compactitem}
+
+\begin{center}	
+	\includegraphics[width=.4\textwidth]{miktex.png}
+\end{center}
+
+\subsection{Limitations of \LaTeX}
+
+\begin{compactitem}\itemsep10pt
+  \item It has a steeper learning curve.
+  
+  \item Can be difficult to manage revisions with multiple authors -- 
+especially if they don't use \LaTeX! (I have a dark secret)
+    
+  \item Typesetting tables can be a bit complex.
+
+    \item Images and floats don't jump like Word, but if you don't use the 
+right package, they can be difficult to place where you want! 
+
+  \end{compactitem}
+
+\section{Installing \LaTeX}
+ 
+\begin{lstlisting} 
+sudo apt-get install texlive-full texlive-fonts-recommended 
+latex-beamer texlive-pictures texlive-latex-extra imagemagick       
+\end{lstlisting}
+
+We will use a text editor in this lecture, but you can use one of a 
+number of WYSIWYG frontends (e.g., {\tt Lyx}, {\tt TeXmacs}), as well 
+as GUI's ({\tt texmaker}, {\tt Gummi}, {\tt TeXShop}, etc). Overleaf (\url{https://www.overleaf.com/})
+(now merged with Sharelatex) is also very good (and works with git), especially for 
+collaborating with non \LaTeX~-ers (your university may have a blanket 
+license for the pro version).  
+
+\section{A first \LaTeX~example}
+
+\begin{compactitem}[$\quad\star$]\itemsep4pt{}
+  \item Open geany and type the following in a file
+	{\tt Week1/Code/FirstExample.tex}:
+\end{compactitem}
+
+\lstinputlisting{Practicals/Code/FirstExample.tex}
+
+Now, let's get a citation for Einstein's paper:
+
+\begin{compactitem}[$\quad\star$]\itemsep4pt{}
+\item In Google Scholar, go to ``settings'' (upper right corner) and choose
+BibTeX as bibliography manager. 
+  \item Now type ``does the energy of a body einstein 1905''
+  \item The paper should be the one on the top. 
+  \item Click `` Import into BibTeX'' should show the following text, that you
+will save in the file {\tt FirstBiblio.bib} (in the same directory as
+{\tt FirstExample.tex})
+{\tiny \lstinputlisting{Practicals/Code/FirstBiblio.bib}}
+  \end{compactitem}
+
+Now we can create a {\tt .pdf} of the article. 
+\begin{compactitem}[$\quad\star$]\itemsep4pt{}
+  \item In the terminal type (are you the right directory?!):
+  \end{compactitem}
+
+\begin{lstlisting}
+$ pdflatex FirstExample.tex
+$ pdflatex FirstExample.tex
+$ bibtex FirstExample
+$ pdflatex FirstExample.tex
+$ pdflatex FirstExample.tex
+\end{lstlisting}
+
+This should produce the file {\tt FirstExample.pdf}:
+    
+\begin{center}
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.5pt}
+\fbox{\includegraphics[width = 0.5\linewidth]{FirstExample.pdf}}
+\end{center}
+
+\subsection{A bash script to compile \LaTeX}
+
+You can of course write a useful little bash script to compile latex 
+with bibtex! 
+
+Type the following script and call it {\tt CompileLaTeX.sh} (you know 
+where to put it!):
+
+\lstinputlisting[language=bash]{Practicals/Code/CompileLaTeX.sh}
+
+How do you run this script? The same as your previous bash scripts, so 
+\begin{lstlisting}	
+$ bash CompileLaTeX.sh FirstExample
+\end{lstlisting}
+
+Why have I not written the {\tt *.tex} extension of {\tt FirstExample} 
+in the command above?  
+
+\section{A brief \LaTeX~tour}
+
+\begin{compactitem}\itemsep12pt
+\item Spaces, new lines and special characters:
+
+\begin{compactitem} \setlength{\itemindent}{-1em}\itemsep2pt
+  \item Several spaces in your text editor are treated as one space in the
+typeset document
+  \item Several empty lines are treated as one empty line
+  \item One empty line defines a new paragraph
+  \item Some characters are ``special'':\# \$ \% \^{} \& \_ \{ \}
+\~{} \textbackslash. 
+  \item To type these special characters, you have to add a ``backslash'' in
+front, e.g., \textbackslash\$ produces \$.
+\end{compactitem}
+
+\item Document structure:
+
+\begin{compactitem} \setlength{\itemindent}{-1em}\itemsep2pt
+  \item Each \LaTeX~command starts with \textbackslash (e.g., to get \LaTeX,
+you need {\tt \textbackslash{LaTeX}}
+  \item The first command is always {\tt \textbackslash{documentclass}} defining
+the type of document (e.g., {\tt article, book, report, letter}).
+  \item You can set several options. For example, to set size of text to 10
+points and the letter paper size: {\tt
+\textbackslash{documentclass[10pt,letterpaper]\{article\}}}.
+
+\end{compactitem}
+
+  \item After having declared the type of document, you can specify packages
+    you want to use. The most useful are:
+
+\begin{compactitem}
+  \item{\tt \textbackslash{usepackage\{color\}}}: use colors for text in your
+document.
+  \item{\tt \textbackslash{usepackage\{amsmath,amssymb\}}}: American
+Mathematical Society formats and commands for typesetting mathematics. 
+  \item{\tt \textbackslash{usepackage\{fancyhdr\}}}: fancy headers and footers. 
+  \item{\tt \textbackslash{usepackage\{graphicx\}}}: include figures in pdf, ps,
+eps, gif and jpeg.
+  \item{\tt \textbackslash{usepackage\{listings\}}}: typeset source code for
+various programming languages.
+  \item{\tt \textbackslash{usepackage\{rotating\}}}: rotate tables and figures.
+  \item{\tt \textbackslash{usepackage\{lineno\}}}: line numbers.
+\end{compactitem}
+
+\item Once you select the packages, you can start your document with {\tt
+\textbackslash{begin\{document\}}}, and end it with {\tt
+\textbackslash{end\{document\}}}.
+
+\end{compactitem}
+
+\section{\LaTeX~templates}
+
+There a lots of useful \LaTeX templates out there. As an example of 
+structure of a document, take the article template provided by the 
+journal PNAS:
+
+{\tiny \lstinputlisting{Practicals/Code/PnasExample.tex}}
+
+I have added some templates in the {\tt CMEEMasteRepo} that you should 
+have a look and play around with
+
+\section{Typesetting math}
+
+There are two ways to display math 
+
+ \begin{enumerate}
+
+  \item First, one can produce inline mathematics (i.e., within the text).
+    \item Second, one can produce stand-alone, numbered equations and formulae.
+    
+   \end{enumerate}
+   
+For inline math, the ``dollar'' sign flanks the math to be typeset. For 
+example, the code:
+\begin{lstlisting}
+$\int_0^1 p^x (1-p)^y dp$
+\end{lstlisting}
+
+Becomes $\int_0^1 p^x (1-p)^y dp$
+
+For numbered equations (almost always a great idea), \LaTeX~provides 
+the {\tt equation} environment:
+
+\begin{lstlisting}
+
+\begin{equation}
+\int_0^1 \left(\ln \left( \frac{1}{x} \right) 
+\right)^y dx = y!
+\end{equation}
+
+\end{lstlisting}
+
+Becomes:
+\begin{equation}
+\int_0^1 \left(\ln \left( \frac{1}{x} \right) \right)^y dx = y!
+\end{equation}
+
+\section{A few more tips}
+
+The following tips might prove handy:
+
+\begin{compactitem}
+\item \LaTeX~has a full set of symbols and operators (plenty of lists online)
+\item Long documents can be split into separate {\tt.tex} documents and
+combined using {\tt input}
+\item Long documents can be split into separate {\tt.tex} documents and
+\item Figures can be included using the {\tt graphicx} package
+\item You can use Mendeley to export and maintain {\tt .bib} files
+\item You can redefine environments and commands in the preamble 
+\end{compactitem}
+
+\subsection[Practical]{Practicals}
+  
+	Test {\tt CompileLaTeX.sh} with {\tt FirstExample.tex} and 
+	bring it under verson control under{\tt CMEECourseWork/Week1} in 
+	your repository. Make sure that {\tt CompileLaTeX.sh} will work if 
+	I ran it from my computer using {\tt FirstExample.tex} as an input.
+
+\section[Practical]{Practicals wrap-up}
+
+Make sure you have your {\tt Week 1} directory organized 
+with {\tt Data}, {\tt Sandbox} and {\tt Code} with the necessary 
+files and this week's (functional!) scripts in there. Every script 
+should run without errors on my computer. This includes the five 
+solutions (single-line commands you came up with) in {\tt 
+UnixPrac1.txt}.
+
+\begin{center}
+	\it Commit and push everything by next Wednesday 5 PM.
+\end{center} 
+
+\section{Readings \& Resources}
+
+\begin{itemize}
+
+\item The Visual \LaTeX~ FAQ: sometimes it is difficult to describe what you
+want to do!\\
+\url{http://get-software.net/info/visualFAQ/visualFAQ.pdf}
+
+\item Myriad online resources for \LaTeX, including:\\
+\url{www.http://en.wikibooks.org/wiki/LaTeX/Introduction},\\
+\url{www.ctan.org/tex-archive/info/lshort/english/}\\
+\url{http://ftp.uni-erlangen.de/mirrors/CTAN/info/lshort/english/lshort.pdf}
+\item Beautiful presentations in \LaTeX: 
+\url{http://tug.org/pracjourn/2005-2/miller/miller.pdf}
+\item Bibliographies in \LaTeX: \url{http://schneider.ncifcrf.gov/latex.html}
+
+\end{itemize}
+
+

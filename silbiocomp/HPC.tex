@@ -1,0 +1,87 @@
+\chapter{High Performance Computing}
+\label{chap:HPC}
+
+These instructions also apply, with suitable modifications, for R 
+scripts.
+
+\section{Preparing scripts for running on the HPC}
+
+The script you will run needs a sha-bang (telling it what shell to run, 
+usually bash), you need to allocate resources to PBS (such as walltime, 
+number of processors, and memory\footnote{Most of the cx1 nodes have 
+multiple cores, so there's no fixed memory assigned to each core. If 
+you use more memory than your request on your \#PBS directive, your job 
+is likely to be terminated. If you request more memory than is 
+available, the job will remain queued until sufficient memory is free 
+for the job to run}, using the {\tt \#PBS} directive), and tell it what 
+Python script to run. The bash script could look something like this:
+
+\lstinputlisting{Practicals/Code/PythonHPC.sh}
+
+Or, you can do something like this to move all files one-by-one to 
+avoid exceeding memory allocation ({\tt *.p} indicates that you used 
+{\tt pickle} to dump results):
+
+\begin{lstlisting}
+for f in *.p; do
+	echo "Processing $f..."
+	mv $f $WORK/TestPyHPC/output/
+done
+\end{lstlisting}
+
+NOTE: PBS  allows  you  to  submit jobs using a Python (instead of 
+shell) script as well. Look up the qsub manual ({\tt man qsub}) in the 
+HPC terminal, or visit 
+\url{https://gist.github.com/nobias/5b2373258e595e5242d5}
+
+Your HPC enabled Python code could look like this:
+
+\lstinputlisting{Practicals/Code/MyHPCScript.py}
+
+% In your Python code you need to set the environment so that it
+% knows its working directory and where to output files:
+
+% \begin{lstlisting}
+  % home <- os.getenv('HOME')
+  % ..
+  % save(object, file=`home/whatever/object.RData')
+% \end{lstlisting}
+
+\section{Copying scripts from your computer to the HPC server}
+ 
+Secure copy bash script file to {\tt \$HOME} on HPC server following
+{\tt \$ scp source host:destination} structure, e.g.:
+
+\begin{lstlisting}
+$ scp script.sh user@login.cx1.hpc.ic.ac.uk:/home/user/whatever/script.sh
+\end{lstlisting}
+
+\section{Running scripts on the HPC}
+
+Open a secure shell (ssh):
+
+\begin{lstlisting}
+$ ssh user@login.cx1.hpc.ic.ac.uk
+\end{lstlisting}
+
+Check for available modules:
+
+\begin{lstlisting}
+$ module avail
+\end{lstlisting}
+
+Your job then needs to be queued using {\tt qsub} (PBS):
+
+\begin{lstlisting}
+  $ qsub -j eo script.sh
+\end{lstlisting}
+
+where {\tt -j eo} is an option to join both output and error into one 
+file. Running the script will produce a job output (anything that is 
+printed in the shell terminal (e.g. {\tt echo})), and an error file 
+(related to whether the script was successful or not), in the form of 
+\{scriptname\}.o\{job id\} and \{scriptname\}.e\{jobid\}.\\
+
+The {\tt qstat} command provides information on the job being submitted 
+(which queue (short, medium, long), status, etc.) as well as 
+information on all queues available (-q, -Q).

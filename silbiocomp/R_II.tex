@@ -1,0 +1,553 @@
+\chapter{Advanced topics in {R}}
+\label{chap:R_II}
+
+In this chapter, you will learn some additional topics in R to
+\begin{itemize}
+	\item Make data wrangling, analyses, and simulations 
+	more efficient using vectorization and tools such as {\tt plyr}
+
+	\item Use some advanced tools for control flows and looping
+	
+	\item Generate random numbers for statistical simulations and looping
+	
+	\item Find and fix errors in R code using debugging 
+
+	\item Become aware of some additional tools and topics in R 
+	(accessing databases, building your own packages, etc.). 
+	
+\end{itemize}
+
+\section{Vectorization}
+R is very slow at running cycles ({\tt for} and {\tt while} loops). 
+This is because R is a ``nimble'' language: at execution time R does 
+not know what you'are going to perform until it ``reads'' the code to 
+perform. Compiled languages such as {\tt C}, know exactly what the flow 
+of the program is, as the code is ``compiled'' before execution. 
+
+As a metaphor, {\tt C} is a musician playing a score she has seen 
+before -- optimizing each passage, while R is playing it ``a prima 
+vista'' (i.e., at first sight) -- this can slow code execution and 
+operations down. Let's see an example that illustrates this point.
+
+\begin{compactitem}[$\quad\star$]
+		\item Type (save in {\tt Code}) as {\tt Vectorize1.R} the following
+		script, and run it (it sums all elements of a matrix):
+\end{compactitem}
+
+\lstinputlisting[language=R]{Practicals/Code/Vectorize1.R}
+
+Note the {\tt system.time} R function --- it calculates how much time 
+your code takes.
+
+Both {\tt SumAllElements()} and {\tt sum()} approaches are correct, and 
+will give you the right answer. However, the inbuilt function {\tt 
+sum()}  is 100 times faster than the other, because it is uses 
+vectorization that avoids the amount of looping that {\tt 
+SumAllElements()} uses!
+
+\begin{tipbox}
+	In R, even if you should try to avoid loops, in practice, it is often 
+	much easier to throw in a {\tt for} loop, and {\it then} ``optimize'' 
+	the code to avoid the loop if the running time is not 
+	satisfactory. Therefore, it won't hurt you to become really familiar 
+	with loops and looping as you learned in Chapter \ref{chap:RI}  
+\end{tipbox} 
+
+Fortunately, R has several functions that can operate on entire vectors 
+and matrices without requiring looping (Vectorization). That is, 
+vectorizing a computer program means you write it such that as many 
+operations as possible are applied to whole data structure (vectors, 
+matrices, dataframes, lists, etc) at one go, instead of its individual 
+elements. 
+
+Let's learn about some important R functions that allow vectorization 
+in the following sections.
+
+\subsection{The {\tt *apply} family of functions}
+
+There are a family of functions called {\tt *apply} in R that vectorize 
+your code for you. These functions are described in the help files (e.g. 
+{\tt ?apply}). 
+
+For example, {\tt apply} can be used when you want to apply a function 
+to the rows or columns of a matrix (and higher-dimensional analogues -- 
+remember arrays!). This is not generally advisable for data frames as 
+it will first need to coerce the data frame to a matrix first.
+
+\begin{compactitem}[$\quad\star$]
+\item Type the following in a script file called {\tt apply1.R}, save 
+it to your {\tt Code} directory, and run it:
+\end{compactitem}
+
+\lstinputlisting[language=R]{Practicals/Code/apply1.R}
+
+That was using apply on some of R's inbuilt functions. You can use 
+apply to define your own functions. Let's try it.
+\begin{compactitem}[$\quad\star$]
+\item Type the following in a script file called {\tt apply2.R}, save 
+it to your {\tt Code} directory, and run it:
+\end{compactitem}
+
+\lstinputlisting[language=R]{Practicals/Code/apply2.R}
+
+There are many other methods: {\tt lapply}, {\tt sapply}, {\tt eapply}, 
+etc. Each is best for a given data type. For example, {\tt lapply} is 
+best for R lists. Have a look at {\scriptsize
+\url{https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family}} 
+for some guidelines. 
+
+\subsubsection{The {\tt tapply} function}
+We will look at {\tt tapply}, which is particularly useful because it 
+allows you to apply a function to subsets of a vector in a dataframe, 
+with the subsets defined by some other vector in the same dataframe, 
+usually a factor (this could be useful for your Chapter \ref{chap:R_data} 
+pound hill data analysis, for example!). 
+
+This makes it a bit of a different member of the {\tt *apply} family.  
+Try this:
+\begin{lstlisting}
+> x <- 1:20 # a vector
+
+# A factor (of the same length) defining groups:
+> y <- factor(rep(letters[1:5], each = 4)) 
+
+# Add up the values in x within each subgroup defined by y:
+> tapply(x, y, sum)  
+ a  b  c  d  e 
+10 26 42 58 74
+\end{lstlisting}
+ 
+\subsection{Using {\tt by}}
+
+You can also do something similar to {\tt tapply} with the {\tt by} 
+function, i.e., apply a function to a dataframe using some factor to 
+define the subsets. Try this:
+
+\begin{lstlisting}
+## import some data
+attach(iris)
+print (iris)
+
+## use colMeans (as it is better for dataframes)
+by(iris[,1:2], iris$Species, colMeans)
+by(iris[,1:2], iris$Petal.Width, colMeans)
+\end{lstlisting}
+
+\subsection{Using {\tt replicate}}
+
+The {\tt replicate} function is useful to avoid a loop for function 
+that typically involves random number generation (more on this below). 
+For example:
+
+\begin{lstlisting}
+> print(replicate(10, runif(5))) 
+\end{lstlisting}
+This generates a 10 $\times$ 5 matrix of uniformly distributed random 
+numbers. 
+
+\subsection{Using {\tt plyr} and {\tt ddply}}
+
+The {\tt plyr} package combines the functionality of the {\tt *apply} 
+family, into a few handy functions. Look up 
+\url{http://plyr.had.co.nz/}.
+
+In particular, {\tt ddply} is very useful, because for each subset of a 
+data frame, it applies a function and then combines results into 
+another data frame (very useful for Practical \ref{sec:PPPrac2} in Chapter 
+\ref{chap:R_data}!). In other words, ``ddply '' means: take a data frame, 
+split it up, do something to it, and return a data frame.  
+
+Look up \url{http://seananderson.ca/2013/12/01/plyr.html} and 
+\url{https://www.r-bloggers.com/transforming-subsets-of-data-in-r-with-by-ddply-and-data-table/} 
+for examples.	There you will also see a comparison of speed of {\tt 
+ddply} vs {\tt by} at the latter web page--- {\tt ddply} is actually 
+slower than other vectorized methods, as it trades-off compactness of 
+use for some of the speed of vectorization! Indeed, overall functions 
+in {\tt plyr} can be slow if you are working with very large datasets 
+that involve a lot of subsetting (analyses by many groups or grouping 
+variables). 
+
+\begin{tipbox}
+The base {\tt *apply} functions remain useful and worth 
+knowing even if you do get into {\tt plyr} or better still, {\tt 
+dplyr} (see Chapter \ref{chap:R_data})
+\end{tipbox}
+
+\section{Some more control flow tools}
+
+Let's look at some more control tools, which we first learned about in 
+Chapter \ref{chap:RI}.  
+
+\subsection{{\tt break}ing out of loops}
+Often it is useful (or necessary) to {\tt break} out of a loop when 
+some condition is met. Use {\tt break} (like in pretty much any other 
+programming language, like {\tt python}) in situations when you cannot 
+set a target number of iterations, as you would with a {\tt while} loop 
+(Chapter 1). Try this (type into {\tt break.R} and save in {\tt Code}):
+
+\lstinputlisting[language=R]{Practicals/Code/break.R}
+
+\subsection{Using {\tt next}}
+You can also skip to next iteration of a loop. Both {\tt next} and {\tt 
+break} can be used within other loops ({\tt while}, {\tt for}). Try 
+this (type into {\tt next.R} and save in {\tt Code}):
+
+\lstinputlisting[language=R]{Practicals/Code/next.R}
+
+This script checks if a number is odd using the ``modulo'' 
+operation and prints if it is.
+
+\begin{tipbox}
+{\bf Reminder}: Indent your code! Indentation helps you see 
+the flow of the logic, rather than flattened version, which is hard for 
+you and everybody else to read. I recommend using the {\it tab} key to 
+indent.
+\end{tipbox}
+
+\section{Practicals}
+
+\begin{enumerate}
+	
+\item {\bf A vectorization challenge}
+
+The Ricker model is a classic discrete population model which was 
+introduced in 1954 by Ricker to model recruitment of stock in fisheries.
+It gives the expected number (or density) $N_{t+1}$ of individuals in 
+generation $t + 1$ as a function of the number of individuals in the 
+previous generation $t$:
+\begin{equation}
+N_{t+1} = N_t e^{r\left(1-\frac{N_t}{k}\right)}
+\end{equation} 
+Here $r$ is intrinsic growth rate and $k$ as the 
+carrying capacity of the environment. Try this script that runs it:
+
+\lstinputlisting[language=R]{Practicals/Code/Ricker.R}
+
+Now open and run the script {\tt Vectorize2.R} (available on the 
+bitbucket repository). This is the stochastic Ricker model (compare 
+with the above script to see where the stochasticity (random error) 
+enters). Now modify the script to complete the exercise given. 
+ 
+{\it You will be marked on this one based upon how much faster your solution 
+is compared to mine!}
+
+\item {\bf Extra Credit:} Implement the python versions of {\tt 
+Vectorize1.R} and {\tt Vectorize2.R} (call them {\tt 
+Vectorize1.py} and {\tt Vectorize2.py} respectively). Then write a bash 
+script that compares the computational speed of the four scripts. the 
+bash script should display meaningful summary of the results in the 
+terminal.       
+ 
+
+\end{enumerate}
+
+\section{Generating Random Numbers}
+
+You will probably need to generate random numbers at some point in your 
+journey towards becoming a proper data analyst or quantitative 
+biologist. 
+
+R has many routines for generating random samples from various 
+probability distributions --- we have already used {\tt runif()}, {\tt 
+rnorm()}. There are a number of random number distributions that you can sample 
+or generate random numbers from: 
+
+\begin{tabular}{p{5.4cm} p{9cm}}
+	{\tt rnorm(10, m=0, sd=1)} & Draw 10 normal random numbers with mean 0 and s.d. 1\\
+	{\tt dnorm(x, m=0, sd=1)} & Density function\\
+	{\tt qnorm(x, m=0, sd=1)} & Cumulative density function\\
+	{\tt runif(20, min=0, max=2)} & Twenty random numbers from uniform
+			[0,2]\\
+	{\tt rpois(20, lambda=10)} & Twenty random numbers from
+			Poisson($\lambda$)\\
+\end{tabular}\\
+
+\subsection{``Seeding'' random number generators}   
+Before proceeding further, note that computers don't really generate mathematically random numbers, but 
+instead a sequence of numbers that are close to random: ``pseudo-random 
+numbers''. They are generated based on some iterative formula:
+
+\[ x_{new} = f( x_{old}) \mod N \]
+
+where modulo operation provides the ``remainder'' division.
+
+So to generate the first random number, you need a {\bf seed}. Setting 
+the seed allows you to reliably generate the same sequence of numbers, 
+which can be useful when debugging programs (next section). 
+
+Now, try this:
+
+\begin{lstlisting}
+> set.seed(1234567)
+> rnorm(1)
+ 0.1567038
+\end{lstlisting}
+
+What happened?! If this were truly a random number, how would everybody 
+get the same answer? Now try {\tt rnorm(10)} and compare the results 
+with your neighbour. Thus "random" numbers generated in R and in any 
+other software are in fact "deterministic", but from a very complex 
+formula that yields numbers with properties like random numbers. 
+
+Effectively, {\tt rnorm} has an enormous list that it cycles through. 
+The random seed starts the process, i.e., indicates where in the list 
+to start. This is usually taken from the clock when you start R.
+
+But why bother with this? Well, for debugging (next section). Bugs in 
+code can be hard to find --- harder still if you are generating random 
+numbers, so repeat runs of your code may or may not all trigger the 
+same behaviour. You can set the seed once at the beginning of the code 
+--- ensuring repeatability, retaining (pseudo) randomness. Once 
+debugged, if you want, you can remove the set seed line.
+
+To try out how sampling works, type the following into {\tt sample.R} 
+and save in {\tt Code}:
+
+\lstinputlisting[language=R]{Practicals/Code/sample.R}
+
+\section{Errors and Debugging}
+
+\subsection{"Catching" errors}
+
+Often, you don't know if a simulation or a R function will work on a 
+particular data or variable, or a value of a variable (can happen in 
+many stats functions). 
+
+Indeed, as most of you must have already experienced by now, there can 
+be frustrating, puzzling bugs in programs that lead to mysterious 
+errors. Often, the error and warning messages you get are 
+un-understandable, especially in R! 
+
+Rather than having R throw you out of the code, you would rather catch 
+the error and keep going. This can be done using {\tt try}. Modify {\tt 
+sample.R} as follows the 
+following into {\tt try.R} and save in {\tt Code} (what does this 
+script do?):
+
+\lstinputlisting[language=R]{Practicals/Code/try.R}
+
+Note the functions {\tt sample} and {\tt stop} in the above script.  
+Also check out {\tt tryCatch}.
+
+\subsection{Debugging}
+
+Once you have found an error, you would like to fix it. This is called 
+debugging. Here are some useful debugging functions in R : 
+
+\begin{itemize}\itemsep2pt
+
+\item Warnings vs Errors; converting warnings to errors: {\tt 
+stopifnot()} --- a bit like {\tt try}
+
+\item What to do when you get an error: {\tt traceback()}
+
+\item Simple {\tt print} commands in the right places can be useful 
+for testing (but not strongly recommended)
+
+\item Use of {\tt browser()} at key points in code --- my favourite option 
+(also look up  {\tt recover()})
+
+\item {\tt debug(fn)}, {\tt undebug(fn)} : More technical approach to 
+debugging --- explore them
+\end{itemize}
+
+Let's look at an example using {\tt browser()}. {\tt browser()} is 
+handy because it will allow you to "single-step" through your code. 
+Place it within your function at the point you want to examine (e.g.) 
+local variables. 
+
+Here's an  example usage of {\tt browser()} (type in {\tt browse.R} and 
+save in {\tt Code}):
+
+\lstinputlisting[language=R]{Practicals/Code/browse.R}
+
+Now, within the browser, you can enter expressions as 
+normal, or you can use a few particularly useful debug commands:
+\begin{itemize}
+\item {\tt n}: single-step 
+\item {\tt c}: exit browser and continue
+\item {\tt Q}: exit browser and abort, return to top-level.
+\end{itemize}
+
+\section{Building your own R packages} 
+
+You can packaging up your code, data sets and documentation to make a 
+{\it bona fide} R package. You may wish to do this for particularly 
+large projects that you think will be useful for others. Read {\it 
+Writing R Extensions} 
+(\url{cran.r-project.org/doc/manuals/r-release/R-exts.html} manual and 
+see {\it package.skeleton} to get started. The R tool set EcoDataTools 
+(\url{https://github.com/DomBennett/EcoDataTools}) and the package 
+{\tt cheddar} were written by Silwood Grad Students! 
+        
+\section{Sweave and knitr}
+
+Sweave and knitr are tools that allows you to write your Dissertation 
+Report or some other document such that it can be updated automatically 
+if data or R analysis change. Instead of inserting a prefabricated 
+graph or table into the report, the master document contains the R code 
+necessary to obtain it. When run through R, all data analysis output 
+(tables, graphs, etc.) is created on the fly and inserted into a final 
+document, which can be written using \LaTeX, LyX, HTML, or Markdown. 
+The report can be automatically updated if data or analysis change, 
+which allows for truly reproducible research. Check out 
+\url{https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr} and 
+\url{http://yihui.name/knitr/}.
+
+\section{Practicals} 
+
+\begin{enumerate}
+	
+\item Autocorrelation in weather (this Practical may make more sense 
+once you have done the R and Stats week where you will learn about 
+correlation coefficients and p-values).
+
+\begin{compactitem}[$\quad\star$]
+		
+\item Make a new script named {\tt TAutoCorr.R}, and save in {\tt Code}
+directory
+  
+\item At the start of the script, load and examine and plot \\ {\tt 
+KeyWestAnnualMeanTemperature.Rdata}, using {\tt load()} --- This is the 
+temperature in Key West, Florida for the 20th century.
+
+\item {\bf The question this script will help answer is}: Is the 
+temperature of one year significantly correlated with the next year 
+(successive years), {\it across the years}. That us you will be 
+calculating the correlation between $n-1$ pairs of years, where $n$ is 
+the total number of years. However, you can't use the standard p-value 
+calculated for a correlation coefficient (using {\tt R}'s {\tt cor()} 
+function -- see below) because measurements of climatic variables in 
+successive time-points in a time series (successive seconds, minutes, 
+hours, months, years, etc.) are {\it not independent}.
+
+\item Therefore,
+\begin{enumerate}\itemsep0pt
+\item Compute the appropriate correlation coefficient between successive 
+years and store it (look at the help file for {\tt cor()}
+\item Then repeat this calculation 10000 times by\\ 
+-- randomly permuting the time series (Hint: you can use the {\tt 
+sample} function that we learned about in this Chapter --- read the 
+help file for this function and experiment with it),\\
+-- then computing the correlation coefficient for each randomly permuted 
+year sequence and storing it\\
+\end{enumerate}
+
+\item Then calculate what fraction of the correlation coefficients from 
+step 2 were greater than that from step 1 (this is your approximate 
+p-value).
+
+\item {\it How do you interpret these results? Why? Present your 
+results and their interpretation in a pdf document written in \LaTeX 
+(please include the the document's source code as well).}
+
+\end{compactitem}
+
+\item{Mapping} (Extra Credit)
+
+Your project may not really need GIS, but you may still like/need to do 
+some mapping. You you can do it in R using the {\tt maps} package. In 
+this practical, you will map the Global Population Dynamics Database 
+(\url{https://www.imperial.ac.uk/cpb/gpdd/gpdd.aspx}) (GPDD). This is a 
+freely available database that was developed at Silwood). 
+
+If any of you are interested in doing a project around this database, 
+please contact David Orme or Samraat Pawar! It is a gold mine of as yet 
+under-utilized information. Note that the Living Planet Index 
+(\url{http://livingplanetindex.org/home/index}) is based upon these 
+data.
+
+\begin{compactitem}[$\quad\star$]
+\item Use {\tt load()} from {\tt GPDDFiltered.RData} that is available 
+on the bitbucket git repository --- have a look at the database field headers and 
+contents. 
+\item What you need is latitude and longitude information for a bunch of 
+species for which population time series are available in the GPDD
+\item Now use {\tt install.packages()} to install the package {\tt 
+maps}, as you did with {\tt ggplot2} --- hopefully without any 
+problems!
+\item Now create a script (saved under a sensible name in a sensible 
+location --- hint hint!) that:
+	\begin{enumerate}\itemsep0pt
+		\item Loads the maps package
+		\item Loads the GPDD data
+		\item Creates a world map (use the map function, read its help 
+		file, also google examples using {\item maps})
+		\item  Superimposes on the map all the locations from which we have 
+		data in the GPDD dataframe
+		\item Compare your map with a fellow student to check
+	\end{enumerate}
+
+\item {\it Based on this map, what biases might you expect in any analysis 
+based on the data represented? --- {\it include your answer as a comment at 
+the end of your R script}. } 
+\end{compactitem}
+
+\end{enumerate}
+
+\section{R Module Wrap up}
+ 
+ \subsection{Some comments and suggestions}
+
+Thanks for enduring through the week! Learning to program in R or any 
+other language, especially if it's your first-ever effort to learn 
+programming, demands perseverance. Y'all have shown admirable 
+quantities of this necessary quality. Keep going! I believe most if not 
+all of you have climbed a significant part of a steep learning curve. 
+Here are some things to keep in mind:
+
+\begin{itemize}\itemsep2pt
+
+\item There are many R nerds at Silwood that you can talk to --- {\it 
+They walk among us!}
+
+\item There is a Silwood R list that you can subscribe to: 
+\url{https://mailman.ic.ac.uk/mailman/listinfo/silwood-r}
+
+\item However, post questions only as a last resort! Google it first, 
+and even before that, make sure you revise this week's (and stats 
+week's) work.
+
+\item Solutions to this weeks Practicals will become available by 15th 
+Nov.
+
+\end{itemize}
+
+\section{Practicals wrap-up}
+
+  \begin{enumerate}
+
+	\item Review and make sure you can run all the commands, code 
+	fragments, and named scripts we have built till now and get the 
+	expected outputs.
+
+	\item Annotate/comment your code lines as much and as often as 
+	necessary using \#.
+	
+	\item Keep all code, data and results files organized in the {\tt 
+	Week3/} directory
+	 
+   \end{enumerate}
+
+\begin{center}
+	\it {\tt git add}, {\tt commit} and {\tt push} all your code and data 
+	from this chapter to your git repository by Wednesday, Nov 2, 5PM.
+\end{center}
+
+\section{Readings}
+
+\begin{itemize}
+    
+	\item See {\bf An introduction to the Interactive Debugging Tools in R,
+	Roger D Peng} for detailed usage. 
+	\url{http://www.biostat.jhsph.edu/~rpeng/docs/R-debug-tools.pdf}
+	
+	\item Friedrich Leisch. (2002) Sweave: Dynamic generation of statistical 
+	reports using literate data analysis. Proceedings in Computational 
+	Statistics, pages 575-580. Physica Verlag, Heidelberg, 2002. 
+	\url{http://www.statistik.lmu.de/~leisch/Sweave}
+	
+	\item Remember, R packages come with pdf guides/documentation!
+	
+\end{itemize}
+

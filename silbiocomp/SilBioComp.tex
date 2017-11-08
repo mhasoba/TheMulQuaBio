@@ -1,0 +1,229 @@
+\documentclass[11pt,a4paper]{book}
+\usepackage[vmargin=3cm,rmargin=3cm,lmargin=3cm]{geometry}
+\setlength\parindent{0pt}
+
+\usepackage{appendix}
+
+\usepackage{parskip}
+\usepackage{paralist}
+
+\usepackage[round]{natbib}
+\bibliography{refs}
+
+% \renewcommand{\chaptername}{Module}
+\usepackage{gensymb}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{amsmath}
+% \usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+
+\usepackage{framed} % For snugshade boxes
+\usepackage{sectsty}
+\usepackage{multicol} % used for the two-column index
+
+% \setlength{\intextsep}{0pt} %to reduce top and bottom spacing in wrapfigs
+\usepackage{wrapfig}
+\usepackage{graphicx}        % standard LaTeX graphics tool
+\graphicspath{{Graphics/}}
+\usepackage{float} %to override default float behavior of figures 
+
+% \usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage{tikz}
+\usetikzlibrary{positioning, fit}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=false,% hyperlinks will be black
+  linkbordercolor=white,% hyperlink borders will be invisibless
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage{verbatim}
+
+\renewcommand{\arraystretch}{1.3} %spacing between table rows
+
+\sloppy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[many]{tcolorbox} %for the tip boxes
+\newtcolorbox{tipbox}{
+breakable,
+freelance,
+colback=white,
+frame code={},
+overlay unbroken={
+  \fill[rounded corners=8pt,gray!30]
+    (title.south west) --
+    (title.south) -- 
+    ([yshift=20pt]title.south) --
+    ([yshift=20pt,xshift=4cm]title.south) --
+    ([xshift=4cm]title.south) --
+    (title.south east) {[sharp corners] --
+    ([yshift=-6pt]title.south east) -- 
+    ([yshift=-6pt]title.south west) } -- cycle;
+  \draw[rounded corners=8pt,gray,line width=1pt]
+    (title.west|-frame.south west) --
+    (title.south west) --
+    (title.south) -- 
+    ([yshift=20pt]title.south) --
+    ([yshift=20pt,xshift=4cm]title.south) --
+    ([xshift=4cm]title.south) --
+    (title.south east) --
+    (title.east|-frame.south east) --
+    cycle;
+  \node at ([xshift=2cm,yshift=4pt,font=]title.south) 
+    {\sffamily\Large Tip~\thetcbcounter};  
+    }, 
+overlay first={
+  \fill[rounded corners=8pt,gray!30]
+    (title.south west) --
+    (title.south) -- 
+    ([yshift=20pt]title.south) --
+    ([yshift=20pt,xshift=4cm]title.south) --
+    ([xshift=4cm]title.south) --
+    (title.south east) {[sharp corners] --
+    ([yshift=-6pt]title.south east) -- 
+    ([yshift=-6pt]title.south west) } -- cycle;
+    \draw[rounded corners=8pt,gray,line width=1pt]
+    (title.west|-frame.south) --
+    (title.south west) --
+    (title.south) -- 
+    ([yshift=20pt]title.south) --
+    ([yshift=20pt,xshift=4cm]title.south) --
+    ([xshift=4cm]title.south) --
+    (title.south east) --
+    (title.south east|-frame.south);
+  \node at ([xshift=2cm,yshift=4pt,font=]title.south) 
+    {\sffamily\Large Tip~\thetcbcounter};  
+  },
+overlay middle={
+  \draw[rounded corners=8pt,gray,line width=1pt]
+    (title.west|-frame.south) --
+    (title.west|-frame.north);
+  \draw[rounded corners=8pt,gray,line width=1pt]
+    (title.east|-frame.south) --
+    (title.east|-frame.north);
+  },
+overlay last={
+  \draw[rounded corners=8pt,gray,line width=1pt]
+    (title.west|-frame.north) --
+    (title.west|-frame.south) --
+    (title.east|-frame.south) --
+    (title.east|-frame.north);
+  },
+title={\mbox{}},
+% top=12pt,
+fontupper=\bf,
+% oversize=0.5cm,
+before={\vskip28pt\par\noindent},
+after={\par\vskip12pt},
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage [autostyle]{csquotes}
+\MakeOuterQuote{"}
+
+\usepackage{epigraph}
+
+
+% \input{inputs/rgb}
+\definecolor{shadecolor}{rgb}{1,.9,.3}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lightgray}{gray}{0.75}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{gray}{gray}{0.5}
+\definecolor{green}{rgb}{0,0.5,0}
+\definecolor{lightgreen}{rgb}{0,0.7,0}
+\definecolor{purple}{rgb}{0.5,0,0.5}
+\definecolor{darkred}{rgb}{0.5,0,0}
+
+\usepackage[procnames]{listings}
+\lstset{
+	literate={~} {$\sim$}{1}, % set tilde as a literal (no process)
+	% literate={\$}{{\textcolor{blue}{\$}}}{2},
+	backgroundcolor=\color{shadecolor},
+	tabsize=4,
+	rulecolor=,
+	language=bash,
+        basicstyle=\scriptsize\ttfamily\setstretch{1},
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numbers=none
+        % numberstyle=\tiny, 
+        % stepnumber=2, 
+        % numbersep=5pt
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	
+\title{Introduction to Biological Computing\\
+ \vspace{24pt} 
+AKA ``The Multilingual Quantitative Biologist''\\ 
+ \vspace{24pt} 
+ \large Department of Life Sciences (Silwood Park Campus)\\ Imperial College London}
+\author{Samraat Pawar (s.pawar@imperial.ac.uk)\\
+ ({\it with inputs from many others!}) 
+% \\
+% \vspace{20pt}
+  % \centering
+  % \includegraphics[height = .3in]{Imperial_Color1.pdf}
+  }
+
+\maketitle
+
+% \frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{chapter}{-1}
+
+\input{intro}
+\input{unix}
+\input{shellscripting}
+\input{git}
+\input{latex}
+\input{Python_I}
+\input{Python_II}
+\input{R_I}
+\input{R_II}
+\input{R_data}
+\input{HPC}
+\input{miniproj}
+\input{Appendices}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter 
+\begin{figure}
+	\begin{center}
+	\includegraphics[width = 0.7 \linewidth]{ballmer_peak.png}\\
+	\vspace{4pt}
+	\includegraphics[width = 0.7 \linewidth]{cautionary.png}\\
+	\includegraphics[width = 0.7 \linewidth]{automation.png}\\
+	\url{www.xkcd.com}
+	\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
