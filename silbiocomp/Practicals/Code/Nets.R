@@ -27,7 +27,7 @@ net <- graph.adjacency(as.matrix(links), mode = "directed", weighted=TRUE, diag=
 
 # Generate colors based on partner type:
 colrs <- c("green", "red", "blue")
-V(net)$color <- colrs[V(net)$Type]
+V(net)$color <- colrs[nodes$Type]
 
 # Set node size based on Number of PIs:
 # V(net)$size <- V(net)$Pis*0.9
@@ -49,7 +49,7 @@ svg("../Results/QMEENet.svg",width=7,height=7)
 
 plot(net, edge.curved=0, vertex.label.color="black") 
 
-# legend(x=-1.5, y=-1.1, c("University","Hosting Partner", "Non-hosting Partner"), pch=21,
-#        col="#777777", pt.bg=colrs, pt.cex=2, cex=.8, bty="n", ncol=1)
+legend(x=-1.5, y=-0.1, c("University","Hosting Partner", "Non-hosting Partner"), pch=21,
+       col="#777777", pt.bg=colrs, pt.cex=2, cex=.8, bty="n", ncol=1)
 
 dev.off()
