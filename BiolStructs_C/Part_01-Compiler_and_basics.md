@@ -162,6 +162,50 @@ The newline character can be included anywhere in a string. We can rewrite the p
     
 We won't go into the details of `printf()` here, because we haven't yet looked at the details of variables. However, [this list](http://www.cdf.toronto.edu/~ajr/209/notes/printf.html) shows that any C data type can be passed to `printf()` and formatted appropriately inside the string by using a formatting code.
 
+
+## Understanding the compiler
+
+The compiler is really at least three different programs: the **preprocessor**, the **compiler**, and the **linker**. 
+
+### The preprocessor
+The preprocessor's main job is textual: it reads through the source code and performs symbolic subsitutions into the base C language.
+For instance, it reads the `#include` directive and looks for the appropriate header file (in this case `stdio.h` somewhere on the system.
+After this, it performs textual substituions that the compiler reads. 
+As we will see later in this module, this becomes important when we want to work with multiple files, use other libraries, call functions out of order, or create special data types.
+
+### The compiler
+The compiler is the program that reads the source code and converts it to something the machine understands. 
+The preprocessed source code is read by the compiler and converted to assembly language. 
+This is a low-level language that is specific to the type and manufacturer of the CPU. 
+Thus a compiler must be written according to the instruction sets understood by particular CPU architectures and vendors which is why not all software can run on all the same systems. 
+Thus, the `gcc` family of compilers will write different assembly language instructions for different types of CPU and new CPU models and architectures require new compilers or updates to existing compilers.
+The assembly language code is then converted into machine language, a set of binary instructions that the computer's CPU actually 'understands'.
+
+The output file is therefore called a **binary**. 
+The files are usually called *object files* and typically have a `.o` or `.obj` extension.
+
+### The linker
+A program can consist of one or more object files, and can even include pre-compiled binaries from other places. 
+The linker's job is to build the **executable** from the individual compiled object files and output a program that is ready for use on your system.
+A clue to what the linker does and how it works is in our 'hello world' program.
+Recall that we used the `#include <stdio.h>` preprocessor directive and that we needed this in order to use the function `printf`.
+The linker 'knows' where the definition of `printf` is and 'builds it into' the new executable.
+
+### Building a program
+When the compiler built your 'hello world' program, it actually used at least one additional file that you didn't see. 
+We will look at this in more detail later.
+However, it is important to understand the chain of events that the compiler actually works with, as this really demystifies and simplifies more complicated aspects of programming later.
+
+Compiling therefore works in three phases: preprocessing, compiling, and linking. 
+Thus the complete structure of a compile command is more complicated:
+
+```gcc *<preprocessor instructions>* *<source file names>* *<linker instructions>*```
+
+The preprocessor instructions and the linker instructions typically specify paths to directories where include files (for the preprocessor) and other object files (for the linker) live. 
+In the case of `stdio.h` and `prinf`, we don't need to specify this information.
+These things come with the compiler (as they're part of the standard C library) and so the compiler already knows where they live.
+In the future, we will need to think about this.
+
 # Exercises
 
 ### 1- Breaking things
