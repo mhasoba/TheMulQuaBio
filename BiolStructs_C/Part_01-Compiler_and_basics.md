@@ -199,7 +199,7 @@ However, it is important to understand the chain of events that the compiler act
 Compiling therefore works in three phases: preprocessing, compiling, and linking. 
 Thus the complete structure of a compile command is more complicated:
 
-```gcc *<preprocessor instructions>* *<source file names>* *<linker instructions>*```
+```gcc <*preprocessor instructions*> <*source file names*> <*linker instructions*>```
 
 The preprocessor instructions and the linker instructions typically specify paths to directories where include files (for the preprocessor) and other object files (for the linker) live. 
 In the case of `stdio.h` and `prinf`, we don't need to specify this information.
