@@ -18,7 +18,7 @@ On your computer, create a text file called ```hello.c```. Open it in a text edi
 Now save the file and exit to the console.
 
 ## The compiler:
-As mentioned, C is a compiled programming language. That means, your text code is used to generate machine instructions prior to run time. The commonly used C compilers for Unix-like systems are the GNU C compiler gcc or cc. The use of the gcc compiler is pretty simple. At the command line, from within the directory containing your source file, enter `gcc` followed by the the name of your source file, like so:
+As mentioned, C is a compiled programming language. That means, your text code is used to generate machine instructions only once prior to run time. The commonly used C compilers for Unix-like systems are the GNU C compiler gcc or cc. The use of the gcc compiler is pretty simple. At the command line, from within the directory containing your source file, enter `gcc` followed by the the name of your source file, like so:
 
 ``` $ gcc hello.c```
 
@@ -36,7 +36,7 @@ Run this program by entering the following at the command prompt:
 
 ```$ ./a.out```
 
-If you wish to change the name of the executable you can do so by supplying additional command line arguments to `gcc`. In this case, simply append `-o` and the name you wish your executable to have:
+If you wish to apply a custom name for the executable you can do so by supplying additional command line arguments to `gcc`. In this case, simply append `-o` and the name you wish your executable to have:
 
 ```$ gcc hello.c -o myprogram```
 
@@ -44,11 +44,11 @@ Naturally, you run this executable simply by entering the command:
 
 ```$ ./myprogram```
 
-Compiling is specific to your local operating system. This limits portability, as you need to compile your code for different machines. However, it improves run-time execution speeds. An advanced topic that won't be covered in detail is program portability and compiling for different operating systems. However, we will emphasise practices that permit cross-platform portability, allowing your code to be re-compiled for different platforms and machine architectures with little or no pain.
+Compiling is specific to your particular operating system and system architecture. This limits portability, as you need to compile your code for different machines. However, it improves run-time execution speeds. The practices we learn in this module will focus on writing C code that maximizes portability, allowing it to be compiled on different systems with minimal pain.
 
 **The compiler vs. run-time:**
 
-There is remarkably little run-time magic that happens in C. Languages like Python, nd R run in an interpreter, while Java runs on a virtual machine which is basically a virtual computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
+There is remarkably little run-time magic that happens in C. Languages like Python and R run in an interpreter, while Java runs on a virtual machine which is basically a virtual computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
 
 
 ## Expressions and statements:
