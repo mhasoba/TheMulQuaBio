@@ -3,18 +3,18 @@
 
 	USAGE 
 	
-	python Assess.py StudentsFile AssessmentPath Week
+	python Assess.py StudentsFile RepoPath Week
 
 	or, if ready to git push: 
 	
-	Assess.py StudentsFile AssessmentPath Week --gitpush 
+	Assess.py StudentsFile RepoPath Week --gitpush 
 
-	example: python Assess.py ~/Documents/Teaching/IC_CMEE/2017-18/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2017-18/Coursework/Week1
+	example: python Assess.py ~/Documents/Teaching/IC_CMEE/2017-18/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2017-18/Coursework/StudentRepos/
 
 	ARGUMENTS: 
 
 	StudentsFile  : Full path to input file containing student details
-	RepoPath 			: Full path to location for students' local git repositories
+	RepoPath 			: Full path to location for students' local git repositories (without and ending "/")
 	Week					: Name of week to assess (Week1, Week2, etc.)
 	--gitpush 		: Optional flag indicating whether to push the assessment 
 										to student's git repository (default is False)
@@ -93,8 +93,10 @@ for Stdnt in Stdnts:
 		
 	Name = "".join((Stdnt[Hdrs.index('1st Name')] + Stdnt[Hdrs.index('Surname')]+\
 	'_'+Stdnt[Hdrs.index('Username')]).split()) #Remove any spaces from name
-	RepoPath = args.RepoPath+'StudentRepos/'+Name
+	RepoPath = args.RepoPath+'/'+Name
 	AzzPath = RepoPath+'/Assessment'
+	
+	# import ipdb; ipdb.set_trace()
 	
 	if not os.path.exists(RepoPath): # Clone repo first time if it does not already exist
 		subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
@@ -255,14 +257,24 @@ for Stdnt in Stdnts:
 			break
 
 		if not DatDir: azz.write('Data directory missing!\n\n')
-		if not ResDir: azz.write('Results directory missing!\n\n')
+	
+		if not ResDir: 
+			azz.write('Results directory missing!\n\n')
+		else:
+			ResNames = []
+			for root, dirs, files in os.walk(WeekPth + '/' + ResDir[0]):
+				for file in files:
+					ResNames.append(file) 
+			azz.write('Found following files in results directory: ' + ', '.join(ResNames) + '...\n\n')
+			if len(ResNames)>1: 
+					azz.write('ideally, Results directory should be empty other than, perhaps, a readme.')
 		
 		## Now get all code file paths for testing
 		Scripts = []
 		ScriptNames = []
 		for root, dirs, files in os.walk(WeekPth + '/' + CodDir[0]):
 			for file in files:
-				if file.lower().endswith(('.sh','.py','.r','.txt','.bib','.tex')):
+				if file.lower().endswith(('.sh','.py','.ipynb','.r','.txt','.bib','.tex')):
 					 Scripts.append(os.path.join(root, file))
 					 ScriptNames.append(file) 
 
@@ -327,6 +339,8 @@ for Stdnt in Stdnts:
 			
 			elif os.path.basename(name).lower().endswith('.r'):
 				p, output, err,	time = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
+			# elif os.path.basename(name).lower().endswith('.ipynb'):
+				# p, output, err,	time = run_popen('jupyter notebook ' + os.path.basename(name), timeout)
 			else:
 				os.chdir(scrptPath)
 				continue
