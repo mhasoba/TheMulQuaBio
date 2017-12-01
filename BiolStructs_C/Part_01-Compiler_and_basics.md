@@ -48,7 +48,7 @@ Compiling is specific to your local operating system. This limits portability, a
 
 **The compiler vs. run-time:**
 
-There is remarkably little run-time magic that happens in C. Languages like Python, Java and R run in an interpreter which is basically a virtual computer: the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system. Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
+There is remarkably little run-time magic that happens in C. Languages like Python, nd R run in an interpreter, while Java runs on a virtual machine which is basically a virtual computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
 
 
 ## Expressions and statements:
