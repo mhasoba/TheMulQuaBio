@@ -8,13 +8,7 @@ scripts.
 
 The script you will run needs a sha-bang (telling it what shell to run, 
 usually bash), you need to allocate resources to PBS (such as walltime, 
-number of processors, and memory\footnote{Most of the cx1 nodes have 
-multiple cores, so there's no fixed memory assigned to each core. If 
-you use more memory than your request on your \#PBS directive, your job 
-is likely to be terminated. If you request more memory than is 
-available, the job will remain queued until sufficient memory is free 
-for the job to run}, using the {\tt \#PBS} directive), and tell it what 
-Python script to run. The bash script could look something like this:
+number of processors, and memory , using the {\tt \#PBS} directive), and tell it what Python script to run. The bash script could look something like this:
 
 \lstinputlisting{Practicals/Code/PythonHPC.sh}
 
@@ -29,7 +23,10 @@ for f in *.p; do
 done
 \end{lstlisting}
 
-NOTE: PBS  allows  you  to  submit jobs using a Python (instead of 
+NOTE: Most of the cx1 nodes have multiple cores, so there's no fixed memory assigned to each core. If you use more memory than your request on your \#PBS directive, your job is likely to be terminated. If you request more memory than is available, the job will remain queued until sufficient memory is free 
+for the job to run
+
+PBS also  allows  you  to  submit jobs using a Python (instead of 
 shell) script as well. Look up the qsub manual ({\tt man qsub}) in the 
 HPC terminal, or visit 
 \url{https://gist.github.com/nobias/5b2373258e595e5242d5}
@@ -85,3 +82,14 @@ printed in the shell terminal (e.g. {\tt echo})), and an error file
 The {\tt qstat} command provides information on the job being submitted 
 (which queue (short, medium, long), status, etc.) as well as 
 information on all queues available (-q, -Q).
+
+\section{Readings \& Resources}
+IC library gives you with access to several e- and paper books on UNIX, some 
+specific to Ubuntu. Browse or search and find a good intro book.
+
+\begin{itemize}
+  \itemsep6pt
+  \item The ICL HPC wiki is a very useful resource: \url{https://wiki.imperial.ac.uk/display/HPC/Command+line}
+\end{itemize}
+
+

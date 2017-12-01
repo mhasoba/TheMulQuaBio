@@ -48,7 +48,7 @@ Compiling is specific to your local operating system. This limits portability, a
 
 **The compiler vs. run-time:**
 
-There is remarkably little run-time magic that happens in C. Languages like Python, Java and R run in an interpreter which is basically a virtual computer: the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system. Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
+There is remarkably little run-time magic that happens in C. Languages like Python, nd R run in an interpreter, while Java runs on a virtual machine which is basically a virtual computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
 
 
 ## Expressions and statements:
@@ -163,9 +163,12 @@ The newline character can be included anywhere in a string. We can rewrite the p
 We won't go into the details of `printf()` here, because we haven't yet looked at the details of variables. However, [this list](http://www.cdf.toronto.edu/~ajr/209/notes/printf.html) shows that any C data type can be passed to `printf()` and formatted appropriately inside the string by using a formatting code.
 
 
-## Understanding the compiler
+## Understanding the compiler (a bit more detail)
 
 The compiler is really at least three different programs: the **preprocessor**, the **compiler**, and the **linker**. 
+While these details aren't needed to compile very simple programs, understanding these details becomes useful later when you want to write C modules that are used by R and Python.
+Therefore, we'll learn a bit about it now, but don't worry if this seems a bit complicated or opaque.
+We'll revisit it later when we learn about building from multiple files.
 
 ### The preprocessor
 The preprocessor's main job is textual: it reads through the source code and performs symbolic subsitutions into the base C language.
