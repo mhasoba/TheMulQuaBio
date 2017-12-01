@@ -219,13 +219,13 @@ The following program will list each site:
 ```C
 #include <stdio.h>
 
-char *site_names[] =	{	"Parking lot",
-							"Cricket lawn",
-							"Manor house",
-							"Silwood Bottom",
-							"The Reactor",
-							"Japanese Garden",
-						};
+char *site_names[] =	{"Parking lot",
+			 "Cricket lawn",
+			 "Manor house",
+			 "Silwood Bottom",
+			 "The Reactor",
+			 "Japanese Garden",
+			 };
 						
 void print_site_names(void)
 {
