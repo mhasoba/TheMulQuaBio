@@ -9,7 +9,12 @@ Even easier is calling C code from C++ which just a few simple modifications to 
 
 ### Type coercion
 To interface with another language, C requires either that language to use the same data types and standards (as in C++, for instance), or the lanugage must supply a means of converting its own data types into ones C understands, and vice-versa.
-We call the process of converting one language's data type into another's **type coercion** or **type conversion**. In this module, we will interface with two languages: R and Python. We will see that coercion in Python is very simple, while in R it is rather more complicated.
+We call the process of converting one language's data type into another's **type coercion** or **type conversion**. 
+As we recall, an integer in C might have a width of four bytes on your system, but might have another size in Python. 
+Another consideration is that some languages (such as R), might work primarily with floating point values, even when they are declared without a decimal.
+It is important to know if data supplied between two different languages are of the correct type.
+In this module, we will interface with two languages: R and Python. 
+We will see that coercion in Python is very simple, while in R it is rather more complicated.
 
 ### Compiling binaries without a `main` function
 
