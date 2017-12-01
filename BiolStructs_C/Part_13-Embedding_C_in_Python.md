@@ -7,6 +7,10 @@ These might be very mature, well-tested, and highly performance optimised, and w
 As long as your C code has been pre-compiled for the architecture of the system calling it, it is possible to interface with that code from languages you're already familiar with, such as R or Python. 
 Even easier is calling C code from C++ which just a few simple modifications to header files.
 
+### Type coercion
+To interface with another language, C requires either that language to use the same data types and standards (as in C++, for instance), or the lanugage must supply a means of converting its own data types into ones C understands, and vice-versa.
+We call the process of converting one language's data type into another's **type coercion** or **type conversion**. In this module, we will interface with two languages: R and Python. We will see that coercion in Python is very simple, while in R it is rather more complicated.
+
 ### Compiling binaries without a `main` function
 
 ### Static vs. dynamic libraries
@@ -16,7 +20,7 @@ Everything you need to know about calling C functions from Python can be found [
 
 ## Function labels
 
-## Variable coercion
+## Coercion in Python
 
 ## Exercises
 
