@@ -1,4 +1,4 @@
-# 13. Embedding C code in R or Python
+# 13. Embedding C code in R
 
 ## The super basics
 This trivial example comes from [r-bloggers](https://www.r-bloggers.com/three-ways-to-call-cc-from-r/). 
