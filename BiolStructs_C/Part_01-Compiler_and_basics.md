@@ -163,9 +163,12 @@ The newline character can be included anywhere in a string. We can rewrite the p
 We won't go into the details of `printf()` here, because we haven't yet looked at the details of variables. However, [this list](http://www.cdf.toronto.edu/~ajr/209/notes/printf.html) shows that any C data type can be passed to `printf()` and formatted appropriately inside the string by using a formatting code.
 
 
-## Understanding the compiler
+## Understanding the compiler (a bit more detail)
 
 The compiler is really at least three different programs: the **preprocessor**, the **compiler**, and the **linker**. 
+While these details aren't needed to compile very simple programs, understanding these details becomes useful later when you want to write C modules that are used by R and Python.
+Therefore, we'll learn a bit about it now, but don't worry if this seems a bit complicated or opaque.
+We'll revisit it later when we learn about building from multiple files.
 
 ### The preprocessor
 The preprocessor's main job is textual: it reads through the source code and performs symbolic subsitutions into the base C language.
