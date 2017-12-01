@@ -1,10 +1,26 @@
 \chapter{High Performance Computing}
 \label{chap:HPC}
 
-These instructions also apply, with suitable modifications, for R 
-scripts.
+This chapter introduces you to HPC in python using of the Imperial College HPC (\url{(https://wiki.imperial.ac.uk/display/HPC/Introduction}). 
 
-\section{Preparing scripts for running on the HPC}
+\section{Local parallel processing}
+
+Note that there are a number of ways in which you can develop HPC implementations for your code locally (on your own computer). I will not cover these, but here is a list of particularly useful approaches/tools:
+
+\begin{itemize}
+   \item Ipython {\tt parallel}: \url{https://ipython.org/ipython-doc/3/parallel/}
+  \item Multi-threading, using the {\tt threading} package: \url{https://docs.python.org/3/library/threading.html}
+  \item Using multiple processors with the {\tt multiprocessing} package    \url{https://docs.python.org/2/library/multiprocessing.html} 
+\end{itemize}
+
+The difference between threading and multiprcocessing is that threads share in the same memory space, while processes have separate memory spaces. This makes it a harder to share information between processes with multiprocessing, but this is till a useful approach for quick and dirty parallelization. When better communication between processes is required, sophisticated solutions such as MPI and OpenMP may be needed. The MPI (Message Passing Interface) standard/protocol can be used in Python to parallelize your code over multiple processors through the {\tt mpi4py} package: \url{http://mpi4py.scipy.org/docs/usrman/index.html}. You can also parallelize numpy array loops with {\tt cython} and OpenMP: \url{http://www.perrygeo.com/parallelizing-numpy-array-loops-with-cython-and-mpi.html}.
+
+\section{Running python scripts on IC HPC}
+
+{\it These instructions also apply, with suitable modifications, for R 
+scripts.}
+
+\subsection{Preparing the scripts for running on the HPC}
 
 The script you will run needs a sha-bang (telling it what shell to run, 
 usually bash), you need to allocate resources to PBS (such as walltime, 
@@ -23,37 +39,25 @@ for f in *.p; do
 done
 \end{lstlisting}
 
-NOTE: Most of the cx1 nodes have multiple cores, so there's no fixed memory assigned to each core. If you use more memory than your request on your \#PBS directive, your job is likely to be terminated. If you request more memory than is available, the job will remain queued until sufficient memory is free 
-for the job to run
-
-PBS also  allows  you  to  submit jobs using a Python (instead of 
-shell) script as well. Look up the qsub manual ({\tt man qsub}) in the 
-HPC terminal, or visit 
-\url{https://gist.github.com/nobias/5b2373258e595e5242d5}
+NOTE: Most of the cx1 nodes have multiple cores, so there's no fixed memory assigned to each core. If you use more memory than your request on your {\tt \#PBS} directive, your job is likely to be terminated. If you request more memory than is available, the job will remain queued until sufficient memory is free for the job to run.
 
 Your HPC enabled Python code could look like this:
 
 \lstinputlisting{Practicals/Code/MyHPCScript.py}
 
-% In your Python code you need to set the environment so that it
-% knows its working directory and where to output files:
+Note the lines in this Python code where you  the environment so that it
+knows the working directory and where to output files.
 
-% \begin{lstlisting}
-  % home <- os.getenv('HOME')
-  % ..
-  % save(object, file=`home/whatever/object.RData')
-% \end{lstlisting}
-
-\section{Copying scripts from your computer to the HPC server}
+\subsection{Copying scripts from your computer to the HPC server}
  
-Secure copy bash script file to {\tt \$HOME} on HPC server following
+Then, secure copy bash script file to {\tt \$HOME} on HPC server following
 {\tt \$ scp source host:destination} structure, e.g.:
 
 \begin{lstlisting}
 $ scp script.sh user@login.cx1.hpc.ic.ac.uk:/home/user/whatever/script.sh
 \end{lstlisting}
 
-\section{Running scripts on the HPC}
+\subsection{Running the scripts}
 
 Open a secure shell (ssh):
 
@@ -61,7 +65,7 @@ Open a secure shell (ssh):
 $ ssh user@login.cx1.hpc.ic.ac.uk
 \end{lstlisting}
 
-Check for available modules:
+where {\tt user} is your ICL username. You will then be prompted to enter your (ICL) password. Once on the HPC server, check for available modules:
 
 \begin{lstlisting}
 $ module avail
@@ -83,13 +87,31 @@ The {\tt qstat} command provides information on the job being submitted
 (which queue (short, medium, long), status, etc.) as well as 
 information on all queues available (-q, -Q).
 
-\section{Readings \& Resources}
-IC library gives you with access to several e- and paper books on UNIX, some 
-specific to Ubuntu. Browse or search and find a good intro book.
+\subsection{Using a python script to submit jobs}
+PBS also  allows  you  to  submit jobs using a Python (instead of 
+shell) script. Look up the {\tt qsub} manual ({\tt man qsub}) in the 
+HPC terminal, or visit 
+\url{https://gist.github.com/nobias/5b2373258e595e5242d5}.
 
-\begin{itemize}
-  \itemsep6pt
-  \item The ICL HPC wiki is a very useful resource: \url{https://wiki.imperial.ac.uk/display/HPC/Command+line}
+For example, the Python job script named  "MyHPCPy.py"  for  a  job  named  "HelloJob" prints "Hello":
+
+\begin{lstlisting}
+  #!/usr/bin/python
+  #PBS -l select=1:ncpus=3:mem=1gb
+  #PBS -N HelloJob
+  print "Hello"
+\end{lstlisting}
+
+To run a Python job script you would do the same a for a bash job script above:
+
+\begin{lstlisting}
+$ qsub MyHPCPy.py
+\end{lstlisting}
+
+\section{Readings \& Resources}
+\begin{itemize} \itemsep6pt
+    \item IC library gives you with access to several e- and paper books on UNIX, some specific to Ubuntu. Browse or search and find a good intro book.
+    \item The ICL HPC wiki is a very useful resource: \url{https://wiki.imperial.ac.uk/display/HPC/Command+line}
 \end{itemize}
 
 
