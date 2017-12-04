@@ -10,7 +10,7 @@ This loop takes the form:
 
 ```C
 if (/* condition */) {
-	// Statements
+    // Statements
 }
 ```
 This logical loop is pretty straightforward as you encountered it probably many times before.
@@ -24,9 +24,9 @@ This loop takes the form:
 
 ```C
 if (/* condition */) {
-	// Statements
+    // Statements
 } else { // Not condition
-	// Statements
+    // Statements
 }
 ```
 
@@ -34,13 +34,13 @@ Naturally, we can combine if and else almost infinitely using `else-if`:
 
 ```C
 if (/* condition 1 */) {
-	// Statements
+    // Statements
 } 
 else if (/*condition 2 */ { 
-	// Statements
+    // Statements
 }
 else if (/*condition 3 */ { 
-	// Statements
+    // Statements
 }
 ...
 ```
@@ -93,7 +93,7 @@ Thus, we can use this in any conditional operation:
 
 ```C
 if (a == b) {
-	// Do something
+    // Do something
 }
 ```
 
@@ -115,7 +115,7 @@ The unary negation operator `!` is combined with an expression and tests whether
 int a = 0;
 
 if (!a) {
-	printf("a is 0!");
+    printf("a is 0!");
 }
 ```
 
@@ -149,7 +149,7 @@ int a = 12;
 int b = 12;
 
 if (a && a==b) {
-	printf("a is non-zero, and a equals b\n");
+    printf("a is non-zero, and a equals b\n");
 }
 ```
 
@@ -162,7 +162,7 @@ Therefore, following from the previous example:
 
 ```C
 if (a || a==b) {
-	printf("a is non-zero OR a equals b, or both.\n");
+    printf("a is non-zero OR a equals b, or both.\n");
 }
 ```
 
@@ -173,7 +173,7 @@ int a = 12;
 int b = 1;
 
 if (a || a==b) {
-	printf("a is non-zero OR a equals b, or both.\n");
+    printf("a is non-zero OR a equals b, or both.\n");
 }
 ```
 The expression `a` to the left of the operator is non-zero and evaluates as 'true'. The expression `a==b` to the right, however, will evaluate to zero (false). Consequently, the `printf` call will execute.
@@ -185,7 +185,7 @@ int a = 0;
 int b = 0;
 
 if (a || a==b) {
-	printf("a is non-zero OR a equals b, or both.\n");
+    printf("a is non-zero OR a equals b, or both.\n");
 }
 ```
 
@@ -205,7 +205,7 @@ and
 
 ```C
 if (x == y) {
-	y = y*2;
+    y = y*2;
 }
 ```
 
@@ -221,8 +221,8 @@ and
 
 ```C
 if (x == y) {
-	y = y*2;
-	x = y*x;
+    y = y*2;
+    x = y*x;
 }
 ```
 
@@ -239,7 +239,7 @@ This loop takes the form:
 
 ```C
 while (/* condition */) {
-	// Statements
+    // Statements
 }
 ```
 
@@ -249,7 +249,7 @@ A simple example of how this would work:
 int i = 0;
 
 while (i < 10) {
-	++i;
+    ++i;
 }
 ```
 Notice that the variable `i` is incremented within the body of the loop. What do you think would happen if you did not include the incremented test variable within the body of the loop?
@@ -264,7 +264,7 @@ The `do-while` loop lets you enter a loop before any test conditions are checked
 ```C
 int i = 0;
 do {
-	++i;
+    ++i;
 } while (i < 10);
 ```
 
@@ -277,7 +277,7 @@ Imagine what would happen if we wrote the following loop:
 ```C
 int i = 0;
 while (i < 10) {
-	i = i^2;
+    i = i^2;
 }
 ```
 
@@ -293,7 +293,7 @@ There are three basic 'fields' in the `for` loop header: the first is executed i
 int i;
 
 for (i = 0; i < 10; ++i) {
-	printf("%i\n", i);
+    printf("%i\n", i);
 }
 ```
 
@@ -303,7 +303,7 @@ All three fields in the loop header are optional. We could as well write:
 int i = 0;
 
 for ( ; i < 10; ++i) {
-	printf("%i\n", i);
+    printf("%i\n", i);
 }
 ```
 
@@ -313,8 +313,8 @@ or
 int i;
 
 for (i = 0; i < 10; ) {
-	printf("%i\n", i);
-	++i;
+    printf("%i\n", i);
+    ++i;
 }
 ```
 
@@ -329,10 +329,10 @@ The `break;` statement terminates a loop before the conditions have been met. It
 int i = 0;
 
 while () {
-	if (i == 0) {
-		break;
-	}
-	++i;
+    if (i == 0) {
+        break;
+    }
+    ++i;
 }
 ```
 
@@ -343,12 +343,12 @@ The `continue;` statement allows you to skip all subsequent statements that exis
 ```C
 for (i = 0; i < 10; ++i) {
 	
-	if (i % 2) {
-		printf("%i is an even number\n", i);
-		continue;
-	}
-	
-	printf("%i is an odd number\n", i);
+    if (i % 2) {
+        printf("%i is an even number\n", i);
+	continue;
+    }
+    
+    printf("%i is an odd number\n", i);
 }
 ```
 
@@ -460,7 +460,7 @@ What will the following do:
 int a = 0;
 int i = 0;
 while ( a == 0 ) {
-	++i;
+    ++i;
 }
 ```
 
@@ -468,13 +468,12 @@ while ( a == 0 ) {
 Write a program that runs the following code.
 ```C
 for (i = 0; i < 10; ++i) {
-	
-	if (i % 2) {
-		printf("%i is an even number\n", i);
-		continue;
-	}
-	
-	printf("%i is an odd number\n", i);
+    if (i % 2) {
+    	printf("%i is an even number\n", i);
+	continue;
+    }
+    
+    printf("%i is an odd number\n", i);
 }
 ```
 
