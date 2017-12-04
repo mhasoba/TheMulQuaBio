@@ -198,7 +198,7 @@ Thus, when involved in an assignment operation, pre- and post-fix operators will
 # Exercises
 
 ### Constants and data type conversions
-Write a small program to explore the interaction of the basic data types and constants. Use `prtinf()` to show the results. For instance:
+Write a small program to explore the interaction of the basic data types and constants. Use `printf()` to show the results. For instance:
 * Add or subtract from an arbitrary character value
 * Add or subtract a whole constant number to or from a floating-point number
 * What happens when you apply a character constant in an arithmetic operation? (i.e. add a `char` to a `float`?)
