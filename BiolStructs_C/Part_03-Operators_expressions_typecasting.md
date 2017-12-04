@@ -69,15 +69,13 @@ case_offset = 'A' - 'a';
 ```
 What do you think the purpose of this code might be?
 
-You can consult ASCII conversion tables to figure out the integral values of each.
+You can consult ASCII conversion tables to figure out the integral values of each character in that set.
 
 
 
 ## Type conversions
 
-As we saw above, the C compiler doesn't do any rounding for you a floating point number is converted to an integer. The variable gets *truncated*: the fractional extension simply gets 'chopped off' without any changes to the integer portion of the numer. Although we are generally encouraged here to simply avoid 'dangerous' type mixing in the first place, a few things are worth noting.
-
-The C compiler *will* make decisions about type conversions whenever operations on two different data types are performed
+As we saw above, the C compiler doesn't do any rounding for you a floating point number is converted to an integer. The variable gets *truncated*: the fractional extension simply gets 'chopped off' without any changes to the integer portion of the numer. Although we are generally encouraged here to simply avoid 'dangerous' type mixing in the first place, a few things are worth noting. This is because the C compiler *will* make decisions about type conversions whenever operations on two different data types are performed.
 
 
 ### Arithmetic involving floating-point and integral values
@@ -126,8 +124,12 @@ float c = 0;
 c = (float) a / b; 
 ```
 
-The cast operator has higher precedence than the `/` operator. However, it converts the variable `a` to a `float` type.
+The cast operator has higher precedence than the `/` operator. So, the the variable `a` is converted to a `float` type. 
+The compiler reads and 'understands' this expression and promotes the variable `b` to a `float` as well.
 
+You can use the cast operator to convert any data type. However, the results are not always intuitively predictable. 
+The cast operator only changes the interpretation of the variable, it does not change the memory width for that variable.
+Thus if you cast a large variable to a smaller type (say casting a `long int` to a `char`), and then assign it to a smaller variable, you would most likely experience data loss.
 
 ## Why not use `double` or `float` as a default, like R does?
 
