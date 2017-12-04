@@ -25,7 +25,7 @@ int myarray[5] = {0};
 
 ## Getting and setting values in an array using index values.
 
-The C language uses **0-based ordering of integers**. Therefore, the first element in an array is always 0. By extension, the 10th element is numbered 9.
+The C language uses **0-based ordering of integers**. Therefore, the first element in an array is always at index 0. By extension, the 10th element is numbered 9.
 
 To set a particular value in an array we use the index along with the assignment operator. For instance, if we wish to assign the value 10 to the first position in the array, we write:
 
