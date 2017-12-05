@@ -101,11 +101,11 @@ As we recall, dividing two integers by each other can have unintended consequenc
 long double divide_ints(long long int num, long long int denom)
 {
 
-	long double result = 0.0;
+    long double result = 0.0;
 
-	result = (long double)num / (long double)denom; // Typecast the inputs to long doubles
+    result = (long double)num / (long double)denom; // Typecast the inputs to long doubles
 
-	return result;
+    return result;
 	
 }
 ```
@@ -142,18 +142,18 @@ If a function requires arguments, then some value must be stated in the call---e
 
 void double_array_values(long double fparray[], long long intarray[], int nelems)
 {
-	int i;
+    int i;
 	
-	if (fparray) {
-		for (i = 0; i < nelems; ++i) {
-			fparray[i] = fparray[i] * 2;
-		}
+    if (fparray) {
+        for (i = 0; i < nelems; ++i) {
+	    fparray[i] = fparray[i] * 2;
 	}
-	else if (intarray) {
-		for (i = 0; i < nelems; ++i) {
-			intarray[i] = intarray[i] * 2;
-		}
+    }
+    else if (intarray) {
+	for (i = 0; i < nelems; ++i) {
+	    intarray[i] = intarray[i] * 2;
 	}
+    }
 }
 
 ```
