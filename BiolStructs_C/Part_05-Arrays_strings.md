@@ -78,6 +78,12 @@ int myarray[n_entries];
 
 This is generally a much safer practice for arrays. This practice prevents you from easily 'blowing out the end' of your array when it is insufficiently sized to handle your real data needs. In most realistic situations, of course, you won't have initialised the value of `n_entries` immediately before declaring the array. Nor will you have simply input a literal constant value. Instead, you would probably have obtained this information from somewhere earlier in program flow.
 
+Note that this is not supported by all compilers.
+It is my experience that the Windows C/C++ compiler does not support variable-sized arrays.
+**This practice is therefore not fully portable.**
+We will see how to use dynamic memory allocation for a more portable approach to this.
+Even more well-tuned library methods are available for this in C++ in the form of a vector datatype.
+
 ## Arrays as primitive C data tyes
 
 Remember that data types in C are primitive and thus there's no object-oriented methods associated with them, nor any fancy run-time magic. What do you think would happen if you included the following in a program?
@@ -148,16 +154,17 @@ The use of double quotations around a string literal instructs the compiler that
 
 int main (void)
 {
-	int i = 0;
-	char mystring[] = "A string printed character-by-character\n";
+    int i = 0;
+    char mystring[] = "A string printed character-by-character\n";
+    
+    while(mystring[i]) {
+        printf("%c", mystring[i]);
+	++i;
+    }
+    
+    printf("\n");
 
-	while(mystring[i]) {
-		printf("%c", mystring[i]);
-		++i;
-	}
-	printf("\n");
-	
-	return 0;
+    return 0;
 }
 
 ```
@@ -209,11 +216,11 @@ Modify the following program so that it returns the square of `myarray[i]`. Don'
 
 int main (void) 
 {
-	int i = 0;
-	int myarray[5];
-	printf("The value at index %i in my array: %i\n", i, myarray[i]);
+    int i = 0;
+    int myarray[5];
+    printf("The value at index %i in my array: %i\n", i, myarray[i]);
 	
-	return 0;
+    return 0;
 }
 ```
 
