@@ -191,7 +191,7 @@ We won't treat these in detail here, but visit them as we need them during the m
 The C language provides all the operators for basic arithmetic as in any other language. 
 
 
-### Arithmetic operators: `+`, `-`, `*`, `/`, `^`, and `%`
+### Arithmetic operators: `+`, `-`, `*`, `/`, and `%`
 
 The `+`, `-`, `*`, `/`, `^`, and `%` operators work in C as they do in other languages and their operations won't be considered in detail here. 
 
