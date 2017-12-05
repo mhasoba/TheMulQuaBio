@@ -1,4 +1,4 @@
-# 6. Arrays and Strings
+# 5. Arrays and Strings
 
 Up to now, we have only dealt with single variables. However, in real-life datasets, we are likely to have considerably larger amounts of data and which may have some sort of organisational structure. The C language provides arrays as a grouping data that forms part of a sequence. Arrays have two 'flavours' in the C language: arrays and strings. As we will see, strings are simply a special case of an array.
 
