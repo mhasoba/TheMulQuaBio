@@ -294,12 +294,29 @@ int calculate_factorial(int n)
 
 # Exercises
 
-## Declaring and calling a function
+### 1- Calculator
+Write a set of basic arithmetic functions that take two operands and return a result.
+
+### 2- Declaring and calling a function
 Last exercise, we wrote our palindrome program. Divide it into two distinct functions: `reverse_string()` and `check_palindrome()` (don't forget to declare the return) and write them in a program (don't forget to declare the functions).
 
-## Recursion
+### 3- Sorting...
+Two of the most important algorithm classes in scientific computing are sorting and searching routines. 
+These routines allow for highly efficient managment of data. In the previous chapter, you wrote a program that found the minim value in the following set of numbers:
+
+123, 747, 768, 2742, 988, 1121, 109, 999, 727, 1030, 999, 2014, 1402
+
+Write a program that uses an array to sort this array in ascending order.
+
+### 4- ...and searching
+Do a web search for the concept of a binary search. Write a program to find any number in the sorted array from question 3. 
+Have it report the index in the array where the number occurs.
+Have it report a message if the queried value cannot be found.
+(As we haven't gone into textual input, you can just pre-program some test cases into your main function).
+
+### 5- Recursion
  * It is pretty trivial to write a loop that counts from 0 to 10. Try to write the same loop without using `for` by using a recursive function.
- * Ever heard about fork bombs or recursive bombs?
+ * Ever hear or read about fork bombs or recursive bombs?
 
 
 
