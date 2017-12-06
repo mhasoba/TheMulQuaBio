@@ -203,13 +203,13 @@ populations_ptr = &site_populations[4];
 You can declare an array of pointers. This is really valuable when we are working with large memory objects like trees, linked lists, or other structure/pointer combinations. 
 
 ```C
-char *site_names[] =	{	"Parking lot",
-							"Cricket lawn",
-							"Manor house",
-							"Silwood Bottom",
-							"The Reactor",
-							"Japanese Garden",
-						};
+char *site_names[] =	{"Parking lot",
+			 "Cricket lawn",
+			 "Manor house",
+			 "Silwood Bottom",
+			 "The Reactor",
+			 "Japanese Garden",
+			 };
 					
 ```
 As you can see, this is basically an array of strings. We can index each element and treat them as strings
@@ -229,18 +229,18 @@ char *site_names[] =	{"Parking lot",
 						
 void print_site_names(void)
 {
-	int i = 0;
-	
-	for (i = 0; i < 6; ++i) {
-		printf("%s\n", site_names[i]);
-	}
+    int i = 0;
+    
+    for (i = 0; i < 6; ++i) {
+        printf("%s\n", site_names[i]);
+    }
 }
 
 int main (void)
 {
-	print_site_names();
-	
-	return 0;
+    print_site_names();
+    
+    return 0;
 }
 
 ```
