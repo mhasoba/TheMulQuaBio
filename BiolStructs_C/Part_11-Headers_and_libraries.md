@@ -26,6 +26,57 @@ gcc main.c funclibr.c
 
 However, in order for functions in `main.c` to be able to use functions in `funclib.c`, the `main.c` file will need to have the prototypes of those functions. Therefore, we can ensure that all of a file's function prototypes live in its header file that gets included as appropriate.
 
+## Creating a library
+
+Let's use the example of a simple calculator tool to illustrate a creation of a function library in C.
+
+Let's implement each of the operators as a function allowing us to perform operations on floating point numbers 
+(this is useful because the compiler can now do type-checking for us).
+
+### file: mycalculator.c
+```C
+double add_dbl(double a, double b)
+{
+    return a + b;
+}
+
+double subtract_dbl(double a, double b)
+{
+    return a - b;
+}
+
+double multiply_double(double a, double b)
+{
+    return a * b;
+}
+
+double div_dbl(double a, double b)
+{
+    return a / b;
+}
+
+```
+
+### file: mycalculator.h
+Now we create the header file that includes all of the prototypes for 
+
+```C
+#ifndef _MYCALC_H_
+#define _MYCALC_H_ // These are called header guards and are explained later in the chapter.
+
+double add_dbl(double a, double b);
+
+double subtract_dbl(double a, double b);
+
+double multiply_double(double a, double b);
+
+double div_dbl(double a, double b);
+
+#endif /* mycalc.h */
+
+```
+
+
 ## Define and Macros
 
 ### the `define` keyword
