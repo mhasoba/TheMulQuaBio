@@ -26,6 +26,107 @@ gcc main.c funclibr.c
 
 However, in order for functions in `main.c` to be able to use functions in `funclib.c`, the `main.c` file will need to have the prototypes of those functions. Therefore, we can ensure that all of a file's function prototypes live in its header file that gets included as appropriate.
 
+## Creating a library
+
+Let's use the example of a simple calculator tool to illustrate a creation of a function library in C. 
+
+We'll implement each of the operators as a function allowing us to perform operations on floating point numbers 
+(this is useful because the compiler can now do type-checking for us).
+
+
+### file: mycalculator.c
+```C
+double add_dbl(double a, double b)
+{
+    return a + b;
+}
+
+double subtract_dbl(double a, double b)
+{
+    return a - b;
+}
+
+double multiply_double(double a, double b)
+{
+    return a * b;
+}
+
+double div_dbl(double a, double b)
+{
+    return a / b;
+}
+
+```
+
+### file: mycalculator.h
+Now we create the header file that includes all of the prototypes for 
+
+```C
+#ifndef _MYCALC_H_
+#define _MYCALC_H_ // These are called header guards and are explained later in the chapter.
+
+double add_dbl(double a, double b);
+
+double subtract_dbl(double a, double b);
+
+double multiply_double(double a, double b);
+
+double div_dbl(double a, double b);
+
+#endif /* mycalc.h */
+
+```
+
+### file: main.c
+
+Now if we wish to employ these functions inside another file, such as our main.c file, the compiler needs to be given clues about the existince, parameters, and return values of the external functions.
+Otherwise, the compiler cannot do type-checking and verify our code for errors.
+To accomplish this, all we need to do to keep the compiler happy (at this stage) is include the mycalculator.h at the beginning of the file:
+
+```C
+#include "mycalculator.h" 
+// Note the double quotes, rather than angled brackets
+
+int main (void)
+{
+    double a = 1.712;
+    double b = 3.14159;
+    double r = 0.0;
+    
+    r = div_dbl(a, b);
+    
+    return 0;
+}
+```
+
+Compiling this program is as simple as:
+
+```bash
+gcc main.c mycalculator.c
+```
+
+Notice that the header file is *not* included in the list of source files. 
+Doing so would simply cause problems, and the compiler would likely throw an error.
+
+It is not uncommon to have header files for a program in a separate directory.
+Usually, a directory called 'include' (for 'include files', another name for header files). 
+When doing so, the compiler needs to know where to find these files when they are not in the same directory as the source.
+We instruct the compiler with an **include flag** before the source file list:
+
+```bash
+gcc -I../include main.c mycalculator.c
+```
+
+### Creating the library: understanding linkage
+
+Because all of the functions within mycalculator.c make no references to any external sources, it is possible to compile it on its own:
+
+```bash
+gcc -o mycalc.o mycalculator.c
+```
+
+
+
 ## Define and Macros
 
 ### the `define` keyword
