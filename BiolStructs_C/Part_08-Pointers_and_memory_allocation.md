@@ -596,6 +596,9 @@ Be careful not to overwrite pointers to valid memory, otherwise you could get a 
 # Exercises
 
 ## Freeing memory via a pointer to a pointer
+One of the problems with the free() function is that it doesn't reinitialise the pointer that was passed to it.
+After freeing, the pointer now points to invalid memory.
+Write a function that takes a pointer of a pointer to both safely free the memory and set the pointer to NULL.
 
 ## Passing pointers to and from functions
 Review the examples under the section on returning pointers from functions. Notice that the first function incremented the pointer before returning. We can check (using a `printf()` statement or debugger, for instance) that the second function *did* loop through from the beginning again, even though it was passed the same pointer.
