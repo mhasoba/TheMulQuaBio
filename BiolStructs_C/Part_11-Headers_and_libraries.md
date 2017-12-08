@@ -146,13 +146,33 @@ These are normally saved as a `.so` (for shared object) file.
 Compiling a dynamically linked library on a Unix-like machine is as simple as:
 
 ```bash
-gcc -shared -o mycalculator.so -fPIC mycalculator.c
+gcc -shared -o libmycalc.so -fPIC mycalculator.c
 ```
 
 The `-shared` flag instructs the compiler to generate a shared object file.
 The `-fPIC` (or similarly, but slightly different `-fpic`) option stands for "Position-Independent Code". 
 This allows the functions within the library to use something like a relative address, rather than an absolute address.
 This is more meaningful at the assembler level, and not something to worry about the details.
+
+
+### Building with a shared library
+
+To build a program that uses the shared library libmycalc.so, we first need to include forward declarations of the functions within the calling program.
+
+To compile it, we can simply run the command:
+
+```bash
+gcc -o calculator main.c -lmycalc
+```
+(note that libraries with the 'lib' prefix in the name can be abbreviated in the linker flag.
+
+It's possible that your compiler will throw an error, complaining that it cannot find the library -lmycalc
+
+To help it along, you can specify an additional linker flag:
+
+```bash
+gcc -L/path/to/mycalc/ -o calculator main.c -lmycalc
+```
 
 
 ## Define and Macros
