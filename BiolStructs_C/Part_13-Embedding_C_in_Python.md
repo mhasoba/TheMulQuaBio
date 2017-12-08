@@ -87,8 +87,43 @@ cbits = ctypes.CDLL("cbits.so") # give a local name to your new library
 
 ## Function labels
 
+Now that the library has been loaded and given a local name `cbits`, we can call any member function from it.
+
+```python
+newCBit = cbits.newCBit
+```
+
+This makes it explicitly label the function without the need to use the cbits namespace operator, if this safe to do in our python program.
+
 ## Coercion in Python
 
-## Exercises
+Python needs to declare the fundamental types called in C functions. 
+The Python names for these types can be found [here](https://docs.python.org/2/library/ctypes.html#fundamental-data-types)
 
-### 1. Compiling object files
+We do this using the argtypes member as follows:
+
+```Python
+cbits.newCBit.argtypes = [c_int]
+cbits.deleteCBit.argtypes = [c_void_p]
+cbits.CBitClear.argtypes = [c_int, c_void_p]
+cbits.CBitZero.argtypes = [c_void_p]
+cbits.CBitAND.argtypes = [c_void_p, c_void_p, c_void_p]
+# And so on...
+```
+
+Similarly, we need to specify the return types so that the Python environment knows what type of value it is supposed to get back from the C function. We do this by assigning the restype member:
+
+
+```Python
+cbits.newCBit.restype = c_void_p
+cbits.deleteCBit.restype = c_int
+cbits.CBitSet.restype = c_int
+cbits.CBitClear.restype = c_int
+cbits.CBitZero.restype = c_int
+cbits.CBitAND.restype = c_int
+# And so on...
+```
+
+
+Once you've done this for your C function library, it is now ready to use in your Python code, just as you would with any other function in Python.
+It is useful, therefore, to write all of these type specifiers into a sinlge file that you bundle with your library/package.
