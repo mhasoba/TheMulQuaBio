@@ -123,3 +123,7 @@ cbits.CBitZero.restype = c_int
 cbits.CBitAND.restype = c_int
 # And so on...
 ```
+
+
+Once you've done this for your C function library, it is now ready to use in your Python code, just as you would with any other function in Python.
+It is useful, therefore, to write all of these type specifiers into a sinlge file that you bundle with your library/package.
