@@ -112,5 +112,18 @@ In the section on header files and programs with multiple files, we will constru
 
 # Exercises
 
-## Returning error from get_int_from_array()
+### Accessing other members with functions
+Extend the examples by adding functions to return the capacity (maximum storage) for the array and the number of elements stored in the array.
+
+### Resizing the array
+How would you resize the array (i.e increase its capacity)?
+
+### Returning error from get_int_from_array()
 In our function to get an int from an array, we checked that our index parameter `place` was within the bounds of our array. If it wasn't it returned the value 0. What is the potential problem with this? What might be a better way to handle errors fromt his function?
+
+### Challenge: dynamic arrays for any datatype
+The examples used here are restricted to the use of `int` variables. 
+That means you'd have to re-write these functions for all types and all extensions of those types.
+How could you re-write these structures and functions to accommodate (nearly) any data type?
+Consider that a `char` is the smallest data type (in bytes) and that the compiler will allow you to cast any data type as another.
+Variables of type `char` could then be used as units of any other data type.

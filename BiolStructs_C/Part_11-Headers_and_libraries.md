@@ -122,18 +122,141 @@ gcc -I../include main.c mycalculator.c
 Because all of the functions within mycalculator.c make no references to any external sources, it is possible to compile it on its own:
 
 ```bash
-gcc -o mycalc.o mycalculator.c
+gcc -c mycalculator.c
 ```
 
+The `-c` option stops the compiler before the linking stage, and the result is an object file: `mycalculator.o`
+
+Unlinked code can be linked with any program, provided the compiler has been prompted about the data in the object files through the use of forward declarations. This, of course, is accomplished through the use of header files.
+
+
+### Static vs. dynamic linkage
+
+Linkage happens in two ways: static and dynamic linkage. 
+**Static linkage** builds the source code into the executable directly, and is therefore included in the application source before run time. 
+By contrast, **dynamic linkage** links external functions and files *at* run time. 
+In dynamic linkage, the linked code is not included in the executable and is usually installed somewhere else on the machine. 
+The result of dynamic linkage can be a much smaller executable, but this executable might be less portable as the linkage might depend on the user having the correct libraries installed.
+
+
+### Compiling a library
+
+In this module, we will compile dynamically linked libraries as these are most useful when calling C from a non-C environment. 
+These are normally saved as a `.so` (for shared object) file.
+Compiling a dynamically linked library on a Unix-like machine is as simple as:
+
+```bash
+gcc -shared -o libmycalc.so -fPIC mycalculator.c
+```
+
+The `-shared` flag instructs the compiler to generate a shared object file.
+The `-fPIC` (or similarly, but slightly different `-fpic`) option stands for "Position-Independent Code". 
+This allows the functions within the library to use something like a relative address, rather than an absolute address.
+This is more meaningful at the assembler level, and not something to worry about the details.
+
+
+### Building with a shared library
+
+To build a program that uses the shared library libmycalc.so, we first need to include forward declarations of the functions within the calling program.
+
+To compile it, we can simply run the command:
+
+```bash
+gcc -o calculator main.c -lmycalc
+```
+(note that libraries with the 'lib' prefix in the name can be abbreviated in the linker flag.
+
+It's possible that your compiler will throw an error, complaining that it cannot find the library -lmycalc
+
+To help it along, you can specify an additional linker flag:
+
+```bash
+gcc -L/path/to/mycalc/ -o calculator main.c -lmycalc
+```
 
 
 ## Define and Macros
 
 ### the `define` keyword
 
-### Preprocessor macros
+The define keyword allows you to exploit the preprocessor to perform textual substitutions or compile code conditionally. 
+These can be useful if applied carefully and sparingly.
 
-Preprocessor macros 
+### preprocessor macros
+
+A preprocessor macro allows you to specify a subtitution:
+
+```C
+#define PI 3.141592654
+```
+
+Now, using the symbol `PI` in your source code will expand to the floating point number 3.141592654
+
+You could also create macros to replace certain operators or keywords, though this isn't recommended:
+
+```C
+#define AND &&
+```
+
+Similarly, an entire expression or operation could be included in a macro:
+
+```C
+#define ALLBUTONE ((-1)^1)
+```
+Note that the entire macro substitution text is contained in parentheses.
+This is important when writing an expression macro, as it ensures that the content of the macro gets evaluated first.
+Otherwise, operator precedence issues could lead to unexpected effects
+
+Note that *macro definitions are 'invisible' to debuggers*.
+Therefore, they can make reading code in the debugger more difficult and assessing the state of variables can be tricky.
+
+### function-like preprocessor macros
+
+Preprocessor macros allow you to perform textual substitutionss. 
+They can also be combined with arguments that act like variables.
+These macros are therefore described as being function-like.
+
+We recall that calls to `free()` are not matched by reinitialisation of the pointer being freed. 
+Thus, those pointers still contain an address, but after freeing that address is invalid. 
+Consequently, we combine calls to `free` very often with the reinitalisation of our pointer like so:
+
+```C
+free(dataptr);
+dataptr = NULL;
+```
+
+We use this so often that we might like to create a shorthand for it. We can do this with a function-like macro:
+
+```C
+#define CFREE(x) {free(x); x = NULL;}
+```
+
+If we wish, we can write this on separate lines. 
+However, because preprocessor directives are terminated by carriage returns (newline), we need to escape them with a `\`:
+
+```C
+#define CFREE(x) { \ 
+                    free(x); \
+                    x = NULL; \
+                 }
+```
+
+Whatever is passed into the argument as 'x' in this case will be included in the text when this macro is expanded by the preprocessor.
+
+Returning to the example above, to free and clear a pointer, we would simply write:
+
+```C
+CFREE(dataptr)
+```
+
+This will get expanded to:
+
+```C
+{
+    free(dataptr); 
+    dataptr = NULL; 
+}
+```
 
 # Exercise
 
