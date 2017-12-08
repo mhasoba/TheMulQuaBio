@@ -139,6 +139,22 @@ In dynamic linkage, the linked code is not included in the executable and is usu
 The result of dynamic linkage can be a much smaller executable, but this executable might be less portable as the linkage might depend on the user having the correct libraries installed.
 
 
+### Compiling a library
+
+In this module, we will compile dynamically linked libraries as these are most useful when calling C from a non-C environment. 
+These are normally saved as a `.so` (for shared object) file.
+Compiling a dynamically linked library on a Unix-like machine is as simple as:
+
+```bash
+gcc -shared -o mycalculator.so -fPIC mycalculator.c
+```
+
+The `-shared` flag instructs the compiler to generate a shared object file.
+The `-fPIC` (or similarly, but slightly different `-fpic`) option stands for "Position-Independent Code". 
+This allows the functions within the library to use something like a relative address, rather than an absolute address.
+This is more meaningful at the assembler level, and not something to worry about the details.
+
+
 ## Define and Macros
 
 ### the `define` keyword
