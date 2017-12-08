@@ -87,7 +87,18 @@ cbits = ctypes.CDLL("cbits.so") # give a local name to your new library
 
 ## Function labels
 
+Now that the library has been loaded and given a local name `cbits`, we can call any member function from it.
+
+```python
+newCBit = cbits.newCBit
+```
+
+This makes it explicitly label the function without the need to use the cbits namespace operator, if this safe to do in our python program.
+
 ## Coercion in Python
+
+Python needs to declare the fundamental types called in C functions. The Python names for these types can be found [here](https://docs.python.org/2/library/ctypes.html#fundamental-data-types)
+
 
 ## Exercises
 
