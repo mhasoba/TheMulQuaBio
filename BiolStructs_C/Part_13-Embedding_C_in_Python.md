@@ -97,9 +97,29 @@ This makes it explicitly label the function without the need to use the cbits na
 
 ## Coercion in Python
 
-Python needs to declare the fundamental types called in C functions. The Python names for these types can be found [here](https://docs.python.org/2/library/ctypes.html#fundamental-data-types)
+Python needs to declare the fundamental types called in C functions. 
+The Python names for these types can be found [here](https://docs.python.org/2/library/ctypes.html#fundamental-data-types)
+
+We do this using the argtypes member as follows:
+
+```Python
+cbits.newCBit.argtypes = [c_int]
+cbits.deleteCBit.argtypes = [c_void_p]
+cbits.CBitClear.argtypes = [c_int, c_void_p]
+cbits.CBitZero.argtypes = [c_void_p]
+cbits.CBitAND.argtypes = [c_void_p, c_void_p, c_void_p]
+# And so on...
+```
+
+Similarly, we need to specify the return types so that the Python environment knows what type of value it is supposed to get back from the C function. We do this by assigning the restype member:
 
 
-## Exercises
-
-### 1. Compiling object files
+```Python
+cbits.newCBit.restype = c_void_p
+cbits.deleteCBit.restype = c_int
+cbits.CBitSet.restype = c_int
+cbits.CBitClear.restype = c_int
+cbits.CBitZero.restype = c_int
+cbits.CBitAND.restype = c_int
+# And so on...
+```
