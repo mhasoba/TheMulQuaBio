@@ -80,9 +80,9 @@ gcc -shared -Wall -o cbits.so -fPIC cbits.c
 From within Python, we can now load this library:
 
 ```python
-from ctypes import *
-cdll.LoadLibrary("cbits.so")
-cbits = CDLL("cbits.so")
+from ctypes import *  #import the ctypes library
+cdll.LoadLibrary("cbits.so") # load the cbits library
+cbits = ctypes.CDLL("cbits.so") # give a local name to your new library
 ```
 
 ## Function labels
