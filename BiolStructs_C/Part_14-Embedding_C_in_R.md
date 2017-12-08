@@ -1,4 +1,4 @@
-# 13. Embedding C code in R
+# 14. Embedding C code in R
 
 While R is useful for a wide variety of statistcal programming applications, one of R's major shortcomings is in performance, especially in loops, and loops containing conditional statements.
 For that reason, many people working with R actually embed C modules and libraries within their R packages. 
