@@ -203,13 +203,13 @@ populations_ptr = &site_populations[4];
 You can declare an array of pointers. This is really valuable when we are working with large memory objects like trees, linked lists, or other structure/pointer combinations. 
 
 ```C
-char *site_names[] =	{	"Parking lot",
-							"Cricket lawn",
-							"Manor house",
-							"Silwood Bottom",
-							"The Reactor",
-							"Japanese Garden",
-						};
+char *site_names[] =	{"Parking lot",
+			 "Cricket lawn",
+			 "Manor house",
+			 "Silwood Bottom",
+			 "The Reactor",
+			 "Japanese Garden",
+			 };
 					
 ```
 As you can see, this is basically an array of strings. We can index each element and treat them as strings
@@ -219,28 +219,28 @@ The following program will list each site:
 ```C
 #include <stdio.h>
 
-char *site_names[] =	{	"Parking lot",
-							"Cricket lawn",
-							"Manor house",
-							"Silwood Bottom",
-							"The Reactor",
-							"Japanese Garden",
-						};
+char *site_names[] =	{"Parking lot",
+			 "Cricket lawn",
+			 "Manor house",
+			 "Silwood Bottom",
+			 "The Reactor",
+			 "Japanese Garden",
+			 };
 						
 void print_site_names(void)
 {
-	int i = 0;
-	
-	for (i = 0; i < 6; ++i) {
-		printf("%s\n", site_names[i]);
-	}
+    int i = 0;
+    
+    for (i = 0; i < 6; ++i) {
+        printf("%s\n", site_names[i]);
+    }
 }
 
 int main (void)
 {
-	print_site_names();
-	
-	return 0;
+    print_site_names();
+    
+    return 0;
 }
 
 ```
@@ -389,12 +389,13 @@ Another way to write this same function is:
 ```C
 int *first_odd_num2(int* oddsandevens, int arraymax)
 {
-	int i = 0;
-	while (!(oddsandevens[i] % 2) && i < arraymax) {
-		++i;
-	}
-	
-	return &oddsandevens[i];
+    int i = 0;
+    
+    while (!(oddsandevens[i] % 2) && i < arraymax) {
+        ++i;
+    }
+    
+    return &oddsandevens[i];
 }
 ```
 Notice that in this function, the return value is preceded by the `&` "address-of" operator. This translates to: "return the address of the element at position `i` in the `oddsandevens` array". The previous function, the return value, in effect, has exactly the same meaning but the expression is simply different.
@@ -408,14 +409,14 @@ We can write these functions into a small program to see how they work:
 
 int main (void)
 {
-	int arraymax = 5;
+    int arraymax = 5;
     int intarray[] = {2, 4, 6, 7, 5};
-	int *result = NULL;
+    int *result = NULL;
 	  
-	result = first_odd_num(intarray, arraymax);
+    result = first_odd_num(intarray, arraymax);
     printf("first odd: %i\n", *result);
 	  
-	result = first_odd_num2(intarray, arraymax);
+    result = first_odd_num2(intarray, arraymax);
     printf("first odd 2: %i\n", *result);
 	  
     return 0;
@@ -458,10 +459,10 @@ The next thing we see is that both functions take a `size_t` data type as argume
 
 int main (void)
 {
-	printf("Size of char: %zu bytes\n", sizeof(char));
-	printf("Size of int:  %zu bytes\n", sizeof(int));
-	
-	return 0;
+    printf("Size of char: %zu bytes\n", sizeof(char));
+    printf("Size of int:  %zu bytes\n", sizeof(int));
+    
+    return 0;
 }
 ```
 
@@ -523,8 +524,8 @@ Thus, a good practice is to match any function that allocates memory with a func
 
 ```C
 if (something_ptr) {
-	free(something_ptr);
-	something_ptr = NULL; // reset the pointer to a null value
+    free(something_ptr);
+    something_ptr = NULL; // reset the pointer to a null value
 }
 ```
 
@@ -550,8 +551,8 @@ We never bothered to check whether `calloc` succeeded. We can do this quite simp
 ```C
 if (!(nucleotide_sites = (char*)calloc(num_sites, sizeof(char))) )
 {
-	printf("Error: unable to allocate sufficient memory\n");
-	exit(EXIT_FAILURE)
+    printf("Error: unable to allocate sufficient memory\n");
+    exit(EXIT_FAILURE)
 }
 ```
 
@@ -560,18 +561,17 @@ we can wrap this in our own function that does this for us (alternatively, we ca
 ```C
 void *my_malloc(size_t size_of_data)
 {
-	void *new_mem;
+     void *new_mem;
 	
-	if ((new_mem = malloc(size_of_data))
-	{
-		memset(new_mem, 0, size_of_data); // Look up memset() to see how this function works
-	}
-	else {
-		printf("Error: unable to allocate sufficient memory\n");
-		exit(EXIT_FAILURE);
-	}
+     if ((new_mem = malloc(size_of_data)) {
+         memset(new_mem, 0, size_of_data); // Look up memset() to see how this function works
+     }
+     else {
+         printf("Error: unable to allocate sufficient memory\n");
+	 exit(EXIT_FAILURE);
+     }
 	
-	return new_mem;
+     return new_mem;
 }
 ```
 
@@ -596,6 +596,9 @@ Be careful not to overwrite pointers to valid memory, otherwise you could get a 
 # Exercises
 
 ## Freeing memory via a pointer to a pointer
+One of the problems with the free() function is that it doesn't reinitialise the pointer that was passed to it.
+After freeing, the pointer now points to invalid memory.
+Write a function that takes a pointer of a pointer to both safely free the memory and set the pointer to NULL.
 
 ## Passing pointers to and from functions
 Review the examples under the section on returning pointers from functions. Notice that the first function incremented the pointer before returning. We can check (using a `printf()` statement or debugger, for instance) that the second function *did* loop through from the beginning again, even though it was passed the same pointer.

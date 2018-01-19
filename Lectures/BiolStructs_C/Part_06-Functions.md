@@ -11,25 +11,25 @@ Consider the following program. How do you think it will behave? Will it compile
 
 int main(void)
 {
-	int i = 5;
-	
-	printf("i in scope of main(): %i\n", i);
+    int i = 5;
+    
+    printf("i in scope of main(): %i\n", i);
 
-	{
-		int i = 10;
-		printf("i in local scope: %i\n", i);
-	}
-
-	if (i) {
-		printf("This i is %i\n", i);	
-	}
-
-	if (i) {
-		int i = 50;
-		printf("A new automatic i: %i\n", i);
-	}
-
-	return 0;
+    {
+    	int i = 10;
+	printf("i in local scope: %i\n", i);
+    }
+    
+    if (i) {
+        printf("This i is %i\n", i);	
+    }
+    
+    if (i) {
+        int i = 50;
+	printf("A new automatic i: %i\n", i);
+    }
+    
+    return 0;
 }
 ```
 
@@ -49,11 +49,11 @@ Two rules govern the placement of function definitions. A new function must be d
 ```C
 int add_integers(int a, int b)
 {
-	int c = 0;
+    int c = 0;
 	
-	c = a + b;
+    c = a + b;
 	
-	return c;
+    return c;
 }
 ```
 
@@ -62,7 +62,7 @@ This function can be written more economically to:
 ```C
 int add_integers(int a, int b)
 {	
-	return a + b;
+    return a + b;
 }
 ```
 
@@ -73,9 +73,9 @@ Once defined (see more about that later), you can call and use your function in 
     #include <stdio.h>
     
     int add_integers(int a, int b)    // Declaring the function
-	{	
-		return a + b;
-	}
+    {	
+        return a + b;
+    }
 
     void main (void)
     {	
@@ -89,6 +89,7 @@ Once defined (see more about that later), you can call and use your function in 
         return void;
     }
 ```
+
 We will see in details each step and subtleties below.
 
 ### Function parameters and arguments
@@ -100,11 +101,11 @@ As we recall, dividing two integers by each other can have unintended consequenc
 long double divide_ints(long long int num, long long int denom)
 {
 
-	long double result = 0.0;
+    long double result = 0.0;
 
-	result = (long double)num / (long double)denom; // Typecast the inputs to long doubles
+    result = (long double)num / (long double)denom; // Typecast the inputs to long doubles
 
-	return result;
+    return result;
 	
 }
 ```
@@ -141,18 +142,18 @@ If a function requires arguments, then some value must be stated in the call---e
 
 void double_array_values(long double fparray[], long long intarray[], int nelems)
 {
-	int i;
+    int i;
 	
-	if (fparray) {
-		for (i = 0; i < nelems; ++i) {
-			fparray[i] = fparray[i] * 2;
-		}
+    if (fparray) {
+        for (i = 0; i < nelems; ++i) {
+	    fparray[i] = fparray[i] * 2;
 	}
-	else if (intarray) {
-		for (i = 0; i < nelems; ++i) {
-			intarray[i] = intarray[i] * 2;
-		}
+    }
+    else if (intarray) {
+	for (i = 0; i < nelems; ++i) {
+	    intarray[i] = intarray[i] * 2;
 	}
+    }
 }
 
 ```
@@ -201,12 +202,12 @@ You should be careful not to write functions that can reach their end without re
 ```C
 int is_positive(int testinput)
 {
-	if (testinput > 0) {
-		return 1;
-	}
-	else if (testinput == 0) {
-		return 0;
-	}
+    if (testinput > 0) {
+        return 1;
+    }
+    else if (testinput == 0) {
+       return 0;
+    }
 }
 ```
 
@@ -217,7 +218,7 @@ Any function that has no return value is declared with an initial `void` keyword
 ```C
 void show_sum(int a, int b)
 {
-	printf("%i\n", a + b);
+    printf("%i\n", a + b);
 }
 ```
 
@@ -266,14 +267,14 @@ Let's write a recursive function to compute n-factorial:
 ```C
 int calculate_factorial(int n)
 {
-	int n_n1;
+    int n_n1;
 
-	if (n) {
-		n_n1 = calculate_factorial(n-1);		
-		return n * n_n1;
-	}
-	
-	return 1;
+    if (n) {
+        n_n1 = calculate_factorial(n-1);
+	return n * n_n1;
+    }
+    
+    return 1;
 }
 ```
 
@@ -282,23 +283,40 @@ A more compact (but equivalent) expression of this:
 ```C
 int calculate_factorial(int n)
 {
-	if (n) {
-		return n * calculate_factorial(n-1);
-	}
+    if (n) {
+        return n * calculate_factorial(n-1);
+    }
 	
-	return 1;
+    return 1;
 }
 ```
 
 
 # Exercises
 
-## Declaring and calling a function
+### 1- Calculator
+Write a set of basic arithmetic functions that take two operands and return a result.
+
+### 2- Declaring and calling a function
 Last exercise, we wrote our palindrome program. Divide it into two distinct functions: `reverse_string()` and `check_palindrome()` (don't forget to declare the return) and write them in a program (don't forget to declare the functions).
 
-## Recursion
+### 3- Sorting...
+Two of the most important algorithm classes in scientific computing are sorting and searching routines. 
+These routines allow for highly efficient managment of data. In the previous chapter, you wrote a program that found the minim value in the following set of numbers:
+
+123, 747, 768, 2742, 988, 1121, 109, 999, 727, 1030, 999, 2014, 1402
+
+Write a program that uses an array to sort this array in ascending order.
+
+### 4- ...and searching
+Do a web search for the concept of a binary search. Write a program to find any number in the sorted array from question 3. 
+Have it report the index in the array where the number occurs.
+Have it report a message if the queried value cannot be found.
+(As we haven't gone into textual input, you can just pre-program some test cases into your main function).
+
+### 5- Recursion
  * It is pretty trivial to write a loop that counts from 0 to 10. Try to write the same loop without using `for` by using a recursive function.
- * Ever heard about fork bombs or recursive bombs?
+ * Ever hear or read about fork bombs or recursive bombs?
 
 
 

@@ -1,4 +1,4 @@
-# 6. Arrays and Strings
+# 5. Arrays and Strings
 
 Up to now, we have only dealt with single variables. However, in real-life datasets, we are likely to have considerably larger amounts of data and which may have some sort of organisational structure. The C language provides arrays as a grouping data that forms part of a sequence. Arrays have two 'flavours' in the C language: arrays and strings. As we will see, strings are simply a special case of an array.
 
@@ -25,7 +25,7 @@ int myarray[5] = {0};
 
 ## Getting and setting values in an array using index values.
 
-The C language uses **0-based ordering of integers**. Therefore, the first element in an array is always 0. By extension, the 10th element is numbered 9.
+The C language uses **0-based ordering of integers**. Therefore, the first element in an array is always at index 0. By extension, the 10th element is numbered 9.
 
 To set a particular value in an array we use the index along with the assignment operator. For instance, if we wish to assign the value 10 to the first position in the array, we write:
 
@@ -77,6 +77,12 @@ int myarray[n_entries];
 ```
 
 This is generally a much safer practice for arrays. This practice prevents you from easily 'blowing out the end' of your array when it is insufficiently sized to handle your real data needs. In most realistic situations, of course, you won't have initialised the value of `n_entries` immediately before declaring the array. Nor will you have simply input a literal constant value. Instead, you would probably have obtained this information from somewhere earlier in program flow.
+
+Note that this is not supported by all compilers.
+It is my experience that the Windows C/C++ compiler does not support variable-sized arrays.
+**This practice is therefore not fully portable.**
+We will see how to use dynamic memory allocation for a more portable approach to this.
+Even more well-tuned library methods are available for this in C++ in the form of a vector datatype.
 
 ## Arrays as primitive C data tyes
 
@@ -148,16 +154,17 @@ The use of double quotations around a string literal instructs the compiler that
 
 int main (void)
 {
-	int i = 0;
-	char mystring[] = "A string printed character-by-character\n";
+    int i = 0;
+    char mystring[] = "A string printed character-by-character\n";
+    
+    while(mystring[i]) {
+        printf("%c", mystring[i]);
+	++i;
+    }
+    
+    printf("\n");
 
-	while(mystring[i]) {
-		printf("%c", mystring[i]);
-		++i;
-	}
-	printf("\n");
-	
-	return 0;
+    return 0;
 }
 
 ```
@@ -209,11 +216,11 @@ Modify the following program so that it returns the square of `myarray[i]`. Don'
 
 int main (void) 
 {
-	int i = 0;
-	int myarray[5];
-	printf("The value at index %i in my array: %i\n", i, myarray[i]);
+    int i = 0;
+    int myarray[5];
+    printf("The value at index %i in my array: %i\n", i, myarray[i]);
 	
-	return 0;
+    return 0;
 }
 ```
 

@@ -2,7 +2,7 @@
 It is not possible to really understand any programming language without an understanding of computer memory. Furthermore, it is not possible to use C correctly or safely without an understanding of computer memory.
 
 ## 2.1 Memory
-Programming of any kind revolves around the manipulation of information in memory. Typically, this is the machine's RAM. Data is fetched from RAM and sent to the CPU to be processed. "Data" in this case can be anything from a single integer value to an entire function or even program. When a program is being executed, it interacts with the operating system to allocate and de-allocate memory. This memory is not in a state of complete and utter chaos, but is structed in the form of addresses and areas "reserved" by the OS for your program's use. Thus, when you are writing an R or Python script and you import some data, you need to declare a variable to assign it to or attach it to your workspace. That way, your program now stores the address of that data in memory and gives it a name so that it can be retrieved.
+Programming of any kind revolves around the manipulation of information in memory. Typically, this is the machine's RAM (but can also include the CPU's registers). Data is fetched from RAM and sent to the CPU to be processed. "Data" in this case can be anything from a single integer value to an entire function or even program. When a program is being executed, it interacts with the operating system to allocate and de-allocate memory. This memory is not in a state of complete and utter chaos, but is structed in the form of addresses and areas "reserved" by the OS for your program's use. Thus, when you are writing an R or Python script and you import some data, you need to declare a variable to assign it to or attach it to your workspace. That way, your program now stores the address of that data in memory and gives it a name so that it can be retrieved.
 
 ## 2.2 Variables
 C only works with very simple data types. But as we will see, you have the power to make the data more complex and structured. Unlike Python and R, C uses **static typing**. A variable, once declared and named does not change type throughout the scope of its use (although, as we'll see, this is not strictly enforced by the compiler). Furthermore, variables are declared to be of a particular type prior to initialisation.
@@ -31,21 +31,21 @@ int main (void) // Begin function main; takes no arguments
 }
 ```
 
-But what was the value of x? This variable was never initialised. To get a sense of "how close to the machine level" we are working and get a little more info on the printf() function, let's try the following experiment:
+But what was the value of `x`? This variable was never initialised. To get a sense of "how close to the machine level" we are working and get a little more info on the printf() function, let's try the following experiment:
+
 ```C
-    #include <stdio.h>
+#include <stdio.h>
   
-    int main (void)
-    {
-  
-      int x;
-  
-      printf("The value of x: %i\n", x);
-  
-      return x;
-  
-    }
+int main (void)
+{
+    int x;
+    
+    printf("The value of x: %i\n", x);
+    
+    return x;
+}
 ```
+
 After compiling and running, on my system I got:
 
     The value of x: 1762254902
@@ -160,6 +160,20 @@ The `double` variable permits a floating point number with double precision. The
 
 Thus a constant that needs to be of type `float` should be expressed with an `f` or `F` at the end: `105.72f`. 
 
+## Integral vs. floatin-point types
+
+All of these variables can be generalised into two 'classes' of data type: integral data types and floating-point data types. 
+**Integral data types** include integers, characters, and a special data type for memory addresses called pointers (which we'll see later).
+Integral data is therefore used to store information that is of simple, whole-unit and sequential type.
+Typically, this data is stored using a simple binary **two's complement** notation, stored in bytes with no internal structure.
+In effect, characters and pointers are types of integers in C.
+
+By contrast, **floating point data types** are used, obviously, for storing data with fractional information. 
+Thus, they can be used to store the output of division operations. 
+Something we'll look at later. 
+The key difference is that the binary convention used to store data in a floating point data type is different from integral types.
+A floating point number will have a certain number of bytes dedicated to each of the exponent, mantissa, and sign of the number.
+The translation of this into decimal uses floating point binary, which is somewhat different from ordinary two's complement binary used in integers.
 
 ## Variable ranges:
 
@@ -177,7 +191,7 @@ We won't treat these in detail here, but visit them as we need them during the m
 The C language provides all the operators for basic arithmetic as in any other language. 
 
 
-### Arithmetic operators: `+`, `-`, `*`, `/`, `^`, and `%`
+### Arithmetic operators: `+`, `-`, `*`, `/`, and `%`
 
 The `+`, `-`, `*`, `/`, `^`, and `%` operators work in C as they do in other languages and their operations won't be considered in detail here. 
 
@@ -247,7 +261,7 @@ Examine the following program and identify all of the bugs within it.
 int main (void)
 {
      int x = 1;
-     Char a = 'a';
+     char a = 'a';
      float 1point1 = 1.1;
      
      printf("An integer: %i\n, x);
@@ -280,3 +294,6 @@ What happens if you assign 'incompatible' constant types to your variable (e.g. 
 
 ### 5- Memory
 Let's break your computer: try to see which will be the biggest integer you can declare to `int`. Go wild!
+
+### 6- Floating point binary
+To understand the difference between integral and floating point binary, do a web search on floating point binary and see what you come up with.

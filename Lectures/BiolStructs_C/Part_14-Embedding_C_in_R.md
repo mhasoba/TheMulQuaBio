@@ -1,57 +1,17 @@
-# 13. Embedding C code in R
+# 14. Embedding C code in R
 
-## The super basics
-This trivial example comes from [r-bloggers](https://www.r-bloggers.com/three-ways-to-call-cc-from-r/). 
-Basically, you can parse your `C` functions into `R` using pointers:
+While R is useful for a wide variety of statistcal programming applications, one of R's major shortcomings is in performance, especially in loops, and loops containing conditional statements.
+For that reason, many people working with R actually embed C modules and libraries within their R packages. 
+You may wish to do the same with your own R modules in order to gain performance.
+However, what might end up being as or more useful is debugging some of the C code within R packages (I've seen some pretty terrifying and unsafe code in some of these modules).
 
-Copy paste the following C function in a file that you will name `doubler.c`:
+There are a number of ways of calling C functions from R. The method we will look at in this chapter is the `.Call` library.
 
-**C:**
-
-```C
-void double_me(int* x) {
-  *x = *x + *x; // Wow! Such complexity!
-}
-```
-
-As you can see, the function here does not return anything and only intakes pointers, thus modifying the values of the input ``on the fly''.
-You'll then need to compile the code using the `R` inbuilt compiler called SHLIB (SHared LIBrary) from your terminal:
-
-**shell:**
-
-```sh
-R CMD SHLIB doubler.c 
-```
-
-Now from `R` it you can load the function using `dyn.load` (dynamic loading) and calling it as follows using `.C` function:
-
-**R:**
-
-```{r}
-## Dynamic loading the function into the current environment
-dyn.load("doubler.so")
-## Calling the double_me function and feeding it 1
-.C("double_me", x = as.integer(1))
-```
-
-The integer enforcing (`as.integer`) is because `R` consider numbers to be `numeric` values by default (that will be the equivalent to a `double` or `long double` in `C`).
-This outputs a list of the arguments (only one here) with the modified value of x:
-```
-$x
-[1] 2
-```
-
-
-This is obviously the best function you ever wrote in `R`: who could have guessed these results!
-
-## A more convincing example
-Of course, if it's just for doing these kinds of examples, you could have totally ignored all this `C` course and added values in `R`.
-The actual occasions where you should bother using `C` code in `R` is when you are using any kind of loops! Which by know in the CMEE course you should have noticed is pretty much all the time...
-
-Here is something more convincing that many of you will be more familiar: the painfully slow nested loops in `R`:
+## Comparing performance
+First, let's look at the differences in performance in R and C.
+In particular, let's look at the painfully slow nested loops in `R` by writing a function that counts all the prime numbers between `1` and `n`:
 
 ### in `R`
-Let's write a function in R that counts all the prime numbers between `1` and `n`:
 
 **R:**
 

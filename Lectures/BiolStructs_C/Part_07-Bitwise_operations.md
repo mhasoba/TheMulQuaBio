@@ -230,6 +230,8 @@ We will perform operations on phylogenetic trees later in the module, but we can
 
 Consider a binary tree with three species at the tips: `sp1`, `sp2`, and `sp3`. There are two internal nodes in this tree, `d1`, which is the ancestor of `sp1` and `sp2`, and `d2`, which is the ancestor of `d1` and `sp3`.
 
+![three-taxon tree](https://raw.githubusercontent.com/mhasoba/TheMulQuaBio/master/BiolStructs_C/images/_3tree.png)
+
 Ancestral states reconstruction occurs in two 'passes' over a phylogenetic tree. An initial pass that traverses from the tips of the tree (where the observed data lives) and which generates a set of preliminary reconstructions that is based solely on 'descendant data'. Then a final pass goes from the root of the tree up towards the tips, updating the nodal values inside the tree with information from collateral descendants. 
 
 To reconstruct ancestral states, we need a tree, some data, and a model. For now, we've got an implicit tree (described above). We can make up any data we like for the purposes of instruction. As for our model, the principle of parsimony offers a simple model of ancestral state reconstruction in phylogenetics and is usually a starting point for these kinds of practices. Parsimony works by assuming that the amount of evolutionary transformation should be minimal on a given tree. That is, we minimise the number of implied transformation events. 
@@ -320,7 +322,7 @@ else if (base == 'T' || base == 'T') {
 ```
 
 
-** Polymorphisms? No problem! **
+**Polymorphisms? No problem!**
 
 Very often, DNA sequences can be polymorphic at a particular site. A special symbol is usually used to represent these. In the case of pyrimidine polymorphisms it's usually `Y` (pYrimidine) and a purine it's `R` (puRine).
 
