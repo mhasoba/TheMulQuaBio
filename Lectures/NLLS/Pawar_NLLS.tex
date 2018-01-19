@@ -1,0 +1,798 @@
+\documentclass[xcolor=x11names,handout,compress]{beamer}
+
+%% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\graphicspath{{graphics/}}
+\usepackage{animate}
+\usepackage{tikz}
+
+% ########For highlight boxes over equations########
+\usepackage{color}
+\input{inputs/rgb}
+\definecolor{capri}{rgb}{0,.75,1}
+\definecolor{coral}{rgb}{1,.2,.2}
+\newcommand{\hltyellow}[1]{\colorbox{yellow}{$\displaystyle #1$}}
+\newcommand{\hltblue}[1]{\colorbox{capri}{$\displaystyle #1$}}
+\newcommand{\hltred}[1]{\colorbox{coral}{$\displaystyle #1$}}
+\newcommand{\hltgreen}[1]{\colorbox{green}{$\displaystyle #1$}}
+
+\usepackage{ulem}
+\renewcommand<>{\sout}[1]{
+  \only#2{\beameroriginal{\sout}{#1}}
+  \invisible#2{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\setbeamertemplate{headline}{}
+
+% ###Comment/Uncomment to display/hide navigation symbols at bottom:
+\setbeamertemplate{navigation symbols}{}
+
+% ###Comment/Uncomment to hide/display outline at top:
+% \useoutertheme[subsection=false,shadow]{miniframes}
+
+% \useinnertheme{default}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.2ex,dp=1ex,center]{author in head/foot}
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.2ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+  \end{beamercolorbox}}
+  \begin{beamercolorbox}[wd=.05\paperwidth,ht=2.2ex,dp=1ex,center]{}
+     \insertframenumber{} / \inserttotalframenumber\hspace*{-3ex}
+  \end{beamercolorbox}
+}
+
+\title[NLLS]{\bf Fitting models to data using Non-linear Least-Squares}
+% \subtitle{Silwood Masters Course Lecture}
+\author[Samraat]{Samraat Pawar}
+\institute{\it
+	{Department of Life Sciences\\
+	\vspace{5pt}
+	(Silwood Park)\\
+		% \vspace{5pt}
+% Imperial College London
+	}
+	\vspace{20pt}
+  \centering
+  \includegraphics[height = .3in]{graphics/Imperial_Color1.pdf}
+}
+
+\usefonttheme{serif}
+\usepackage{palatino}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, series = \bfseries}
+\setbeamertemplate{frametitle}[default][center]
+
+\setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black}
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+ 
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Outline}
+
+\begin{itemize}\itemsep16pt
+	\item Why Non-Linear Least Squares regression / fitting? 
+	\item The NLLS fitting method 
+	\item NLLS in {\tt R}
+	\item Afternoon practicals overview (two examples)
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Linear models are great}
+
+\includegraphics[width=\textwidth]{Linear.pdf}
+
+\begin{itemize}[<+->]
+	\pause 
+	\item These are {\it all} good linear models (huh?!)
+	\item The data can be modelled as {\it linear combination} of 
+	variables and coefficients
+	\item Easily fitted using Ordinary Least Squares (OLS) regression
+	\item Linear models can include curved relationships (e.g. polynomials)
+	\item {\it OK, so then why Non-Linear Least Squares (NLLS) fitting?} 
+\end{itemize}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Why NLLS? -- first, what makes a model non-linear?}
+
+% \begin{itemize}[<+->]\itemsep10pt
+
+	% \item OLS regression can be used to fit both linear and nonlinear 
+	% {\it equations} that {\it intrinsically linear}\\
+	% \pause e.g., Straight line: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$\\
+	% \pause e.g., Polynomial: $y_i = \exp(\beta_0) + \beta_1 x_i + \beta_2 x_i^2 
+	% + \varepsilon_i$
+
+	% \item Indeed, for OLS to work, we need {\it intrinsic linearity} --- 
+	% i.e., the equation to be fitted (model) should be {\it linear in the 
+	% parameters}\\
+	
+	% \item Are these models linear in their parameters?  
+	% \begin{itemize}
+		% \item $y_i = \beta_0 + \beta_1 x_i^{\beta_2} + \varepsilon_i$
+		% \item $y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i$
+	% \end{itemize}
+	% \pause NO!
+		
+% \end{itemize}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+{\bf Recall what the Least Squares method does:}
+
+	\begin{itemize}[<+->] \itemsep10pt
+
+		\item Consider a predictor $x$, data $y$, $n$ observations, and a 
+		model that we want to fit to the data: \\
+		
+		$f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
+		
+		where $\boldsymbol\beta = (\beta_1, \beta_2, \ldots,\beta_k)$ are 
+		the model's $k$ parameters
+	
+		\item The objective is to find estimates of values of the $k$ 
+		parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared 
+		residuals ($r_i$) (AKA RSS):
+		
+		$S = \sum\nolimits_{i=1}^n{\left[ y_i - f(x_i,\boldsymbol\beta) 
+		\right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
+	
+	\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+	
+\begin{columns}[T]
+
+	\column{0.5\textwidth}
+		\includegraphics[width=\textwidth]{JustRight.pdf}
+		
+	\column{0.5\textwidth}
+		\begin{align*}
+		  y_1  & = \beta_0 + \beta_1 x_1  + {\color{red} \varepsilon_i }\\
+		  \\
+		  9.50  &= 5 + 4 \times 1 + {\color{red} 0.50}\\
+		  11.00 &= 5 + 4 \times 2 - {\color{red} 2.00}\\
+		  19.58 &= 5 + 4 \times 3 + {\color{red} 2.58}\\
+		  20.00 &= 5 + 4 \times 4 - {\color{red} 1.00} 
+		\end{align*}
+		
+		\[\beta_0 = 5; \beta_1 = 4\]
+				
+\end{columns}		
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{The linear least-squares solution}
+
+% OLS minimizes the {\it sum} of the {\it squared} residuals
+
+%% animate directly from a multipage pdf
+%% use timeline to only embed the axes once!
+% \begin{columns}[T]
+% \column{\textwidth}
+% \animategraphics[width=\textwidth, 
+                 % controls, %autoplay, %palindrome, 
+                 % timeline=Varying_timeline.txt, 
+                 % buttonsize=1em]{12}{Varying_timeline}{}{}
+
+% \end{columns}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+{\bf That's all well and good, but we can use maths instead of 
+brute-force computation!}
+
+	\begin{itemize}[<+->] \itemsep10pt
+
+		\item Our model is $f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
+			
+		\item We want to find estimates of values of the parameters 
+		($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals 
+		($r_i$) (AKA ``RSS'') $S = \sum\nolimits_{i=1}^n{\left[ y_i - 
+		f(x_i,\boldsymbol\beta) \right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
+
+		\item For this we can solve $\frac{\partial S}{\partial 
+		\beta_j} = 0, j = 0,1,2,\ldots,k$ to find the {\it minimum}
+	
+		\item That is, we need to solve	
+		$\frac{\partial \sum\nolimits_{i=1}^n{r_i^2}}{\partial \beta_j} = 
+		0$
+		
+		\item Or, $2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} = 0$
+	
+	\end{itemize}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+	% \begin{itemize}[<+->] \itemsep10pt
+
+		% \item Thus, solving $ 2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} 
+		% = 0$ \\
+		
+		% boils down to finding the ``gradient'' $ \frac{\partial r_i}{\partial \beta_j} $
+	
+		% \item This is not a problem in linear models, because this gradient 
+		% is fully solvable as the equation is {\it intrinsically linear}
+		
+		% \item That is, the solution of $ \frac{\partial r_i}{\partial 
+		% \beta_j} $ is simple (enough)  
+				
+	% \end{itemize}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+	% \begin{itemize}[<+->] \itemsep15pt
+		
+		% \item For example, if $f(x_i,\boldsymbol\beta) + \varepsilon_i = \beta_0 + \beta_1 x_i + 
+		% \varepsilon_i$ \\
+		
+		% \item That is, our model is $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$ 
+		% (Linear Regression)
+		
+	% \item Then we want to solve 
+		
+		% $\frac{\partial S}{\partial {\beta_0}} = 
+		% \sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+		% y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
+		% }_{0}}}}=0 $ \\
+		 
+		% $ \frac{\partial S}{\partial {{\beta 
+		% }_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+		% {{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
+		% \right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$
+		
+	% \end{itemize}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+	% \begin{itemize}[<+->] \itemsep12pt
+
+		% \item And, solving\\ 		
+		% $\frac{\partial S}{\partial {\beta_0}} = 
+		% \sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+		% y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
+		% }_{0}}}}=0 $\\ 
+		 
+		% $ \frac{\partial S}{\partial {{\beta }_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial 
+		% {{\left[ {{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
+		% \right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$ \\
+		
+		% \vspace{6pt}
+		% just boils down to solving two simultaneous equations because $ 
+		% \frac{\partial r_i}{\partial \beta_j} $ is simple {\it because} the model 
+		% is intrinsically linear:\\
+		
+		% \vspace{6pt}
+		% $-n{{\beta }_{0}}+\sum\nolimits_{i=1}^{n}{{{y}_{i}}}+{{\beta 
+		% }_{1}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}=0 $\\ 
+		
+		% $ \sum\nolimits_{i=1}^{n}{{{x}_{i}}{{y}_{i}}}-{{\beta 
+		% }_{0}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}+{{\beta 
+		% }_{1}}\sum\nolimits_{i=1}^{n}{x_{i}^{2}}=0$
+
+		% \item That is, we need to solve $\mathbf{Y} = \mathbf{X 
+		% \boldsymbol\beta  +  \boldsymbol\varepsilon}$ ({\it this is what R 
+		% solves when you use {\tt lm()}})
+
+	% \end{itemize}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{The linear least-squares solution}
+
+% There is only one unique solution, which gives the OLS fitted 
+	% parameter values for $\boldsymbol\beta = (\beta_0, \beta_1)$:
+		
+% \begin{columns}[T]
+% \column{\textwidth}
+% \animategraphics[width=\textwidth, 
+                 % controls, %autoplay, %palindrome, 
+                 % timeline=Varying_timeline.txt, 
+                 % buttonsize=1em]{12}{Varying_timeline}{}{}
+
+% \end{columns}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+
+% \begin{itemize}[<+->]\itemsep10pt
+
+	% \item So, then, in an {intrinsically non-linear model} such as $y_i = 
+	% \beta_0 e^{\beta_2 x_i} + \varepsilon_i$ the derivatives 
+	% $\frac{\partial r_i}{\partial \beta_j}$ are naughty
+	
+	% \item That is, they are functions of both $x$ and the parameters 
+	% $\beta_j$, so the gradient equations do not have a solution like the 
+	% OLS case
+
+	% \item So the nice trick of solving  $\mathbf{Y} = \mathbf{X 
+	% \boldsymbol\beta  +  \boldsymbol\varepsilon}$ is impossible {\it 
+	% mathematically}
+							
+% \end{itemize}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{So --- Enter NLLS!}
+
+But we can use a computer!
+	
+\begin{itemize}[<+->]\itemsep10pt
+	\item Choose initial values for the $\beta_j$'s
+	
+	\item Then, ``refine'' the parameters {\it iteratively} by calculating 
+	$\frac{\partial r_i}{\partial \beta_j}$ {\it approximately} --- 
+	this approximation is the {\it Jacobian} (the gradient), which is a matrix of 
+	the $\frac{\partial r_i}{\partial \beta_j}$'s
+
+	\item Whether a refinement has taken place in any step of the 
+	iteration is determined by re-calculating the residuals at that 
+	step
+
+	\item Eventually, if it all goes well, we find a combination of 
+	$\beta_j$'s that is {\it very close} to the desired solution 
+	$\frac{\partial S}{\partial \beta_j} = 0, j = 0,1,2,\ldots,k$
+			
+\end{itemize}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Enter NLLS!}
+
+% The end result is (approximately) the same:
+
+% \begin{columns}[T]
+% \column{\textwidth}
+% \animategraphics[width=\textwidth, 
+                 % controls, %autoplay, %palindrome, 
+                 % timeline=Varying_timeline.txt, 
+                 % buttonsize=1em]{12}{Varying_timeline}{}{}
+
+% \end{columns}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{OK, fine, why would {\it I} ever need to worry about NLLS?}
+
+\begin{itemize}[<+->]\itemsep10pt
+	\pause 
+	\item Many observations in biology are just not well-fitted by a linear model
+
+	\item That is, the underlying biological phenomena are not 
+	well-described by a linear model
+	
+	\item Examples:
+
+	\begin{itemize}\itemsep2pt
+	
+		\item Logistic growth model
+		
+		\item Michaelis-Menten biochemical kinetics (two parameters 
+		$V_{\max}$ and $K_m$: $v = \frac{V_{\max}[S]}{K_{m} + [S]}$
+	
+		\item Responses of metabolic rates to changing temperature 
+		(practical 1)
+
+		\item Consumer-Resource (e.g., predator-prey) functional responses 
+		(practical 2)
+		
+		\item Time-series data (e.g., fitting a sinusoidal function)
+			
+		\item \it Can you think of some examples? 
+	\end{itemize}
+	
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example 1: Temperature and metabolism}
+      
+\begin{columns}[c]
+  \column{2.1in}
+    \pause
+      \includegraphics[width=\textwidth]{graphics/Photobacterium.pdf}
+  \pause
+  \column{2.7in}
+    $B = B_0 \boxed {e^{-\frac{E}{kT}}}f(T,T_{pk},E_D)$\\
+    \vspace{10pt}
+    \raggedright{$T$ = temperature (K)\\
+     $k$ = Boltzmann constant (eV K$^{-1}$)}\\
+     $E$ = Activation energy (eV)\\
+     $T_{pk}$ = Temperature of peak performance\\
+     $E_D$ = Deactivation energy (eV)\\
+    {\small (J H van’t Hoff 1884, S Arrhenius 1889)}
+\end{columns}
+
+\begin{itemize}\setlength{\itemindent}{0em}
+  \pause
+  \item Surely there is more to thermal responses?
+    \begin{itemize}\setlength{\itemindent}{-1em}
+     \item Oxygen limitation
+     \item Complexity of metabolic network
+     \item Hormonal regulation
+    \end{itemize}
+    \pause
+  \item \textit{What about {\it alternative models}?}\\
+
+\end{itemize}
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example 2: Functional responses}
+ 
+\begin{columns}[c]
+  \column{2in}
+  \begin{center}
+			   $f(x_R) = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$
+	\scriptsize (Holling, 1959)
+	\end{center}
+ \scriptsize
+ $x_R$ = Resource density (Mass / Area or Volume)\\
+ $a$ = Search rate (Area or Volume / Time )\\
+ $h$ = Handling time \\
+ $q$ = Shape parameter (dimensionless) 
+ \column{2.3in}
+      \includegraphics[width=\textwidth]{graphics/FR.pdf}
+\end{columns}
+
+\vspace{10pt}
+ Note that: 
+\begin{itemize}
+\item NLLS fitting can yield $h < 0$, $q < 0$, or both 
+\item $h < 0$ is biologically impossible but indicates an upward curving response
+\item $q < 0$ is biologically unlikely as it indicates a decline in 
+search rate with resource density (but is useful as a measure of 
+deviation away from a type III response) 
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{NLLS fitting}
+
+So the general procedure is:
+
+\begin{enumerate}[<+->] \itemsep4pt
+	\item Start with an initial value for each parameter in the model
+	\item Generate the curve defined by the initial values
+	\item Calculate the residual sum-of-squares (rss)
+	\item Adjust the parameters to make the curve come closer to the data 
+	points. This the tricky part --- more on this in the next slide
+	\item Adjust the parameters again so that the curve comes even closer 
+	to the points (rss decreases)
+	\item Repeat 4--5
+	\item Stop simulations when the adjustments make virtually no 
+	difference to the rss
+\end{enumerate}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{NLLS fitting}
+
+The {\it tricky part --- adjust parameters to make curve come closer to 
+the data points} (step 4) has at least two algorithms:
+
+\begin{itemize}[<+->]\itemsep10pt
+
+	\item The Gauss-Newton algorithm is the default in the {\tt nls} 
+	package (part of the {\tt stats} base package) --- good in many 
+	cases, but doesn't work very well if the model is mathematically 
+	weird (the optimization landscape is difficult) and the starting 
+	values for parameters are far-off-optimal
+	
+	\item The Levenberg-Marquardt (LM) switches switches between 
+	Gauss-Newton and ``gradient descent'' and is more robust against 
+	starting values that are far-off-optimal --- available in {\tt R} 
+	through the the {\tt minpack.lm} package {\small \url 
+	{http://cran.r-project.org/web/packages/minpack.lm}}
+	
+	% %% \item It's an R front-end to a Fortran LM implementation of the 
+	% %% MINPACK package
+	
+	\item The command is {\tt nlsLM}
+
+\end{itemize}   
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{NLLS fitting}
+
+\begin{itemize}[<+->] \itemsep6pt
+\item Once the algorithm as converged (hopefully -- but you may be surprised 
+how well it usually works), you need to get the goodness of fit measures
+
+\item First, of course, examine the fits visually
+
+\item Also, report the best-fit results, including:
+
+	\begin{itemize}
+	
+		\item Sums of deviations of the data points from the final model 
+		fit (final RSS)
+		\item $R^2$
+		\item Estimated coefficients
+		\item For each coefficient, standard error (can be used for CI's), t-statistic 
+		and corresponding (two-sided) p-value 
+	\end{itemize} 
+
+\item The function {\tt summary.nls} will give you all these measures
+
+\item Remember, the precise parameter values you obtain will depend in part on 
+the initial values chosen and the convergence criteria 
+
+\item You may also want to compare multiple models...  
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{NLLS Assumptions}
+
+NLLS-regression has all the assumptions of OLS-regression:
+	\begin{itemize}[<+->]\itemsep10pt
+		
+		\item No (in practice, minimal) measurement error in explanatory 
+		variable ($x$-axis variable)
+		
+		\item Data have constant normal variance --- errors in the $y$-axis 
+		are homogeneously distributed over the $x$-axis range
+		
+		\item The measurement/observation error distribution is Gaussian 
+		--- for example, what would the error distribution of this 
+		non-linear model be: $y_i = \beta_0 e^{\beta_2 x_i} + 
+		\varepsilon_i$ 
+		
+		\item What if the errors are not normal? --- use maximum likelihood 
+		instead! 
+		(e.g., using {\tt nlm} for optimizing/fitting) 
+	
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Comparing models}
+
+\begin{itemize}
+	\item It's all about the ``Likelihood'' of a model: 
+	
+	\item That is, the likelihood of a set of parameter values (of a 
+	model), $\theta$, given outcomes $x$, equals the probability of those 
+	observed outcomes given those parameter values, that is,
+
+	$$ \mathcal{L}(\theta |x) = P(x | \theta)$$
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comparing models}
+
+The easiest thing to do for you is to use information theory (including AIC and BIC) to compare 
+models. \\
+
+{\it Both use estimated likelihood of a model}\\
+
+\pause This is how you can calculate these (using {\tt R} syntax): 
+
+\pause
+\begin{itemize}
+\small
+	\item residuals = Observations - Predictions
+	\item {\tt rss = sum(residuals \^{} 2)} 
+	
+	\item Then, AIC is {\tt n * log((2 * pi) / n) + n + 2 + n * log(rss) + 
+	2 * k} \\
+		({\it what is {\tt n} and {\tt k}?})
+	
+	\item And BIC is {\tt n + n * log(2 * pi) + n * log(rss / n) + 
+	(log(n)) * (k + 1)}
+	
+	\item For both AIC and BIC, If model {\bf A} has AIC lower by 2-3 or 
+	more than model {\bf B}, it’s better --- Differences of less than 2-3 
+	don't really matter
+
+\end{itemize}
+
+    \pause
+Also note that:
+\begin{itemize}
+\small
+	\item R$^{2}$ = 1 - (rss$/$tss), where tss is total sum of squares: \\
+{\tt tss = sum((Observations - mean(Predictions)) \^{} 2)}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Practicals: Instructions}
+
+\begin{itemize}\itemsep12pt
+	
+	\item We shall start off with some simple examples 
+	({\tt NLSFitEx1.R}, {\tt NLSFitEx2.R}, etc.)
+
+	% \item You can then choose either Practical 1 or 2, or do both!
+
+	\item In each, make sure you have a good look at the data first by plotting 
+	them up in a loop.
+	
+	\item Keep workflow organized in {\tt Code}, {\tt Results}, {\tt Data} ! 
+	
+	\item You may also find your own model to fit some data related to your interests 
+	or project
+
+	% \item Your demonstrators and I will help you get started in any case
+	
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Practicals: Basic examples}
+
+\begin{itemize}\itemsep12pt
+	
+	\item Go to \url{mhasoba.bitbucket.org} and click on the sailfin. (This takes you to \url{https://bitbucket.org/mhasoba/silbiocompmasterepo/src/92f5d9b6910f?at=master})
+	
+	\item Create {\tt Code}, {\tt Results}, {\tt Data} directories on your own computer 
+
+	\item Download {\tt NLSFitEx1.R} and {\tt NLSFitEx2.R} from the {\tt Code} directory, and the associated data from the {\tt Data} directory.
+
+	\item Run the both scripts and examine them line by line  
+
+	\item Next you can try Practical 1 or 2 (Next two slides)
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Practical 1: Fitting thermal responses}
+
+% \begin{itemize}
+	
+	% \item Use {\tt nls} (or {\tt nlsLM}) to fit the {\tt ThermRespData.csv} 
+	% dataset to the model: $B = B_0 \boxed {e^{-\frac{E}{kT}}}f(T,T_{pk},E_D)$\\
+
+  % \item Plot the data and output coefficient estimates and fit stats to 
+  % a file 
+  
+  % \item Here's an example of how a fitted curve looks (only two 
+  % fitted parameters are shown): \\
+
+	% \centering 
+	% \includegraphics[width=.45\textwidth]{164.pdf}
+ 
+% \end{itemize}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Practical: Fitting Functional responses}
+
+\begin{itemize}
+	
+	\item Use {\tt nls} (or {\tt nlsLM}) to fit {\tt CRat.csv} 
+	dataset to the model: $f(x_R) = c = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$\\
+	($c$ is consumption rate)
+  \item Plot the data and output coefficient estimates and fit stats to 
+  a file 
+  
+  \item Here's an example of how a fitted curve looks : \\
+ 
+\end{itemize}
+
+	\centering 
+	\includegraphics[width=.4\textwidth]{FR_eg.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{More NLLS tips}
+
+\begin{itemize}[<+->]\itemsep10pt
+	\item You can use mixed-effects modelling with NLLS in R; the package is {\tt nlme}
+	{\small \url 
+	{https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/nlme.html}}
+	(You are probably stuck with the Gauss-Newton algorithm with 
+	{\tt nlme} though)
+	
+	\item You can also use Python --- look up {\tt lmfit} \url{https://lmfit.github.io/lmfit-py/index.html}. \\ {\tt python} seems to have a better Levenberg-Marqualdt implementation than {\tt R} 
+	
+\end{itemize}   
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Readings}
+
+\begin{itemize}\itemsep10pt
+	
+	\item Motulsky, Harvey, and Arthur Christopoulos. Fitting models to 
+	biological data using linear and nonlinear regression: a practical 
+	guide to curve fitting. OUP USA, 2004. 
+	
+	\item Johnson, J. B. \& Omland, K. S. 2004 Model selection in ecology 
+and evolution. Trends Ecol. Evol. 19, 101--108. 
+
+\end{itemize}   
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
