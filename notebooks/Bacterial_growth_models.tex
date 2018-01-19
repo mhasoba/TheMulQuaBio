@@ -1,0 +1,73 @@
+%% Bacterial Growth Models
+
+\documentclass[a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\linespread{1.5}
+\usepackage{mathtools}
+
+%\author{Tom Smith}
+\title{Bacterial Growth Models}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Background}
+
+Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. \
+
+Traditionally, growth rate can be measured by plotting out cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase - the slope of the line gives the maximum growth rate ($r_{max}$). Models have since been devised which we can use to describe the whole sigmoidal bacterial growth curve.  \
+
+\section*{The Models}
+
+Shown here are a modified Gompertz model (as described by Zwietering \textsl{et. al.}, 1990), the Baranyi model (Baranyi, 1993) and the Buchanan model (or three-phase logistic model; Buchanan, 1997). Given a set of cell numbers (N) and times (t), each growth model can be described in terms of:
+
+\begin{itemize}
+	\item $N_{min}$ - the initial culture density
+	\item $N_{max}$ - the maximum culture density
+	\item $r_{max}$ (or $\mu_{max}$) - maximum growth rate
+	\item $t_{lag}$ (or $\lambda$) - the duration of the lag phase
+\end{itemize} 
+	
+
+\noindent The modified Gompertz model (eq. \ref{eq:Gompertz}) has been used consistently through the literature as a good description of bacterial growth. Here maximum growth rate ($\mu_{max}$) is the tangent to the inflection point, $\lambda$ is the x-axis intercept to this tangent and A is the asymptote ($A = ln(\frac{N_{max}}{N_{min}})$):
+
+\begin{equation}
+ \label{eq:Gompertz}
+N(t) = A \cdot exp \left\{-exp \Big[\frac{\mu_{max}e}{A} (\lambda - t) + 1 \Big]\  \right\}
+\end{equation}
+
+The Baranyi model (eq. \ref{eq:Baranyi}) introduces a new dimensionless parameter $h_{0}$ which represents the initial physiological state of the cells. The length of the lag phase is determined by the value of $h_{0}$ at inoculation and the post-inoculation environment. 
+Thus the definition of lag is independent from the shape of the
+growth curve, and the effect of the previous environment is separated from the
+effects of the present environment. This allows modelling growth without a
+lag period following inoculation from media favourable to growth to new media
+also favourable to growth. This is the explicit form of the model:
+
+\begin{equation}
+ \label{eq:Baranyi}
+N(t) = N_{min} + \mu_{max}t + \frac{1}{\mu_{max}} ln (e^{-v \cdot t} + e^{-h_{0}} - e^{-v \cdot t - h_{0}}) 
+- \frac{1}{m} ln \bigg( \frac{1 + e^{m \mu_{max} t} + \frac{1}{\mu_{max}} ln (e^{-v \cdot t} + e^{-h_{0}} - e^{-v \cdot t - h_{0}}) - 1}{e^{m(N_{max}-N_{min})}} \bigg)
+\end{equation}
+
+Thankfully we can simplify this somewhat. v and m are curvature parameters, which characterise the transition from and to the exponential phase respectively. Baranyi (1997) suggests $v = \mu_{max}$ and $m = 1$, whilst $h_{0}$ can be defined using our original parameters as $\lambda = \frac{h_{0}}{\mu_{max}}$. Substituting these in, we can return to the original 4 parameters. \
+
+Finally, we will use the Buchanan model, or `three-phase logistic model' (eq. \ref{eq:Buchanan}). This is very simple and makes three assumptions; 1. growth rate during lag phase is zero, 2. growth rate during exponential phase is constant, 3. growth rate during stationary phase is zero. This is not a good description of the shape of the curve (no curvature), but the argument is that it captures the growth parameters well without the need for a more complicated model.
+
+\begin{equation}
+ \label{eq:Buchanan}
+N(t) =
+\left\{
+	\begin{array}{ll}
+		N_{min}  & \mbox{if } t \leq t_{lag} \\
+		N_{max} + r_{max} \cdot (t-t_{lag})  & \mbox{if } t_{lag} < t < t_{max} \\
+		N_{max}  & \mbox{if } t \geq t_{max}
+	\end{array}
+\right.
+\end{equation}
+
+Here, $t_{max}$ is the time at which $N_{max}$ is reached.
+
+
+\end{document}
