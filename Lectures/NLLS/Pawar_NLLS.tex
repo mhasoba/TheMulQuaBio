@@ -53,7 +53,7 @@
   \end{beamercolorbox}
 }
 
-\title[NLLS]{\bf Fitting models to data using Non-linear Least-Squares}
+\title[NLLS]{\bf Fitting mathematical models to data using Non-linear Least-Squares}
 % \subtitle{Silwood Masters Course Lecture}
 \author[Samraat]{Samraat Pawar}
 \institute{\it
@@ -107,7 +107,7 @@
 	\item Why Non-Linear Least Squares regression / fitting? 
 	\item The NLLS fitting method 
 	\item NLLS in {\tt R}
-	\item Afternoon practicals overview (two examples)
+	\item Afternoon practicals overview
 \end{itemize}
 
 \end{frame}
@@ -117,43 +117,40 @@
 
 \includegraphics[width=\textwidth]{Linear.pdf}
 
-\begin{itemize}[<+->]
+\begin{itemize}[<+->]\itemsep4pt
 	\pause 
-	\item These are {\it all} good linear models (huh?!)
-	\item The data can be modelled as {\it linear combination} of 
-	variables and coefficients
-	\item Easily fitted using Ordinary Least Squares (OLS) regression
-	\item Linear models can include curved relationships (e.g. polynomials)
-	\item {\it OK, so then why Non-Linear Least Squares (NLLS) fitting?} 
+	\item These are {\it all} good {\it Linear Models} (really?!)
+	\item The data can be modelled (aka "fitted to a mathematical model") as a {\it linear combination} of {\it variables} and {\it coefficients}
+	\item Easily fitted using {\it Ordinary Least Squares} (OLS) regression
+	\item Linear models can {\it include curved responses} (e.g. polynomial regression)
+	\item OK, so then {\it why Non-Linear Least Squares (NLLS) fitting?} 
 \end{itemize}
 
 \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{Why NLLS? -- first, what makes a model non-linear?}
+\begin{frame}{Why NLLS? -- first, what makes a model non-linear?}
 
-% \begin{itemize}[<+->]\itemsep10pt
+\begin{itemize}[<+->]\itemsep10pt
 
-	% \item OLS regression can be used to fit both linear and nonlinear 
-	% {\it equations} that {\it intrinsically linear}\\
-	% \pause e.g., Straight line: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$\\
-	% \pause e.g., Polynomial: $y_i = \exp(\beta_0) + \beta_1 x_i + \beta_2 x_i^2 
-	% + \varepsilon_i$
-
-	% \item Indeed, for OLS to work, we need {\it intrinsic linearity} --- 
-	% i.e., the equation to be fitted (model) should be {\it linear in the 
-	% parameters}\\
-	
-	% \item Are these models linear in their parameters?  
-	% \begin{itemize}
-		% \item $y_i = \beta_0 + \beta_1 x_i^{\beta_2} + \varepsilon_i$
-		% \item $y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i$
-	% \end{itemize}
-	% \pause NO!
+	\item OLS can be used to fit both linear and nonlinear {\it equations} that {\it intrinsically linear}, e.g.,
+	\begin{itemize}
+		\item 	Straight line: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$
+		\item Polynomial: $y_i = \exp(\beta_0) + \beta_1 x_i + \beta_2 x_i^2 
+		+ \varepsilon_i$
+	\end{itemize} 	
+	\item Indeed, for OLS to work, we need {\it intrinsic linearity} --- 
+	i.e., the equation to be fitted (model) should be {\it linear in the parameters}	
+	\item Are these models linear in their {\it parameters}?  
+	\begin{itemize}
+		\item $y_i = \beta_0 + \beta_1 x_i^{\beta_2} + \varepsilon_i$
+		\item $y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i$
+	\end{itemize}
+	\pause NO!
 		
-% \end{itemize}
+\end{itemize}
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
@@ -182,7 +179,21 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+\begin{frame}{The Least-squares solution}
+
+	OLS minimizes the {\it sum} of the {\it squared} residuals
+	
+	\begin{columns}[T]
+	\column{\textwidth}
+		\animategraphics[width=\textwidth, controls, buttonsize=1em, %timeline=Varying_timeline.txt % does not work - TODO
+		]{10}{Varying}{}{}
+	\end{columns}
+	
+	\end{frame}
+
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{If the model is linear, the solution is easy using algebra}
 	
 \begin{columns}[T]
 
@@ -205,50 +216,34 @@
 
 \end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{The linear least-squares solution}
-
-% OLS minimizes the {\it sum} of the {\it squared} residuals
-
-%% animate directly from a multipage pdf
-%% use timeline to only embed the axes once!
-% \begin{columns}[T]
-% \column{\textwidth}
-% \animategraphics[width=\textwidth, 
-                 % controls, %autoplay, %palindrome, 
-                 % timeline=Varying_timeline.txt, 
-                 % buttonsize=1em]{12}{Varying_timeline}{}{}
-
-% \end{columns}
-% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
 
-{\bf That's all well and good, but we can use maths instead of 
-brute-force computation!}
+% {\bf That's all well and good, but we can use maths instead of 
+% brute-force computation!}
 
-	\begin{itemize}[<+->] \itemsep10pt
+% 	\begin{itemize}[<+->] \itemsep10pt
 
-		\item Our model is $f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
+% 		\item Our model is $f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
 			
-		\item We want to find estimates of values of the parameters 
-		($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals 
-		($r_i$) (AKA ``RSS'') $S = \sum\nolimits_{i=1}^n{\left[ y_i - 
-		f(x_i,\boldsymbol\beta) \right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
+% 		\item We want to find estimates of values of the parameters 
+% 		($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals 
+% 		($r_i$) (AKA ``RSS'') $S = \sum\nolimits_{i=1}^n{\left[ y_i - 
+% 		f(x_i,\boldsymbol\beta) \right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
 
-		\item For this we can solve $\frac{\partial S}{\partial 
-		\beta_j} = 0, j = 0,1,2,\ldots,k$ to find the {\it minimum}
+% 		\item For this we can solve $\frac{\partial S}{\partial 
+% 		\beta_j} = 0, j = 0,1,2,\ldots,k$ to find the {\it minimum}
 	
-		\item That is, we need to solve	
-		$\frac{\partial \sum\nolimits_{i=1}^n{r_i^2}}{\partial \beta_j} = 
-		0$
+% 		\item That is, we need to solve	
+% 		$\frac{\partial \sum\nolimits_{i=1}^n{r_i^2}}{\partial \beta_j} = 
+% 		0$
 		
-		\item Or, $2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} = 0$
+% 		\item Or, $2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} = 0$
 	
-	\end{itemize}
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
@@ -333,51 +328,34 @@ brute-force computation!}
 
 % \end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{The linear least-squares solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Intrinsic non-linearity does not allow a algebraic solution}
 
-% There is only one unique solution, which gives the OLS fitted 
-	% parameter values for $\boldsymbol\beta = (\beta_0, \beta_1)$:
-		
-% \begin{columns}[T]
-% \column{\textwidth}
-% \animategraphics[width=\textwidth, 
-                 % controls, %autoplay, %palindrome, 
-                 % timeline=Varying_timeline.txt, 
-                 % buttonsize=1em]{12}{Varying_timeline}{}{}
+\begin{itemize}[<+->]\itemsep10pt
 
-% \end{columns}
-
-% \end{frame}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{So what --- why is intrinsic non-linearity a problem?}
-
-% \begin{itemize}[<+->]\itemsep10pt
-
-	% \item So, then, in an {intrinsically non-linear model} such as $y_i = 
-	% \beta_0 e^{\beta_2 x_i} + \varepsilon_i$ the derivatives 
-	% $\frac{\partial r_i}{\partial \beta_j}$ are naughty
+	\item So, then, in an {intrinsically non-linear model} such as $y_i = 
+	\beta_0 e^{\beta_2 x_i} + \varepsilon_i$ the derivatives 
+	$\frac{\partial r_i}{\partial \beta_j}$ are naughty
 	
-	% \item That is, they are functions of both $x$ and the parameters 
-	% $\beta_j$, so the gradient equations do not have a solution like the 
-	% OLS case
+	\item That is, they are functions of both $x$ and the parameters 
+	$\beta_j$, so the gradient equations do not have a solution like the 
+	OLS case
 
-	% \item So the nice trick of solving  $\mathbf{Y} = \mathbf{X 
-	% \boldsymbol\beta  +  \boldsymbol\varepsilon}$ is impossible {\it 
-	% mathematically}
+	\item So the nice trick of solving  $\mathbf{Y} = \mathbf{X 
+	\boldsymbol\beta  +  \boldsymbol\varepsilon}$ is impossible {\it 
+	mathematically}
 							
-% \end{itemize}
+\end{itemize}
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{So --- Enter NLLS!}
+\begin{frame}{So --- Enter NLLS}
 
-But we can use a computer!
+But we can use brute-force computation to find close-to-optimal least squares minimization!
 	
 \begin{itemize}[<+->]\itemsep10pt
-	\item Choose initial values for the $\beta_j$'s
+	\item Choose initial values for the parameters we want to estimate ( $\beta_j$'s)
 	
 	\item Then, ``refine'' the parameters {\it iteratively} by calculating 
 	$\frac{\partial r_i}{\partial \beta_j}$ {\it approximately} --- 
@@ -397,57 +375,53 @@ But we can use a computer!
 \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{Enter NLLS!}
+\begin{frame}[plain]{}
 
-% The end result is (approximately) the same:
+\begin{columns}[T]
+	\column{\textwidth}
+		\animategraphics[width=\textwidth, controls, buttonsize=1em, %timeline=Varying_timeline.txt % does not work - TODO
+		]{10}{Varying}{}{}
+	\end{columns}
 
-% \begin{columns}[T]
-% \column{\textwidth}
-% \animategraphics[width=\textwidth, 
-                 % controls, %autoplay, %palindrome, 
-                 % timeline=Varying_timeline.txt, 
-                 % buttonsize=1em]{12}{Varying_timeline}{}{}
-
-% \end{columns}
-
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{OK, fine, why would {\it I} ever need to worry about NLLS?}
+\begin{frame}{OK, fine, why would {\it I} ever need NLLS?}
 
 \begin{itemize}[<+->]\itemsep10pt
 	\pause 
-	\item Many observations in biology are just not well-fitted by a linear model
+	\item Many observations in biology are just {\it not} well-fitted by a linear model
 
-	\item That is, the underlying biological phenomena are not 
-	well-described by a linear model
+	\item That is, the underlying biological phenomena/phenomenon are not 
+	well-described by a linear equation
 	
 	\item Examples:
 
 	\begin{itemize}\itemsep2pt
 	
-		\item Logistic growth model
+		\item Logistic population growth
 		
+		\item Allometric growth
+
 		\item Michaelis-Menten biochemical kinetics (two parameters 
 		$V_{\max}$ and $K_m$: $v = \frac{V_{\max}[S]}{K_{m} + [S]}$
 	
 		\item Responses of metabolic rates to changing temperature 
-		(practical 1)
 
 		\item Consumer-Resource (e.g., predator-prey) functional responses 
-		(practical 2)
 		
 		\item Time-series data (e.g., fitting a sinusoidal function)
 			
-		\item \it Can you think of some examples? 
 	\end{itemize}
-	
+
+	\item \it Can you think of some examples? 
+
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Example 1: Temperature and metabolism}
+\begin{frame}{Example: Temperature and metabolism}
       
 \begin{columns}[c]
   \column{2.1in}
@@ -481,7 +455,7 @@ But we can use a computer!
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Example 2: Functional responses}
+\begin{frame}{Example: Functional responses}
  
 \begin{columns}[c]
   \column{2in}
@@ -680,43 +654,36 @@ Also note that:
 
 \begin{itemize}\itemsep12pt
 	
-	\item We shall start off with some simple examples 
-	({\tt NLSFitEx1.R}, {\tt NLSFitEx2.R}, etc.)
+	\item All materials are at: \url{https://goo.gl/8b9vMh}
 
-	% \item You can then choose either Practical 1 or 2, or do both!
-
-	\item In each, make sure you have a good look at the data first by plotting 
-	them up in a loop.
+	\item You will work with multiple examples and on some Exercises.
 	
-	\item Keep workflow organized in {\tt Code}, {\tt Results}, {\tt Data} ! 
+	\item Keep workflow organized in {\tt Code}, {\tt Results}, {\tt Data} as you learnt in the R week! 
 	
-	\item You may also find your own model to fit some data related to your interests 
-	or project
-
-	% \item Your demonstrators and I will help you get started in any case
+	\item Your will have demonstrators and me to help you -- You may also talk to us about using NLLS for your own project
 	
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Practicals: Basic examples}
+% \begin{frame}{Practicals: Basic examples}
 
-\begin{itemize}\itemsep12pt
+% \begin{itemize}\itemsep12pt
 	
-	\item Go to \url{mhasoba.bitbucket.org} and click on the sailfin. (This takes you to \url{https://bitbucket.org/mhasoba/silbiocompmasterepo/src/92f5d9b6910f?at=master})
+% 	\item Go to \url{mhasoba.bitbucket.org} and click on the sailfin. (This takes you to \url{https://bitbucket.org/mhasoba/silbiocompmasterepo/src/92f5d9b6910f?at=master})
 	
-	\item Create {\tt Code}, {\tt Results}, {\tt Data} directories on your own computer 
+% 	\item Create {\tt Code}, {\tt Results}, {\tt Data} directories on your own computer 
 
-	\item Download {\tt NLSFitEx1.R} and {\tt NLSFitEx2.R} from the {\tt Code} directory, and the associated data from the {\tt Data} directory.
+% 	\item Download {\tt NLSFitEx1.R} and {\tt NLSFitEx2.R} from the {\tt Code} directory, and the associated data from the {\tt Data} directory.
 
-	\item Run the both scripts and examine them line by line  
+% 	\item Run the both scripts and examine them line by line  
 
-	\item Next you can try Practical 1 or 2 (Next two slides)
+% 	\item Next you can try Practical 1 or 2 (Next two slides)
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -741,24 +708,24 @@ Also note that:
 % \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Practical: Fitting Functional responses}
+% \begin{frame}{Practical: Fitting Functional responses}
 
-\begin{itemize}
+% \begin{itemize}
 	
-	\item Use {\tt nls} (or {\tt nlsLM}) to fit {\tt CRat.csv} 
-	dataset to the model: $f(x_R) = c = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$\\
-	($c$ is consumption rate)
-  \item Plot the data and output coefficient estimates and fit stats to 
-  a file 
+% 	\item Use {\tt nls} (or {\tt nlsLM}) to fit {\tt CRat.csv} 
+% 	dataset to the model: $f(x_R) = c = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$\\
+% 	($c$ is consumption rate)
+%   \item Plot the data and output coefficient estimates and fit stats to 
+%   a file 
   
-  \item Here's an example of how a fitted curve looks : \\
+%   \item Here's an example of how a fitted curve looks : \\
  
-\end{itemize}
+% \end{itemize}
 
-	\centering 
-	\includegraphics[width=.4\textwidth]{FR_eg.pdf}
+% 	\centering 
+% 	\includegraphics[width=.4\textwidth]{FR_eg.pdf}
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -779,7 +746,7 @@ Also note that:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Readings}
+\begin{frame}{Readings and Resources}
 
 \begin{itemize}\itemsep10pt
 	
