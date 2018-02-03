@@ -1,0 +1,55 @@
+http://pages.stat.wisc.edu/~larget/math496/qr.html
+
+The QR Decomposition and Regression
+
+In multiple regression, a single quantitative response variable is modeled as a linear combination of quantitative explanatory variables and error. There are n observations and p explanatory variables (including an intercept).
+y = b_0 + b_1 x_1 + ... + b_{p-1} x_{p-1} + error
+The Matrix Formulation of Regression
+
+The matrix expression of this, where each row corresponds to all measurements on a single individual is:
+y = Xb + error
+Letting X^T represent the transpose of the matrix X, the normal equations are formed in this way.
+X^T y = X^T X b
+Notice that there are now exactly p linear equations with p unknowns. If the matrix X is full rank (p if p < n), then X^T X will be invertible and the solution to the normal equations is
+(X^T X)^{-1} X^T y = b
+where b is the estimate of the parameters that minimizes the residual sum of squares. (A residual is the difference between the actual value of y and the value of y that is predicted by the model.
+On the surface, it appears that this requires the explicit inversion of a matrix, which requires substantial computation. A better algorithm for regression is found by using the QR decomposition.
+
+The QR Decomposition
+
+Here is the mathematical fact. If X is an n by p matrix of full rank (say n > p and the rank = p), then X = QR where Q is an n by p orthonormal matrix and R is a p by p upper triangular matrix. Since Q is orthonormal, Q^T Q = I, the identity matrix.
+Beginning with the normal equations, see how the QR decomposition simplifies them.
+
+X^T X b = X^T y
+(QR)^T (QR) b = (QR)^T y
+R^T (Q^T Q) R b = R^T Q^T y
+R^T R b = R^T Q^T y
+(R^T)^{-1} R^T R b = (R^T)^{-1} R^T Q^T y
+R b = Q^T y
+If we let z = Q^T y,
+R b = z
+This is simply an upper triangular system of equations which may be quickly solved by back substitution.
+This algorithm will be efficient if the QR decomposition is fast. This algorithm will create the matrix Q by overwriting X and create a new matrix R.
+
+for j = 1 to p
+{
+	define r[j,j] = sqrt( sum_i x[i,j]^2 )  
+
+# r[j,j] is the norm of the jth column of X
+
+	for i = 1 to n
+	{
+		x[i,j] = x[i,j] / r[j,j]
+	}
+
+	for k = j+1 to p
+	{
+		r[j,k] = sum_{i=1}^n x[i,j]x[i,k]
+		for i = 1 to n
+		{
+			x[i,k] = x[i,k] - x[i,j] r[j,k]
+		}
+	}
+}
+Last modified: April 25, 1997
+Bret Larget, larget@mathcs.duq.edu

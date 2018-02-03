@@ -1,0 +1,7 @@
+library(ape)
+tre <- read.nexus('~/Desktop/mammalST_best_chrono_nolab.tre')
+library(caper)
+dat <- read.delim('~/Desktop/PanTHERIA_1-0_WR93_Aug2008.txt', na.string='-999.00')
+pd <- comparative.data(tre,dat, 'MSW93_Binomial', na.omit=FALSE)
+pdLPY <- na.omit(pd, scope= X16.1_LittersPerYear ~ 1)
+pgls( X16.1_LittersPerYear ~ 1, lambda='ML', data=pdLPY)

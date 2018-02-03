@@ -9,15 +9,15 @@
 	
 	Assess.py StudentsFile RepoPath Week --gitpush 
 
-	example: python Assess.py ~/Documents/Teaching/IC_CMEE/2017-18/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2017-18/Coursework/StudentRepos/
+	example: python Assess.py ~/Documents/Teaching/IC_CMEE/2017-18/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2017-18/Coursework/StudentRepos/ Week1
 
 	ARGUMENTS: 
 
-	StudentsFile  : Full path to input file containing student details
-	RepoPath 			: Full path to location for students' local git repositories (without and ending "/")
-	Week					: Name of week to assess (Week1, Week2, etc.)
-	--gitpush 		: Optional flag indicating whether to push the assessment 
-										to student's git repository (default is False)
+	StudentsFile  : FULL path to input file containing student details
+	RepoPath 	  : FULL path to location for students' local git 					    		repositories (without and ending "/")
+	Week		  : Name of week to assess (Week1, Week2, etc.)
+    --gitpush     : Optional flag indicating whether to push the assessment 					to student' git repositories (default is False)
+	--gitpush_fin : Optional flag indicating whether to push the final 							assessment to students' git repositories (default is False) 			    . If used, repo is pulled and contents of assessment 		 				directory pushed, nothing else 
 """
 # TODO: 
 # * Allow Week to be set to 0 for only git pulling
@@ -30,10 +30,11 @@
 # *Allocate points to each independent code file as weighted 
 # percent of 100, weight determined by number of code lines; Update 
 # marking criteria accordingly 
-# Total baseline marks are weighted average of these two, from which 
-# additional marks are deleted for poor project organization, readme, 
+# Total baseline points are weighted average of these two, from which 
+# additional points are deleted for poor project organization, readme, 
 # etc.
 # Call a warning a warning and an error an error!
+# Count up lines of code in each script and report it
 
 import subprocess, os, csv, argparse, re
 
@@ -74,6 +75,10 @@ parser.add_argument("--gitpush", action="store_true",
 								dest="gitpush", default=False,
 								help="Whether to push the assessment to student' git repository")
 
+parser.add_argument("--gitpush_fin", action="store_true", 
+								dest="gitpush_fin", default=False,
+								help="Whether to push final assessment to student' git repository")
+
 args = parser.parse_args() 
 
 f = open(args.StudentsFile,'rb') # Read in and store the student data
@@ -89,14 +94,23 @@ charLim = 500 #set limit to output of each script's run to be printed
 
 for Stdnt in Stdnts:
 	
-	Mrks = 100
-		
 	Name = "".join((Stdnt[Hdrs.index('1st Name')] + Stdnt[Hdrs.index('Surname')]+\
 	'_'+Stdnt[Hdrs.index('Username')]).split()) #Remove any spaces from name
 	RepoPath = args.RepoPath+'/'+Name
 	AzzPath = RepoPath+'/Assessment'
 	
-	# import ipdb; ipdb.set_trace()
+	if args.gitpush_fin:
+		
+		print("...\n\n"+"Git pushing final assessment for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] +"...\n\n")
+		# import ipdb; ipdb.set_trace()
+		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
+		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
+		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final assessment"])
+		subprocess.check_output(["git", "-C", RepoPath, "pull"])
+		subprocess.check_output(["git","-C", RepoPath,"push","-u", "origin",  "master"])
+		continue
+
+	Mrks = 100
 	
 	if not os.path.exists(RepoPath): # Clone repo first time if it does not already exist
 		subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
@@ -141,7 +155,7 @@ for Stdnt in Stdnts:
 	print('='*70 + '\n' + 'Starting weekly assessment for '+ Stdnt[Hdrs.index('1st Name')] + ' ' + Stdnt[Hdrs.index('Surname')]+ ', ' + args.Week +'\n' + '='*70 + '\n\n')
 
 	azz.write('Starting weekly assessment for '+ Stdnt[Hdrs.index('1st Name')] + ', ' + args.Week +'\n\n')
-	azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+	azz.write('Current Points = ' + str(Mrks) + '\n\n')
 	azz.write('Note that: \n')
 	azz.write('(1) Major sections begin with a double "====" line \n')
 	azz.write('(2) Subsections begin with a single "====" line \n')
@@ -175,7 +189,7 @@ for Stdnt in Stdnts:
 	else:
 		azz.write('.gitignore missing, 1 pt deducted\n\n')
 		Mrks = Mrks - 1
-		azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+		azz.write('Current Points = ' + str(Mrks) + '\n\n')
 		
 	readme = 'n'
 	for name in TempFiles:
@@ -192,7 +206,7 @@ for Stdnt in Stdnts:
 	if readme == 'n':
 		azz.write('README file missing, 1 pt deducted\n\n')
 		Mrks = Mrks - 1
-		azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+		azz.write('Current Points = ' + str(Mrks) + '\n\n')
 		
 	azz.write('='*70 + '\n')
 	azz.write('Looking for the weekly directories...' + '\n\n') 
@@ -246,7 +260,7 @@ for Stdnt in Stdnts:
 		if readme == 'n':
 			azz.write('README file missing, 1 pt deducted\n\n')
 			Mrks = Mrks - 1
-			azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+			azz.write('Current Points = ' + str(Mrks) + '\n\n')
 		
 		CodDir = [name for name in TempDirs if 'code' in name.lower()]
 		DatDir = [name for name in TempDirs if 'data' in name.lower()]
@@ -260,14 +274,16 @@ for Stdnt in Stdnts:
 	
 		if not ResDir: 
 			azz.write('Results directory missing!\n\n')
+			azz.write('Creating Results directory...\n\n')
+			os.makedirs(WeekPth+'/Results')
 		else:
 			ResNames = []
 			for root, dirs, files in os.walk(WeekPth + '/' + ResDir[0]):
 				for file in files:
 					ResNames.append(file) 
-			azz.write('Found following files in results directory: ' + ', '.join(ResNames) + '...\n\n')
+			azz.write('Found following files in results directory: ' + ', '.join(ResNames) + '...\n')
 			if len(ResNames)>1: 
-					azz.write('ideally, Results directory should be empty other than, perhaps, a readme.')
+					azz.write('ideally, Results directory should be empty other than, perhaps, a readme. \n\n')
 		
 		## Now get all code file paths for testing
 		Scripts = []
@@ -286,7 +302,7 @@ for Stdnt in Stdnts:
 			azz.write('Found the following extra files: ' + ', '.join(extras) + '\n')		
 			Mrks = Mrks - .5 * len(extras)
 			azz.write('0.5 pt deducted per extra file\n\n')
-			azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+			azz.write('Current Points = ' + str(Mrks) + '\n\n')
 
 		## Now test all valid script files that were found
 		azz.write('='*70 + '\n')
@@ -327,13 +343,13 @@ for Stdnt in Stdnts:
 									azz.write('Missing docstrings in one more functions!\n')
 									Mrks = Mrks - len(match_1) - len (match_2)*0.5
 									azz.write('.5 pt deducted per missing docstring\n\n')
-									azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+									azz.write('Current Points = ' + str(Mrks) + '\n\n')
 								
 					else: 
 						azz.write('Found no doctrings!\n')
 						Mrks = Mrks - 1
 						azz.write('1 pt deducted\n\n')
-						azz.write('Current Marks = ' + str(Mrks) + '\n\n')
+						azz.write('Current Points = ' + str(Mrks) + '\n\n')
 				
 				p, output, err,	time = run_popen('python ' + os.path.basename(name), timeout)
 			
@@ -379,8 +395,8 @@ for Stdnt in Stdnts:
 	azz.write('='*70 + '\n')
 	azz.write('='*70 + '\n')
 	azz.write('\nFINISHED WEEKLY ASSESSMENT\n\n')
-	azz.write('Current Marks for the Week = ' + str(Mrks) + '\n\n')
-	azz.write('NOTE THAT THESE ARE NOT THE FINAL MARKS FOR THE WEEK, BUT AN UPPER BOUND ON THE MARKS!')
+	azz.write('Current Points for the Week = ' + str(Mrks) + '\n\n')
+	azz.write('NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!')
 	
 	azz.close()
 			

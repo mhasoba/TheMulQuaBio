@@ -1,0 +1,161 @@
+\section{A data exploration case study}
+
+% Suppose you want to 
+% Different kinds of statistical approach are appropriate to the analysis 
+% of different combinations of variables. For example, to test whether a 
+% continuous dependent variable (e.g. life-span) varies significantly 
+% across a categorical independent variable (e.g. handedness), then a t 
+% test might be appropriate. However, a t test would be inappropriate to 
+% test whether a continuous dependent variable (e.g. growth rate) varies 
+% significantly across a continuous independent variable (e.g. nutrient 
+% concentration): here some sort of regression would be required. It is 
+% critical that you know what sorts of test are appropriate to different 
+% kinds of data.
+ % If your dependent variable is count data, random variation in the 
+ % variable is likely to be distributed according to the Poisson 
+ % distribution, and particular care must be taken in its analysis.
+% 
+% 
+
+
+We will use the famous {\it Iris} data set which is available in R (one 
+of many) as a case study for data exploration and descriptive 
+statistics. This dataset gives the measurements in centimeters of the 
+variables sepal length and width and petal length and width, 
+respectively, for 50 flowers from each of 3 species of iris: {\it Iris 
+setosa}, {\it I. versicolor}, and {\it I. virginica}. All data came 
+from the same  pasture, and picked on the same day and measured at the 
+same time by the same person with the same apparatus. 
+
+\section{Subsetting Data}
+Often, you will need to get only part of a matrix, dataframe, etc. Here 
+are ways to subset your data:
+\begin{snugshade}
+\footnotesize
+\begin{verbatim}
+> M <- matrix(1:9, 3, 3)
+> M
+	 [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+> M[1,1]
+[1] 1
+> M[1, ]
+[1] 1 4 7
+> M[1:2, ]
+	 [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+> M[c(1, 3), 2]
+[1] 4 6
+> M[-3,]
+	 [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+> M[-3,-2]
+	 [,1] [,2]
+[1,]    1    7
+[2,]    2    8
+> attach(iris)
+> iris
+	 Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1            5.1         3.5          1.4         0.2 setosa
+2            4.9         3.0          1.4         0.2 setosa
+3            4.7         3.2          1.3         0.2 setosa
+4            4.6         3.1          1.5         0.2 setosa
+5            5.0         3.6          1.4         0.2 setosa
+6            5.4         3.9          1.7         0.4 setosa
+7            4.6         3.4          1.4         0.3 setosa
+8            5.0         3.4          1.5         0.2 setosa
+9            4.4         2.9          1.4         0.2 setosa
+10           4.9         3.1          1.5         0.1 setosa
+> iris$Sepal.Width[1:5]
+[1] 3.5 3.0 3.2 3.1 3.6
+> iris[1:3, c("Sepal.Width","Petal.Width")]
+	Sepal.Width Petal.Width
+1         3.5         0.2
+2         3.0         0.2
+3         3.2         0.2
+> iris[(Sepal.Width < 3.5) & (Sepal.Length > 7.2),]
+ Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+106      7.6         3.0          6.6         2.1 virginica
+108      7.3         2.9          6.3         1.8 virginica
+119      7.7         2.6          6.9         2.3 virginica
+123      7.7         2.8          6.7         2.0 virginica
+131      7.4         2.8          6.1         1.9 virginica
+136      7.7         3.0          6.1         2.3 virginica
+\end{verbatim}
+\end{snugshade}
+
+\noindent  
+\section{Basic Statistics in R}
+R contains several functions to perform basic (and advanced!) 
+statistics. 
+\begin{snugshade} \footnotesize
+\begin{verbatim}
+> attach(iris)
+> summary(iris)
+  Sepal.Length    Sepal.Width     Petal.Length  Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000 Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600 1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350 Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758 Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100 3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900 Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+> table(Species)
+Species
+    setosa versicolor  virginica 
+        50         50         50
+
+> table(Species, Petal.Width)
+            Petal.Width
+Species      0.1 0.2 0.3 0.4 0.5 0.6  1 1.1 1.2 1.3 1.4 ...
+  setosa       5  29   7   7   1   1  0   0   0   0   0 ...
+  versicolor   0   0   0   0   0   0  7   3   5  13   7 ...
+  virginica    0   0   0   0   0   0  0   0   0   0   1 ...
+            Petal.Width
+Species      2.1 2.2 2.3 2.4 2.5
+  setosa       0   0   0   0   0
+  versicolor   0   0   0   0   0
+  virginica    6   3   8   3   3
+> t.test(Sepal.Width[which(Species == "setosa")], 
+         Sepal.Width[which(Species == "versicolor")])
+
+	Welch Two Sample t-test
+
+data:  Sepal.Width[which(Species == "setosa")] and 
+       Sepal.Width[which(Species == "versicolor")] 
+t = 9.455, df = 94.698, p-value = 2.484e-15
+alternative hypothesis: true difference in means is
+not equal to 0 
+95 percent confidence interval:
+ 0.5198348 0.7961652 
+sample estimates:
+mean of x mean of y 
+    3.428     2.770 
+> summary(lm(Sepal.Width ~ Sepal.Length))
+
+Call:
+lm(formula = Sepal.Width ~ Sepal.Length)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1095 -0.2454 -0.0167  0.2763  1.3338 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.41895    0.25356   13.48   <2e-16 ***
+Sepal.Length -0.06188    0.04297   -1.44    0.152    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 
+
+Residual standard error: 0.4343 on 148 degrees of freedom
+Multiple R-squared: 0.01382,	Adjusted R-squared: 0.007159 
+F-statistic: 2.074 on 1 and 148 DF,  p-value: 0.1519 
+\end{verbatim}
+\end{snugshade}
