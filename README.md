@@ -2,23 +2,21 @@
 
 This repository contains the source code for the **The Multilingual Quantitative Biologist**.
 
-![cover image](silbiocomp/Graphics/CMEE_Fungus.jpg)
+![cover image](graphics/CMEE_Fungus.jpg)
 
-These code was written and tested with R 3.xx and Python 3.xx, though older language versions (including R 2.xx and Python 2.7) should work in most cases.
+All code in this book is computer platform (Mac, Linux or PC) independent.
 
-See [Index.ipynb](http://nbviewer.jupyter.org/github/mhasoba/TheMulQuaBio/blob/master/notebooks/Index.ipynb) for an index of the notebooks available to accompany the text.
+The code was written in and tested with R 3.xx and Python 3.xx, though older language versions (including R 2.xx and Python 2.7) should work in most cases.
+
+See [Index.ipynb](http://nbviewer.jupyter.org/github/mhasoba/TheMulQuaBio/blob/master/notebooks/Index.ipynb) for a table of contents of the chapters (all jupyter notebooks).
 
 ## License
 
-### Code
-The code in this repository, including all code samples in the notebooks listed above, is released under the [MIT license](LICENSE-CODE). Read more at the [Open Source Initiative](https://opensource.org/licenses/MIT).
-
-### Text
-The text content of the book is released under the...
+This work is licensed under a [Creative Commons Attribution 3.0 Unported License.](http://creativecommons.org/licenses/by/3.0/)
 
 ===
-## For Co-authors:
+## For Contributors/Co-authors:
 
-The old silbiocomp repo is now here, (the silbiocomp) directory. Please 
-make changes and addtions there for now, until the online version, 
-(a bunch of cross-linked jupyter nbs) is up and running.    
+* Note that the old materials, written in LaTeX, are no in the `archived` directory.
+* The solutions to the exercises are in a separate, [private git repo](https://bitbucket.org/mhasoba/themulquabio_sols) that students do not have access to. Ask Samraat (mhasoba@gmail.com) if you need access to that repository.
+* The `results` directory will be populated only when scripts are run, but these are not version controlled (all files in this directory under `.gitignore`).
