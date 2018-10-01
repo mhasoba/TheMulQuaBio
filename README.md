@@ -14,7 +14,7 @@ See [Index.ipynb](http://nbviewer.jupyter.org/github/mhasoba/TheMulQuaBio/blob/m
 
 This work is licensed under a [Creative Commons Attribution 3.0 Unported License.](http://creativecommons.org/licenses/by/3.0/)
 
-===
+---
 ## For Contributors/Co-authors:
 
 * Note that the old materials, written in LaTeX, are no in the `archived` directory.
