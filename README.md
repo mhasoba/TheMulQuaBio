@@ -2,7 +2,7 @@
 
 This repository contains the source code for the **The Multilingual Quantitative Biologist**.
 
-![cover image](graphics/CMEE_Fungus.jpg)
+![cover image](./images/CMEE_Fungus.jpg)
 
 All code in this book is computer platform (Mac, Linux or PC) independent.
 
