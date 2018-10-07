@@ -4,7 +4,6 @@
 import scipy as sc
 import scipy.integrate as integrate
 import pylab as p #Contains matplotlib for plotting
-
 # import matplotlib.pylab as p #Some people might need to do this
 
 def dCR_dt(pops, t=0):
@@ -44,4 +43,4 @@ p.xlabel('Time')
 p.ylabel('Population')
 p.title('Consumer-Resource population dynamics')
 p.show()
-f1.savefig('../Results/prey_and_predators_1.pdf') #Save figure
+f1.savefig('../results/prey_and_predators_1.pdf') #Save figure

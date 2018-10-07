@@ -19,7 +19,7 @@ def a_less_useless_function(x):
     return 0
 
 def some_function(x):
-    print x
+    print(x)
     a_useless_function(x)
     another_useless_function(x)
     a_less_useless_function(x)
