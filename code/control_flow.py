@@ -1,9 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Some functions exemplifying the use of control statements"""
-#docstrings are considered part of the running code (normal comments are
-#stripped). Hence, you can access your docstrings at run time.
-__author__ = 'Samraat Pawar (s.pawar@imperial.ac.uk)'
+
+__author__ = 'Your name (your@email.address)'
 __version__ = '0.0.1'
 
 import sys
@@ -34,10 +33,10 @@ def is_prime(x=70):
     """Find whether an integer is prime."""
     for i in range(2, x): #  "range" returns a sequence of integers
         if x % i == 0:
-          print "%d is not a prime: %d is a divisor" % (x, i) #Print formatted text "%d %s %f %e" % (20,"30",0.0003,0.00003)
+          print("%d is not a prime: %d is a divisor" % (x, i)) #Print formatted text "%d %s %f %e" % (20,"30",0.0003,0.00003)
 
           return False
-    print "%d is a prime!" % x
+    print ("%d is a prime!" % x)
     return True 
 
 def find_all_primes(x=22):
@@ -46,18 +45,18 @@ def find_all_primes(x=22):
     for i in range(2, x + 1):
       if is_prime(i):
         allprimes.append(i)
-    print "There are %d primes between 2 and %d" % (len(allprimes), x)
+    print("There are %d primes between 2 and %d" % (len(allprimes), x))
     return allprimes
       
 def main(argv):
     # sys.exit("don't want to do this right now!")
-    print even_or_odd(22)
-    print even_or_odd(33)
-    print largest_divisor_five(120)
-    print largest_divisor_five(121)
-    print is_prime(60)
-    print is_prime(59)
-    print find_all_primes(100)
+    print(even_or_odd(22))
+    print(even_or_odd(33))
+    print(largest_divisor_five(120))
+    print(largest_divisor_five(121))
+    print(is_prime(60))
+    print(is_prime(59))
+    print(find_all_primes(100))
     return 0
 
 if (__name__ == "__main__"):

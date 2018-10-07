@@ -1,4 +1,3 @@
-#Define function
 def is_an_oak(name):
     """ Returns True if name is starts with 'quercus'
 
