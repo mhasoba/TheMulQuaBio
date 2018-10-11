@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Some functions exemplifying the use of control statements"""
 
-__author__ = 'Your Name (Your.Name@your.institutional.email.address)'
+__author__ = 'Your Name (Your.Name@your.email.address)'
 __version__ = '0.0.1'
 
 import sys
@@ -34,12 +34,12 @@ def even_or_odd(x=0):
 ####### I SUPPRESSED THIS BLOCK: WHY? #######
 
 # def main(argv): 
-    # print even_or_odd(22)
-    # print even_or_odd(33)
-    # return 0
+#     print even_or_odd(22)
+#     print even_or_odd(33)
+#     return 0
 
 # if (__name__ == "__main__"):
-    # status = main(sys.argv)
-#############################################
+#     status = main(sys.argv)
+############################################
     
 doctest.testmod()   # To run with embedded tests
