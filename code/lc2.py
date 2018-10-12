@@ -22,8 +22,3 @@ rainfall = (('JAN',111.4),
 
 # (3) Now do (1) and (2) using conventional loops (you can choose to do 
 # this before 1 and 2 !). 
-
-# ANNOTATE WHAT EVERY BLOCK OR IF NECESSARY, LINE IS DOING! 
-
-# ALSO, PLEASE INCLUDE A DOCSTRING AT THE BEGINNING OF THIS FILE THAT 
-# SAYS WHAT THE SCRIPT DOES AND WHO THE AUTHOR IS
