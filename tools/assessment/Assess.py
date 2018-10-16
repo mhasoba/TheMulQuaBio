@@ -9,33 +9,33 @@
 	
 	Assess.py StudentsFile RepoPath Week --gitpush 
 
-	example: python Assess.py ~/Documents/Teaching/IC_CMEE/2017-18/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2017-18/Coursework/StudentRepos/ Week1
+	example: python3 Assess.py ~/Documents/Teaching/IC_CMEE/2018-19/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2018-19/Coursework/StudentRepos Week1
 
 	ARGUMENTS: 
 
-	StudentsFile  : FULL path to input file containing student details
-	RepoPath 	  : FULL path to location for students' local git 					    		repositories (without and ending "/")
+	StudentsFile  : FULL path to input file containing student data, including 					git repo address
+	RepoPath 	  : FULL path to location for students' local git repositories 					(without an ending "/")
 	Week		  : Name of week to assess (Week1, Week2, etc.)
+ 
+    --gitpull     : Optional flag indicating whether to pull to students' git 					repositories only without assessment (default is False). 					Only works if the student's repo already exists.
     --gitpush     : Optional flag indicating whether to push the assessment 					to students' git repositories (default is False).
-    --gitpull     : Optional flag indicating whether to pull to students' git 					repositories only without assessment (default is False).
 	--gitpush_fin : Optional flag indicating whether to push the final 							assessment to students' git repositories (default is False) 			    . If used, repo is pulled and contents of assessment 		 				directory pushed, nothing else.
 """
 # TODO: 
-# * Allow Week to be set to 0 for only git pulling
-# --gitpull : Optional flag indicating whether to pull the student's git repository or not (default is False)
-# *Include a weekly list of expected code files to check against
-# *Include "using repository state at time..."
-# *Allocate points to each expected code file as weighted 
+# * Call a warning a warning and an error an error!
+# * Count up lines of code in each script and report it
+# * Include a weekly list of expected code files to check against
+# * Include "using repository state at time..."
+# * Allocate points to each expected code file as weighted 
 # percent of 100, weight determined by number of code lines; Update 
 # marking criteria accordingly 
-# *Allocate points to each independent code file as weighted 
+# * Allocate points to each independent code file as weighted 
 # percent of 100, weight determined by number of code lines; Update 
 # marking criteria accordingly 
 # Total baseline points are weighted average of these two, from which 
 # additional points are deleted for poor project organization, readme, 
 # etc.
-# Call a warning a warning and an error an error!
-# Count up lines of code in each script and report it
+# * Allow Week to be set to 0 for only git pulling
 
 import subprocess, os, csv, argparse, re
 
@@ -47,13 +47,14 @@ def run_popen(command, timeout):
 	import time
 		
 	start = time.time()
-	# p = Popen('git log --format="%s"' % GIT_LOG_FORMAT, shell=True, stdout=PIPE)
- 
+
 	p = subprocess.Popen('timeout ' + str(timeout) + 's ' + command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	
 	stdout, stderr = p.communicate()
+	
 	end = time.time()
 	
-	return p, stdout, stderr, (end - start)
+	return p, stdout.decode(), stderr.decode(), (end - start) # decode: binary --> string
 
 ################################################
 ################ Main Code #####################		
@@ -82,7 +83,9 @@ parser.add_argument("--gitpush_fin", action="store_true",
 
 args = parser.parse_args() 
 
-f = open(args.StudentsFile,'rb') # Read in and store the student data
+ignore_files = [".log",".csv",".pdf"] # files to ignore in all directories
+
+f = open(args.StudentsFile,'r') # Read in and store the student data
 csvread = csv.reader(f)
 Stdnts = [tuple(row) for row in csvread]
 f.close()
@@ -95,50 +98,64 @@ charLim = 500 #set limit to output of each script's run to be printed
 
 for Stdnt in Stdnts:
 	
-	Name = "".join((Stdnt[Hdrs.index('1st Name')] + Stdnt[Hdrs.index('Surname')]+\
-	'_'+Stdnt[Hdrs.index('Username')]).split()) #Remove any spaces from name
-	RepoPath = args.RepoPath+'/'+Name
-	AzzPath = RepoPath+'/Assessment'
+	Name = (Stdnt[Hdrs.index('1st Name')] + Stdnt[Hdrs.index('Surname')]+ '_' + Stdnt[Hdrs.index('Username')]).replace(" ","").replace("'","") #Remove any spaces from name
+	RepoPath = args.RepoPath + '/' + Name
+	AzzPath = RepoPath + '/Assessment'
 	
 	if args.gitpush_fin:
 		
-		print("...\n\n"+"Git pushing final assessment for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] +"...\n\n")
+		print("...\n\n" + "Git pushing final assessment for " + Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] + "...\n\n")
+
 		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
+		
 		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
+		
 		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final assessment"])
+		
 		subprocess.check_output(["git", "-C", RepoPath, "pull"])
+		
 		subprocess.check_output(["git","-C", RepoPath,"push","-u", "origin",  "master"])
+
 		continue
 	
 	if args.gitpull:
-		# import ipdb; ipdb.set_trace()
-		print("...\n\n"+"Pulling repository for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] +"...\n\n")
-		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
-		subprocess.check_output(["git", "-C", RepoPath, "pull"])
+		print("...\n\n"+"Pulling repository for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] + "...\n\n")		
+		if os.path.exists(RepoPath): # only if the repo exists already
+
+			subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
+
+			subprocess.check_output(["git", "-C", RepoPath, "pull"])
+		
+		else: # Otherwise, clone repo first time
+			print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
+		
+			subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
 		continue
 
 	Mrks = 100
 	
 	if not os.path.exists(RepoPath): # Clone repo first time if it does not already exist
+		print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
+		
 		subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
 		continue
 	else:
-		
+
 		subprocess.check_output(["git","-C", RepoPath,"pull"])
 
-		p, output, err, time	= run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
-		
+		p, output, err, time = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
+
 		Keys = list([row.split(': ')[0] for row in output.splitlines()])
 		Vals = list([row.split(': ')[1] for row in output.splitlines()])
 		RepoStats = dict(zip(Keys, Vals))
-		
+
 		########## block for accessing git log - to be finished ########### 
 		## Store gits codes, along with the corresponding field names in two lists:
 		# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
 		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
 		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
 		# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
-		# p, log, err, time 	= run_popen('git log --format="%s"', timeout)
+		# p, log, err, time = run_popen('git log --format="%s"', timeout)
 		# (log, _) = p.communicate()
 		# log = log.strip('\n\x1e').split("\x1e")
 		# log = [row.strip().split("\x1f") for row in log]
@@ -207,7 +224,7 @@ for Stdnt in Stdnts:
 			for line in g:
 				azz.write(line,)
 			azz.write('*'*70 + '\n\n')
-			readme	= 'y'
+			readme = 'y'
 			break
 	if readme == 'n':
 		azz.write('README file missing, 1 pt deducted\n\n')
@@ -301,7 +318,7 @@ for Stdnt in Stdnts:
 					 ScriptNames.append(file) 
 
 		azz.write('Found ' + str(len(Scripts)) + ' code files: ' + ', '.join(ScriptNames) + '\n\n')
-		
+		files = [fname for fname in files if fname not in ignore_files] # remove files to be ignored
 		if len(ScriptNames) < len(files):
 			extras = list(set(files) - set(ScriptNames))
 			extras = [name for name in extras if not (name.lower().endswith(('~', 'pyc')))] #ignore certain extensions
@@ -335,7 +352,7 @@ for Stdnt in Stdnts:
 			print('Testing ' + os.path.basename(name) + '...\n\n')
 			
 			if os.path.basename(name).lower().endswith('.sh'):
-				p, output, err, time	= run_popen('bash ' + os.path.basename(name), timeout)
+				p, output, err, time = run_popen('bash ' + os.path.basename(name), timeout)
 			elif os.path.basename(name).lower().endswith('.py'):
 				azz.write(os.path.basename(name) + ' is a Python script file;\n checking for docstrings...\n\n')
 				with open(os.path.basename(name)) as f:
