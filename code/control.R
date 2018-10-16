@@ -1,3 +1,5 @@
+## Some code exemplifying control flow constructs in R 
+
 ## If statement
 a <- TRUE
 if (a == TRUE){
