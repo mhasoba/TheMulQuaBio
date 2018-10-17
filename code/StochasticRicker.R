@@ -1,8 +1,6 @@
-
 #Examine the bahaviour of the stochastic Ricker model
 
-StochRicker <- function(N0=1, r=1, K=10, 
-                        sigma=.1, generations=50)
+StochRicker <- function(N0=1, r=1, K=10, sigma=.1, generations=50)
 {
   # Runs a simulation of the stochastic ricker model
   # Returns a vector of length generations
