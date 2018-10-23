@@ -1,0 +1,624 @@
+\documentclass[xcolor={usenames,x11names},compress]{beamer}
+% Otherwise use xcolor=x11names
+
+%% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\graphicspath{{graphics/}}
+
+\usepackage{tikz}
+% \usetikzlibrary{decorations.pathreplacing}
+% \tikzstyle{every picture}+=[remember picture]
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\usepackage{color,colortbl}
+\input{inputs/rgb}
+
+% \usepackage{animate}
+
+% \usepackage[table]{xcolor}
+  \usepackage{multirow}
+
+\definecolor{CMEEBlue}      {RGB}{99,0, 230}
+\definecolor{CMEELightBlue} {RGB}{30,144,255}
+\definecolor{CMEEVLightBlue}{RGB}{135,206,250}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetheme{Madrid}
+\setbeamertemplate{headline}{}
+\title{QMEE/CMEE Intro}
+\author{Samraat Pawar \& James Rosindell}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+%   \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in 
+% head/foot}%
+%     \usebeamerfont{author in head/foot}\insertshortauthor
+%   \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.93\paperwidth,ht=2.25ex,dp=1ex,left]{title in 
+head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+  \end{beamercolorbox}}%
+  \begin{beamercolorbox}[wd=.07\paperwidth,ht=2.25ex,dp=1ex,center]{}
+     \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+%       \insertframenumber{}
+  \end{beamercolorbox}
+
+%   \vskip0pt%
+}
+
+% \useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{palatino}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, series = \bfseries}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{note page}[plain]
+
+\setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black}
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+
+\title{Quantitative and Computational Methods in Ecology \& Evolution:
+Introduction}
+\vspace{12pt}
+% \subtitle{}
+\author{
+	Samraat Pawar \& James Rosindell\\
+	\vspace{10pt}
+	{\it Department of Life Sciences\\
+	\vspace{10pt}
+	 Silwood Park}\\
+	\vspace{20pt}
+  \centering
+  \includegraphics[height = .3in]{Imperial_Color1.pdf}
+}
+ 
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{\scshape Introduction}
+% \subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Why Ecology and Evolution?}
+
+\centering
+
+\includegraphics[width=.7\textwidth]{Pieter_Fish.jpg}
+
+\vspace{6pt}
+
+{\small {\bf \it Big Fish Eat Little Fish}, 1557, Pieter van der Heyden}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Why Ecology and Evolution?}
+
+There is a long list of real world applications that need Quantitative innovation and Computational methods in Ecology and Evolution ...
+ 
+  \begin{itemize}[<+->] \setlength{\itemindent}{0em}\itemsep6pt
+
+		\item Agro-ecology and sustainable agricuture 
+		
+		\item Economic systems (micro-economics in particular) 
+
+		\item Disease emergence and transmission/outbreak (especially complex transmission systems such as vectro-borne diseases)
+		 
+	 \item Global climate change, carbon balance, nitrogen cycling
+	 
+	 \item Ecosystem engineering (think yogurt cheese \& wine!)
+		 
+	 \item Species invasions and ecosystem collapse
+
+  \end{itemize} 
+
+    % \pause
+% \centering
+    % {\bf ergo, Computing!}\\
+  % \includegraphics[width=.4\textwidth]{IBM_Blue_Gene.jpg}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{We live in ``interesting'' times}
+
+\pause
+\begin{columns}[c]
+  \column{0.6\linewidth}
+		\begin{itemize}[<+->]\setlength{\itemindent}{0em}
+			\item Climatic warming and fluctuations
+		\end{itemize}
+  \column{0.4\linewidth}\centering
+
+		% {\tiny 5-yr mean surface temperature anomaly (NASA 2013)}
+			\includegraphics[width=.9\textwidth]<1>{Composite/001.jpg}
+			\includegraphics[width=.9\textwidth]<2>{Composite/148.jpg}
+			\includegraphics[width=.9\textwidth]<3>{Composite/295.jpg}
+			\includegraphics[width=.9\textwidth]<4>{Composite/443.jpg}
+			\includegraphics[width=.9\textwidth]<5>{Composite/590.jpg}
+			\includegraphics[width=.9\textwidth]<6>{Composite/800.jpg}		
+
+\end{columns}
+
+\pause
+
+\begin{columns}[c]
+  \column{0.6\linewidth}
+		\begin{itemize}[<+->]\setlength{\itemindent}{0em}
+			\item Species range shifts and invasions 
+		\end{itemize}
+  \column{0.4\linewidth} \centering
+		\includegraphics[width=.9\textwidth]{Kudzu.pdf}		
+\end{columns}
+
+\pause
+
+\begin{columns}[c]
+  \column{0.6\linewidth}
+		\begin{itemize}[<+->]\setlength{\itemindent}{0em}
+			\item Overexploitation of ecosystems
+		\end{itemize}
+  \column{0.4\linewidth}\centering
+		\includegraphics[width=.9\textwidth]{Pieter_Fish.jpg}		
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Some worrying effects on (complex) biological systems}
+
+\begin{columns}[c]
+  \column{0.55\linewidth}
+		\begin{itemize}[<+->]\setlength{\itemindent}{0em}
+			\item Loss or collapse of ecosystem function
+			
+			\item Loss of ecosystem recovery or succession
+
+		\end{itemize}
+
+  \column{0.45\linewidth}
+    \begin{figure}
+			\includegraphics[width=\textwidth]{Paleo.pdf}		
+		\end{figure}
+\end{columns}
+
+\pause
+
+\begin{columns}[c]
+  \column{0.55\linewidth}
+		\begin{itemize}\setlength{\itemindent}{0em}
+			\item Disease emergence \& outbreak
+		\end{itemize}
+  \column{0.45\linewidth}
+
+	% \begin{center}
+		\begin{tikzpicture}
+		  \node (img1) {\includegraphics[width=\textwidth]{Chagas.pdf}};
+		  \pause
+		  \node (img2) at (img1) {\includegraphics[width=\textwidth]{Chagas_box.pdf}};
+		\end{tikzpicture}
+	% \end{center}
+	
+  % \begin{figure}
+		% \includegraphics[width=\textwidth]<1>{Chagas.pdf}		
+		% \includegraphics[width=\textwidth]<2>{Chagas_box.pdf}
+	% \end{figure}
+		
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Why Ecology and Evolution?}
+\centering
+	\includegraphics[width=.55\textwidth]{EcoEvoRoadmap.pdf}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Why {\it Computational} Ecology and Evolution?}
+
+  \begin{itemize}[<+->] \setlength{\itemindent}{0em}\itemsep3pt
+
+    \item Biological systems are complex (e.g., nonlinear dynamics are rife)
+
+    \item Maths is far more powerful with numerical analyses
+
+		\item Biological data are BIG and MESSY --- need to be organized 
+		and managed 
+
+		\item Biological data need MINING and often, complex STATISTICAL ANALYSES
+
+		\item Biology needs REPRODUCIBLE analyses and work-flows 
+		that link theory and data \pause {\it -- employers want 
+		this too!}
+
+  \end{itemize} 
+
+\centering
+    % {\bf ergo, Computing!}\\
+  \includegraphics[width=.4\textwidth]{IBM_Blue_Gene.jpg}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]{}
+
+\begin{aquote}{Donald Knuth}
+It is hard for me to say confidently that, after fifty more years of explosive 
+growth of computer science, there will still be a lot of fascinating unsolved 
+problems at peoples' fingertips, that it won't be pretty much working on 
+refinements of well-explored things. Maybe all of the simple stuff and the 
+really great stuff has been discovered. It may not be true, but I can't predict 
+an unending growth. I can't be as confident about computer science as I can 
+about biology. Biology easily has 500 years of exciting problems to work on, 
+it's at that level.
+\end{aquote}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Why {\it Computational} Ecology and Evolution?}
+
+\centering
+
+\includegraphics[width=.9\textwidth]{Joel_Microscope.png}
+
+  \vspace{20pt}
+
+  \pause 
+
+  {\bf Read it}  --- its on the course's Git repository \\\url{https://github.com/mhasoba/TheMulQuaBio}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Computational Ecology and Evolution at {\it Silwood}}
+
+{\bf A wide range of theoretical and empirical research (big data!)}:
+\scriptsize
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep2pt
+		\item Evolution and Developmental Genetics (Abzhanov)
+    \item Genetics and behavior (Schroeder)
+    \item Tropical biology (Ewers, Banks-Leite)
+    \item Vector borne diseases (Cator, Burt)
+    \item Phylogenetics, genomics (Savolainen, Fumagalli)
+    \item Human genetics (Hodgson)
+    \item Behavior (Cator, Gill)
+    \item Paleontology (Brazeau)
+    \item Food webs, networks (Woodward, O'Gorman, Pawar)
+    \item Metabolic theory, population biology (Pawar) 
+    \item Pollinator behavior and ecology (Gill)
+    \item Neutral theory, scientific visualization (Rosindell)
+    \item Population genetics (Burt, Schroeder, Hodgson, Barraclough, Fumagalli)
+    \item Conservation biology (Knight, Mills, Banks-Leite, Ewers)
+    \item Microbial systems (Bell, Barraclough)
+    \pause
+    \item {\bf Many more PIs across are multiple campuses!}
+  \end{itemize}  
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What you will learn}
+  
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep6pt
+\item Competence in stat-of-art quantitative methods for addressing 
+	modern biological problems
+	
+	\item How to select the correct quantitative tool to address a 
+	specific biological problem
+
+	\item An ability to develop, analyse, numerically simulate, fit 
+	models to data and interpret
+
+	\item Quantitative models of biological systems, including 
+	statistical and mathematical models
+
+ \item Techniques in Population biology, Population genetics, Genomics 
+ and Geographical Information Systems
+
+ \item How to design and conduct research, with the necessary 
+ computational workflows -- {\it please have a look at past projects!}
+ 
+ \end{itemize}  
+
+  % {\it Note that MSc's have about double the coursework in these areas}
+  
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Course Administration}
+
+\small
+\begin{center}
+  \begin{tabular}{>{\it}lP{0.52\textwidth} lP{0.6\textwidth}}
+\rowcolor{CMEEVLightBlue}    
+    Course Director & Dr. Samraat Pawar (ext. 42213, 
+  s.pawar@imperial.ac.uk)\\
+    Course Co-Director  & Dr. James Rosindell (ext. 42242, j.rosindell@imperial.ac.uk)\\
+\rowcolor{CMEEVLightBlue}    
+    Postgraduate Administrator	  & Mrs. Amanda Ellis (ext. 42251,  amanda.ellis@imperial.ac.uk)\\
+    Postgraduate Tutor	& Dr. Julia Schroeder (julia.schroeder@imperial.ac.uk)\\
+\rowcolor{CMEEVLightBlue}    
+		Director of Postgraduate Studies &   Dr. Niki Gounaris (ext. 4 5209, k.gounaris@imperial.ac.uk)\\
+		Course Tutors		& Katie Willis (katie.willis16@imperial.ac.uk) \& Tom Clegg (t.clegg17@imperial.ac.uk) \\
+\rowcolor{CMEEVLightBlue}    
+    Course Representative	& Up to you (see Silwood Masters Guidebook)\\
+  \end{tabular}
+
+\end{center}
+{\it Add 020 759 to extension numbers to call from external phones}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Getting started}
+  
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep6pt
+    \item You each will receive a laptop computer and peripherals -- {\it If you want it}  
+    \item You will be provided a USB stick with Ubuntu 16.04 64 bit -- {\it If you need it (ubuntu 18.04 will also work)}
+    \item If you are using your own laptop -- use Ubuntu/Lubuntu/Xubuntu 14.04 64 bit or higher, or Mac OS
+    \begin{itemize}
+	    \item If using Mac OS, remember that not all commands behave the same between Mac OS and Linux 
+		\end{itemize}
+    
+		\item Make sure you can access secured Imperial College wireless (use college name and password) --- external Bootcampers, use Eduroam or a guest account (ask me later) 
+    \item Get an bitbucket or github account (read their Git tutorials (quite intuitive)) --- free private repos using your college email account
+     \item You will be assisted by very capable demonstrators -- also, learn collaboratively with your your classmates!
+  
+\end{itemize}  
+ 
+  \end{frame}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Computer guidelines and rules}
+  
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep6pt
+    \item You are responsible for your computer hardware and software (we have your money!)
+    \item You should be able to install all necessary (open source) software
+    \item Your computer is your main tool, you are expected to achieve a high
+degree of mastery of it!
+    \item Return it to Martin Selby at end of Course (CMEE Masters) or Bootcamp/Winter term (QMEE CDT)
+    \item We expect it to be undamaged
+  \item Please do not leave your computer in any room (other than your
+residence!) overnight, starting now
+ \end{itemize}  
+  \end{frame}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Handbook and Lectures}
+  
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep6pt
+%     \item Printed guidebooks may become outdated, download updated ones from
+% the git repo
+    \item Please check key dates for coursework and reports in your gudebook
+    \item Lectures:
+    \begin{itemize}\setlength{\itemindent}{-1em}
+      \item 2 1-hr lectures in the morning (1000 -- 1230, except in come cases)
+      \item 3-hour practical in afternoon, except on Wednesdays
+      \item Lecturers will stay for at least 1 hour of practical session
+      \item There may be deviations from this -- check updated timetables (use ical)!
+      \item Demonstrators will be available during practicals in botcamp and most other weeks
+      \item Most lectures in CPB or Hamilton Comp room in first 9 weeks, then Wallace Room after MRes cohort finishes
+    \end{itemize}
+ \end{itemize}  
+  \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Seminars}
+
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep12pt
+
+    \item Thursday seminars at 1300 hrs in this building (web link in guidebook)
+    \item Students must attend Thursday seminars -- 1/2 page summary each 
+of min 12 seminars (seminar diary) due after seminar series ends in summer
+	 \item You are encouraged to give talks for feedback / discussion at 
+	 other times of the week, especially in the Spring --- great for 
+	 running ideas past peers (you can give multiple short ones)
+
+	 \item There bi-weekly Social Seminar Series (Beer, Pizza, Talks!) is also a great platform to give a talk.   
+	  
+	  \end{itemize}
+
+  \end{frame}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Workshops and Symposia}
+
+  \begin{itemize}\setlength{\itemindent}{0em}\itemsep12pt
+
+    \item Workshops organized by us are all optional, but strongly recommended -- check guidebook
+    \item Some important ones this week
+
+    \item Summer graduate symposium on Frontiers in Ecology and Evolution (FrEEC Symposium -- \url{freesymp.org}):
+    \begin{itemize}\setlength{\itemindent}{-1em}
+      \item Week 2 of September, organized by Masters + PhD students + Postdocs
+      \item More details in Silwood Masters Student Guidebook
+    \end{itemize}
+ \end{itemize}  
+  \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Assessment and Marking}
+
+\small
+
+\begin{center}
+  \begin{tabular}{>{\it}P{3cm}|P{3cm}|P{4.9cm}}
+    \hline
+    \rowcolor{CMEEVLightBlue}{\bf Activity} &  {\bf MSc CMEE} & {\bf MRes 
+CMEE}\\ \hline
+      Lectures + practicals, with assessment & Required for 19 weeks &
+Required for first 9 weeks, optional attendance in MSc modules within reason
+thereafter \\ \hline
+    Exams & Required & Not required \\
+\hline
+  Project report (Dissertation) & Required & Required \\ \hline
+   Seminars & Required, seminar diary to be submitted based on
+the attendance of a minimum of 12 seminars & Required, seminar diary to be submitted based on
+the attendance of a minimum of 12 seminars\\ \hline
+  Workshops & All optional & All optional \\
+\hline
+
+\end{tabular}
+  
+\end{center}
+  \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Assessment and Marking}
+
+% \scriptsize
+
+% \begin{center}
+
+    % \begin{tabular}{>{\it}m{3.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}}
+    % \hline 
+		% \rowcolor{CMEEVLightBlue} &  \multicolumn{2}{c|}{\bf MSc CMEE} & \multicolumn{2}{c}{\bf MRes CMEE}\\ \hline
+    
+    % \rowcolor{CMEEVLightBlue} {\bf Component} &  {\% of Course} & {\% of Component} & {\% of Course} & {\% of Component}\\ \hline
+
+    % \multicolumn{5}{l}{\bf Coursework} \\ \hline 
+    % Computing  &  {13.75} & {55} & {13.75} & {55}\\ \hline
+    % CMEE Mini-project  &  {6} & {24} & {6} & {24}\\ \hline
+    % HPC Long Practical  &  {5} & {20} & {5} & {20} \\ \hline
+    % Seminar Diary  &  {0.25} & {1} & {0.25} & {1}\\ \hline
+    % {\bf Coursework Total} &  {25} & {100} & {25} & {100}\\ \hline
+    % \multicolumn{5}{l}{} \\[-10pt]\hline 
+
+    % \multicolumn{5}{l}{\bf Exams} \\ \hline 
+    % Exam 1  &  {10} & {40} & {--} & {--}\\ \hline
+    % Exam 2  &  {15} & {60} & {--} & {--}\\ \hline
+		% {\bf Exam Total} &  {25} & {100} & {--} & {--}\\ \hline    
+    % \multicolumn{5}{l}{} \\[-10pt]\hline 
+    
+    % \multicolumn{5}{l}{\bf Project} \\ \hline 
+    % Final Report + Presentation  &  {35} & {70} & {52.5} & {70}\\ \hline
+    % Viva  &  {12.5} & {25} & {18.75} & {25}\\ \hline
+    % Supervisor mark  &  {2.5} & {5} & {3.75} & {5}\\ \hline
+		% {\bf Project Total} &  {50} & {100} & {75} & {100}\\ \hline    
+
+    % \hline
+  % \end{tabular}
+% \end{center}
+
+  % \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Important dates}
+
+% \begin{center}
+	    %% \rowcolors{1}{CMEEVLightBlue}{}
+  % \begin{tabular}{p{3cm}|p{7cm}}
+    % \hline
+      % \rowcolor{CMEEVLightBlue}{\bf Date} & {\bf Activity/Item due} \\ 
+      % \noalign{\smallskip}
+	% 9 Dec, 5PM 	& MRes: Project proposal\\ 
+	% \rowcolor{CMEEVLightBlue}
+	% 15 Dec, 5PM 	& MSc, MRes: HPC Long Practical\\ 
+	% 17 Feb, 5PM 	& MSc, MRes: CMEE Miniproject\\ 
+	% \rowcolor{CMEEVLightBlue}
+	% 7 April, 5PM 	& MSc, Project proposal\\ 
+	% 25 Aug, 5pm 	& MSc, MRes: Seminar Diary\\ 
+   % \hline 
+  % \end{tabular}\\
+% \end{center}
+
+% \pause {\centering Further important dates, including thesis submission are same across 
+% all Silwood Masters courses -- \bf please refer to the Silwood Student 
+% Guidebook}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Warm-up for the Bootcamp and rest of the course}
+
+\begin{itemize}\itemsep8pt
+
+\item Get Linux on your computer (if applicable)! (google - ``Install Ubuntu'')
+\item Lots of UNIX tutorials out there. Try 
+\url{https://software-carpentry.org/lessons/} (Chapter ``shell''). 
+\item Excellent book on Git: \url{http://git-scm.com/book}, also,
+\url{https://www.atlassian.com/git/}
+\item See \url{http://www.andy-roberts.net/writing/latex/benefits}
+\item Also, Word vs. \LaTeX: \url{http://openwetware.org/wiki/Word_vs._LaTeX}
+
+\end{itemize}
+
+\centering
+{\it More extensive list in Guidebook and Course notes (are you getting my emails?)}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Rest of the Course/Bootcamp}
+
+\begin{itemize}\itemsep12pt
+
+\item A number of Readings/Resources on the git repo 
+
+\item Read, Read, Read about concepts and models in Ecology \& Evolution!
+
+\item Happy QMEE (Boot)campers --- if you plant to attend any of the weeks beyond the Bootcamp, please let Joel Santana-Mondo know!
+		\begin{itemize}
+    \item You may skip parts of the Bootcamp that are too basic for you 
+    \item You need to return your Laptop (if applicable) latest by end of Winter term 
+		\end{itemize}
+		
+		
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Questions?}
+
+\centering
+  \includegraphics[width=\textwidth]{CMEE_Fungus.jpg}\\
+    {\it \small (soon to be) Famous CMEE Fungus}
+  
+\end{frame}
+
+
+
+\end{document}
