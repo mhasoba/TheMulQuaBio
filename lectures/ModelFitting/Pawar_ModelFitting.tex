@@ -88,7 +88,7 @@
   {\signed{\usebox\mybox}\end{quote}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Model Fitting]{Fitting Models to Data in Ecology and Evolution}
-\author{Samraat Pawar}
+\author [Samraat]{Samraat Pawar}
 \institute{{\it Department of Life Sciences (Silwood Park)}\\
   \vspace{12pt}
   \centering
@@ -372,94 +372,104 @@ Multiple ways to do it:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Summary: Model selection is the key}
 
-	\begin{itemize}[<+->]\itemsep12pt
-		 \item Ideally, several competing (meaningful, not just null) hypotheses (mathematical models) should be fitted to data and compared using statistical theory 
-		 \item This is an advance over the traditional ``null hypothesis'' approach in Biology
-		 \item Necessary for developing the advancement of Biology from from an observational and axiomatic discipline to one with general theories.
-		 \item Necessary for understanding the mechanisms underlying biological patterns/phenomena
-	  \end{itemize}
+\begin{itemize}[<+->]\itemsep12pt
+	\item Ideally, several competing (meaningful, not just null) hypotheses (mathematical models) should be fitted to data and compared using statistical theory 
+	\item This is an advance over the traditional ``null hypothesis'' approach in Biology
+	\item Necessary for developing the advancement of Biology from from an observational and axiomatic discipline to one with general theories.
+	\item Necessary for understanding the mechanisms underlying biological patterns/phenomena
+\end{itemize}
  
  \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Comparing and selecting models}
+
+\begin{itemize}
+	
+	\item It's all about the ``Likelihood'' of a model: \\
+	the set of parameter values of the	model ($\theta$) given outcomes ($x$),
+	equals the probability of those observed outcomes given those parameter
+	values, that is,
+
+	$$ \mathcal{L}(\theta |x) = P(x | \theta)$$
+
+	\item The easiest thing to do for you is to use information theory
+	(including AIC and BIC) to compare models. 
+
+	\item Both AIC and BIC use the {\it estimated likelihoods of a model}:\\
+	
+	AIC: $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
+
+	Small sample AIC (AICc): $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
+	
+	BIC (Schwartz criterion): $-2 ln[\mathcal{L}(\theta |x) ] + p \ln(n)$
+	
+		(where $n = $ sample size, $p$ number of free parameters)
+	\item The lower the AIC or BIC, the better. 
+
+\end{itemize}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}{Comparing and selecting models}
+\begin{frame}{Comparing and selecting models}
 
-% \begin{itemize}
-% 	\item It's all about the ``Likelihood'' of a model: \\
-% 	the set of parameter values of the	model ($\theta$) given outcomes ($x$), equals the probability of those 
-% 	observed outcomes given those parameter values, that is,
+This is how you calculate AIC and BIC (using python syntax): 
 
-% 	$$ \mathcal{L}(\theta |x) = P(x | \theta)$$
+\pause
+\begin{itemize}\itemsep10pt
+\small
+	\item residuals = Observations - Predictions
+	\item rss = sum(residuals ** 2) 
+	\item Then, AIC is n * log((2 * pi) / n) + n + 2 + n * log(rss) + 2 * p \\
+		({\it note n and p!})
+	\item And BIC is n + n * log(2 * pi) + n * log(rss / n) + (log(n)) * (p + 1)
 
-% 	\item The easiest thing to do for you is to use information theory 
-% 	(including AIC and BIC) to compare models. 
+	\item That is, 	$ \mathcal{L}(\theta |x) = -\frac{n}{2/ln(RSS/n)}$
+	\item For both AIC and BIC, If model {\bf A} has AIC lower by 2-3 or 
+	more than model {\bf B}, it's better --- Differences of less than 2-3 
+	don't really matter
 
-% 	\item Both AIC and BIC use the {\it estimated likelihoods of a model}:\\
+\end{itemize}
+
+    \pause
+Also note that:
+\begin{itemize}
+\small
+	\item R$^{2}$ = 1 - (rss$/$tss), where tss is total sum of squares: \\
+tss = sum((Observations - mean(Predictions)) ** 2)\\
+(a useful measure of goodness of fit)
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Comparing and selecting models: More stuff}
+
+\begin{itemize} \itemsep12pt
+	\item You can also calculate Akaike Weights, which is very useful/important
+	when comparing $ > 2$ models. These weights can then be used to perform {\it
+	model averaging}.
+
+	\item Model selection using the Likelihood-Ratio test (LRT) is another
+	option when you are comparing 2 models.
 	
-% 	AIC: $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
-
-% 	Small sample AIC (AICc): $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
+	\item Adjusted $R^2$ can be used to get rigorous ``idea'' about how
+	alternative models are performing. 
 	
-% 	BIC (Schwartz criterion): $-2 ln[\mathcal{L}(\theta |x) ] + p \ln(n)$
-	
-% 		(where $n = $ sample size, $p$ number of free parameters)
-% 	\item The lower the AIC or BIC, the better. 
+	\item Very often, you will end up doing  model simplification, especially in
+	{\it for linear least squares model fitting} --- starting with a complex
+	model and then dropping terms till you have found a the most parsimonious
+	version of the original model. There are functions in {\tt R} to do this (of
+	course!).
+ 
+\end{itemize}
 
-% \end{itemize}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}{Comparing and selecting models}
-
-% This is how you calculate AIC and BIC (using python syntax): 
-
-% \pause
-% \begin{itemize}\itemsep10pt
-% \small
-% 	\item residuals = Observations - Predictions
-% 	\item rss = sum(residuals ** 2) 
-% 	\item Then, AIC is n * log((2 * pi) / n) + n + 2 + n * log(rss) + 2 * p \\
-% 		({\it note n and p!})
-% 	\item And BIC is n + n * log(2 * pi) + n * log(rss / n) + (log(n)) * (p + 1)
-
-% 	\item That is, 	$ \mathcal{L}(\theta |x) = -\frac{n}{2/ln(RSS/n)}$
-% 	\item For both AIC and BIC, If model {\bf A} has AIC lower by 2-3 or 
-% 	more than model {\bf B}, it's better --- Differences of less than 2-3 
-% 	don't really matter
-
-% \end{itemize}
-
-%     \pause
-% Also note that:
-% \begin{itemize}
-% \small
-% 	\item R$^{2}$ = 1 - (rss$/$tss), where tss is total sum of squares: \\
-% tss = sum((Observations - mean(Predictions)) ** 2)\\
-% (a useful measure of goodness of fit)
-
-% \end{itemize}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}{Comparing and selecting models: More stuff}
-
-% \begin{itemize} \itemsep12pt
-% 	\item You can also calculate Akaike Weights, which is very useful/important when comparing $
-% 	> 2$ models. These weights can then be used to perform {\it model averaging}
-
-% 	\item Model selection using the Likelihood-Ratio test (LRT) is another option when you are comparing 2 models
-	
-% 	\item Adjusted $R^2$ can be used to get rigorous ``idea'' about how alternative models are performing. 
-	
-% 	\item Very often, you will end up doing  model simplification, especially in {\it for linear least squares model fitting} --- starting with a complex model and then dropping terms till you have found a the most parsimonious version of the original model. There are functions in {\tt R} to do this (of course!). 
-% \end{itemize}
-
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Readings}
