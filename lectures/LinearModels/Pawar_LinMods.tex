@@ -123,20 +123,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Lecture Outline}
 
-    \begin{itemize}
+Topics:
+\begin{itemize}
     \item What is a linear model?
-    \item How do we deal with variation?  
-    \item Is a linear model appropriate for the data?
-    \item How well does a linear model explain the data?
+    \begin{itemize}
+        \item Regression
+        \item ANOVA
+        \item Multiple explanatory variables (ANCOVA)
+    \end{itemize} 
+    \item Fitting linear models to your data  
+    \item Is the fitted linear model appropriate for the data?
+    \item How well does a fitted linear model explain the data?
     \end{itemize}
   
+    \pause
     \vspace{12pt}
     Concepts:
    \begin{itemize}
     \item Types of variable: continuous versus categorical 
     \item Terms and coefficients of a model
-    \item Model residuals
-    \item Significance testing
+    \item Model fitting and model residuals
+    \item Significance testing and p-values
    \end{itemize}
   
   \end{frame}
@@ -147,8 +154,8 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \begin{frame}{What predicts the weights ($w$) of lecturers?}
   
-  Use our {\it hypotheses} to identify the {\it variables} we collect\ldots
-  \begin{itemize}
+  Use {\it intuition} and {\it prior knowledge} to identify the {\it variables} to collect...
+  \begin{itemize}[<+->]
   
       \item Height ($h$) in metres
       \item Exercise per week ($e$) in hours
@@ -156,14 +163,21 @@
       \item Distance from home to nearest Greggs bakery ($d$) in metres
       \item Ownership of a games console ($c$)
   
+  \pause
   \end{itemize}
   \vspace{12pt}
-  \ldots and build a mathematical model:
-  \[w = \beta_1 + \beta_2 h + \beta_3 e + \beta_4 g_m  + \beta_5 d + \beta_6 c_s + \beta_7 c_a + \varepsilon\]
-  \end{frame}
+  \ldots and build a mathematical model:\\
+  \vspace{6pt}
+  Lecturer weight ($w$) = {\it Combination} of {\it Independent Variables} (that determine $w$)
+  \pause
+  $$w = \beta_1 + \beta_2 h + \beta_3 e + \beta_4 g_m  + \beta_5 d + \beta_6 c_s + \beta_7 c_a + \varepsilon$$
+  
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{A combination of four components}
+\begin{frame}{The linear model}
+
+    A combination of four components:
 
     \begin{center}
     
@@ -245,7 +259,7 @@
     \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Different types of variables}
+\begin{frame}[t]{The Variables}
     
     \begin{center}
     \begin{tikzpicture} 
@@ -301,7 +315,7 @@
     
     \end{tikzpicture}
     
-    \begin{itemize}
+    \begin{itemize}[<+->]\itemsep6pt
     \item The response variable is always \textcolor{blue}{continuous}.
     \item The explanatory variables can be a mix of:
     \begin{itemize}
@@ -320,7 +334,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Terms and coefficients}
+\begin{frame}{The Terms and Coefficients}
     
     \begin{center}
     \begin{tikzpicture} 
@@ -386,7 +400,7 @@
     \end{tikzpicture}
     
     
-    \begin{itemize}
+    \begin{itemize}[<+->]\itemsep6pt
     \item Each explanatory variable is a {\it term} in the model
     \item Each term has at least one coefficient
     \item \textcolor{blue}{Continuous} terms always have one coefficient
@@ -397,7 +411,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Wait! Why $N-1$? What is $\beta_1$?}
+\begin{frame}{Wait! Why $N-1$ Coefficients? What is $\beta_1$?}
     
     \begin{center}
     \begin{tikzpicture}[every node/.style={text height=3mm,  text depth=1mm, on chain, inner sep=0.5mm},
@@ -445,7 +459,7 @@
     \end{tikzpicture}
     %
     
-    \begin{itemize}
+    \begin{itemize}[<+->]\itemsep6pt
     \item Two ways of thinking about $\beta_1$:
     \begin{itemize}
     \item Continuous variables: the $y$ {\it intercept}
@@ -466,9 +480,11 @@
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Linear models are just a sum}
+\begin{frame}{So, to put it simply,}
 
 \begin{center}
+Linear models are just a sum of terms that are {\it linear} in the coefficients:
+\vspace{-20pt}
 \begin{tikzpicture}[every node/.style={text height=3mm,  text depth=1mm, on chain, inner sep=0.5mm},
                 cross/.style={path picture={
                     \draw[red, ultra thick] (path picture bounding box.center) +(0, 1.4mm) -- +(0, -1.4mm) (path picture bounding box.center) +(1.4mm, 0mm) -- +(-1.4mm,0) ;}},
@@ -509,9 +525,11 @@
 %
 \end{center}
 
-\begin{itemize}
-\item Find the baseline value for women with no games console ($\beta_1$)
-\item The model tells us how much to add to this\ldots
+\pause 
+What our example linear model means (literally):
+\begin{itemize}[<+->]\itemsep6pt
+\item $\beta_1$ is the baseline value of {\it weight} for {\it women} with {\it no games console}
+\item The model tells us how much to add to this baseline weight \ldots
     \begin{itemize}
         \item  for a height of 1.82 metres?
         \item  for doing 150 minutes of exercise a week?
@@ -523,9 +541,23 @@
     
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Examples of Linear Models}
+
+    \includegraphics[width=\textwidth]{Linear.pdf}
+    
+    \begin{itemize}\itemsep10pt
+    \item These are {\it all} linear models (fitted to data)
+    \item Each model a {\it sum} of {\it terms} that are {\it linear in coefficients}
+    \item {\it Linear models can include curved relationships (e.g. polynomials) --- this is a common point of confusion!}
+    \end{itemize}
+    
+    \end{frame}
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Examples - one continuous variable}
+\begin{frame}{Linear model with one continuous variable}
 
     \begin{columns}[T]
     
@@ -543,9 +575,17 @@
             \end{align*}
             \[\beta_1 =4\]
     \end{columns}
-    \end{frame}
-    
-    \begin{frame}{Examples - one continuous variable}
+
+\pause
+
+\begin{center}
+    {\bf Regression} with {\it known baseline value (intercept) }
+\end{center}
+
+\end{frame}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{frame}{Linear model with one continuous variable}
     
     \begin{columns}[T]
     
@@ -563,10 +603,15 @@
             \end{align*}
             \[\beta_1 = 5; \beta_2=4\]
     \end{columns}
+\pause
+    \begin{center}
+        {\bf Regression} with {\it unknown baseline value (intercept) }
+    \end{center}
+    
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Examples - one factor}
+\begin{frame}{Linear model with one factor (categorical variable)}
 
     \begin{columns}[T]
     
@@ -586,10 +631,15 @@
             \end{align*}
             \[\beta_1 = 2; \beta_2=3\]
     \end{columns}
+    \pause
+    \begin{center}
+        {\it Analysis of Variance} ({\bf ANOVA})
+    \end{center}
+
 \end{frame}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Examples - one continuous variable and one factor}
+\begin{frame}{Linear model with one continuous variable and one factor}
 
     \begin{columns}[T]
     
@@ -609,10 +659,14 @@
             \end{align*}
             \[\beta_1 = 1; \beta_2=2; \beta_3=3\]
     \end{columns}
+    \pause
+    \begin{center}
+        {\it Multiple Expanatory variables, Analysis of Covariance} ({\bf ANCOVA})
+    \end{center}
 \end{frame}
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Examples - one continuous variable and one factor}
+\begin{frame}{Closer look at the ANCOVA example}
 
     \begin{columns}[T]
     
@@ -635,32 +689,34 @@
     \end{frame}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{How do we deal with variation?}
+\section{Fitting a LM}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Residuals: variation is everywhere}
+\begin{frame}{``Fitting'' a linear model to data}
 
-  \begin{center}
-            \includegraphics[width=0.6\textwidth]{CarnivoreBMRplot.pdf}\\
+% Residuals; variation is everywhere!
+% \pause
+
+ \begin{center}
+            \includegraphics[width=0.5\textwidth]{CarnivoreBMRplot.pdf}\\
             \vspace{-6pt}
             {\tiny Rizzuto et al. 2017, Nat Ecol Evol}
-            
-    \begin{itemize}
+\end{center}		
+\begin{itemize}\itemsep6pt
     \item Data always shows variation from a perfect model (deviations)
-    \begin{itemize}
+    \begin{itemize}[<+->]
     \item Missing variables (age, lab vs. field biology, time of day) 
     \item Measurement error 
     \item Stochastic variation
     \end{itemize}
     \end{itemize}
-\end{center}		
 
 \end{frame}
     
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Residuals - variation is everywhere}
+\begin{frame}{Fitting a Linear Model to Data}
 
     \begin{columns}[T]
     
@@ -668,26 +724,29 @@
             \includegraphics[width=\textwidth]{Error.pdf}
             
         \column{0.5\textwidth}
-            \begin{align*}
+            
+        \begin{center}
+            {\it What line best passes through (describes) these data?}
+           \end{center}
+           \pause
+           \begin{align*}
               y  &= \beta_1 + \beta_2 x \\
-              \\
-              9.50  &= \;?\; + \;?\; \times 1 \\
+            \end{align*}
+            \pause
+            \vspace{-40pt}
+            \begin{align*}
+               9.50  &= \;?\; + \;?\; \times 1 \\
               11.00 &= \;?\; + \;?\; \times 2 \\
               19.58 &= \;?\; + \;?\; \times 3 \\
               20.00 &= \;?\; + \;?\; \times 4   
             \end{align*}
-            
-            \begin{center}
-             {\it No unique line through the points unless we impose some other 
-             constraint or condition}
-            \end{center}
              
     \end{columns}
     \end{frame}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Residuals - Guess 1}
+\begin{frame}{Fitting a Linear Model to Data: Guess}
     \begin{columns}[T]
    
        \column{0.5\textwidth}
@@ -709,8 +768,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Residuals  - Guess 2}
-\begin{columns}[T]
+\begin{frame}{Fitting a Linear Model to Data: Guess again!}
+    \begin{columns}[T]
 
 	\column{0.5\textwidth}
 		\includegraphics[width=\textwidth]{TooSteep.pdf}
@@ -727,12 +786,17 @@
 		\[\beta_1 = -2.48; \beta_2=7\]
 
 \end{columns}		
+\pause
+\begin{center}
+    {\it There must be a better way to do this!}
+\end{center}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Residuals: (ordinary) least squares solution}
+\begin{frame}{Fitting a Linear Model: Least squares solution}
 
-Minimize the {\it sum} of the {\it squared} residuals
+Minimize the {\it sum} of the {\it squared} {\it residuals:}
 
 % %% animate directly from a multipage pdf - this is rather sweet!
 % %% this is also over-engineered using timeline to only embed the axes once!
@@ -746,7 +810,7 @@ Minimize the {\it sum} of the {\it squared} residuals
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why guess?: The (ordinary) least squares solution}
+\begin{frame}{The (Ordinary) Least Squares fitting solution}
 
 \begin{columns}[T]
 
@@ -770,7 +834,7 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Model as a matrix - terminology}
+\begin{frame}{The maths magic under the hood}
 	
 	\begin{center}
 	
@@ -811,7 +875,7 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Model as a matrix - terminology}
+\begin{frame}{The maths magic under the hood}
 
 \begin{center}
 
@@ -875,7 +939,7 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Model as a matrix - predictions}
+\begin{frame}{The maths magic under the hood}
 
 \begin{center}
 
@@ -916,7 +980,7 @@ Minimize the {\it sum} of the {\it squared} residuals
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Predicted values}
+\begin{frame}{Predicted values and Residuals}
 
 \begin{columns}[T]
 
@@ -942,33 +1006,18 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Assumptions}
+\begin{frame}{Fitting a linear model: Assumptions}
 
 \begin{itemize}\itemsep20pt
-\item Linear models have the following assumptions:
+\item Linear models are fitted with the following assumptions:
 \begin{itemize}
 \item No measurement error in explanatory variables
-\item The explanatory variables are not very highly correlated
-\item \color<2>{red} The model is linear
+\item The explanatory variables are not very highly (inter-) correlated
 \item \color<2>{red} The model has constant normal variance
 \end{itemize}
 \item {\bf If these assumptions are not met, the model can be very wrong}
-\item<2> The last two need some further explanation
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{`The model is linear'}
-
-\includegraphics[width=\textwidth]{Linear.pdf}
-
-\begin{itemize}
-\item These are {\it all} good linear models.
-\item Linear models can include curved relationships (e.g. polynomials)
-\item The data can be modelled as a {\it sum} of components
-\item A {\it linear combination} of variables and coefficients
+\item The first two you will should consider {\it before} even fitting a linear model
+\item<2> The last one needs can be tested {\it after} fitting a linear model
 \end{itemize}
 
 \end{frame}
@@ -983,11 +1032,10 @@ Minimize the {\it sum} of the {\it squared} residuals
 		
 	\column{0.5\textwidth}
 		\begin{itemize}
-		\item The data has a similar spread around any predicted point in the model
+		\item The data have a similar spread around any predicted point in the model
 		\vspace{2cm}
-		\item The residuals are normal
-		\item Points {\it should} be spaced equally in the area under the curve
-		\item Expect mostly small but a few larger residuals
+		\item Overall, the residuals are {\it normally distributed}: mostly small but a few larger values
+        \item Points {\it should} be spaced so as to to best capture the normal (gaussian) curve
 		\end{itemize}
 		
 \end{columns}
@@ -995,15 +1043,16 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{`The model has constant normal variance'}
+\begin{frame}{Checking if the linear model is appropriate}
 
 \includegraphics[width=\textwidth]{ConstantVarianceMods.pdf}
 
-\begin{itemize}
-\item Three good models
-\begin{itemize}
-\item Is the spread the same for all fitted values?
-\item Do the residuals match the normal expectation?
+\begin{itemize}[<+->]
+\item All these three linear model fits appropriate for the data? Are assumptions of the linear model fit satisfied?
+\pause
+\begin{itemize}[<+->]\itemsep6pt
+    \item The spread of the real data around the fitted line (fitted values) is about the same across the x-axis -- good
+    \item But are the residuals normally distributed?
 \end{itemize}
 \end{itemize}
 
@@ -1011,25 +1060,51 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{`The model has constant normal variance'}
+\begin{frame}{Diagnostics for a fitted linear model}
+        
+\begin{itemize}[<+->]\itemsep6pt
+    \item \it The spread of the real data around the fitted line (fitted values) is about the same across the x-axis\\ \pause
+    
+    \includegraphics[width=0.95\textwidth]{FitResid.pdf}
 
-\includegraphics[width=0.95\textwidth]{FitResid.pdf}
-
-\includegraphics[width=0.95\textwidth]{QQNorm.pdf}
+    \pause 
+    \item That is, the residuals have about the same spread irrespective of the fitted values 
+    \item The three numbered points in each plot are the three most `badly behaved' data points.
+    \begin{itemize}
+        \item Each number is the datum's row number in the R data frame 
+    \end{itemize}
+\end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{`The model has constant normal variance'}
+\begin{frame}{Diagnostics for a fitted linear model}
+
+\begin{itemize}[<+->]\itemsep6pt
+    \item \it Are the residuals normally distributed?\\ \pause
+
+    \includegraphics[width=0.95\textwidth]{QQNorm.pdf}
+
+    \pause 
+    \item Residuals from the first (simple regression) and third (polynomial) model's fits show some deviations from normality at the ends (high and low ends of their distributions), but it's acceptable
+    \end{itemize}
+
+\end{frame}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Three bad linear model fits}
 
 \includegraphics[width=\textwidth]{NonConstantVarianceMods.pdf}
 
-\begin{itemize}
-\item Three bad models
-\begin{itemize}
-\item Is the spread the same for all fitted values?
-\item Do the residuals match the normal expectation?
+\begin{itemize}\itemsep6pt
+\item These are three bad linear model fits
+\pause 
+\begin{itemize}[<+->]\itemsep6pt
+    \item The data spread is not the same for all fitted values
+    \item The first model clearly  spread is not the same for all fitted values
+    \item Are the residuals normally distributed?
 \end{itemize}
 \end{itemize}
 
@@ -1037,9 +1112,11 @@ Minimize the {\it sum} of the {\it squared} residuals
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{`The model has constant normal variance'}
+\begin{frame}{Diagnostics for a (badly) fitted linear model}
 
 \includegraphics[width=0.95\textwidth]{BadFitResid.pdf}
+
+\pause
 
 \includegraphics[width=0.95\textwidth]{BadQQNorm.pdf}
 
@@ -1064,19 +1141,19 @@ Plot the residuals!
 \section{Is a linear model explanatory?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}{How explanatory is the model?}
+\begin{frame}{How explanatory is the fitted linear model?}
 
 \begin{center}
-\begin{itemize}\itemsep20pt
-\item Back to F and t tests! (Woohoo!)
-\item {\it Terms}: analysis of variance
+\begin{itemize}[<+->]\itemsep20pt
+\item The role of $F$ and $t$ tests in Linear Model fitting
+\item Significance of {\it Terms}: $F$ test
 \begin{itemize}
-\item Does the model explain enough variation?
-\item Does each term explain enough variation?
+    \item Does the model explain enough variation?
+    \item Does each term explain enough variation?
 \end{itemize}
-\item {\it Coefficients}: $t$ tests
+\item Significance of {\it Coefficients}: $t$ tests
 \begin{itemize}
-\item Are the coefficients different from zero?
+    \item Are the coefficients different from zero?
 \end{itemize}
 \end{itemize}
 
@@ -1085,9 +1162,9 @@ Plot the residuals!
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Null vs. over-specified models: two endpoints}
+\begin{frame}{Is the fitted linear model significant?: $F$ test}
 
-\begin{itemize} \itemsep6pt
+\begin{itemize}[<+->]\itemsep6pt
 
 \item {\bf Total sum of squares} (TSS): Sum of the squared difference between the observed dependent variable ($y$) and the mean of $y$ ($\bar{y}$), or,		
  TSS = $\sum_{i=1}^{n}(y_i - \bar{y})^2$\\
@@ -1101,7 +1178,7 @@ ESS = $\sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2$\\
 our model was able to explain}
 
 \item {\bf Residual sum of squares} (RSS): Sum of the squared 
-differences between the observed $y$ and the predicted $\hat{y}$, or, \\
+differences between the observed $y$ and the predicted $\hat{y}$ (residuals), or, \\
 
 RSS = $\sum_{i=1}^{n} (\hat{y}_i - y_i)^2$\\
 
@@ -1137,11 +1214,11 @@ our model could not explain}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{More interesting models}
+\begin{frame}{The `right' (interesting) model}
 
     \centerline{\includegraphics[height=0.5\textheight]{Intermediate.pdf}}
 
-    \begin{itemize}
+    \begin{itemize}\itemsep6pt
     \item Added a term with three levels
     \item Some but not all of the residual sums of squares are explained
     \item Is this enough to be interesting?
@@ -1150,13 +1227,13 @@ our model could not explain}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{The F statistic}
+\begin{frame}{$F$ statistic of the fitted Linear Model}
 
 \begin{center}
 
 	\begin{tikzpicture}[every node/.style={ text depth=1mm, inner sep=2mm,font=\Large}, node distance=0mm]
 	
-	\node (stat) {F};
+	\node (stat) {$F$};
 	\node (eq1) [right= of stat] {=};
 
 	\matrix (ratio1) [right=of eq1,ampersand replacement=\&] {
@@ -1179,16 +1256,18 @@ our model could not explain}
 	
 	\begin{scope} [every node/.style={fill=blue!10, draw=blue, font=\large, rounded corners, align=center},
                    every path/.style={latex-,  thick, draw=blue}]
-	\node (ESSGood)  [above=of ESS, yshift=8mm, xshift=-4mm] {Large ESS \\ is good};	
-	\node (RSSGood)  [below=of RSS, yshift=-8mm, xshift=-4mm] {Small RSS \\ is good};	
-	\node (NcGood)  [above=of Nc, yshift=8mm, xshift=8mm, anchor=south west] {Fewer coefficients \\ is better};	
-	\node (NrGood)  [below=of Nr, yshift=-8mm, xshift=8mm, anchor=north west] {Residual degrees of freedom};	
-	
+    \pause
+    \node (ESSGood)  [above=of ESS, yshift=8mm, xshift=-4mm] {Large ESS \\ is good};	
 	\draw [blue] (ESS.north) -- (ESS.north |- ESSGood.south);
+    \pause 
+    \node (RSSGood)  [below=of RSS, yshift=-8mm, xshift=-4mm] {Small RSS \\ is good};	
 	\draw  [blue](RSS.south) -- (RSS.south |- RSSGood.north);
-	\draw [blue] (Nc.north) |- (NcGood.west);
+    \pause 
+    \node (NcGood)  [above=of Nc, yshift=8mm, xshift=8mm, anchor=south west] {Fewer coefficients \\ is better};	
+    \draw [blue] (Nc.north) |- (NcGood.west);
+    \pause 
+    \node (NrGood)  [below=of Nr, yshift=-8mm, xshift=8mm, anchor=north west] {Residual degrees of freedom:\\ larger sample size is better};	
 	\draw [blue] (Nr.south) |- (NrGood.west);
-
 	
 	\end{scope}
 	
@@ -1199,48 +1278,51 @@ our model could not explain}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{$F$ values by chance}
+\begin{frame}{What it really means: $F$ value by chance?}
 
-\includegraphics[width=\textwidth]{F_extremes.pdf}
+\begin{center}
+    \it What would be the distribution of $F$ if nothing is going on?\\
+    \pause
+    \includegraphics[width=\textwidth]{F_extremes.pdf}
+\end{center}
 
-\begin{itemize}
-\item What is the distribution of $F$ if nothing is going on?
-\item Simulate 10,000 datasets where nothing is going on ($H_0$ is true)
-\item Calculate $F$ for each random dataset under $H_1$
-\item Mostly $H_1$ has a low $F$ - but sometimes it is high by chance 
+\pause 
+\begin{itemize}[<+->]\itemsep6pt
+    \item Simulate 10,000 datasets where nothing is going on ($H_0$ is true)
+    \item Calculate $F$ for each random dataset under $H_1$
+    \item $H_1$ typically has a low $F$ -- but sometimes it is high {\it by chance} 
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Distribution of $F$}
+\begin{frame}{What it really means: $F$ value by chance?}
 
-% %% animate directly from a multipage pdf - this is rather sweet!
-% %% this is also over-engineered using timeline to only embed the axes once!
+% %% TODO: use timeline to only embed the axes once
 
 \centerline{\animategraphics[height=0.5\textheight, 
                  %autoplay, %controls, %palindrome, 
                 %  timeline=FAnimate.txt, 
                  buttonsize=1em]{12}{FAnimate}{}{}}
 
-\begin{itemize}
-\item In our possibly interesting model, $F=4.52$
-\item<2> 95\% of the random data sets have $F\le 5.5$
-\item<2> A model this good is found by chance 1 in 16 times ($p=0.063$)
-\item<2> Not quite interesting enough!
+\begin{itemize}[<+->]\itemsep6pt
+\item In our possibly interesting model, $F = 4.52$
+\item 95\% of the random data sets have $F\le 5.5$
+\item A model this good would be found by chance 1 in 16 times (p$=0.063$)
+\item Close, but not quite interesting (significant) enough!
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Are coefficients different from zero?}
+\begin{frame}{Are the coefficients different from zero?}
 
 \begin{center}
 
 	\begin{tikzpicture}[every node/.style={ text depth=1mm, inner sep=2mm,font=\Large}, node distance=0mm]
 	
-	\node (stat) {t};
+	\node (stat) {$t$};
 	\node (eq1) [right= of stat] {=};
 
 	\matrix (ratio1) [right=of eq1,ampersand replacement=\&] {
@@ -1259,11 +1341,14 @@ our model could not explain}
 	
 	\begin{scope} [every node/.style={fill=blue!10, draw=blue, font=\large, rounded corners, align=center},
                    every path/.style={latex-,  thick, draw=blue}]
-	\node (esgood)  [above=of eq2, yshift=10mm ] {Large is good - bigger changes};	
-	\node (precgood)  [below=of eq2, yshift=-10mm] {Small is good - known more precisely};	
-	
+
+    \pause 
+    \node (esgood)  [above=of eq2, yshift=10mm ] {Large is good: bigger changes};	
 	\draw [blue] (diff.north) -- (diff.north |- esgood.south);
 	\draw [blue] (val.north) -- (val.north |- esgood.south);
+    
+    \pause 
+    \node (precgood)  [below=of eq2, yshift=-10mm] {Small is good: known more precisely};	
 	\draw [blue] (prec.south) -- (prec.south |- precgood.north);
 	\draw [blue] (se.south) -- (se.south |- precgood.north);	
 		
@@ -1272,10 +1357,11 @@ our model could not explain}
 	\end{tikzpicture}
 \end{center}
 
-\begin{itemize}
+\pause 
+\begin{itemize}[<+->] \itemsep6pt
     \item The value of a coefficient in a model is an {\it effect size}
-    \item How much does changing this variable change the response?
-    \item A {\it standard error} estimates how precisely we know the value
+    \item How much does changing that predictor variable change the response variable?
+    \item The {\it standard error} estimates how precisely we know the value
 \end{itemize}
 
 \end{frame}
@@ -1283,20 +1369,24 @@ our model could not explain}
 
 \begin{frame}{Variation in effect size and precision}
 	
-		\centerline{\includegraphics[height=75mm]{T_examples.pdf}}
+\centerline{\includegraphics[height=75mm]{T_examples.pdf}}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{$t$ values by chance}
+\begin{frame}{What it really means: $t$ values by chance}
 
-\includegraphics[width=\textwidth]{t_extremes.pdf}
+\begin{center}
+    \it What is the distribution of $t$ if nothing is going on?\\
+    \pause
+    \includegraphics[width=\textwidth]{t_extremes.pdf}
+\end{center}
 
-\begin{itemize}
-\item What is the distribution of $t$ if nothing is going on?
+\pause
+\begin{itemize}[<+->]\itemsep6pt
 \item Simulate 10,000 datasets where nothing is going on ($H_0$ is true)
 \item Calculate $t$ for each random dataset under $H_1$
-\item Mostly $H_1$ has a $t$ near zero but can be positive or negative
+\item $H_1$ typically has a $t$ near zero but can be strongly positive or negative {\it by chance}
 \end{itemize}
 
 \end{frame}
@@ -1313,50 +1403,41 @@ our model could not explain}
                 %  timeline=tAnimate.txt, 
                  buttonsize=1em]{12}{tAnimate}{}{}}
 
-\begin{itemize}
-\item 95\% of the random data sets have $t\le \pm 2.09$
-\item Only the two higher precision models are expected to occur less than 1 time in 20 by chance.
+\pause 
+\begin{itemize}[<+->] \itemsep6pt
+    \item 95\% of the random data sets have $t\le \pm 2.09$
+    \item Only the two higher precision models are expected to occur less than 1 time in 20 by chance.
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Summary}
-
-\begin{itemize}
-    \item Linear models predict a continuous response variable
-    \item A sum based on the effect size of explanatory variables
-    \item Estimate the model using least squares residuals
-    \item Need to check if the model is appropriate
-    \item Then check if the model is explanatory
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{What about Analysis of Variance (ANOVA)?}
+\begin{frame}{Some more examples of linear model fitting}
 
 \includegraphics[width=\textwidth]{ANOVA_null.pdf}
 
-\begin{itemize}
-\item The null hypothesis ($H_0$): Nothing is going on
-\item The residuals have to get smaller as we include terms.
-\item How much shorter?
+\begin{itemize}[<+->]\itemsep6pt
+\item The null hypothesis ($H_0$): Nothing is going on (model is just $\beta_1$!)
+\item The residuals (and therefore, RSS) will get {\it smaller} as we include more terms to the model
+\item {\it How much smaller is enough?}
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Examples: one continuous term}
+\begin{frame}{Some more examples of linear model fitting}
 
-\includegraphics[width=\textwidth]{ANOVA_mod.pdf}
+    \begin{center}
+        {\it First try: Add one continuous term}\\
 
-\begin{itemize}
-\item An alternative model ($H_1$) using $x$
-\item Added one term ($x$) to the model to give ($H_1$)
+        \includegraphics[width=\textwidth]{ANOVA_mod.pdf}
+    \end{center}
+
+\begin{itemize}[<+->]\itemsep10pt
+\item Fitted an {\it alternative} model ($H_1$) using a predictor variable $x$
+\item i.e., Added one term ($x$) to the model to give ($H_1$)
 \item Do we reject $H_0$ and accept this new model?
 \end{itemize}
 
@@ -1364,22 +1445,27 @@ our model could not explain}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Examples: adding a factor}
+\begin{frame}{Some more examples of linear model fitting}
 
-\includegraphics[width=\textwidth]{ANOVA_mod2.pdf}
+    \begin{center}
+        {\it Second try: Add one continuous term}\\
 
-\begin{itemize}
-\item Another model ($H_2$) using $x$ and a factor $f$ with three levels
-\item The sum of squares gets smaller again 
-\item We've added one term ($f$) but two coefficients ($f_b$ and $f_c$)
-\item Is this even better than $H_1$?
+        \includegraphics[width=\textwidth]{ANOVA_mod2.pdf}
+    \end{center}
+
+\begin{itemize}[<+->]\itemsep6pt
+    \item Fitted another model ($H_2$) with continuous predictor $x$ and factor $f$
+    \item The RSS gets still smaller 
+    \item Is this {\it even} better than $H_1$?
 \end{itemize}
+
+% \footnotetext[1]{Note that we've added one term ($f$) but two coefficients ($f_b$ and $f_c$) --- recall where the baseline level is}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Change in variance}
+\begin{frame}{Compare the three models}
 
 \begin{table}[htdp]
 	\begin{center}
@@ -1392,12 +1478,33 @@ our model could not explain}
 		       & Explained SS   & 0.00  & 11.81 & 196.85 \\
 		$H_2 $ & Unexplained SS & 238.07 & 123.75 & 25.05 \\
 		       & Explained SS   & 3.9  & 61.27 & 234.75 \\
-		\end{tabular}
-	\end{center}
+        \hline
+    \end{tabular}
+\end{center}
 \end{table}
 
+\begin{itemize}[<+->]\itemsep6pt
+    \item Which model would you choose between $H_1$ and $H_2$?
+    \item Every alternative model is an {\it alternative hypothesis}
+\end{itemize}
+    
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Linear Models: Summary}
+
+    \begin{itemize}\itemsep12pt
+        \item Linear models predict a continuous response variable
+        \item A LM is a sum of terms that are linear in the coefficients capturing the effect sizes of explanatory variables
+        \item LMs are fitted using (ordinary) least squares --- minimizes sum of squared residuals
+        \item Need to check if the fitted LM is appropriate
+        \item Then check if the LM is explanatory
+        \item Fitting alternative LMs = Testing alternative hypotheses
+    \end{itemize}
+    
+    \end{frame}
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 % \begin{frame}{Categorical variables}
