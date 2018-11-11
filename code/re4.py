@@ -32,6 +32,6 @@ invalid2 = "Abc.@example.com"
 emailpattern1 = r'^[a-zA-Z0-9\._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
 print re.search(emailpattern1, valid1).group()
 
-#matching the nasty one:
+#matching a nasty one:
 emailpattern = r'[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!\#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
 print re.search(emailpattern, validbutterrible).group()
