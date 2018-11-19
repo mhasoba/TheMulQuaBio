@@ -1,0 +1,16 @@
+
+model {
+  
+  for (i in 1:N) {
+      Y[i] ~ dlnorm(log(mu[i]), tau)
+      mu[i] <- K*Y0/(Y0+(K-Y0)*exp(-r*t[i]))
+      
+  }
+
+  r~dexp(1000)
+  K ~ dunif(0.01, 0.6)
+  Y0 ~ dunif(0.09, 0.15)
+  tau<-1/sigma^2
+  sigma ~ dexp(0.1)
+
+}
