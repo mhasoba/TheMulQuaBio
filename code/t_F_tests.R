@@ -4,7 +4,7 @@
 # t tests and F tests in R
 
 # (1) load the data from the CSV text file into a data frame
-genome <- read.csv('../Data/GenomeSize.csv')
+genome <- read.csv('../data/GenomeSize.csv')
 # double check that the data has loaded properly - does str() look right
 str(genome)
 
