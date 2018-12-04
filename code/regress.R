@@ -3,7 +3,7 @@
 # This script uses genome size and morphology data to explore regression in R
 
 # (1) Load the data
-genome <- read.csv('../Data/GenomeSize.csv')
+genome <- read.csv('../data/GenomeSize.csv')
 
 # (2) look at pairwise plots of all variables
 pairs(genome)
@@ -44,7 +44,7 @@ sum(resid(nullModDragon)^2)
 sum(resid(genomeSizeModelDragon)^2) 
 
 # (8) fit the genome size model for damselflies
-genomeSizeModelDamsel <- lm(logBW ~ logGS, data=genome, subset=Suborder=='Zygoptera')
+genomeSizeModelDamsel <- lm(logBW ~ logGS, data=genome,subset=Suborder=='Zygoptera')
 summary(genomeSizeModelDamsel)
 anova(genomeSizeModelDamsel)
 
