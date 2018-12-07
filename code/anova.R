@@ -79,7 +79,6 @@ par(mfrow=c(1,2))
 plotmeans(logCvalue ~ TrophicLevel, data=mammals, connect=FALSE)
 plotmeans(logCvalue ~ GroundDwelling, data=mammals, connect=FALSE)
 
-
 # 5) Linear models
 trophicLM <- lm(logCvalue ~ TrophicLevel, data=mammals)
 anova(trophicLM)

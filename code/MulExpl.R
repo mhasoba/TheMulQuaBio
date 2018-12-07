@@ -1,7 +1,7 @@
 # Chapter 7: Linear Models, Multiple explanatory variables
 # load and check the data
 
-load('mammals.Rdata')
+load('../data/mammals.Rdata')
 ls()
 str(mammals)
 
