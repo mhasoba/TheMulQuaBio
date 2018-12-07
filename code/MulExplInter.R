@@ -4,7 +4,6 @@ load('mammals.Rdata')
 ls()
 str(mammals)
 
-
 # 1) interaction model
 model <- lm(logCvalue ~ TrophicLevel * GroundDwelling, data= mammals)
 par(mfrow=c(2,2))
@@ -27,7 +26,7 @@ print(predVals)
 
 # 3) analysis of covariance
 
-odonata <- read.csv('GenomeSize.csv')
+odonata <- read.csv('../data/GenomeSize.csv')
 odonata$logGS <- log(odonata$GenomeSize)
 odonata$logBW <- log(odonata$BodyWeight)
 
