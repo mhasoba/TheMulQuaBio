@@ -1,4 +1,4 @@
-# Chapter 7: Linear Models, Multiple explanatory variables
+# Linear Models, Multiple explanatory variables
 # load and check the data
 
 load('../data/mammals.Rdata')

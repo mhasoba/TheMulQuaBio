@@ -3,7 +3,7 @@ library(lattice)
 library(nlme)
 library(reshape2)
 
-Chem_Extracts <- read.csv("~/Documents/FIU/Research/JapBeetle_Temp_Herbivory/Data/Chemical_Assays/Chem_Extracts.csv")
+Chem_Extracts <- read.csv("Chem_Extracts.csv")
 Chem_Extracts <- subset(Chem_Extracts[,1:17], Comments=='')
 Chem_Extracts$Temperature[which(Chem_Extracts$Temperature==33)] <- 35
 

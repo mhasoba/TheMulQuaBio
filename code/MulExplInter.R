@@ -1,4 +1,4 @@
-# Chapter 8: Multiple variables and interactions
+# Multiple variables and interactions
 # load and check the data
 load('mammals.Rdata')
 ls()

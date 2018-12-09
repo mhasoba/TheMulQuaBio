@@ -1,7 +1,7 @@
-# CHAPTER 10. GENERALISED LINEAR MODELS
+# GENERALISED LINEAR MODELS
 
 # 1) Load the data
-colonies <- read.csv("../Data/PracData.csv")
+colonies <- read.csv("../data/PracData.csv")
 str(colonies)
 
 # 2) Look at all the data
