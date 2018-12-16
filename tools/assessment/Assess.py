@@ -3,7 +3,7 @@
 
 	USAGE 
 	
-	python Assess.py StudentsFile RepoPath Week
+	python3 Assess.py StudentsFile RepoPath Week
 
 	or, if ready to git push: 
 	
@@ -17,25 +17,27 @@
 	RepoPath 	  : FULL path to location for students' local git repositories 					(without an ending "/")
 	Week		  : Name of week to assess (Week1, Week2, etc.)
  
-    --gitpull     : Optional flag indicating whether to pull to students' git 					repositories only without assessment (default is False). 					Only works if the student's repo already exists.
+    --gitcheckout : Optional flag indicating whether to checkout students' git 					repositories only without assessment (default is False). 					Only works if the student's repo already exists.
+ 
     --gitpush     : Optional flag indicating whether to push the assessment 					to students' git repositories (default is False).
+
 	--gitpush_fin : Optional flag indicating whether to push the final 							assessment to students' git repositories (default is False) 			    . If used, repo is pulled and contents of assessment 		 				directory pushed, nothing else.
 """
 # TODO: 
+# * Allow Week to be set to 0 for only git checking out
 # * Call a warning a warning and an error an error!
 # * Count up lines of code in each script and report it
-# * Include a weekly list of expected code files to check against
-# * Include "using repository state at time..."
-# * Allocate points to each expected code file as weighted 
-# percent of 100, weight determined by number of code lines; Update 
-# marking criteria accordingly 
-# * Allocate points to each independent code file as weighted 
-# percent of 100, weight determined by number of code lines; Update 
-# marking criteria accordingly 
-# Total baseline points are weighted average of these two, from which 
-# additional points are deleted for poor project organization, readme, 
-# etc.
-# * Allow Week to be set to 0 for only git pulling
+# * Include a weekly list of expected code files to check against?
+# * Include "using repository state at time..."?
+# * Allocate points to each expected code file as weighted percent of 100,
+#   weight determined by number of code lines; Update marking criteria
+#   accordingly
+# * Allocate points to each independent code file as weighted percent of 100,
+#   weight determined by number of code lines; Update marking criteria
+#   accordingly
+# * Total baseline points are weighted average of these two, from
+#   which additional points are deleted for poor project organization, readme,
+#   etc.
 
 import subprocess, os, csv, argparse, re
 
@@ -69,8 +71,8 @@ parser.add_argument("RepoPath", help="Location for git repositories (full path)"
 parser.add_argument("Week", help="Name of week to assess (Week1, Week2, etc.)")
 
 # Optional argument inputs
-parser.add_argument("--gitpull", action="store_true", 
-								 dest="gitpull", default=False,
+parser.add_argument("--gitcheckout", action="store_true", 
+								 dest="gitcheckout", default=False,
 								 help="Whether to only git pull (no assessment) repositories")
 
 parser.add_argument("--gitpush", action="store_true", 
@@ -112,19 +114,21 @@ for Stdnt in Stdnts:
 		
 		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final assessment"])
 		
-		subprocess.check_output(["git", "-C", RepoPath, "pull"])
+		subprocess.check_output(["git", "-C", RepoPath, "checkout"])
 		
-		subprocess.check_output(["git","-C", RepoPath,"push","-u", "origin",  "master"])
+		import ipdb; ipdb.set_trace() # check if pushing from assessment directory only 
+
+		subprocess.check_output(["git","-C", AzzPath + "/*","push","-u", "origin",  "master"])
 
 		continue
 	
-	if args.gitpull:
+	if args.gitcheckout:
 		print("...\n\n"+"Pulling repository for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] + "...\n\n")		
 		if os.path.exists(RepoPath): # only if the repo exists already
 
-			subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
+			# subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
 
-			subprocess.check_output(["git", "-C", RepoPath, "pull"])
+			subprocess.check_output(["git", "-C", RepoPath, "checkout"])
 		
 		else: # Otherwise, clone repo first time
 			print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
@@ -141,7 +145,7 @@ for Stdnt in Stdnts:
 		continue
 	else:
 
-		subprocess.check_output(["git","-C", RepoPath,"pull"])
+		subprocess.check_output(["git","-C", RepoPath,"checkout"])
 
 		p, output, err, time = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
 
@@ -374,7 +378,7 @@ for Stdnt in Stdnts:
 						azz.write('1 pt deducted\n\n')
 						azz.write('Current Points = ' + str(Mrks) + '\n\n')
 				
-				p, output, err,	time = run_popen('python ' + os.path.basename(name), timeout)
+				p, output, err,	time = run_popen('python3 ' + os.path.basename(name), timeout)
 			
 			elif os.path.basename(name).lower().endswith('.r'):
 				p, output, err,	time = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
