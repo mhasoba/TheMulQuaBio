@@ -24,6 +24,7 @@
 	--gitpush_fin : Optional flag indicating whether to push the final 							assessment to students' git repositories (default is False) 			    . If used, repo is pulled and contents of assessment 		 				directory pushed, nothing else.
 """
 # TODO: 
+# * Bug: week 1, but also 10 will end up being assessed if it exists - fix
 # * Allow Week to be set to 0 for only git checking out
 # * Call a warning a warning and an error an error!
 # * Count up lines of code in each script and report it
@@ -260,6 +261,7 @@ for Stdnt in Stdnts:
 	
 	for week in WeekDirs:
 		if not args.Week.lower() in week.lower().replace(" ", ""):
+			import ipdb; ipdb.set_trace() # fix - check TODO
 			continue # only assess for current week
 		azz.write('='*70 + '\n')
 		WeekPth = RepoPath+'/'+week

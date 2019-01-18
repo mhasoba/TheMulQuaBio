@@ -17,4 +17,5 @@ This work is licensed under a [Creative Commons Attribution 3.0 Unported License
 
 * Note that the old materials, written in LaTeX, are now in the `archived` directory.
 * The solutions to the exercises are in a separate, [private git repo](https://bitbucket.org/mhasoba/themulquabio_sols) that students do not have access to. Ask Samraat (mhasoba@gmail.com) if you need access to that repository.
+  * Students will be given access to solutions when the time comes through the directory `sols`.
 * The `results` directory will be populated only when scripts are run, but these are not version controlled (all files in this directory under `.gitignore`).
