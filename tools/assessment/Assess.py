@@ -111,15 +111,15 @@ for Stdnt in Stdnts:
 
 		# subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
 
+		# import ipdb; ipdb.set_trace() # check if pushing from assessment directory only 	
+
 		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
 
 		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final assessment"])
 
-		import ipdb; ipdb.set_trace() # check if pushing from assessment directory only 	
-
 		subprocess.check_output(["git","-C", RepoPath,"push","-u", "origin",  "master"])
 
-		subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
+		# subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
 
 		continue
 	
@@ -127,9 +127,9 @@ for Stdnt in Stdnts:
 		print("...\n\n"+"Pulling repository for "+ Stdnt[Hdrs.index('1st Name')] + " "+ Stdnt[Hdrs.index('Surname')] + "...\n\n")		
 		if os.path.exists(RepoPath): # only if the repo exists already
 
-			subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
+			# subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
 
-			subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
+			# subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
 			
 			subprocess.check_output(["git", "-C", RepoPath, "pull"])
 		
@@ -261,8 +261,8 @@ for Stdnt in Stdnts:
 	
 	for week in WeekDirs:
 		if not args.Week.lower() in week.lower().replace(" ", ""):
-			import ipdb; ipdb.set_trace() # fix - check TODO
-			continue # only assess for current week
+			# import ipdb; ipdb.set_trace() # fix - check TODO
+			continue # only assess for current week - no week 10 and 1, for eg
 		azz.write('='*70 + '\n')
 		WeekPth = RepoPath+'/'+week
 		azz.write('Assessing ' + week.upper()+'...\n\n')
