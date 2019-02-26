@@ -1,0 +1,28 @@
+# a heteroclinic orbit
+# unstable at u=1, stable at u=0
+f(u,up)=up
+g(u,up)=-c*up-u*(1-u)*(u-a)
+u'=up*per
+up'=(-c*up-u*(1-u)*(u-a))*per
+uleft'=0
+upleft'=0
+uright'=0
+upright'=0
+per'=0
+c'=0
+# unstable manifold
+b (u-uleft)*lamp-(up-upleft)
+b (u'-uright)*lamn-(up'-upright)
+b sqrt((u-uleft)^2+(up-upleft)^2)-eps
+b sqrt((u'-uright)^2+(up'-upright)^2)-eps
+b f(uleft,upleft)
+b g(uleft,upleft)
+b f(uright,upright)
+b g(uright,upright) 
+lamn=(c-sqrt(c^2+4*a))/2
+lamp=(c+sqrt(c^2+4*(1-a)))/2
+par a=.5,eps=.1
+init u=.918,up=-.0577,per=6.67,c=0
+init uleft=1,upleft=0,uright=0,upright=0
+@ total=1.01,dt=.01
+done

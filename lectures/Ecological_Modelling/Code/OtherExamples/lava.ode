@@ -1,0 +1,24 @@
+# lava lamp
+# density of the base(x<0), water (0<x<L), air (x>L)
+dd(x)=db/(1+exp(b*x))+dw/(1+exp(b*(x-L)))+da
+par db=8,dw=1,da=.01,b=20
+# x is the center of mass of the blob
+# density is the mean density
+# f = friction,g=gravity,k=buoyant force
+x'=xp
+xp'=-f*xp-g + k*(dd(x)-density)
+par g=.2,f=1,k=2
+par l=10
+# density depends on the temperature
+# ambient temperature profile
+tam(x)=tbase+x*(tair-tbase)/L
+par tbase=80,tair=40
+temp'= c*(tam(x)-temp)
+par c=.002
+# now need density dependence on temp
+density=dens(temp)
+dens(temp)=dmin+(dmax-dmin)/(1+exp((temp-temp0)/temp1))
+par dmin=.6,dmax=1.2,temp0=60,temp1=1
+init x=0,xp=0,temp=50
+@ meth=qualrk,dt=.5,total=1000,xlo=0,xhi=1000,ylo=0,yhi=10
+done

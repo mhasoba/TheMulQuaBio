@@ -1,0 +1,16 @@
+# poisson.ode
+# poisson synaptic input
+v'=-gl*(v-vl)-gs*s*(v-vsyn)
+tn'=0
+s'=sp
+sp'=-2*a*sp-a*a*s
+init v=-65,tn=200.0028191
+global 1 t-tn {tn=tn-ln(ran(1))/r;sp=q*sp+a;s=q*s}
+# r=rate of input train
+# 1/a is synaptic time constant
+par vl=-65,vsyn=0,gl=.05,gs=.02,a=.5,r=.005
+# q=1 for synapses with accumulation - q=0 for no accumulation
+par q=1
+@ bound=1000000,total=2000,njmp=100
+@ xhi=2000,ylo=-65.1,yhi=-60
+done

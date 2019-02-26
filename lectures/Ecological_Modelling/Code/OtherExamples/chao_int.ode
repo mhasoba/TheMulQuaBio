@@ -1,0 +1,11 @@
+# a chaotic integral equation
+# I take advantage of the convolution to make a lookup table
+x(t)=c*exp(-b*t)+r*int{exp(-(t-tau)^2)#x*(1-x)}
+par tau=3,b=8,c=.1,r=2.4
+par d1=1.8,d2=3.6
+# I add two more variables so we can make a cool 3D plot
+aux y=delay(x,d1)
+aux z=delay(x,d2)
+@ delay=4,total=300,trans=100,dt=0.05
+done
+

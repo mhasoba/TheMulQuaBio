@@ -1,0 +1,23 @@
+# ifs4.ode
+# general code for ifs with 4 choices
+par a1=0,a2=.85,a3=.2,a4=-.15
+par b1=0,b2=.04,b3=-.26,b4=.28
+par c1=0,c2=-.04,c3=.23,c4=.26
+par d1=.16,d2=.85,d3=.22,d4=.24
+par e1=0,e2=0,e3=0,e4=0
+par f1=0,f2=1.6,f3=1.6,f4=.44
+par p1=0.01,p2=0.85,p3=0.07,p4=0.07
+s1=p1
+s2=s1+p2
+s3=s2+p3
+z=ran(1)
+i1=if(z>s1)then(1)else(0)
+i2=if(z>s2)then(2)else(i1)
+i=if(z>s3)then(3)else(i2)
+x'=shift(a1,i)*x+shift(b1,i)*y+shift(e1,i)
+y'=shift(c1,i)*x+shift(d1,i)*y+shift(f1,i)
+@ meth=discrete,total=20000,maxstor=100000
+@ xp=x,yp=y,xlo=-3,xhi=3,ylo=0,yhi=10,lt=0
+aux pp=i
+done
+

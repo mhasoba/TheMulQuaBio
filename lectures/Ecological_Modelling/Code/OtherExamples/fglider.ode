@@ -1,0 +1,20 @@
+# fancy glider
+tab xg xglid.tab
+tab yg yglid.tab
+v'=-sin(th)-d*v^2
+th'=(v^2-cos(th))/v
+x'=v*cos(th)*scale
+y'=v*sin(th)*scale
+par d=0.25,scale=2,lg=.04
+# these initial data correspond to a nice loop
+init th=.2,v=8
+init x=4,y=0
+# these are points for the fancy glider
+xc=x
+yc=y
+c=cos(th)
+s=sin(th)
+xx[1..14]=(xg([j])*c-yg([j])*s+xc)*lg
+yy[1..14]=(xg([j])*s+yg([j])*c+yc)*lg+.5
+@ total=30,dt=.025,bound=1000000
+done

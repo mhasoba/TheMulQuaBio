@@ -1,0 +1,21 @@
+# mlpair.ode
+# morris-lecar; dimensionless
+# diffusively coupled
+# try  phi between .7 and 1.2 to see a change
+# in synchronization
+v'=I+gl*(el-v)+gk*w*(ek-v)+gca*minf(v)*(eca-v)+d*(vp-v)
+w'=(winf(v)-w)*lamw(v)
+vp'=I+gl*(el-vp)+gk*wp*(ek-vp)+gca*minf(vp)*(eca-vp)+d*(v-vp)
+wp'=(winf(vp)-wp)*lamw(vp)
+par d=.05
+par I=0.09,phi=1
+par ek=-.7,eca=1,el=-.5
+par gl=.5,gk=2,gca=1
+par v1=-.01,v2=0.15,v3=0.1,v4=0.145
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+lamw(v)= phi*cosh((v-v3)/(2*v4))
+init vp=.1
+@ total=100,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=v,yplot=w
+done

@@ -1,0 +1,18 @@
+# parrondo.ode
+# this plays the combined game with probability 1/2 each
+# Parrondos paradox
+game(p,e)=if(ran(1) < (p-e))then(1)else(-1)
+par eps=.005,p2=.1,p3=.75,m=3,pa=.5,gamma=.5
+# game 1 alone
+ca_1'=ca_1+game(pa,eps)
+# game 2 alone
+pg2p=if(mod(ca_2,m)==0)then(p2)else(p3)
+ca_2'=ca_2+game(pg2p,eps)
+# game 3
+pg2=if(mod(ca_c,m)==0)then(p2)else(p3)
+pg1=pa
+p=if(ran(1)>gamma)then(pg2)else(pg1)
+ca_c'=ca_c+game(p,eps)
+@ total=100,meth=discrete,dt=1
+done
+

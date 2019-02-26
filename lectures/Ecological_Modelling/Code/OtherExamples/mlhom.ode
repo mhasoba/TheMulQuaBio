@@ -1,0 +1,37 @@
+# The Morris-Lecar model as in our chapter in Koch & Segev
+#  A simple membrane oscillator.  
+#
+params per=10,iapp=0.05
+param v1=-.01,v2=0.15,v3=0.1,v4=0.145,gca=1.33
+params vk=-.7,vl=-.5,gk=2.0,gl=.5,om=1
+minf(v)=.5*(1+tanh((v-v1)/v2))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+lamn(v)= phi*cosh((v-v3)/(2*v4))
+f(v,w)=(iapp+gl*(vl-v)+gk*w*(vk-v)-gca*minf(v)*(v-1))
+g(v,w)=lamn(v)*(ninf(v)-w)
+v'=f(v,w)*per
+w'=g(v,w)*per
+ve'=0
+we'=0
+phi'=0
+init phi=.785,ve=-.1978,we=.01249
+init v=-.1978,w=.01249
+b f(ve,we)
+b g(ve,we)
+b hom_bcs(0)
+b hom_bcs(1)
+#
+@ TOTAL=1.001,DT=.01,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=v,yplot=w
+done
+
+
+
+
+
+
+
+
+
+
+

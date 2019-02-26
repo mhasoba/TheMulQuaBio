@@ -1,0 +1,58 @@
+# quar.ode
+# newtons method in the complex plane to find square roots of 1
+# z^4=1
+# draws  basin boundaries
+#
+# tolerances
+par eps=.001
+# discretization of the phase-space
+par dx=0,dy=0
+# the 4 roots
+par r1=1,s1=0
+par r2=-1,s2=0
+par r3=0,s3=1
+par r4=0,s4=-1
+# the functions
+f=x^4-6*x^2*y^2+y^4-1
+g=4*(x^3*y-x*y^3)
+# the derivatives of the functions
+fx=4*x^3-12*x*y^2
+fy=-12*y*x^2+4*y^3
+gx=12*x^2*y-4*y^3
+gy=12*x^3-12*x*y^2
+# the Jacobian -- used in the inverse
+det=fx*gy-fy*gx
+# a euclidean distance function
+dd(x,y)=x*x+y*y
+# if close to the root then plot otherwise out of bounds for each root
+aux xp[1..4]=if(dd(x-r[j],y-s[j])<eps)then(x0)else(-100)
+aux yp[1..4]=if(dd(x-r[j],y-s[j])<eps)then(y0)else(-100)
+#
+# iteration
+x'=x-(f*gy-g*fy)/det
+y'=y-(g*fx-f*gx)/det
+# initial data
+x0'=x0
+y0'=y0
+# set initial data as parameters
+glob 0 t {x0=-1.1+dx*2.2;y0=-1.1+dy*2.2;x=-1.1+dx*2.2;y=-1.1+dy*2.2}
+# 
+# plot all three sets of points in lousy colors
+#
+@ meth=discrete,total=20,bound=1000,maxstor=100000,trans=20
+@ xp=xp1,yp=yp1,xp2=xp2,yp2=yp2,xp3=xp3,yp3=yp3,xp4=xp4,yp4=yp4,nplot=4,lt=-1
+@ xlo=-1.1,ylo=-1.1,xhi=1.1,yhi=1.1
+done
+
+Do a two-parameter range on this ranging over
+
+0 < dx < 1
+0 < dy < 1
+
+using the array option
+
+
+
+
+
+

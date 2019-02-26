@@ -1,0 +1,18 @@
+# cicada model 
+#
+# here are the predators decay plus feeding on emerged stuff
+pt1=nu*p+a*mu^k*delay(n,k)
+# amount of food left after taking into acct of all the grubs
+c=max(d-sum(1,k-1)of((mu^i')*delay(n,i'-1)),0)
+#  
+p'=pt1
+# new number is whats left after predation and what could have eaten
+n'=min(f*max(mu^k*delay(n,k-1)-pt1,0),c)
+# set initial delay to 100
+n(0)=100-0*t
+aux ct=c
+par a=.042,f=10,d=10000,nu=.95,mu=.95,k=7
+# note you must set delay initial data to 100
+@ meth=disc,dt=1,total=200,bound=1000000,delay=20
+@ xhi=200,yhi=10000,yp=n,ylo=0
+done

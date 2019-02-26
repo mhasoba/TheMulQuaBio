@@ -1,0 +1,34 @@
+# cobweb.ode
+# way to fool XPP into cobwebbing
+# first I define a function that every other step evaluates
+# the map -- in the alternate steps, it just keeps the same
+# value so that it alternates between horizontal and vertical
+# jumps
+g(x,y)=if(mod(t,2)<.5)then(f(x))else(y)
+# note that 't' is the iteration number 0,1,2,...
+# if t is even evaluate f otherwise keep the old y
+y(t+1)=g(x,y)
+x(t+1)=if(t==0)then(x)else(y)
+# note that x(t+2)=f(x(t)) so every other point is the map!
+f(x)=a*x*(1-x)
+par a=3.95
+# these are just useful for plotting f(x),x
+par xlo=0,xhi=1,nit=25
+# 
+init y=0,x=.25
+# always start y=0
+#
+# here I create scaled x-values to plot f(x)
+xx=xlo+(xhi-xlo)*t/nit
+aux map=f(xx)
+aux st=xx
+# some convenient settings for the graphics
+@ xlo=0,ylo=0,xhi=1.001,yhi=1.001
+@ xp=x,yp=y
+@ nplot=3
+# add the plots y=x and y=f(x)
+@ xp2=st,yp2=st
+@ xp3=st,yp3=map
+# tell xpp that it is discrete and iterate 100 times
+@ meth=discrete,total=25
+done

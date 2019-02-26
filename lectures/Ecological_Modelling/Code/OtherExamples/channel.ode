@@ -1,0 +1,14 @@
+# channel.ode - random channel model using HH alpha and beta
+#
+v' =(I-gl*(v-vl)-gna*z*(v-vna))/c
+par I=0,gl=.1,gna=.001,vna=55,vl=-65,c=1,phi=1
+init v=-65,z=0
+markov z 2
+{0} {al(v)}
+{beta(v)} {0}
+al(v)=phi*.1*(v+40)/(1-exp(-(v+40)/10))
+beta(v)=phi*4*exp(-(v+65)/18)
+aux ina=-gna*z*(v-vna)
+@ total=100,meth=euler
+@ xlo=0,xhi=100,ylo=-66,yhi=-64
+done

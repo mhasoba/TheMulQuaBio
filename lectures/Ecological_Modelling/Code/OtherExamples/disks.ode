@@ -1,0 +1,58 @@
+# elastic scattering of disks
+# we want tofigure out which disk
+# i is the current disk i=0 means no disk
+
+inew=if((i!=1)&
+
+x'=if(p==0)then(if(i)then(x+u*(-u*(x-xx)-v*(y-yy)+sign(u*(x-xx)+v*(y-yy))*sqrt(sqr(rr)*(sqr(u)+sqr(v))-sqr(v*(x-xx)-u*(y-yy))))/(sqr(u)+sqr(v)))else(x+d*u))else(x)
+
+
+y'=if(p==0)then(if(i)then(y+v*(-u*(x-xx)-v*(y-yy)+sign(u*(x-xx)+v*(y-yy))*sqrt(sqr(rr)*(sqr(u)+sqr(v))-sqr(v*(x-xx)-u*(y-yy))))/(sqr(u)+sqr(v)))else(y+d*v))else(y)
+
+
+u'=if(p==1)then(if(i)then(u-2*(u*(x-xx)+v*(y-yy))*(x-xx)/sqr(rr))else(u))else(u))
+
+v'=if(p==1,if(i,v-2*(u*(x-xx)+v*(y-yy))*(y-yy)/sqr(rr),v),v)
+
+
+i'=if(p==2,if(i!=1&&u*(x-x1)+v*(y-y1)<0&&sqr(r1)*(sqr(u)+sqr(v))>=sqr(v*(x-x1)-u*(y-y1)), 1,if(i!=2&&u*(x-x2)+v*(y-y2)<0&&sqr(r2)*(sqr(u)+sqr(v))>=sqr(v*(x-x2)-u*(y-y2)), 2,if(i!=3&&u*(x-x3)+v*(y-y3)<0&&sqr(r3)*(sqr(u)+sqr(v))>=sqr(v*(x-x3)-u*(y-y3)), 3,0))),i)
+
+rr'=if(p==2,if(i!=1&&u*(x-x1)+v*(y-y1)<0&&sqr(r1)*(sqr(u)+sqr(v))>=sqr(v*(x-x1)-u*(y-y1)),r1,if(i!=2&&u*(x-x2)+v*(y-y2)<0&&sqr(r2)*(sqr(u)+sqr(v))>=sqr(v*(x-x2)-u*(y-y2)),r2,if(i!=3&&u*(x-x3)+v*(y-y3)<0&&sqr(r3)*(sqr(u)+sqr(v))>=sqr(v*(x-x3)-u*(y-y3)),r3,0))),rr)
+
+xx'=if(p==2,if(i!=1&&u*(x-x1)+v*(y-y1)<0&&sqr(r1)*(sqr(u)+sqr(v))>=sqr(v*(x-x1)-u*(y-y1)),x1,if(i!=2&&u*(x-x2)+v*(y-y2)<0&&sqr(r2)*(sqr(u)+sqr(v))>=sqr(v*(x-x2)-u*(y-y2)),x2,if(i!=3&&u*(x-x3)+v*(y-y3)<0&&sqr(r3)*(sqr(u)+sqr(v))>=sqr(v*(x-x3)-u*(y-y3)),x3,0))),xx)
+
+yy'=if(p==2,if(i!=1&&u*(x-x1)+v*(y-y1)<0&&sqr(r1)*(sqr(u)+sqr(v))>=sqr(v*(x-x1)-u*(y-y1)),y1,if(i!=2&&u*(x-x2)+v*(y-y2)<0&&sqr(r2)*(sqr(u)+sqr(v))>=sqr(v*(x-x2)-u*(y-y2)),y2,if(i!=3&&u*(x-x3)+v*(y-y3)<0&&sqr(r3)*(sqr(u)+sqr(v))>=sqr(v*(x-x3)-u*(y-y3)),y3,0))),yy)
+
+p'=(p+1)%3
+
+
+par r1=1 x1=-0.721687836487032 y1=1.25 r2=1 x2=-0.721687836487032 y2=-1.25
+par r3=1 x3=1.44337567297406 y3=0 d=10 b1=0.1 b2=0.4
+
+
+
+
+
+
+The disk with radius r and center in x0 will be hit in the
+next iteration if (x0, x, x', v and v' are vectors)
+  (x-x0).v < 0
+and
+  [(x-x0).v]^2 - v^2 (|x-x0|^2 - r^2)>0
+The collision point is then
+                           ____________________________________
+             -(x-x0).v - \/ [(x-x0).v]^2 - v^2 (|x-x0|^2 - r^2)
+  x' = x + v ---------------------------------------------------
+                                   |v|^2
+and, the velocity after the collision is:
+             (x'-x0).v
+  v' = v - 2 --------- (x'-x0) 
+                r^2
+
+
+
+
+
+
+
+

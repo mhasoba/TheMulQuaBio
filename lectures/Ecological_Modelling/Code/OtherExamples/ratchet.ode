@@ -1,0 +1,19 @@
+# a simple thermal ratchet
+wiener w
+par a=.8,sig=.05,alpha=.1,beta=.1
+# piecewise linear potential with slope
+# 1 from 0 to a and slope -a/(1-a) from a to 1
+#  f = -V'
+f(x)=if(x<a)then(-1)else(a/(1-a))
+x'=z*f(mod(x,1))+sig*w
+# z is two states
+markov z 2
+{0} {alpha}
+{beta} {0}
+@ meth=euler,dt=.1,total=2000,njmp=10
+@ xhi=2000,yhi=8,ylo=-8
+done
+
+
+
+

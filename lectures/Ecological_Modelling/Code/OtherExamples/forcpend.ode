@@ -1,0 +1,12 @@
+# parametrically forced pendulum
+# forcpend.ode
+yo(t)=a*sin(w*t)
+yopp(t)=-a*w*w*sin(w*t)
+th'=thp
+thp'=(-f*thp-m*g*sin(th))/(m*l*l)-yopp(t)*sin(th)/l
+par l=2,g=9.8,m=1
+par a=0.3,w=50,f=.25
+init th=2
+@ meth=qualrk
+@ total=100,bound=10000,tol=1e-5,atol=1e-4
+done

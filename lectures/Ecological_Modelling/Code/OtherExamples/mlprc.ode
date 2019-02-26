@@ -1,0 +1,19 @@
+# mlprc.ode
+# morris-lecar PRC; dimensionless
+v'=I+gl*(el-v)+gk*w*(ek-v)+gca*minf(v)*(eca-v)+a*pulse(t-tau)
+w'=(winf(v)-w)*lamw(v)
+tau'=0
+pulse(t)=heav(t)*heav(sigma-t)
+par a=0,I=0.09,phi=.5,t0=10,sigma=2
+par ek=-.7,eca=1,el=-.5
+par gl=.5,gk=2,gca=1
+par v1=-.01,v2=0.15,v3=0.1,v4=0.145
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+lamw(v)= phi*cosh((v-v3)/(2*v4))
+aux ica=gca*minf(v)*(v-eca)
+aux ik=gk*w*(v-ek)
+aux prc=1-t/t0
+@ total=50,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=v,yplot=w
+done

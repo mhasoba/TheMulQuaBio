@@ -1,0 +1,13 @@
+#  phschn.ode
+# a chain of 40 phase oscillators
+# in relative phase coordinates
+table w % 11 -5 5 exp(-abs(t))
+gam(u,v)=gamf(u-v)
+gamf(u)=a0+a1*cos(u)+b1*sin(u)+b2*sin(2*u)
+special r=fconv(zero,40,5,w,theta0,theta0,gam)
+theta[0..39]'=g*(r([j])-r(0))
+par a0=.25,a1=.4,b1=1,b2=-.2,g=1
+@ total=200,dt=.25,meth=cvode
+@ nplot=5,yp=theta5,yp2=theta10,yp3=theta15,yp4=theta20,
+@ xhi=200,ylo=0,yhi=10
+done

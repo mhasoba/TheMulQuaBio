@@ -1,0 +1,53 @@
+# cube.ode
+# newtons method in the complex plane to find cube roots of 1
+# z^3=1
+# x^3-3*xy^2 = 1 , 3x^2y-y^3=0
+# draws fractal basin boundaries
+#
+# tolerances
+par eps=.001
+# discretization of the phase-space
+par dx=0,dy=0
+# the three roots
+par r1=1,s1=0
+par r2=-.5,s2=-.8660254
+par r3=-.5,s3=.8660254
+# the functions
+f=x^3-3*x*y^2-1
+g=3*x^2*y-y^3
+# the derivatives of the functions
+fx=3*(x^2-y^2)
+fy=-6*x*y
+gx=6*x*y  
+gy=3*(x^2-y^2)
+# the Jacobian -- used in the inverse
+det=fx*gy-fy*gx
+# a euclidean distance function
+dd(x,y)=x*x+y*y
+# if close to the root then plot otherwise out of bounds for each root
+aux xp[1..3]=if(dd(x-r[j],y-s[j])<eps)then(x0)else(-100)
+aux yp[1..3]=if(dd(x-r[j],y-s[j])<eps)then(y0)else(-100)
+#
+# iteration
+x'=x-(f*gy-g*fy)/det
+y'=y-(g*fx-f*gx)/det
+# initial data
+x0'=x0
+y0'=y0
+# set initial data as parameters
+glob 0 t {x0=-1.1+dx*2.2;y0=-1.1+dy*2.2;x=-1.1+dx*2.2;y=-1.1+dy*2.2}
+# 
+# plot all three sets of points in lousy colors
+#
+@ meth=discrete,total=20,bound=1000,maxstor=100000,trans=20
+@ xp=xp1,yp=yp1,xp2=xp2,yp2=yp2,xp3=xp3,yp3=yp3,nplot=3,lt=-1
+@ xlo=-1.1,ylo=-1.1,xhi=1.1,yhi=1.1
+done
+
+Do a two-parameter range on this ranging over
+
+0 < dx < 1
+0 < dy < 1
+
+using the array option
+

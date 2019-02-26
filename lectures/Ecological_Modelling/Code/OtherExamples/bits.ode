@@ -1,0 +1,18 @@
+# bits.ode
+# the morse sequence of 0's and 1's 
+# that is the sum mod 2 of the 1's in the binary expansion
+# of the integers
+# look at the power spectrum for z
+s0=0
+x0=y
+%[1..16]
+s[j]=s[j-1]+mod(x[j],2)
+x[j]=flr(x[j-1]/2)
+%
+y'=y+1
+z'=mod(s16,2)
+aux ss=s16
+@ meth=discrete,total=10000,maxstor=80000
+@ bound=100000
+@ xlo=0,xhi=10000,ylo=0,yhi=14,yp=ss
+done

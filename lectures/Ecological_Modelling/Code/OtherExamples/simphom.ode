@@ -1,0 +1,46 @@
+# computing a homoclinic orbit
+# main ODE
+x'=per*y
+y'=per*(x*(1-x)-a*y+s*x*y)
+# auxiliary ODE for fixed point
+x1'=f1
+y1'=f2
+# period
+per'=0
+# free parameter
+s'=0
+# right-hand sides
+f1=y1
+f2=x1*(1-x1)-a*y1+s*x1*y1
+# are set to zero for x1,y1
+b f1
+b f2
+# these are the eigenvalues
+lamp=(-a+sqrt(a*a+4))/2
+lamm=(-a-sqrt(a*a+4))/2
+# project off the fixed point from unstable manifold
+b x1+eps-x
+b y1+eps*lamp-y
+# project onto the stable manifold
+b x1+eps-x'
+b y1+eps*lamm-y'
+# check the errors at either end
+aux bx=x1+eps-x
+aux by0=y1+eps*lamp-y
+aux by1=y1+eps*lamm-y
+par a=0,eps=.1
+init per=8.1,x=.1,y=.1
+@ total=1.01,meth=qualrk,dt=.001
+done
+x=.001
+y=.0017
+per=18.722
+s=-1.15
+a=2.0556
+eps=.001
+
+
+
+
+
+

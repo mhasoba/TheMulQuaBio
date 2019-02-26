@@ -1,0 +1,19 @@
+# sparse.ode
+# a random sparse network with delays
+# each is connected to 10 others
+table con % 1000 0 999 flr(ran(1)*100)
+table w % 1000 0 999 ran(1)
+par cp=1,cm=6,tau=3,r=3,ut=.25
+special k=sparse(100,10,w,con,u0)
+f(u)=1/(1+exp(-r*(u-ut)))
+u[0..99]'=-u[j] + f(cp*k([j])-cm*delay(u[j],tau))
+@ dt=.1,total=100,delay=10
+@ autoeval=0
+done
+
+
+
+
+
+
+

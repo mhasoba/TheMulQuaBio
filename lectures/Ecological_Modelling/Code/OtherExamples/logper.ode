@@ -1,0 +1,20 @@
+# logper.ode
+# finds the periodic points of the logistic map
+# 
+f(x)=a*x*(1-x)
+# recursively define pth iterate
+ff(x,p)=if(p<=0)then(x)else(ff(f(x),p-1))
+# find zeros of g
+g(x)=x-ff(x,p)
+#
+q=g(r)
+# Newtons method with numerical derivative
+r'=r-eps*q/(g(r+eps)-q)
+a'=a
+# if within tol of root, then OK
+aux err=tol-abs(q)
+par p=3,eps=.000001,tol=1e-7
+@ meth=discrete,total=20,maxstor=50000
+@ xp=a,yp=r,xlo=3,xhi=4.0001,ylo=0,yhi=1.00001
+done
+

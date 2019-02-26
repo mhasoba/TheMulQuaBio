@@ -1,0 +1,36 @@
+# discbi.ode
+# discrete bistable system
+# tolerances
+par eps=.001
+par dx=0,dy=0
+# the two roots
+par r1=.15,s1=0
+par r2=-.15,s2=0
+x'=x+y
+y'=a*y+b*x*(c^2-x^2)
+aux xp[1..2]=if(dd(x-r[j],y-s[j])<eps)then(x0)else(-100)
+aux yp[1..2]=if(dd(x-r[j],y-s[j])<eps)then(y0)else(-100)
+#
+par a=.6,b=.3,c=.15
+dd(x,y)=x*x+y*y
+# initial data
+x0'=x0
+y0'=y0
+# set initial data as parameters
+glob 0 t {x0=-1.1+dx*2.2;y0=-1.1+dy*2.2;x=-1.1+dx*2.2;y=-1.1+dy*2.2}
+# 
+# plot all three sets of points in lousy colors
+#
+@ meth=discrete,total=100,bound=1000,maxstor=100000,trans=100
+@ xp=xp1,yp=yp1,xp2=xp2,yp2=yp2,nplot=2,lt=-1
+@ xlo=-1.1,ylo=-1.1,xhi=1.1,yhi=1.1
+done
+
+
+
+
+
+
+
+
+

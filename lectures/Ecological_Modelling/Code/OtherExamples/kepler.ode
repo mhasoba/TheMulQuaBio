@@ -1,0 +1,15 @@
+# Kepler model kepler.ode
+#
+init x1=1.e-4,z=0
+par eps=.1,a=1
+x1' = x1*(1-x1-z*x2)
+x2'= z*(a*x2*(1-x1-x2)+eps*x1)
+# the markov variable and its transition matrix
+markov z 2
+{0} {eps*x1}
+{0} {0}
+@ total=100,xhi=100,ylo=0,yhi=1.2
+@ nplot=2,yp2=x2
+done
+
+

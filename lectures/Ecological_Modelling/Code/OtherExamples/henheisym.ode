@@ -1,0 +1,25 @@
+# a symplectic version of the henon-heiles system
+f(x,y)=-x-2*x*y
+g(x,y)=-y-x^2+y^2
+
+par h=.05
+xh=x+.5*h*xp
+yh=y+.5*h*yp
+xp1=xp+h*f(xh,yh)
+yp1=yp+h*g(xh,yh)
+x'=xh+.5*h*xp1
+y'=yh+.5*h*yp1
+xp'=xp1
+yp'=yp1
+init x=0,y=-.1475,xp=.3101,yp=0
+aux h=.5*(xp*xp+yp*yp)+.5*(x^2+y^2+x^2*y-y^3/3)
+@ meth=discrete,total=2000
+done
+
+The leapfrog integrator:
+
+r(n+1/2) = r(n) + .5 h v(n)
+v(n+1) = v(n) + h F(r(n+1/2))
+r(n+1) = r(n) + .5 h v(n+1)
+
+

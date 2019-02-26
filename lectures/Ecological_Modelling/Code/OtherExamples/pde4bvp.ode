@@ -1,0 +1,17 @@
+# pde4bvp.ode
+#
+# boundary value problem
+# 0 = - (u_xxxx/pi^4+au_xx/pi^2)-u+r tanh(u)
+# u,u_xx = 0 at x=0,1
+u'=up
+up'=upp
+upp'=uppp
+uppp'=pi^4*(r*tanh(u)-u-a*upp/(pi*pi))
+par r=1,a=2
+@ total=1.01,xhi=1,meth=cvode,bound=1000
+@ dsmax=2,parmax=20,autoxmin=0,autoxmax=20,autoymin=-1,autoymax=4
+b u
+b u'
+b upp
+b upp'
+done

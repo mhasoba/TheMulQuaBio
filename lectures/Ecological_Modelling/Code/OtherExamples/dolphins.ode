@@ -1,0 +1,54 @@
+# model for the frogs/dolphins
+# phimax is maximum angle of periodic driver
+# w is frequency, k is magnetic force, mu is friction, a outer radius
+# l is radius of frogs,m is mass
+# x is angle, xp the derivative
+phi=phimax*sin(w*t)
+x0=a*sin(phi)
+y0=-a*cos(phi)
+# forces computed with MAPLE
+t1 = sin(x) 
+t2 = l*t1 
+t3 = -t2-x0 
+t4 = t3*t3 
+t5 = cos(x) 
+t6 = l*t5 
+t7 = t6-y0 
+t8 = t7*t7 
+t10 = (t4+t8)^2
+t19 = t2-x0 
+t20 = t19*t19 
+t21 = -t6-y0 
+t22 = t21*t21  
+t24 = (t20+t22)^2
+t33 = -k/t10*(-2.0*t3*l*t5-2.0*t7*l*t1)-k/t24*(2.0*t19*l*t5+2.0*t21*l*t1)
+# the dynamics
+x'=xp
+xp'=(-mu*xp-t33)/(2*m*l^2)
+# some auxiliary stuff for graphing
+x1=l*sin(x)
+y1=-l*cos(x)
+x2=-x1
+y2=-y1
+par w=1,phimax=1.5,mu=.05,k=.02,l=1,a=1.07,m=1
+init x=1.5,xp=0
+@ total=200,meth=qualrk,tol=1e-6
+@ xhi=200,ylo=-50,yhi=50,bound=10000
+done
+
+# dolphin2.ani
+line .5;.5;.5;0;$RED;4
+line 0;0;1;0;$RED;4
+circle   .5;.5;.4;$BLACK
+fcircle .5+.4*sin(phi);.5-.4*cos(phi);.035;$BLACK
+line .5-.35*sin(x);.5+.35*cos(x);.5+.35*sin(x);.5-.35*cos(x);$GREEN;4
+fcircle .5-.35*sin(x);.5+.35*cos(x);.03;$BLUE
+fcircle .5+.35*sin(x);.5-.35*cos(x);.03;$BLUE
+end
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# coaster2.ode
+# this is a rather simple coaster
+tab xx xcoast.tab
+tab yy ycoast.tab
+# numerically compute x',x'' etc
+xp=(xx(s+h)-xx(s-h))/(2*h)
+yp=(yy(s+h)-yy(s-h))/(2*h)
+xpp=(xx(s+h)-2*xx(s)+xx(s-h))/(h*h)
+ypp=(yy(s+h)-2*yy(s)+yy(s-h))/(h*h)
+#  
+vsq=xp*xp+yp*yp
+aa=(xp*xpp+yp*ypp)/vsq
+# now add a few parameters to scale time and gravity etc
+s'=v
+v'=-r*yp/vsq-q*aa*v*v
+#v'=-yp/r
+par r=175,h=.02,q=.1
+# give it a little push!
+init v=1e-5
+# here is the coaster
+aux x=xx(s)
+aux y=yy(s)
+@ bound=100000,total=40
+@ xp=x,yp=y,xlo=0,ylo=0,xhi=12000,yhi=4500,lt=0
+done

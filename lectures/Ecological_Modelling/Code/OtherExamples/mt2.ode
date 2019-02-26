@@ -1,0 +1,23 @@
+# mt.ode
+# a way to compute the Morse-Thule sequence
+# which is the sum mod 2 of the bits of the natural numbers
+# 
+n'=n
+# here is the iteration
+s'=s+mod(x,2)
+x'=flr(x/2)
+# after 16 iterates, we have get sum for n < 2^16
+# initialize x to n
+global 0 t {x=n}
+# the actual sequence
+aux z=mod(s,2)
+#
+@ meth=discrete,total=16,trans=16
+@ bound=50000,maxstor=50000
+# plot sum as its kinda cool
+@ xp=n,yp=s,xlo=0,xhi=10000,ylo=0,yhi=12
+# set up for range
+@ rangeover=n,rangestep=10000
+@ rangelow=0,rangehigh=10000
+@ rangereset=no
+done

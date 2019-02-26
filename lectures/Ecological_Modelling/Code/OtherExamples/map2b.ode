@@ -1,0 +1,19 @@
+# map2.ode
+# pair of coupled maps
+# and timing info
+x1'=w1
+x2'=w2
+t1f'=0
+t2f'=0
+t1'=0
+t2'=0
+phi'=0
+p(x)=-a*sin(2*pi*x)
+f(x)=mod(x+p(x),1)
+par a=.05
+par w1=1,w2=.9
+global 1 x1-1 {x1=0;x2=f(x2);t1=t-t1f;t1f=t}
+global 1 x2-1 {x2=0;x1=f(x1);phi=t-t1f;t2=t-t2f;t2f=t}
+@ dt=.0101,total=50, bound=10000
+done
+

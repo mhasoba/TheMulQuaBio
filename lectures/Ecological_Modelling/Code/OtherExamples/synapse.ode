@@ -1,0 +1,14 @@
+# synapse.ode
+# a nerve membrane hit with a simple Poisson input
+v' = -v -g*s(t-told)*(v-vsyn)
+tn'=0
+told'=0
+init tn=50.004,told=-100
+s(t)=alpha(max(t,0))
+alpha(t)=t*exp(-a*t)
+global 1 t-tn {told=tn;tn=tn-ln(ran(1))/r}
+par a=.1,g=.1,vsyn=50,r=.005
+aux ss=s(t-told)
+@ bound=1000000,total=1000,njmp=10
+@ xhi=1000
+done

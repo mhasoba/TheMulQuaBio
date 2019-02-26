@@ -1,0 +1,19 @@
+# this plays the combined game with probability 1/2 each
+# Parrondos paradox
+game(p,e)=if(ran(1) < (p-e))then(1)else(-1)
+par eps=.005,p2=.1,p3=.75,m=3,pa=.5,gamma=.5
+pg2=if(mod(ca,m)==0)then(p2)else(p3)
+pg1=pa
+p=if(ran(1)>gamma)then(pg2)else(pg1)
+ca'=ca+game(p,eps)
+aux pc=p
+@ total=100,meth=discrete,dt=1
+done
+
+1-pa+eps>pa-eps  <--  game 1 loses
+(1-p2+eps)*(1-p3+eps)^(m-1)>(p2-eps)*(p3-eps)^(m-1) <-- game 2 loses
+q2=gamma*(pa-eps) + (1-gamma)*(p2-eps)
+q3=gamma*(pa-eps) + (1-gamma)*(p3-eps)
+(1-q2)*(1-q3)^(m-1)<q2*q3^(m-1)   <--- game3 wins!
+
+

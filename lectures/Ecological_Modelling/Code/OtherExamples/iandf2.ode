@@ -1,0 +1,25 @@
+# two integrate and fire models coupled with alpha functions
+#  b^2*t exp(-b*t)
+#  we solve these by solving a 2d ode
+v1' = -v1 + i1 + g*s2
+v2' = -v2 + i2 + g*s1
+s1'=s1p
+s1p'=-2*b*s1p-b*b*s1
+s2'=s2p
+s2p'=-2*b*s2p-b*b*s2
+#
+init v1=.1
+par i1=1.1,i2=1.1,vt=1,g=.2
+par b=5
+global 1 v1-vt {v1=0;s1p=s1p+b*b}
+global 1 v2-vt {v2=0;s2p=s2p+b*b}
+@ dt=.01,total=100,transient=80
+@ xlo=80,xhi=100,ylo=0,nplot=2,yp2=v2
+done
+
+
+
+
+
+
+

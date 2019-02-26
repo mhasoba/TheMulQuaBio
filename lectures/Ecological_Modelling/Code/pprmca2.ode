@@ -1,0 +1,16 @@
+# cts predator prey model 
+# Test problem from the AUTO manual pp.ode
+# Use AUTO with defaults -- just click Run
+p k=2,d=0.42, h=0.1,a=1,b=1,u=1,r1=.05,r2=.05
+lnv1' = r1*(k-exp(lnv1))-a*exp(lnp1)/(1+exp(lnv1)*a*h)
+lnp1' = b*exp(lnv1)/(1+exp(lnv1)*a*h)-u+d*(exp(lnp2-lnp1)-1)
+lnv2' = r2*(k-exp(lnv2))-a*exp(lnp2)/(1+a*h*exp(lnv2))
+lnp2' = b*exp(lnv2)/(1+a*h*exp(lnv2))-u+d*(exp(lnp1-lnp2)-1)
+lnv1(0)=0.
+lnp1(0)=-1
+lnv2(0)=0
+lnp2(0)=-1.24
+@ meth=stiff
+@ xp=lnv1,yp=lnp1,xlo=-1,xhi=1,ylo=-6,yhi=1, total=200
+@ autoxmin=0, autoxmax=40, autoymin=-10,autoymax=4, parmax=40, parmin=0
+d

@@ -1,0 +1,22 @@
+# dae_ex3.ode
+#  a boundary-value DAE model
+u'=up
+up'=v*up+lamu*(u-w)
+# DAE stuff
+0= -k*w/(1+w)+lamv*(u-w)
+solve w=.235
+# some extra stuff
+init u=1,up=-.34
+aux ww=w
+aux z=-k*w/(1+w)+lamv*(u-w)
+par k=1,lamu=.25,lamv=.25,v=.2,u0=1
+bdry u-u0
+bdry up'
+@ total=5.001,jac_eps=1e-5,newt_tol=1e-5,dt=.005
+done
+
+
+
+
+
+

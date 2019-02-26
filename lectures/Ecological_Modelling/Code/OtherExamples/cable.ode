@@ -1,0 +1,23 @@
+# Linear Cable Model cable.ode
+
+# define the 4 parameters, a,b,v0,lambda^2
+par a=1,b=0,v0=1,lam2=1
+# equations
+v'=vx
+vx'=v/lam2
+
+# The initial data
+v(0)=1
+vx(0)=0
+
+# and finally, boundary conditions
+# First we want V(0)-V0=0
+bndry v-v0
+#
+# We also want aV(1)+bVX(1)=0
+bndry a*v'+b*vx'
+@ xlo=0,xhi=1,ylo=0,yhi=1.2,total=1.001
+done
+
+
+

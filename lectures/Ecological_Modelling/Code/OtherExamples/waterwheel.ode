@@ -1,0 +1,30 @@
+# the waterwheel ala Lorenz but discrete
+# there are 10 cups and each leaks
+# here we figure out which cup is under the spigot 
+ff(u)=heav(cos(u)-cos(pi/n))
+# flow into cup i. i=0..9
+flow[0..9]=flow*ff(theta-2*pi*[j]/n)
+# input-output for each cup
+cp[0..9]=flow[j]-mu*c[j]
+# mass of the cups
+m[0..9]=c[j]+mc/n
+# ODE for the cup
+c[0..9]'=cp[j]
+# total change in mass
+mdot=sum(0,9)of(shift(cp0,i'))
+# total mass
+m=sum(0,9)of(shift(c0,i'))+mc
+# the waterwheel equations using 10 pendulums with mass of each cup
+theta'=thetap
+thetap'=(-nu*thetap-l*l*mdot*thetap+l*sum(0,9)of(shift(m0,i')*sin(theta-2*pi*i'/n)))/(m*l*l)
+# main parameter to change is flow - the spigot rate
+par flow=.5,mu=.1,n=10,l=.15,mc=2,nu=.1
+init theta=.05
+### some stuff for animation
+x[0..9]=.3*sin(theta-2*pi*[j]/n)+.4
+y[0..9]=.3*cos(theta-2*pi*[j]/n)+.4
+yc[0..9]=.3*cos(theta-2*pi*[j]/n)+.4+.1*c[j]/2
+@ total=200,dt=.05,meth=cvode,tol=1e-5,atol=1e-4
+@ yp=thetap,xhi=200,ylo=-2.5,yhi=2.5
+
+

@@ -1,0 +1,16 @@
+# cts sir model 
+p b=792,amp=0.08,gamma=50, w=6.28319, mu=0.0125
+beta(t)=b*(1+amp*sin(w*t))
+s' = mu*(1-s)-beta(t)*s*i
+i' = (beta(t)*s-gamma-mu)*i
+
+s(0)=0.02
+i(0)=0.001
+#u(0)=1
+#v(0)=0
+@ xp=s,yp=i,xlo=0,xhi=1,ylo=0,yhi=1
+@ meth=qualrk, dt=.01
+@ autoxmin=10, autoxmax=1250, autoymin=0,autoymax=.001, 
+@ autovar=i, ds=1, dsmax=5, parmax=80, parmin=500
+@ total=50
+d

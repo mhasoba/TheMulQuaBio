@@ -1,0 +1,19 @@
+# the double pendulum
+# doubpend.ode
+#  th1 is the angle between the pivot and the first mass
+#  th2 is the angle between the first mass and the second mass
+#  mu is friction
+# L1-2, m1-2 are the length and mass. 
+th1' = th1p
+th2' = th2p
+th2p' = -mu*th2p+1/(L2*(m1+m2*(sin(th2-th1))^2))*(-(m1+m2)*g*sin(th2)-\
+(m1+m2)*L1*th1p^2*sin(th2-th1)+cos(th2-th1)*((m1+m2)*g*sin(th1)-\
+m2*L2*th2p^2*sin(th2-th1)))
+th1p' = -mu*th1p+1/(L1*(m1+m2*(sin(th2-th1))^2))*(-(m1+m2)*g*sin(th1)+\
+m2*L2*th2p^2*sin(th2-th1)+cos(th2-th1)*(m2*g*sin(th2)+\
+m2*L1*th1p^2*sin(th2-th1)))
+# parameters
+par L1=.1,L2=.1,m1=.028,m2=.04,g=9.8,mu=.01
+init th1=0,th2=0,th2p=31,th1p=0
+@ total=30,dt=.01,meth=qualrk,bound=100000
+done

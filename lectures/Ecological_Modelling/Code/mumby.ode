@@ -1,0 +1,11 @@
+# mumby et al. model for coral reefs
+# describes, c:coral, m:macroalgae, t: algal turf 
+# 
+p g=0.42, r=2, gamma=1, a=.5, d=0.8
+m' = m*(a*C-g/(m+tu(m,c))+gamma*tu(m,c))
+c' = c*(r*tu(m,c)-d-a*m)
+tu(m,c)=1-m-c
+m(0)=.1
+c(0)=.1
+@ xp=m,yp=c,xlo=0,xhi=1,ylo=0,yhi=1
+d

@@ -1,0 +1,29 @@
+# gberg_auto.ode
+# 
+init a=0.00118  ap=1.18  k=0  omeg=-0.19,r=.001 
+# domain is reasonably small sqrt(1/d) 
+par d=0.177  q=0.5, r0=.001  
+# the odes...
+a'=ap
+ap'=a*k*k-ap/r+a/(r*r)-a*(1-a*a)/d
+k'=-k/r-2*k*ap/a-(omeg+q*a*a)/d
+phi'=k
+b phi
+# extras to make it autonomous
+omeg'=0
+r'=1
+# the boundary conditions
+# at r=0
+bndry  a-r*ap
+bndry  k
+bndry r-r0
+# at r=1
+bndry  ap'
+bndry  k'
+# set it up for the user
+@ xhi=1.001,dt=.01,total=1.001,ylo=0
+@ parmax=1,autoxmax=1,autoxmin=0,autoymax=1,autoymin=0
+aux uc=r*cos(phi)
+aux vc=r*sin(phi)
+done
+

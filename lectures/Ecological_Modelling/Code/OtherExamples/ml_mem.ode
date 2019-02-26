@@ -1,0 +1,14 @@
+# ml.ode
+# morris-lecar; dimensionless
+v'=I+gl*(el-v)+gk*w*(ek-v)+gca*minf(v)*(eca-v)
+w'=(winf(v)-w)*lamw(v)
+par I=0,phi=.333
+par ek=-.7,eca=1,el=-.5
+par gl=.5,gk=2,gca=1.33
+par v1=-.01,v2=0.15,v3=0.1,v4=0.145
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+lamw(v)= phi*cosh((v-v3)/(2*v4))
+@ total=20,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=v,yplot=w, maxstor=20000
+done

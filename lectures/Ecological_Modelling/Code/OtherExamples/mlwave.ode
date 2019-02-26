@@ -1,0 +1,18 @@
+# morris-lecar traveling wave
+#   c is close to 1.08121222
+param c=0.5
+params v1=-.01,v2=0.15,v3=0.1,v4=0.145,gca=1.33,phi=.333
+params vk=-.7,vl=-.5,iapp=.04,gk=2.0,gl=.5,om=1
+minf(v)=.5*(1+tanh((v-v1)/v2))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+lamn(v)= phi*cosh((v-v3)/(2*v4))
+f=gl*(vl-v)+gk*w*(vk-v)+gca*minf(v)*(1-v)+iapp
+g=lamn(v)*(ninf(v)-w)
+v'=vp
+vp'=-c*vp-f
+w'=-g/c
+init v=-.4,w=0,vp=0
+@ xp=v,yp=w,xlo=-.5,xhi=.3,ylo=-.1,yhi=.6
+done
+
+

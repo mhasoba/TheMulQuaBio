@@ -1,0 +1,29 @@
+# gillesp_bruss.ode
+# gillespie algorithm for brusselator
+#
+# x1  -> y1 (c1)
+# x2+y1 -> y2+Z (c2)
+# 2 y1 + y2 -> 3 y1 (c3)
+# y1 -> Z2 (c4)
+par c1x1=5000,c2x2=50,c3=.00005,c4=5
+init y1=1000,y2=2000
+#  compute the cumulative reactions
+p1=c1x1
+p2=p1+c2x2*y1
+p3=p2+c3*y1*y2*(y1-1)/2
+p4=p3+c4*y1
+# choose random #
+s2=ran(1)*p4
+z1=(s2<p1)
+z2=(s2<p2)&(s2>=p1)
+z3=(s2<p3)&(s2>=p2)
+z4=s2>p3
+# time for next reaction
+tr'=tr-log(ran(1))/p4
+y1'=max(1,y1+z1-z2+z3-z4)
+y2'=max(1,y2+z2-z3)
+@ bound=100000000,meth=discrete,total=1000000,njmp=1000
+@ xp=y1,yp=y2
+@ xlo=0,ylo=0,xhi=10000,yhi=10000
+done
+

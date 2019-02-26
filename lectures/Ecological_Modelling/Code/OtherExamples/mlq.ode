@@ -1,0 +1,17 @@
+# mlq.ode
+# morris-lecar; dimensionless
+# with I slowly varying
+v'=I+gl*(el-v)+(gk*w+gs)*(ek-v)+gca*minf(v)*(eca-v)
+w'=(winf(v)-w)*lamw(v)
+i'=eps*(v0-v)
+par eps=.02,v0=-.1,phi=1.2
+par gs=0
+par ek=-.7,eca=1,el=-.5
+par gl=.5,gk=2,gca=1
+par v1=-.01,v2=0.15,v3=0.1,v4=0.145
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+lamw(v)= phi*cosh((v-v3)/(2*v4))
+@ total=200,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=i,yplot=v
+done

@@ -1,0 +1,16 @@
+# grey scott equations
+par d=.25,al=.1,a=2,h2=100
+u1'=(d*(u2-u1)+a*u1^2*z1-u1)/al
+z1'=h2*(z2-z1)-u1*u1*z1+1-z1
+%[2..199]
+u[j]'=(d*(u[j+1]-2*u[j]+u[j-1])+a*u[j]*u[j]*z[j]-u[j])/al
+z[j]'=h2*(z[j+1]-2*z[j]+z[j-1])-z[j]*(1+u[j]*u[j])+1
+%
+u200'=(d*(u199-u200)+a*u200^2*z200-u200)/al
+z200'=h2*(z199-z200)-z200*(1+u200*u200)+1
+init z[1..200]=1
+init u1=1.2
+@ meth=cvode,tol=1e-5,atol=1e-4,bandup=2,bandlo=2
+@ dt=.25,total=200,xhi=200,yhi=25,yp=u100
+done
+

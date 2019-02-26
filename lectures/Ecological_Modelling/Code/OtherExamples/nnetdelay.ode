@@ -1,0 +1,11 @@
+# nnetdelay.ode
+# a neural net with delays
+table w % 21 -10 10 exp(-c*abs(t))-a*exp(-b*abs(t))
+par cp=4,cm=4,tau=0,r=3,ut=.25
+par a=.5,b=.1,c=.25
+init u[45..55]=.5
+special k=conv(periodic,101,10,w,u0)
+f(u)=1/(1+exp(-r*(u-ut)))
+u[0..100]'=-u[j] + f(cp*k([j])-cm*delay(u[j],tau))
+@ dt=.05,total=100,delay=10
+done

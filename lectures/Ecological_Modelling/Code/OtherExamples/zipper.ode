@@ -1,0 +1,70 @@
+# this is a model for the zipper carnival ride
+# zipper.ode
+# 
+# table of 16 points on the zipper
+table zx zipx.tab
+table zy zipy.tab
+# here is the track RHSs
+xdot=a*f*y*abs(y)^p
+ydot=-f*x*abs(x)^p
+# second derivatives
+xddot=a*f*(p+1)*ydot*abs(y)^p
+yddot=-f*(p+1)*xdot*abs(x)^p
+# odes for the track
+x'=xdot
+y'=ydot
+# omega and f are chosen so that they agree with the real 
+# machine - one is the angular frequency and the other the track
+# g is gravity
+# mu is friction
+# l (feet) is the effective length of the cars
+# a is aspect ratio for the track so that it is about 8 feet wide
+# s is a scaling factor for the animation
+par p=1,a=.005,l=4.5,f=.6,g=32,mu=.01
+par s=60,q=1
+# the initial condition here scales the length of the track 2*28=56 feet
+init x=0,y=28
+par omega=.8
+# the endpoints of the cars
+#
+# now the angular variable for the zipper
+xbdot=yb*omega
+ybdot=-xb*omega
+xbddot=-omega*omega*xb
+ybddot=-omega*omega*yb
+# simple harmonic oscillator for the rotation of the zipper track
+xb'=xbdot
+yb'=ybdot
+init xb=1
+#
+# now put into a rotating frame
+xc=x*xb-y*yb
+yc=x*yb+y*xb
+xcdot=xdot*xb+x*xbdot-ydot*yb-y*ybdot
+xcddot=xddot*xb+2*xdot*xbdot+x*xbddot-yddot*yb-2*ydot*ybdot-y*ybddot
+ycdot=xdot*yb+x*ybdot+ydot*xb+y*xbdot
+ycddot=xddot*yb+2*xdot*ybdot+x*ybddot+yddot*xb+2*ydot*xbdot+y*xbddot
+# this is car's dynamics
+# now we add the pendulum with friction to the whole thing
+th'=v
+v'=-(g*sin(th)+mu*v+xcddot*cos(th)+ycddot*sin(th))/l
+# position of people in the car
+# scaled a bit for the animation
+xp=xc+q*l*sin(th)
+yp=yc-q*l*cos(th)
+# position of a point on the track
+aux xcar=xc
+aux ycar=yc
+# position of the people in a car
+aux xpeople=xp
+aux ypeople=yp
+# 
+# now for the animation, we will make the track
+xt[0..17]=zx([j])*xb-zy([j])*yb
+yt[0..17]=zx([j])*yb+zy([j])*xb
+@ xp=x,yp=y,xlo=-30,ylo=-30,xhi=30,yhi=30
+@ dt=.05,total=240,bound=10000
+done
+
+
+

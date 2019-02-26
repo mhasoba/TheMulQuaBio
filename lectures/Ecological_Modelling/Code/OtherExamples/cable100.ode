@@ -1,0 +1,21 @@
+# cable equation with different BC's
+# cable100.ode
+#  c0 = a0 u + b0 u_x
+#  cl = al u + bl u_x
+#  h=0.1 L=100 h
+u0=(c0-b0*u1/h)/(a0-b0/h)
+u[1..100]'=(d/(h*h))*(u[j+1]-2*u[j]+u[j-1])-u[j]
+u101=(cl+bl*u100/h)/(al+bl/h)
+par d=1,h=.1,c0=1,a0=1,b0=0,cl=0,al=0,bl=1
+@ total=5.005,dt=.005
+done
+
+
+
+
+
+
+
+
+
+

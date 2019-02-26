@@ -1,0 +1,16 @@
+# gillespie.ode
+# this implements gillespies algorithm
+#  X -> Z  at rate c
+par c=.5,xin=1000
+init X=1000,tr=0
+a0=c*X
+tr'=tr+log(1/ran(1))/a0
+X'=max(X-1,1)
+aux cts=xin*exp(-c*tr)
+@ bound=100000000,meth=discrete,total=1000
+@ xlo=0,xhi=10,ylo=0,yhi=1000,xp=tr,yp=x
+done
+
+
+
+

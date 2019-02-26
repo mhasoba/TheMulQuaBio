@@ -1,0 +1,15 @@
+# rd2.ode
+# generic 2 variable reaction diffusion with Neumann conds
+f(u,v)=u*(1-u)*(u-a)-v
+g(u,v)=(u-d*v-b)*c
+u1'=f(u1,v1)+du*(u2-u1)/h^2
+v1'=g(u1,v1)+dv*(v2-v1)/h^2
+%[2..99]
+u[j]'=f(u[j],v[j])+du*(u[j+1]+u[j-1]-2*u[j])/h^2
+v[j]'=g(u[j],v[j])+dv*(v[j+1]+v[j-1]-2*v[j])/h^2
+%
+u100'=f(u100,v100)+du*(u99-u100)/h^2
+v100'=g(u100,v100)+dv*(v99-v100)/h^2
+par a=.25,d=0,b=.4,c=1,du=.2,dv=1,h=.1
+@ meth=cvode,bandup=2,bandlo=2
+done

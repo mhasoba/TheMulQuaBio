@@ -1,0 +1,18 @@
+# randnet.ode
+table wee % 900 0 899 ran(1)/15
+table wie % 300 0 299 ran(1)/5
+table wei % 300 0 299 ran(1)/15
+table wii % 100 0 99 ran(1)/5
+special see=mmult(30,30,wee,u0)
+special sie=mmult(10,30,wie,v0)
+special sei=mmult(30,10,wei,u0)
+special sii=mmult(10,10,wii,v0)
+fu(x)=1/(1+exp(-(x-uth)))
+fv(x)=1/(1+exp(-(x-vth)))
+u[0..29]'=-u[j]+fu(cee*see([j])-cie*sie([j]))
+v[0..9]'=(-v[j]+fv(cei*sei([j])-cii*sii([j])))/tau
+par cee=10,cie=8,uth=1.55,cei=13,cii=8,vth=2,tau=4
+aux uu=sum(0,29)of(shift(u0,i'))/30
+aux vv=sum(0,9)of(shift(v0,i'))/10
+@ autoeval=0,total=50 
+done

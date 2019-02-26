@@ -1,0 +1,14 @@
+# logliap.ode
+# the liapunov exponent of the logistic map
+f(x)=a*x*(1-x)
+fp(x)=a*(1-2*x)
+init x=.1,a=2,z=0
+x'=f(x)
+a'=a
+z'=z+heav(t-100)*ln(abs(fp(x))+1e-8)
+aux liap=z/max(t-100,1)
+@ xlo=2,xhi=4,ylo=-2,yhi=1
+@ total=2000,trans=2000
+@ meth=disc,bound=1000000
+@ xp=a,yp=liap
+done

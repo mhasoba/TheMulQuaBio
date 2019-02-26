@@ -1,0 +1,13 @@
+# ca100.ode
+# 101 cell CA model
+# here is the function for the new value
+table f ca5.tab 
+# add up with equal weight 5 cells
+table wgt % 5 -2 2 1
+# The convolution is created
+special k=conv(periodic,100,2,wgt,u0)
+# here is the update
+u[0..100]'=f(k([j]))
+# make sure XPP knows it is discrete time
+@ total=200,meth=discrete
+done

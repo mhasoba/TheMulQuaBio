@@ -1,0 +1,12 @@
+# fourth order PDE on interval 0 1
+f(u)=-u+r*tanh(u)
+par dx=.0628,r=1,a=2
+# uxxxx = u(j+2)+u(j-2)+6u(j)-4u(j-1)-4u(j+1)
+# uxx = u(j+1)+u(j-1)-2*u(j)
+u0'=f(u0)-(u2+6*u0-4*u1)/(dx^4)-a*(u1-2*u0)/(dx*dx)
+u1'=f(u1)-(u3+6*u1-4*u0-4*u2)/(dx^4)-a*(u0+u2-2*u1)/(dx*dx)
+u[2..48]'=f(u[j])-(u[j-2]+u[j+2]+6*u[j]-4*(u[j+1]+u[j-1]))/(dx^4)-a*(u[j+1]+u[j-1]-2*u[j])
+u49'=f(u49)-(u47+6*u49-4*u48-4*u50)/(dx^4)-a*(u50+u48-2*u49)/(dx*dx)
+u50'=f(u50)-(u48+6*u50-4*u49)/(dx^4)-a*(u49-2*u50)/(dx*dx)
+@ meth=cvode,bandup=2,bandlo=2,total=30
+done

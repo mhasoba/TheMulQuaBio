@@ -1,0 +1,10 @@
+# tyson.ode
+init u=.0075,v=.48,m=1
+p k1=.015,k4=200,k6=2,a=.0001,b=.005
+u'=  k4*(v-u)*(a+u^2) - k6*u
+v'= k1*m - k6*u
+m'= b*m
+global -1 {u-.2} {m=.5*m}
+@ total=1000,meth=8,dt=.25
+@ xhi=1000,ylo=0,yhi=2,yp=m 
+done

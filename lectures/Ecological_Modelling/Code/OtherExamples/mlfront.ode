@@ -1,0 +1,12 @@
+# morris-lecar front
+param c=0
+params v1=-.01,v2=0.15,gca=1.33
+params vl=-.5,iapp=.04,gl=.5
+minf(v)=.5*(1+tanh((v-v1)/v2))
+f=gl*(vl-v)+gca*minf(v)*(1-v)+iapp
+v'=vp
+vp'=-c*vp-f
+init v=1
+@ xlo=-1,xhi=1,ylo=-1,yhi=1
+@ xp=v,yp=vp
+done

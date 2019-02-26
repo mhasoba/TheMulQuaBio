@@ -1,0 +1,25 @@
+# duffbas.ode
+# a trick to compute the basin boundaries of the duffing equation
+# better be patient it takes awhile
+# here is the ODE
+x'=y
+y'=-.15*y+.5*x*(1-x^2)+f*cos(.8333*t)
+#  dx,dy are the increment sizes, f is the forcing amplitude
+par dx,dy,f=.1
+# here are the initial data evaluated once per cycle
+# initial data lie in the square [-2.4,2.4]x[-1.2,1.2]
+!x0=-2.4+dx*4.8
+!y0=-1.2+dy*2.4
+# save the initial data at different time slices 
+aux xp[1..10]=if((x>0)&(abs(t-2*[j]))<.1)then(x0)else(-100)
+aux yp[1..10]=if((x>0)&(abs(t-2*[j]))<.1)then(y0)else(-100)
+# set initial data with parameter
+glob 0 t {x=x0;y=y0}
+# set some options
+@ total=22
+@ xp=xp5,yp=yp5,xlo=-2.4,ylo=-1.2,xhi=2.4,yhi=1.2,lt=-1
+@ maxstor=500000
+@ trans=1,dt=2,meth=8
+done
+
+use a 2 param range on this with 0< dx, dy < 1

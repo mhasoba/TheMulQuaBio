@@ -1,0 +1,18 @@
+# two wc networks coupled with reciprocal inhibition
+f(u)=1/(1+exp(-u))
+u1'=-u1+f(a*u1-c*u2-g*v1-te+ff)
+v1'=(u1-b*v1)/tau
+u2'=-u2+f(a*u2-c*u1-g*v2-te+ff)
+v2'=(u2-b*v2)/tau
+x'=x*(1-x*x-y*y)-w*y
+y'=y*(1-x*x-y*y)+w*x
+par amp=1,w=.05,thr=.8
+par c=1
+init x=1
+par k=10,xt=.9
+ff=amp/(1+exp(-k*(x-xt)))
+par tau=10,b=.2,a=6.5,g=4,te=.25
+aux stim=ff
+@ total=500,njmp=10
+init u2=.2
+done

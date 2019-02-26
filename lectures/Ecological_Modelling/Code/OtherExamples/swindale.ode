@@ -1,0 +1,8 @@
+# swindale.ode
+table wa % 31 -15 15 exp(-a*t*t)-c*exp(-b*t*t)
+par  mu=.5,nu=1.3
+par a=.1,b=.025,c=.035
+special k=conv(periodic,101,15,wa,n0)
+n[0..100]'=n[j]*(1-n[j])*(mu*k([j])-nu)
+# integrate using n[0..100]=ran(1)
+done

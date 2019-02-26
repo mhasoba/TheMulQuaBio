@@ -1,0 +1,21 @@
+# cts sir model 
+p b=1000,amp=0.08,gamma=50, w=6.2831853071795864769, mu=0.0133333
+beta(u)=b*(1+amp*u)
+s' = mu*(1-s)-beta(u)*s*exp(lnI)
+lnI' = beta(u)*s-gamma-mu
+# the next two odes create a periodiocal solution that we will use 
+# to force the system
+u'=u*(1-u^2-v^2)-w*v
+v'=v*(1-u^2-v^2)+w*u
+#aux li=log10(i)
+s(0)=0.05
+lnI(0)=-6.0
+u(0)=1
+v(0)=0
+@ xp=t,yp=lnI,xlo=0,xhi=100,ylo=-20,yhi=-5
+@ dt=.01
+@ autoxmin=50, autoxmax=2000, autoymin=-20,autoymax=-3, 
+@ autovar=lnI, ds=.1, dsmax=20, parmax=3000, parmin=55
+@ total=200
+# beta 900 gives two cycle. 850 gives 6 cycle
+d

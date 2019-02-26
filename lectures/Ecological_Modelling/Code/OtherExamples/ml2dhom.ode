@@ -1,0 +1,19 @@
+# ml2dhom.ode
+dv/dt = ( I - gca*minf(V)*(V-Vca)-gk*w*(V-VK)-gl*(V-Vl))/c
+dw/dt = phi*(winf(V)-w)/tauw(V)
+v(0)=-41.84
+w(0)=0.002
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+tauw(v)=1/cosh((v-v3)/(2*v4))
+param i=30,vk=-84,vl=-60,vca=120
+param gk=8,gl=2,c=20
+param v1=-1.2,v2=18
+param v3=12,v4=17.4,phi=.23,gca=4
+@ total=150,dt=.25,xlo=-60,xhi=60,ylo=-.125,yhi=.6,xp=v,yp=w
+@ dsmax=2,parmin=-30,parmax=60
+@ autoxmin=-10,autoxmax=60,autoymin=-60,autoymax=40
+done
+
+
+

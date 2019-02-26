@@ -1,0 +1,50 @@
+# persistent sodium current ala Gillespie
+# napgill.ode
+# we use the exponential integration method
+#   c -> o  rate a
+#   o ->c   rate b
+# definition of a,b
+# a=xinf*tau^-1
+# b=tau^-1 -a
+xinf=.5*(1+tanh((v-vxt)/vxs))
+tauxi=phix*cosh((v-vxt)/(2*vxs))
+a=xinf*tauxi
+b=tauxi-a
+# the cumulative probabilities
+p1=a*(xn-o)
+p2=p1+b*o
+# which reaction?
+s2=ran(1)*p2
+z1=(s2<p1)
+# when is the next reaction?
+dt=-log(ran(1))/p2
+# the fraction of open channels
+x=o/xn
+# the total conductance
+gv=gl+gk*w+gna*x
+# the reversal potential
+vrev= (gl*vl+gk*w*vk+gna*x*vna+i)/gv
+# that is,  v' = -gv (v-vrev)
+init v=-78,w=.3
+# here is the exponential method
+v'=vrev+(v-vrev)*exp(-gv*dt)
+w'=winf(v)+(w-winf(v))*exp(-dt/tauw(v))
+# update reaction time
+tr'=tr+dt
+# and the channels
+o' = max(1,o+2*z1-1)
+# parameters
+par xn=100
+par i=0,gk=10,gl=.1,gna=2.5,vk=-85,vl=-70,vna=120
+par vxt=-52,vxs=15,vwt=-65,vws=20,phix=10,phiw=.1
+# functions
+winf(v)=.5*(1+tanh((v-vwt)/vws))
+tauw(v)=1/(phiw*cosh((v-vwt)/(2*vws)))
+# some XPP settings
+@ meth=discrete,total=20000,bound=10000000,njmp=10
+@ xlo=0,xhi=200,xp=tr,yp=v,yhi=20,ylo=-85
+done
+
+
+
+

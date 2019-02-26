@@ -1,0 +1,21 @@
+# ml10.ode
+# morris-lecar; dimensionless
+vtot=.1*sum(0,9)of(shift(v0,i'))
+wtot=.1*sum(0,9)of(shift(w0,i'))
+itot(v,w)=I+gl*(el-v)+gk*w*(ek-v)+gca*minf(v)*(eca-v)
+g(v,w)=(winf(v)-w)*lamw(v)
+v[0..9]'=itot(v[j],w[j])+d*(vtot-v[j])
+w[0..9]'=g(v[j],w[j])
+par d=.05
+par I=.095,phi=1
+par ek=-.7,eca=1,el=-.5
+par gl=.5,gk=2,gca=1
+par va=-.01,vb=0.15,vc=0.1,vd=0.145
+minf(v)=.5*(1+tanh((v-va)/vb))
+winf(v)=.5*(1+tanh((v-vc)/vd))
+lamw(v)= phi*cosh((v-vc)/(2*vd))
+@ total=200,njmp=4
+@ xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xp=v0,yp=w0
+done
+

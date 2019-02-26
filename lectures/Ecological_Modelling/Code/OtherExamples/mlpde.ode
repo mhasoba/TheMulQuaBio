@@ -1,0 +1,22 @@
+# morris-lecar PDE
+par d=.1,h=.1 
+# note that I have to change the names of the parameters
+# so that I can use v1,v2, etc as the voltage grid points
+#
+params va1=-.01,va2=0.15,va3=0.1,va4=0.145,gca=1.33,phi=.333
+params vk=-.7,vl=-.5,iapp=.04,gk=2.0,gl=.5,om=1
+minf(v)=.5*(1+tanh((v-va1)/va2))
+ninf(v)=.5*(1+tanh((v-va3)/va4))
+lamn(v)= phi*cosh((v-va3)/(2*va4))
+f(v,w)=gl*(vl-v)+gk*w*(vk-v)+gca*minf(v)*(1-v)+iapp
+g(v,w)=lamn(v)*(ninf(v)-w)
+v0=v1
+v[1..100]'=f(v[j],w[j])+d*(v[j+1]-2*v[j]+v[j-1])/(h*h)
+v101=v100
+w[1..100]'=g(v[j],w[j])
+init v1=0,v2=0,v3=0,v4=0
+init v[5..100]=-.4
+@ total=50
+done
+
+
