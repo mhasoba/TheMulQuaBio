@@ -1,15 +1,15 @@
 """
-	Code to assess computing practical work for TheMulQuaBio
+	Code to giving automated feedback on computing practical work for TheMulQuaBio
 
 	USAGE 
 	
-	python3 Assess.py StudentsFile RepoPath Week
+	python3 Feedback.py StudentsFile RepoPath Week
 
 	or, if ready to git push: 
 	
-	Assess.py StudentsFile RepoPath Week --gitpush 
+	Feedback.py StudentsFile RepoPath Week --gitpush 
 
-	example: python3 Assess.py ~/Documents/Teaching/IC_CMEE/2018-19/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2018-19/Coursework/StudentRepos Week1
+	example: python3 Feedback.py ~/Documents/Teaching/IC_CMEE/2019-20/Students/Students.csv ~/Documents/Teaching/IC_CMEE/2019-20/Coursework/StudentRepos Week1
 
 	ARGUMENTS: 
 
@@ -17,28 +17,22 @@
 	RepoPath 	  : FULL path to location for students' local git repositories 					(without an ending "/")
 	Week		  : Name of week to assess (Week1, Week2, etc.)
  
-    --gitpull : Optional flag indicating whether to pull students' git 					repositories only without assessment (default is False). 					Only works if the student's repo already exists.
+    --gitpull 		: Optional flag indicating whether to pull students' git 					repositories only without assessment (default is False). 					Only works if the student's repo already exists.
  
-    --gitpush     : Optional flag indicating whether to push the assessment 					to students' git repositories (default is False).
+    --gitpush     	: Optional flag indicating whether to push the feedback log 				file(s) to students' git repositories (default is False).
 
-	--gitpush_fin : Optional flag indicating whether to push the final 							assessment to students' git repositories (default is False) 			    . If used, repo is pulled and contents of assessment 		 				directory pushed, nothing else.
+	--gitpush_fin   : Optional flag indicating whether to push the final 						assessment to students' git repositories (default is False)
+					. If used, repo is pulled and contents of assessment
+					directory pushed, nothing else.
 """
 # TODO: 
 # * Bug: week 1, but also 10 will end up being assessed if it exists - fix
 # * Allow Week to be set to 0 for only git checking out
-# * Call a warning a warning and an error an error!
+# * Call a warning a warning and error an error!
 # * Count up lines of code in each script and report it
 # * Include a weekly list of expected code files to check against?
 # * Include "using repository state at time..."?
-# * Allocate points to each expected code file as weighted percent of 100,
-#   weight determined by number of code lines; Update marking criteria
-#   accordingly
-# * Allocate points to each independent code file as weighted percent of 100,
-#   weight determined by number of code lines; Update marking criteria
-#   accordingly
-# * Total baseline points are weighted average of these two, from
-#   which additional points are deleted for poor project organization, readme,
-#   etc.
+# * Allocate points to each expected and independent code file as weighted 			percent of 100, weight determined by number of code lines; Update marking 		criteria accordingly; Total baseline points are weighted average of these two, from   which additional points are deleted for poor project organization, readme,  etc.
 
 import subprocess, os, csv, argparse, re
 
@@ -139,7 +133,7 @@ for Stdnt in Stdnts:
 			subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
 		continue
 
-	Mrks = 100
+	Points = 100
 	
 	if not os.path.exists(RepoPath): # Clone repo first time if it does not already exist
 		print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
@@ -185,7 +179,7 @@ for Stdnt in Stdnts:
 	print('='*70 + '\n' + 'Starting weekly assessment for '+ Stdnt[Hdrs.index('1st Name')] + ' ' + Stdnt[Hdrs.index('Surname')]+ ', ' + args.Week +'\n' + '='*70 + '\n\n')
 
 	azz.write('Starting weekly assessment for '+ Stdnt[Hdrs.index('1st Name')] + ', ' + args.Week +'\n\n')
-	azz.write('Current Points = ' + str(Mrks) + '\n\n')
+	azz.write('Current Points = ' + str(Points) + '\n\n')
 	azz.write('Note that: \n')
 	azz.write('(1) Major sections begin with a double "====" line \n')
 	azz.write('(2) Subsections begin with a single "====" line \n')
@@ -218,8 +212,8 @@ for Stdnt in Stdnts:
 		azz.write('*'*70 + '\n\n')
 	else:
 		azz.write('.gitignore missing, 1 pt deducted\n\n')
-		Mrks = Mrks - 1
-		azz.write('Current Points = ' + str(Mrks) + '\n\n')
+		Points = Points - 1
+		azz.write('Current Points = ' + str(Points) + '\n\n')
 		
 	readme = 'n'
 	for name in TempFiles:
@@ -235,8 +229,8 @@ for Stdnt in Stdnts:
 			break
 	if readme == 'n':
 		azz.write('README file missing, 1 pt deducted\n\n')
-		Mrks = Mrks - 1
-		azz.write('Current Points = ' + str(Mrks) + '\n\n')
+		Points = Points - 1
+		azz.write('Current Points = ' + str(Points) + '\n\n')
 		
 	azz.write('='*70 + '\n')
 	azz.write('Looking for the weekly directories...' + '\n\n') 
@@ -290,8 +284,8 @@ for Stdnt in Stdnts:
 				break
 		if readme == 'n':
 			azz.write('README file missing, 1 pt deducted\n\n')
-			Mrks = Mrks - 1
-			azz.write('Current Points = ' + str(Mrks) + '\n\n')
+			Points = Points - 1
+			azz.write('Current Points = ' + str(Points) + '\n\n')
 		
 		CodDir = [name for name in TempDirs if 'code' in name.lower()]
 		DatDir = [name for name in TempDirs if 'data' in name.lower()]
@@ -333,9 +327,9 @@ for Stdnt in Stdnts:
 			extras = list(set(files) - set(ScriptNames))
 			extras = [name for name in extras if not (name.lower().endswith(('~', 'pyc')))] #ignore certain extensions
 			azz.write('Found the following extra files: ' + ', '.join(extras) + '\n')		
-			Mrks = Mrks - .5 * len(extras)
+			Points = Points - .5 * len(extras)
 			azz.write('0.5 pt deducted per extra file\n\n')
-			azz.write('Current Points = ' + str(Mrks) + '\n\n')
+			azz.write('Current Points = ' + str(Points) + '\n\n')
 
 		## Now test all valid script files that were found
 		azz.write('='*70 + '\n')
@@ -374,15 +368,15 @@ for Stdnt in Stdnts:
 							if match_1:
 								if len(match_2) < len (match_1)-2:
 									azz.write('Missing docstrings in one more functions!\n')
-									Mrks = Mrks - len(match_1) - len (match_2)*0.5
+									Points = Points - len(match_1) - len (match_2)*0.5
 									azz.write('.5 pt deducted per missing docstring\n\n')
-									azz.write('Current Points = ' + str(Mrks) + '\n\n')
+									azz.write('Current Points = ' + str(Points) + '\n\n')
 								
 					else: 
 						azz.write('Found no doctrings!\n')
-						Mrks = Mrks - 1
+						Points = Points - 1
 						azz.write('1 pt deducted\n\n')
-						azz.write('Current Points = ' + str(Mrks) + '\n\n')
+						azz.write('Current Points = ' + str(Points) + '\n\n')
 				
 				p, output, err,	time = run_popen('python3 ' + os.path.basename(name), timeout)
 			
@@ -413,7 +407,7 @@ for Stdnt in Stdnts:
 				azz.write('Time consumed = ' +"{:.5f}".format(time)+ 's\n\n')
 			else:
 				errors += 1
-				azz.write('\nEncountered error:\n')
+				azz.write('\nEncountered error (or warning):\n')
 				azz.write(err)
 				azz.write('\n')
 			
@@ -428,7 +422,7 @@ for Stdnt in Stdnts:
 	azz.write('='*70 + '\n')
 	azz.write('='*70 + '\n')
 	azz.write('\nFINISHED WEEKLY ASSESSMENT\n\n')
-	azz.write('Current Points for the Week = ' + str(Mrks) + '\n\n')
+	azz.write('Current Points for the Week = ' + str(Points) + '\n\n')
 	azz.write('NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!')
 	
 	azz.close()
