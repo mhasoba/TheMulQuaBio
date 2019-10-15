@@ -1,4 +1,3 @@
-
 library(minpack.lm)
 require(graphics)
 

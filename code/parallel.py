@@ -3,12 +3,10 @@ import scipy.stats as st
 import time
 import numpy
 
-
 def pointless_function(x):
     rv = st.norm.rvs(loc=x, scale=1, size=2e8)
     m = numpy.mean(rv)
     return m
-
 
 if __name__ == "__main__":
     list_of_args = [1, 3, 10]
