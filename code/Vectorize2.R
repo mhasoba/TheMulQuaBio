@@ -1,4 +1,4 @@
-# Runs the stochastic (with gaussian fluctuations) Ricker Eqn .
+# Runs the stochastic Ricker equation with gaussian fluctuations
 
 rm(list=ls())
 
@@ -24,4 +24,3 @@ stochrick<-function(p0=runif(1000,.5,1.5),r=1.2,K=1,sigma=0.2,numyears=100)
 
 # print("Vectorized Stochastic Ricker takes:")
 # print(system.time(res2<-stochrickvect()))
-
