@@ -398,7 +398,7 @@ Multiple ways to do it:
 
 \begin{frame}{Comparing and selecting models}
 
-\begin{itemize}
+\begin{itemize}\itemsep12pt
 	
 	\item It's all about the ``Likelihood'' of a model: \\
 	the set of parameter values of the	model ($\theta$) given outcomes ($x$),
@@ -410,20 +410,51 @@ Multiple ways to do it:
 	\item The easiest thing to do for you is to use information theory
 	(including AIC and BIC) to compare models. 
 
-	\item Both AIC and BIC use the {\it estimated likelihoods of a model}:\\
+	\item Both AIC and BIC use the {\it estimated (log-) likelihood of a model}:\\
 	
-	AIC: $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
+	\begin{itemize}
+		
+		\item AIC: $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
 
-	Small sample AIC (AICc): $-2 \ln[\mathcal{L}(\theta |x)] + 2p$\\
+		\item BIC (Schwartz criterion): $-2 ln[\mathcal{L}(\theta |x) ] + p \ln(n)$
+		
+		($n = $ sample size, $p$ = number of free parameters)	
+	\end{itemize}
 	
-	BIC (Schwartz criterion): $-2 ln[\mathcal{L}(\theta |x) ] + p \ln(n)$
 	
-		(where $n = $ sample size, $p$ number of free parameters)
 	\item The lower the AIC or BIC, the better. 
 
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{AIC and BIC}
+
+	\begin{itemize}\itemsep6pt
+		
+		\item In models fitted with least squares and normally-distributed errors,
+		
+		 $\ln[\mathcal{L}(\theta |x)] = -\frac{n}{2}\ln\left(\frac{RSS}{n}\right)$
+
+		\item Thus 
+		\begin{align*}
+			\text{AIC} &= -2 \ln[\mathcal{L}(\theta |x)] + 2p \\
+			&= n + 2 + n \ln\left(\frac{2 \pi}{n}\right) + n \ln(\text{RSS}) + 2 p			
+		\end{align*}
+		
+		\item And 
+		\begin{align*}
+			\text{BIC} &= -2 ln[\mathcal{L}(\theta |x) ] + p \ln(n) \\ 
+			&= n + 2 + n \ln\left(\frac{2 \pi}{n}\right) + n \ln(\text{RSS}) + p \ln(n)
+		\end{align*}
+
+		\item  \it The small sample AIC can also be calculated similarly (see Johnson \& Omland 2004)
+
+	\end{itemize}
+	
+	\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -436,11 +467,10 @@ This is how you calculate AIC and BIC (using python syntax):
 \small
 	\item residuals = Observations - Predictions
 	\item rss = sum(residuals ** 2) 
-	\item Then, AIC is n * log((2 * pi) / n) + n + 2 + n * log(rss) + 2 * p \\
+	\item Then, AIC = n + 2 + n * log((2 * pi) / n) + n * log(rss) + 2 * p \\
 		({\it note n and p!})
-	\item And BIC is n + n * log(2 * pi) + n * log(rss / n) + (log(n)) * (p + 1)
+	\item And BIC = n + 2 + n * log((2 * pi) / n) + n * log(rss) + (log(n)) * (p + 1)
 
-	\item That is, 	$ \mathcal{L}(\theta |x) = -\frac{n}{2/ln(RSS/n)}$
 	\item For both AIC and BIC, If model {\bf A} has AIC lower by 2-3 or 
 	more than model {\bf B}, it's better --- Differences of less than 2-3 
 	don't really matter
