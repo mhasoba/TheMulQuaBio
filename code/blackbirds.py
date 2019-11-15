@@ -20,4 +20,4 @@ text = text.decode('ascii', 'ignore') # Now decode back to string
 
 # Hint: you may want to use re.findall(my_reg, text)... Keep in mind that there
 # are multiple ways to skin this cat! Your solution could involve multiple
-# regular expression calls (easier!), or a single one (harder!)
+# regular expression calls (slightly easier!), or a single one (slightly harder!)

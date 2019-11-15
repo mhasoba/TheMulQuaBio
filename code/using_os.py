@@ -1,6 +1,6 @@
 """ This is blah blah"""
 
-# Use the subprocess.os module to get a list of files and  directories 
+# Use the subprocess.os module to get a list of files and directories 
 # in your ubuntu home directory 
 
 # Hint: look in subprocess.os and/or subprocess.os.path and/or 
