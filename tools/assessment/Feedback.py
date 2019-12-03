@@ -358,26 +358,34 @@ for Stdnt in Stdnts:
 			if os.path.basename(name).lower().endswith('.sh'):
 				p, output, err, time = run_popen('bash ' + os.path.basename(name), timeout)
 			elif os.path.basename(name).lower().endswith('.py'):
-				azz.write(os.path.basename(name) + ' is a Python script file;\n checking for docstrings...\n\n')
+				azz.write(os.path.basename(name) + ' is a Python script file;\n\nchecking for docstrings...\n\n')
 				with open(os.path.basename(name)) as f:
-					match_2 = re.findall(r'""".+',f.read(),re.MULTILINE)
-					if match_2:
-						azz.write('Found one or more doctrings!\n\n')
-						with open(os.path.basename(name)) as g:
-							match_1 = re.findall(r'def\s.+:',g.read(),re.MULTILINE)
-							if match_1:
-								if len(match_2) < len (match_1)-2:
-									azz.write('Missing docstrings in one more functions!\n')
-									Points = Points - len(match_1) - len (match_2)*0.5
-									azz.write('.5 pt deducted per missing docstring\n\n')
-									azz.write('Current Points = ' + str(Points) + '\n\n')
-								
-					else: 
-						azz.write('Found no doctrings!\n')
-						Points = Points - 1
-						azz.write('1 pt deducted\n\n')
-						azz.write('Current Points = ' + str(Points) + '\n\n')
+					funcs = re.findall(r'def\s.+:',f.read(),re.MULTILINE)
+				with open(os.path.basename(name)) as f:
+					dstrngs = re.findall(r'"""[\w\W]*?"""',f.read(),re.MULTILINE)
+					
+					if len(funcs)>0 and len(dstrngs)>0:
+						azz.write('Found one or more docstrings and functions\n\n')
+						if len(dstrngs) < len(funcs) + 1:
+							azz.write('Missing docstring, either in one or functions and/or at the script level\n')
+							Points = Points - (len(funcs) + 1 - len(dstrngs)) * 0.5
+							azz.write('\n')
+					elif len(funcs)>0 and len(dstrngs)==0:
+						azz.write('Found one or more functions, but completely missing docstrings\n')
+						Points = Points - 2 - len(funcs)*0.5 
+						azz.write('2 pts deducted for missing docstring for script, and .5 pt deducted per missing docstring for function\n\n')
+					elif len(funcs)==0 and len(dstrngs)==1:
+						azz.write('Found no functions, but one docstring for the script, good\n\n')
+					elif len(funcs)==0 and len(dstrngs)>2:
+						import ipdb; ipdb.set_trace()
+						azz.write('Found too many docstrings.  Check your script.\n\n')
+					else:
+						azz.write('No functions, but no script-level docstring either\n')
+						Points = Points - 2
+						azz.write('2 pts deducted\n\n')
 				
+				azz.write('Current Points = ' + str(Points) + '\n\n')
+
 				p, output, err,	time = run_popen('python3 ' + os.path.basename(name), timeout)
 			
 			elif os.path.basename(name).lower().endswith('.r'):
