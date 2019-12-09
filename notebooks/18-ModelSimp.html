@@ -11816,12 +11816,12 @@ model that says that none of your variables are important. Hopefully, there is a
 <p><a id="fig:minmodflow"></a></p>
 <figure>
     <img src="./graphics/minmodflow.png" alt="minmodflow" style="width:80%">
-</figure><h2 id="Chapter-aims">Chapter aims<a class="anchor-link" href="#Chapter-aims">&#182;</a></h2><p>The main aim of this chapter<a href="#fn1">$^{[1]}$</a> is to learn learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
+</figure><h2 id="Chapter-aims">Chapter aims<a class="anchor-link" href="#Chapter-aims">&#182;</a></h2><p>The main aim of this chapter<a href="#fn1">$^{[1]}$</a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
 <h2 id="The-process-of-model-simplification">The process of model simplification<a class="anchor-link" href="#The-process-of-model-simplification">&#182;</a></h2><p>Model simplification is an iterative process. The flow diagram below shows how it works: at each stage you try and find an acceptable simplification. If successful, then you start again with the new simpler model and try and find a way to simplify this, until eventually, you can't find anything more to remove.</p>
 <p><a id="fig:maxmodflow"></a></p>
 <figure>
-    <img src="./graphics/maxmodflow.png" alt="maxmodflow" style="width:80%">
-</figure><p>As always, we can use an $F$-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the $F$-test used to compare to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we've removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
+    <img src="./graphics/maxmodflow.png" alt="maxmodflow" style="width:70%">
+</figure><p>As always, we can use an $F$-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the $F$-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we've removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
 <h1 id="An-example">An example<a class="anchor-link" href="#An-example">&#182;</a></h1><p>We'll be using the mammal dataset for this practical, so once again:</p>
 <p>$\star$ Make sure you have changed the working directory to your stats module <code>code</code> folder.</p>
 <p>$\star$  Create a new blank script called <code>MyModelSimp.R</code>.</p>
@@ -12052,8 +12052,8 @@ which suggests that the slope of log C value with body mass differs between grou
 <p>$\star$ Run this model in your script.</p>
 <p>$\star$ Look at the output of <code>anova(model)</code> and <code>summary(model)</code>.</p>
 <p>$\star$ Generate and inspect the model diagnostic plots.</p>
-<h1 id="Model-simplification">Model simplification<a class="anchor-link" href="#Model-simplification">&#182;</a></h1><p>Now let's simplify the model we fitted above. Model simplification is not a straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
-<p>But how much is "tiny amount"? This is what we will learn now by using the $F$-test.   Again, remember: significance of the $F$-test used to compare to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we've removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
+<h1 id="Model-simplification">Model simplification<a class="anchor-link" href="#Model-simplification">&#182;</a></h1><p>Now let's simplify the model we fitted above. Model simplification is not as straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
+<p>But how much is "tiny amount"? This is what we will learn now by using the $F$-test.   Again, remember: significance of the $F$-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we've removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
 <p>The first question is: <em>what terms can you remove from a model</em>? Obviously, you only want to remove non-significant terms, but there is another rule – you cannot remove a main effect or an interaction while those main effects or interactions are present in a more complex interaction. For example, in the model <code>y ~ a + b + c + a:b + a:c + b:c</code>, you cannot drop <code>c</code> without dropping both <code>a:c</code> and <code>b:c</code>.</p>
 <p>The R function <code>drop.scope</code> tells you what you can drop from a model. Some examples:</p>
 
@@ -12276,7 +12276,7 @@ update<span class="p">(</span>f<span class="p">,</span> g <span class="o">~</spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now use use anova to compare the two models:</p>
+<p>And now use ANOVA to compare the two models:</p>
 
 </div>
 </div>
@@ -12423,7 +12423,7 @@ update<span class="p">(</span>f<span class="p">,</span> g <span class="o">~</spa
 <p>$\star$ Add this first simplification to your script and re-run it.</p>
 <p>$\star$  Look at the output above and decide what is the next possible term to delete</p>
 <p>$\star$ Using the code above as a model, create <code>model3</code> as the next simplification. (remember to use <code>model2</code> in your <code>update</code> call and not <code>model</code>).</p>
-<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Now for a more difficult exercise:</p>
+<h2 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h2><p>Now for a more difficult exercise:</p>
 <p>$\star$ Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code>anova(model, modelN)</code> should be non-significant (where $N$ is the current step).</p>
 <p>It can be important to consider both <code>anova</code> and <code>summary</code> tables. It can be worth trying to remove things that look significant in one table but not the other — some terms can explain significant variation on the <code>anova</code> table but the coefficients are not significant.</p>
 <p>Remember to remove <em>terms</em>: with categorical variables, several coefficients in the <code>summary</code> table may come from one term in the model and have to be removed together.</p>

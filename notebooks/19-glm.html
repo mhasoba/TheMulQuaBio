@@ -12284,7 +12284,7 @@ QBAAFEAQABRAEAAUQBAAFEAQABRAEAAUQBAAFPw/VBRXHFQt2t4AAAAASUVORK5CYII="
 <li>The right plot is the binomial distribution that you will encounter more often, which is appropriate for modeling the number of successes in a sample of a given size. In the above code, <code>size</code> = 100, with 1000 repetitions of this "experiment"). Thus in the right plot, the distribution will on average have a mean value of 50 ($0.5\times100$ trials) (recall the <a href="12-ExpDesign.ipynb#Data-types-and-distributions">Central Limit Theorem</a>).</li>
 </ul>
 </li>
-<li>Thus, the binomial distribution family is appropriate for binomial <a href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>, which is a GLM analysis where you a sample of binary (yes/no, 0/1, etc) outcomes is fitted as a function of one or more continuous or categorical predictors.</li>
+<li>Thus, the binomial distribution family is appropriate for binomial <a href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>, which is a GLM analysis where your sample of binary (yes/no, 0/1, etc) outcomes is fitted as a function of one or more continuous or categorical predictors.</li>
 </ul>
 <p>$\star$ Play with the above code and generate variants of binomial-distributed data distributions. They will all be bell-shaped, but can take different mean and spread values.</p>
 
@@ -12295,7 +12295,7 @@ QBAAFEAQABRAEAAUQBAAFEAQABRAEAAUQBAAFPw/VBRXHFQt2t4AAAAASUVORK5CYII="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Gamma-distribution">The Gamma distribution<a class="anchor-link" href="#The-Gamma-distribution">&#182;</a></h2><p>The Gamma family is suitable for data that are continuous and can only take values greater than zero (positive values). Another key feature of this distribution family is that the ratio of its variance and mean is constant, so it is appropriate to model data where increasing a mean value also increases the variance as a fixed (constant) factor.  Because of this property, the Gamma family is often used to fit a GLM to response variables that are times, such as waiting time, time between failure, or inverse of the rate of an any  event, such as an accident.</p>
+<h2 id="The-Gamma-distribution">The Gamma distribution<a class="anchor-link" href="#The-Gamma-distribution">&#182;</a></h2><p>The Gamma family is suitable for data that are continuous and can only take values greater than zero (positive values). Another key feature of this distribution family is that the ratio of its variance and mean is constant, so it is appropriate to model data where increasing a mean value also increases the variance as a fixed (constant) factor.  Because of this property, the Gamma family is often used to fit a GLM to response variables that are times, such as waiting time, time between failure, or inverse of the rate of any event, such as an accident.</p>
 <p>You can generate  Gamma-distributed "data" by using the function <code>rgamma(n, shape, rate)</code> in R:</p>
 
 </div>
@@ -12519,8 +12519,8 @@ EAQAARAEAAEQBAABEAQAAf8PIfujwSsdEOIAAAAASUVORK5CYII="
 <li>This distribution can be right-skewed or bell-shaped, depending on choice of the <code>shape</code> parameter.</li>
 </ul>
 <p>$\star$ Play with the above code and generate variants in the gamma-distributed data family.</p>
-<h2 id="Other-distributions">Other distributions<a class="anchor-link" href="#Other-distributions">&#182;</a></h2><p>There are also the The Quasi-binomial and Quasi-poisson families within R's <code>glm</code> procedure, which differ from the Binomial and Poisson families in that the dispersion parameter (variance to mean ratio) is not fixed at one, so that over-dispersion can be modeled (you will see an example of this below).</p>
-<p>Thus, the first and key step while using GLMs is to determine what type of distribution bet describes your response variable. We will now try put this and subsequent steps of fitting GLMs.</p>
+<h2 id="Other-distributions">Other distributions<a class="anchor-link" href="#Other-distributions">&#182;</a></h2><p>There are also the Quasi-binomial and Quasi-poisson families within R's <code>glm</code> procedure, which differ from the Binomial and Poisson families in that the dispersion parameter (variance to mean ratio) is not fixed at one, so that over-dispersion can be modeled (you will see an example of this below).</p>
+<p>Thus, the first and key step while using GLMs is to determine what type of distribution best describes your response variable. We will now try put this and subsequent steps of fitting GLMs.</p>
 
 </div>
 </div>
@@ -12969,7 +12969,7 @@ iAUQYgGEWAAhFkCIBRBiAYRYACHW/wEm/75ToE1InwAAAABJRU5ErkJggg=="
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There is indeed no variation at all in colony count for histidine and streptomycine — colonies never grow in these treatments. We don't really need statistics for this observation and, in fact, variation is needed for statistics to work. So, for the rest of this analysis, we will reduce the dataset to the control and nitroguanisine treatments.</p>
 <p>$\star$ Update your script by including the code for these plots.</p>
-<p>We'll use a new piece of code here to get the right subset. <code>var %in% c('a','b','c')</code> finds the all entries in <code>var</code> whose values are equal to <code>'a'</code>, <code>'b'</code> OR <code>'c'</code>.</p>
+<p>We'll use a new piece of code here to get the right subset. <code>var %in% c('a','b','c')</code> finds all the entries in <code>var</code> whose values are equal to <code>'a'</code>, <code>'b'</code> OR <code>'c'</code>.</p>
 <p>This is new syntax, so let's make sure we understand it. For example, try the following:</p>
 
 </div>
@@ -13828,7 +13828,7 @@ IMQCCLEAQiyAEAsgxAIIsQBCrP8Dy7DPi+DO+/EAAAAASUVORK5CYII="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Lets have a go at fitting an ordinary Linea model.</p>
+<p>Let's have a go at fitting an ordinary Linear model.</p>
 <h2 id="A-linear-model">A linear model<a class="anchor-link" href="#A-linear-model">&#182;</a></h2><p>We'll fit a model of colony count as the interaction between strain and treatment and then look at the diagnostic plots. We'd do this anyway, but we're already suspicious about the variance.</p>
 
 </div>
@@ -15136,7 +15136,7 @@ to be trusted.</p>
 <h1 id="Fitting-a-GLM">Fitting a GLM<a class="anchor-link" href="#Fitting-a-GLM">&#182;</a></h1><p>In the linear models lecture, we looked at the expectation of <em>constant normal variance</em> in linear models. Whatever the combination of explanatory variables for a particular prediction, the residuals around that prediction have similar variance and are roughly normally distributed. The panel on the left shows this basic idea.</p>
 <p><a id="fig:GLMexample"></a></p>
 <figure>
-    <img src="./graphics/GLMexample.svg" alt="GLMexample" style="width:80%">
+    <img src="./graphics/GLMexample.svg" alt="GLMexample" style="width:70%">
     <small> 
         <center>
             <figcaption> 
@@ -16594,7 +16594,7 @@ Number of Fisher Scoring iterations: 7
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is pretty similar to the previous table but there two differences. First, the dispersion parameter line has changed. Second, all the $p$ values have got less significant – this is the effect of controlling for the overdispersion.</p>
+<p>This is pretty similar to the previous table but there are two differences. First, the dispersion parameter line has changed. Second, all the $p$ values have got less significant – this is the effect of controlling for the overdispersion.</p>
 <p>Let's look at the model diagnostic plots next:</p>
 
 </div>
@@ -18125,7 +18125,8 @@ Halo 421 712 881 899 TA102
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So, lawns and halos are never recorded from nitroguanisine or the control. They're nearly always found with histidine and different strains have different response to streptomysin. Again, treatment and strain interact. Although you can use a $\chi^2$ test with two-dimensional contingency tables to look for independence between factors, you can't with a three-way table without using more specialized tests. We will not go any further into this, but be aware that such gnarly statistical challenges may arise at times!</p>
+<p>So, lawns and halos are never recorded from nitroguanisine or the control. They're nearly always found with histidine and different strains have different response to streptomysin. Again, treatment and strain interact. Although you can use a $\chi^2$ test with two-dimensional contingency tables to look for independence between factors, you can't with a three-way table without using more specialized tests.</p>
+<p>We will not go any further into this, but be aware that such gnarly statistical challenges may arise at times!</p>
 <hr>
 <p><a id="fn1"></a>
 [1]: Here you will work with the script file <code>glm.R</code></p>

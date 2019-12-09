@@ -11773,7 +11773,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>repr<span class="p">)</span> <span class="p">;</span> <span class="kp">options</span><span class="p">(</span>repr.plot.res <span class="o">=</span> <span class="m">100</span><span class="p">,</span> repr.plot.width<span class="o">=</span><span class="m">4</span><span class="p">,</span> repr.plot.height<span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="c1"># Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise</span>
@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1>Experimental design and Data exploration <span class="tocSkip">`</h1>
+<h1>Experimental design and Data exploration <span class="tocSkip"></h1>
 
 </div>
 </div>
@@ -11816,9 +11816,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>In this chapter we you learn how to use R to explore your data and determine appropriate statistical analyses.</p>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
 <p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
-<p>(a) Your experiments or observations may not go as planned (do the ever?), and</p>
+<p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
 <p>(b) You might have somebody else's data to analyse (very common in this era of "Big Data").</p>
 <p>By the time you have worked through this chapter, you should be able to:</p>
 <ul>
@@ -11830,7 +11830,7 @@ div#notebook {
 </li>
 </ul>
 <p>We are going to start off with the simplest of scenarios for statistical testing — that you want to determine whether a sample, or a pair of samples meet some expectation (hypothesis) or not.</p>
-<p>First, some let's revisit some key concepts and terminology. Please make sure you have watched <a href="">this video</a> first.</p>
+<p>First, some let's revisit some key concepts and terminology.</p>
 <h2 id="Some-statistical-parlance">Some statistical parlance<a class="anchor-link" href="#Some-statistical-parlance">&#182;</a></h2><p>The following terms are important for you to get familiar with:</p>
 <ul>
 <li><strong>(Statistical) Population</strong>: A <em>complete set</em> of items that share at least one <em>attribute</em> of interest. This attribute of interest is the target of your statistical analysis. For example, if we are interested in studying the weight of year-old cod in the Oceans, the population consists of <em>all</em> year-old cod, but more specifically, the weight measurements of all the individuals of the cod population is what we want to analyse.</li>
@@ -11847,7 +11847,7 @@ div#notebook {
     </small>
 </figure><hr>
 <ul>
-<li><strong>(Statistical) Distribution</strong>: A mathematical description (expressed as a mathematical equation) of the properties of a population of interest. Theoreticians have come up with a bunch of distributions (e.g., Gaussian or Normal, Poisson, Binomial, etc.) that are appropriate for different kinds of data. Figuring out which distribution best describes a population of interest is one of the first steps in a statistical analysis. The primary goal of experimental design is to collecting and measuring sufficient individuals of a population to adequately characterize the statistical properties of an attribute (e.g., body weight of yearling cod) of interest  (that is, the <em>statistical distribution</em> that best characterizes the attribute). </li>
+<li><strong>(Statistical) Distribution</strong>: A mathematical description (expressed as a mathematical equation) of the properties of a population of interest. Theoreticians have come up with a bunch of distributions (e.g., Gaussian or Normal, Poisson, Binomial, etc.) that are appropriate for different kinds of data. Figuring out which distribution best describes a population of interest is one of the first steps in a statistical analysis. The primary goal of experimental design is to collect and measure sufficient individuals of a population to adequately characterize the statistical properties of an attribute (e.g., body weight of yearling cod) of interest. That is, the <em>statistical distribution</em> that best characterizes the attribute. </li>
 </ul>
 <ul>
 <li><strong>(Data or Population) Sample</strong>: A data <em>sample</em> is a set of measurements of the attribute of interest collected from a  (statistical) <em>population</em> (all the individuals of interest) by a defined procedure (<em>sampling methodology</em>). In the cod example above, this could be the weight of every individual of a <em>subset</em> (the <em>sample</em>) of the year-old cod population. This could be from a particular location, such as the Atlantic ocean.</li>
@@ -11876,7 +11876,7 @@ div#notebook {
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/Median"><strong>Median</strong></a>: The above two statistics (mean and sd) are particularly meaningful when the sample and population have a symmetric distribution (e.g., normal or gaussian). When the distribution is not symmetric (that is, it is <a href="https://en.wikipedia.org/wiki/Skewness"><em>skewed</em></a>), the <em>median</em>  is a better measure of central tendency. This is the middle value in the ordered set of data. That is, exactly 50% of the data lie below and 50% lie above the median.</p>
 </li>
-<li><p>Other descriptive statistics you should keep in mind are the <a href="https://en.wikipedia.org/wiki/Range_(statistics">range</a>) (difference between the largest and smallest values), and the <a href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals $[{1\over4}, {1\over 2},{3\over 4}, 1]$ or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p>
+<li><p>Other descriptive statistics you should keep in mind is the <a href="https://en.wikipedia.org/wiki/Range_(statistics">range</a>) (difference between the largest and smallest values), and the <a href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals $[{1\over4}, {1\over 2},{3\over 4}, 1]$ or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p>
 </li>
 </ul>
 <h2 id="Descriptive-statistics-in-R">Descriptive statistics in R<a class="anchor-link" href="#Descriptive-statistics-in-R">&#182;</a></h2><p>Here are the R commands for the key descriptive statistics:</p>
@@ -11952,7 +11952,7 @@ div#notebook {
 <li>Ground-cover of grass in a quadrat</li>
 <li>Winning side in chess</li>
 </ul>
-<h2 id="Sampling-from-distributions-in-R">Sampling from distributions in R<a class="anchor-link" href="#Sampling-from-distributions-in-R">&#182;</a></h2><p>You can generate samples form many ststistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling "experiment" . In particular, the following R commands are important:</p>
+<h2 id="Sampling-from-distributions-in-R">Sampling from distributions in R<a class="anchor-link" href="#Sampling-from-distributions-in-R">&#182;</a></h2><p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling "experiment" . In particular, the following R commands are important:</p>
 <table>
 <thead><tr>
 <th style="text-align:left">Command</th>
@@ -12805,8 +12805,7 @@ EEKMgQ0LIcQY2LAQQoyBDQshxBjYsBBCjPH/oL+ln0N+fnsAAAAASUVORK5CYII="
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rule 2 above states that if I was to repeat even $n = 5$ sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
 <p>If you give due regard to the two rules of experimental design above, and consider the type of distribution your population of interest follows, you will have taken some basic, important steps towards designing an effective study.</p>
-<p>A more rigorous method is to design experiments is to perform a <a href="https://en.wikipedia.org/wiki/Power_(statistics">power analysis</a>): 
-determining the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size . Covering this is outside the scope of the current course, but you might want to have a look at <a href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
+<p>A more rigorous method for designing experiments is to perform a <a href="https://en.wikipedia.org/wiki/Power_(statistics">power analysis</a>). Power analyses allow you to estimate the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size. Covering this is outside the scope of the current course, but you might want to have a look at <a href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
 <p>OK, so you have performed your experiments or field sampling, or some data have fallen into your lap. Let's move on to data exploration.</p>
 
 </div>
@@ -12819,7 +12818,7 @@ determining the minimum sample size required to be able to detect (while minimiz
 <h1 id="Data-exploration">Data exploration<a class="anchor-link" href="#Data-exploration">&#182;</a></h1><h2 id="Some-general-tips">Some general tips<a class="anchor-link" href="#Some-general-tips">&#182;</a></h2><p>Statistics is a bit of an art.</p>
 <p>That is why <em>a priori</em> visualization is important, and directly cutting to the (statistical) chase can often leave one floundering with confusing coefficient estimates and model fits (or over-fits) and overall uncertainty about whether you have picked the right statistical test.</p>
 <ul>
-<li><p>So no matter what, always first look at the distribution of the response (the "raw data"). If you see multi-modality (multiple peaks), it might asign that some process or effect is generating it. So, in the dragonfly-damselfly example, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies $\mu_A$ and $\mu_B$).</p>
+<li><p>So no matter what, always first look at the distribution of the response (the "raw data"). If you see multi-modality (multiple peaks), it might mean that some process or effect is generating it. So, in the dragonfly-damselfly example below, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies $\mu_A$ and $\mu_B$).</p>
 </li>
 <li><p>If it is a regression-type problem, look at the marginal distributions (distributions of the x and y variables) - similar insights can be gained.</p>
 </li>
@@ -12964,7 +12963,7 @@ determining the minimum sample size required to be able to detect (while minimiz
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Have a good look at the data. There are three factors (categorical variables): Suborder, splitting the species into dragonflies (Anisoptera) and damselflies (Zygoptera); Family, splitting the species further into 9 taxonomic families; and Species, giving the latin
 binomial for each species in the table. The remaining columns are measurements of genome size (in picograms) and measurements of body size and morphology (in grams, mm and mm$^2$). There are two columns ending with an N that show the sample size from which the observations for each species are taken and a column ending SE showing standard errors.</p>
-<p>One thing you should see in the output from <code>head</code> or <code>str</code> is that there are some observations marked as <code>NA</code> – this is the way R shows <em>missing data</em>. It is important to check how much missing data there is an dataset, so we'll use another function that includes this information. Many R functions refuse to use variables containing missing data — this is just R being careful and you can add <code>na.rm=TRUE</code> into most functions to avoid this problem.</p>
+<p>One thing you should see in the output from <code>head</code> or <code>str</code> is that there are some observations marked as <code>NA</code> – this is the way R shows <em>missing data</em>. It is important to check how much missing data there are in a dataset, so we'll use another function that includes this information. Many R functions refuse to use variables containing missing data — this is just R being careful and you can add <code>na.rm=TRUE</code> into most functions to avoid this problem.</p>
 <p>$\star$ Run the <code>summary</code> line from the script window (block 3).</p>
 
 </div>
@@ -13605,8 +13604,8 @@ RK5CYII="
 <figure>
     <img src="./graphics/bxpTL.png" alt=" " style="width:40%">
 </figure><hr>
-<p>Although histograms are great for one variable, plotting two histograms on top of one another rarely works well because the overlapping bars arehard to interpret (recall the predator-prey body size example). Densityplots don't have this problem but it takes a bit more code to create the plot.</p>
-<p>$\star$ block 6 of the script uses the <code>subset</code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
+<p>Although histograms are great for one variable, plotting two histograms on top of one another rarely works well because the overlapping bars are hard to interpret (recall the predator-prey body size example). Density plots don't have this problem, but it takes a bit more code to create the plot.</p>
+<p>$\star$ Block 6 of the script uses the <code>subset</code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
 
 </div>
 </div>
@@ -15052,7 +15051,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
 <p>$\star$ Go to the script window and run the final line in block (10)</p>
 <p>Still in the script window, choose 'File $\triangleright$ Save' to save your changes to the script file.</p>
 <p>Quit from R by typing <code>q()</code> at the R command prompt. You can also use ctrl+D in Unix).</p>
-<h1 id="From-data-exploration-to-statistical-analysis">From data exploration to statistical analysis<a class="anchor-link" href="#From-data-exploration-to-statistical-analysis">&#182;</a></h1><p>After you have performed your data exploration, you will be able to to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
+<h1 id="From-data-exploration-to-statistical-analysis">From data exploration to statistical analysis<a class="anchor-link" href="#From-data-exploration-to-statistical-analysis">&#182;</a></h1><p>After you have performed your data exploration, you are in a position to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
 <hr>
 <p><a id="fig:yr1_2_flowchart"></a></p>
 <figure>

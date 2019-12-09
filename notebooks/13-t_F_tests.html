@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1>$t$ tests and $F$ tests <span class="tocSkip">`</h1>
+<h1>$t$ tests and $F$ tests <span class="tocSkip"></h1>
 
 </div>
 </div>
@@ -12189,7 +12189,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is a big $t$ value — values this extreme don't even appear on the graph above — so we would conclude that the mean genome size for Odonata is different from the average for insects.</p>
 <p>$\star$ Copy and paste the code above into your script in R and run it. Read through the code and make sure you understand the steps.</p>
-<p>We can the above more easily and get some more information using R's <code>t.test</code> function. The null hypothesis can be set using the option (sometimes called a function <em>argument</em>) <code>mu</code> — the Greek letter $\mu$ is typically used to refer to a (true, not sample) mean:</p>
+<p>We can do the above more easily and get some more information using R's <code>t.test</code> function. The null hypothesis can be set using the option (sometimes called a function <em>argument</em>) <code>mu</code> — the Greek letter $\mu$ is typically used to refer to a (true, not sample) mean:</p>
 
 </div>
 </div>
@@ -12332,7 +12332,7 @@ mean of x
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h4><p>Using the <code>t.test</code> code above as an template, test whether the body weight (in grams) of Odonata is different from the average for arthropods of 0.045 grams. Note that This slightly dodgy estimate comes from an estimated average volume for arthropods of 45.21 mm$^3$, and assuming a density of 1 gm per cm$^3$; see:</p>
+<h4 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h4><p>Using the <code>t.test</code> code above as a template, test whether the body weight (in grams) of Odonata is different from the average for arthropods of 0.045 grams. Note that this slightly dodgy estimate comes from an estimated average volume for arthropods of 45.21 mm$^3$, and assuming a density of 1 gm per cm$^3$; see:</p>
 <p>Orme, C. D. L., Quicke, D. L. J., Cook, J. M. and Purvis, A. (2002), Body size does not predict species richness among the metazoan phyla. Journal of Evolutionary Biology, 15: 235–247.</p>
 <h3 id="Two-sample-$t$-tests">Two-sample $t$ tests<a class="anchor-link" href="#Two-sample-$t$-tests">&#182;</a></h3><p>It is more common to use a $t$ test to compare the means of two samples. This includes questions like:</p>
 <ul>
@@ -12368,7 +12368,7 @@ mean of x
 <p>So, with two samples, we shouldn't be so confident about the difference between the values — it should have a higher standard error. We can do this simply by combining the variance and sample size for the two samples ($a$ and $b$) into the calculation:</p>
 <p>$$se_{a-b}= \sqrt{\frac{\textrm{var}(a)}{n_a} + \frac{\textrm{var}(b)}{n_b}}$$</p>
 <p>Note that the two-sample t-test makes two assumptions; that the data are:</p>
-<p>(i) <em>normally distributed</em>, so that means are a good measure of central tendency and be estimated sensibly; and</p>
+<p>(i) <em>normally distributed</em>, so that the two means are a good measure of central tendencies of the two samples and be estimated sensibly; and</p>
 <p>(ii) have <em>similar variances</em>.</p>
 <p>The first assumption also applies to the one-sample t-test.</p>
 <p>Let's use a $t$ test to address the question of whether the genome sizes of Anisoptera and Zygoptera are different. First, we'll do this by hand.</p>
@@ -12821,7 +12821,7 @@ $F$ value this extreme will only be observed roughly 1 time in 500
 <h2 id="$t$-tests-revisited">$t$ tests revisited<a class="anchor-link" href="#$t$-tests-revisited">&#182;</a></h2><p>The first thing to say is that R is aware of the problem with the variance. If you look back at the output from the previous $t$ tests, you will see that the degrees of freedom vary a lot. We have 100 observations and – after subtracting one for each mean we calculate — our degrees of freedom should be either 99 (one sample test) or 98 (two
 sample test). What we actually see are smaller numbers, with the smallest being <code>df = 60.503</code> for the two sample test of body weight.</p>
 <p>The explanation is that R is applying a <em>penalty</em> to the degrees of freedom to account for differences in variance. With fewer degrees for freedom, more extreme $t$ values are more likely and so it is harder to find significant results. This doesn't mean we can forget about checking the variances or plotting the data!</p>
-<p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we'll look at it again when we learn about <a href="14-anova.ipynb">ANOVA</a>.</p>
+<p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we'll look at it again when we learn about <a href="15-anova.ipynb">ANOVA</a>.</p>
 <p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution:</p>
 <p><img src="./graphics/transform.svg" alt="image"></p>
 <p>We can do a $\log_e$ (natural log)  transform of our body weight data as follows:</p>
@@ -12846,7 +12846,7 @@ sample test). What we actually see are smaller numbers, with the smallest being 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That is, you took an natural log of the whole Body weight column and saved it as a new column called <code>logBodyWeight</code></p>
+<p>That is, you took a natural log of the whole Body weight column and saved it as a new column called <code>logBodyWeight</code></p>
 <p>$\star$ Copy the line into your <code>FTests.R</code> script and run it.</p>
 <h4 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h4><p>Now write three lines of code to get a boxplot of $\log_e$ body weight and then run a variance test and $t$ test on the differences in $\log_e$ body weight between suborders. This gives a much clearer result — the variances are almost identical and the differences between the suborders are much more cleanly tested.</p>
 <h2 id="Non-parametric-tests">Non-parametric tests<a class="anchor-link" href="#Non-parametric-tests">&#182;</a></h2><p>What happens if there isn't a convenient transformation for the variable that gives roughly constant variation and equal variance? In a parametric test, like the $t$ and $F$ test above, we use parameters (mean and variance) to describe the data, assume these describe the data well and then just use these parameters to run the test. If these assumptions don't seem very sound, the non-parametric tests provide a way of using the ranks of the data to test for differences. They aren't as powerful — they are less likely to reveal significant differences — but they are more robust. The most commonly used alternative is the Wilcoxon test, which uses the function <code>wilcox.test</code> in R.</p>
@@ -12900,7 +12900,7 @@ alternative hypothesis: true location is not equal to 1.25
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Compare the two (t vs wilcox test) results.</p>
-<h4 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h4><p>Repeat the above analyseswith the predator and prey body mass data that you were introduced to <a href="08-Data_R.ipynb">previously</a>. Again check how different the results are when using $t$ vs. Wilcoxon tests.</p>
+<h4 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h4><p>Repeat the above analyses with the predator and prey body mass data that you were introduced to <a href="08-Data_R.ipynb">previously</a>. Again check how different the results are when using $t$ vs. Wilcoxon tests.</p>
 
 </div>
 </div>
