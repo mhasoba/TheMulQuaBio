@@ -11815,12 +11815,12 @@ div#notebook {
 model that says that none of your variables are important. Hopefully, there is a point somewhere in between where you can't remove any further terms without making the model significantly worse: this is called the <em>minimum adequate model</em>.</p>
 <p><a id="fig:minmodflow"></a></p>
 <figure>
-    <img src="./graphics/minmodflow.png" alt="minmodflow" style="width:80%">
+    <img src="./graphics/minmodflow.png" alt="minmodflow" style="width:60%">
 </figure><h2 id="Chapter-aims">Chapter aims<a class="anchor-link" href="#Chapter-aims">&#182;</a></h2><p>The main aim of this chapter<a href="#fn1">$^{[1]}$</a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
 <h2 id="The-process-of-model-simplification">The process of model simplification<a class="anchor-link" href="#The-process-of-model-simplification">&#182;</a></h2><p>Model simplification is an iterative process. The flow diagram below shows how it works: at each stage you try and find an acceptable simplification. If successful, then you start again with the new simpler model and try and find a way to simplify this, until eventually, you can't find anything more to remove.</p>
 <p><a id="fig:maxmodflow"></a></p>
 <figure>
-    <img src="./graphics/maxmodflow.png" alt="maxmodflow" style="width:70%">
+    <img src="./graphics/maxmodflow.png" alt="maxmodflow" style="width:60%">
 </figure><p>As always, we can use an $F$-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the $F$-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we've removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
 <h1 id="An-example">An example<a class="anchor-link" href="#An-example">&#182;</a></h1><p>We'll be using the mammal dataset for this practical, so once again:</p>
 <p>$\star$ Make sure you have changed the working directory to your stats module <code>code</code> folder.</p>
@@ -11832,7 +11832,7 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>mammals <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#39;../data/MammalData.csv&#39;</span><span class="p">)</span>
@@ -11854,7 +11854,7 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#get logs of continuous variables</span>
@@ -11887,7 +11887,7 @@ mammals <span class="o">&lt;-</span> na.omit<span class="p">(</span>mammals<span
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>str<span class="p">(</span>mammals<span class="p">)</span>
@@ -11934,7 +11934,7 @@ mammals <span class="o">&lt;-</span> na.omit<span class="p">(</span>mammals<span
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>model <span class="o">&lt;-</span> lm<span class="p">(</span>formula <span class="o">=</span> logCvalue <span class="o">~</span> logLS <span class="o">*</span> logBM <span class="o">*</span> TrophicLevel <span class="o">*</span> GroundDwelling<span class="p">,</span> data <span class="o">=</span> mammals<span class="p">)</span>
@@ -11975,7 +11975,7 @@ mammals <span class="o">&lt;-</span> na.omit<span class="p">(</span>mammals<span
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>model <span class="o">&lt;-</span> lm<span class="p">(</span>logCvalue <span class="o">~</span> <span class="p">(</span>logLS <span class="o">+</span> logBM <span class="o">+</span> TrophicLevel <span class="o">+</span> GroundDwelling<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">,</span> data <span class="o">=</span> mammals<span class="p">)</span>
