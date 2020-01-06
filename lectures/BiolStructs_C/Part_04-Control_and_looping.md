@@ -478,5 +478,5 @@ for (i = 0; i < 10; ++i) {
     printf("%i is an odd number\n", i);
 }
 ```
-
+The program above has an error. Can you fix it?
 What happens when you exclude the `continue;` statement?
