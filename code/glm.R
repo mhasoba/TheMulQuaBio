@@ -15,7 +15,7 @@ tapply(colonies$ColonyCount, colonies$Treatment, min, na.rm=TRUE)
 tapply(colonies$ColonyCount, colonies$Treatment, max, na.rm=TRUE)
 
 # 4) Subset the data down to control and NG
-coloniesCN <- subset(colonies, Treatment %in% c('Control', 'NG'), drop=TRUE)
+coloniesCN <- subset(colonies, Treatment %in% c('Control', 'NG'))
 str(coloniesCN)
 # remove the unused levels
 coloniesCN <- droplevels(coloniesCN)

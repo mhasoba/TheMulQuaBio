@@ -15,7 +15,6 @@ par(mfrow=c(1,2))
 plot(logCvalue ~ TrophicLevel, data= mammals, subset=GroundDwelling=='No', main='Not ground dwelling')
 plot(logCvalue ~ TrophicLevel, data= mammals, subset=GroundDwelling=='Yes', main='Ground dwelling')
 
-
 # 2) boxplots using lattice
 library(lattice)
 bwplot(logCvalue ~ TrophicLevel | GroundDwelling, data= mammals)
