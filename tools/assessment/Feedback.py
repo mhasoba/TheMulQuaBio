@@ -26,13 +26,19 @@
 					directory pushed, nothing else.
 """
 # TODO: 
+# * Hard-code include a dictionary that has names of weekly code files to
+#   compare against
 # * Bug: week 1, but also 10 will end up being assessed if it exists - fix
 # * Allow Week to be set to 0 for only git checking out
 # * Call a warning a warning and error an error!
 # * Count up lines of code in each script and report it
 # * Include a weekly list of expected code files to check against?
 # * Include "using repository state at time..."?
-# * Allocate points to each expected and independent code file as weighted 			percent of 100, weight determined by number of code lines; Update marking 		criteria accordingly; Total baseline points are weighted average of these two, from   which additional points are deleted for poor project organization, readme,  etc.
+# * Allocate points to each expected and independent code file as weighted
+#   percent of 100, weight determined by number of code lines; Update marking
+#   criteria accordingly; Total baseline points are weighted average of these
+#   two, from   which additional points are deleted for poor project
+#   organization, readme,  etc.
 
 import subprocess, os, csv, argparse, re
 
@@ -255,7 +261,6 @@ for Stdnt in Stdnts:
 	
 	for week in WeekDirs:
 		if not args.Week.lower() in week.lower().replace(" ", ""):
-			# import ipdb; ipdb.set_trace() # fix - check TODO
 			continue # only assess for current week - no week 10 and 1, for eg
 		azz.write('='*70 + '\n')
 		WeekPth = RepoPath+'/'+week
@@ -306,9 +311,9 @@ for Stdnt in Stdnts:
 			for root, dirs, files in os.walk(WeekPth + '/' + ResDir[0]):
 				for file in files:
 					ResNames.append(file) 
-			azz.write('Found following files in results directory: ' + ', '.join(ResNames) + '...\n')
+			azz.write('Found following files in results directory: ' + ', '.join(ResNames) + '...\n\n')
 			if len(ResNames)>1:
-					azz.write('ideally, Results directory should be empty other than, perhaps, a readme. \n\n')
+					azz.write('Ideally, Results directory should be empty other than, perhaps, a readme. \n\n')
 			else: 
 				azz.write('\n')		
 		
@@ -354,7 +359,7 @@ for Stdnt in Stdnts:
 
 			azz.write('Testing ' + os.path.basename(name) + '...\n\n')
 			print('Testing ' + os.path.basename(name) + '...\n\n')
-			
+						
 			if os.path.basename(name).lower().endswith('.sh'):
 				p, output, err, time = run_popen('bash ' + os.path.basename(name), timeout)
 			elif os.path.basename(name).lower().endswith('.py'):
@@ -377,25 +382,24 @@ for Stdnt in Stdnts:
 					elif len(funcs)==0 and len(dstrngs)==1:
 						azz.write('Found no functions, but one docstring for the script, good\n\n')
 					elif len(funcs)==0 and len(dstrngs)>2:
-						import ipdb; ipdb.set_trace()
+						# import ipdb; ipdb.set_trace()
 						azz.write('Found too many docstrings.  Check your script.\n\n')
 					else:
 						azz.write('No functions, but no script-level docstring either\n')
 						Points = Points - 2
 						azz.write('2 pts deducted\n\n')
-				
+
 				azz.write('Current Points = ' + str(Points) + '\n\n')
 
 				p, output, err,	time = run_popen('python3 ' + os.path.basename(name), timeout)
 			
 			elif os.path.basename(name).lower().endswith('.r'):
 				p, output, err,	time = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
-			# elif os.path.basename(name).lower().endswith('.ipynb'):
-				# p, output, err,	time = run_popen('jupyter notebook ' + os.path.basename(name), timeout)
 			else:
 				os.chdir(scrptPath)
 				continue
-			
+							
+
 			chars = 0
 						
 			azz.write('Output (only first ' + str(charLim) + ' characters): \n\n')
