@@ -24,9 +24,52 @@ https://stackoverflow.com/questions/16956810/how-do-i-find-all-files-containing-
 
 ### Stats
 
-* As of R version 4.0.0 of R released in April 2020 the default for `stringsAsFactors` was changed to false: (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html)
-* In the Data exploration chapter, link to explanations of distributions that appears in GLM chapter. 
-* t & F tests: Explain that the default of na.action in t.test is to omit - you can check that by using getOption("na.action").  Have a look at https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test 
-* Perhaps it would be could to edit the notebooks to put diff <- mean.gs[[1]][1] - mean.gs[[2]][1] to avoid confusion? 
-* Boxplot and plot not equivalent in some R versions?
+* As of R version 4.0.0 of R released in April 2020 the default for
+`stringsAsFactors` was changed to false:
+(https://cran.r-project.org/doc/manuals/r-devel/NEWS.html) * In the Data
+exploration chapter, link to explanations of distributions that appears in GLM
+chapter. * t & F tests: Explain that the default of na.action in t.test is to
+omit - you can check that by using getOption("na.action").  Have a look at
+https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test *
+Perhaps it would be could to edit the notebooks to put diff <- mean.gs[[1]][1] -
+mean.gs[[2]][1] to avoid confusion? * Boxplot and plot not equivalent in some R
+versions? * Clarify SD vs SE: The standard deviation (often SD) is a measure of
+variability. When we calculate the standard deviation of a sample, we are using
+it as an estimate of the variability of the population from which the sample was
+drawn. For data with a normal distribution,2 about 95% of individuals will have
+values within 2 standard deviations of the mean, the other 5% being equally
+scattered above and below these limits. Contrary to popular misconception, the
+standard deviation is a valid measure of variability regardless of the
+distribution. About 95% of observations of any distribution usually fall within
+the 2 standard deviation limits, though those outside may all be at one end. We
+may choose a different summary statistic, however, when data have a skewed
+distribution. 
+
+When we calculate the sample mean we are usually interested not in the mean of this particular sample, but in the mean for individuals of this type—in statistical terms, of the population from which the sample comes. We usually collect data in order to generalise from them and so use the sample mean as an estimate of the mean for the whole population. Now the sample mean will vary from sample to sample; the way this variation occurs is described by the “sampling distribution” of the mean. We can estimate how much sample means will vary from the standard deviation of this sampling distribution, which we call the standard error (SE) of the estimate of the mean. As the standard error is a type of standard deviation, confusion is understandable. Another way of considering the standard error is as a measure of the precision of the sample mean.
+
+The standard error of the sample mean depends on both the standard deviation and the sample size, by the simple relation SE = SD/√(sample size). The standard error falls as the sample size increases, as the extent of chance variation is reduced—this idea underlies the sample size calculation for a controlled trial, for example. By contrast the standard deviation will not tend to change as we increase the size of our sample.
+
+
+So, if we want to say how widely scattered some measurements are, we use the standard deviation. If we want to indicate the uncertainty around the estimate of the mean measurement, we quote the standard error of the mean. The standard error is most useful as a means of calculating a confidence interval. For a large sample, a 95% confidence interval is obtained as the values 1.96×SE either side of the mean. We will discuss confidence intervals in more detail in a subsequent Statistics Note. The standard error is also used to calculate P values in many circumstances.
+
+
+Standard deviations and standard errors
+Douglas G Altman, professor of statistics in medicine and J Martin Bland, professor of health statistics
+
+Additional article information
+
+The terms “standard error” and “standard deviation” are often confused.1 The contrast between these two terms reflects the important distinction between data description and inference, one that all researchers should appreciate.
+
+The standard deviation (often SD) is a measure of variability. When we calculate the standard deviation of a sample, we are using it as an estimate of the variability of the population from which the sample was drawn. For data with a normal distribution,2 about 95% of individuals will have values within 2 standard deviations of the mean, the other 5% being equally scattered above and below these limits. Contrary to popular misconception, the standard deviation is a valid measure of variability regardless of the distribution. About 95% of observations of any distribution usually fall within the 2 standard deviation limits, though those outside may all be at one end. We may choose a different summary statistic, however, when data have a skewed distribution.3
+
+When we calculate the sample mean we are usually interested not in the mean of this particular sample, but in the mean for individuals of this type—in statistical terms, of the population from which the sample comes. We usually collect data in order to generalise from them and so use the sample mean as an estimate of the mean for the whole population. Now the sample mean will vary from sample to sample; the way this variation occurs is described by the “sampling distribution” of the mean. We can estimate how much sample means will vary from the standard deviation of this sampling distribution, which we call the standard error (SE) of the estimate of the mean. As the standard error is a type of standard deviation, confusion is understandable. Another way of considering the standard error is as a measure of the precision of the sample mean.
+
+The standard error of the sample mean depends on both the standard deviation and the sample size, by the simple relation SE = SD/√(sample size). The standard error falls as the sample size increases, as the extent of chance variation is reduced—this idea underlies the sample size calculation for a controlled trial, for example. By contrast the standard deviation will not tend to change as we increase the size of our sample.
+
+So, if we want to say how widely scattered some measurements are, we use the standard deviation. If we want to indicate the uncertainty around the estimate of the mean measurement, we quote the standard error of the mean. The standard error is most useful as a means of calculating a confidence interval. For a large sample, a 95% confidence interval is obtained as the values 1.96×SE either side of the mean. We will discuss confidence intervals in more detail in a subsequent Statistics Note. The standard error is also used to calculate P values in many circumstances.
+
+The principle of a sampling distribution applies to other quantities that we may estimate from a sample, such as a proportion or regression coefficient, and to contrasts between two samples, such as a risk ratio or the difference between two means or proportions. All such quantities have uncertainty due to sampling variation, and for all such estimates a standard error can be calculated to indicate the degree of uncertainty.
+
+In many publications a ± sign is used to join the standard deviation (SD) or standard error (SE) to an observed mean—for example, 69.4±9.3 kg. That notation gives no indication whether the second figure is the standard deviation or the standard error (or indeed something else). A review of 88 articles published in 2002 found that 12 (14%) failed to identify which measure of dispersion was reported (and three failed to report any measure of variability).4 The policy of the BMJ and many other journals is to remove ± signs and request authors to indicate clearly whether the standard deviation or standard error is being quoted. All journals should follow this practice.
+
 * 
