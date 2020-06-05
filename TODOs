@@ -81,3 +81,28 @@ The principle of a sampling distribution applies to other quantities that we may
 In many publications a ± sign is used to join the standard deviation (SD) or standard error (SE) to an observed mean—for example, 69.4±9.3 kg. That notation gives no indication whether the second figure is the standard deviation or the standard error (or indeed something else). A review of 88 articles published in 2002 found that 12 (14%) failed to identify which measure of dispersion was reported (and three failed to report any measure of variability).4 The policy of the BMJ and many other journals is to remove ± signs and request authors to indicate clearly whether the standard deviation or standard error is being quoted. All journals should follow this practice.
 
 * Regression - add explanation of standard error of coefficients and calculation of CI's 
+
+
+#############
+
+Some questions that are arising:
+
+* How can the Tukey Honest Significant Difference test ensure a probability of 0.05 of a type I error across all tested pairs? What is different with an ordinary t-test?
+
+- Regarding the Tukey HSD test: You can actually think of it as a special kind of t-test, since the test statistic is very similar:
+
+- For the t-statistic we take the difference of the sample mean and the hypothesised mean, and divide by the standard error.
+
+- For the Tukey statistic we are no longer comparing a single variable's sample mean to a hypothesised true mean. Instead we have multiple groups (think of the herbivores, omnivores and carnivores in the Jupyter notebook). The Tukey test looks at all pairwise combinations of your groups (in your case: Herb-Omni, Herb-Carni and Omni-Carni) and reports whether the difference in any of their group means is larger than expected.
+
+- The test statistic it uses for this is philosophically very similar to the Student's t-test; we take a difference between means and divide it by a standard error. How is it different from the t-test you know and love?
+
+- We no longer have a "hypothesised" true mean to compare against, instead we separately take the difference between each of the pairwise group means for our numerator. For the denominator, rather than the standard error of the sample mean, we take the standard error of the sum of the group means.
+
+- You can think of this as a t-test that corrects for a "family-wise" error rate, which is how the type I error applies to the entire testing of all group means against each other, rather than to each comparison individually.
+
+- Family-wise error rateIn statistics, family-wise error rate (FWER) is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.
+
+* In the beginning of the Jupiter script it says: "ANOVA uses the F-statistic — the ratio of the variance calculated across the samples (groups) (the null hypothesis) to the variance within the samples (groups)." However, later it says that the F-statistic of ANOVA is the ratio of the mean sum of squares explained by the linear model to the mean sum of squares about the linear model (the variance not explained by the linear model).  So F = (ESS/(nc - 1))/(RSS/(n-nc)).  I don't see how these two definitions could be the same. 
+
+* I understand from the lectures that a model is linear unless the coefficients become raised to a power other than 1. This can result in parabolas being fitted as linear models if the explanatory variables but not the coefficients are raised to a power. However, in the jupyter notebook allometric scaling and curved models are mentioned, which need to be log transformed to fit a linear model. Would these have powers not only in the explanatory variables but also in the coefficients? 
