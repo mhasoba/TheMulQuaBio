@@ -83,6 +83,24 @@ In many publications a ± sign is used to join the standard deviation (SD) or st
 * Regression - add explanation of standard error of coefficients and calculation of CI's 
 
 
+
+* ### F-test vs ANOVA 
+ 
+ - Defn 1: the ratio of the variance calculated across the samples (groups) (the null hypothesis) to the variance within the samples (groups).
+ 
+    This definition is about using the F-statistic in an ANOVA to check the hypothesis that two or more groups are drawn from populations with the same mean value.
+ 
+ 
+    Defn 2: ratio of the mean sum of squares explained by the linear model to the mean sum of squares about the linear model (the variance not explained by the linear model).
+ 
+    Here, imagine you've run a linear model on some sample data, to obtain a line (y intercept + gradient) that you hope is a good predictor for how some variables are related. Maybe the line fits well in the sense of having a low RSS, but it doesn't account for much of the variance in your data, because something else is going on that your model isn't capturing. I've drawn an example of such a situation below. The linear model (diagonal blue line) has a low RSS (i.e. is a "good fit"), but because the data actually consists of two clearly different subpopulations with different means but the same gradient, there is a lot of variance in the data that the linear model fit isn't able to capture (I've tried to show this with the difference between the two vertical lines to the right of the plot).
+ 
+    So Defn 2 is about using the F-test in an ANOVA to determine how much of the variance in your sample can be explained by a particular linear model.
+ 
+    You can hopefully see how this is sort of similar to the case for Defn 1; which explicitly checks if two or more specified samples are drawn from populations with the same mean. Defn 2 is about asking the same kind of question in a slightly different way - if the whole sample is drawn from populations with the same mean then the line should explain a good proportion of the variance, if in fact your sample is composed of various populations with different means, then no single line (even if it has a minimal RSS) will ever be able to explain much of the variance.
+ 
+    In summary, both definitions are essentially asking the same question, but to different ends. One is a straightforward comparison between groups to compare their underlying means, another is a diagnostic test using the same idea in order to determine how well a linear model actually explains the data on which it's been fit.
+
 #############
 
 Some questions that are arising:
@@ -103,23 +121,3 @@ Some questions that are arising:
 
 - Family-wise error rateIn statistics, family-wise error rate (FWER) is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.
 
-* In the beginning of the Jupiter script it says: "ANOVA uses the F-statistic — the ratio of the variance calculated across the samples (groups) (the null hypothesis) to the variance within the samples (groups)." However, later it says that the F-statistic of ANOVA is the ratio of the mean sum of squares explained by the linear model to the mean sum of squares about the linear model (the variance not explained by the linear model).  So F = (ESS/(nc - 1))/(RSS/(n-nc)).  I don't see how these two definitions could be the same. 
-
-* I understand from the lectures that a model is linear unless the coefficients become raised to a power other than 1. This can result in parabolas being fitted as linear models if the explanatory variables but not the coefficients are raised to a power. However, in the jupyter notebook allometric scaling and curved models are mentioned, which need to be log transformed to fit a linear model. Would these have powers not only in the explanatory variables but also in the coefficients? 
-
-* ### F-test vs ANOVA 
- 
-Defn 1: the ratio of the variance calculated across the samples (groups) (the null hypothesis) to the variance within the samples (groups).
- 
-This definition is about using the F-statistic in an ANOVA to check the hypothesis that two or more groups are drawn from populations with the same mean value.
- 
- 
-Defn 2: ratio of the mean sum of squares explained by the linear model to the mean sum of squares about the linear model (the variance not explained by the linear model).
- 
-Here, imagine you've run a linear model on some sample data, to obtain a line (y intercept + gradient) that you hope is a good predictor for how some variables are related. Maybe the line fits well in the sense of having a low RSS, but it doesn't account for much of the variance in your data, because something else is going on that your model isn't capturing. I've drawn an example of such a situation below. The linear model (diagonal blue line) has a low RSS (i.e. is a "good fit"), but because the data actually consists of two clearly different subpopulations with different means but the same gradient, there is a lot of variance in the data that the linear model fit isn't able to capture (I've tried to show this with the difference between the two vertical lines to the right of the plot).
- 
-So Defn 2 is about using the F-test in an ANOVA to determine how much of the variance in your sample can be explained by a particular linear model.
- 
-You can hopefully see how this is sort of similar to the case for Defn 1; which explicitly checks if two or more specified samples are drawn from populations with the same mean. Defn 2 is about asking the same kind of question in a slightly different way - if the whole sample is drawn from populations with the same mean then the line should explain a good proportion of the variance, if in fact your sample is composed of various populations with different means, then no single line (even if it has a minimal RSS) will ever be able to explain much of the variance.
- 
-In summary, both definitions are essentially asking the same question, but to different ends. One is a straightforward comparison between groups to compare their underlying means, another is a diagnostic test using the same idea in order to determine how well a linear model actually explains the data on which it's been fit.
