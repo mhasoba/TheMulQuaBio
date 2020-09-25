@@ -1,6 +1,14 @@
 # 0. Introduction to Biological Computing With C.
 
-Welcome to Biological Computing With C. This module is meant to introduce you to features of the C programming language that are useful in biological applications. Although C is considered a very small language (i.e. it has few keywords and an economical standard library), it is extremely versatile. You can write anything from a simple command-line calculator to a complete operating system using C. The other side of C is its many 'sharp edges': it lacks pretty much any safety features found in modern programming languages. This gives it a reputation for being difficult to learn. However learning C will teach you to be rigourous and defensive in your programming style. Your code in other languages will become cleaner and more structured. This leads to code that is easier to read, easier to re-use, and easier to debug.
+Welcome to Biological Computing With C. 
+This module is meant to introduce you to features of the C programming language that are useful in biological applications. 
+Although C is considered a very small language (i.e. it has few keywords and an economical standard library), it is extremely versatile. 
+You can write anything from a simple command-line calculator to a complete operating system using C. 
+The other side of C is its many 'sharp edges': it lacks pretty much any safety features found in modern programming languages. 
+This gives it a reputation for being difficult to learn. 
+However learning C will teach you to be rigourous and defensive in your programming style. 
+Your code in other languages will become cleaner and more structured. 
+This leads to code that is easier to read, easier to re-use, and easier to debug.
 
 This is not meant to be a complete course in C. It is meant to get you up to speed on some elements that will be useful in biological computing. This will extend from simply writing more efficient loops in R or Python up to techniques that will give you a platform for more advanced pieces of software. It will therefore be a mix of advanced and elementary parts of C.
 

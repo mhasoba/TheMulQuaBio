@@ -1,10 +1,66 @@
 # 2. Memory, data, variables, and types
-It is not possible to really understand any programming language without an understanding of computer memory. Furthermore, it is not possible to use C correctly or safely without an understanding of computer memory.
+It is not possible to really understand any programming language without an understanding of computer memory. 
+Furthermore, it is not possible to use C correctly or safely without an understanding of computer memory.
+
+The key to understanding the C language is to understand C's data types and what they mean to the compiler and at run time. 
+This might sound complicated at first, but as we'll see it is fairly straightforward for our purposes. 
 
 ## 2.1 Memory
 Programming of any kind revolves around the manipulation of information in memory. Typically, this is the machine's RAM (but can also include the CPU's registers). Data is fetched from RAM and sent to the CPU to be processed. "Data" in this case can be anything from a single integer value to an entire function or even program. When a program is being executed, it interacts with the operating system to allocate and de-allocate memory. This memory is not in a state of complete and utter chaos, but is structed in the form of addresses and areas "reserved" by the OS for your program's use. Thus, when you are writing an R or Python script and you import some data, you need to declare a variable to assign it to or attach it to your workspace. That way, your program now stores the address of that data in memory and gives it a name so that it can be retrieved.
 
-## 2.2 Variables
+## 2.2 Data and Types
+
+In C, there are two main types of data:
+
+	integral type
+	floating point type
+
+### Integral data
+Integral type data is any data that can be represented as an integer; it is data that is expressed as 'unique counts'. 
+This includes, appropriately enough, integer numbers, but it also includes characters, and another special data type we'll learn about later called a pointer (or memory reference). 
+At the machine level, the binary encoding of integral data is in what's called two's complement binary format. 
+Integral data has a finite range on your machine, depending on the CPU. For instance, the largest integer type on a 32-bit computer is (you guessed it) 32 bits. On a 64-bit machine, unsurprisingly, it's 64 bits. In two's complement, the largest possible integer on a 64-bit computer is 18,446,744,073,709,551,615. That should be big enough for most applications apart from managing Jeff Bezos's bank account.
+
+This means that an integer-type on a 64-bit computer can store all whole numbers between 0 and 18,446,744,073,709,551,615.
+
+### Floating point data
+Floating point data is used for storing real numbers with a decimal. 
+The encoding of floating point numbers is more complicated than integer data and we won't look at the details.
+
+The largest unsigned floating point number is 1.7976931348623157e+308 and the smallest is 2.2250738585072014e-308. 
+What is important to realise is that there are infinitely many numbers between those two values, but only 64 bits to represent them (less than that in reality, but we haven't talked about signing variables yet).
+Because there are infinitely many values but only a finite number of bits to store them, floating point numbers are *approximations* of the real numbers they are meant to represent.
+
+Arithmetic on floating point numbers in a computer is not straightforward and we need to be careful what we are doing.
+
+
+## 2.3 Variables
+
+Variables are used in C to store data that could change during program execution.
+
+Variables in C are stored in four main types that are broadly classified as either integer or floating point.
+
+    int    // integer
+    char   // a character value
+    float  // a floating point numerical value
+    double // a double-precision floating point value
+
+We will cover modifiers for these types later. What is most important to know about these types is not simply what their high-level translations are, but rather that they specify different 'words' to the machine in terms of the 'width' of their machine code. That is, each variable type can have a different size in terms of the number of bits. In turn, this means that each type will specify a different range of values.
+
+Each one of these tells the OS to reserve an actual *physical place* on the machine of a particular width (typically by the byte) that is large enough for its range of values.
+
+The size of each of these types will vary from machine to machine, though char type is usually the smallest (and has been on most machine architectures since the 1960s) and usually consists of a single byte.
+
+A single byte is typically what is called the **smallest addressable unit**. Again, this can vary between machine architectures. However, when a variable is declared, it will reserve space in memory in some multiple of smallest addressable units.
+
+We are familiar with the terms 32- and 64-bit when talking about computer architectures (and the headaches this can cause for legacy and cross-platform computing). This refers to the size of an int variable.
+
+On a 32-bit machine, the standard int size is 32 bits. The smallest addressable unit is the byte (typically 8 bits), so one 32-bit int will consist of 4 addressable units, all living physically next to each other in RAM. Similarly, a 64-bit int (on a 64-bit machine) will consist of 8 addressable units (or bytes).
+
+You should never write code that makes particular assumptions about the size of a variable. We will learn ways of avoiding these assumptions.
+
+
+## 2.4 Declaring variables
 C only works with very simple data types. But as we will see, you have the power to make the data more complex and structured. Unlike Python and R, C uses **static typing**. A variable, once declared and named does not change type throughout the scope of its use (although, as we'll see, this is not strictly enforced by the compiler). Furthermore, variables are declared to be of a particular type prior to initialisation.
 
 Example:
@@ -25,8 +81,9 @@ int main (void) // Begin function main; takes no arguments
 {
     int x;         // Hey, operating system, give me some space for an integer
                    // that we'll agree to call x.
+				   // x means: read or write at this location to the size of one integer.
 
-    return x;      // Pass the value in x back to the calling operation (in this
+	return x;      // Pass the value in x back to the calling operation (in this
                    // case the OS)
 }
 ```
@@ -100,30 +157,6 @@ Use informative variable names. The variable name should say what it is.
 `range = maxlength - minlength` is more informative than `r = a - b`, for instance. It makes your code more readable and easier to debug. Furthermore, with modern programming environments including features like predictive text, typing out longer, descriptive variable and function names isn't so tedious. But keep them relatively short as well, as names that are too long can make your code harder to read. So, use a bit of common sense. Generally, however, meaningful use of variable and function naming lends itself to creating *self-documenting code*.
 
 Some exceptions are conventions that are so common that they don't inhibit readability. We will see the variable name `i` used a lot for an integer that is incremented or used as an index in some array, for instance. 
-
-
-## Variable types and their meaning
-
-In C, the basic variable types are:
-
-    int    // an integer
-    char   // a character value
-    float  // a floating point numerical value
-    double // a double-precision floating point value
-
-We will cover modifiers for these types later. What is most important to know about these types is not simply what their high-level translations are, but rather that they specify different 'words' to the machine in terms of the 'width' of their machine code. That is, each variable type can have a different size in terms of the number of bits. In turn, this means that each type will specify a different range of values.
-
-Each one of these tells the OS to reserve an actual *physical place* on the machine of a particular width (typically by the byte) that is large enough for its range of values.
-
-The size of each of these types will vary from machine to machine, though char type is usually the smallest (and has been on most machine architectures since the 1960s) and usually consists of a single byte.
-
-A single byte is typically what is called the **smallest addressable unit**. Again, this can vary between machine architectures. However, when a variable is declared, it will reserve space in memory in some multiple of smallest addressable units.
-
-We are familiar with the terms 32- and 64-bit when talking about computer architectures (and the headaches this can cause for legacy and cross-platform computing). This refers to the size of an int variable.
-
-On a 32-bit machine, the standard int size is 32 bits. The smallest addressable unit is the byte (typically 8 bits), so one 32-bit int will consist of 4 addressable units, all living physically next to each other in RAM. Similarly, a 64-bit int (on a 64-bit machine) will consist of 8 addressable units (or bytes).
-
-You should never write code that makes particular assumptions about the size of a variable. We will learn ways of avoiding these assumptions.
 
 
 ##  Why are we talking about all of this low-level nonsense?
@@ -225,7 +258,15 @@ c = a + b;
 
 # Exercises
 
-### 1- Bugs and compiler feedback
+### 1 - The meaning of variables
+
+What is the meaning of the following declaration?
+
+```C
+	char c = 'a';
+```
+
+### 2- Bugs and compiler feedback
 Compile the following program. What happens? Examine the compiler feedback to fix the program. 
 ```C
 #include <stdio.h>
@@ -251,7 +292,7 @@ int main()
 ```
 
 
-### 2- Fixing bugs before the compiler
+### 3- Fixing bugs before the compiler
 
 Examine the following program and identify all of the bugs within it. 
 
@@ -273,7 +314,7 @@ int main (void)
 ```
 
 
-### 3- Variable declarations
+### 4- Variable declarations
 Rewrite the the example program below trying different type of basic variables (`int`, `char`, `float`, `double` - you can express each of them using `printf` and respectively `%i`, `%c`, `%f` and `%e`)
 
     #include <stdio.h>
@@ -289,11 +330,11 @@ Rewrite the the example program below trying different type of basic variables (
   
     }
 
-### 4- Playing with the different variables
+### 5- Playing with the different variables
 What happens if you assign 'incompatible' constant types to your variable (e.g. `int x = 'a';`)?
 
-### 5- Memory
+### 6- Memory
 Let's break your computer: try to see which will be the biggest integer you can declare to `int`. Go wild!
 
-### 6- Floating point binary
+### 7- Floating point binary
 To understand the difference between integral and floating point binary, do a web search on floating point binary and see what you come up with.
