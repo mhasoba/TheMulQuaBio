@@ -15,6 +15,7 @@ This work is licensed under a [Creative Commons Attribution 3.0 Unported License
 ---
 ## For Contributors/Co-authors:
 
-* Note that the old materials, written in LaTeX, are now in the `archived` directory.
+* The `master` branch of this repository is protected, so even users with write (push) access need to push changes on a branch and make a [pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests) (also, [this](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)). New commits to a non-master branch *after* a pull request has been made will result in any pull requests from that non-master branch to be discrded. Please [read this](https://gist.github.com/digitaljhelms/4287848) for more on good practices for branching (and merging).     
+* Old materials, written in LaTeX, are now in the `archived` directory.
 * The solutions to the exercises are in a separate, [private git repo](https://bitbucket.org/mhasoba/themulquabio_sols) that students do not have access to. Ask Samraat (mhasoba@gmail.com) if you need access to that repository. Students will be provided the solutions when the time comes.
 * The `results` directory will be populated only when scripts are run, but these are not version controlled (all files in this directory under `.gitignore`).
