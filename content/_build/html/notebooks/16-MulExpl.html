@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Models: Multiple explanatory variables &#8212; TheMulQuaBio</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear Models: Multiple variables with interactions" href="17-MulExplInter.html" />
+    <link rel="prev" title="Linear Models: Analysis of variance" href="15-anova.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00-Intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data Analyses and Statistics
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Stats-Intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data management, Exploration and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html#fitting-a-glm">
+   Fitting a GLM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting.html">
+   Model Fitting in Ecology and Evolution
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+   <a name="Apx:Miniproj">
+   </a>
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/16-MulExpl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        
+        <a class="issues-button"
+            href="https://github.com/mhasoba/Tempura/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16-MulExpl.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/Tempura/master?urlpath=tree/notebooks/16-MulExpl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/Tempura/blob/master/notebooks/16-MulExpl.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   An example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exploring-the-data">
+     Exploring the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#boxplots-within-groups">
+     Boxplots within groups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lattice-again">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       lattice
+      </span>
+     </code>
+     again
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#barplots-again">
+     Barplots again
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-means-and-confidence-intervals">
+     Plotting means and confidence intervals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-the-linear-model">
+   Fitting the linear model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicted-values">
+     Predicted values
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">)</span> <span class="p">;</span> <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.res</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">repr.plot.width</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">repr.plot.height</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span> <span class="c1"># Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="linear-models-multiple-explanatory-variables">
+<h1>Linear Models: Multiple explanatory variables<a class="headerlink" href="#linear-models-multiple-explanatory-variables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we will explore fitting a linear model to data when you have multiple explanatory (predictor) variables.</p>
+<p>The aims of this chapter are<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
+<ul class="simple">
+<li><p>Learning to build and fit a linear model that includes several explanatory variables</p></li>
+<li><p>Learning to interpret the summary tables and diagnostics after fitting a linear model with multiple explanatory variables</p></li>
+</ul>
+</div>
+<div class="section" id="an-example">
+<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
+<p>The models we looked at in the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> explored whether the log genome size (C value, in picograms) of terrestrial mammals varied with trophic level and whether or not the species is ground dwelling. We will now look at a single model that includes both explanatory variables.</p>
+<p>The first thing to do is look at the data again.</p>
+<div class="section" id="exploring-the-data">
+<h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory and add some introductory comments.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Load the data saved at the end of the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">&#39;../data/mammals.Rdata&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Look back at the end of the previous chapter to see how you saved the RData file. If <code class="docutils literal notranslate"><span class="pre">mammals.Rdata</span></code> is missing, just import the data again using <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> and add the <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">C</span> <span class="pre">Value</span></code> column to the imported data frame again (go back to the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> and have a look if you have forgotten how).</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ls()</span></code>, and then <code class="docutils literal notranslate"><span class="pre">str</span></code> to check that the data has loaded correctly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	379 obs. of  10 variables:
+ $ Binomial       : Factor w/ 379 levels &quot;Acinonyx jubatus&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ meanCvalue     : num  2.56 2.64 3.75 3.7 3.98 4.69 2.15 2.43 2.73 2.92 ...
+ $ Order          : Factor w/ 21 levels &quot;Artiodactyla&quot;,..: 2 17 17 17 1 1 4 17 17 17 ...
+ $ AdultBodyMass_g: num  50500 41.2 130 96.5 94700 52300 15 25.3 50.5 33 ...
+ $ DietBreadth    : int  1 NA 2 NA 5 2 NA 4 NA NA ...
+ $ HabitatBreadth : int  1 NA 2 2 1 1 1 2 NA 1 ...
+ $ LitterSize     : num  2.99 2.43 3.07 NA 1 1 0.99 4.59 3.9 3.77 ...
+ $ GroundDwelling : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 NA 2 2 2 2 1 2 NA 2 ...
+ $ TrophicLevel   : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 NA 2 NA 2 2 NA 3 NA NA ...
+ $ logCvalue      : num  0.94 0.971 1.322 1.308 1.381 ...
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we asked if carnivores or herbivores had larger genomes. Now we want to ask questions like: do ground-dwelling carnivores have larger genomes than arboreal or flying omnivores? We need to look at plots within groups.</p>
+<p>Before we do that, there is a lot of missing data in the data frame and we should make sure that we are using the same data for our plots and models. We will subset the data down to the complete data for the three variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span> <span class="n">select</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">TrophicLevel</span><span class="p">,</span> 
+<span class="n">logCvalue</span><span class="p">))</span>
+<span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	259 obs. of  3 variables:
+ $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
+ $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
+ $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
+ - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="boxplots-within-groups">
+<h3>Boxplots within groups<a class="headerlink" href="#boxplots-within-groups" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we used the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to fit a model just to dragonflies. You can use <code class="docutils literal notranslate"><span class="pre">subset</span></code> with plots too.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> to your script to split the graphics into two panels.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy over and modify the code from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to create a boxplot of genome size by trophic level into your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command):</p>
+<p><img alt="image" src="../_images/boxplots.svg" />
+<small> <center> Figure 1</p>
+</center> </small>
+<p>You can use the option <code class="docutils literal notranslate"><span class="pre">main</span></code> to add titles to a plot.</p>
+</div>
+<div class="section" id="lattice-again">
+<h3><code class="docutils literal notranslate"><span class="pre">lattice</span></code> again<a class="headerlink" href="#lattice-again" title="Permalink to this headline">¶</a></h3>
+<p>Recall that the <code class="docutils literal notranslate"><span class="pre">lattice</span></code> package provides some very neat extra ways to plot data in groups. They look pretty but the downside is that they don’t use the same graphics system — all those <code class="docutils literal notranslate"><span class="pre">par</span></code> commands are useless for these graphs. The defaults look good though!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="nf">bwplot</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">|</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16-MulExpl_9_0.png" src="../_images/16-MulExpl_9_0.png" />
+</div>
+</div>
+<p>The code <code class="docutils literal notranslate"><span class="pre">logCvalue</span> <span class="pre">~</span> <span class="pre">TrophicLevel</span> <span class="pre">|</span> <span class="pre">GroundDwelling</span></code> means plot the relationship between genome size and trophic level, but group within levels of ground dwelling. We are using the function <code class="docutils literal notranslate"><span class="pre">bwplot</span></code>, which is provided by <code class="docutils literal notranslate"><span class="pre">lattice</span></code> to create box and whisker plots.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create the lattice plots above from within your script.</p>
+<p>Rearrange this code to have three plots, showing the box and whisker plots for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>, grouped within the levels of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code>.</p>
+<p>Try reshaping the R plot window and running the command again. Lattice tries to make good use of the available space when creating lattice plots.</p>
+</div>
+<div class="section" id="barplots-again">
+<h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this headline">¶</a></h3>
+<p>We’re going to make the barplot code from <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regress</span></a> even more complicated! This time we want to know the mean log genome size within combinations of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code> and <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. We can still use <code class="docutils literal notranslate"><span class="pre">tapply</span></code>, providing more than one grouping factor. We create a set of grouping factors like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
+<span class="n">groupMeans</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="n">mean</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Carnivore Herbivore Omnivore
+No  0.9589465  1.012459 1.191760
+Yes 1.2138170  1.297662 1.299017
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy this code into your script and run it.</p>
+<p>Use this code and the script from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to get the set of
+standard errors for the groups <code class="docutils literal notranslate"><span class="pre">groupSE</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">seMean</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+	<span class="c1"># get rid of missing values</span>
+	<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+	<span class="c1"># calculate the standard error</span>
+	<span class="n">se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+	<span class="c1"># tell the function to report the standard error</span>
+	<span class="nf">return</span><span class="p">(</span><span class="n">se</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
+
+<span class="n">groupMeans</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span><span class="o">=</span><span class="n">mean</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Carnivore Herbivore Omnivore
+No  0.9589465  1.012459 1.191760
+Yes 1.2138170  1.297662 1.299017
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groupSE</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span><span class="o">=</span><span class="n">seMean</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">groupSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     Carnivore  Herbivore   Omnivore
+No  0.04842209 0.03418613 0.02410400
+Yes 0.05975510 0.02787009 0.03586826
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">barplot</span></code>. The default option for a barplot of
+a table is to create a stacked barplot, which is not what we want. The
+option <code class="docutils literal notranslate"><span class="pre">beside=TRUE</span></code> makes the bars for each column appear
+side by side.</p>
+<p>Once again, we save the midpoints of the bars to add the
+error bars. The other options in the code below change the colours of
+the bars and the length of error bar caps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># get upper and lower standard error height</span>
+<span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">groupMeans</span> <span class="o">+</span> <span class="n">groupSE</span>
+<span class="n">lowerSE</span> <span class="o">&lt;-</span> <span class="n">groupMeans</span> <span class="o">-</span> <span class="n">groupSE</span>
+<span class="c1"># create barplot</span>
+<span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span> <span class="s">&#39; log C value (pg) &#39;</span> <span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span> <span class="s">&#39; white &#39;</span> <span class="p">,</span> <span class="s">&#39; grey70 &#39;</span><span class="p">))</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">len</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16-MulExpl_17_0.png" src="../_images/16-MulExpl_17_0.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Generate the barplot above and then edit your script to change the colours and error bar lengths to your taste.</p>
+</div>
+<div class="section" id="plotting-means-and-confidence-intervals">
+<h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this headline">¶</a></h3>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> function again as an exercise to change graph settings and to prepare figures for reports and write ups. This is the figure you should be able to reproduce:</p>
+<p><img alt="image" src="../_images/plotmeans.svg" />
+<small> <center> Means and 95% confidence intervals for log genome size (picograms) in mammals for different trophic levels for a) ground dwelling species and b) other species. </center> </small></p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> and the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to generate the two plots below. You will need to
+set the <code class="docutils literal notranslate"><span class="pre">ylim</span></code> option for the two plots to make them use the same <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">text</span></code> to add labels — the command <code class="docutils literal notranslate"><span class="pre">par('usr')</span></code> will show you the limits of the plot (<span class="math notranslate nohighlight">\(x_{min}, x_{max}, y_{min}, y_{max}\)</span>) and help pick a location for the labels.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Change the <code class="docutils literal notranslate"><span class="pre">par</span></code> settings in your code and redraw the plots to try and make better use of the space. In the example below, the box shows the edges of the R graphics window.</p>
+<p>Note the following about the this figure (<a class="reference external" href="#fig:plotmeans">Figure xx</a>):</p>
+<ul class="simple">
+<li><p><strong>White space</strong>: The default options in R use wide margins and spaced out axes and take up a lot of space that could be used for plotting data. You’ve already seen the <code class="docutils literal notranslate"><span class="pre">par</span></code> function and the options <code class="docutils literal notranslate"><span class="pre">mfrow</span></code> for multiple plots and <code class="docutils literal notranslate"><span class="pre">mar</span></code> to adjust margin size. The option <code class="docutils literal notranslate"><span class="pre">mgp</span></code> adjusts the placement of the axis label, tick labels and tick locations. See <code class="docutils literal notranslate"><span class="pre">?par</span></code> for help on the these options.</p></li>
+<li><p><strong>Main titles</strong>: Adding large titles to graphs is also a bad idea — it uses lots of space to explain something that should be in the figure legend. With multiple plots in a figure, you have to label graphs so that the figure legend can refer to them. You can add labels using <code class="docutils literal notranslate"><span class="pre">text(x,y,'label')</span></code>.</p></li>
+<li><p><strong>Figure legends</strong>: A figure caption and legend should give a clear stand-alone description of the whole figure.</p></li>
+<li><p><strong>Referring to figures</strong>: You <em>must</em> link from your text to your figures — a reader has to know which figures refer to which results. So: ‘There are clear differences in mean genome size between species at different trophic levels and between ground dwelling and other species, <a class="reference external" href="#fig:plotmeans">Figure xx</a>’.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="fitting-the-linear-model">
+<h2>Fitting the linear model<a class="headerlink" href="#fitting-the-linear-model" title="Permalink to this headline">¶</a></h2>
+<p>All those exploratory visualizations suggest:</p>
+<ul class="simple">
+<li><p>Carnivores have smaller genome size; omnivores have larger genome size.</p></li>
+<li><p>Herbivores are somewhere in between, but not consistently.</p></li>
+<li><p>All ground dwelling mammals typically have larger genome sizes.</p></li>
+</ul>
+<p>We suspected these things from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter analyses</span></a>, but now we can see that they might have separate effects. We’ll fit a linear model to explore this and add the two explanatory variables together.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> This is an important section — read it through carefully and ask questions if you are unsure. Copy the code into your script and add comments. <em>Do not just jump to the next action item</em>!</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> First, fit the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">+</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re going to do things right this time and check the model diagnostics
+before we rush into interpretation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16-MulExpl_21_0.png" src="../_images/16-MulExpl_21_0.png" />
+</div>
+</div>
+<p>Examine these diagnostic plots. There are six predicted values now - three trophic levels for each of the two levels of ground dwelling. Those plots look ok so now we can look at the analysis of variance table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A anova: 3 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td> 0.8141063</td><td>0.40705316</td><td> 7.859815</td><td>4.870855e-04</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1</td><td> 2.7469218</td><td>2.74692183</td><td>53.040485</td><td>4.062981e-12</td></tr>
+	<tr><th scope=row>Residuals</th><td>255</td><td>13.2062341</td><td>0.05178915</td><td>       NA</td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><em>Ignore the <span class="math notranslate nohighlight">\(p\)</span> values</em>! Yes, they’re highly significant but we want to understand the model, not rubber stamp it with ‘significant’.</p>
+<p>The sums of squares for the variables are both small compared to the residual sums of squares — there is lots of unexplained variation. We can calculate the <span class="math notranslate nohighlight">\(r^2\)</span> as explained sums of squares over total sums of squares:</p>
+<div class="math notranslate nohighlight">
+\[\frac{0.81 + 2.75}{0.81 + 2.75 + 13.21} = \frac{3.56}{16.77} = 0.212\]</div>
+<p>Trophic level explain much less variation than ground dwelling — this makes intuitive sense from the plots since there are big differences between in the <a class="reference external" href="#fig:plotmeans">figure we generated</a> (a vs b), but small differences within.</p>
+<p>We could also calculate a significance for the whole model by merging the terms. The total explained sums of squares of <span class="math notranslate nohighlight">\(0.81 + 2.75  = 3.56\)</span> uses <span class="math notranslate nohighlight">\(2+1 =3\)</span> degrees of freedom, so the mean sums of squares for all the terms together is <span class="math notranslate nohighlight">\(3.56/3=1.187\)</span>. Dividing this by the residual mean square of 0.052 gives an F of <span class="math notranslate nohighlight">\(1.187 / 0.052 = 22.83\)</span>.</p>
+<p>Now we can look at the summary table to see the coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = logCvalue ~ TrophicLevel + GroundDwelling, data = mammals)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.49902 -0.17844 -0.01462  0.12496  0.86242 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            0.97976    0.03539  27.682  &lt; 2e-16 ***
+TrophicLevelHerbivore  0.07659    0.03969   1.930   0.0547 .  
+TrophicLevelOmnivore   0.17269    0.03977   4.343 2.03e-05 ***
+GroundDwellingYes      0.20947    0.02876   7.283 4.06e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2276 on 255 degrees of freedom
+Multiple R-squared:  0.2124,	Adjusted R-squared:  0.2031 
+F-statistic: 22.92 on 3 and 255 DF,  p-value: 3.602e-13
+</pre></div>
+</div>
+</div>
+</div>
+<p>Starting at the bottom of this output, <code class="docutils literal notranslate"><span class="pre">summary</span></code> has again calculated <span class="math notranslate nohighlight">\(r^2\)</span> for us and also an <span class="math notranslate nohighlight">\(F\)</span> statistic for the whole model, which matches the calculation above.</p>
+<p>The other important bits are the four coefficients. The intercept is now the reference level for two variables: it is the mean for carnivores that are not ground dwelling. We then have differences from this value for being an omnivore or herbivore and for being ground dwelling. There is a big change in genome size associated with ground dwelling and
+omnivory and both of these have large effects sizes, each introducing about a 20% difference in genome size from the non-ground dwelling carnivores. In contrast, herbivory makes a small difference — about 8%.</p>
+<p>Because the difference is small and the standard error is large, the <span class="math notranslate nohighlight">\(t\)</span> value suggests that this difference might arise just be chance. Put another way, it isn’t significant.</p>
+<p>The table below shows how these four coefficients combine to give the predicted values for each of the group means.</p>
+<p><span class="math notranslate nohighlight">\(\begin{array}{|r|rrr|}
+\hline
+         &amp; \textrm{Carnivore} &amp; \textrm{Herbivore} &amp; \textrm{Omnivore}\\
+\hline
+\textrm{Not ground} &amp; {\it 0.98} = 0.98    &amp; {\it 0.98  + 0.08} =1.06    &amp; {\it 0.98 + 0.17} =1.15 \\
+\textrm{Ground}     &amp; {\it 0.98 + 0.21} = 1.19    &amp; {\it 0.98  + 0.08   + 0.21} =1.27   &amp; {\it 0.98 + 0.17  + 0.21} =1.36\\
+\hline
+\end{array}\)</span></p>
+<div class="section" id="predicted-values">
+<h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">¶</a></h3>
+<p>Getting the model predictions by hand in this way is tedious and error prone. There is a handy function called <code class="docutils literal notranslate"><span class="pre">predict</span></code> which uses the model directly to calculate values. The default is to give you the prediction for each point in the original data, but you can also ask for specific predictions.</p>
+<p>The first thing to do is to set up a small data frame containing the explanatory values we want to use. The variable names and the level name have to match <em>exactly</em>, so we’ll use the <code class="docutils literal notranslate"><span class="pre">levels</span></code> function to get the names. We want to look at all six combinations, so we’ll use the <code class="docutils literal notranslate"><span class="pre">rep</span></code> function to set this up. The <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">=</span> <span class="pre">2</span></code> option repeats each value twice in succession; the <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">3</span></code> options repeats the whole set of values three times.</p>
+<p>Let’s do it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># data frame of combinations of variables</span>
+<span class="n">gd</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">),</span> <span class="n">each</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">tl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Carnivore&quot; &quot;Carnivore&quot; &quot;Herbivore&quot; &quot;Herbivore&quot; &quot;Omnivore&quot;  &quot;Omnivore&quot; 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">GroundDwelling</span> <span class="o">=</span> <span class="n">gd</span><span class="p">,</span> <span class="n">TrophicLevel</span> <span class="o">=</span> <span class="n">tl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have the data frame of values we want, we can use <code class="docutils literal notranslate"><span class="pre">predict</span></code>. Just as when we created log values, we can save the output back into a new column in the data frame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span><span class="o">$</span><span class="n">predict</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">predVals</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">predVals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  GroundDwelling TrophicLevel   predict
+1             No    Carnivore 0.9797572
+2            Yes    Carnivore 1.1892226
+3             No    Herbivore 1.0563447
+4            Yes    Herbivore 1.2658102
+5             No     Omnivore 1.1524491
+6            Yes     Omnivore 1.3619145
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not that these are in the same order as the bars from your barplot.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Make a copy of the barplot and arrows code from above and modify it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1.4</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log C value (pg)&#39;</span><span class="p">,</span> <span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;grey70&#39;</span><span class="p">))</span>
+
+<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">len</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">predVals</span><span class="o">$</span><span class="n">predict</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16-MulExpl_33_0.png" src="../_images/16-MulExpl_33_0.png" />
+</div>
+</div>
+<p>The red markers do not match to the calculated means. This is because the model only includes a single difference between ground and non-ground species, which has to be the same for each trophic group. That is, there is no interaction between trophic level and ground / non-ground identity of each species in the current model.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add the code for this plot to your script file.</p>
+<p><a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">Next</span></a>, we will look at interactions, which allows these values to differ using an interaction term in the model.</p>
+<hr class="docutils" />
+<p><a id="fn1"></a>
+[1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="15-anova.html" title="previous page">Linear Models: Analysis of variance</a>
+    <a class='right-next' id="next-link" href="17-MulExplInter.html" title="next page">Linear Models: Multiple variables with interactions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

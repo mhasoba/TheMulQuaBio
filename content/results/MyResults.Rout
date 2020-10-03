@@ -1,0 +1,40 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # A simple R script to illustrate R input-output.   
+> # Run line by line and check inputs outputs to understand what is happening  
+> 
+> MyData <- read.csv("../data/trees.csv", header = TRUE) # import with headers
+> 
+> write.csv(MyData, "../results/MyData.csv") #write it out as a new file
+> 
+> write.table(MyData[1,], file = "../results/MyData.csv",append=TRUE) # Append to it
+Warning message:
+In write.table(MyData[1, ], file = "../results/MyData.csv", append = TRUE) :
+  appending column names to file
+> 
+> write.csv(MyData, "../results/MyData.csv", row.names=TRUE) # write row names
+> 
+> write.table(MyData, "../results/MyData.csv", col.names=FALSE) # ignore column names
+> 
+> proc.time()
+   user  system elapsed 
+  0.156   0.012   0.162 

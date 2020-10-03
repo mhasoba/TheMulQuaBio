@@ -1,0 +1,1282 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experimental design and Data exploration &#8212; TheMulQuaBio</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="\(t\) tests and \(F\) tests" href="13-t_F_tests.html" />
+    <link rel="prev" title="Data management, Exploration and Visualization" href="08-Data_R.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00-Intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data Analyses and Statistics
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Stats-Intro.html">
+   Introduction
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data management, Exploration and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   tests and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html#the-f-test">
+   The
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   test
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#calculating-the-anova-test-statistic">
+   Calculating the ANOVA test statistic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#an-example-anova">
+   An example ANOVA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html#model-simplification">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html#fitting-a-glm">
+   Fitting a GLM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting.html">
+   Model Fitting in Ecology and Evolution
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html#sqlite-with-python">
+   SQLite with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The computing Miniproject
+   <a name="Apx:Miniproj">
+   </a>
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/12-ExpDesign.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        
+        <a class="issues-button"
+            href="https://github.com/mhasoba/Tempura/issues/new?title=Issue%20on%20page%20%2Fnotebooks/12-ExpDesign.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/Tempura/master?urlpath=tree/notebooks/12-ExpDesign.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/Tempura/blob/master/notebooks/12-ExpDesign.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-statistical-parlance">
+   Some statistical parlance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#descriptive-statistics">
+   Descriptive Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#descriptive-statistics-in-r">
+   Descriptive statistics in R
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-types-and-statistical-distributions">
+   Data types and (statistical) distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-distributions-in-r">
+   Sampling from distributions in R
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">
+   Two basic rules of experimental design and sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-general-tips">
+     Some general tips
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-case-study">
+     A case study
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">
+   Visualise distributions of the variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">
+   Take a quick look at effects of certain factors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-distribution-of-the-variable-across-levels-of-a-factor">
+   Compare distribution of the variable across levels of a factor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">
+   Explore further by scatter-plotting two variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-your-results">
+   Save your results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-the-exploratory-graphics">
+     Saving the exploratory graphics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-other-results">
+     Saving other results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-data-exploration-to-statistical-analysis">
+   From data exploration to statistical analysis
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">)</span> <span class="p">;</span> <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.res</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">repr.plot.width</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">repr.plot.height</span><span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="c1"># Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="experimental-design-and-data-exploration">
+<h1>Experimental design and Data exploration<a class="headerlink" href="#experimental-design-and-data-exploration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
+<p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
+<p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
+<p>(b) You might have somebody else’s data to analyse (very common in this era of “Big Data”).</p>
+<p>By the time you have worked through this chapter, you should be able to:</p>
+<ul class="simple">
+<li><p>Provided sufficient information is available, be able to judge whether the sampling design used to generate a particular dataset was appropriate</p></li>
+<li><p>Calculate basic statistical measures on your data to determine its properties.</p></li>
+<li><p>Determine if your sample sizes are adequate, especially for a specific statistical test.</p></li>
+</ul>
+<p>We are going to start off with the simplest of scenarios for statistical testing — that you want to determine whether a sample, or a pair of samples meet some expectation (hypothesis) or not.</p>
+<p>First, some let’s revisit some key concepts and terminology.</p>
+</div>
+<div class="section" id="some-statistical-parlance">
+<h2>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Permalink to this headline">¶</a></h2>
+<p>The following terms are important for you to get familiar with:</p>
+<ul class="simple">
+<li><p><strong>(Statistical) Population</strong>: A <em>complete set</em> of items that share at least one <em>attribute</em> of interest. This attribute of interest is the target of your statistical analysis. For example, if we are interested in studying the weight of year-old cod in the Oceans, the population consists of <em>all</em> year-old cod, but more specifically, the weight measurements of all the individuals of the cod population is what we want to analyse.</p></li>
+</ul>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/Cod.jpg" />
+<small> <center>
+(Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)
+Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</p>
+</center></small>
+<ul class="simple">
+<li><p><strong>(Statistical) Distribution</strong>: A mathematical description (expressed as a mathematical equation) of the properties of a population of interest. Theoreticians have come up with a bunch of distributions (e.g., Gaussian or Normal, Poisson, Binomial, etc.) that are appropriate for different kinds of data. Figuring out which distribution best describes a population of interest is one of the first steps in a statistical analysis. The primary goal of experimental design is to collect and measure sufficient individuals of a population to adequately characterize the statistical properties of an attribute (e.g., body weight of yearling cod) of interest. That is, the <em>statistical distribution</em> that best characterizes the attribute.</p></li>
+<li><p><strong>(Data or Population) Sample</strong>: A data <em>sample</em> is a set of measurements of the attribute of interest collected from a  (statistical) <em>population</em> (all the individuals of interest) by a defined procedure (<em>sampling methodology</em>). In the cod example above, this could be the weight of every individual of a <em>subset</em> (the <em>sample</em>) of the year-old cod population. This could be from a particular location, such as the Atlantic ocean.</p></li>
+<li><p><strong>(Statistical) Parameter</strong> :   A measure of some attribute of the (theoretical) <em>statistical distribution</em> that is supposed to represent your population. An example would be the average weight of <em>all</em> yearling cod, which presumably follow some sort of distribution. In practice, this is not measurable because the population is much too large or incompletely inaccessible/invisible — imagine measuring the weight of every year-old cod individual in the Atlantic ocean!</p></li>
+<li><p><strong>Statistic</strong>(singular):  An <em>estimate</em> of a statistical parameter of the population of interest, obtained by calculating the measure for a <em>sample</em>. An example would be the average or mean weight of individuals in a sample of one-year old cod in the Atlantic Ocean. This is also known as a <em>descriptive statistic</em>. Therefore, a <em>Statistic</em> is to a <em>Statistical Parameter</em> what a  <em>Sample</em> is to the (Statistical) <em>Population</em>. For example, the average of a sample of cod weights is a statistic that  <em>estimates</em> the “real” average of the weights of the entire one-year Cod population (which is its statistical parameter). This real average is also the mean value of the theoretical distribution (e.g., Gaussian) that the population is expected to follow.</p></li>
+<li><p><strong>Hypothesis</strong>: An informed  <em>postulate</em> about an attribute of your population of interest. For example, you may hypothesize that the one-year old cod population’s mean weight has declined over the last two decades because of preferential fishing of larger individuals. You will typically confront your main hypothesis with a <em>Null Hypothesis</em>, to minimize the risk of making a significant <em>Type I error</em>. This is the probability of wrongly accepting an <em>alternative (or main) hypothesis</em> even is not really true, and rejecting the null hypothesis (e.g., the yearling cods have in reality not declined in weight, but you wrongly infer that they have). This is a big NO NO from a scientific and philosophical standpoint. The rate or probability of the Type I error is denoted by the Greek letter <span class="math notranslate nohighlight">\(\alpha\)</span>, and equals the <em>significance level</em> of a statistical test. Wrongly rejecting a true alternative (main) hypothesis is also  a <em>Type II</em> error</p></li>
+</ul>
+</div>
+<div class="section" id="descriptive-statistics">
+<h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h2>
+<p>The key statistical measures that describe a sample (or a population) are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic_mean"><strong>Mean</strong>  (or average, or more precisely, the arithmetic mean)</a>:  This is a measure of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_tendency"><em>central tendency</em></a> of the sample and population (what values most of the data tend to have). Given a sample <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_n\)</span> of size <span class="math notranslate nohighlight">\(n\)</span>, the mean is typically denoted by a <span class="math notranslate nohighlight">\(\bar{x}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\bar{x} =  \frac{x_{1} + x_{2} + \dots +x_{n}}{n} = \bar{x} = \frac{\sum_{i=1}^n x_i}{n}\]</div>
+<p>That is, it is the sum of all the values in a sample divided by the number, <span class="math notranslate nohighlight">\(n\)</span>, of items in the sample.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation"><strong>Standard deviation</strong></a>: A measure of spread of the population around the mean. This is typically denoted by <span class="math notranslate nohighlight">\(s\)</span>,and is calculated as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{\frac{(\bar{x} - x_{1})^{2} + (\bar{x} - x_{2})^2 + \dots + (\bar{x} - x_{n})^{2}}{n-1}} =  \sqrt{\frac{\sum_{i=1}^n (\bar{x} - x_{i})^2}{n-1}}\]</div>
+<p>That is, it is the square root of the sum of squares (“SS”) of the differences between each item in the sample and the mean, divided by the <em>degrees of freedom, “df”</em> remaining in the data set (<span class="math notranslate nohighlight">\(n-1\)</span>). df is the sample size, <span class="math notranslate nohighlight">\(n\)</span>, minus the number of statistical parameters estimated from the data set. This is to reduce the  <em>bias</em> in your <em>estimate</em> of the statistic, as you are calculating it from the sample, and not the whole theoretical population.</p>
+<p>Thus, the formula for <span class="math notranslate nohighlight">\(s\)</span> above has <span class="math notranslate nohighlight">\(n-1\)</span> in its denominator because, to work out the standard deviation, you must have already estimated the mean (<span class="math notranslate nohighlight">\(\bar{x}\)</span>) from the same data set. This removes 1 degree of freedom. Also, note that the sample variance, <span class="math notranslate nohighlight">\(s^2\)</span> is the square of standard deviation. Or, in other words, the standard deviation is the square-root of the variance!</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Median"><strong>Median</strong></a>: The above two statistics (mean and sd) are particularly meaningful when the sample and population have a symmetric distribution (e.g., normal or gaussian). When the distribution is not symmetric (that is, it is <a class="reference external" href="https://en.wikipedia.org/wiki/Skewness"><em>skewed</em></a>), the <em>median</em>  is a better measure of central tendency. This is the middle value in the ordered set of data. That is, exactly 50% of the data lie below and 50% lie above the median.</p></li>
+<li><p>Other descriptive statistics you should keep in mind is the <a class="reference external" href="https://en.wikipedia.org/wiki/Range_(statistics)">range</a> (difference between the largest and smallest values), and the <a class="reference external" href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals <span class="math notranslate nohighlight">\([{1\over4}, {1\over 2},{3\over 4}, 1]\)</span> or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p></li>
+</ul>
+</div>
+<div class="section" id="descriptive-statistics-in-r">
+<h2>Descriptive statistics in R<a class="headerlink" href="#descriptive-statistics-in-r" title="Permalink to this headline">¶</a></h2>
+<p>Here are the R commands for the key descriptive statistics:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
+<th class="text-align:left head"><p>Functionality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">mean(x)</span></code></p></td>
+<td class="text-align:left"><p>Compute mean (of a vector or matrix)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">sd(x)</span></code></p></td>
+<td class="text-align:left"><p>Standard deviation</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">var(x)</span></code></p></td>
+<td class="text-align:left"><p>Variance</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">median(x)</span></code></p></td>
+<td class="text-align:left"><p>Median</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">quantile(x,0.05)</span></code></p></td>
+<td class="text-align:left"><p>Compute the 0.05 quantile</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">range(x)</span></code></p></td>
+<td class="text-align:left"><p>Range of the data</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"> <span class="pre">min(x)</span></code></p></td>
+<td class="text-align:left"><p>Minimum</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">max(x)</span></code></p></td>
+<td class="text-align:left"><p>Maximum</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">sum(x)</span></code></p></td>
+<td class="text-align:left"><p>Sum all elements</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-types-and-statistical-distributions">
+<h2>Data types and (statistical) distributions<a class="headerlink" href="#data-types-and-statistical-distributions" title="Permalink to this headline">¶</a></h2>
+<p>You will typically encounter or sample the following main types of data:</p>
+<ul class="simple">
+<li><p><strong>Continuous numeric</strong>: Data that can take decimal values (real numbers) such as human height or weight. These may be unbounded (any value between negative infinity to positive infinity), or bounded (e.g., between or zero and some upper positive number) like human weight. This is the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
+<li><p><strong>Discrete numeric</strong>: Integer (whole) numbers such as counts of individuals in a population, e.g., The number of bacteria in a ml of pond water. This is the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type in R.</p></li>
+<li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This is also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
+<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference external" href="08-Data_R.ipynb#Basic-plotting-commands">used previously</a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
+<li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
+</ul>
+<p>While designing experiments or exploring data, you need to keep in mind that each data type will often be best-represented by a particular <em>statistical distribution</em>. For example, continuous numeric data are <em>often</em> normally distributed. On the other hand, count data are likely to be distributed according to the Poisson distribution.</p>
+<p>If you are lucky, you will mostly have to deal with data that are continuous or discrete numeric, which are the most straightforward to analyse using Linear models (more on that in subsequent chapters). However, some of the most interesting and important problems in biology involve proportion (percentage), categorical and binary data (e.g., Presence or absence of a disease symptom).</p>
+<p>For example, think about what type of data, and what type of distribution, a sample of the following is likely to be:</p>
+<ul class="simple">
+<li><p>Wavelength of light</p></li>
+<li><p>Temperature</p></li>
+<li><p>Egg clutch size</p></li>
+<li><p>Rate of a reaction</p></li>
+<li><p>Eye-colour</p></li>
+<li><p>Score in Scrabble</p></li>
+<li><p>Undregraduate Degree class</p></li>
+<li><p>Ground-cover of grass in a quadrat</p></li>
+<li><p>Winning side in chess</p></li>
+</ul>
+</div>
+<div class="section" id="sampling-from-distributions-in-r">
+<h2>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Permalink to this headline">¶</a></h2>
+<p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling “experiment” . In particular, the following R commands are important:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
+<th class="text-align:left head"><p>Functionality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rnorm(n,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-align:left"><p>Draw <code class="docutils literal notranslate"><span class="pre">n</span></code> <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normally-distributed</a> random numbers with mean = 0 and sd = 1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-align:left"><p>Density function of the normal distribution, which can be used to calculate the probability of a particular event or a set of independent events</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">qnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-align:left"><p>Cumulative density function</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">runif(n,</span> <span class="pre">min=0,</span> <span class="pre">max=2)</span></code></p></td>
+<td class="text-align:left"><p>Twenty random numbers from uniform distribution with bounds <span class="math notranslate nohighlight">\([0, 2]\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rpois(n,</span> <span class="pre">lambda=10)</span></code></p></td>
+<td class="text-align:left"><p>Twenty random numbers from the Poisson(<span class="math notranslate nohighlight">\(\lambda\)</span>) distribution</p></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s try some of these. Generate a random sample of 10:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1.14484282062199</li><li>-0.327822780545907</li><li>0.575932327322446</li><li>-1.18161207411442</li><li>0.310801072658146</li><li>0.828871508811509</li><li>0.547015605699791</li><li>-1.34924854521339</li><li>-0.69890109470959</li><li>-1.01692741739124</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_5_0.png" src="../_images/12-ExpDesign_5_0.png" />
+</div>
+</div>
+<p>Probability of getting a value of 1 or -1 from a normally distributed random number with mean = 0 and sd = 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.241970724519143</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.241970724519143</div></div>
+</div>
+<p>Probability of getting large values given the same distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">7.69459862670642e-23</div></div>
+</div>
+<p>Very small!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0</div></div>
+</div>
+<p>Zero!</p>
+<p>Look up the documentation and examples for the other commands/functions listed above and many others that are available.</p>
+</div>
+<div class="section" id="two-basic-rules-of-experimental-design-and-sampling">
+<h2>Two basic rules of experimental design and sampling<a class="headerlink" href="#two-basic-rules-of-experimental-design-and-sampling" title="Permalink to this headline">¶</a></h2>
+<p>In general, while designing experiments, and sampling from a  <em>population</em>, there are two key (and simple) rules:</p>
+<ol class="simple">
+<li><p><strong>The more you sample, the more your sample’s distribution will look like the population distribution</strong> (obviously!)</p></li>
+<li><p><strong>The more you sample, the closer will your sample statistic be to the population’s statistical parameter</strong> (the central limit theorem; when the statistical parameter is the mean, this is the “law of large numbers”)</p></li>
+</ol>
+<p>Let’s test rule 1 using R. We will perform a “experiment” by generating random samples of increasing size from the normal distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample5</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Draw 5 normal random nos w/ mean 0 and s.d. 1:</span>
+<span class="n">MySample10</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> 
+<span class="n">MySample20</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> 
+<span class="n">MySample40</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">MySample80</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">80</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">MySample160</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">160</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s visualize these “samples”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfcol</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span> <span class="c1">#initialize multi-paneled plot</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample5</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 5&#39;</span><span class="p">)</span> 
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample10</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 10&#39;</span><span class="p">)</span> 
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample20</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 20&#39;</span><span class="p">)</span> 
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample40</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 40&#39;</span><span class="p">)</span> 
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample80</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 80&#39;</span><span class="p">)</span> 
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample160</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 160&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_18_0.png" src="../_images/12-ExpDesign_18_0.png" />
+</div>
+</div>
+<p>Rule 2 above states that if I was to repeat even <span class="math notranslate nohighlight">\(n = 5\)</span> sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
+<p>If you give due regard to the two rules of experimental design above, and consider the type of distribution your population of interest follows, you will have taken some basic, important steps towards designing an effective study.</p>
+<p>A more rigorous method for designing experiments is to perform a <a class="reference external" href="https://en.wikipedia.org/wiki/Power_(statistics)">power analysis</a>. Power analyses allow you to estimate the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size. Covering this is outside the scope of the current course, but you might want to have a look at <a class="reference external" href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
+<p>OK, so you have performed your experiments or field sampling, or some data have fallen into your lap. Let’s move on to data exploration.</p>
+</div>
+<div class="section" id="data-exploration">
+<h2>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="some-general-tips">
+<h3>Some general tips<a class="headerlink" href="#some-general-tips" title="Permalink to this headline">¶</a></h3>
+<p>Statistics is a bit of an art.</p>
+<p>That is why <em>a priori</em> visualization is important, and directly cutting to the (statistical) chase can often leave one floundering with confusing coefficient estimates and model fits (or over-fits) and overall uncertainty about whether you have picked the right statistical test.</p>
+<ul class="simple">
+<li><p>So no matter what, always first look at the distribution of the response (the “raw data”). If you see multi-modality (multiple peaks), it might mean that some process or effect is generating it. So, in the dragonfly-damselfly example below, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies <span class="math notranslate nohighlight">\(\mu_A\)</span> and <span class="math notranslate nohighlight">\(\mu_B\)</span>).</p></li>
+<li><p>If it is a regression-type problem, look at the marginal distributions (distributions of the x and y variables) - similar insights can be gained.</p></li>
+<li><p>Also, one can look at the distributions within the effects to look for consistency of both shape (sample of the underlying population’s distribution type) and spread (sample of the underlying population’s variance).</p>
+<ul>
+<li><p>If there is consistency in both, the battle is pretty much won, because normal or not, there are statistical methods (GLMs, for example) that can be used.</p></li>
+<li><p>If there is consistency in distribution type but not in variance, half the battle is won. Unequal variances very often tend to be a problem with unbalanced sampling (across effects/treatments), so you can throw in mixed effects (so, GLMMs) which allows you to use empirical information (the data) across effects to help correct for it.</p></li>
+<li><p>And also, very often, tests are robust to unequal variances (you would need to find a statistical paper, or do your own simulations to support this - so very often better to stick with mixed effects).</p></li>
+<li><p>If there is consistency in variance but not shape, or inconsistency in both, then you have a harder problem, and may have to resort to transforming some data and not others (not ideal, to be avoided).</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="a-case-study">
+<h3>A case study<a class="headerlink" href="#a-case-study" title="Permalink to this headline">¶</a></h3>
+<p>As a case study, we will use data from a paper looking at the relationship between genome size and body size across species of dragonflies and damselflies (<a class="reference external" href="http://en.wikipedia.org/wiki/Odonata">Odonata</a>):</p>
+<blockquote>
+<div><p>Ardila-Garcia, AM &amp; Gregory, TR (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
+</div></blockquote>
+<p>You will work with the script file <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code>, which performs exploratory analyses on the data in <code class="docutils literal notranslate"><span class="pre">GenomeSize.csv</span></code>. Let’s go through the code block by block.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Get the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> from the TheMulQuaBio repository and put it in your own <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Also get <code class="docutils literal notranslate"><span class="pre">GenomeSize.csv</span></code></p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Open the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> in RStudio (or some other text editor).</p>
+<p>Use the shift and arrow keys to select the code in block (2), including the comments. Now use the keyboard short cut (look back at the R Chapters if you don’t know how!) to run the highlighted block of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the relative path <code class="docutils literal notranslate"><span class="pre">../</span></code>, which will work assuming that you are working from your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory (that is, you have set your working directory (using <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>) to <code class="docutils literal notranslate"><span class="pre">code</span></code>).</p>
+<p>This first line (block (1)) reads in the data, as you have learned previously.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now run the code in block (2) line by line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="c1"># this won&#39;t look so nice on your computer!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A data.frame: 6 × 16</caption>
+<thead>
+	<tr><th></th><th scope=col>Suborder</th><th scope=col>Family</th><th scope=col>Species</th><th scope=col>GenomeSize</th><th scope=col>GenomeSE</th><th scope=col>GenomeN</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>HeadLength</th><th scope=col>ThoraxLength</th><th scope=col>AdbdomenLength</th><th scope=col>ForewingLength</th><th scope=col>HindwingLength</th><th scope=col>ForewingArea</th><th scope=col>HindwingArea</th><th scope=col>MorphologyN</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna canadensis   </td><td>2.20</td><td>  NA</td><td>1</td><td>0.159</td><td>67.58</td><td>6.83</td><td>11.81</td><td>48.94</td><td>45.47</td><td>45.40</td><td>369.57</td><td>483.61</td><td>2</td></tr>
+	<tr><th scope=row>2</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna constricta   </td><td>1.76</td><td>0.06</td><td>4</td><td>0.228</td><td>71.97</td><td>6.84</td><td>10.72</td><td>54.41</td><td>46.00</td><td>45.48</td><td>411.15</td><td>517.38</td><td>3</td></tr>
+	<tr><th scope=row>3</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna eremita      </td><td>1.85</td><td>  NA</td><td>1</td><td>0.312</td><td>78.80</td><td>6.27</td><td>16.19</td><td>56.33</td><td>51.24</td><td>49.47</td><td>460.72</td><td>574.33</td><td>1</td></tr>
+	<tr><th scope=row>4</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna tuberculifera</td><td>1.78</td><td>0.10</td><td>2</td><td>0.218</td><td>72.44</td><td>6.62</td><td>12.53</td><td>53.29</td><td>49.84</td><td>48.82</td><td>468.74</td><td>591.42</td><td>2</td></tr>
+	<tr><th scope=row>5</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna umbrosa      </td><td>2.00</td><td>  NA</td><td>1</td><td>0.207</td><td>73.05</td><td>4.92</td><td>11.11</td><td>57.03</td><td>46.51</td><td>45.97</td><td>382.48</td><td>481.44</td><td>1</td></tr>
+	<tr><th scope=row>6</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna verticalis   </td><td>1.59</td><td>  NA</td><td>1</td><td>0.220</td><td>66.25</td><td>6.48</td><td>11.64</td><td>48.13</td><td>45.91</td><td>44.91</td><td>400.40</td><td>486.97</td><td>1</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="c1"># Check what the data columns contain</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	100 obs. of  16 variables:
+ $ Suborder      : chr  &quot;Anisoptera&quot; &quot;Anisoptera&quot; &quot;Anisoptera&quot; &quot;Anisoptera&quot; ...
+ $ Family        : chr  &quot;Aeshnidae&quot; &quot;Aeshnidae&quot; &quot;Aeshnidae&quot; &quot;Aeshnidae&quot; ...
+ $ Species       : chr  &quot;Aeshna canadensis&quot; &quot;Aeshna constricta&quot; &quot;Aeshna eremita&quot; &quot;Aeshna tuberculifera&quot; ...
+ $ GenomeSize    : num  2.2 1.76 1.85 1.78 2 1.59 1.44 1.16 1.44 1.2 ...
+ $ GenomeSE      : num  NA 0.06 NA 0.1 NA NA NA NA NA NA ...
+ $ GenomeN       : int  1 4 1 2 1 1 1 1 1 1 ...
+ $ BodyWeight    : num  0.159 0.228 0.312 0.218 0.207 0.22 0.344 0.128 0.392 0.029 ...
+ $ TotalLength   : num  67.6 72 78.8 72.4 73 ...
+ $ HeadLength    : num  6.83 6.84 6.27 6.62 4.92 6.48 7.53 5.74 8.05 5.28 ...
+ $ ThoraxLength  : num  11.8 10.7 16.2 12.5 11.1 ...
+ $ AdbdomenLength: num  48.9 54.4 56.3 53.3 57 ...
+ $ ForewingLength: num  45.5 46 51.2 49.8 46.5 ...
+ $ HindwingLength: num  45.4 45.5 49.5 48.8 46 ...
+ $ ForewingArea  : num  370 411 461 469 382 ...
+ $ HindwingArea  : num  484 517 574 591 481 ...
+ $ MorphologyN   : int  2 3 1 2 1 1 4 1 1 1 ...
+</pre></div>
+</div>
+</div>
+</div>
+<p>Have a good look at the data. There are three factors (categorical variables): Suborder, splitting the species into dragonflies (Anisoptera) and damselflies (Zygoptera); Family, splitting the species further into 9 taxonomic families; and Species, giving the latin
+binomial for each species in the table. The remaining columns are measurements of genome size (in picograms) and measurements of body size and morphology (in grams, mm and mm<span class="math notranslate nohighlight">\(^2\)</span>). There are two columns ending with an N that show the sample size from which the observations for each species are taken and a column ending SE showing standard errors.</p>
+<p>One thing you should see in the output from <code class="docutils literal notranslate"><span class="pre">head</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code> is that there are some observations marked as <code class="docutils literal notranslate"><span class="pre">NA</span></code> – this is the way R shows <em>missing data</em>. It is important to check how much missing data there are in a dataset, so we’ll use another function that includes this information. Many R functions refuse to use variables containing missing data — this is just R being careful and you can add <code class="docutils literal notranslate"><span class="pre">na.rm=TRUE</span></code> into most functions to avoid this problem.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the <code class="docutils literal notranslate"><span class="pre">summary</span></code> line from the script window (block 3).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Suborder            Family            Species            GenomeSize    
+ Length:100         Length:100         Length:100         Min.   :0.4100  
+ Class :character   Class :character   Class :character   1st Qu.:0.7375  
+ Mode  :character   Mode  :character   Mode  :character   Median :0.9400  
+                                                          Mean   :1.0143  
+                                                          3rd Qu.:1.1800  
+                                                          Max.   :2.3600  
+                                                                          
+    GenomeSE          GenomeN        BodyWeight       TotalLength   
+ Min.   :0.00600   Min.   : 1.00   Min.   :0.00200   Min.   :22.82  
+ 1st Qu.:0.02000   1st Qu.: 1.00   1st Qu.:0.01200   1st Qu.:32.35  
+ Median :0.03000   Median : 1.00   Median :0.04000   Median :41.41  
+ Mean   :0.03398   Mean   : 2.36   Mean   :0.07486   Mean   :43.76  
+ 3rd Qu.:0.04000   3rd Qu.: 3.00   3rd Qu.:0.10975   3rd Qu.:51.74  
+ Max.   :0.10000   Max.   :12.00   Max.   :0.39200   Max.   :82.39  
+ NA&#39;s   :55                        NA&#39;s   :2         NA&#39;s   :2      
+   HeadLength    ThoraxLength    AdbdomenLength  ForewingLength 
+ Min.   :1.11   Min.   : 3.150   Min.   :13.29   Min.   :12.07  
+ 1st Qu.:1.91   1st Qu.: 5.645   1st Qu.:24.62   1st Qu.:20.76  
+ Median :3.75   Median : 7.585   Median :28.39   Median :27.55  
+ Mean   :3.62   Mean   : 8.283   Mean   :31.89   Mean   :29.74  
+ 3rd Qu.:4.93   3rd Qu.:10.720   3rd Qu.:38.12   3rd Qu.:36.89  
+ Max.   :8.05   Max.   :16.190   Max.   :61.35   Max.   :55.99  
+ NA&#39;s   :3      NA&#39;s   :2        NA&#39;s   :2       NA&#39;s   :4      
+ HindwingLength   ForewingArea     HindwingArea     MorphologyN    
+ Min.   :11.45   Min.   : 21.04   Min.   : 19.39   Min.   : 1.000  
+ 1st Qu.:19.95   1st Qu.: 62.94   1st Qu.: 56.66   1st Qu.: 1.000  
+ Median :26.80   Median :145.95   Median :177.03   Median : 2.000  
+ Mean   :28.54   Mean   :174.32   Mean   :205.84   Mean   : 2.949  
+ 3rd Qu.:35.40   3rd Qu.:226.91   3rd Qu.:279.36   3rd Qu.: 4.000  
+ Max.   :54.59   Max.   :527.92   Max.   :632.77   Max.   :13.000  
+ NA&#39;s   :4       NA&#39;s   :4        NA&#39;s   :4        NA&#39;s   :2       
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that each column gets a separate summary! Look carefully at the output. There is a column for each variable: for factors, it provides a short table of the number of observations in each level and for continuous variables, it provides some simple summary statistics about the distribution (range, quartiles, mean and median), and the number of missing values.</p>
+</div>
+</div>
+<div class="section" id="visualise-distributions-of-the-variables">
+<h2>Visualise distributions of the variables<a class="headerlink" href="#visualise-distributions-of-the-variables" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">summary</span></code> function shows us the basic distribution (range, quartiles, mean and median) of a continuous variable, but this is easier to interpret if we visualise it. We’ll look at two ways:</p>
+<ul class="simple">
+<li><p><strong>Histogram</strong>: In the simplest form, this shows the number of observations of the variable falling into a set of bins spanning the range of the variable. The option <code class="docutils literal notranslate"><span class="pre">breaks</span></code> allows you to change the number of bins.</p></li>
+<li><p><strong>Density plot</strong>:   Rather than showing blocks of counts, the density plot shows a continuous smooth line. This is a <em>smoothed</em> estimate of the how frequently data is observed across the range of values and the <em>bandwidth</em> (<code class="docutils literal notranslate"><span class="pre">bw=0.1</span></code>) controls the degree of the smoothing.</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (4) of the script and run each line separately, looking at the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">hist</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_28_0.png" src="../_images/12-ExpDesign_28_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_29_0.png" src="../_images/12-ExpDesign_29_0.png" />
+</div>
+</div>
+<p>In your code editor, change the values of <code class="docutils literal notranslate"><span class="pre">breaks</span></code> and <code class="docutils literal notranslate"><span class="pre">bw</span></code> (gfor example <code class="docutils literal notranslate"><span class="pre">breaks=5</span></code> and
+<code class="docutils literal notranslate"><span class="pre">bw=0.05</span></code>), and re-run these lines to see how this affects the graph. Basically, with both types of graph you can look at the data too coarsely or too finely.</p>
+<p>The graphs you’ve just created look at genome size. Add a copy of those two lines of code in the script and change them to look at the variable <code class="docutils literal notranslate"><span class="pre">TotalLength</span></code>. You will need to alter the <code class="docutils literal notranslate"><span class="pre">density</span></code> function to ignore missing values (<code class="docutils literal notranslate"><span class="pre">na.rm=TRUE</span></code>) and to play around with the bandwidth. You should get something like this:</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/histTL1.png" /></p>
+<p><img alt="image" src="../_images/histTL2.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="take-a-quick-look-at-effects-of-certain-factors">
+<h2>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Permalink to this headline">¶</a></h2>
+<p>R has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the <span class="math notranslate nohighlight">\(y\)</span> axis and the explanatory
+variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Genome</span> <span class="pre">Size</span> <span class="pre">~</span> <span class="pre">Suborder</span></code></p>
+<p>This formula tells R to model genome size ‘as a function of’ (<code class="docutils literal notranslate"><span class="pre">~</span></code>) the suborders of Odonata. When using this syntax in a <code class="docutils literal notranslate"><span class="pre">plot</span></code> function, the result will be to plot genome size as a function of the suborders.</p>
+</div>
+<div class="section" id="compare-distribution-of-the-variable-across-levels-of-a-factor">
+<h2>Compare distribution of the variable across levels of a factor<a class="headerlink" href="#compare-distribution-of-the-variable-across-levels-of-a-factor" title="Permalink to this headline">¶</a></h2>
+<p>Although looking at the distribution of variables is a good first step, we often want to compare distributions. In this case, we might want to know how genome size varies between dragonflies and damselflies. The first way we will look at is using boxplots — these show the median and the 25% and 75% quantiles as a box, with whiskers extending to the minimum and maximum. More extreme outliers are plotted independently as points. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a boxplot when the explanatory variable is a factor.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block 5 of the script and run the first line, looking at genome size between the two suborders:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in xy.coords(x, y, xlabel, ylabel, log):
+“NAs introduced by coercion”
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in min(x):
+“no non-missing arguments to min; returning Inf”
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in max(x):
+“no non-missing arguments to max; returning -Inf”
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="o">...</span><span class="p">):</span> <span class="n">need</span> <span class="n">finite</span> <span class="s1">&#39;xlim&#39;</span> <span class="n">values</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">plot</span><span class="o">.</span><span class="n">formula</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">do</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">funname</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">mf</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span> <span class="n">y</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="n">yl</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="n">xl</span><span class="p">),</span> <span class="n">dots</span><span class="p">))</span>
+<span class="mi">4</span><span class="o">.</span> <span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.76</span><span class="p">,</span> <span class="mf">1.85</span><span class="p">,</span> <span class="mf">1.78</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span> <span class="mf">1.44</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">,</span> <span class="mf">1.44</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.31</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">1.54</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.36</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.57</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.62</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> <span class="mf">1.27</span><span class="p">,</span> <span class="mf">0.74</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.41</span><span class="p">,</span> <span class="mf">0.68</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.62</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.11</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.11</span><span class="p">,</span> <span class="mf">0.89</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.26</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.19</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.34</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">,</span> <span class="mf">1.53</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.59</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.62</span><span class="p">),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;GenomeSize&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;Suborder&quot;</span><span class="p">)</span>
+<span class="mi">5</span><span class="o">.</span> <span class="n">plot</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Anisoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="s2">&quot;Zygoptera&quot;</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.76</span><span class="p">,</span> <span class="mf">1.85</span><span class="p">,</span> <span class="mf">1.78</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span> <span class="mf">1.44</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">,</span> <span class="mf">1.44</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.31</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">1.54</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.36</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.57</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.62</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> <span class="mf">1.27</span><span class="p">,</span> <span class="mf">0.74</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.41</span><span class="p">,</span> <span class="mf">0.68</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.62</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.11</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.11</span><span class="p">,</span> <span class="mf">0.89</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">1.26</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.19</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.34</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">,</span> <span class="mf">1.53</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.59</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> 
+ <span class="o">.</span> <span class="mf">0.62</span><span class="p">),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;GenomeSize&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;Suborder&quot;</span><span class="p">)</span>
+<span class="mi">6</span><span class="o">.</span> <span class="n">localWindow</span><span class="p">(</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">asp</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="mi">7</span><span class="o">.</span> <span class="n">plot</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/12-ExpDesign_31_4.png" src="../_images/12-ExpDesign_31_4.png" />
+</div>
+</div>
+<p>Duplicate and alter this line to look at the same plot for total length. You should get a plot like this:</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/bxpTL.png" /></p>
+<hr class="docutils" />
+<p>Although histograms are great for one variable, plotting two histograms on top of one another rarely works well because the overlapping bars are hard to interpret (recall the predator-prey body size example). Density plots don’t have this problem, but it takes a bit more code to create the plot.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Block 6 of the script uses the <code class="docutils literal notranslate"><span class="pre">subset</span></code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Anisoptera</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Anisoptera&#39;</span><span class="p">)</span> <span class="c1">#The dragonflies</span>
+<span class="n">Zygoptera</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Zygoptera&#39;</span><span class="p">)</span> <span class="c1">#The damselflies</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that the arrow symbol (<code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>) is used to save the output of a function into a new
+object in R — if you use <code class="docutils literal notranslate"><span class="pre">ls()</span></code> in the console, you will see the two new data frames.</p>
+<p>In the console, use <code class="docutils literal notranslate"><span class="pre">str</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to explore these two new dataframes. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">Anisoptera</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<thead><tr><th scope=col>Suborder</th><th scope=col>Family</th><th scope=col>Species</th><th scope=col>GenomeSize</th><th scope=col>GenomeSE</th><th scope=col>GenomeN</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>HeadLength</th><th scope=col>ThoraxLength</th><th scope=col>AdbdomenLength</th><th scope=col>ForewingLength</th><th scope=col>HindwingLength</th><th scope=col>ForewingArea</th><th scope=col>HindwingArea</th><th scope=col>MorphologyN</th></tr></thead>
+<tbody>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna canadensis   </td><td>2.20                </td><td>  NA                </td><td>1                   </td><td>0.159               </td><td>67.58               </td><td>6.83                </td><td>11.81               </td><td>48.94               </td><td>45.47               </td><td>45.40               </td><td>369.57              </td><td>483.61              </td><td>2                   </td></tr>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna constricta   </td><td>1.76                </td><td>0.06                </td><td>4                   </td><td>0.228               </td><td>71.97               </td><td>6.84                </td><td>10.72               </td><td>54.41               </td><td>46.00               </td><td>45.48               </td><td>411.15              </td><td>517.38              </td><td>3                   </td></tr>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna eremita      </td><td>1.85                </td><td>  NA                </td><td>1                   </td><td>0.312               </td><td>78.80               </td><td>6.27                </td><td>16.19               </td><td>56.33               </td><td>51.24               </td><td>49.47               </td><td>460.72              </td><td>574.33              </td><td>1                   </td></tr>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna tuberculifera</td><td>1.78                </td><td>0.10                </td><td>2                   </td><td>0.218               </td><td>72.44               </td><td>6.62                </td><td>12.53               </td><td>53.29               </td><td>49.84               </td><td>48.82               </td><td>468.74              </td><td>591.42              </td><td>2                   </td></tr>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna umbrosa      </td><td>2.00                </td><td>  NA                </td><td>1                   </td><td>0.207               </td><td>73.05               </td><td>4.92                </td><td>11.11               </td><td>57.03               </td><td>46.51               </td><td>45.97               </td><td>382.48              </td><td>481.44              </td><td>1                   </td></tr>
+	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna verticalis   </td><td>1.59                </td><td>  NA                </td><td>1                   </td><td>0.220               </td><td>66.25               </td><td>6.48                </td><td>11.64               </td><td>48.13               </td><td>45.91               </td><td>44.91               </td><td>400.40              </td><td>486.97              </td><td>1                   </td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Now that we’ve got the data separated we can go about plotting the two curves.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the next two lines of code in block 6. The first draws the plot for damselflies and the second adds a line for the dragonflies:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Zygoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">2.7</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1.7</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Anisoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_37_0.png" src="../_images/12-ExpDesign_37_0.png" />
+</div>
+</div>
+<p>Duplicate these last two lines of code and edit them to generate a similar plot for total body length. You will need to edit the code to change the range of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes (<code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>) to get both curves to fit neatly on to the graph. It should look like this:</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/densTL.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="explore-further-by-scatter-plotting-two-variables">
+<h2>Explore further by scatter-plotting two variables<a class="headerlink" href="#explore-further-by-scatter-plotting-two-variables" title="Permalink to this headline">¶</a></h2>
+<p>Once we’ve looked at the distribution of variables, the next thing is to look at the relationships between continuous variables using scatterplots. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a scatterplot when the explanatory variable is continuous, so we can use the same syntax and structure as for the boxplot above.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (7) of the script and run the plot commands. The third one plots genome size as a function of body weight:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">BodyWeight</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_40_0.png" src="../_images/12-ExpDesign_40_0.png" />
+</div>
+</div>
+<p>The scatterplot seems to show a weak relationship between genome size and morphology. But maybe dragonflies and damselflies show different relationships, and we can’t distinguish between them! To explore this possibility, we need to plot the two orders using different colours or plot characters. In the next code block, we will customize the plots to show different types of points for each suborder. It is done by using <em>indexing</em> (recall the first <a class="reference external" href="07-R.ipynb#Acessing-parts-of-data-stuctures:-Indices-and-Indexing">R Chapter</a>).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the first three lines of code in block 8. There are two levels of suborder and these two lines set up a colour and a plot symbol that will be used for each one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span> <span class="c1">#Confirm that there are two levels under suborders </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Factor w/ 2 levels &quot;Anisoptera&quot;,&quot;Zygoptera&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that there are two levels, with Anisoptera first and then Zygoptera. You can also see that these are stored as numeric values: 1 refers to the first level and 2 the second. We can use these as <em>indices</em> to pair the colours and plot symbols to each suborder. These are set in the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function using the options <code class="docutils literal notranslate"><span class="pre">col=</span></code> and <code class="docutils literal notranslate"><span class="pre">pch=</span></code>, which stands for ” <code class="docutils literal notranslate"><span class="pre">p</span></code>lot <code class="docutils literal notranslate"><span class="pre">ch</span></code>aracter”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myColours</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="c1"># So choose two colours</span>
+<span class="n">mySymbols</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span> <span class="c1"># And two different markers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Run the next plot command to see the resulting plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">TotalLength</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="c1">#Now plot again</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">myColours</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span>
+<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Total length (mm)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">)</span>
+
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span> <span class="c1">#Add legend at top left corner</span>
+       <span class="n">col</span><span class="o">=</span> <span class="n">myColours</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12-ExpDesign_46_0.png" src="../_images/12-ExpDesign_46_0.png" />
+</div>
+</div>
+<p>Thus each point gets the appropriate colour and symbol for its group. This is the indexing: <code class="docutils literal notranslate"><span class="pre">myColours[Suborder]</span></code> and <code class="docutils literal notranslate"><span class="pre">mySymbols[Suborder]</span></code> automatically assign the two colors and two symbols to the two suborders.</p>
+<p>There are a lot of built in colours and plot symbols in R, so the next thing to experiment with is changing these to your own versions.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> In the R commandline, type in the function <code class="docutils literal notranslate"><span class="pre">colors()</span></code>.</p>
+<p>You’ll see a long list of options to choose from, so pick two to replace red and blue in the plot above.</p>
+<p>The options for the plot symbols are shown below. Pick two to replace the current symbol choices.</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/pch.png" /></p>
+<hr class="docutils" />
+<p>Rerun the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function and see what you get!</p>
+</div>
+<div class="section" id="save-your-results">
+<h2>Save your results<a class="headerlink" href="#save-your-results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="saving-the-exploratory-graphics">
+<h3>Saving the exploratory graphics<a class="headerlink" href="#saving-the-exploratory-graphics" title="Permalink to this headline">¶</a></h3>
+<p>The file ‘GenomeSize.pdf’ in the practical folder was created using the next block of code using the approach you <a class="reference external" href="08-Data_R.ipynb#Saving-your-graphics">learned previously</a>. The function <code class="docutils literal notranslate"><span class="pre">pdf</span></code> opens a new empty pdf file which can then be used to plot graphs. You can set the width and the height of the page size in the pdf but note that this is set in <em>inches</em>. When you have finished creating a plot, the function <code class="docutils literal notranslate"><span class="pre">dev.off</span></code> closes the pdf file and makes it readable.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Open ‘GenomeSize.pdf’ in a PDF reader. It uses the original colours and
+plot symbols. Close the file and then delete it from the folder.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now go back to the script in R and select and run all the code in block (9)</p>
+<p>Go back to the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder. The pdf file should have been recreated — open it and it should now use your choice of colours and symbols.</p>
+</div>
+<div class="section" id="saving-other-results">
+<h3>Saving other results<a class="headerlink" href="#saving-other-results" title="Permalink to this headline">¶</a></h3>
+<p>You can also save the data and variables in R format — the original data, two subsets of the data and the two sets of colours and symbols. This will make it easy to restart where you left off. However, We can recreate the data subsets easily, so we’ll just save the data and your colour sets.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to the script window and run the final line in block (10)</p>
+<p>Still in the script window, choose ‘File <span class="math notranslate nohighlight">\(\triangleright\)</span> Save’ to save your changes to the script file.</p>
+<p>Quit from R by typing <code class="docutils literal notranslate"><span class="pre">q()</span></code> at the R command prompt. You can also use ctrl+D in Unix).</p>
+</div>
+</div>
+<div class="section" id="from-data-exploration-to-statistical-analysis">
+<h2>From data exploration to statistical analysis<a class="headerlink" href="#from-data-exploration-to-statistical-analysis" title="Permalink to this headline">¶</a></h2>
+<p>After you have performed your data exploration, you are in a position to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/yr1_2_flowchart.svg" /></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="08-Data_R.html" title="previous page">Data management, Exploration and Visualization</a>
+    <a class='right-next' id="next-link" href="13-t_F_tests.html" title="next page"><span class="math notranslate nohighlight">\(t\)</span> tests and <span class="math notranslate nohighlight">\(F\)</span> tests <span class="tocSkip"></a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

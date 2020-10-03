@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Jupyter &#8212; TheMulQuaBio</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mathematical models in Jupyter" href="Appendix-Maths.html" />
+    <link rel="prev" title="Model Fitting in Ecology and Evolution" href="20-ModelFitting.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00-Intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Stats-Intro.html">
+   Introduction
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data management, Exploration and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   tests and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html#the-f-test">
+   The
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   test
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#calculating-the-anova-test-statistic">
+   Calculating the ANOVA test statistic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html#an-example-anova">
+   An example ANOVA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html#model-simplification">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html#fitting-a-glm">
+   Fitting a GLM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting.html">
+   Model Fitting in Ecology and Evolution
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html#sqlite-with-python">
+   SQLite with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The computing Miniproject
+   <a name="Apx:Miniproj">
+   </a>
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Appendix-JupyIntro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        
+        <a class="issues-button"
+            href="https://github.com/mhasoba/Tempura/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-JupyIntro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/Tempura/master?urlpath=tree/notebooks/Appendix-JupyIntro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/Tempura/blob/master/notebooks/Appendix-JupyIntro.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-jupyter">
+   What is Jupyter?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-interactive-notebooks">
+     Why use interactive notebooks?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-jupyter-features">
+   Key Jupyter features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyter-vs-ipython">
+     Jupyter vs. IPython
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-jupyter">
+   Installing Jupyter
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ubuntu-linux">
+     Ubuntu / Linux
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#python-2-7-on-ubuntu-16-04">
+       Python 2.7 on Ubuntu 16.04
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mac">
+       Mac
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#windows">
+       Windows
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#launching-running-a-jupyter-notebook">
+   Launching/Running a Jupyter Notebook
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#language-kernels">
+     Language Kernels
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-ipython-kernel">
+       The IPython kernel
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-r-kernel">
+       The R kernel
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-extensions-to-jupyter">
+     Adding extensions to Jupyter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-elements-of-the-jupyter-nb-content">
+   Key elements of the Jupyter nb content
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#text-cells">
+     Text cells
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#equations">
+       Equations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-cells">
+     Code cells
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyboard-shortcuts">
+   Keyboard shortcuts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-code">
+   Running code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#graphics">
+     Graphics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exiting-a-jupyter-notebook">
+   Exiting a Jupyter Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources">
+   Readings and Resources
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-jupyter">
+<h1>Introduction to Jupyter<a class="headerlink" href="#introduction-to-jupyter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-jupyter">
+<h2>What is Jupyter?<a class="headerlink" href="#what-is-jupyter" title="Permalink to this headline">¶</a></h2>
+<p>The Jupyter Notebook offers an interactive interface to multiple programming languages (including Python and R) that can be viewed and manipulated in web browsers.</p>
+<p>Jupyter notebooks can run code, and also store the code and a current snapshot of the output (graphics and text), together with notes (in markdown), in an editable document called a <em>notebook</em> (like this one you are currently reading).</p>
+<p>Thus a Jupyter notebook is similar to a <a class="reference external" href="https://www.wolfram.com/mathematica/">Mathematica</a>
+or <a class="reference external" href="https://www.maplesoft.com/">Maple</a> notebook. The difference is that Jupyter is free, fast improving, and unlike Mathematica or Maple notebooks, the Jupyter notebook can support almost <a class="reference external" href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">100 programming languages</a> (more on this <a class="reference external" href="#Language-Kernels">below</a>). Furthermore, Jupyter notebooks are saved on disk as a <a class="reference external" href="https://www.json.org/">JSON</a> files (with a .ipynb extension), so are  fully open source and can be kept under version control.</p>
+<div class="section" id="why-use-interactive-notebooks">
+<h3>Why use interactive notebooks?<a class="headerlink" href="#why-use-interactive-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>Jupyter is a great tool for “literate programming”; a software development style pioneered by (yes, again!) Donald Knuth. In his words:</p>
+<blockquote>
+<div><p><em>Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.</em></p>
+</div></blockquote>
+<p>In literate programming, human-friendly text is as important as code, making coding accessible to a larger proportion of people.</p>
+<p>And just as importantly, literate programming also helps address the generally poor reproducibility of scientific research by making your code and your methods better reproducible and reusable.</p>
+<p>With Jupyter notebooks, you can <em>explore quantitative ideas</em> by combining snippets of computer code and human text. The main uses of Jupyter notebooks are:</p>
+<ul class="simple">
+<li><p>Data science (e.g., with <a class="reference external" href="http://pandas.pydata.org/">pandas</a>)</p></li>
+<li><p>Mathematical analyses (e.g., with <a class="reference external" href="http://www.sympy.org/en/index.html">sympy</a>)</p></li>
+<li><p>Interactive visualization (e.g., with <a class="reference external" href="https://matplotlib.org/">matpliotib</a> or <a class="reference external" href="https://ggplot2.tidyverse.org/">ggplot</a>)</p></li>
+<li><p>Education</p></li>
+</ul>
+<p>Jupyter Notebooks are increasingly being used as a research tool in academic, government (e.g., NASA), as well as industry (e.g., IBM, Facebook, Microsoft &amp; JP Morgan) sectors.</p>
+</div>
+</div>
+<div class="section" id="key-jupyter-features">
+<h2>Key Jupyter features<a class="headerlink" href="#key-jupyter-features" title="Permalink to this headline">¶</a></h2>
+<p>The Jupyter Notebook:</p>
+<ul class="simple">
+<li><p>…allows you to keep notes using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a>, the increasingly popular markup language.</p></li>
+<li><p>…offers features available in typical Interactive Development Environments (IDEs) such as code completion and easy access to help.</p></li>
+<li><p>…has LaTeX support.</p></li>
+<li><p>…can be saved and easily shared in the .ipynb <a class="reference external" href="https://www.json.org/">JSON</a> (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation – syntax for storing and exchanging data).</p></li>
+<li><p>…can be kept under version control (e.g., with git).</p></li>
+<li><p>…be rendered and viewed online (e.g., with nbviewer technology on github as in the case of <span class="xref myst">TheMulQuaBio</span>).</p></li>
+<li><p>…can be exported to multiple formats, including html and pdf.</p></li>
+</ul>
+<div class="section" id="jupyter-vs-ipython">
+<h3>Jupyter vs. IPython<a class="headerlink" href="#jupyter-vs-ipython" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://physics.calpoly.edu/bgranger">Brian Granger</a> and <a class="reference external" href="http://fperez.org/">Fernando Pérez</a> created IPython (<strong>I</strong>nteractive <strong>Python</strong>) as an implementation of Python for literate programming, taking advantage of improved web browser technologies (e.g., HTML5). IPython notebooks quickly gained popularity (they were a great alternative to Mathematica and Maple as well), and in 2013 the IPython team won a Sloan Foundation Grant to accelerate development of this technology. The IPython Notebook concept was expanded upon to allow for additional programming languages, which became project Jupyter (why “Jupyter”? See <a class="reference external" href="https://github.com/jupyter/design/wiki/Jupyter-Logo">this</a>. IPython itself is now focused on the interactive Python project per se, part of which is providing a Python kernel for Jupyter.</p>
+<p><em>Your Jupyter notebooks will typically open in IPython as well, but will not allow you Jupyter-only features</em> (of course!)</p>
+</div>
+</div>
+<div class="section" id="installing-jupyter">
+<h2>Installing Jupyter<a class="headerlink" href="#installing-jupyter" title="Permalink to this headline">¶</a></h2>
+<p>Please see project Jupyter’s <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/install.html">instructions for installation</a>. Basically,</p>
+<ul class="simple">
+<li><p><strong>If you already have Python (2 or 3)</strong>, follow the following instructions for your particular OS from the above webpage. We will use Python 3 henceforth.</p></li>
+<li><p><strong>If you are a new Python user, or just want to reinstall Python (say, to move from Python 2 to 3)</strong> you can install Python+Jupyter using <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a>, by downloading Anaconda’s latest Python 3 version.</p></li>
+</ul>
+<div class="section" id="ubuntu-linux">
+<h3>Ubuntu / Linux<a class="headerlink" href="#ubuntu-linux" title="Permalink to this headline">¶</a></h3>
+<p>As an existing Python 3 user, you may wish to install Jupyter using Python’s package manager, <code class="docutils literal notranslate"><span class="pre">pip</span></code>, instead of Anaconda. Do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo pip3 install --upgrade pip
+
+pip3 install jupyter
+</pre></div>
+</div>
+<p>If pip3 is not available, then first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python3-pip
+</pre></div>
+</div>
+<p>If you keep getting a <code class="docutils literal notranslate"><span class="pre">pip2</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> error:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt remove python3-pip <span class="o">&amp;&amp;</span> sudo apt install python3-pip
+</pre></div>
+</div>
+<blockquote>
+<div><p>If you already have python 2.x and then installed python3, your pip will be pointing to pip3. you can verify that by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">--version</span></code> which would be the same as <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">--version</span></code>.</p>
+</div></blockquote>
+<div class="section" id="python-2-7-on-ubuntu-16-04">
+<h4>Python 2.7 on Ubuntu 16.04<a class="headerlink" href="#python-2-7-on-ubuntu-16-04" title="Permalink to this headline">¶</a></h4>
+<p>If this does not work for python 2.7 on Ubuntu 16.04, do this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+
+sudo apt-get -y install python2.7 python-pip python-dev
+
+python --version
+
+pip --version
+
+sudo apt-get -y install ipython ipython-notebook
+
+sudo -H pip install jupyter
+</pre></div>
+</div>
+<p>You will likely get an error like: “You are using pip version 8.1.1, however version 8.1.2 is available.”</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -H pip install --upgrade pip
+
+sudo -H pip install jupyter
+</pre></div>
+</div>
+</div>
+<div class="section" id="mac">
+<h4>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install --upgrade pip
+
+pip3 install jupyter
+</pre></div>
+</div>
+</div>
+<div class="section" id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<p>Best option is to download and install Anaconda: https://www.continuum.io/downloads</p>
+</div>
+</div>
+</div>
+<div class="section" id="launching-running-a-jupyter-notebook">
+<h2>Launching/Running a Jupyter Notebook<a class="headerlink" href="#launching-running-a-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>In Linux / Mac, Jupyter will start in the directory that toy launch it from though terminal. So in your terminal first <code class="docutils literal notranslate"><span class="pre">cd</span></code> to your weekly coursework’ <code class="docutils literal notranslate"><span class="pre">code</span></code> directory.  Then, simply launch jupyter (Linux / Mac):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
+</pre></div>
+</div>
+<p>This will inititalize a new server instance (watch your active terminal) and launch a web browser with the Jupyter interface, include a menu at the top.</p>
+<p>Play abound a bit. For starters,</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new nb called <code class="docutils literal notranslate"><span class="pre">MyFirstJupyterNb.ipynb</span></code> using the menu in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory.</p>
+<p>One you have created the new nb, you can launch it next time by <code class="docutils literal notranslate"><span class="pre">cd</span></code>’ing to its location and then launching it by name:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook MyFirstJupyterNb.ipynb
+</pre></div>
+</div>
+<div class="section" id="language-kernels">
+<h3>Language Kernels<a class="headerlink" href="#language-kernels" title="Permalink to this headline">¶</a></h3>
+<p>The Jupyter notebook can support almost <a class="reference external" href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">100 programming languages</a> (and counting).</p>
+<div class="section" id="the-ipython-kernel">
+<h4>The IPython kernel<a class="headerlink" href="#the-ipython-kernel" title="Permalink to this headline">¶</a></h4>
+<p>The default kernel you will have is IPython (with Python 3 or 2) – the core Jupyter kernel. Click on the kernel menu item at the top of your notebook to check.</p>
+<p>If you upgraded to Python 3 from 2 <strong>after</strong> installing Jupyter, you will need to reinstall Jupyter using <code class="docutils literal notranslate"><span class="pre">pip3</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install jupyter
+</pre></div>
+</div>
+<p>You will then need to relaunch Jupyter. You should see the Python 3 kernel. If you want both Python 2 and 3 kernels, <a class="reference external" href="https://stackoverflow.com/questions/30492623/using-both-python-2-x-and-python-3-x-in-ipython-notebook">see this</a>.</p>
+</div>
+<div class="section" id="the-r-kernel">
+<h4>The R kernel<a class="headerlink" href="#the-r-kernel" title="Permalink to this headline">¶</a></h4>
+<p>Let’s add the R kernel as well. First have a quick look at the <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/projects/kernels.html">Jupyter kernel documentation</a> .</p>
+<p>Now, go to the <a class="reference external" href="https://github.com/IRkernel/IRkernel">IRKernel github</a>, and follow the instructions for installing using the <code class="docutils literal notranslate"><span class="pre">devtools</span></code> package in R (This package will also soon be installable through CRAN).</p>
+<div style="padding:6px;background-color:cornsilk;line-height:1.4;">
+On Ubuntu 16.04, If you run into errors while installing the `devtools` package through R, very likely you might need to install the `curl` package using `sudo apt-get install` in a terminal first  (read the error messages you get in R).    
+</div>
+<p>After installing the R kernel, relaunch Jupyter as you did above, and then check your kernels in the drop-down Jupyter nb menu – you should now have both Python and R.</p>
+</div>
+</div>
+<div class="section" id="adding-extensions-to-jupyter">
+<h3>Adding extensions to Jupyter<a class="headerlink" href="#adding-extensions-to-jupyter" title="Permalink to this headline">¶</a></h3>
+<p>You can add some useful additional functionalities to your Jupyter notebook interface using (the unofficial) <a class="reference external" href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions">extensions</a>. The list of extensions and further instructions for installation can be <a class="reference external" href="http://jupyter-contrib-nbextensions.readthedocs.io/en/latest/">found here</a>. You will also probably want to install the <a class="reference external" href="https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator">extensions “configurator”</a>. This package will add useful functionalities like <span class="math notranslate nohighlight">\(\LaTeX\)</span> environments and TOCs (like the one in the right margin of this nb).</p>
+</div>
+</div>
+<div class="section" id="key-elements-of-the-jupyter-nb-content">
+<h2>Key elements of the Jupyter nb content<a class="headerlink" href="#key-elements-of-the-jupyter-nb-content" title="Permalink to this headline">¶</a></h2>
+<p>The two main elements (and the associated syntax) you need to know to modify the content of a Jupyter nb are as follows. These will either be entered into text-only cells (“markdown cells”), or code cells. To insert a new cell, click on the edge of an existing cell, and hit <code class="docutils literal notranslate"><span class="pre">A</span></code> or <code class="docutils literal notranslate"><span class="pre">B</span></code> on your keyboard to insert a cell above and below, respectively. By default, Jupyter inserts a code cell. To convert it to a text cell, hit <code class="docutils literal notranslate"><span class="pre">M</span></code> immediately after inserting the cell, or if you have clicked elsewhere after inserting the cell, by clicking on the edge of the new cell and <em>then</em> hitting <code class="docutils literal notranslate"><span class="pre">M</span></code>. You can now either enter and modify text or code:</p>
+<div class="section" id="text-cells">
+<h3>Text cells<a class="headerlink" href="#text-cells" title="Permalink to this headline">¶</a></h3>
+<p>Text is formatted using markdown and standard html. The <a class="reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown cheatsheet for github</a> is very handy. Give it a quick spin to get started with markdown.</p>
+<div class="section" id="equations">
+<h4>Equations<a class="headerlink" href="#equations" title="Permalink to this headline">¶</a></h4>
+<p>You can insert inline or standalone equations by using standard <span class="math notranslate nohighlight">\(\LaTeX\)</span> environments (and you can access more <span class="math notranslate nohighlight">\(\LaTeX\)</span> functionality and environments using the <a class="reference external" href="https://github.com/jfbercher/jupyter_latex_envs"><code class="docutils literal notranslate"><span class="pre">LaTeX_envs</span></code> extension</a>.). For example, how about the ecologist’s beloved logistic growth equation:</p>
+<p>which will render as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dN}{dt} = rN \left( 1-\frac{N}{K}\right)\]</div>
+</div>
+</div>
+<div class="section" id="code-cells">
+<h3>Code cells<a class="headerlink" href="#code-cells" title="Permalink to this headline">¶</a></h3>
+<p>Depending on your kernel, you will type the appropriate programming language code in these cells.</p>
+</div>
+</div>
+<div class="section" id="keyboard-shortcuts">
+<h2>Keyboard shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<p>A full list of keyboard shortcuts can be displayed by clicking outside the current cell and hitting “h”. The following are important keyboard shortcuts:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Key</p></th>
+<th class="text-align:left head"><p>Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">A</span></code> or <code class="docutils literal notranslate"><span class="pre">B</span></code>:</p></td>
+<td class="text-align:left"><p>insert cell above or below current cell, respectively</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">M</span></code>       :</p></td>
+<td class="text-align:left"><p>convert code or raw cell to text cell</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>        :</p></td>
+<td class="text-align:left"><p>convert raw or text cell to code cell</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">R</span></code>        :</p></td>
+<td class="text-align:left"><p>convert code or text cell to raw cell</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">CTRL+ENTER</span></code>:</p></td>
+<td class="text-align:left"><p>render (text) or evaluate (code) cell</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">D,</span> <span class="pre">D</span></code>:</p></td>
+<td class="text-align:left"><p>delete cell</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">I,</span> <span class="pre">I</span></code>:</p></td>
+<td class="text-align:left"><p>interrupt a running kernel (evaluation of a code cell)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code>:</p></td>
+<td class="text-align:left"><p>cut selected cell(s)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">SHIFT+V</span></code>:</p></td>
+<td class="text-align:left"><p>Insert cell(s) cell above selected cell</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">V</span></code>:</p></td>
+<td class="text-align:left"><p>Insert cut cell(s)  below selected cell</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">SHIFT+M</span></code>:</p></td>
+<td class="text-align:left"><p>merge selected cells, or current cell with cell below if only one cell selected</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a full list of keyboard shortcuts or to cutomize them, click anywhere outside your current cell and hit the <code class="docutils literal notranslate"><span class="pre">H</span></code> key. Or, click on the “help” menu item at the top.</p>
+</div>
+<div class="section" id="running-code">
+<h2>Running code<a class="headerlink" href="#running-code" title="Permalink to this headline">¶</a></h2>
+<p>Let’s try running code in a code cell. Python first. Make sure that your kernel is Python using the dropdown Jupyter nb menu. Then try the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;this is python!&quot;</span><span class="p">;</span> <span class="nf">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;this is python!&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also run a script file that is saved on your computer by using the  ipython <code class="docutils literal notranslate"><span class="pre">%run</span></code> command — basically you have a fully functional ipython environment inside each code cell.</p>
+<p>Now R. Switch the kernel to R by using the <em>Kernel</em> menu along the top of the Jupyter window.</p>
+<p>Then try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="s">&quot;this is R!&quot;</span><span class="p">;</span> <span class="nf">cat</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>this is R!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="graphics">
+<h3>Graphics<a class="headerlink" href="#graphics" title="Permalink to this headline">¶</a></h3>
+<p>Plotting is straightforward. Again, let’s try Python first. Switch back to the Python kernel. Then try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">import</span> <span class="n">matplotlib.pyplot</span> <span class="n">as</span> <span class="n">p</span>
+<span class="n">import</span> <span class="n">scipy</span> <span class="n">as</span> <span class="n">sc</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="nf">sc.arange</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">sc.sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nf">p.plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> <span class="nf">p.show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-JupyIntro_14_0.png" src="../_images/Appendix-JupyIntro_14_0.png" />
+</div>
+</div>
+<p>Now lets try R. Switch to the R kernel, and try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">)</span><span class="c1"># to resize plot within jupyter - this package is part of IRKernel</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">3.3</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">2.5</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nf">qplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">geom</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span><span class="p">)</span> <span class="c1"># large figure</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: ggplot2
+</pre></div>
+</div>
+<img alt="../_images/Appendix-JupyIntro_16_2.png" src="../_images/Appendix-JupyIntro_16_2.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exiting-a-jupyter-notebook">
+<h2>Exiting a Jupyter Notebook<a class="headerlink" href="#exiting-a-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Exiting is easy. Just <code class="docutils literal notranslate"><span class="pre">CTRL+S</span></code> (to save) and close the browser. The server will still be active in the bash terminal. You may then relaunch by typing the local url (e.g., by typing <code class="docutils literal notranslate"><span class="pre">http://localhost:8888/notebooks/MyJupyterNbName.ipynb</span></code>) in your web browser window, or by exiting the kernel with <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> an then relaunching as you <a class="reference external" href="#Launching/Running-a-Jupyter-Notebook">originally did</a>.</p>
+<p>That’s the end of your intro to Jupyter! Play around a bit. You can also try out the <a class="reference internal" href="Appendix-Data-Python.html"><span class="doc std std-doc">Data in Jupyter</span></a> and <a class="reference internal" href="Appendix-Maths.html"><span class="doc std std-doc">Maths in Jupyter</span></a> tutorials.</p>
+</div>
+<div class="section" id="readings-and-resources">
+<h2>Readings and Resources<a class="headerlink" href="#readings-and-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Check out <a class="reference external" href="https://guides.github.com/features/mastering-markdown/">github flavored markdown</a>, <a class="reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown cheatsheet for github</a>, and <a class="reference external" href="https://en.support.wordpress.com/markdown-quick-reference/">also this</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks">A gallery of interesting Jupyter Notebooks
+</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jakevdp/PythonDataScienceHandbook">Python Data Science Handbook</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jrjohansson/scientific-python-lectures">Scientific Python Lectures in Jupyter</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="20-ModelFitting.html" title="previous page">Model Fitting in Ecology and Evolution</a>
+    <a class='right-next' id="next-link" href="Appendix-Maths.html" title="next page">Mathematical models in Jupyter</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>
