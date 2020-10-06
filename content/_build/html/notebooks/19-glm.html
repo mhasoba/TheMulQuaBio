@@ -184,8 +184,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="14-regress.html">
    Linear Models: Regression
-   <span class="tocSkip">
-   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -211,11 +209,6 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#fitting-a-glm">
-   Fitting a GLM
   </a>
  </li>
  <li class="toctree-l1">
@@ -323,7 +316,7 @@
     <div class="dropdown-buttons sourcebuttons">
         
         <a class="issues-button"
-            href="https://github.com/mhasoba/Tempura/issues/new?title=Issue%20on%20page%20%2Fnotebooks/19-glm.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/19-glm.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -343,7 +336,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/Tempura/master?urlpath=tree/notebooks/19-glm.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/19-glm.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -351,7 +344,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/Tempura/blob/master/notebooks/19-glm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/TheMulQuaBio/blob/master/notebooks/19-glm.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -370,105 +363,96 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Generalised Linear Models
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-glm">
+   What is a GLM?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-statistical-distributions">
+   Some (statistical) distributions
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#introduction">
-     Introduction
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-poisson-distribution">
+     The Poisson distribution
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-a-glm">
-     What is a GLM?
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-binomial-distribution">
+     The Binomial distribution
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-statistical-distributions">
-     Some (statistical) distributions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-poisson-distribution">
-       The Poisson distribution
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-binomial-distribution">
-       The Binomial distribution
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-gamma-distribution">
-       The Gamma distribution
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#other-distributions">
-       Other distributions
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-glm-example">
-     A GLM example
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-exploration">
-       Data exploration
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#looking-at-strains-too">
-     Looking at strains too
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gamma-distribution">
+     The Gamma distribution
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-linear-model">
-     A linear model
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-distributions">
+     Other distributions
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-glm-example">
+   A GLM example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-exploration">
+     Data exploration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-at-strains-too">
+   Looking at strains too
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-linear-model">
+   A linear model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fitting-a-glm">
    Fitting a GLM
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#overdispersion">
      Overdispersion
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">
-       Fitting a GLM using a quasi-poisson distribution
-      </a>
-     </li>
-    </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">
+     Fitting a GLM using a quasi-poisson distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model-predictions">
      Model predictions
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#reporting-the-model">
      Reporting the model
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#halos-and-lawns">
-     Halos and lawns
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#halos-and-lawns">
+   Halos and lawns
+  </a>
  </li>
 </ul>
 
@@ -891,9 +875,8 @@ NG       61.28571   5.517241 292.71429 593.000 523.9000
 <p>That normal Q-Q plot is not good. Our suspicions were justified and it doesn’t look like we can use a simple log transformation. We’re not even going to look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables — if the diagnostic plots are bad enough, then the model outputs are not
 to be trusted.</p>
 </div>
-</div>
 <div class="section" id="fitting-a-glm">
-<h1>Fitting a GLM<a class="headerlink" href="#fitting-a-glm" title="Permalink to this headline">¶</a></h1>
+<h2>Fitting a GLM<a class="headerlink" href="#fitting-a-glm" title="Permalink to this headline">¶</a></h2>
 <p>In the linear models lecture, we looked at the expectation of <em>constant normal variance</em> in linear models. Whatever the combination of explanatory variables for a particular prediction, the residuals around that prediction have similar variance and are roughly normally distributed. The panel on the left shows this basic idea.</p>
 <p><img alt="image" src="../_images/GLMexample.svg" />
 <small> <center> Illustration of continuous data that follow a normal distribution (left) versus discerete, count data (right). </center></small></p>
@@ -980,7 +963,7 @@ negative.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code in this section into your script and explore the model a bit more.</p>
 <div class="section" id="overdispersion">
-<h2>Overdispersion<a class="headerlink" href="#overdispersion" title="Permalink to this headline">¶</a></h2>
+<h3>Overdispersion<a class="headerlink" href="#overdispersion" title="Permalink to this headline">¶</a></h3>
 <p>There’s a problem. You may have already spotted it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -998,6 +981,7 @@ negative.</p></li>
 <p>There is a simple way to check the dispersion of count data using the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table: the ratio of the residual deviance to the residual degrees of freedom should be approximately 1. This expectation is actually given in the table:</p>
 <p><code class="docutils literal notranslate"><span class="pre">(Dispersion</span> <span class="pre">parameter</span> <span class="pre">for</span> <span class="pre">poisson</span> <span class="pre">family</span> <span class="pre">taken</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">1)</span></code></p>
 <p>In this case, the ratio is <span class="math notranslate nohighlight">\(61579/284=216.8\)</span>. That’s very strongly overdispersed. Fortunately, we can allow for this by using a different model.</p>
+</div>
 <div class="section" id="fitting-a-glm-using-a-quasi-poisson-distribution">
 <h3>Fitting a GLM using a quasi-poisson distribution<a class="headerlink" href="#fitting-a-glm-using-a-quasi-poisson-distribution" title="Permalink to this headline">¶</a></h3>
 <p>The quasi-poisson distribution family uses the data to estimate the dispersion of the model, but is otherwise very similar to using the Poisson family. Let’s re-fit the GLM using this distribution.</p>
@@ -1123,9 +1107,8 @@ colonies?</p>
 <p>No, that makes the model much worse, so we now have our final model.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include this new model fitting in your script and check you’ve got the same results.</p>
 </div>
-</div>
 <div class="section" id="model-predictions">
-<h2>Model predictions<a class="headerlink" href="#model-predictions" title="Permalink to this headline">¶</a></h2>
+<h3>Model predictions<a class="headerlink" href="#model-predictions" title="Permalink to this headline">¶</a></h3>
 <p>We can get model predictions and standard errors using the <code class="docutils literal notranslate"><span class="pre">predict</span></code> function. There is a difference though. GLMs use an internal transformation to model the data using a <em>link function</em> and the coefficients in the summary above are on the scale of the link transformation. The link function defines the relationship between the linear predictor and the mean of the distribution function, so that an otherwise non-linear (non-normal) response can be accommodated. For quasipoisson, the default is a <em>log link</em>, which you can see in the output of <code class="docutils literal notranslate"><span class="pre">anova</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">predict</span></code> to get predictions on the scale of the original <em>response</em>. You can use different link functions than the “canonical” one encoded for each distribution <code class="docutils literal notranslate"><span class="pre">family</span></code>, but covering this is outside the scope of this chapter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1155,7 +1138,7 @@ Traceback:
 <p>Those are the same values as the means we calculated for the barplot. Adding standard errors to barplots is more difficult for GLMs and we won’t go into it here.</p>
 </div>
 <div class="section" id="reporting-the-model">
-<h2>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this headline">¶</a></h2>
+<h3>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Reporting complicated statistics is a difficult business. There is a lot of detail involved and you want the reader to understand what you have done well enough to repeat the analysis if needed. You also have to summarise and explain the results without pages of R output.</p>
 <p>Here are some pointers:</p>
 <ul class="simple">
@@ -1188,6 +1171,7 @@ Traceback:
 |      Strain881:TreatmentNG|       5.31|         1.24|      4.30| &lt;0.0001|
 |Strain899:TreatmentNG|       9.54|         5.82|      1.64| 0.1025|
 |    StrainTA102:TreatmentNG|       3.59|         0.62|      5.79| &lt;0.0001|</p>
+</div>
 </div>
 <div class="section" id="halos-and-lawns">
 <h2>Halos and lawns<a class="headerlink" href="#halos-and-lawns" title="Permalink to this headline">¶</a></h2>

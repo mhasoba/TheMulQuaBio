@@ -51,3 +51,5 @@ Also, note that:
 ## Credits
 
 This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/), initiated using [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
+
+Most of the sections on Data Analysis and Statistics were originally written by David Orme <d.orme@imperial.ac.uk>. 

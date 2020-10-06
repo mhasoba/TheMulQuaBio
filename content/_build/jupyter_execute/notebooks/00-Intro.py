@@ -1,18 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# <!--NAVIGATION-->
-# | [Main Contents](Index.ipynb) | [Unix](01-Unix.ipynb) >
-
 # # Introduction <span class="tocSkip"></span> <a name="chap:Intro"></a>
 # 
 # > *It is hard for me to say confidently that, after fifty more years of explosive growth of computer science, there will still be a lot of fascinating unsolved problems at peoples' fingertips, that it won't be pretty much working on refinements of well-explored things. Maybe all of the simple stuff and the really great stuff has been discovered. It may not be true, but I can't predict an unending growth. I can't be as confident about computer science as I can about biology. Biology easily has 500 years of exciting problems to work on, it's at that level.*
 # >
 # > — *Donald Knuth*
 # 
-
-# <h1>Contents<span class="tocSkip"></span></h1>
-# <div class="toc"><ul class="toc-item"><li><span><a href="#About-these-notes" data-toc-modified-id="About-these-notes-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>About these notes</a></span><ul class="toc-item"><li><span><a href="#Learning-goals" data-toc-modified-id="Learning-goals-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>Learning goals</a></span></li></ul></li><li><span><a href="#Some-guidelines,-conventions-and-rules" data-toc-modified-id="Some-guidelines,-conventions-and-rules-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Some guidelines, conventions and rules</a></span><ul class="toc-item"><li><span><a href="#Beware-the-dark-forces" data-toc-modified-id="Beware-the-dark-forces-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Beware the dark forces</a></span></li><li><span><a href="#Keep-your-workflow-organized" data-toc-modified-id="Keep-your-workflow-organized-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Keep your workflow organized</a></span></li><li><span><a href="#Conventions-used-in-this-document" data-toc-modified-id="Conventions-used-in-this-document-2.3"><span class="toc-item-num">2.3&nbsp;&nbsp;</span>Conventions used in this document</a></span></li><li><span><a href="#To-IDE-or-not-to-IDE?" data-toc-modified-id="To-IDE-or-not-to-IDE?-2.4"><span class="toc-item-num">2.4&nbsp;&nbsp;</span>To IDE or not to IDE?</a></span></li><li><span><a href="#Assessment" data-toc-modified-id="Assessment-2.5"><span class="toc-item-num">2.5&nbsp;&nbsp;</span>Assessment</a></span></li></ul></li></ul></div>
 
 # ## About these notes
 #     
@@ -26,11 +20,9 @@
 # 
 # ---
 # 
-# <figure>
-# <img src="./graphics/programming.png" alt="xkcd on programming" style="width:40%">
+# ![image](./graphics/programming.png)
 # <small> <center>(Source: [http://xkcd.com/974](http://xkcd.com/974)) 
-# </figcaption></center></small>
-# </figure>
+# </center></small>
 # 
 # ---
 # 
@@ -81,29 +73,27 @@
 # In the following chapters, you will practice many examples where you are required to write large blocks of code. Please get into the habit of writing code into text files with an appropriate extension (e.g., `.R` for `R` code, `.py` for `python` code, etc.). Furthermore, please keep all your code files organized in one or more directories (e.g., named `Code`!). Similarly, some of these scripts will take data files as inputs, and output some results in the form of text or graphics. Please keep these inputs and outputs organized as well, in
 # separate directories (e.g., named `Data` and ` Results`) respectively. Your instructor(s) will help you get set up and abide by this "workflow".
 # 
-# ---
-# <figure>
-#     <img src=".\graphics\workflow.png" alt="xkcd on workflow" style="width:25%">
-#     <small> 
-#         <center>(Source: http://xkcd.com/1172) 
-#             <figcaption> 
+# ![image](graphics/workflow.png)
+# <small> 
+#     <center>(Source: http://xkcd.com/1172) 
 #                 Logical workflows are important, but don't get married to yours!
-#             </figcaption>
-#         </center>
-#     </small>
-# </figure>
+#      </center>
+# </small>
+# 
+# 
 # 
 # ---
+# 
 # ### Conventions used in this document
 # 
 # Throughout these sessions, directory paths will be specified in UNIX (Mac, Linux) style, using `/` instead of the `\` used in Windows. Also, in general, we will be using [relative paths](https://en.wikipedia.org/wiki/Path_(computing)) throughout the exercises and practicals (more on this later, but google it!).
 # 
 # You will find all command line/console arguments, code snippets and output in coloured boxes like this:
 
-# In[ ]:
+# In[1]:
 
 
-
+# Some code here!
 
 
 # You will type the commands/code that you see in such boxes into the relevant command line (don't copy-paste - you likely need all the command / syntax typing practice you can get !). 

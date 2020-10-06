@@ -57,43 +57,40 @@
 # 
 # ## A first LaTeX example
 # 
-# $\star$ In your code editor type the following in a file called `FirstExample.tex` and save it in a suitable location in your coursework directory (e.g, `/Week1/Code/`:
+# $\star$ In your code editor type the following in a file called `FirstExample.tex` and save it in a suitable location in your coursework directory (e.g, `/Week1/Code/`):
 
-# In[1]:
-
-
-```
-\documentclass[12pt]{article}
-
-\title{A Simple Document}
-
-\author{Your Name}
-
-\date{}
-
-\begin{document}
-  \maketitle
-  
-  \begin{abstract}
-    This paper must be cool!
-  \end{abstract}
-  
-  \section{Introduction}
-    Blah Blah!
-  
-  \section{Materials \& Methods}
-  One of the most famous equations is:
-  \begin{equation}
-    E = mc^2
-  \end{equation}
-  This equation was first proposed by Einstein in 1905 
-  \cite{einstein1905does}.
-  
-  \bibliographystyle{plain}
-  \bibliography{FirstBiblio}
-\end{document}
-```
-
+# ```tex
+# 
+# \documentclass[12pt]{article}
+# 
+# \title{A Simple Document}
+# 
+# \author{Your Name}
+# 
+# \date{}
+# 
+# \begin{document}
+#   \maketitle
+#   
+#   \begin{abstract}
+#     This paper must be cool!
+#   \end{abstract}
+#   
+#   \section{Introduction}
+#     Blah Blah!
+#   
+#   \section{Materials \& Methods}
+#   One of the most famous equations is:
+#   \begin{equation}
+#     E = mc^2
+#   \end{equation}
+#   This equation was first proposed by Einstein in 1905 
+#   \cite{einstein1905does}.
+#   
+#   \bibliographystyle{plain}
+#   \bibliography{FirstBiblio}
+# \end{document}
+# ```
 
 # Now, let's get a citation for this paper:
 # 
@@ -126,10 +123,7 @@
 # ```
 # This should produce the file `FirstExample.pdf`:
 
-# <figure>
-# <img src="./graphics/FirstExample.png" alt=" " style="width:65%">
-# </figure>
-# 
+# ![image](./graphics/FirstExample.png)
 
 # ### A bash script to compile LaTeX
 # 
@@ -158,7 +152,7 @@
 # ```
 # How do you run this script? The same as your previous bash scripts, so:
 
-# In[ ]:
+# In[1]:
 
 
 bash CompileLaTeX.sh FirstExample
