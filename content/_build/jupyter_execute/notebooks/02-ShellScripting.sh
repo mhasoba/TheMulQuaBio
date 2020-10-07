@@ -1,11 +1,5 @@
-bash myscript.sh # OR sh myscript.sh
-
-chmod +x myscript.sh
-myscript.sh
-
 mkdir ~/bin
 PATH=$PATH:$HOME/bin #Tell UNIX to look in /home/bin for commands
-
 bash boilerplate.sh
 
 echo "Remove    excess      spaces." | tr -s "\b" " "

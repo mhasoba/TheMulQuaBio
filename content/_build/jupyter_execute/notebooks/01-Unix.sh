@@ -1,45 +1,53 @@
-cd ~/Downloads
+cd ~/Documents # same as /home/YourUserName/Documents
 
-sudo dpkg -i <file>.deb # de-package it
-sudo apt-get install -f  # install dependencies
+mkdir CMEECourseWork
 
-cd ~/Documents
+cd CMEECourseWork
 
-ls
+mkdir week1
 
-mkdir CMEECourseWork && cd CMEECourseWork
+cd week1
 
-mkdir Week1
+mkdir sandbox code data results
 
-cd Week1
+rm -r sandbox
 
 mkdir sandbox
 
-cd Sandbox
-
-rm sandbox
-
 mv sandbox Sandbox
 
-cd Sandbox
-pwd
 ls
+
+mv Sandbox sandbox
+ls
+
+cd sandbox
+
+ls # nothing here yet
+
 touch TestFile # OR, "touch TestFile.txt"
+
 ls
-mv TestFile TestFile2
+
+mv TestFile TestFile2; ls # commands can also be sequentially executed with a `;`
+
 rm TestFile2
 
-mkdir -p Week1/{Data,Code,Sandbox}
+cd ../../ # cd two directory levels higher, assuming you are currently in CMEECourseWork/Week1/sandbox
 
-ls -lt
+ls -l
+
+ls -R
+
+ls -lR # same as ls -l -R
+
+cd week1/sandbox
 
 echo "My first line." > test.txt
 cat test.txt
-echo "My second line" >> test.txt
-ls / >> ListRootDir.txt
-cat ListRootDir.txt #Isn't that cool?!
 
-ls / | wc -l
+echo "My second line" >> test.txt
+cat test.txt
 
 ls -lt | head -5
 
@@ -65,15 +73,16 @@ ls File?.txt
 ls File[1-2].txt
 ls File[!3].*
 
-wget https://raw.githubusercontent.com/mhasoba/TheMulQuaBio/master/data/spawannxs.txt #Cool!
+cd ../ # move one level up from TestWild, back to sandbox
+wget https://raw.githubusercontent.com/mhasoba/TheMulQuaBio/master/content/data/spawannxs.txt #Cool!
 
-head -n 50 spawannxs.txt #You will see "head" in R as well
+ls
 
-mkdir ../Data
+mv spawannxs.txt ../data # Move the file to the appropriate location (note the ../ - relative path)
 
-mv spawannxs.txt ../Data/
-cd ../Data
-head -n 50 spawannxs.txt 
+cd ../data # Move to the data directory
+
+head -n 50 spawannxs.txt #You will see "head" in R and Python as well
 
 grep Falco spawannxs.txt
 
@@ -89,7 +98,7 @@ grep -i -w -B 1 ara spawannxs.txt
 
 grep -i -w -n ara spawannxs.txt
 
-grep -i -w -v ara spawannxs.txt
+cd ../sandbox # again, note the relative path!
 
 mkdir TestFind
 cd TestFind
@@ -104,6 +113,12 @@ touch Dir2/file2.csv
 touch Dir2/File2.tex
 touch Dir1/Dir11/Dir111/File111.txt
 touch Dir3/File3.txt
+
+ls
+
+ls Dir1
+
+ls Dir* # the asterisk wildcards names so you can find all dirs with a particular start to their name
 
 find . -name "File1.txt"
 

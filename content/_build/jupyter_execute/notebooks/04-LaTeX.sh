@@ -1,0 +1,1 @@
+bash CompileLaTeX.sh FirstExample
