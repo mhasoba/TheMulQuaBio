@@ -1,8 +1,3 @@
-sudo apt-get install git
-git config --global user.name "Your Name"
-git config --global user.email "your.login@imperial.ac.uk"
-git config --list
-
 cd CMEECourseWork
 
 git init
