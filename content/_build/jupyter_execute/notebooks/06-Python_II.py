@@ -25,26 +25,26 @@
 # 
 # We will use the `scipy` package, which includes `numpy`, and lot more. Let's try it:
 
-# In[1]:
+# In[2]:
 
 
 import scipy as sc
 
 
-# In[2]:
+# In[3]:
 
 
 a = sc.array(range(5)) # a one-dimensional array
 a
 
 
-# In[3]:
+# In[4]:
 
 
 print(type(a))
 
 
-# In[4]:
+# In[174]:
 
 
 print(type(a[0]))
@@ -59,14 +59,14 @@ print(type(a[0]))
 # 
 # You can also specify the data type of the array:
 
-# In[5]:
+# In[175]:
 
 
 a = sc.array(range(5), float)
 a
 
 
-# In[6]:
+# In[176]:
 
 
 a.dtype # Check type 
@@ -74,14 +74,14 @@ a.dtype # Check type
 
 # You can also get a 1-D arrays as follows:
 
-# In[7]:
+# In[177]:
 
 
 x = sc.arange(5)
 x
 
 
-# In[8]:
+# In[178]:
 
 
 x = sc.arange(5.) #directly specify float using decimal
@@ -90,7 +90,7 @@ x
 
 # As with other Python variables (e.g., created as a list or a dictionary), you can apply methods to variables created as numpy arrays. For example, type `x.` and hit TAB to see all methods you can apply to`x`. To see dimensions of `x`:
 
-# In[9]:
+# In[179]:
 
 
 x.shape
@@ -100,14 +100,14 @@ x.shape
 # 
 # You can also convert to and from Python lists (recall [list comprehensions](./05-Python_I.ipynb#Comprehensions)):
 
-# In[10]:
+# In[180]:
 
 
 b = sc.array([i for i in range(10) if i % 2 == 1]) #odd numbers between 1 and 10 
 b
 
 
-# In[11]:
+# In[181]:
 
 
 c = b.tolist() #convert back to list
@@ -116,14 +116,14 @@ c
 
 # To make a matrix, you need a 2-D numpy array:
 
-# In[12]:
+# In[182]:
 
 
 mat = sc.array([[0, 1], [2, 3]])
 mat
 
 
-# In[13]:
+# In[183]:
 
 
 mat.shape
@@ -133,13 +133,13 @@ mat.shape
 # 
 # As with other Python data objects such as lists, numpy array elements can be accessed using square brackets (`[ ]`) with the usual `[row,column]` reference. Indexing of numpy arrays works like that for other data structures, with index values starting at 0. So, you can obtain all the elements of a particular row as:
 
-# In[14]:
+# In[184]:
 
 
 mat[1] # accessing whole 2nd row, remember indexing starts at  0
 
 
-# In[15]:
+# In[185]:
 
 
 mat[:,1] #accessing whole second column  
@@ -147,13 +147,13 @@ mat[:,1] #accessing whole second column
 
 # And accessing particular elements:
 
-# In[16]:
+# In[186]:
 
 
 mat[0,0] # 1st row, 1st column element
 
 
-# In[17]:
+# In[187]:
 
 
 mat[1,0] # 2nd row, 1st column element
@@ -161,7 +161,7 @@ mat[1,0] # 2nd row, 1st column element
 
 # Note that (like all other programming languages) row index always comes before column index. That is, `mat[1]` is always going to mean "whole second row", and `mat[1,1]` means 1st row and 1st column element. Therefore, to access the whole second column, you need:
 
-# In[18]:
+# In[188]:
 
 
 mat[:,0] #accessing whole first column  
@@ -170,25 +170,25 @@ mat[:,0] #accessing whole first column
 # Python indexing also accepts negative values for going back to the start
 # from the end of an array:
 
-# In[19]:
+# In[189]:
 
 
 mat[0,1]
 
 
-# In[20]:
+# In[190]:
 
 
 mat[0,-1]
 
 
-# In[21]:
+# In[191]:
 
 
 mat[-1,0]
 
 
-# In[22]:
+# In[192]:
 
 
 mat[0,-2]
@@ -209,46 +209,46 @@ mat[0,-2]
 # 
 # Let's look at how you can replace, add, or delete an array element (a single entry, or whole row(s) or whole column(s)):
 
-# In[23]:
+# In[193]:
 
 
 mat[0,0] = -1 #replace a single element
 mat
 
 
-# In[24]:
+# In[194]:
 
 
 mat[:,0] = [12,12] #replace whole column
 mat
 
 
-# In[25]:
+# In[195]:
 
 
 sc.append(mat, [[12,12]], axis = 0) #append row, note axis specification
 
 
-# In[26]:
+# In[196]:
 
 
 sc.append(mat, [[12],[12]], axis = 1) #append column
 
 
-# In[27]:
+# In[197]:
 
 
 newRow = [[12,12]] #create new row
 
 
-# In[28]:
+# In[198]:
 
 
 mat = sc.append(mat, newRow, axis = 0) #append that existing row
 mat
 
 
-# In[29]:
+# In[199]:
 
 
 sc.delete(mat, 2, 0) #Delete 3rd row
@@ -256,7 +256,7 @@ sc.delete(mat, 2, 0) #Delete 3rd row
 
 # And concatenation:
 
-# In[30]:
+# In[200]:
 
 
 mat = sc.array([[0, 1], [2, 3]])
@@ -268,25 +268,25 @@ sc.concatenate((mat, mat0), axis = 0)
 # 
 # You can also "flatten" or "melt" arrays, that is, change array dimensions (e.g., from a matrix to a vector):
 
-# In[31]:
+# In[201]:
 
 
 mat.ravel() # NOTE: ravel is row-priority - happens row by row
 
 
-# In[32]:
+# In[202]:
 
 
 mat.reshape((4,1)) # this is different from ravel - check ?sc.reshape
 
 
-# In[33]:
+# In[203]:
 
 
 mat.reshape((1,4)) # NOTE: reshaping is also row-priority
 
 
-# In[34]:
+# In[204]:
 
 
 mat.reshape((3, 1)) # But total elements must remain the same!

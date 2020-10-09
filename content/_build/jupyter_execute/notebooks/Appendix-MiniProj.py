@@ -111,51 +111,51 @@ import seaborn as sns # You might need to install this (e.g., sudo pip install s
 
 # Let's have a look at the data:
 
-# In[2]:
+# In[54]:
 
 
 data = pd.read_csv("../data/ThermRespData.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[3]:
+# In[55]:
 
 
 data.head()
 
 
-# In[4]:
+# In[56]:
 
 
 print(data.columns.values)
 
 
-# In[5]:
+# In[57]:
 
 
 print(data.OriginalTraitUnit.unique()) #units of the response variable 
 
 
-# In[6]:
+# In[58]:
 
 
 print(data.ConTempUnit.unique()) #units of the independent variable 
 
 
-# In[7]:
+# In[59]:
 
 
 print(data.ID.unique()) #units of the independent variable 
 
 
-# In[8]:
+# In[60]:
 
 
 data_subset = data[data['ID']==110]
 data_subset.head()
 
 
-# In[9]:
+# In[61]:
 
 
 sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False) # you may ignore the warning taht appears below
@@ -234,51 +234,51 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False) # y
 
 # Let's have a look at the data:
 
-# In[10]:
+# In[11]:
 
 
 data = pd.read_csv("../data/CRat.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[11]:
+# In[12]:
 
 
 data.head()
 
 
-# In[12]:
+# In[13]:
 
 
 print(data.columns.values)
 
 
-# In[13]:
+# In[14]:
 
 
 print(data.TraitUnit.unique()) #units of the response variable 
 
 
-# In[14]:
+# In[15]:
 
 
 print(data.ResDensityUnit.unique()) #units of the independent variable 
 
 
-# In[15]:
+# In[16]:
 
 
 print(data.ID.unique()) #units of the independent variable 
 
 
-# In[16]:
+# In[17]:
 
 
 data_subset = data[data['ID']==39982]
 data_subset.head()
 
 
-# In[17]:
+# In[18]:
 
 
 sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
@@ -342,14 +342,14 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # 
 # Let's have a look at the data:
 
-# In[18]:
+# In[19]:
 
 
 data = pd.read_csv("../data/LogisticGrowthData.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[19]:
+# In[22]:
 
 
 print(data.columns.values)
@@ -367,13 +367,13 @@ pd.read_csv("../data/LogisticGrowthMetaData.csv")
 data.head()
 
 
-# In[22]:
+# In[23]:
 
 
 print(data.PopBio_units.unique()) #units of the response variable 
 
 
-# In[23]:
+# In[24]:
 
 
 print(data.Time_units.unique()) #units of the independent variable 
@@ -381,7 +381,7 @@ print(data.Time_units.unique()) #units of the independent variable
 
 # Unlike the previous two datasets there are no ID coulmns, so you will have to  infer single growth curves by combining `Species`, `Medium`, `Temp` and `Citation` columns (each species-medium-citation combination is unique):
 
-# In[24]:
+# In[44]:
 
 
 data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium + "_" + data.Citation)
@@ -389,7 +389,7 @@ data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium
 
 # Note that the `map()` method coverts temperature values to string (`str`) for concatenation.
 
-# In[25]:
+# In[46]:
 
 
 print(data.ID.unique()) #units of the independent variable 
@@ -397,14 +397,14 @@ print(data.ID.unique()) #units of the independent variable
 
 # These are rather ungainly IDs, so you might want to replace them with numbers!
 
-# In[26]:
+# In[47]:
 
 
 data_subset = data[data['ID']=='Chryseobacterium.balustinum_5_TSB_Bae, Y.M., Zheng, L., Hyun, J.E., Jung, K.S., Heu, S. and Lee, S.Y., 2014. Growth characteristics and biofilm formation of various spoilage bacteria isolated from fresh produce. Journal of food science, 79(10), pp.M2072-M2080.']
 data_subset.head()
 
 
-# In[27]:
+# In[49]:
 
 
 sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give warning - you can ignore it

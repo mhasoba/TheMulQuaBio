@@ -318,7 +318,10 @@
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
-        
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-ShellScripting.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
@@ -427,6 +430,13 @@
   <a class="reference internal nav-link" href="#practicals">
    Practicals
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instructions">
+     Instructions
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#readings-resources">
@@ -494,7 +504,7 @@
 <li><p>Make the script executable and execute it:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x myscript.sh
-myscript.sh
+./myscript.sh <span class="c1"># the ./ is needed</span>
 </pre></div>
 </div>
 <p>Use this second approach for a script that does something generic, and is likely to be reused again and again (<em>Can you think of examples?</em>)</p>
@@ -513,13 +523,7 @@ bash boilerplate.sh
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is a shell script! 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -532,7 +536,7 @@ separated files than csv (e.g., <code class="docutils literal notranslate"><span
 <p>To do this, in the bash we can use <code class="docutils literal notranslate"><span class="pre">tr</span></code> (abbreviation of <code class="docutils literal notranslate"><span class="pre">tr</span></code>anslate or <code class="docutils literal notranslate"><span class="pre">tr</span></code>ansliterate), which deletes or substitute characters. Here are some examples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Remove    excess      spaces.&quot;</span> <span class="p">|</span> tr -s <span class="s2">&quot;\b&quot;</span> <span class="s2">&quot; &quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Remove    excess      spaces.&quot;</span> <span class="p">|</span> tr -s <span class="s2">&quot; &quot;</span>
 </pre></div>
 </div>
 </div>
@@ -544,12 +548,12 @@ separated files than csv (e.g., <code class="docutils literal notranslate"><span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;remove all the as&quot;</span> <span class="p">|</span> tr -d <span class="s2">&quot;a&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;remove all the a&#39;s&quot;</span> <span class="p">|</span> tr -d <span class="s2">&quot;a&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remove ll the s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remove ll the &#39;s
 </pre></div>
 </div>
 </div>
@@ -578,7 +582,7 @@ separated files than csv (e.g., <code class="docutils literal notranslate"><span
 </div>
 </div>
 </div>
-<p>Now write a shell script to substitute all tabs with commas called <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> in <code class="docutils literal notranslate"><span class="pre">Week1/Code</span></code>:</p>
+<p>Now write a shell script to substitute all tabs with commas called <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> in <code class="docutils literal notranslate"><span class="pre">week1/code</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># Author: Your name you.login@imperial.ac.uk</span>
 <span class="c1"># Script: tabtocsv.sh</span>
@@ -589,7 +593,7 @@ separated files than csv (e.g., <code class="docutils literal notranslate"><span
 <span class="c1"># Date: Oct 2019</span>
 
 <span class="nb">echo</span> <span class="s2">&quot;Creating a comma delimited version of </span><span class="nv">$1</span><span class="s2"> ...&quot;</span>
-cat <span class="nv">$1</span> <span class="p">|</span> tr -s <span class="s2">&quot;\t&quot;</span> <span class="s2">&quot;,&quot;</span> &gt;&gt; <span class="nv">$1</span>.txt
+cat <span class="nv">$1</span> <span class="p">|</span> tr -s <span class="s2">&quot;\t&quot;</span> <span class="s2">&quot;,&quot;</span> &gt;&gt; <span class="nv">$1</span>.csv
 <span class="nb">echo</span> <span class="s2">&quot;Done!&quot;</span>
 <span class="nb">exit</span>
 </pre></div>
@@ -611,9 +615,7 @@ cat <span class="nv">$1</span> <span class="p">|</span> tr -s <span class="s2">&
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creating a comma delimited version of ../sandbox/test.txt ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done!
+Done!
 </pre></div>
 </div>
 </div>
@@ -633,7 +635,7 @@ cat <span class="nv">$1</span> <span class="p">|</span> tr -s <span class="s2">&
 <li><p>Reading from the user: <code class="docutils literal notranslate"><span class="pre">read</span> <span class="pre">MYVAR</span></code></p></li>
 <li><p>Command substitution: <code class="docutils literal notranslate"><span class="pre">MYVAR=\$(</span> <span class="pre">(ls</span> <span class="pre">|</span> <span class="pre">wc</span> <span class="pre">-l)</span> <span class="pre">)</span></code></p></li>
 </ol>
-<p>Here are some examples of assignments (try them out and save as a single  <code class="docutils literal notranslate"><span class="pre">Week1/Code/variables.sh</span></code> script):</p>
+<p>Here are some examples of assignments (try them out and save as a single  <code class="docutils literal notranslate"><span class="pre">week1/code/variables.sh</span></code> script):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Shows the use of variables</span>
@@ -651,7 +653,7 @@ cat <span class="nv">$1</span> <span class="p">|</span> tr -s <span class="s2">&
 <span class="nb">echo</span> <span class="nv">$mysum</span>
 </pre></div>
 </div>
-<p>And also (save as <code class="docutils literal notranslate"><span class="pre">Week1/Code/MyExampleScript.sh</span></code>):</p>
+<p>And also (save as <code class="docutils literal notranslate"><span class="pre">week1/code/MyExampleScript.sh</span></code>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="nv">msg1</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
@@ -706,28 +708,28 @@ cat <span class="nv">$3</span>
 </div>
 <div class="section" id="practicals">
 <h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this headline">¶</a></h2>
-<p><strong>Some instructions</strong>:</p>
+<div class="section" id="instructions">
+<h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Along with the completeness of the practicals/exercises themselves, you will be marked on the basis of how complete and well-organized your directory structure and content is.</p></li>
 <li><p>Review (especially if you got lost along the way) and make sure all the shell scripts you created in this chapter are functional.</p></li>
 <li><p>Make sure you have your weekly directory organized with <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>, <code class="docutils literal notranslate"><span class="pre">code</span></code> with the necessary files, under <code class="docutils literal notranslate"> <span class="pre">CMEECourseWork/week1</span></code>.</p></li>
-<li><p><em>All scripts should run on any other Unix/Linux machine</em> — for example, always call data from the <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory using relative paths.</p></li>
+<li><p><em>All scripts should run on any other Unix/Linux machine</em> — for example, always call data from the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory using relative paths.</p></li>
 <li><p>Make sure there is a <code class="docutils literal notranslate"><span class="pre">readme</span></code> file in every week’s directory. This file should give an overview of the weekly directory contents, listing all the scripts and what they do. This is different from the <code class="docutils literal notranslate"><span class="pre">readme</span></code> for your overall git repository, of which <code class="docutils literal notranslate"><span class="pre">Week</span> <span class="pre">1</span></code> is a part. You will write a similar <code class="docutils literal notranslate"> <span class="pre">readme</span></code> for each subsequent weekly submission.</p></li>
 <li><p>Don’t put any scripts that are part of the submission in your <code class="docutils literal notranslate"><span class="pre">home/bin</span></code> directory! You can put a copy there, but a working version should be in your repository.</p></li>
 </ul>
-<p><em>Don’t modify anything (or refer to any files) in your local copy of the git repository of these notes (on Github). Copy whatever you need from the master repository to your own repository.</em></p>
-<p><em>Git commit and push every time you do some significant amount of coding work (after testing it), and then again before the given deadline (this will be announced in class).</em> This includes <code class="docutils literal notranslate"><span class="pre">UnixPrac1.txt</span></code> from the <a class="reference internal" href="01-Unix.html"><span class="doc std std-doc">Unix Chapter</span></a>.</p>
-<p>a. <strong>Improve the existing scripts</strong></p>
+<p><strong>(a) Improve the existing scripts</strong></p>
 <p>Note that some of the shell scripts that you have created in this chapter above requires input files. For example, <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> needs one input file, and <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code> needs two. When you run any of these scripts without inputs (e.g., just <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">tabtocsv.sh</span></code>), you either get no result, or an error.</p>
 <ul class="simple">
 <li><p>Make each such script robust so that it gives feedback to the user and exits if the right inputs are not provided.</p></li>
 </ul>
-<p>b. <strong>A new shell script</strong></p>
+<p><strong>(b) A new shell script</strong></p>
 <ul class="simple">
 <li><p>Write a <code class="docutils literal notranslate"><span class="pre">csvtospace.sh</span></code> shell script that takes a <code class="docutils literal notranslate"><span class="pre">c</span></code>omma <code class="docutils literal notranslate"><span class="pre">s</span></code>eparated <code class="docutils literal notranslate"><span class="pre">v</span></code>alues and converts it to a space separated values file. However, it must not change the input file — it should save it as a differently named file.</p></li>
 <li><p>Make this script robust, as you were asked to doin the previous exercise (a).</p></li>
-<li><p>Save the script in <code class="docutils literal notranslate"><span class="pre">CMEECourseWork/Week1/Code</span></code>, and run it on the <code class="docutils literal notranslate"><span class="pre">csv</span></code> data files that are in <code class="docutils literal notranslate"><span class="pre">Temperatures</span></code> in the master repository’s <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory.</p></li>
+<li><p>Save the script in <code class="docutils literal notranslate"><span class="pre">CMEECourseWork/week1/code</span></code>, and run it on the <code class="docutils literal notranslate"><span class="pre">csv</span></code> data files that are in <code class="docutils literal notranslate"><span class="pre">Temperatures</span></code> in the master repository’s <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory.</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="readings-resources">
 <h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>

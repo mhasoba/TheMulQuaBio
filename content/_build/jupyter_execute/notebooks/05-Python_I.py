@@ -148,19 +148,19 @@
 # 
 # Now, try some simple operations:
 
-# In[1]:
+# In[5]:
 
 
 2 + 2 # Summation; note that comments still start with #
 
 
-# In[2]:
+# In[6]:
 
 
 2 * 2 # Multiplication
 
 
-# In[3]:
+# In[7]:
 
 
 2 / 2 # division
@@ -168,19 +168,19 @@
 
 # To specify an integer division, use `//`:
 
-# In[4]:
+# In[8]:
 
 
 2//2
 
 
-# In[5]:
+# In[9]:
 
 
 2 > 3 # logical operation
 
 
-# In[6]:
+# In[10]:
 
 
 2 >= 2 # another one
@@ -232,7 +232,7 @@
 # 
 # You can try any or all of these now. For example:
 
-# In[7]:
+# In[11]:
 
 
 get_ipython().run_line_magic('who', '')
@@ -240,19 +240,19 @@ get_ipython().run_line_magic('who', '')
 
 # That is, there are no objects in your workspace yet. Let's create one:
 
-# In[8]:
+# In[12]:
 
 
 a = 1
 
 
-# In[9]:
+# In[13]:
 
 
 get_ipython().run_line_magic('who', '')
 
 
-# In[10]:
+# In[14]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -264,7 +264,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # This will give you detailed information about this variable (which is an object, belonging to a particular class, because this is python!). You can also check a variable's type: 
 
-# In[11]:
+# In[15]:
 
 
 type(a)
@@ -286,28 +286,28 @@ type(a)
 # 
 # Now, let's continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:
 
-# In[12]:
+# In[16]:
 
 
 a = 2 #integer
 type(a)
 
 
-# In[13]:
+# In[17]:
 
 
 a = 2. #Float
 type(a)
 
 
-# In[14]:
+# In[18]:
 
 
 a = "Two" #String
 type(a)
 
 
-# In[15]:
+# In[19]:
 
 
 a = True #Boolean
@@ -350,25 +350,25 @@ type(a)
 # 
 # Try the following:
 
-# In[16]:
+# In[20]:
 
 
 2 == 2
 
 
-# In[17]:
+# In[21]:
 
 
 2 != 2
 
 
-# In[18]:
+# In[22]:
 
 
 3 / 2
 
 
-# In[19]:
+# In[23]:
 
 
 3 // 2
@@ -376,49 +376,49 @@ type(a)
 
 # *What happened here*? This is an integer division, so the decimal part is lost.  
 
-# In[20]:
+# In[24]:
 
 
 'hola, ' + 'mi llamo Samraat' #why not learn two languages at the same time?! 
 
 
-# In[21]:
+# In[25]:
 
 
 x = 5
 
 
-# In[22]:
+# In[26]:
 
 
 x + 3
 
 
-# In[23]:
+# In[27]:
 
 
 y = 2
 
 
-# In[24]:
+# In[28]:
 
 
 x + y
 
 
-# In[25]:
+# In[29]:
 
 
 x = 'My string'
 
 
-# In[26]:
+# In[30]:
 
 
 x + ' now has more stuff'
 
 
-# In[27]:
+# In[31]:
 
 
 x + y

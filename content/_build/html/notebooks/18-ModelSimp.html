@@ -107,6 +107,10 @@
  <li class="toctree-l1">
   <a class="reference internal" href="00-Intro.html">
    Introduction
+   <span class="tocSkip">
+   </span>
+   <a name="chap:Intro">
+   </a>
   </a>
  </li>
  <li class="toctree-l1">
@@ -212,11 +216,6 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html#fitting-a-glm">
-   Fitting a GLM
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting.html">
    Model Fitting in Ecology and Evolution
   </a>
@@ -319,7 +318,10 @@
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
-        
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/18-ModelSimp.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
@@ -493,10 +495,10 @@ model that says that none of your variables are important. Hopefully, there is a
  $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
  $ logLS         : num  1.1 1.12 0 0 1.52 ...
  $ logBM         : num  10.83 4.87 11.46 10.86 3.23 ...
- $ TrophicLevel  : chr  &quot;Carnivore&quot; &quot;Herbivore&quot; &quot;Herbivore&quot; &quot;Herbivore&quot; ...
- $ GroundDwelling: chr  &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; ...
- - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:139] 2 4 7 9 10 11 14 15 20 21 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:139] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
+ $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
+ $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
+ - attr(*, &quot;na.action&quot;)=Class &#39;omit&#39;  Named int [1:139] 2 4 7 9 10 11 14 15 20 21 ...
+  .. ..- attr(*, &quot;names&quot;)= chr [1:139] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
 </pre></div>
 </div>
 </div>
@@ -547,23 +549,19 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<caption>A anova: 11 × 5</caption>
-<thead>
-	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
 <tbody>
-	<tr><th scope=row>logLS</th><td>  1</td><td>0.98923090</td><td>0.98923090</td><td>25.7218583</td><td>8.238435e-07</td></tr>
-	<tr><th scope=row>logBM</th><td>  1</td><td>3.03170122</td><td>3.03170122</td><td>78.8299165</td><td>2.175874e-16</td></tr>
-	<tr><th scope=row>TrophicLevel</th><td>  2</td><td>0.47787807</td><td>0.23893904</td><td> 6.2128630</td><td>2.364061e-03</td></tr>
-	<tr><th scope=row>GroundDwelling</th><td>  1</td><td>0.11043622</td><td>0.11043622</td><td> 2.8715489</td><td>9.154164e-02</td></tr>
-	<tr><th scope=row>logLS:logBM</th><td>  1</td><td>0.27482000</td><td>0.27482000</td><td> 7.1458354</td><td>8.064321e-03</td></tr>
-	<tr><th scope=row>logLS:TrophicLevel</th><td>  2</td><td>0.19062973</td><td>0.09531487</td><td> 2.4783653</td><td>8.616764e-02</td></tr>
-	<tr><th scope=row>logLS:GroundDwelling</th><td>  1</td><td>0.13645096</td><td>0.13645096</td><td> 3.5479808</td><td>6.090771e-02</td></tr>
-	<tr><th scope=row>logBM:TrophicLevel</th><td>  2</td><td>0.08736291</td><td>0.04368145</td><td> 1.1357997</td><td>3.229995e-01</td></tr>
-	<tr><th scope=row>logBM:GroundDwelling</th><td>  1</td><td>0.88303940</td><td>0.88303940</td><td>22.9606803</td><td>3.002337e-06</td></tr>
-	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2</td><td>0.04461728</td><td>0.02230864</td><td> 0.5800664</td><td>5.606962e-01</td></tr>
-	<tr><th scope=row>Residuals</th><td>225</td><td>8.65322208</td><td>0.03845876</td><td>        NA</td><td>          NA</td></tr>
+	<tr><th scope=row>logLS</th><td>  1         </td><td>0.98923090  </td><td>0.98923090  </td><td>25.7218583  </td><td>8.238435e-07</td></tr>
+	<tr><th scope=row>logBM</th><td>  1         </td><td>3.03170122  </td><td>3.03170122  </td><td>78.8299165  </td><td>2.175874e-16</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td>0.47787807  </td><td>0.23893904  </td><td> 6.2128630  </td><td>2.364061e-03</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td>0.11043622  </td><td>0.11043622  </td><td> 2.8715489  </td><td>9.154164e-02</td></tr>
+	<tr><th scope=row>logLS:logBM</th><td>  1         </td><td>0.27482000  </td><td>0.27482000  </td><td> 7.1458354  </td><td>8.064321e-03</td></tr>
+	<tr><th scope=row>logLS:TrophicLevel</th><td>  2         </td><td>0.19062973  </td><td>0.09531487  </td><td> 2.4783653  </td><td>8.616764e-02</td></tr>
+	<tr><th scope=row>logLS:GroundDwelling</th><td>  1         </td><td>0.13645096  </td><td>0.13645096  </td><td> 3.5479808  </td><td>6.090771e-02</td></tr>
+	<tr><th scope=row>logBM:TrophicLevel</th><td>  2         </td><td>0.08736291  </td><td>0.04368145  </td><td> 1.1357997  </td><td>3.229995e-01</td></tr>
+	<tr><th scope=row>logBM:GroundDwelling</th><td>  1         </td><td>0.88303940  </td><td>0.88303940  </td><td>22.9606803  </td><td>3.002337e-06</td></tr>
+	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2         </td><td>0.04461728  </td><td>0.02230864  </td><td> 0.5800664  </td><td>5.606962e-01</td></tr>
+	<tr><th scope=row>Residuals</th><td>225         </td><td>8.65322208  </td><td>0.03845876  </td><td>        NA  </td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -587,12 +585,14 @@ which suggests that the slope of log C value with body mass differs between grou
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'logLS:logBM'</li><li>'logLS:TrophicLevel'</li><li>'logLS:GroundDwelling'</li><li>'logBM:TrophicLevel'</li><li>'logBM:GroundDwelling'</li><li>'TrophicLevel:GroundDwelling'</li></ol>
+<div class="output text_html"><ol class=list-inline>
+	<li>'logLS:logBM'</li>
+	<li>'logLS:TrophicLevel'</li>
+	<li>'logLS:GroundDwelling'</li>
+	<li>'logBM:TrophicLevel'</li>
+	<li>'logBM:GroundDwelling'</li>
+	<li>'TrophicLevel:GroundDwelling'</li>
+</ol>
 </div></div>
 </div>
 <div class="cell docutils container">
@@ -602,12 +602,10 @@ which suggests that the slope of log C value with body mass differs between grou
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'c'</li><li>'a:b'</li></ol>
+<div class="output text_html"><ol class=list-inline>
+	<li>'c'</li>
+	<li>'a:b'</li>
+</ol>
 </div></div>
 </div>
 <div class="cell docutils container">
@@ -668,14 +666,10 @@ which suggests that the slope of log C value with body mass differs between grou
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<caption>A anova: 2 × 6</caption>
-<thead>
-	<tr><th></th><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
-	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<thead><tr><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr></thead>
 <tbody>
-	<tr><th scope=row>1</th><td>225</td><td>8.653222</td><td>NA</td><td>         NA</td><td>       NA</td><td>       NA</td></tr>
-	<tr><th scope=row>2</th><td>227</td><td>8.697839</td><td>-2</td><td>-0.04461728</td><td>0.5800664</td><td>0.5606962</td></tr>
+	<tr><td>225        </td><td>8.653222   </td><td>NA         </td><td>         NA</td><td>       NA  </td><td>       NA  </td></tr>
+	<tr><td>227        </td><td>8.697839   </td><td>-2         </td><td>-0.04461728</td><td>0.5800664  </td><td>0.5606962  </td></tr>
 </tbody>
 </table>
 </div></div>
@@ -690,22 +684,18 @@ which suggests that the slope of log C value with body mass differs between grou
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<caption>A anova: 10 × 5</caption>
-<thead>
-	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
 <tbody>
-	<tr><th scope=row>logLS</th><td>  1</td><td>0.98923090</td><td>0.98923090</td><td>25.817379</td><td>7.832839e-07</td></tr>
-	<tr><th scope=row>logBM</th><td>  1</td><td>3.03170122</td><td>3.03170122</td><td>79.122659</td><td>1.869660e-16</td></tr>
-	<tr><th scope=row>TrophicLevel</th><td>  2</td><td>0.47787807</td><td>0.23893904</td><td> 6.235935</td><td>2.309662e-03</td></tr>
-	<tr><th scope=row>GroundDwelling</th><td>  1</td><td>0.11043622</td><td>0.11043622</td><td> 2.882213</td><td>9.093329e-02</td></tr>
-	<tr><th scope=row>logLS:logBM</th><td>  1</td><td>0.27482000</td><td>0.27482000</td><td> 7.172372</td><td>7.944702e-03</td></tr>
-	<tr><th scope=row>logLS:TrophicLevel</th><td>  2</td><td>0.19062973</td><td>0.09531487</td><td> 2.487569</td><td>8.537509e-02</td></tr>
-	<tr><th scope=row>logLS:GroundDwelling</th><td>  1</td><td>0.13645096</td><td>0.13645096</td><td> 3.561157</td><td>6.042258e-02</td></tr>
-	<tr><th scope=row>logBM:TrophicLevel</th><td>  2</td><td>0.08736291</td><td>0.04368145</td><td> 1.140018</td><td>3.216374e-01</td></tr>
-	<tr><th scope=row>logBM:GroundDwelling</th><td>  1</td><td>0.88303940</td><td>0.88303940</td><td>23.045947</td><td>2.869667e-06</td></tr>
-	<tr><th scope=row>Residuals</th><td>227</td><td>8.69783936</td><td>0.03831647</td><td>       NA</td><td>          NA</td></tr>
+	<tr><th scope=row>logLS</th><td>  1         </td><td>0.98923090  </td><td>0.98923090  </td><td>25.817379   </td><td>7.832839e-07</td></tr>
+	<tr><th scope=row>logBM</th><td>  1         </td><td>3.03170122  </td><td>3.03170122  </td><td>79.122659   </td><td>1.869660e-16</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td>0.47787807  </td><td>0.23893904  </td><td> 6.235935   </td><td>2.309662e-03</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td>0.11043622  </td><td>0.11043622  </td><td> 2.882213   </td><td>9.093329e-02</td></tr>
+	<tr><th scope=row>logLS:logBM</th><td>  1         </td><td>0.27482000  </td><td>0.27482000  </td><td> 7.172372   </td><td>7.944702e-03</td></tr>
+	<tr><th scope=row>logLS:TrophicLevel</th><td>  2         </td><td>0.19062973  </td><td>0.09531487  </td><td> 2.487569   </td><td>8.537509e-02</td></tr>
+	<tr><th scope=row>logLS:GroundDwelling</th><td>  1         </td><td>0.13645096  </td><td>0.13645096  </td><td> 3.561157   </td><td>6.042258e-02</td></tr>
+	<tr><th scope=row>logBM:TrophicLevel</th><td>  2         </td><td>0.08736291  </td><td>0.04368145  </td><td> 1.140018   </td><td>3.216374e-01</td></tr>
+	<tr><th scope=row>logBM:GroundDwelling</th><td>  1         </td><td>0.88303940  </td><td>0.88303940  </td><td>23.045947   </td><td>2.869667e-06</td></tr>
+	<tr><th scope=row>Residuals</th><td>227         </td><td>8.69783936  </td><td>0.03831647  </td><td>       NA   </td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -717,12 +707,13 @@ which suggests that the slope of log C value with body mass differs between grou
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'logLS:logBM'</li><li>'logLS:TrophicLevel'</li><li>'logLS:GroundDwelling'</li><li>'logBM:TrophicLevel'</li><li>'logBM:GroundDwelling'</li></ol>
+<div class="output text_html"><ol class=list-inline>
+	<li>'logLS:logBM'</li>
+	<li>'logLS:TrophicLevel'</li>
+	<li>'logLS:GroundDwelling'</li>
+	<li>'logBM:TrophicLevel'</li>
+	<li>'logBM:GroundDwelling'</li>
+</ol>
 </div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add this first simplification to your script and re-run it.</p>

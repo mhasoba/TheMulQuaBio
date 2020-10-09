@@ -27,7 +27,7 @@ pd.__version__
 
 # Also import scipy: 
 
-# In[2]:
+# In[4]:
 
 
 import scipy as sc
@@ -54,7 +54,7 @@ import scipy as sc
 # ### importing data
 # Dataframes can be created from multiple sources - e.g. CSV files, excel files, and JSON.
 
-# In[3]:
+# In[2]:
 
 
 MyDF = pd.read_csv('../data/testcsv.csv', sep=',')
@@ -65,7 +65,7 @@ MyDF
 # 
 # You can also create dataframes using a python dictionary like syntax: 
 
-# In[4]:
+# In[5]:
 
 
 MyDF = pd.DataFrame({
@@ -79,56 +79,56 @@ MyDF
 
 # ### Examining your data
 
-# In[5]:
+# In[6]:
 
 
 # Displays the top 5 rows. Accepts an optional int parameter - num. of rows to show
 MyDF.head()
 
 
-# In[6]:
+# In[7]:
 
 
 # Similar to head, but displays the last rows
 MyDF.tail()
 
 
-# In[7]:
+# In[8]:
 
 
 # The dimensions of the dataframe as a (rows, cols) tuple
 MyDF.shape
 
 
-# In[8]:
+# In[15]:
 
 
 # The number of columns. Equal to df.shape[0]
 len(MyDF) 
 
 
-# In[9]:
+# In[16]:
 
 
 # An array of the column names
 MyDF.columns 
 
 
-# In[10]:
+# In[17]:
 
 
 # Columns and their types
 MyDF.dtypes
 
 
-# In[11]:
+# In[18]:
 
 
 # Converts the frame to a two-dimensional table
 MyDF.values 
 
 
-# In[12]:
+# In[9]:
 
 
 # Displays descriptive stats for all columns

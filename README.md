@@ -25,18 +25,20 @@ To deal with non-standard kernel dependencies (bash, R) we will not use an GitHu
 
 However, the workflow for building the book manually is not too onerous:
 
-- Make changes to your book's content on the master branch of your repository
-- Re-build your book with `jupyter-book build content`
+- Make changes to the book's content on the master branch of this repository
+- Re-build the book with `jupyter-book build content` (assumes you are running the command from root directory of the repository)
 - Ensure that HTML has been built for each page of your book. There should be a collection of HTML files in the `content/_build/html` folder. Also load `_build/html/notebooks/index.html` and check that the book has been built (with navigation etc.) as expected. 
-- Run `ghp-import -n -p -f content/_build/html`
+- Run `ghp-import -n -p -f content/_build/html` to deploy the book.
  
 The last command will automatically push the latest build to the `gh-pages` branch. More information on this hosting process can be found [here](https://jupyterbook.org/publish/gh-pages.html#manually-host-your-book-with-github-pages).
 
 Typically after a few minutes the site should be viewable online at [https://mhasoba.github.io/TheMulQuaBio](https://mhasoba.github.io/TheMulQuaBio). If not, check repository settings under Options -> GitHub Pages to ensure that the gh-pages branch is configured as the build source for GitHub Pages.
 
-Thus a reaosnable one-shot command in terminal to both commit and push new changes and publish the book online is:
+An example command  to push all new changes to the git repository **and** is:
 
-`git add -A && git commit -m "Commit message" && git push -u origin master && ghp-import -n -p -f content/_build/html`
+`git add -A && git commit -m "Commit message" && git push -u origin master`
+
+**Please do not push changes for every little edit you make to the book (e.g., after fixing some typos)**. Push only significant changes. Remember, you can deploy the book (by pushing to the `gh-pages` branch using `ghp-import` as explained above) without pushing changes to the `master` branch. 
 
 ## Contributors
 
@@ -52,4 +54,5 @@ Also, note that:
 
 This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/), initiated using [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
 
-Most of the sections on Data Analysis and Statistics were originally written by David Orme <d.orme@imperial.ac.uk>. 
+Most of the sections on Data Analysis and Statistics were originally written by David Orme <d.orme@imperial.ac.uk>.
+

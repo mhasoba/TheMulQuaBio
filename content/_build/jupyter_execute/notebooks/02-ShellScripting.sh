@@ -1,9 +1,9 @@
 cd ../code
 bash boilerplate.sh
 
-echo "Remove    excess      spaces." | tr -s "\b" " "
+echo "Remove    excess      spaces." | tr -s " "
 
-echo "remove all the as" | tr -d "a"
+echo "remove all the a's" | tr -d "a"
 
 echo "set to uppercase" | tr [:lower:] [:upper:]
 
