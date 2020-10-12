@@ -408,21 +408,47 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-readme-file">
+   The README file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ignoring-files">
    Ignoring Files
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dealing-with-binary-files">
-     Dealing with binary files
+    <a class="reference internal nav-link" href="#directory-and-file-patterns-for-gitignoring">
+     Directory and file patterns for gitignoring
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dealing-with-large-files">
-     Dealing with large files
+    <a class="reference internal nav-link" href="#gitignore-ng-after-commit-ing">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .gitignore
+      </span>
+     </code>
+     -ng after
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       commit
+      </span>
+     </code>
+     -ing
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dealing-with-binary-files">
+   Dealing with binary files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dealing-with-large-files">
+   Dealing with large files
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#removing-files">
@@ -520,8 +546,8 @@
 <li><p>back up your project (but git is not a backup software - see <a class="reference external" href="#Dealing-with-binary-files">sections on binary and large files</a> below).</p></li>
 </ul>
 <p><img alt="image" src="../_images/cvs.png" />
-<small> <center>Source: <span class="xref myst">maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html</span>
-Don’t do this.</center></small></p>
+<small> <center>If you don’t use Version Control.<br>
+Source: <a class="reference external" href="http://maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html">maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html</a> </center></small></p>
 <p>Or here’s <a class="reference external" href="http://www.phdcomics.com/comics/archive/phd101212s.gif">another one</a>.</p>
 </div>
 <div class="section" id="git">
@@ -542,7 +568,7 @@ git config --list
 </div>
 <div class="section" id="basic-git-commands">
 <h3>Basic git commands<a class="headerlink" href="#basic-git-commands" title="Permalink to this headline">¶</a></h3>
-<p>Here are some basic git commands:</p>
+<p>Here are some fundamenetally important git commands (please make sure you read about them):</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
@@ -580,14 +606,21 @@ git config --list
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">name</span></code></p></td>
 <td class="text-align:left"><p>Switch to a different commit/branch called <code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
 </tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code></p></td>
+<td class="text-align:left"><p>Gather commits info from a remote branch to your current local branch without merging them</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code></p></td>
+<td class="text-align:left"><p>Merge two or more versions of one or more files</p></td>
+</tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
-<td class="text-align:left"><p>Upload from remote repository</p></td>
+<td class="text-align:left"><p>Upload from remote repository (this is effectively the same as <code class="docutils literal notranslate"><span class="pre">fetch</span></code> followed by <code class="docutils literal notranslate"><span class="pre">merge</span></code>)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></td>
 <td class="text-align:left"><p>Send changes to remote repository</p></td>
 </tr>
 </tbody>
 </table>
+<p>There are more git commands which you will also learn, but it is important that you familiarize yourself with these ones in particular first.</p>
 </div>
 </div>
 <div class="section" id="your-first-repository">
@@ -599,16 +632,19 @@ git config --list
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bash: cd: /home/mhasoba/Documents/CMEECourseWork: No such file or directory
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Then initialize your local git repository:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initialised empty Git repository in /home/mhasoba/Documents/CMEECourseWork/.git/
 </pre></div>
 </div>
 </div>
@@ -636,6 +672,10 @@ core.repositoryformatversion=0
 core.filemode=true
 core.bare=false
 core.logallrefupdates=true
+remote.origin.url=git@github.com:mhasoba/TheMulQuaBio.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
 </pre></div>
 </div>
 </div>
@@ -648,12 +688,41 @@ core.logallrefupdates=true
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 20
-drwxrwxr-x  4 mhasoba mhasoba 4096 Oct  9 08:56 <span class=" -Color -Color-Bold -Color-Bold-Blue">.</span>
-drwxr-xr-x 34 mhasoba mhasoba 4096 Oct  9 08:56 <span class=" -Color -Color-Bold -Color-Bold-Blue">..</span>
-drwxrwxr-x  7 mhasoba mhasoba 4096 Oct  9 08:56 <span class=" -Color -Color-Bold -Color-Bold-Blue">.git</span>
--rw-rw-r--  1 mhasoba mhasoba   30 Oct  9 08:56 README.md
-drwxrwxr-x  6 mhasoba mhasoba 4096 Oct  9 08:56 <span class=" -Color -Color-Bold -Color-Bold-Blue">week1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 7592
+drwxrwxr-x  5 mhasoba mhasoba    4096 Oct 12 06:28 <span class=" -Color -Color-Bold -Color-Bold-Blue">.</span>
+drwxrwxr-x 13 mhasoba mhasoba    4096 Oct  9 16:44 <span class=" -Color -Color-Bold -Color-Bold-Blue">..</span>
+-rwxrwxr-x  1 mhasoba mhasoba   15584 Oct 11 20:13 <span class=" -Color -Color-Bold -Color-Bold-Green">00-Intro.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   62064 Oct 12 05:53 <span class=" -Color -Color-Bold -Color-Bold-Green">01-Unix.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   16263 Oct 12 06:00 <span class=" -Color -Color-Bold -Color-Bold-Green">02-ShellScripting.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   38801 Oct 12 06:28 <span class=" -Color -Color-Bold -Color-Bold-Green">03-Git.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   14317 Oct 11 20:16 <span class=" -Color -Color-Bold -Color-Bold-Green">04-LaTeX.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  131814 Oct 11 21:24 <span class=" -Color -Color-Bold -Color-Bold-Green">05-Python_I.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  168291 Oct 11 20:54 <span class=" -Color -Color-Bold -Color-Bold-Green">06-Python_II.ipynb</span>
+-rw-rw-r--  1 mhasoba mhasoba  306678 Oct  6 17:26 07-R.ipynb
+-rwxrwxr-x  1 mhasoba mhasoba 3423928 Oct  3 15:45 <span class=" -Color -Color-Bold -Color-Bold-Green">08-Data_R.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba    5340 Oct  3 16:00 <span class=" -Color -Color-Bold -Color-Bold-Green">11-Stats-Intro.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  219288 Oct  3 15:48 <span class=" -Color -Color-Bold -Color-Bold-Green">12-ExpDesign.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   35185 Oct  3 15:52 <span class=" -Color -Color-Bold -Color-Bold-Green">13-t_F_tests.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba 1007136 Oct  3 16:00 <span class=" -Color -Color-Bold -Color-Bold-Green">14-regress.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  101464 Oct  3 15:59 <span class=" -Color -Color-Bold -Color-Bold-Green">15-anova.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  203492 Oct  3 15:59 <span class=" -Color -Color-Bold -Color-Bold-Green">16-MulExpl.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  187806 Oct  3 15:27 <span class=" -Color -Color-Bold -Color-Bold-Green">17-MulExplInter.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   32638 Oct  3 15:54 <span class=" -Color -Color-Bold -Color-Bold-Green">18-ModelSimp.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  355663 Oct  3 16:48 <span class=" -Color -Color-Bold -Color-Bold-Green">19-glm.ipynb</span>
+-rw-rw-r--  1 mhasoba mhasoba  775893 Oct  3 15:31 20-ModelFitting.ipynb
+-rw-rw-r--  1 mhasoba mhasoba    8286 Oct  3 11:34 Appendix-Assessment.rst
+-rw-rw-r--  1 mhasoba mhasoba   32292 Oct  3 15:58 Appendix-Databases.ipynb
+-rwxrwxr-x  1 mhasoba mhasoba   18641 Oct  3 13:44 <span class=" -Color -Color-Bold -Color-Bold-Green">Appendix-Data-Python.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba   43827 Oct  3 13:39 <span class=" -Color -Color-Bold -Color-Bold-Green">Appendix-JupyIntro.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  272052 Oct  3 13:39 <span class=" -Color -Color-Bold -Color-Bold-Green">Appendix-Maths.ipynb</span>
+-rwxrwxr-x  1 mhasoba mhasoba  211316 Oct  3 15:59 <span class=" -Color -Color-Bold -Color-Bold-Green">Appendix-MiniProj.ipynb</span>
+-rw-rw-r--  1 mhasoba mhasoba      10 Oct  8 08:31 .gitignore
+drwxrwxr-x  2 mhasoba mhasoba   12288 Oct  2 22:20 <span class=" -Color -Color-Bold -Color-Bold-Blue">graphics</span>
+drwxrwxr-x  2 mhasoba mhasoba    4096 Oct  9 16:44 <span class=" -Color -Color-Bold -Color-Bold-Blue">.ipynb_checkpoints</span>
+-rw-rw-r--  1 mhasoba mhasoba    5989 Oct  2 22:20 .RData
+-rwxrwxr-x  1 mhasoba mhasoba    1406 Oct  2 22:20 <span class=" -Color -Color-Bold -Color-Bold-Green">.Rhistory</span>
+-rw-rw-r--  1 mhasoba mhasoba       0 Oct  8 08:39 temporary.tmp
+drwxrwxr-x  2 mhasoba mhasoba    4096 Oct  6 17:17 <span class=" -Color -Color-Bold -Color-Bold-Blue">test</span>
 </pre></div>
 </div>
 </div>
@@ -665,26 +734,19 @@ drwxrwxr-x  6 mhasoba mhasoba 4096 Oct  9 08:56 <span class=" -Color -Color-Bold
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: pathspec &#39;README.md&#39; did not match any files
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Check the current status of your repository:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
-	<span class=" -Color -Color-Green">new file:   README.md</span>
-
-Untracked files:
-  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
-	<span class=" -Color -Color-Red">week1/</span>
 </pre></div>
 </div>
 </div>
@@ -696,29 +758,12 @@ Untracked files:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master (root-commit) 8aa8c1e] Added README file.
- 1 file changed, 1 insertion(+)
- create mode 100644 README.md
-</pre></div>
-</div>
-</div>
 </div>
 <p>You can also combine flags like in other UNIX comamnds; so you can both, add (<code class="docutils literal notranslate"><span class="pre">-a</span></code> flag) and commit (<code class="docutils literal notranslate"><span class="pre">-m</span></code> flag) at one go, with <code class="docutils literal notranslate"><span class="pre">-am</span></code>.</p>
 <p>Check status again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch master
-Untracked files:
-  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
-	<span class=" -Color -Color-Red">week1/</span>
-
-nothing added to commit but untracked files present (use &quot;git add&quot; to track)
 </pre></div>
 </div>
 </div>
@@ -738,33 +783,6 @@ nothing added to commit but untracked files present (use &quot;git add&quot; to 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch master
-Changes to be committed:
-  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
-	<span class=" -Color -Color-Green">new file:   week1/data/spawannxs.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir1/Dir11/Dir111/File111.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir1/File1.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir1/File1.tex</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir1/File1.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir2/File2.tex</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir2/File2.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir2/file2.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestFind/Dir3/File3.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/Anotherfile.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/Anotherfile.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File1.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File1.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File2.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File2.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File3.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File3.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File4.csv</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/TestWild/File4.txt</span>
-	<span class=" -Color -Color-Green">new file:   week1/sandbox/test.txt</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note that this adds ALL changes, recursively (through all sub-directories).</p>
 <p>Next you can commit the rest of these files inside <code class="docutils literal notranslate"><span class="pre">week</span> <span class="pre">1</span></code> with another message, just like you did for <code class="docutils literal notranslate"><span class="pre">readme</span></code> above:</p>
@@ -774,42 +792,10 @@ Changes to be committed:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master a16e73c] Full first commit of new project
- 20 files changed, 599 insertions(+)
- create mode 100644 week1/data/spawannxs.txt
- create mode 100644 week1/sandbox/TestFind/Dir1/Dir11/Dir111/File111.txt
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.csv
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.tex
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.txt
- create mode 100644 week1/sandbox/TestFind/Dir2/File2.tex
- create mode 100644 week1/sandbox/TestFind/Dir2/File2.txt
- create mode 100644 week1/sandbox/TestFind/Dir2/file2.csv
- create mode 100644 week1/sandbox/TestFind/Dir3/File3.txt
- create mode 100644 week1/sandbox/TestWild/Anotherfile.csv
- create mode 100644 week1/sandbox/TestWild/Anotherfile.txt
- create mode 100644 week1/sandbox/TestWild/File1.csv
- create mode 100644 week1/sandbox/TestWild/File1.txt
- create mode 100644 week1/sandbox/TestWild/File2.csv
- create mode 100644 week1/sandbox/TestWild/File2.txt
- create mode 100644 week1/sandbox/TestWild/File3.csv
- create mode 100644 week1/sandbox/TestWild/File3.txt
- create mode 100644 week1/sandbox/TestWild/File4.csv
- create mode 100644 week1/sandbox/TestWild/File4.txt
- create mode 100644 week1/sandbox/test.txt
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch master
-nothing to commit, working tree clean
 </pre></div>
 </div>
 </div>
@@ -857,6 +843,22 @@ Don’t succumb to this.</figcaption></center></small></p>
 <p>This pushes the (committed) changes in your local repository up to the remote repository you specified as the <code class="docutils literal notranslate"><span class="pre">origin</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">master</span></code> refers to the branch (you currently only have one). More on branching below.</p>
 <p>You can rename your remote <code class="docutils literal notranslate"><span class="pre">origin</span></code> to a more meaningful name, (e.g., <code class="docutils literal notranslate"><span class="pre">github_CMEECourseWork</span></code>) using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">rename</span></code> command. <a class="reference external" href="https://help.github.com/articles/renaming-a-remote">See this</a>.</p>
 </div>
+<div class="section" id="the-readme-file">
+<h2>The README file<a class="headerlink" href="#the-readme-file" title="Permalink to this headline">¶</a></h2>
+<p>A README (like the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> that you created in your git repo above) is a text file that introduces and explains a project. It contains information that is required to understand what the project is about and how to use or run it.</p>
+<p>While READMEs can be written in any text file format, Markdown (saved as an <code class="docutils literal notranslate"><span class="pre">.md</span></code> file) is most commonly used, as it allows you to add simple text formatting easily. Two other formats that you might most often see are plain text and <a class="reference external" href="https://en.wikipedia.org/wiki/ReStructuredText">reStructuredText</a> (saved as an <code class="docutils literal notranslate"><span class="pre">.rst</span></code> file, common in Python projects).</p>
+<p>You can find many README file suggestions (and templates) online. Essentially, it should ideally have the following features/content:</p>
+<ul class="simple">
+<li><p><strong>Project name / title</strong></p></li>
+<li><p><strong>Brief description</strong>: what your project does and/or is for. Provide context and add links to any references to help new visitors.</p></li>
+<li><p><strong>Languages</strong>: List language(s) and their versions used in the project</p></li>
+<li><p><strong>Dependencies</strong>: What special packages (which are not part of standard libraries of the language(s) used) might be needed for a new user to run your project</p></li>
+<li><p><strong>Installation</strong>: Guidelines for installing the project (if applicable), including dependencies.</p></li>
+<li><p><strong>Project structure and Usage</strong>: How the project is structured and how to run/use it. Explain, if relevant, what specific files do. No need to list every file, such as data or experimental ones (like the ones in <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>).</p></li>
+<li><p><strong>Author name and contact</strong></p></li>
+</ul>
+<p>In addition, you may want to include(but not necessary for your current coursework), <a class="reference external" href="https://en.wikipedia.org/wiki/Software_license">License</a>, Acknowledgments, and instructions for Contributing.</p>
+</div>
 <div class="section" id="ignoring-files">
 <h2>Ignoring Files<a class="headerlink" href="#ignoring-files" title="Permalink to this headline">¶</a></h2>
 <p>You will have some files you don’t want to track (log files, temporary files, executables, etc). You can ignore entire classes of files with <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>.</p>
@@ -900,15 +902,66 @@ Don’t succumb to this.</figcaption></center></small></p>
 <p>You can also create a global gitignore file that lists rules for files to be ignored <a class="reference external" href="https://help.github.com/articles/ignoring-files">in every Git repository on your computer</a>.</p>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>Standard templates for .gitignore</strong>: You can find standard <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> templates online. For example, Google “.gitignore templates”.</p>
+<div><p><strong>Templates for .gitignore</strong>: You can find standard <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> templates online. For example, Seacrh for “.gitignore templates”.</p>
 </div></blockquote>
+<hr class="docutils" />
+<div class="section" id="directory-and-file-patterns-for-gitignoring">
+<h3>Directory and file patterns for gitignoring<a class="headerlink" href="#directory-and-file-patterns-for-gitignoring" title="Permalink to this headline">¶</a></h3>
+<p>It’s important that you use the correct <em>patterns</em> for what to ignore in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, to make sure that all the correct directories and files are being excluded. Note that you can put additonal <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files in sub-directories if you need more fine-grained control over what is to be ignored, bt it is not necessary, because git-ignoring works recursively (including thorugh sub-directories) as long as you include the correct pattern.</p>
+<p>Here are the basic patterns (rules) :</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Pattern</p></th>
+<th class="text-align:left head"><p>gitignore result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">#comment</span></code></p></td>
+<td class="text-align:left"><p>This is a comment - this gitignore entry will be ignored (avoid having any file or directory with <code class="docutils literal notranslate"><span class="pre">#</span></code> in its name!)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">target</span></code></p></td>
+<td class="text-align:left"><p>Every file OR directory (because lack of trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">target/</span></code></p></td>
+<td class="text-align:left"><p>Every directory (due to the trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">/target</span></code></p></td>
+<td class="text-align:left"><p>Every file OR directory named <code class="docutils literal notranslate"><span class="pre">target</span></code> in the top-most directory (due to the leading <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">/target/</span></code></p></td>
+<td class="text-align:left"><p>Every directory named target in the top-most directory (because of the leading and trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">*.extension</span></code></p></td>
+<td class="text-align:left"><p>Every file or directory ending with the extension <code class="docutils literal notranslate"><span class="pre">.extension</span></code> is ignored, recursively</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">*.py[co]</span></code></p></td>
+<td class="text-align:left"><p>Every file or directory ending in <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyo</span></code> is ignored (but not <code class="docutils literal notranslate"><span class="pre">.py</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<p>There are additonal patterns - please see the Readings and Resources section.</p>
+</div>
+<div class="section" id="gitignore-ng-after-commit-ing">
+<h3><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>-ng after <code class="docutils literal notranslate"><span class="pre">commit</span></code>-ing<a class="headerlink" href="#gitignore-ng-after-commit-ing" title="Permalink to this headline">¶</a></h3>
+<p>If you find that a file or directory belonging to a pattern that you incuded in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> fails to be ignored (still comes under version control), it most likely means that you gitignored it AFTER committing and pushing it. In this scenario, you need to use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm --cached &lt;file&gt;
+</pre></div>
+</div>
+<p>for a file, and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm -r --cached &lt;folder&gt;
+</pre></div>
+</div>
+<p>for a directory.</p>
+<p>While these commands will not remove the physical file from your local repository, it will remove the files from other locals on their next <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+</div>
+</div>
 <div class="section" id="dealing-with-binary-files">
-<h3>Dealing with binary files<a class="headerlink" href="#dealing-with-binary-files" title="Permalink to this headline">¶</a></h3>
+<h2>Dealing with binary files<a class="headerlink" href="#dealing-with-binary-files" title="Permalink to this headline">¶</a></h2>
 <p>A binary file is computer-readable but not human-readable, that is, it cannot be read by opening them in a text viewer. Examples of binary files include compiled executables, zip files, images, word documents and videos. In contrast, text files are stored in a form (usually ASCII) that is human-readable by opening in a text reader (e.g., gedit). Without some git extensions and configurations (coming up next), binary files cannot be properly version-controlled because each version of the entire file is saved <em>as is</em> in a hidden directory in the repository (<code class="docutils literal notranslate"><span class="pre">.git</span></code>).</p>
 <p>However, with some more effort, git can be made to work for binary formats like <code class="docutils literal notranslate"><span class="pre">*.docx</span></code> or image formats such as <code class="docutils literal notranslate"><span class="pre">*.jpeg</span></code>, but it is harder to compare versions; have a look at <a class="reference external" href="https://git-scm.com/docs/gitattributes">this</a> and <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes">this</a><sup><a class="reference external" href="#git:word">1</a></sup>, and also, <a class="reference external" href="https://opensource.com/life/16/8/how-manage-binary-blobs-git-part-7">this</a></p>
 </div>
 <div class="section" id="dealing-with-large-files">
-<h3>Dealing with large files<a class="headerlink" href="#dealing-with-large-files" title="Permalink to this headline">¶</a></h3>
+<h2>Dealing with large files<a class="headerlink" href="#dealing-with-large-files" title="Permalink to this headline">¶</a></h2>
 <p>As such, git was designed for version control of workflows and software projects, <em>not</em> large files (say, &gt;100mb) (which may be plain-text or binary). Binary files are particularly problematic because each version of the file is saved <em>as is</em> in <code class="docutils literal notranslate"><span class="pre">.git</span></code>, when you have a large number of versions it means that there are the same number of binary files in the hidden directory (for example 100 <span class="math notranslate nohighlight">\(\times\)</span> &gt;100mb files!).</p>
 <p><em>So please do not keep large files (especially binary files) under version control</em><sup><a class="reference external" href="#git:largefiles">2</a></sup>. For example, if you are doing GIS work, you may have to handle large raster image files.  Do not bring such files under version control. We suggest that you include files larger than some size in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>. For example, you can use the following bash command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-size</span> <span class="pre">+100M</span> <span class="pre">|</span> <span class="pre">cat</span> <span class="pre">&gt;&gt;</span> <span class="pre">.gitignore</span></code></p>
@@ -926,7 +979,6 @@ Don’t succumb to this.</figcaption></center></small></p>
 <p>or (more detailed information about what’s using the space),</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git count-objects -vH
 </pre></div>
-</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -954,30 +1006,18 @@ Don’t succumb to this.</figcaption></center></small></p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master a921378] added a new file that we&#39;ll remove later
- 22 files changed, 602 insertions(+)
- create mode 100644 .gitignore
- create mode 100644 FileToRem.txt
- create mode 100644 week1/data/spawannxs.txt
- create mode 100644 week1/sandbox/TestFind/Dir1/Dir11/Dir111/File111.txt
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.csv
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.tex
- create mode 100644 week1/sandbox/TestFind/Dir1/File1.txt
- create mode 100644 week1/sandbox/TestFind/Dir2/File2.tex
- create mode 100644 week1/sandbox/TestFind/Dir2/File2.txt
- create mode 100644 week1/sandbox/TestFind/Dir2/file2.csv
- create mode 100644 week1/sandbox/TestFind/Dir3/File3.txt
- create mode 100644 week1/sandbox/TestWild/Anotherfile.csv
- create mode 100644 week1/sandbox/TestWild/Anotherfile.txt
- create mode 100644 week1/sandbox/TestWild/File1.csv
- create mode 100644 week1/sandbox/TestWild/File1.txt
- create mode 100644 week1/sandbox/TestWild/File2.csv
- create mode 100644 week1/sandbox/TestWild/File2.txt
- create mode 100644 week1/sandbox/TestWild/File3.csv
- create mode 100644 week1/sandbox/TestWild/File3.txt
- create mode 100644 week1/sandbox/TestWild/File4.csv
- create mode 100644 week1/sandbox/TestWild/File4.txt
- create mode 100644 week1/sandbox/test.txt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master 7f301eb] added a new file that we&#39;ll remove later
+ 39 files changed, 3433 insertions(+), 5371 deletions(-)
+ rewrite content/_build/.doctrees/environment.pickle (85%)
+ rewrite content/_build/.doctrees/notebooks/01-Unix.doctree (73%)
+ rewrite content/_build/.doctrees/notebooks/05-Python_I.doctree (73%)
+ rewrite content/_build/.doctrees/notebooks/06-Python_II.doctree (64%)
+ rewrite content/_build/html/_images/06-Python_II_116_0.png (99%)
+ rewrite content/_build/html/_images/06-Python_II_98_0.png (99%)
+ rewrite content/_build/html/searchindex.js (95%)
+ rewrite content/_build/jupyter_execute/notebooks/06-Python_II_116_0.png (99%)
+ rewrite content/_build/jupyter_execute/notebooks/06-Python_II_98_0.png (99%)
+ create mode 100644 content/notebooks/FileToRem.txt
 </pre></div>
 </div>
 </div>
@@ -989,7 +1029,7 @@ Don’t succumb to this.</figcaption></center></small></p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rm &#39;FileToRem.txt&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rm &#39;content/notebooks/FileToRem.txt&#39;
 </pre></div>
 </div>
 </div>
@@ -1001,9 +1041,9 @@ Don’t succumb to this.</figcaption></center></small></p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master c3cbaf7] removed the file
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[master e3c3dc6] removed the file
  1 file changed, 1 deletion(-)
- delete mode 100644 FileToRem.txt
+ delete mode 100644 content/notebooks/FileToRem.txt
 </pre></div>
 </div>
 </div>
@@ -1116,9 +1156,10 @@ Try not to do this, but most of us will have, at some point!</p>
 <h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
 <p><em>Don’t modify anything (or refer to any files) in your local copy of the git repository of these notes (on Github). Copy whatever you need from the master repository to your own repository.</em></p>
 <p><em>Git commit and push every time you do some significant amount of coding work (after testing it), and then again before the given deadline (this will be announced in class).</em> This includes <code class="docutils literal notranslate"><span class="pre">UnixPrac1.txt</span></code> from the <a class="reference internal" href="01-Unix.html"><span class="doc std std-doc">Unix Chapter</span></a>.</p>
+<p><strong>Push your git repository</strong></p>
 <ul class="simple">
-<li><p>The only practical submission for git is pushing your coursework git repository, <code class="docutils literal notranslate"><span class="pre">.gitgnore</span></code> and <code class="docutils literal notranslate"><span class="pre">readme</span></code> files included. Make sure your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> has meaningful exclusions, and your <code class="docutils literal notranslate"><span class="pre">readme</span></code> has useful information. Google “readme good practices” or something like that to find online tips.</p></li>
-<li><p>Also, invite your assessor to your coursework repository (e.g, <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code>) repository with <em>write privileges</em>. The current assessor is s.pawar&#64;imperial.ac.uk (or “mhasoba” on both bitbucket and github).</p></li>
+<li><p>The only practical submission for git is pushing your coursework git repository, <code class="docutils literal notranslate"><span class="pre">.gitgnore</span></code> and <code class="docutils literal notranslate"><span class="pre">readme</span></code> files included. Make sure your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> has meaningful exclusions, and your <code class="docutils literal notranslate"><span class="pre">readme</span></code> has useful information (as explained in the <a class="reference external" href="#The-README-file">section above</a>). Also search online “readme good practices” or something like that to find additional tips/info.</p></li>
+<li><p>Also, invite your assessor to your coursework repository (e.g, <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code>) repository with <em>write privileges</em> (AKA <em>push</em> privilege in GitHub). The current assessor is s.pawar&#64;imperial.ac.uk (or “mhasoba” on both bitbucket and github).</p></li>
 </ul>
 </div>
 </div>
@@ -1131,7 +1172,8 @@ Try not to do this, but most of us will have, at some point!</p>
 <li><p>Really great git tutorials: <a class="reference external" href="https://try.github.io">https://try.github.io</a></p></li>
 <li><p>Some tips for good commit practices: https://chris.beams.io/posts/git-commit/</p></li>
 <li><p>Guidelines for the <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file: https://labs.consol.de/development/git/2017/02/22/gitignore.html, https://docs.github.com/en/free-pro-team&#64;latest/github/using-git/ignoring-files</p></li>
-<li><p>Gudelines for brancing: https://gist.github.com/digitaljhelms/4287848</p></li>
+<li><p>Guidelines for brancing: https://gist.github.com/digitaljhelms/4287848</p></li>
+<li><p>A cheatsheet for github-flavored Markdown: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</p></li>
 </ul>
 <p><strong>Footnotes</strong></p>
 <p><a name="git:word">1</a>: There you will find the following phrase: “…one of the most annoying problems known to humanity: version-controlling Microsoft Word documents.”. LOL!</p>
