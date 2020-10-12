@@ -44,7 +44,7 @@ a
 print(type(a))
 
 
-# In[174]:
+# In[5]:
 
 
 print(type(a[0]))
@@ -59,14 +59,14 @@ print(type(a[0]))
 # 
 # You can also specify the data type of the array:
 
-# In[175]:
+# In[6]:
 
 
 a = sc.array(range(5), float)
 a
 
 
-# In[176]:
+# In[7]:
 
 
 a.dtype # Check type 
@@ -74,14 +74,14 @@ a.dtype # Check type
 
 # You can also get a 1-D arrays as follows:
 
-# In[177]:
+# In[8]:
 
 
 x = sc.arange(5)
 x
 
 
-# In[178]:
+# In[9]:
 
 
 x = sc.arange(5.) #directly specify float using decimal
@@ -90,7 +90,7 @@ x
 
 # As with other Python variables (e.g., created as a list or a dictionary), you can apply methods to variables created as numpy arrays. For example, type `x.` and hit TAB to see all methods you can apply to`x`. To see dimensions of `x`:
 
-# In[179]:
+# In[10]:
 
 
 x.shape
@@ -100,14 +100,14 @@ x.shape
 # 
 # You can also convert to and from Python lists (recall [list comprehensions](./05-Python_I.ipynb#Comprehensions)):
 
-# In[180]:
+# In[11]:
 
 
 b = sc.array([i for i in range(10) if i % 2 == 1]) #odd numbers between 1 and 10 
 b
 
 
-# In[181]:
+# In[12]:
 
 
 c = b.tolist() #convert back to list
@@ -116,14 +116,14 @@ c
 
 # To make a matrix, you need a 2-D numpy array:
 
-# In[182]:
+# In[13]:
 
 
 mat = sc.array([[0, 1], [2, 3]])
 mat
 
 
-# In[183]:
+# In[14]:
 
 
 mat.shape
@@ -133,13 +133,13 @@ mat.shape
 # 
 # As with other Python data objects such as lists, numpy array elements can be accessed using square brackets (`[ ]`) with the usual `[row,column]` reference. Indexing of numpy arrays works like that for other data structures, with index values starting at 0. So, you can obtain all the elements of a particular row as:
 
-# In[184]:
+# In[15]:
 
 
 mat[1] # accessing whole 2nd row, remember indexing starts at  0
 
 
-# In[185]:
+# In[16]:
 
 
 mat[:,1] #accessing whole second column  
@@ -147,13 +147,13 @@ mat[:,1] #accessing whole second column
 
 # And accessing particular elements:
 
-# In[186]:
+# In[17]:
 
 
 mat[0,0] # 1st row, 1st column element
 
 
-# In[187]:
+# In[18]:
 
 
 mat[1,0] # 2nd row, 1st column element
@@ -161,7 +161,7 @@ mat[1,0] # 2nd row, 1st column element
 
 # Note that (like all other programming languages) row index always comes before column index. That is, `mat[1]` is always going to mean "whole second row", and `mat[1,1]` means 1st row and 1st column element. Therefore, to access the whole second column, you need:
 
-# In[188]:
+# In[19]:
 
 
 mat[:,0] #accessing whole first column  
@@ -170,25 +170,25 @@ mat[:,0] #accessing whole first column
 # Python indexing also accepts negative values for going back to the start
 # from the end of an array:
 
-# In[189]:
+# In[20]:
 
 
 mat[0,1]
 
 
-# In[190]:
+# In[21]:
 
 
 mat[0,-1]
 
 
-# In[191]:
+# In[22]:
 
 
 mat[-1,0]
 
 
-# In[192]:
+# In[23]:
 
 
 mat[0,-2]
@@ -209,46 +209,46 @@ mat[0,-2]
 # 
 # Let's look at how you can replace, add, or delete an array element (a single entry, or whole row(s) or whole column(s)):
 
-# In[193]:
+# In[24]:
 
 
 mat[0,0] = -1 #replace a single element
 mat
 
 
-# In[194]:
+# In[25]:
 
 
 mat[:,0] = [12,12] #replace whole column
 mat
 
 
-# In[195]:
+# In[26]:
 
 
 sc.append(mat, [[12,12]], axis = 0) #append row, note axis specification
 
 
-# In[196]:
+# In[27]:
 
 
 sc.append(mat, [[12],[12]], axis = 1) #append column
 
 
-# In[197]:
+# In[28]:
 
 
 newRow = [[12,12]] #create new row
 
 
-# In[198]:
+# In[29]:
 
 
 mat = sc.append(mat, newRow, axis = 0) #append that existing row
 mat
 
 
-# In[199]:
+# In[30]:
 
 
 sc.delete(mat, 2, 0) #Delete 3rd row
@@ -256,7 +256,7 @@ sc.delete(mat, 2, 0) #Delete 3rd row
 
 # And concatenation:
 
-# In[200]:
+# In[31]:
 
 
 mat = sc.array([[0, 1], [2, 3]])
@@ -268,25 +268,25 @@ sc.concatenate((mat, mat0), axis = 0)
 # 
 # You can also "flatten" or "melt" arrays, that is, change array dimensions (e.g., from a matrix to a vector):
 
-# In[201]:
+# In[32]:
 
 
 mat.ravel() # NOTE: ravel is row-priority - happens row by row
 
 
-# In[202]:
+# In[33]:
 
 
 mat.reshape((4,1)) # this is different from ravel - check ?sc.reshape
 
 
-# In[203]:
+# In[34]:
 
 
 mat.reshape((1,4)) # NOTE: reshaping is also row-priority
 
 
-# In[204]:
+# In[35]:
 
 
 mat.reshape((3, 1)) # But total elements must remain the same!
@@ -300,26 +300,26 @@ mat.reshape((3, 1)) # But total elements must remain the same!
 # 
 # For example, if you know the size of your matrix or array, you can initialize it with ones or zeros:
 
-# In[205]:
+# In[76]:
 
 
 sc.ones((4,2)) #(4,2) are the (row,col) array dimensions
 
 
-# In[206]:
+# In[37]:
 
 
 sc.zeros((4,2)) # or zeros
 
 
-# In[207]:
+# In[38]:
 
 
 m = sc.identity(4) #create an identity matrix
 m
 
 
-# In[208]:
+# In[39]:
 
 
 m.fill(16) #fill the matrix with 16
@@ -336,7 +336,7 @@ m
 # 
 # Now let's perform some common matrix-vector operations on arrays (you can also try the same using matrices instead of arrays):
 
-# In[5]:
+# In[40]:
 
 
 mm = sc.arange(16)
@@ -344,31 +344,31 @@ mm = mm.reshape(4,4) #Convert to matrix
 mm
 
 
-# In[210]:
+# In[41]:
 
 
 mm.transpose()
 
 
-# In[211]:
+# In[42]:
 
 
 mm + mm.transpose()
 
 
-# In[212]:
+# In[43]:
 
 
 mm - mm.transpose()
 
 
-# In[213]:
+# In[44]:
 
 
 mm * mm.transpose() ## Note: Elementwise multiplication!
 
 
-# In[214]:
+# In[45]:
 
 
 mm // mm.transpose()
@@ -376,38 +376,38 @@ mm // mm.transpose()
 
 # Note that we used integer division `//`. Note also the warning you get(because of zero division). So let's avoid the divide by zero:
 
-# In[215]:
+# In[46]:
 
 
 mm // (mm + 1).transpose()
 
 
-# In[216]:
+# In[47]:
 
 
 mm * sc.pi
 
 
-# In[217]:
+# In[48]:
 
 
 mm.dot(mm) # MATRIX MULTIPLICATION, OR DOT PRODUCT 
 
 
-# In[218]:
+# In[49]:
 
 
 mm = sc.matrix(mm) # convert to scipy matrix class
 mm
 
 
-# In[219]:
+# In[50]:
 
 
 print(type(mm))
 
 
-# In[220]:
+# In[51]:
 
 
 mm * mm # now matrix multiplication is syntactically easier
@@ -423,19 +423,19 @@ mm * mm # now matrix multiplication is syntactically easier
 # 
 # Let's take a quick spin in `sc.stats`.
 
-# In[6]:
+# In[52]:
 
 
 import scipy.stats
 
 
-# In[7]:
+# In[53]:
 
 
 scipy.stats.norm.rvs(size = 10) # 10 samples from N(0,1)
 
 
-# In[8]:
+# In[54]:
 
 
 scipy.stats.randint.rvs(0, 10, size =7) # Random integers between 0 and 10
@@ -462,7 +462,7 @@ scipy.stats.randint.rvs(0, 10, size =7) # Random integers between 0 and 10
 # 
 # First, import `scipy`'s `integrate` submodule:
 
-# In[9]:
+# In[55]:
 
 
 import scipy.integrate as integrate
@@ -470,7 +470,7 @@ import scipy.integrate as integrate
 
 # Now define a function that returns the growth rate of consumer and resource population at any given time step.
 
-# In[10]:
+# In[56]:
 
 
 def dCR_dt(pops, t=0):
@@ -483,7 +483,7 @@ def dCR_dt(pops, t=0):
     return sc.array([dRdt, dCdt])
 
 
-# In[11]:
+# In[57]:
 
 
 type(dCR_dt)
@@ -493,7 +493,7 @@ type(dCR_dt)
 # 
 # Now assign some parameter values:
 
-# In[12]:
+# In[58]:
 
 
 r = 1.
@@ -504,7 +504,7 @@ e = 0.75
 
 # Define the time vector; let's integrate from time point 0 to 15, using 1000 sub-divisions of time:
 
-# In[13]:
+# In[59]:
 
 
 t = sc.linspace(0, 15, 1000)
@@ -514,7 +514,7 @@ t = sc.linspace(0, 15, 1000)
 
 # Set the initial conditions for the two populations (10 resources and 5 consumers per unit area), and convert the two into an array (because our `dCR_dt` function take an array as input). 
 
-# In[15]:
+# In[60]:
 
 
 R0 = 10
@@ -524,13 +524,13 @@ RC0 = sc.array([R0, C0])
 
 # Now numerically integrate this system forward from those starting conditions: 
 
-# In[16]:
+# In[61]:
 
 
 pops, infodict = integrate.odeint(dCR_dt, RC0, t, full_output=True)
 
 
-# In[17]:
+# In[62]:
 
 
 pops
@@ -538,13 +538,13 @@ pops
 
 # So `pops` contains the result (the population trajectories).  Also check what's in infodict (it's a  dictionary with additional information)
 
-# In[18]:
+# In[63]:
 
 
 type(infodict)
 
 
-# In[19]:
+# In[64]:
 
 
 infodict.keys()
@@ -552,7 +552,7 @@ infodict.keys()
 
 # Check what the `infodict` output is by reading the help documentation with `?scipy.integrate.odeint`. For example, you can return a message to screen about whether the integration was successful: 
 
-# In[20]:
+# In[65]:
 
 
 infodict['message']
@@ -568,7 +568,7 @@ infodict['message']
 # 
 # First let's import the package:
 
-# In[21]:
+# In[66]:
 
 
 import matplotlib.pylab as p
@@ -576,13 +576,13 @@ import matplotlib.pylab as p
 
 # Now open an empty figure object (analogous to an R graphics object).
 
-# In[22]:
+# In[67]:
 
 
 f1 = p.figure()
 
 
-# In[23]:
+# In[68]:
 
 
 p.plot(t, pops[:,0], 'g-', label='Resource density') # Plot
@@ -597,7 +597,7 @@ p.show()# To display the figure
 
 # Finally, save the figure as a pdf:
 
-# In[238]:
+# In[69]:
 
 
 f1.savefig('../results/LV_model.pdf') #Save figure
@@ -634,7 +634,7 @@ f1.savefig('../results/LV_model.pdf') #Save figure
 # 
 # Let's write an illustrative program (name it `profileme.py`) and run it:
 
-# In[8]:
+# In[70]:
 
 
 def my_squares(iters):
@@ -696,7 +696,7 @@ run_my_funcs(10000000,"My string")
 # 
 # Let's try this alternative approach to writing the program (save it as `profileme2.py`, and again, run it):
 
-# In[9]:
+# In[71]:
 
 
 def my_squares(iters):
@@ -852,7 +852,7 @@ run_my_funcs(10000000,"My string")
 # 
 # Below are a loop-based function and a vectorized function to calculate the entrywise product of two 1D arrays of the same length. We will test them both on larger and larger 1D arrays to see how the vectorized approach is faster.
 
-# In[4]:
+# In[72]:
 
 
 def loop_product(a, b):
@@ -871,7 +871,7 @@ def vect_product(a, b):
 # 
 # Let's try comparing the runtimes of `loop_product` and `vect_product` on increasingly large randomly-generated 1D arrays:
 
-# In[22]:
+# In[73]:
 
 
 import timeit
@@ -899,7 +899,7 @@ for N in array_lengths:
 
 # Now let's compare the timings on a plot:
 
-# In[23]:
+# In[74]:
 
 
 p.figure()
@@ -921,13 +921,13 @@ p.show()
 # 
 # There are trade-offs to vectorizing, most notably memory usage. One downside of calculating many steps simultaneously is that your computer needs to hold much more in memory in order to do it. If you try to vectorize a problem thats *too* large, you will probably run into memory errors. One easy example is to re-run the above example, but make it **even bigger**:
 
-# In[24]:
+# In[ ]:
 
 
 N = 1000000000
 
-a = np.random.rand(N)
-b = np.random.rand(N)
+a = sc.random.rand(N)
+b = sc.random.rand(N)
 c = vect_product(a, b)
 
 # if no error, remove a, b, c from memory.
@@ -1020,7 +1020,7 @@ del c
 # 
 # First, import the necessary modules:
 
-# In[7]:
+# In[ ]:
 
 
 import networkx as nx
@@ -1030,7 +1030,7 @@ import matplotlib.pylab as p
 
 # Let's generate a "synthetic" food web. We can do this with the following function that generates a random adjacency list of a $N$-species food web with "connectance probability" $C$: the probability of having a link between any pair of species in the food web. 
 
-# In[8]:
+# In[ ]:
 
 
 def GenRdmAdjList(N = 2, C = 0.5):
@@ -1050,7 +1050,7 @@ def GenRdmAdjList(N = 2, C = 0.5):
 
 # Now assign number of species (`MaxN`) and connectance (`C`):
 
-# In[9]:
+# In[ ]:
 
 
 MaxN = 30
@@ -1059,7 +1059,7 @@ C = 0.75
 
 # Now generate an adjacency list representing a random food web:
 
-# In[10]:
+# In[ ]:
 
 
 AdjL = sc.array(GenRdmAdjList(MaxN, C))
@@ -1070,7 +1070,7 @@ AdjL
 # 
 # Now generate species (node) data:
 
-# In[11]:
+# In[ ]:
 
 
 Sps = sc.unique(AdjL) # get species ids
@@ -1078,7 +1078,7 @@ Sps = sc.unique(AdjL) # get species ids
 
 # Now generate body sizes for the species. We will use a log$_{10}$ scale because species body sizes tend to be [log-normally distributed](08-Data_R.ipynb#Histograms).
 
-# In[12]:
+# In[ ]:
 
 
 SizRan = ([-10,10]) #use log10 scale
@@ -1088,13 +1088,13 @@ Sizs
 
 # Let's visualize the size distribution we have generated.
 
-# In[13]:
+# In[ ]:
 
 
 p.hist(Sizs) #log10 scale
 
 
-# In[14]:
+# In[ ]:
 
 
 p.hist(10 ** Sizs) #raw scale
@@ -1102,7 +1102,7 @@ p.hist(10 ** Sizs) #raw scale
 
 # Now let's plot the network, with node sizes proportional to (log) body size:
 
-# In[15]:
+# In[ ]:
 
 
 p.close('all') # close all open plot objects
@@ -1110,7 +1110,7 @@ p.close('all') # close all open plot objects
 
 # Let's use a circular configuration. For this, we need to calculate the coordinates, easily done using networkx:
 
-# In[16]:
+# In[ ]:
 
 
 pos = nx.circular_layout(Sps)
@@ -1120,7 +1120,7 @@ pos = nx.circular_layout(Sps)
 # 
 # Now generate a networkx graph object:
 
-# In[17]:
+# In[ ]:
 
 
 G = nx.Graph()
@@ -1128,7 +1128,7 @@ G = nx.Graph()
 
 # Now add the nodes and links (edges) to it:
 
-# In[18]:
+# In[ ]:
 
 
 G.add_nodes_from(Sps)
@@ -1139,7 +1139,7 @@ G.add_edges_from(tuple(AdjL))
 
 # Now generate node sizes that are proportional to (log) body sizes:
 
-# In[19]:
+# In[ ]:
 
 
 NodSizs= 1000 * (Sizs-min(Sizs))/(max(Sizs)-min(Sizs)) 
@@ -1147,7 +1147,7 @@ NodSizs= 1000 * (Sizs-min(Sizs))/(max(Sizs)-min(Sizs))
 
 # Now render (plot) the graph:
 
-# In[25]:
+# In[ ]:
 
 
 nx.draw_networkx(G, pos, node_size = NodSizs)
@@ -1245,7 +1245,7 @@ nx.draw_networkx(G, pos, node_size = NodSizs)
 # 
 # Let's import it:
 
-# In[1]:
+# In[ ]:
 
 
 import re
@@ -1257,7 +1257,7 @@ import re
 # 
 # OK, let's try some regexes (type all that follows in `regexs.py`):
 
-# In[254]:
+# In[ ]:
 
 
 my_string = "a given string"
@@ -1265,7 +1265,7 @@ my_string = "a given string"
 
 # Find a space in the string:
 
-# In[255]:
+# In[ ]:
 
 
 match = re.search(r'\s', my_string)
@@ -1276,7 +1276,7 @@ print(match)
 # 
 # To see the match, use:
 
-# In[256]:
+# In[ ]:
 
 
 match.group()
@@ -1284,13 +1284,13 @@ match.group()
 
 # Now let's try another pattern:
 
-# In[257]:
+# In[ ]:
 
 
 match = re.search(r'\d', my_string)
 
 
-# In[258]:
+# In[ ]:
 
 
 print(match)
@@ -1300,7 +1300,7 @@ print(match)
 
 # To know whether a pattern was matched, we can use an `if`:
 
-# In[259]:
+# In[ ]:
 
 
 MyStr = 'an example'
@@ -1315,35 +1315,35 @@ else:
 
 # Here are some more regexes (add all that follows to `regexs.py`):
 
-# In[260]:
+# In[ ]:
 
 
 match = re.search(r'2' , "it takes 2 to tango")
 match.group()
 
 
-# In[261]:
+# In[ ]:
 
 
 match = re.search(r'\d' , "it takes 2 to tango")
 match.group()
 
 
-# In[262]:
+# In[ ]:
 
 
 match = re.search(r'\d.*' , "it takes 2 to tango")
 match.group()
 
 
-# In[263]:
+# In[ ]:
 
 
 match = re.search(r'\s\w{1,3}\s', 'once upon a time')
 match.group()
 
 
-# In[264]:
+# In[ ]:
 
 
 match = re.search(r'\s\w*$', 'once upon a time')
@@ -1352,13 +1352,13 @@ match.group()
 
 # Let's switch to a more compact syntax by directly returning the matched group (by directly appending `.group()` to the result).
 
-# In[265]:
+# In[ ]:
 
 
 re.search(r'\w*\s\d.*\d', 'take 2 grams of H2O').group()
 
 
-# In[266]:
+# In[ ]:
 
 
 re.search(r'^\w*.*\s', 'once upon a time').group() # 'once upon a '
@@ -1368,7 +1368,7 @@ re.search(r'^\w*.*\s', 'once upon a time').group() # 'once upon a '
 # 
 # As a result, they may match more text than you want. To make it non-greedy and terminate at the first found instance of a pattern, use `?`:
 
-# In[267]:
+# In[ ]:
 
 
 re.search(r'^\w*.*?\s', 'once upon a time').group()
@@ -1376,7 +1376,7 @@ re.search(r'^\w*.*?\s', 'once upon a time').group()
 
 # To further illustrate greediness in regexes, let's try matching an HTML tag:
 
-# In[268]:
+# In[ ]:
 
 
 re.search(r'<.+>', 'This is a <EM>first</EM> test').group()
@@ -1386,7 +1386,7 @@ re.search(r'<.+>', 'This is a <EM>first</EM> test').group()
 # 
 # It's because `+` is greedy. Instead, we can make `+` "lazy":
 
-# In[269]:
+# In[ ]:
 
 
 re.search(r'<.+?>', 'This is a <EM>first</EM> test').group()
@@ -1394,7 +1394,7 @@ re.search(r'<.+?>', 'This is a <EM>first</EM> test').group()
 
 # OK, moving on from greed and laziness...
 
-# In[270]:
+# In[ ]:
 
 
 re.search(r'\d*\.?\d*','1432.75+60.22i').group()
@@ -1406,13 +1406,13 @@ re.search(r'\d*\.?\d*','1432.75+60.22i').group()
 # 
 # A couple more examples:
 
-# In[271]:
+# In[ ]:
 
 
 re.search(r'[AGTC]+', 'the sequence ATTCGT').group()
 
 
-# In[272]:
+# In[ ]:
 
 
 re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper.").group()
@@ -1429,7 +1429,7 @@ re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper."
 
 # How about looking for email addresses in a string? For example, let's try matching a string consisting of an academic's name, email address and research area or interest (no need to type this into any python file):
 
-# In[11]:
+# In[ ]:
 
 
 MyStr = 'Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory'
@@ -1441,13 +1441,13 @@ match.group()
 # 
 # Let's see if this regex works on a different pattern of email addresses: 
 
-# In[3]:
+# In[ ]:
 
 
 MyStr = 'Samraat Pawar, s-pawar@imperial.ac.uk, Systems biology and ecological theory'
 
 
-# In[4]:
+# In[ ]:
 
 
 match = re.search(r"[\w\s]+,\s[\w\.@]+,\s[\w\s]+",MyStr)
@@ -1456,7 +1456,7 @@ match.group()
 
 # Nope! So let's make the email address part of the regex more robust:
 
-# In[13]:
+# In[ ]:
 
 
 match = re.search(r"[\w\s]+,\s[\w\.-]+@[\w\.-]+,\s[\w\s]+",MyStr)
@@ -1481,7 +1481,7 @@ match.group()
 # 
 # You can group regex patterns into meaningful blocks using parentheses. Let's look again at the example of finding  email addresses.
 
-# In[14]:
+# In[ ]:
 
 
 MyStr = 'Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory'
@@ -1491,7 +1491,7 @@ match.group()
 
 # Without grouping the regex:
 
-# In[278]:
+# In[ ]:
 
 
 match.group(0)
@@ -1499,7 +1499,7 @@ match.group(0)
 
 # Now create groups using `( )`:
 
-# In[279]:
+# In[ ]:
 
 
 match = re.search(r"([\w\s]+),\s([\w\.-]+@[\w\.-]+),\s([\w\s&]+)",MyStr)
@@ -1537,7 +1537,7 @@ if match:
 # 
 # Let's try this on an extension of the email example above for some data with multiple addresses: 
 
-# In[280]:
+# In[ ]:
 
 
 MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory; Another academic, a-academic@imperial.ac.uk, Some other stuff thats equally boring; Yet another academic, y.a_academic@imperial.ac.uk, Some other stuff thats even more boring"
@@ -1545,7 +1545,7 @@ MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological t
 
 # Now `re.findall()` returns a list of all the emails found:
 
-# In[281]:
+# In[ ]:
 
 
 emails = re.findall(r'[\w\.-]+@[\w\.-]+', MyStr) 
@@ -1561,7 +1561,7 @@ for email in emails:
 # 
 # Let's try finding all species names that correspond to Oaks in a data file:
 
-# In[290]:
+# In[ ]:
 
 
 f = open('../data/TestOaksData.csv', 'r')
@@ -1578,7 +1578,7 @@ found_oaks
 # 
 # Let's try it:
 
-# In[291]:
+# In[ ]:
 
 
 MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory; Another academic, a.academic@imperial.ac.uk, Some other stuff thats equally boring; Yet another academic, y.a.academic@imperial.ac.uk, Some other stuff thats even more boring"
@@ -1587,7 +1587,7 @@ found_matches = re.findall(r"([\w\s]+),\s([\w\.-]+@[\w\.-]+)", MyStr)
 found_matches
 
 
-# In[292]:
+# In[ ]:
 
 
 for item in found_matches:
@@ -1600,13 +1600,13 @@ for item in found_matches:
 # 
 # You will need a new package `urllib3`. Install it, and import it (also `import re` if needed). 
 
-# In[293]:
+# In[ ]:
 
 
 import urllib3
 
 
-# In[294]:
+# In[ ]:
 
 
 conn = urllib3.PoolManager() # open a connection
@@ -1616,7 +1616,7 @@ webpage_html = r.data #read in the webpage's contents
 
 # This is returned as bytes (not strings). 
 
-# In[295]:
+# In[ ]:
 
 
 type(webpage_html)
@@ -1624,7 +1624,7 @@ type(webpage_html)
 
 # So decode it (remember, the default decoding that this method applies is *utf-8*):
 
-# In[296]:
+# In[ ]:
 
 
 My_Data  = webpage_html.decode()
@@ -1633,7 +1633,7 @@ My_Data  = webpage_html.decode()
 
 # That's a lot of potentially useful information! Let's extract all the names of academics:
 
-# In[297]:
+# In[ ]:
 
 
 pattern = r"Dr\s+\w+\s+\w+"
@@ -1656,7 +1656,7 @@ for match in regex.finditer(My_Data): # example use of re.finditer()
 # 
 # Using the same web page data, let's try using the `re.sub` command on the same web page data (`My_Data`) to replace text:
 
-# In[298]:
+# In[ ]:
 
 
 New_Data = re.sub(r'\t'," ", My_Data) # replace all tabs with a space
@@ -1683,7 +1683,7 @@ New_Data = re.sub(r'\t'," ", My_Data) # replace all tabs with a space
 # 
 # First, import the module (this is part of the python standard library, so you won't need to install it):
 
-# In[1]:
+# In[ ]:
 
 
 import subprocess
@@ -1697,7 +1697,7 @@ import subprocess
 # 
 # $\star$ In a terminal, first `cd` to your `code` directory,  launch `ipython3`, then and type:
 
-# In[4]:
+# In[ ]:
 
 
 p = subprocess.Popen(["echo", "I'm talkin' to you, bash!"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -1709,13 +1709,13 @@ p = subprocess.Popen(["echo", "I'm talkin' to you, bash!"], stdout=subprocess.PI
 # * `stdout` is the output from the process "spawned" by your command. This is bytes sequence (which you will need to decode - more on this below). 
 # * `stderr` is the error code (from which you can capture whether the process ran successfully or not). The method PIPE creates a new "pipe" to the "child process". 
 
-# In[5]:
+# In[ ]:
 
 
 stdout, stderr = p.communicate()
 
 
-# In[6]:
+# In[ ]:
 
 
 stderr
@@ -1725,7 +1725,7 @@ stderr
 # 
 # Now check what's in `stdout`:
 
-# In[7]:
+# In[ ]:
 
 
 stdout
@@ -1733,7 +1733,7 @@ stdout
 
 # Let's encode and print it.
 
-# In[8]:
+# In[ ]:
 
 
 print(stdout.decode())
@@ -1743,7 +1743,7 @@ print(stdout.decode())
 # 
 # Let's try something else: 
 
-# In[258]:
+# In[ ]:
 
 
 p = subprocess.Popen(["ls", "-l"], stdout=subprocess.PIPE)
@@ -1755,7 +1755,7 @@ stdout, stderr = p.communicate()
 # 
 # You can also call python itself from bash (!):
 
-# In[259]:
+# In[ ]:
 
 
 p = subprocess.Popen(["python3", "boilerplate.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # A bit silly! 
@@ -1771,7 +1771,7 @@ print(stdout.decode())
 
 # You can also do this instead:
 
-# In[260]:
+# In[ ]:
 
 
 p = subprocess.Popen(["python3", "boilerplate.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # A bit silly! 
@@ -1783,7 +1783,7 @@ print(stdout.decode())
 # 
 # You can also use `subprocess.os` to make your code OS (Linux, Windows, Mac) independent. For example to assign paths:
 
-# In[261]:
+# In[ ]:
 
 
 subprocess.os.path.join('directory', 'subdirectory', 'file')
@@ -1794,7 +1794,7 @@ subprocess.os.path.join('directory', 'subdirectory', 'file')
 # Note that in all cases you can "catch" the output of `subprocess` so that you can then use the output within your
 # python script. A simple example, where the output is a platform-dependent directory path, is:
 
-# In[262]:
+# In[ ]:
 
 
 MyPath = subprocess.os.path.join('directory', 'subdirectory', 'file')
@@ -1819,7 +1819,7 @@ MyPath
 
 # Now, create a script `TestR.py` with the following content :
 
-# In[263]:
+# In[ ]:
 
 
 import subprocess
@@ -1831,7 +1831,7 @@ subprocess.Popen("Rscript --verbose TestR.R > ../Results/TestR.Rout 2> ../Result
 # 
 # Also check what happens if you run (type directly in `ipython` or `python` console):
 
-# In[264]:
+# In[ ]:
 
 
 subprocess.Popen("Rscript --verbose NonExistScript.R > ../Results/outputFile.Rout 2> ../Results/errorFile.Rout", shell=True).wait()
@@ -1864,6 +1864,8 @@ subprocess.Popen("Rscript --verbose NonExistScript.R > ../Results/outputFile.Rou
 # ## Readings and Resources
 # 
 # 
+# * In general, scores of good module/package-specific cookbooks are out there — google "cookbook" along with the name of the package you are interested in (e.g., "scipy cookbook").
+# 
 # * [The matplotlib website](http://matplotlib.org)
 # 
 # * For SciPy, the [official documentation is good](https://docs.scipy.org/doc/); Read about the scipy modules you think will be important to you.
@@ -1882,3 +1884,5 @@ subprocess.Popen("Rscript --verbose NonExistScript.R > ../Results/outputFile.Rou
 # * <http://www.regular-expressions.info/> has a good intro, tips and a great array of canned solutions
 # 
 # * Use and abuse of regex: <https://blog.codinghorror.com/regex-use-vs-regex-abuse/>
+# 
+# * Some of you might find the python package `biopython` particularly useful — check out <http://biopython.org/>, and especially, the cookbook

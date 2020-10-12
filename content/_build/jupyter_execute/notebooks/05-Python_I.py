@@ -9,19 +9,21 @@
 # ```
 # *What is the command doing? How has it been built (explain the components)?*
 
-# ## Learning objectives
+# ## Introduction
 # 
-# The python chapters of TeMulQuaBio are geared towards teaching you scientific programming in biology using this modern, and immensely popular language. Across all the Python chapters, you will learn:
+# Python is a modern, easy-to-write, interpreted (semi-compiled)  programming language that was conceived with readability of code in mind. It has a numerous of feature-rich packages that can be used for a wide variety of biological applications and analyses.
+# 
+# The two Python chapters of TheMulQuaBio are intended to teach you scientific programming in biology using Python. Across both these chapters, you will learn:
 # 
 # * Basics of python syntax and data structures
 # 
 # * Python's object-oriented features
 # 
+# * Learning to use the `ipython` environment
+# 
 # * How to write and run python code
 # 
 # * Understand and implement python control flow tools
-# 
-# * Learning to use the `ipython` environment
 # 
 # * Writing, debugging, using, and testing python functions
 # 
@@ -29,81 +31,42 @@
 # 
 # * Using regular expressions in python
 # 
-# * Introduction to certain particularly useful python packages
-# 
-# * Using python for building and modifying databases
+# * Introduction to particularly useful python packages
 # 
 # * Using python to run other, non-python tasks and code
 # 
 # * Using python to patch together data analysis and/or numerical simulation work flows
 # 
 # 
-# ## Why Python?
+# 
+# ### Why Python?
+# 
+# Python was designed with readability and re-usability in mind. Time taken by programming + debugging + running is likely to be relatively lower in python than less intuitive or cluttered languages (e.g., FORTRAN, Perl). 
 # 
 # ---
 # 
 # ![image](./graphics/python.png)
-# <small> <center> (Source: [http://xkcd.com](http://xkcd.com))
+# <small> <center> (Source: [http://xkcd.com](http://xkcd.com))<br>
 #                 Is python the most common answer to your daily programming needs? Possibly!
 # </center> </small>
 # 
 # ---
 # 
-# Python was designed with readability and re-usability in mind. Time taken by programming + debugging + running is likely to be relatively lower in python than less intuitive or cluttered languages (e.g., FORTRAN, Perl). It is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
+# Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
 # 
 # ---
 # 
 # ![image](./graphics/benchmarks.png)
-# <small><center>(Source: http://julialang.org/)
-#                 Python's numerical computing performance compared (smaller numbers are better). Note that the y-axis is in $\log_{10}$ scale. 
+# <small><center>(Source: http://julialang.org/) <br>
+# Python's numerical computing performance compared (smaller numbers are better). Note that the y-axis is in $\log_{10}$ scale. 
 # </center> </small>
 # 
 # ---
-
-# ## Installing Python
 # 
 # ### Python versions 
 # 
-# We will use python 3. But most of the code in the python chapters will work in python 2.7.xx as well. If you are interested in the python 2 vs 3 history, [read this](https://wiki.python.org/moin/Python2orPython3).
+# We will use python 3. But most of the code in the Python chapters will work in python 2.7.xx as well. If you are interested in the python 2 vs 3 history, [read this](https://wiki.python.org/moin/Python2orPython3).
 # 
-# ### Installing on Ubuntu
-# 
-# The following instructions are for Ubuntu. For other OS', [see this](https://realpython.com/installing-python/#ubuntu) (On Mac you will need `homebrew`; see [this Appendix](Appendix-MacNotes.ipynb)). 
-# 
-# For Ubuntu 16.04, python 3.5.2 and 2.7 will already be installed. Check the version by typing in terminal:
-# 
-# ```bash
-# python3 --version
-# ```
-# You can also install python 3.6 [if you want](https://realpython.com/installing-python/#ubuntu), but for all practical purposes it won't make any difference as far as this course is concerned. 
-# 
-# However, we will mainly be using the interactive python shell `ipython`, which needs to be installed.
-# 
-# $\star$ Open a terminal (`ctrl+alt+t`) and type:
-# ```bash
-# sudo apt install ipython3 python3-scipy python3-matplotlib
-# ```
-# 
-# #### Installing packages
-# 
-# In Linux, you can easily install python packages that come with the standard python distribution using:
-# 
-# ```bash
-# sudo apt install python3-packagename
-# ```
-# However, certain python packages are only available through `pip`, a package manager for python packages. pythonistas like to be extra-smart, so pip is a recursive acronym for "`P`ip `I`nstalls `P`ackages"!
-# 
-# ```bash
-# sudo apt install python3-pip
-# ```
-# Thereafter, you can install packages using:
-# ```bash
-# pip3 install package_name
-# ```
-# 
-# #### Virtual environments
-# 
-# We will not mess around with virtual environments (e.g., Anaconda) for python. If you are interested in trying out virtual environments, [this article](https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c) is pretty comprehensive.   
 
 # ## Getting started with Python
 # 
@@ -148,19 +111,19 @@
 # 
 # Now, try some simple operations:
 
-# In[5]:
+# In[2]:
 
 
 2 + 2 # Summation; note that comments still start with #
 
 
-# In[6]:
+# In[3]:
 
 
 2 * 2 # Multiplication
 
 
-# In[7]:
+# In[4]:
 
 
 2 / 2 # division
@@ -168,19 +131,19 @@
 
 # To specify an integer division, use `//`:
 
-# In[8]:
+# In[5]:
 
 
 2//2
 
 
-# In[9]:
+# In[6]:
 
 
 2 > 3 # logical operation
 
 
-# In[10]:
+# In[7]:
 
 
 2 >= 2 # another one
@@ -199,7 +162,7 @@
 # |Class| A way of grouping *Variables* and *functions* into a single object with specific properties that are inherited when you create its copy. Unlike *modules*, you can create ("spawn") many copies of a *class* within a python session or program|
 # |Object|  A particular instance of a class (every object belongs to a class) that is created in a session and eventually destroyed; everything in your workspace is an object in python!|
 # 
-# This Module vs. Class vs. Object business is confusing. These constructs are created to make an (object-oriented) programming language like python more flexible and user friendly (though it might not seem so to you currently!). In practice, at least for your current purposes, you will not build you own python classes much (but will use the inbuilt python classes).You will however write your own modules. More on all this later. Also, [read this](https://learnpythonthehardway.org/book/ex40.html) (may be available in your university library).
+# This Module vs. Class vs. Object business is confusing. These constructs are created to make an (object-oriented) programming language like Python more flexible and user friendly (though it might not seem so to you currently!). In practice, at least for your current purposes, you will not build you own python classes much (but will use the inbuilt Python classes).You will however write your own modules. More on all this later. 
 
 # ### ipython
 # 
@@ -232,7 +195,7 @@
 # 
 # You can try any or all of these now. For example:
 
-# In[11]:
+# In[8]:
 
 
 get_ipython().run_line_magic('who', '')
@@ -240,19 +203,19 @@ get_ipython().run_line_magic('who', '')
 
 # That is, there are no objects in your workspace yet. Let's create one:
 
-# In[12]:
+# In[9]:
 
 
 a = 1
 
 
-# In[13]:
+# In[10]:
 
 
 get_ipython().run_line_magic('who', '')
 
 
-# In[14]:
+# In[11]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -264,7 +227,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # This will give you detailed information about this variable (which is an object, belonging to a particular class, because this is python!). You can also check a variable's type: 
 
-# In[15]:
+# In[12]:
 
 
 type(a)
@@ -272,9 +235,9 @@ type(a)
 
 # ---
 # 
-# > You can configure ipython's environment and behavior by editing the `ipython_config.py` file, which is located in the `.ipython` directory of your `home`. This file does not initially exist, but you can create it by running `ipython profile create` in a bash terminal (try it now). Then, edit it; for example, you can 
+# > You can configure ipython's environment and behavior by editing the `ipython_config.py` file, which is located in the `.ipython` directory of your `home` (on Linux/Ubuntu). This file does not initially exist, but you can create it by running `ipython profile create [profilename]` in a bash terminal. Then, edit it. For example, on Ubuntu you can 
 # > ```bash 
-# gedit .ipython/profile_default/ipython_config.py &
+# gedit ~/.ipython/profile_default/ipython_config.py &
 # ```
 # And then make the changes you want to the default ipython configuration. For example, If you don't like the blue
 # `ipython` prompt, you can type `%colors linux` (once inside the shell). If you want to make this color the default,
@@ -286,28 +249,28 @@ type(a)
 # 
 # Now, let's continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:
 
-# In[16]:
+# In[13]:
 
 
 a = 2 #integer
 type(a)
 
 
-# In[17]:
+# In[14]:
 
 
 a = 2. #Float
 type(a)
 
 
-# In[18]:
+# In[15]:
 
 
 a = "Two" #String
 type(a)
 
 
-# In[19]:
+# In[16]:
 
 
 a = True #Boolean
@@ -350,25 +313,25 @@ type(a)
 # 
 # Try the following:
 
-# In[20]:
+# In[17]:
 
 
 2 == 2
 
 
-# In[21]:
+# In[18]:
 
 
 2 != 2
 
 
-# In[22]:
+# In[19]:
 
 
 3 / 2
 
 
-# In[23]:
+# In[20]:
 
 
 3 // 2
@@ -376,49 +339,49 @@ type(a)
 
 # *What happened here*? This is an integer division, so the decimal part is lost.  
 
-# In[24]:
+# In[21]:
 
 
 'hola, ' + 'mi llamo Samraat' #why not learn two languages at the same time?! 
 
 
-# In[25]:
+# In[22]:
 
 
 x = 5
 
 
-# In[26]:
+# In[23]:
 
 
 x + 3
 
 
-# In[27]:
+# In[24]:
 
 
 y = 2
 
 
-# In[28]:
+# In[25]:
 
 
 x + y
 
 
-# In[29]:
+# In[26]:
 
 
 x = 'My string'
 
 
-# In[30]:
+# In[29]:
 
 
 x + ' now has more stuff'
 
 
-# In[31]:
+# In[30]:
 
 
 x + y
@@ -482,7 +445,7 @@ MyList = [3,2.44,'green',True]
 MyList[1]
 
 
-# In[38]:
+# In[126]:
 
 
 MyList[0]
@@ -490,25 +453,27 @@ MyList[0]
 
 # *Note that python "indexing" starts at 0, not 1!*
 
-# In[39]:
+# In[127]:
 
 
 MyList[4]
 
 
-# In[40]:
+# As expected!
+
+# In[128]:
 
 
 MyList[2] = 'blue'
 
 
-# In[41]:
+# In[40]:
 
 
 MyList
 
 
-# In[42]:
+# In[41]:
 
 
 MyList.append('a new item')
@@ -516,19 +481,19 @@ MyList.append('a new item')
 
 # Note `.append`. This is an operation (a "method") that can be applied to any "object" with the "class" list. You can check the type of any object: 
 
-# In[43]:
+# In[42]:
 
 
 get_ipython().run_line_magic('whos', '')
 
 
-# In[44]:
+# In[43]:
 
 
 type(MyList)
 
 
-# In[45]:
+# In[44]:
 
 
 print(type(MyList))
@@ -539,19 +504,19 @@ print(type(MyList))
 # 
 # ---
 
-# In[46]:
+# In[45]:
 
 
 MyList
 
 
-# In[47]:
+# In[46]:
 
 
 del MyList[2]
 
 
-# In[48]:
+# In[47]:
 
 
 MyList
@@ -565,26 +530,26 @@ MyList
 # 
 # Try this:
 
-# In[49]:
+# In[48]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[50]:
+# In[49]:
 
 
 FoodWeb[0]
 
 
-# In[51]:
+# In[50]:
 
 
 FoodWeb[0][0]
 
 
-# In[52]:
+# In[129]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -594,13 +559,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[53]:
+# In[52]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[54]:
+# In[53]:
 
 
 FoodWeb[0]
@@ -623,10 +588,17 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[55]:
+# In[54]:
 
 
 a = (1, 2, []) 
+a
+
+
+# In[55]:
+
+
+a[2].append(1000)
 a
 
 
@@ -640,40 +612,33 @@ a
 # In[57]:
 
 
-a[2].append(1000)
-a
-
-
-# In[58]:
-
-
 a[2].append((100,10))
 a
 
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[59]:
+# In[58]:
 
 
 a = (1, 2, 3)
 
 
-# In[60]:
+# In[59]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[61]:
+# In[60]:
 
 
 c = b[1:]
 c
 
 
-# In[62]:
+# In[61]:
 
 
 b = b[1:]
@@ -682,7 +647,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[63]:
+# In[62]:
 
 
 a = ("1", 2, True)
@@ -693,37 +658,37 @@ a
 # 
 # You can convert a list to an immutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[64]:
+# In[63]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[65]:
+# In[64]:
 
 
 b = set(a)
 
 
-# In[66]:
+# In[65]:
 
 
 b
 
 
-# In[67]:
+# In[66]:
 
 
 c = set([3,4,5,6])
 
 
-# In[68]:
+# In[67]:
 
 
 b & c # intersection
 
 
-# In[69]:
+# In[68]:
 
 
 b | c # union
@@ -743,43 +708,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[70]:
+# In[69]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[71]:
+# In[70]:
 
 
 GenomeSize
 
 
-# In[72]:
+# In[71]:
 
 
 GenomeSize['Arabidopsis thaliana']
 
 
-# In[73]:
+# In[72]:
 
 
 GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
-# In[74]:
+# In[73]:
 
 
 GenomeSize
 
 
-# In[75]:
+# In[74]:
 
 
 GenomeSize['Escherichia coli'] = 4.6 
 
 
-# In[76]:
+# In[75]:
 
 
 GenomeSize
@@ -787,13 +752,13 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[77]:
+# In[76]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[78]:
+# In[77]:
 
 
 GenomeSize
@@ -819,7 +784,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[79]:
+# In[78]:
 
 
 a = [1, 2, 3]
@@ -828,13 +793,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[80]:
+# In[79]:
 
 
 a.append(4)
 
 
-# In[81]:
+# In[80]:
 
 
 b
@@ -844,14 +809,14 @@ b
 # 
 # Now, try:
 
-# In[82]:
+# In[81]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy
 
 
-# In[83]:
+# In[82]:
 
 
 a.append(4)
@@ -860,7 +825,7 @@ b
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[84]:
+# In[83]:
 
 
 a = [[1, 2], [3, 4]]
@@ -868,7 +833,7 @@ b = a[:]
 b
 
 
-# In[85]:
+# In[84]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -879,7 +844,7 @@ b
 # 
 # The solution is to do a "deep" copy:
 
-# In[86]:
+# In[85]:
 
 
 import copy
@@ -901,75 +866,75 @@ b
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[87]:
+# In[86]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[88]:
+# In[87]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[89]:
+# In[88]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[90]:
+# In[89]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[91]:
+# In[90]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[92]:
+# In[91]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[93]:
+# In[92]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[94]:
+# In[93]:
 
 
 s.upper()
 
 
-# In[95]:
+# In[94]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[96]:
+# In[95]:
 
 
-'WORD'.lower() # can perfrom operations directy on a literal string 
+'WORD'.lower() # can perform operations directy on a literal string 
 
 
 # ### Getting help
 # 
 # You can do this:
 
-# In[97]:
+# In[96]:
 
 
 get_ipython().run_line_magic('pinfo', 's.upper')
@@ -1014,7 +979,7 @@ get_ipython().run_line_magic('pinfo', 's.upper')
 # 
 # Now, assign some integer value to a variable `x`:
 
-# In[98]:
+# In[97]:
 
 
 x = 11
@@ -1022,7 +987,7 @@ x = 11
 
 # Then, paste this code at the ipython prompt (`ctrl+shift+v`), and hit enter: 
 
-# In[99]:
+# In[98]:
 
 
 for i in range(x):
@@ -1129,7 +1094,7 @@ for i in range(x):
 # Now that you have written your first script, you now need to know how to run it (instead of pasting or sending to the command prompt like you did above). 
 # 
 # ### Using bash
-# Open another bash terminal, and `cd ` to the directory. Then, run the `basic_io*.py` scripts one by one (NOT in the python or ipython shell, but the bash shell!) using:
+# Open another bash terminal, and `cd ` to the `code` directory. Then, run the `basic_io*.py` scripts one by one (NOT in the python or ipython shell, but the bash shell!) using:
 # 
 # ```bash
 # python3 MyScript.py
@@ -1248,14 +1213,14 @@ for i in range(x):
 # 
 # For example:
 
-# In[1]:
+# In[99]:
 
 
 def foo_1(x):
     return x ** 0.5
 
 
-# In[2]:
+# In[100]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -1263,7 +1228,7 @@ get_ipython().run_line_magic('whos', '')
 
 # So python tells you it is a function object. Now test it:
 
-# In[3]:
+# In[101]:
 
 
 foo_1(2)
@@ -1350,7 +1315,7 @@ foo_1(2)
 # 
 # Let's look at how list comprehensions work:
 
-# In[100]:
+# In[102]:
 
 
 x = [i for i in range(10)]
@@ -1359,7 +1324,7 @@ print(x)
 
 # This is the same as writing the following loop:
 
-# In[101]:
+# In[103]:
 
 
 x = []
@@ -1370,7 +1335,7 @@ print(x)
 
 # Here's another example:  
 
-# In[102]:
+# In[104]:
 
 
 x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
@@ -1379,7 +1344,7 @@ print(x)
 
 # Which is same as the loop:
 
-# In[103]:
+# In[105]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1390,7 +1355,7 @@ print(x)
 
 # Or this loop:
 
-# In[104]:
+# In[106]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1402,7 +1367,7 @@ print(x_new)
 
 # How about a nested loop? Let's try an example:
 
-# In[105]:
+# In[107]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1415,7 +1380,7 @@ print(flattened_matrix)
 
 # A list comprehension to do the same:
 
-# In[106]:
+# In[108]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1425,7 +1390,7 @@ print(flattened_matrix)
 
 # Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
 
-# In[107]:
+# In[109]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1439,7 +1404,7 @@ print(first_letters)
 # 
 # Now, the same as a set comprehension: 
 
-# In[108]:
+# In[131]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1495,7 +1460,7 @@ print(first_letters)
 # 
 # Let's try this first:
 
-# In[3]:
+# In[111]:
 
 
 _a_global = 10 # a global variable
@@ -1533,7 +1498,7 @@ print("Outside the function, the value of _b_global is ", _b_global)
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
-# In[19]:
+# In[112]:
 
 
 _a_global = 10
@@ -1555,7 +1520,7 @@ print("Outside the function, the value of _a_global is", _a_global)
 # 
 # If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
 
-# In[25]:
+# In[113]:
 
 
 _a_global = 10
@@ -1581,7 +1546,7 @@ print("Outside the function, the value of _a_global now is", _a_global)
 # 
 # The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
 
-# In[4]:
+# In[114]:
 
 
 def a_function():
@@ -1608,7 +1573,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Compare the above with this: 
 
-# In[49]:
+# In[115]:
 
 
 _a_global = 10
@@ -1640,7 +1605,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Now let's start with proper python programs. The difference between scripts (which you have been writing till now) and programs is that the latter can be "compiled" into a self standing application or utility. This distinction will not mean much to you currently, but eventually will, once you have converted a script to a program below! 
 # 
-# We will start with a "boilerplate" program. Type the code below and save as `boilerplate.py` in `Week2/Code`:
+# We will start with a "boilerplate" program. Type the code below and save as `boilerplate.py` in `week2/code`:
 # 
 # ```python
 # #!/usr/bin/env python3
@@ -1671,7 +1636,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 	sys.exit(status)
 # ```
 # 
-# Now open another bash terminal, and `cd ` to the directory and run the code. Then, run the code (NOT in the python or ipython shell, but the bash shell! ):
+# Now open another bash terminal, and `cd ` to the code directory and run the code. Then, run the code (NOT in the python or ipython shell, but the bash shell! ):
 # 
 # ```bash
 # python3 boilerplate.py
@@ -1691,10 +1656,10 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[133]:
+# In[146]:
 
 
-run boilerplate.py
+get_ipython().run_line_magic('run', 'boilerplate.py')
 
 
 # ### Components of the Python program
@@ -1716,13 +1681,13 @@ run boilerplate.py
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[134]:
+# In[147]:
 
 
 import boilerplate
 
 
-# In[ ]:
+# In[148]:
 
 
 help(boilerplate)
@@ -1755,7 +1720,7 @@ help(boilerplate)
 # ```
 # directs the python interpreter to set the special `__name__` variable to have a value `"__main__"`, so that the file is usable as a script as well as an importable module. How do you import? Simply as (in python or ipython shell):
 
-# In[135]:
+# In[149]:
 
 
 import boilerplate
@@ -1763,7 +1728,7 @@ import boilerplate
 
 # Then type
 
-# In[136]:
+# In[150]:
 
 
 boilerplate
@@ -1796,15 +1761,15 @@ boilerplate
 # 
 # Now run it:
 
-# In[3]:
+# In[154]:
 
 
-run using_name.py
+get_ipython().run_line_magic('run', 'using_name.py')
 
 
 # Now, try:
 
-# In[4]:
+# In[155]:
 
 
 import using_name
@@ -1829,19 +1794,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[124]:
+# In[158]:
 
 
-run sysargv.py
+get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[125]:
+# In[159]:
 
 
 run sysargv.py var1 var2
 
 
-# In[127]:
+# In[160]:
 
 
 run sysargv.py 1 2 var3
@@ -1951,7 +1916,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[128]:
+# In[164]:
 
 
 run control_flow.py
@@ -1959,7 +1924,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[129]:
+# In[165]:
 
 
 even_or_odd(11)
@@ -2079,7 +2044,7 @@ even_or_odd(11)
 # ```
 # Now run it:
 
-# In[130]:
+# In[167]:
 
 
 run test_control_flow.py -v
@@ -2117,21 +2082,19 @@ run test_control_flow.py -v
 # ```
 # Now run it:
 
-# In[2]:
+# In[170]:
 
 
-run debugme.py
+get_ipython().run_line_magic('run', 'debugme.py')
 
 
 # Note that the directory path will be different for you.
 # 
 # OK, so let's turn debugging on using `%pdb`:
 
-# In[3]:
-
-
-get_ipython().run_line_magic('pdb', '')
-
+# ```python
+# %pdb
+# ```
 
 # Now run the script again:
 
@@ -2340,8 +2303,6 @@ get_ipython().run_line_magic('pdb', '')
 # * Shaw, Zed. 2017. Learn Python 3 the Hard Way : A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code. Boston : Addison-Wesley (likely available in your University library)
 # * [Browse the python tutorial](https://docs.python.org/3/tutorial)
 # * [For functions and modules](https://learnpythonthehardway.org/book/ex40.html)
-# * For IPython, [see this](http://ipython.org/ipython-doc/stable/interactive/tips.html)
+# * The [IPython documentation](https://ipython.readthedocs.io/en/stable)
 # * Cookbooks can be very useful: <https://github.com/ipython/ipython/wiki>
 # * Look up <https://docs.python.org/3/library/index.html> – Read about the packages you think will be important to you
-# * Some of you might find the python package `biopython` particularly useful — check out <http://biopython.org/>, and especially, the cookbook
-# * In general, scores of good module/package-specific cookbooks are out there — google "cookbook" along with the name of the package you are interested in (e.g., "scipy cookbook").

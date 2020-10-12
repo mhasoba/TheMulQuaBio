@@ -35,8 +35,6 @@ rm TestFile2
 
 cd ../../ # cd two directory levels higher, assuming you are currently in CMEECourseWork/Week1/sandbox
 
-ls -l
-
 ls -R
 
 ls -lR # same as ls -l -R
