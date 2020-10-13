@@ -12,3 +12,9 @@ birds = ( ('Passerculus sandwichensis','Savannah sparrow',18.7),
 # (2) Now do the same using conventional loops (you can choose to do this 
 # before 1 !). 
 
+# A nice example out out is:
+# Step #1:
+# Latin names:
+# ['Passerculus sandwichensis', 'Delichon urbica', 'Junco phaeonotus', 'Junco hyemalis', 'Tachycineata bicolor']
+# ... etc.
+ 
