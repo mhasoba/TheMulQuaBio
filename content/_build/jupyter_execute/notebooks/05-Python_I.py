@@ -232,17 +232,17 @@ get_ipython().run_line_magic('whos', '')
 type(a)
 
 
-# ---
+# ```{tip}
 # 
-# > You can configure ipython's environment and behavior by editing the `ipython_config.py` file, which is located in the `.ipython` directory of your `home` (on Linux/Ubuntu). This file does not initially exist, but you can create it by running `ipython profile create [profilename]` in a bash terminal. Then, edit it. For example, on Ubuntu you can 
-# >
-# > `gedit ~/.ipython/profile_default/ipython_config.py &`
-# >
-# > And then make the changes you want to the default ipython configuration. For example, If you don't like the blue
+# You can configure ipython's environment and behavior by editing the `ipython_config.py` file, which is located in the `.ipython` directory of your `home` (on Linux/Ubuntu). This file does not initially exist, but you can create it by running `ipython profile create [profilename]` in a bash terminal. Then, edit it. For example, on Ubuntu you can 
+# 
+# `gedit ~/.ipython/profile_default/ipython_config.py &`
+# 
+# And then make the changes you want to the default ipython configuration. For example, If you don't like the blue
 # `ipython` prompt, you can type `%colors linux` (once inside the shell). If you want to make this color the default,
 # then edit the `ipython_config.py` — search for "Set the color scheme" option in the file.
 # 
-# ---
+# ```
 
 # ## Python variables
 # 
@@ -307,7 +307,7 @@ type(a)
 # |  `&, and` |        Logical AND
 # |  $\vert$ , `or` |   Logical OR
 # |  `!, not` |       Logical NOT
-# 
+
 # ### Assigning and manipulating variables
 # 
 # Try the following:
@@ -412,10 +412,9 @@ x + z
 y + int(z)
 
 
-# ---
-# > In python, the type of a variable is determined when the program or command is running (dynamic typing) (like `R`, unlike `C` or `FORTRAN`). This is convenient, but can make programs slow. More on efficient computing later.
-# 
-# ---
+# ```{note}
+# In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like `R`, unlike `C` or `FORTRAN`). This is convenient, but can make programs slow. More on efficient computing [later](./06-Python_II.ipynb).
+# ```
 # 
 # ## Python data structures
 # 
@@ -498,10 +497,9 @@ type(MyList)
 print(type(MyList))
 
 
-# ---
-# > In Python3 there is no difference between "classes" and "types". They are in most cases used as synonyms.
-# 
-# ---
+# ```{note}
+# In Python3 there is no difference between "classes" and "types". They are in most cases used as synonyms.
+# ```
 
 # In[42]:
 
@@ -582,8 +580,6 @@ FoodWeb[0]
 # * use the `in` operator to check if an element exists in the tuple (more on this in the control flow tools sections below).
 # 
 # The key point is that tuples are faster than lists, as you might expect for an immutable object (it has a fixed memory space, which makes it more efficient to retrieve). using tuples also makes your code safer as it effectively write-protects data (as long as you don't plan to modify those particular data).
-# 
-# [Read more about tuples here.](https://diveintopython3.problemsolving.io/native-datatypes.html) 
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
@@ -767,8 +763,8 @@ GenomeSize
 # > Tuples that contain immutable values like strings, numbers, and other tuples  can be used as dictionary keys. Lists can never be used as dictionary keys, because they are mutable
 # 
 # ---
-# 
-# So, in summary:
+
+# In summary, the guidelines for choosing a Python data structure are:
 # 
 # * If your elements/data are unordered and indexed by numbers use a *list*
 # * If you're defining a constant set of values (or ordered sequences) and all you're ever going to do with them is iterate through them, use a *tuple*.
@@ -776,14 +772,14 @@ GenomeSize
 # * If they are unordered and indexed by keys (e.g., names), use a  *dictionary*
 # 
 # *But why not use dictionaries for everything?* – because it can slow down your code!
-# 
+
 # ### Copying mutable objects
 # 
-# Copying mutable objects can be tricky. 
+# Copying mutable objects can be tricky because by default, when you create a new variable based on an existing one, , Python only creates a reference to the original (that is it does not create a new, duplicate variable in memory as such). To understand this, let's see an example. 
 # 
 # First, try this:
 
-# In[75]:
+# In[42]:
 
 
 a = [1, 2, 3]
@@ -792,58 +788,66 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[76]:
+# In[43]:
 
 
 a.append(4)
 
 
-# In[77]:
+# In[44]:
 
 
-b
+print(a)
+print(b)
 
 
-# So `b` changed as well! 
+# So `b` changed as well! This is because `b` is just a "pointer" or "reference" to `a`, not an actual copy in memory.
 # 
 # Now, try:
 
-# In[78]:
+# In[45]:
 
 
 a = [1, 2, 3]
-b = a[:]  # This is a "shallow" copy
+b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[79]:
+# In[46]:
 
 
 a.append(4)
-b
+print(a)
+print(b)
 
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[80]:
+# In[47]:
 
 
 a = [[1, 2], [3, 4]]
 b = a[:]
-b
+print(a)
+print(b)
 
 
-# In[81]:
+# Now, modify `a`, and then inspect both `a` and `b`:
+
+# In[48]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
-b
+print(a)
+print(b)
 
 
-# So shallow copy is not recursive, that is, it does not copy beyond the first level of the list, leaving the values in the nested list still linked in memory to the  original object `a`.
+# So `b` still got modified!
+# 
+# This is because shallow copy is not recursive, that is, it does not copy beyond the first level of the list, leaving the values in the nested list still linked in memory to the  original object `a`.
 # 
 # The solution is to do a "deep" copy:
 
-# In[82]:
+# In[49]:
 
 
 import copy
@@ -851,16 +855,16 @@ import copy
 a = [[1, 2], [3, 4]]
 b = copy.deepcopy(a)
 a[0][1] = 22
-b
+print(a)
+print(b)
 
 
 # So, you need to employ `deepcopy` to really copy an existing object or variable and assign a new name to the copy. So, in summary, shallow copying an object won't create objects that are independent clones, i.e., the copy is not fully independent of the original. A deep copy of an object will recursively clone "child" objects (like nested parts of a list). The clone is fully independent of the original, but creating a deep copy is slower, as it involves assigning new memory space. Keep in mind that this shallow vs. deep copy business does  not just apply to lists. You can copy arbitrary objects (including custom classes) with the copy module.
 # 
-# ---
-# > **Why Python "shallow" copies objects:** Python does shallow copying of mutable objects for (computing) performance considerations. By not copying the underlaying object when you re-assign a mutable object to a new ("variable") name, python avoids unnecessary memory copying ( aka "passing by reference"). That does not change the fact that shallow vs. deep copying can be confusing, of course!
-# 
-# ---
-# 
+# ```{note}
+# **Why Python "shallow" copies objects:** Python does shallow copying of mutable objects for (computing) performance considerations. By not copying the underlying object when you re-assign a mutable object to a new ("variable") name, Python avoids unnecessary memory usage. This is known as "passing by reference" (in contrast to passing  ). That does not change the fact that shallow vs. deep copying can be confusing, of course!
+# ```
+
 # ### Python with strings
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
@@ -911,7 +915,7 @@ t = s.strip() # remove trailing spaces
 t
 
 
-# In[92]:
+# In[90]:
 
 
 s.upper()
@@ -932,13 +936,11 @@ s.upper().strip() # can perform sequential operations
 # ### Getting help
 # 
 # You can do this:
-
-# In[93]:
-
-
-get_ipython().run_line_magic('pinfo', 's.upper')
-
-
+# 
+# ```python
+# ?s.upper
+# ```
+# 
 # Also try `help()` at the python/ipython prompt. 
 
 # ## Writing Python code
@@ -950,7 +952,9 @@ get_ipython().run_line_magic('pinfo', 's.upper')
 # * Separate functions using a blank line
 # * When possible, write comments on separate lines
 # 
-# Make sure you have chosen a particular indent type (space or tab) in or whatever code IDE/editor you are using — indentation is all-important in python. Furthermore,
+# Make sure you have chosen a particular indent type (space or tab) in whatever code IDE/editor you are using — indentation is all-important in python. 
+
+# Furthermore,
 # 
 # * Use "docstrings" to **document how to use the code**, and **comments to explain why and how the code works**
 # * Naming conventions (bit of a mess, you'll learn as you go!):
@@ -1166,7 +1170,7 @@ for i in range(x):
 # 
 # ### Conditionals
 # 
-# Try these *function by function*, pasting the block in the ipython command line (hopefully you have set your code editor to send a selection to the command line by now (see the [Unix Chapter](01-Unix.ipynb))). 
+# Try these *function by function*, pasting the block in the ipython command line (hopefully you have set your code editor to send a selection to the command line by now). 
 # 
 # $\star$ Now type these and save them as `cfexercises1.py`:
 # 
@@ -1225,7 +1229,7 @@ def foo_1(x):
 get_ipython().run_line_magic('whos', '')
 
 
-# So python tells you it is a function object. Now test it:
+# So python tells you that `foo_1` is a function object. Now test it:
 
 # In[98]:
 
@@ -1489,11 +1493,9 @@ print("Outside the function, the value of _b_global is ", _b_global)
 
 # Thus,though `_a_global` was overwritten inside the function, what happened inside the function remained inside the function (*What happens in Vegas...*) . Note that `_a_global` is just a naming convention &ndash; nothing special about this variable as such. 
 # 
-# ---
-# 
-# > **`return`ing a `None`:** Why `return None` in the above script? The short answer is, it good practice to do so, much as putting in an explicit `exit` in a shell script is. The **`None`** keyword is used to define a NULL value (no value at all). It is is actually a special dummy value and has a data type of its own called `NoneType` (try `type(None)`). As such, Python functions do have a default return value, which is in fact `None` if no return expression is given, or `return` is given on its own. 
-# 
-# ---
+# ```{tip}
+# **`return`ing a `None`:** Why `return None` in the above script? The short answer is, it good practice to do so, much as putting in an explicit `exit` in a shell script is. The **`None`** keyword is used to define a NULL value (no value at all). It is is actually a special dummy value and has a data type of its own called `NoneType` (try `type(None)`). As such, Python functions do have a default return value, which is in fact `None` if no return expression is given, or `return` is given on its own. 
+# ```
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
@@ -1600,6 +1602,70 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. However, in some cases, you may find it useful to impose one or more global variables that are available across multiple modules/functions. You can do this by assigning the global variables at the start of the script/program, or by creating a separate module (say, called `config.py`) to hold the global variables and then import it.
 
+# In this context, it important for you to note that in Python, arguments are passed to a function [by assignment](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference). 
+# 
+# "passing by assignment" means by just creating a reference to the object being passed (just like `b` was merely a reference to `a` in our [shallow copy example](#Copying-mutable-objects)). 
+# 
+# Let's look at an example to understand this: 
+# 
+# 
+
+# In[51]:
+
+
+def modify_list_by_reference(some_list):
+    print('got', some_list)
+    some_list = [1, 2, 3, 4]
+    print('set to', some_list)
+
+my_list = [1, 2, 3]
+
+print('before, my_list =', my_list)
+
+
+# In[52]:
+
+
+modify_list_by_reference(my_list)
+
+
+# In[53]:
+
+
+print('after, my_list =', my_list)
+
+
+# The original list remains the same even though it is changed inside the function!    
+# 
+# Now let's try to change the list using `append`:
+
+# In[54]:
+
+
+def modify_list_contents(some_list):
+    print('got', some_list)
+    some_list.append(4) # an actual modification of the list
+    print('changed to', some_list)
+
+my_list = [1, 2, 3]
+
+print('before, my_list =', my_list)
+
+
+# In[56]:
+
+
+modify_list_contents(my_list)
+
+
+# In[57]:
+
+
+print('after, my_list =', my_list)
+
+
+# That did it. So `append` will actually change the original list object.
+
 # ## Writing Python programs
 # 
 # Now let's start with proper python programs. The difference between scripts (which you have been writing till now) and programs is that the latter can be "compiled" into a self standing application or utility. This distinction will not mean much to you currently, but eventually will, once you have converted a script to a program below! 
@@ -1655,13 +1721,13 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[126]:
+# In[97]:
 
 
 cd "../code"
 
 
-# In[128]:
+# In[98]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -1677,8 +1743,6 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # However, which shebang line you use is important. Here by using `\#!/usr/bin/env python3` we are specifying the location to the python executable in your machine that the rest of the script needs to be interpreted with. You may use `\#!/usr/bin/python` instead, but this might not work on somebody else's machine if the Python executable isn't actually located at `/usr/bin/`.
 # 
-# [Read more about the python shebang here.](https://www.python.org/dev/peps/pep-0394/#recommendation)
-# 
 # #### The Docstring
 # 
 # Triple quotes start a "docstring" comment, which is meant to describe the operation of the script or a function/module within it. Docstrings are considered part of the running code, while normal comments are
@@ -1686,20 +1750,18 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[129]:
+# In[99]:
 
 
 import boilerplate
 
 
-# In[130]:
+# In[100]:
 
 
 help(boilerplate)
 
 
-# For more info, see the official [doctring conventions](https://www.python.org/dev/peps/pep-0257/).
-# 
 # #### Internal Variables
 # 
 # "`__`" signal "internal" variables (never name your variables so!). These are special variables names reserved by python for its own purposes. For more on the usage of underscores in python, [see this](https://www.datacamp.com/community/tutorials/role-underscore-python). 
@@ -1711,8 +1773,6 @@ help(boilerplate)
 # It's important to know that somewhat confusingly, Pythonistas call a file containing function `def`itions) and statements (e.g., assignments of constant variables) a "module". There is a practical reason (there's always one!) for this. You might want to use a particular set of python `def`'s (functions) and statements either as a standalone function, or use it or subsets of it from other scripts. So in theory, every function you `def`ine can be a sub-module usable by other scripts.
 # 
 # *In other words, `def`initions from a module can be imported into other modules and scripts, or into the main program itself.*
-# 
-# Remember, you can define your own Python "class"es. Have a look [at this]( http://learnpythonthehardway.org/book/ex40.html) (very likely available in your University library) — a nice, intuitive tutorial that should help you understand functions vs. modules vs. classes in Python.
 # 
 # The last few lines, including the `main` function/module are somewhat esoteric but important; more on this below.
 # 
@@ -1936,15 +1996,14 @@ even_or_odd(11)
 
 
 # This is possible without explicitly importing the modules because you are only running one script. You would have to do an explicit `import` if you needed a module from another python script file.
+
+# ```{note}
+# **Formatting output for printing:** Note the usage of `%d`, `%s`, etc in the script above. This is for formatting the output of a particular operation/method nicely in a string that is printed to screen or a file. The basic formatting types are `%d`, `%s`, `%f`, `%e`, for decimals, strings, floats, and floats with scientific notation, respectively. Try this in ipython:
 # 
-# ---
-# > **Formatting output for printing:** Note the usage of `%d`, `%s`, etc in the script above. This is for formatting the output of a particular operation/method nicely in a string that is printed to screen or a file. The basic formatting types are `%d`, `%s`, `%f`, `%e`, for decimals, strings, floats, and floats with scientific notation, respectively. Try this in ipython:
-# >
-# > `print("%d %s %f %e" % (20,"30",0.0003,0.00003))`
-# >
-# > But there are more modern pythonic ways to do this as well. [See this](https://pyformat.info). 
+#  `print("%d %s %f %e" % (20,"30",0.0003,0.00003))`
 # 
-# ---
+#  But there are more modern pythonic ways to do this as well. [See this](https://pyformat.info). 
+# ```
 
 # ## Practicals
 # 
@@ -1952,12 +2011,12 @@ even_or_odd(11)
 # 
 # *In general, follow good programming practices such as commenting where necessary, and using pythonic ways to make your code more user-friendly, such as by using docstrings.*
 # 
-# **(a) Comprehensions**
+# ### Comprehensions
 # 
 # Open and complete the tasks in `lc1.py`, `lc2.py`, `dictionary.py`, `tuple.py` available on TheMulQuaBio repo (you can tackle them in any order). 
 # 
 # 
-# **(b) Writing a Program with Control flows**
+# ### Writing a Program with Control flows
 # 
 # * Modify `cfexercises1.py` to make it a "module" like ` control_flow.py`). That is, all the `foo_x` functions should take arguments from the user (like the functions inside ` control_flow.py`. 
 # 
@@ -2252,7 +2311,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # As always, test, add, commit and push all your new code and data to your git repository.
 # 
-# **(a) Align DNA sequences**
+# ### Align DNA sequences
 # 
 # Open `align_seqs.py` from TheMulQuaBio's code directory. This script aligns two DNA sequences such that they are as similar as possible. Run the script and make sure you understand what every line is doing. A good way to do this, now that you have learnt debugging, is to insert a breakpoint (`import ipdb; ipdb.set_trace()`) at key locations in the script and examine what is going on. For example, inserting one just after the start of the `for` loop of the `calculate_score` function/module is a good place.     
 # 
@@ -2260,14 +2319,20 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # Your tasks:
 # 
-# 1. Convert `align_seqs.py` to a Python program that takes the DNA sequences as an input from a single external file and saves the best alignment along with its corresponding score in a single text file (your choice of format and file type) to an appropriate location. No external input should be required; that is, you should still only need to use `python align_seq.py` to run it.
+# * Convert `align_seqs.py` to a Python program that takes the DNA sequences as an input from a single external file and saves the best alignment along with its corresponding score in a single text file (your choice of format and file type) to an appropriate location. No external input should be required; that is, you should still only need to use `python align_seq.py` to run it.
 #     For example, the input file can be a single `.csv` file with the two example sequences given at the top of the original script.
-# 2. **Extra Credit**: Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
+#     
+# ### Groupwork Practical 
+# 
+# Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
 # python align_seqs_fasta.py seq1.csv seq2.csv
 # ``` 
 # However, it should still run if no inputs were given, using two fasta sequences from the `data` directory as defaults.
-# 3. **Extra extra Credit**: The current script/program runs through all possible starting points on the main sequence and then just takes the first of the alignments with the highest score. This should be apparent if you closely examine this part of the script:
+# 
+# ###  Groupwork Practical 
+# 
+# The current script/program runs through all possible starting points on the main sequence and then just takes the first of the alignments with the highest score. This should be apparent if you closely examine this part of the script:
 # ```python
 # for i in range(l1):
 #     z = calculate_score(s1, s2, l1, l2, i)
@@ -2276,47 +2341,63 @@ get_ipython().run_line_magic('run', 'debugme.py')
 #         my_best_score = z
 # ```
 # This means when multiple alignments have the same score (highly likely in longer sequences), you lose all the equally good alignments, keeping only the last one. 
-# *Your task* is to modify the script so that all the equally best alignments are recorded and saved to the `results` directory in an appropriate file format (Hint: recall `pickle`). Call your new script `align_seqs_better.py`.
 # 
-# *Don't forget to add docstrings where necessary/appropriate.*
+# * Modify the script so that all the equally best alignments are recorded and saved to the `results` directory in an appropriate file format (Hint: recall `pickle`). Call your new script `align_seqs_better.py`.
 # 
-# **(b) Missing oaks problem**
+# ### Missing oaks problem
 # 
-# 1.  Open and run the code `oaks_debugme.py` — there's a bug, for no oaks are being found! (*where's `TestOaksData.csv`?* — in the `data` directory of TheMulQuaBio repo!)
-# 2.  Fix the bug (e.g., you could insert a debugging breakpoint using `import ipdb; ipdb.set_trace()`)
-# 3.  Now, write doctests to make sure that, bug or no bug, your `is_an_oak` function is working as expected (hint: `>>> is_an_oak('Fagus sylvatica')` should return `False`)
-# 4.  If you wrote good doctests, you will find another bug that you might not have by just debugging (hint: what happens if you try the doctest with "Quercuss" instead of "Quercus"? Should this pass or fail?). Modify your doctests approriately, and  modify your script such that it can handle cases where there is a typo (such as 'Quercuss') or there is a genus name that is not strictly 'Quercus'. 
-# 5. **Extra Credit**: 
-#     * You might have noticed that the headers in the data column are being included in the program as if they were a genus and species. That is, the first block of the program's output is:
+# *  Open and run the code `oaks_debugme.py` — there's a bug, for no oaks are being found! (*where's `TestOaksData.csv`?* — in the `data` directory of TheMulQuaBio repo!)
+# *  Fix the bug (e.g., you could insert a debugging breakpoint using `import ipdb; ipdb.set_trace()`)
+# *  Now, write doctests to make sure that, bug or no bug, your `is_an_oak` function is working as expected (hint: `>>> is_an_oak('Fagus sylvatica')` should return `False`)
+# 
+# If you wrote good doctests, you will find another bug that you might not have by just debugging (hint: what happens if you try the doctest with "Quercuss" instead of "Quercus"? Should this pass or fail?). 
+# 
+# * Modify your doctests approriately, and  modify your script such that it can handle cases where there is a typo (such as 'Quercuss') or there is a genus name that is not strictly 'Quercus'. 
+# 
+# ### Groupwork Practical 
+# 
+# You might have noticed that the headers in the data column are being included in the program as if they were a genus and species. That is, the first block of the program's output is:
 # ```bash
 # ['Genus', ' species']
 # The genus is:
 # Genus
 # ```
-# Modify the script so that it excludes the header row (if it exists) in its search for oaks in a given dataset.
-#     * You might also have noticed that the output of the program writes a new file containing just the names of oaks. However, it does not include the column headers ("Genus", "species"). Fix this.
+# * Modify the script so that it excludes the header row (if it exists) in its search for oaks in a given dataset.
 # 
-# **Practicals wrap-up**
+# * You might also have noticed that the output of the program writes a new file containing just the names of oaks. However, it does not include the column headers ("Genus", "species"). Fix this.
 # 
-# 1.  Review and make sure you can run all the commands, code fragments, and scripts we have till now and get the expected outputs — all scripts should work on any other linux laptop.
+# ### Practicals wrap-up
 # 
-# 2.  Run `boilerplate.py` and `control_flow.py` from the bash terminal instead of from within the ipython shell (try both python and ipython from the bash)
-# 
-# 3.  Include an appropriate docstring (if one is missing) at the beginning of `*each*` of each of the python script/ module files you have written, as well as at the start of every function (sub-module) in a module.
-# 
-# 4.  Also annotate your code lines as much and as often as necessary using `#`.
-# 
-# 5.  Keep all code files organized in `code` in your weekly directory in your coursework repository (e.g., in CMEECourseWork/Week2). 
-# 
-# *`git add`, `commit` and `push` all your code and data files to your git repository by given deadline.*
+# *  Review and make sure you can run all the commands, code fragments, and scripts we have till now and get the expected outputs — all scripts should work on any other linux laptop.
+# * *Don't forget to add docstrings where necessary/appropriate.*
+# *  Test all your scripts by running from the bash terminal in additon to from within the ipython shell (and try both `python` and `ipython` to run in the bash terminal)
+# *  Include an appropriate docstring (if one is missing) at the beginning of `*each*` of each of the python script/ module files you have written, as well as at the start of every function (sub-module) in a module.
+# *  Also annotate your code lines as much and as often as necessary using `#`.
+# *  Keep all code files organized in `code` in your weekly directory in your coursework repository (e.g., in CMEECourseWork/Week2). 
+# * `git add`, `commit` and `push` all your code and data files to your git repository by given deadline.*
 
 # ## Readings and Resources
 # 
-# * Code like a Pythonista: Idiomatic python (Google it)
-# * Also good: the Google python Style Guide
-# * Shaw, Zed. 2017. Learn Python 3 the Hard Way : A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code. Boston : Addison-Wesley (likely available in your University library)
-# * [Browse the python tutorial](https://docs.python.org/3/tutorial)
-# * [For functions and modules](https://learnpythonthehardway.org/book/ex40.html)
-# * The [IPython documentation](https://ipython.readthedocs.io/en/stable)
-# * Cookbooks can be very useful: <https://github.com/ipython/ipython/wiki>
+# ### General
+# 
+# * Browse the Python [tutorial](https://docs.python.org/3/tutorial)
+# * Shaw, Zed. 2017. Learn Python 3 the Hard Way: A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code. Boston : Addison-Wesley (likely available in your University library)
+# * Python style guide from [the Hitchhiker's Guide to Python](https://docs.python-guide.org/writing/style)
+# * A very detailed style guide: [the Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+# 
+# ### IPython
+# * The IPython [documentation](https://ipython.readthedocs.io/en/stable)
+# * [Cookbooks](https://github.com/ipython/ipython/wiki) can be very useful
+# 
+# ### Elements of the Python program 
+# * Read more about the python shebang [here](https://www.python.org/dev/peps/pep-0394/#recommendation)
+# * See the [official docstring conventions](https://www.python.org/dev/peps/pep-0257/).
+# 
+# ### Python data structures
+# * Read more about native Python data structures [here](https://diveintopython3.problemsolving.io/native-datatypes.html)
+# 
+# ### Functions, Modules, and Classes
+# * For functions vs. modules vs. classes in Python, have a look [at this]( http://learnpythonthehardway.org/book/ex40.html).
+# 
+# ### Python Packages
 # * Look up <https://docs.python.org/3/library/index.html> – Read about the packages you think will be important to you
