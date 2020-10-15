@@ -501,25 +501,27 @@ print(type(MyList))
 # In Python3 there is no difference between "classes" and "types". They are in most cases used as synonyms.
 # ```
 
-# In[42]:
-
-
-MyList
-
-
 # In[43]:
 
 
-del MyList[2]
+MyList
 
 
 # In[44]:
 
 
+del MyList[2]
+
+
+# In[45]:
+
+
 MyList
 
 
-# Note that in ipython you can suffix an `.` to a particular object (e.g., `MyList.`), and then hit tab to see the methods that can be applied to that object.  
+# ```{tip}
+# Note that in ipython you can suffix an `.` to a particular object (e.g., `MyList.`), and then hit tab to see the methods that can be applied to that object. 
+# ```
 
 # ### Tuples
 # 
@@ -527,26 +529,26 @@ MyList
 # 
 # Try this:
 
-# In[45]:
+# In[46]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[46]:
+# In[47]:
 
 
 FoodWeb[0]
 
 
-# In[47]:
+# In[48]:
 
 
 FoodWeb[0][0]
 
 
-# In[48]:
+# In[49]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -556,13 +558,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[49]:
+# In[50]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[50]:
+# In[51]:
 
 
 FoodWeb[0]
@@ -583,17 +585,10 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[51]:
-
-
-a = (1, 2, []) 
-a
-
-
 # In[52]:
 
 
-a[2].append(1000)
+a = (1, 2, []) 
 a
 
 
@@ -607,33 +602,40 @@ a
 # In[54]:
 
 
+a[2].append(1000)
+a
+
+
+# In[55]:
+
+
 a[2].append((100,10))
 a
 
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[55]:
+# In[56]:
 
 
 a = (1, 2, 3)
 
 
-# In[56]:
+# In[57]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[57]:
+# In[58]:
 
 
 c = b[1:]
 c
 
 
-# In[58]:
+# In[59]:
 
 
 b = b[1:]
@@ -642,7 +644,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[59]:
+# In[60]:
 
 
 a = ("1", 2, True)
@@ -653,37 +655,37 @@ a
 # 
 # You can convert a list to an immutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[60]:
+# In[61]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[61]:
+# In[62]:
 
 
 b = set(a)
 
 
-# In[62]:
+# In[63]:
 
 
 b
 
 
-# In[63]:
+# In[64]:
 
 
 c = set([3,4,5,6])
 
 
-# In[64]:
+# In[65]:
 
 
 b & c # intersection
 
 
-# In[65]:
+# In[66]:
 
 
 b | c # union
@@ -703,43 +705,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[66]:
+# In[67]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[67]:
-
-
-GenomeSize
-
-
 # In[68]:
 
 
-GenomeSize['Arabidopsis thaliana']
+GenomeSize
 
 
 # In[69]:
 
 
-GenomeSize['Saccharomyces cerevisiae'] = 12.1
+GenomeSize['Arabidopsis thaliana']
 
 
 # In[70]:
 
 
-GenomeSize
+GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
 # In[71]:
 
 
-GenomeSize['Escherichia coli'] = 4.6 
+GenomeSize
 
 
 # In[72]:
+
+
+GenomeSize['Escherichia coli'] = 4.6 
+
+
+# In[73]:
 
 
 GenomeSize
@@ -747,22 +749,21 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[73]:
+# In[74]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[74]:
+# In[75]:
 
 
 GenomeSize
 
 
-# ---
-# > Tuples that contain immutable values like strings, numbers, and other tuples  can be used as dictionary keys. Lists can never be used as dictionary keys, because they are mutable
-# 
-# ---
+# ```{note}
+# Tuples that contain immutable values like strings, numbers, and other tuples  can be used as dictionary keys. Lists can never be used as dictionary keys, because they are mutable.
+# ```
 
 # In summary, the guidelines for choosing a Python data structure are:
 # 
@@ -779,7 +780,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[42]:
+# In[76]:
 
 
 a = [1, 2, 3]
@@ -788,13 +789,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[43]:
+# In[77]:
 
 
 a.append(4)
 
 
-# In[44]:
+# In[78]:
 
 
 print(a)
@@ -805,14 +806,14 @@ print(b)
 # 
 # Now, try:
 
-# In[45]:
+# In[79]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[46]:
+# In[80]:
 
 
 a.append(4)
@@ -822,7 +823,7 @@ print(b)
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[47]:
+# In[81]:
 
 
 a = [[1, 2], [3, 4]]
@@ -833,7 +834,7 @@ print(b)
 
 # Now, modify `a`, and then inspect both `a` and `b`:
 
-# In[48]:
+# In[82]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -847,7 +848,7 @@ print(b)
 # 
 # The solution is to do a "deep" copy:
 
-# In[49]:
+# In[83]:
 
 
 import copy
@@ -862,72 +863,72 @@ print(b)
 # So, you need to employ `deepcopy` to really copy an existing object or variable and assign a new name to the copy. So, in summary, shallow copying an object won't create objects that are independent clones, i.e., the copy is not fully independent of the original. A deep copy of an object will recursively clone "child" objects (like nested parts of a list). The clone is fully independent of the original, but creating a deep copy is slower, as it involves assigning new memory space. Keep in mind that this shallow vs. deep copy business does  not just apply to lists. You can copy arbitrary objects (including custom classes) with the copy module.
 # 
 # ```{note}
-# **Why Python "shallow" copies objects:** Python does shallow copying of mutable objects for (computing) performance considerations. By not copying the underlying object when you re-assign a mutable object to a new ("variable") name, Python avoids unnecessary memory usage. This is known as "passing by reference" (in contrast to passing  ). That does not change the fact that shallow vs. deep copying can be confusing, of course!
+# **Why Python "shallow" copies objects:** This is a bit of a technical detail, but important to keep in mind: Python does shallow copying of mutable objects for (computing) performance considerations. By not copying the underlying object when you re-assign a mutable object to a new ("variable") name, Python avoids unnecessary memory usage. This is known as "passing by reference" (in contrast to passing by "value", where a new variable would be actually created in memory). That does not change the fact that shallow vs. deep copying can be confusing, of course!
 # ```
 
 # ### Python with strings
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[83]:
+# In[84]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[84]:
+# In[85]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[85]:
+# In[86]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[86]:
+# In[87]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[87]:
+# In[88]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[88]:
+# In[89]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[89]:
+# In[90]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[90]:
+# In[91]:
 
 
 s.upper()
 
 
-# In[91]:
+# In[92]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[92]:
+# In[93]:
 
 
 'WORD'.lower() # can perform operations directy on a literal string 
@@ -1168,11 +1169,98 @@ for i in range(x):
 # 
 # OK, let's get deeper into python code. A computer script or program's control flow is the order in which the code executes. Upto now, you have written scripts with simple control flows, with the code executing statements from the top to bottom. But very often, you want more flexible flows of commands and statements, for example, where you can switch between alternative commands depending on some condition. This is possible using *control flow tools*. Let's learn python's control flow tools hands-on.   
 # 
+# 
+# ### Functions
+# 
+# In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
+
+# In[96]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    return x
+
+
+# Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
+
+# In[97]:
+
+
+get_ipython().run_line_magic('whos', '')
+
+
+# So, `foo` is a function stored in memory (at address given by the value `0x...` in the `Data/Info` column), and ready to serve you!
+# 
+# Now "call it":
+
+# In[98]:
+
+
+foo(2)
+
+
+# Note that the first,  `print` command only outputs the value of `x` to the terminal, whereas, the second `return` command actually outputs it so that you can "capture" and store it. 
+# 
+# To see this distinction, let's try the following.
+
+# In[99]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    return x
+
+y = foo(2)
+
+
+# In[100]:
+
+
+y
+
+
+# In[101]:
+
+
+type(y)
+
+
+# Thus, the output of `foo` was stored as a new variable `y`. 
+
+# In[102]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    # return x
+
+y = foo(2)
+
+
+# In[103]:
+
+
+y
+
+
+# In[104]:
+
+
+type(y)
+
+
+# So, if we don't explicitly `return` the value of `x`, the output of `foo` cannot be stored.
+
 # ### Conditionals
 # 
-# Try these *function by function*, pasting the block in the ipython command line (hopefully you have set your code editor to send a selection to the command line by now). 
+# Now that we know how to define functions in Python, let's look at *conditionals* that allow you fine-grained control over the function's operations.
 # 
-# $\star$ Now type these and save them as `cfexercises1.py`:
+# $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a keybinding (typically , ctrl+enter). 
+# 
 # 
 # ```python
 # # What does each of foo_x do? 
@@ -1215,27 +1303,6 @@ for i in range(x):
 # ```
 # 
 # For example:
-
-# In[96]:
-
-
-def foo_1(x):
-    return x ** 0.5
-
-
-# In[97]:
-
-
-get_ipython().run_line_magic('whos', '')
-
-
-# So python tells you that `foo_1` is a function object. Now test it:
-
-# In[98]:
-
-
-foo_1(2)
-
 
 # *Think about what each of the foo_x function does before running it.* Note that `foo_5` is a recursive function, meaning that the function [calls itself](https://en.wikipedia.org/wiki/Recursion_(computer_science)). 
 
@@ -1314,11 +1381,11 @@ foo_1(2)
 
 # ## Comprehensions
 # 
-# Python offers a way to combine loops, functions and logical tests / conditionals in a single line of code to transform any *iterable* object (list, set, or dictionary, over which you can iterate) into another object, after performing some operations on the elements in the original object. That is, they are a compact way to create a new list, dictionary or object from an existing one.  As you might expect, there are three types of comprehensions, each corresponding to what the target object is (list, set, dictionary). 
+# Python offers a way to combine loops and logical tests / conditionals in a single line of code to transform any *iterable* object (list, set, or dictionary, over which you can iterate) into another object, after performing some operations on the elements in the original object. That is, they are a compact way to create a new list, dictionary or object from an existing one. As you might expect, there are three types of comprehensions, each corresponding to what the target object is (list, set, dictionary). 
 # 
 # Let's look at how list comprehensions work:
 
-# In[99]:
+# In[105]:
 
 
 x = [i for i in range(10)]
@@ -1327,7 +1394,7 @@ print(x)
 
 # This is the same as writing the following loop:
 
-# In[100]:
+# In[106]:
 
 
 x = []
@@ -1338,7 +1405,7 @@ print(x)
 
 # Here's another example:  
 
-# In[101]:
+# In[107]:
 
 
 x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
@@ -1347,7 +1414,7 @@ print(x)
 
 # Which is same as the loop:
 
-# In[102]:
+# In[108]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1358,7 +1425,7 @@ print(x)
 
 # Or this loop:
 
-# In[103]:
+# In[109]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1370,7 +1437,7 @@ print(x_new)
 
 # How about a nested loop? Let's try an example:
 
-# In[104]:
+# In[110]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1383,7 +1450,7 @@ print(flattened_matrix)
 
 # A list comprehension to do the same:
 
-# In[105]:
+# In[111]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1393,7 +1460,7 @@ print(flattened_matrix)
 
 # Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
 
-# In[106]:
+# In[112]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1407,7 +1474,7 @@ print(first_letters)
 # 
 # Now, the same as a set comprehension: 
 
-# In[107]:
+# In[113]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1455,15 +1522,19 @@ print(first_letters)
 # 
 # Carefully compare the looping vs list comprehension way for the two  tasks (find oak tree species names and get names in upper case) to make sure you understand what's going on.   
 # 
-# Don't go mad with list comprehensions — code readability is more important than squeezing lots into a single line!
+# ```{note}
+# Don't go mad with list comprehensions — code readability is more important than squeezing lots into a single line! They can also make your code run more slowly or use more memory in some cases (we will learn about this more in the [second Python Chapter](./06-Python_II.ipynb)).
+# ```
 
 # ## Variable scope
 # 
-# One important thing to note about functions, in any language, is that variables inside functions are invisible outside of it, nor do they persist once the function has run. These are called "local" variables, and are only accessible inside their function. However, "global" variables are visible inside and outside of functions. In python, you can assign global variables like any other programming language.
+# One important thing to note about functions, in any programming language, is that variables created inside functions are invisible outside of it, nor do they persist once the function has run unless they are explicitly returned. These are called "local" variables, and are only accessible inside their function. However, "global" variables are visible inside and outside of functions. In Python, you can assign global variables like any other programming language.
 # 
-# Let's try this first:
+# To understand this, let's look at an example. 
+# 
+# First try this:
 
-# In[108]:
+# In[114]:
 
 
 _a_global = 10 # a global variable
@@ -1499,7 +1570,7 @@ print("Outside the function, the value of _b_global is ", _b_global)
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
-# In[109]:
+# In[115]:
 
 
 _a_global = 10
@@ -1521,7 +1592,7 @@ print("Outside the function, the value of _a_global is", _a_global)
 # 
 # If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
 
-# In[110]:
+# In[116]:
 
 
 _a_global = 10
@@ -1547,7 +1618,7 @@ print("Outside the function, the value of _a_global now is", _a_global)
 # 
 # The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
 
-# In[111]:
+# In[117]:
 
 
 def a_function():
@@ -1574,7 +1645,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Compare the above with this: 
 
-# In[112]:
+# In[118]:
 
 
 _a_global = 10
@@ -1600,49 +1671,83 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # $\star$ Collect all three blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
 # 
-# In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. However, in some cases, you may find it useful to impose one or more global variables that are available across multiple modules/functions. You can do this by assigning the global variables at the start of the script/program, or by creating a separate module (say, called `config.py`) to hold the global variables and then import it.
-
-# In this context, it important for you to note that in Python, arguments are passed to a function [by assignment](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference). 
+# ```{note}
+# In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. 
+# ```
 # 
-# "passing by assignment" means by just creating a reference to the object being passed (just like `b` was merely a reference to `a` in our [shallow copy example](#Copying-mutable-objects)). 
+# ```{tip}
+# In some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as  global at the start of the script/program, but a better, safer option is to create a separate module (say, called `config.py`) to hold the global variables and then `import` it where needed.
+# ```
+
+# ### Importance of the `return` directive 
+# 
+# In the context of scope of variables, it is also important to keep in mind that in Python, arguments are passed to a function [by assignment](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference). This is a bit of a technical detail that we don't need to go into here, but basically, in practice, this means that for mutable objects such as lists, unless you do something special, if a function modifies the (mutable) variable inside it, the original variable outside the function remains unchanged.
 # 
 # Let's look at an example to understand this: 
-# 
-# 
 
-# In[51]:
+# In[119]:
 
 
-def modify_list_by_reference(some_list):
+def modify_list_1(some_list):
     print('got', some_list)
     some_list = [1, 2, 3, 4]
     print('set to', some_list)
+
+
+# In[120]:
+
 
 my_list = [1, 2, 3]
 
 print('before, my_list =', my_list)
 
 
-# In[52]:
+# In[121]:
 
 
-modify_list_by_reference(my_list)
+modify_list_1(my_list)
 
 
-# In[53]:
+# In[122]:
 
 
 print('after, my_list =', my_list)
 
 
-# The original list remains the same even though it is changed inside the function!    
+# The original list remains the same even though it is changed inside the function!
 # 
-# Now let's try to change the list using `append`:
+# This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
 
-# In[54]:
+# In[123]:
 
 
-def modify_list_contents(some_list):
+def modify_list_2(some_list):
+    print('got', some_list)
+    some_list = [1, 2, 3, 4]
+    print('set to', some_list)
+    return some_list
+
+
+# In[124]:
+
+
+my_list = modify_list_2(my_list)
+
+
+# In[125]:
+
+
+print('after, my_list =', my_list)
+
+
+# So now the original `my_list` is changed because you explicitly replaced it. This reinforces the fact that explicit `return` statements are important.  
+# 
+# And if we do want to modify the original list *in place*, use `append`:
+
+# In[126]:
+
+
+def modify_list_3(some_list):
     print('got', some_list)
     some_list.append(4) # an actual modification of the list
     print('changed to', some_list)
@@ -1652,31 +1757,35 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[56]:
+# In[127]:
 
 
-modify_list_contents(my_list)
+modify_list_3(my_list)
 
 
-# In[57]:
+# In[128]:
 
 
 print('after, my_list =', my_list)
 
 
-# That did it. So `append` will actually change the original list object.
+# That did it. So `append` will actually change the original list object. However, the fact still remains that you should use a `return` statement at the end of the function to be safe and be able to capture the output (and use it to replace an existing variable if needed).   
 
 # ## Writing Python programs
 # 
-# Now let's start with proper python programs. The difference between scripts (which you have been writing till now) and programs is that the latter can be "compiled" into a self standing application or utility. This distinction will not mean much to you currently, but eventually will, once you have converted a script to a program below! 
+# Now let's start with proper python programs. 
 # 
-# We will start with a "boilerplate" program. Type the code below and save as `boilerplate.py` in `week2/code`:
+# The difference between scripts (which you have been writing till now) and programs is that the latter can be "compiled" into a self standing application or utility. This distinction will not mean much to you currently, but eventually will, once you have converted a script to a program below! 
 # 
+# We will start with a "boilerplate" (template) program, just as we did in the [shell scripting chapter](./02-ShellScripting.ipynb#Your-first-shell-script). 
+# 
+# $\star$ Type the code below and save as `boilerplate.py` in `week2/code`:
+
 # ```python
 # #!/usr/bin/env python3
 # 
 # """Description of this program or application.
-# 	You can use several lines"""
+# You can use several lines"""
 # 
 # __appname__ = '[application name here]'
 # __author__ = 'Your Name (your@email.address)'
@@ -1692,15 +1801,15 @@ print('after, my_list =', my_list)
 # ## functions ##
 # def main(argv):
 #     """ Main entry point of the program """
-# 	print('This is a boilerplate') # NOTE: indented using two tabs or 4 spaces
-# 	return 0
+#     print('This is a boilerplate') # NOTE: indented using two tabs or 4 spaces
+#     return 0
 # 
 # if __name__ == "__main__": 
 #     """Makes sure the "main" function is called from command line"""  
-# 	status = main(sys.argv)
-# 	sys.exit(status)
+#     status = main(sys.argv)
+#     sys.exit(status)
 # ```
-# 
+
 # Now open another bash terminal, and `cd ` to the code directory and run the code. Then, run the code (NOT in the python or ipython shell, but the bash shell! ):
 # 
 # ```bash
@@ -1721,13 +1830,13 @@ print('after, my_list =', my_list)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[97]:
+# In[129]:
 
 
-cd "../code"
+cd "../code"  
 
 
-# In[98]:
+# In[130]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -1741,7 +1850,7 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # Just like UNIX shell scripts, the first "shebang" line tells the computer where to look for python. It determines the script's ability to be executed when compiled as part of a standalone program. It isn't absolutely necessary, but it is good practice to use it, and it is also also useful because when someone examines the file in an editor, they immediately know what they're looking at. 
 # 
-# However, which shebang line you use is important. Here by using `\#!/usr/bin/env python3` we are specifying the location to the python executable in your machine that the rest of the script needs to be interpreted with. You may use `\#!/usr/bin/python` instead, but this might not work on somebody else's machine if the Python executable isn't actually located at `/usr/bin/`.
+# However, which shebang line you use is important. Here by using `#!/usr/bin/env python3` we are specifying the location to the python executable in your machine that the rest of the script needs to be interpreted with. You may use `#!/usr/bin/python` instead, but this might not work on somebody else's machine if the Python executable isn't actually located at `/usr/bin/`.
 # 
 # #### The Docstring
 # 
@@ -1750,13 +1859,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[99]:
+# In[131]:
 
 
 import boilerplate
 
 
-# In[100]:
+# In[132]:
 
 
 help(boilerplate)
@@ -1783,9 +1892,11 @@ help(boilerplate)
 # ```python
 # if (__name__ == "__main__"):
 # ```
-# directs the python interpreter to set the special `__name__` variable to have a value `"__main__"`, so that the file is usable as a script as well as an importable module. How do you import? Simply as (in python or ipython shell):
+# directs the python interpreter to set the special `__name__` variable to have a value `"__main__"`, so that the file is usable as a script *as well as* an importable module (important for packaging and re-usability). 
+# 
+# How do you import? Simply as (in python or ipython shell):
 
-# In[131]:
+# In[133]:
 
 
 import boilerplate
@@ -1793,20 +1904,15 @@ import boilerplate
 
 # Then type
 
-# In[132]:
+# In[134]:
 
 
 boilerplate
 
 
-# So when you run your module by itself using:
+# So when you ran your module by itself using `python3 boilerplate.py` (as you did above by opening a separate bash shell), having `__name__ = "__main__"` made the Python interpreter assign the string `"__main__"` to the `__name__` variable inside the module, so that the your module execution was forced to start with the control flow *first* passing through the `main` function.
 # 
-# ```python
-# python3 boilerplate.py
-# ```
-# having `__name__ = "__main__"` makes the interpreter assign the string `"__main__"` to the `__name__` variable, so that the your module execution starts with the control flow first passing through the `main` function.
-# 
-# On the other hand, if some other module is the main program and your module is being imported (`import boilerplate.py`), the interpreter looks at the filename of your module, boilerplate.py, strips off the .py, and assigns that string to your module's `__name__` variable instead, skipping the command(s) under the `if` statement.
+# On the other hand, if *some other module* (not `boilerplate`) is the main program, and you want to import the boilerplate module into it (with `import boilerplate`), the interpreter looks at the filename of your module (`boilerplate.py`), strips off the `.py`, and assigns that string (`boilerplate`) to the imported module's `__name__` variable instead, skipping the command(s) under the `if` statement of `boilerplate.py`.
 # 
 # Let's write a script to illustrate this. 
 # 
@@ -1826,7 +1932,7 @@ boilerplate
 # 
 # Now run it:
 
-# In[133]:
+# In[135]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -1834,13 +1940,15 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[134]:
+# In[136]:
 
 
 import using_name
 
 
+# ```{tip}
 # Also please look up the [official python doc for modules](https://docs.python.org/3/tutorial/modules.html).
+# ```
 # 
 # #### What is `sys.argv`?
 # 
@@ -1859,19 +1967,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[135]:
+# In[137]:
 
 
 get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[136]:
+# In[138]:
 
 
 run sysargv.py var1 var2
 
 
-# In[137]:
+# In[139]:
 
 
 run sysargv.py 1 2 var3
@@ -1899,7 +2007,9 @@ run sysargv.py 1 2 var3
 # ```bash
 # sys.exit(status)
 # ``` 
-# It's just a way to terminate and exit the Python program in an explicit manner, returning an appropriate status code (recall the `exit` command from the [shell scripting chapter](02-ShellScripting.ipynb)). In this case, we have decided that `main()` returns 0 on a successful run, so ` sys.exit(status)` will return zero (because status = 0 upon successful termination of the `main` program) indicating "successful termination". Try putting `sys.exit("I am exiting right now!")` in other places in `boilerplate.py` and see what happens.
+# It's just a way to terminate and exit the Python program in an explicit manner, returning an appropriate status code (recall the `exit` command from the [shell scripting chapter](02-ShellScripting.ipynb)). In this case, we have decided that `main()` returns 0 on a successful run, so ` sys.exit(status)` will return zero (because status = 0 upon successful termination of the `main` program) indicating "successful termination". 
+# 
+# Try putting `sys.exit("I am exiting right now!")` in other places in `boilerplate.py` and see what happens.
 
 # ### A program-with-control-flows example 
 # 
@@ -1981,7 +2091,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[138]:
+# In[140]:
 
 
 run control_flow.py
@@ -1989,7 +2099,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[139]:
+# In[141]:
 
 
 even_or_odd(11)
@@ -1997,7 +2107,7 @@ even_or_odd(11)
 
 # This is possible without explicitly importing the modules because you are only running one script. You would have to do an explicit `import` if you needed a module from another python script file.
 
-# ```{note}
+# ```{tip}
 # **Formatting output for printing:** Note the usage of `%d`, `%s`, etc in the script above. This is for formatting the output of a particular operation/method nicely in a string that is printed to screen or a file. The basic formatting types are `%d`, `%s`, `%f`, `%e`, for decimals, strings, floats, and floats with scientific notation, respectively. Try this in ipython:
 # 
 #  `print("%d %s %f %e" % (20,"30",0.0003,0.00003))`
@@ -2020,7 +2130,7 @@ even_or_odd(11)
 # 
 # * Modify `cfexercises1.py` to make it a "module" like ` control_flow.py`). That is, all the `foo_x` functions should take arguments from the user (like the functions inside ` control_flow.py`. 
 # 
-# * Also, add some test arguments to show that they work (again, like `control_flow.py`) — for example, ``foo_5(10)``. Thus, running `cfexercises2.py` should now output evaluations of all the `foo_x` modules.
+# * Also, add some test arguments to show that they work (again, like `control_flow.py`) — for example, ``foo_5(10)``. Thus, running `cfexercises1.py` should now output evaluations of all the `foo_x` functions.
 
 # ## Errors in your python code
 # 
@@ -2039,11 +2149,11 @@ even_or_odd(11)
 # * If you are *unlucky*, you won't notice until after publication
 # * If you are *very unlucky*, someone else will notice it after publication
 # 
-# Ultimately, most of your time could well be spent error-checking and fixing them ("debugging"), not writing code. You can debug when errors appear, but why not just nip as many as you can in the bud? For this, you would use unit testing.
-# 
+# Ultimately, most of your time could well be spent finding errors and fixing them ("debugging"), not writing code. You can debug when errors appear, but why not just "nip" as many as you can in the "bud"? For this, you would use unit testing.
+
 # ### Unit testing
 # 
-# Unit testing prevents the most common mistakes and helps write reliable code. Indeed, there are many reasons for testing:
+# Unit testing prevents the most common mistakes and helps you write reliable code. Indeed, there are many reasons for testing:
 # 
 # * Can you prove (to yourself) that your code does what you think it does?
 # * Did you think about the things that might go wrong?
@@ -2064,8 +2174,7 @@ even_or_odd(11)
 # Let's try `doctest`, the simplest testing tool in python: simple tests for each function are embedded in the docstring. 
 # 
 # $\star$ Copy the file `control_flow.py` into the file `test_control_flow.py` and edit the original function so:
-# 
-# 
+
 # ```python
 # #!/usr/bin/env python3
 # 
@@ -2100,8 +2209,6 @@ even_or_odd(11)
 #         return "%d is Even!" % x
 #     return "%d is Odd!" % x
 # 
-# ####### I SUPPRESSED THIS BLOCK: WHY? #######
-# 
 # # def main(argv): 
 # #     print even_or_odd(22)
 # #     print even_or_odd(33)
@@ -2109,10 +2216,12 @@ even_or_odd(11)
 # 
 # # if (__name__ == "__main__"):
 # #     status = main(sys.argv)
-# ############################################
-#     
+# 
 # doctest.testmod()   # To run with embedded tests
 # ```
+
+# Note that we suppressed the block of code containing `def main()` and `if (__name__ == "__main__")` because we don't want them for unit testing with `doctest`. 
+# 
 # Now run it:
 
 # In[142]:
@@ -2129,7 +2238,9 @@ run test_control_flow.py -v
 # 
 # #### Other unit testing approaches
 # 
-# For more complex testing, see documentation of `doctest` [here](https://docs.python.org/3.5/library/doctest.html). Also check out the packages `nose` and `unittest`.
+# For more complex testing, see documentation of `doctest` [here](https://docs.python.org/3.8/library/doctest.html). 
+# 
+# Also check out the packages `nose`, `unittest`, and `pytest` for more comprehensive unit testing.
 # 
 # Please start testing as early as possible, but don't try to test everything either! Remember, it is easier to test if code is compartmentalized into functions.
 # 
@@ -2258,7 +2369,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # ### Debugging using your IDE
 # 
-# If you are using a python-dedicated IDE like Spyder or PyCharm, you can do debugging, including setting breakpoints using a graphic user interface. Even more general-purpose code editors / IDEs like vscode should also be able to allow you graphical debugging. For vscode, [see this](https://code.visualstudio.com/docs/editor/debugging).
+# If you are using a python-dedicated IDE like Spyder or PyCharm, you can do debugging, including setting breakpoints using a graphic user interface. Even more general-purpose code editors / IDEs like Visual Studio Code allow very good [graphical debugging](https://code.visualstudio.com/docs/editor/debugging).
 
 # ## Functions, Modules, and code compartmentalization
 # 
@@ -2322,7 +2433,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # * Convert `align_seqs.py` to a Python program that takes the DNA sequences as an input from a single external file and saves the best alignment along with its corresponding score in a single text file (your choice of format and file type) to an appropriate location. No external input should be required; that is, you should still only need to use `python align_seq.py` to run it.
 #     For example, the input file can be a single `.csv` file with the two example sequences given at the top of the original script.
 #     
-# ### Groupwork Practical 
+# #### Align DNA sequences Groupwork Practical 1 
 # 
 # Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
@@ -2330,7 +2441,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # ``` 
 # However, it should still run if no inputs were given, using two fasta sequences from the `data` directory as defaults.
 # 
-# ###  Groupwork Practical 
+# #### Align DNA sequences Groupwork Practical 2
 # 
 # The current script/program runs through all possible starting points on the main sequence and then just takes the first of the alignments with the highest score. This should be apparent if you closely examine this part of the script:
 # ```python
@@ -2354,7 +2465,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # * Modify your doctests approriately, and  modify your script such that it can handle cases where there is a typo (such as 'Quercuss') or there is a genus name that is not strictly 'Quercus'. 
 # 
-# ### Groupwork Practical 
+# #### Missing oaks problem Groupwork Practical 1 
 # 
 # You might have noticed that the headers in the data column are being included in the program as if they were a genus and species. That is, the first block of the program's output is:
 # ```bash
