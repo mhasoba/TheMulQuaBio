@@ -670,7 +670,6 @@ Gummi, TeXShop, etc.) There are also WYSIWYG frontends (e.g., Lyx, TeXmacs).</p>
 <p>Now we can create a <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> of the article.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> In the terminal type (make sure you are the right directory!):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> pdflatex FirstExample.tex
- pdflatex FirstExample.tex
  bibtex FirstExample
  pdflatex FirstExample.tex
  pdflatex FirstExample.tex
@@ -678,12 +677,37 @@ Gummi, TeXShop, etc.) There are also WYSIWYG frontends (e.g., Lyx, TeXmacs).</p>
 </div>
 <p>This should produce the file <code class="docutils literal notranslate"><span class="pre">FirstExample.pdf</span></code>:</p>
 <p><img alt="image" src="../_images/FirstExample.png" /></p>
+<p>In the above bash script, we repeated the <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> command 3 times. Here’s why:</p>
+<ul class="simple">
+<li><p>The first <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> run generates two files:<code class="docutils literal notranslate"><span class="pre">FirstExample.log</span></code> and <code class="docutils literal notranslate"><span class="pre">FirstExample.aux</span></code> (and an incomplete <code class="docutils literal notranslate"><span class="pre">.pdf</span></code>).</p>
+<ul>
+<li><p>At this step, all cite{…} arguments info that bibtex needs are written into the <code class="docutils literal notranslate"><span class="pre">.aux</span></code> file.</p></li>
+</ul>
+</li>
+<li><p>Then, running <code class="docutils literal notranslate"><span class="pre">bibtex</span></code> (followed by the filename without the <code class="docutils literal notranslate"><span class="pre">.tex</span></code> extension) results in bibtex reading the <code class="docutils literal notranslate"><span class="pre">.aux</span></code> file that was generated. It then produces two more files: <code class="docutils literal notranslate"><span class="pre">FirstExample.bbl</span></code> and <code class="docutils literal notranslate"><span class="pre">FirstExample.blg</span></code></p>
+<ul>
+<li><p>At this step, bibtex takes the citation info in the aux file and puts the relevant biblogrphic entries into the <code class="docutils literal notranslate"><span class="pre">.bbl</span></code> file (you can take a peek at all these files), formatted according to the instructions provided by the bibliography style that you have specified using <code class="docutils literal notranslate"><span class="pre">bibliographystyle{plain}</span></code>.</p></li>
+</ul>
+</li>
+<li><p>The second <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> run updates <code class="docutils literal notranslate"><span class="pre">FirstExample.log</span></code> and <code class="docutils literal notranslate"><span class="pre">FirstExample.aux</span></code> (and a still-incomplete <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> - the citations are not correctly formatted yet)</p>
+<ul>
+<li><p>At this step, the reference list in the <code class="docutils literal notranslate"><span class="pre">.bbl</span></code> generated in the above step is included in the document, and the correct labels for the in-text <code class="docutils literal notranslate"><span class="pre">cite{...}</span></code> commands are written in <code class="docutils literal notranslate"><span class="pre">.aux</span></code> file (but the non in the actual pdf).</p></li>
+</ul>
+</li>
+<li><p>The third and final <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> run then updates <code class="docutils literal notranslate"><span class="pre">FirstExample.log</span></code> and <code class="docutils literal notranslate"><span class="pre">FirstExample.aux</span></code> one last time, and now produces the complete <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> file, with citations correctly formatted.</p>
+<ul>
+<li><p>At this step, latex knows what the correct in-text citation labels are, and includes them in the pdf document.</p></li>
+</ul>
+</li>
+</ul>
+<p>Throughout all this, the <code class="docutils literal notranslate"><span class="pre">.log</span></code> file plays no role except to record info about how the commands are running.</p>
+<p>PHEW! Why go through this repetitive sequence of commands? Well, “it is what it is” – <span class="math notranslate nohighlight">\(\LaTeX\)</span>, with all its advantages does have its quirks. The reason why it is this way, is probably that back then (Donald Knuth’s PhD Thesis writing days – late 1950’s to early 1960’s), computers had <em>tiny</em> memories (RAMs), and writing files to disk and then reading them back in for the next step of the algorithm/program was the best (and only) way to go. Why has this not been fixed? I am not sure - keep an eye out, and it might well be (and then, raise an issue on TheMulQuaBio’s <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/issues">Github</a>!)</p>
+<p>Anyway, as such, you don’t have to run these commands literally step by step, because you can create a bash script that does it for you, as we will now learn.</p>
 <div class="section" id="a-bash-script-to-compile-latex">
 <h3>A bash script to compile LaTeX<a class="headerlink" href="#a-bash-script-to-compile-latex" title="Permalink to this headline">¶</a></h3>
-<p>You can of course write a useful little bash script to compile latex with bibtex!</p>
-<p>Type the following script and call it <code class="docutils literal notranslate"><span class="pre">CompileLaTeX.sh</span></code> (you know where to put it!):</p>
+<p>Let’s write a useful little bash script to compile latex with bibtex.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Type the following script and call it <code class="docutils literal notranslate"><span class="pre">CompileLaTeX.sh</span></code> (you know where to put it!):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-pdflatex <span class="nv">$1</span>.tex
 pdflatex <span class="nv">$1</span>.tex
 bibtex <span class="nv">$1</span>
 pdflatex <span class="nv">$1</span>.tex
@@ -691,17 +715,16 @@ pdflatex <span class="nv">$1</span>.tex
 evince <span class="nv">$1</span>.pdf <span class="p">&amp;</span>
 
 <span class="c1">## Cleanup</span>
-rm *~
 rm *.aux
-rm *.dvi
 rm *.log
-rm *.nav
-rm *.out
-rm *.snm
-rm *.toc
+rm *.bbl
+rm *.blg
 </pre></div>
 </div>
 <p>How do you run this script? The same as your previous bash scripts, so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash CompileLaTeX.sh FirstExample
+</pre></div>
+</div>
 <p><em>Why have I not written the <code class="docutils literal notranslate"><span class="pre">.tex</span></code> extension of <code class="docutils literal notranslate"><span class="pre">FirstExample</span></code> in the command above? Can you make this bash script more convenient to use?</em></p>
 </div>
 </div>

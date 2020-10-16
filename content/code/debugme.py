@@ -1,7 +1,8 @@
-def makeabug(x):
-    y = x**4
-    z = 0.
-    y = y/z
-    return y
+def buggyfunc(x):
+    y = x
+    for i in range(x):
+        y = y-1
+        z = x/y
+    return z
 
-makeabug(25)
+buggyfunc(20)

@@ -388,25 +388,25 @@ x + y
 
 # Doesn't work. No problem, we can convert from one type to another:
 
-# In[28]:
+# In[ ]:
 
 
 x + str(y)
 
 
-# In[29]:
+# In[ ]:
 
 
 z = '88'
 
 
-# In[30]:
+# In[ ]:
 
 
 x + z
 
 
-# In[31]:
+# In[ ]:
 
 
 y + int(z)
@@ -431,19 +431,19 @@ y + int(z)
 # 
 # These are the most versatile, and can contain compound data. They are "mutable", as will be illustrated below. Try this:
 
-# In[32]:
+# In[ ]:
 
 
 MyList = [3,2.44,'green',True]
 
 
-# In[33]:
+# In[ ]:
 
 
 MyList[1]
 
 
-# In[34]:
+# In[ ]:
 
 
 MyList[0]
@@ -451,7 +451,7 @@ MyList[0]
 
 # *Note that python "indexing" starts at 0, not 1!*
 
-# In[35]:
+# In[ ]:
 
 
 MyList[4]
@@ -459,19 +459,19 @@ MyList[4]
 
 # As expected!
 
-# In[36]:
+# In[ ]:
 
 
 MyList[2] = 'blue'
 
 
-# In[37]:
+# In[ ]:
 
 
 MyList
 
 
-# In[38]:
+# In[ ]:
 
 
 MyList.append('a new item')
@@ -479,19 +479,19 @@ MyList.append('a new item')
 
 # Note `.append`. This is an operation (a "method") that can be applied to any "object" with the "class" list. You can check the type of any object: 
 
-# In[39]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('whos', '')
 
 
-# In[40]:
+# In[ ]:
 
 
 type(MyList)
 
 
-# In[41]:
+# In[ ]:
 
 
 print(type(MyList))
@@ -501,19 +501,19 @@ print(type(MyList))
 # In Python3 there is no difference between "classes" and "types". They are in most cases used as synonyms.
 # ```
 
-# In[43]:
+# In[ ]:
 
 
 MyList
 
 
-# In[44]:
+# In[ ]:
 
 
 del MyList[2]
 
 
-# In[45]:
+# In[ ]:
 
 
 MyList
@@ -529,26 +529,26 @@ MyList
 # 
 # Try this:
 
-# In[46]:
+# In[ ]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[47]:
+# In[ ]:
 
 
 FoodWeb[0]
 
 
-# In[48]:
+# In[ ]:
 
 
 FoodWeb[0][0]
 
 
-# In[49]:
+# In[ ]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -558,13 +558,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[50]:
+# In[ ]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[51]:
+# In[ ]:
 
 
 FoodWeb[0]
@@ -585,28 +585,28 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[52]:
+# In[ ]:
 
 
 a = (1, 2, []) 
 a
 
 
-# In[53]:
+# In[ ]:
 
 
 a[2].append(1000)
 a
 
 
-# In[54]:
+# In[ ]:
 
 
 a[2].append(1000)
 a
 
 
-# In[55]:
+# In[ ]:
 
 
 a[2].append((100,10))
@@ -615,27 +615,27 @@ a
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[56]:
+# In[ ]:
 
 
 a = (1, 2, 3)
 
 
-# In[57]:
+# In[ ]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[58]:
+# In[ ]:
 
 
 c = b[1:]
 c
 
 
-# In[59]:
+# In[ ]:
 
 
 b = b[1:]
@@ -644,7 +644,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[60]:
+# In[ ]:
 
 
 a = ("1", 2, True)
@@ -655,37 +655,37 @@ a
 # 
 # You can convert a list to an immutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[61]:
+# In[ ]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[62]:
+# In[ ]:
 
 
 b = set(a)
 
 
-# In[63]:
+# In[ ]:
 
 
 b
 
 
-# In[64]:
+# In[ ]:
 
 
 c = set([3,4,5,6])
 
 
-# In[65]:
+# In[ ]:
 
 
 b & c # intersection
 
 
-# In[66]:
+# In[ ]:
 
 
 b | c # union
@@ -705,43 +705,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[67]:
+# In[ ]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[68]:
+# In[ ]:
 
 
 GenomeSize
 
 
-# In[69]:
+# In[ ]:
 
 
 GenomeSize['Arabidopsis thaliana']
 
 
-# In[70]:
+# In[ ]:
 
 
 GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
-# In[71]:
+# In[ ]:
 
 
 GenomeSize
 
 
-# In[72]:
+# In[ ]:
 
 
 GenomeSize['Escherichia coli'] = 4.6 
 
 
-# In[73]:
+# In[ ]:
 
 
 GenomeSize
@@ -749,13 +749,13 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[74]:
+# In[ ]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[75]:
+# In[ ]:
 
 
 GenomeSize
@@ -780,7 +780,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[76]:
+# In[ ]:
 
 
 a = [1, 2, 3]
@@ -789,13 +789,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[77]:
+# In[ ]:
 
 
 a.append(4)
 
 
-# In[78]:
+# In[ ]:
 
 
 print(a)
@@ -806,14 +806,14 @@ print(b)
 # 
 # Now, try:
 
-# In[79]:
+# In[ ]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[80]:
+# In[ ]:
 
 
 a.append(4)
@@ -823,7 +823,7 @@ print(b)
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[81]:
+# In[ ]:
 
 
 a = [[1, 2], [3, 4]]
@@ -834,7 +834,7 @@ print(b)
 
 # Now, modify `a`, and then inspect both `a` and `b`:
 
-# In[82]:
+# In[ ]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -848,7 +848,7 @@ print(b)
 # 
 # The solution is to do a "deep" copy:
 
-# In[83]:
+# In[ ]:
 
 
 import copy
@@ -870,65 +870,65 @@ print(b)
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[84]:
+# In[ ]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[85]:
+# In[ ]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[86]:
+# In[ ]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[87]:
+# In[ ]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[88]:
+# In[ ]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[89]:
+# In[ ]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[90]:
+# In[ ]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[91]:
+# In[ ]:
 
 
 s.upper()
 
 
-# In[92]:
+# In[ ]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[93]:
+# In[ ]:
 
 
 'WORD'.lower() # can perform operations directy on a literal string 
@@ -980,10 +980,9 @@ s.upper().strip() # can perform sequential operations
 #     if i > 3: #4 spaces or 2 tabs in this case
 #         print(i)
 # ```
-# 
 # Now, assign some integer value to a variable `x`:
 
-# In[94]:
+# In[ ]:
 
 
 x = 11
@@ -991,7 +990,7 @@ x = 11
 
 # Then, paste this code at the ipython prompt (`ctrl+shift+v`), and hit enter: 
 
-# In[95]:
+# In[ ]:
 
 
 for i in range(x):
@@ -1000,6 +999,64 @@ for i in range(x):
 
 
 # Of course, this code is simple, so directly pasting works. For more complex code, you may need to use the ipython `%cpaste` magic function.
+
+# ## Looping, and the `range` function
+# 
+# What exactly is going on in the piece of code above? What is `i`? What does `range(x)` do?  
+# 
+# Basically, this piece of code runs a [loop](https://en.wikipedia.org/wiki/Control_flow#Loops) ("loops") over the full range of `x` numbers, printing each one of them. 
+# 
+# First, let's understand the `range()` function. This function generates, as the name suggests, a range of integers depending on the input to it. So, for example, range(10) generates 10 numbers, starting at 0:
+
+# In[ ]:
+
+
+for i in range(10):
+    print(i)
+
+
+# The start point is 0 because this is Python (it will start at 1 in R, for example). Note that if you try to run`range()` by itself, it will not actually produce a range of numbers. For example:
+
+# In[ ]:
+
+
+a = range(10)
+a
+
+
+# So all you get is the start and end point of the range, stored as `a`, whereas you might have expected to see the actual range of numbers. 
+# 
+# But as you saw above, this is a range of integers starting at 0, so 10 will actually not be in the set of numbers that are generated. 
+# 
+# The reason why `range(10)` does not give you the actual range of numbers when you call it, is that it is a "generator". It doesn't actually produce all numbers at once, but generates them only when needed (in the loop). This is (memory-)efficient, as it does not require a bunch of numbers to be stored in the RAM memory.
+
+# You can also use `range()` to generate numbers (and loop over) from a specific range of integers. For example, to generate a range from 1 to 5, do:
+
+# In[ ]:
+
+
+for i in range(1, 6):
+    print(i)
+
+
+# Yes, it is slightly counter-intuitive that you have to use `range(1, 6)` to generate numbers from 1 to 5, but that's inevitable (and something to get used to) because of the fact that Python's indexing starts at 0!
+# 
+# You can also generate a set of indices that skips values using `range()` like so:
+
+# In[ ]:
+
+
+for i in range(2, 10, 2): # skip odd numbers
+    print(i)
+
+
+# Play around with range a bit, and also check out its documentation. This is a very important function that you will use again and again!
+
+# ```{note}
+# The `range()` function in  Python 2 vs Python 3 are entirely different. The Python 3 range() function is actually what is called `xrange` in Python 2. There are in fact both `range` and `xrange` functions in Python 2. `xrange`, renamed as `range`, is now the default in Python 3 because it is more memory efficient. 
+# ```
+
+# OK, on to the variable `i` in our loop. This is a temporary placeholder for the value of `x` at each iteration of the loop (AKA the "iterator variable"). So, in the first iteration of the loop, i = 0, which is also the "index" value of the loop at that point. We have used `i`, but you can use any valid variable name, such as `j`, `k`, or even `num` (try it). 
 
 # ## Python Input/Output
 # 
@@ -1174,7 +1231,7 @@ for i in range(x):
 # 
 # In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
 
-# In[96]:
+# In[ ]:
 
 
 def foo(x):
@@ -1185,7 +1242,7 @@ def foo(x):
 
 # Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
 
-# In[97]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -1195,7 +1252,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # Now "call it":
 
-# In[98]:
+# In[ ]:
 
 
 foo(2)
@@ -1205,7 +1262,7 @@ foo(2)
 # 
 # To see this distinction, let's try the following.
 
-# In[99]:
+# In[ ]:
 
 
 def foo(x):
@@ -1216,13 +1273,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[100]:
+# In[ ]:
 
 
 y
 
 
-# In[101]:
+# In[ ]:
 
 
 type(y)
@@ -1230,7 +1287,7 @@ type(y)
 
 # Thus, the output of `foo` was stored as a new variable `y`. 
 
-# In[102]:
+# In[ ]:
 
 
 def foo(x):
@@ -1241,13 +1298,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[103]:
+# In[ ]:
 
 
 y
 
 
-# In[104]:
+# In[ ]:
 
 
 type(y)
@@ -1385,7 +1442,7 @@ type(y)
 # 
 # Let's look at how list comprehensions work:
 
-# In[105]:
+# In[ ]:
 
 
 x = [i for i in range(10)]
@@ -1394,7 +1451,7 @@ print(x)
 
 # This is the same as writing the following loop:
 
-# In[106]:
+# In[ ]:
 
 
 x = []
@@ -1405,7 +1462,7 @@ print(x)
 
 # Here's another example:  
 
-# In[107]:
+# In[ ]:
 
 
 x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
@@ -1414,7 +1471,7 @@ print(x)
 
 # Which is same as the loop:
 
-# In[108]:
+# In[ ]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1425,7 +1482,7 @@ print(x)
 
 # Or this loop:
 
-# In[109]:
+# In[ ]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1437,7 +1494,7 @@ print(x_new)
 
 # How about a nested loop? Let's try an example:
 
-# In[110]:
+# In[ ]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1450,7 +1507,7 @@ print(flattened_matrix)
 
 # A list comprehension to do the same:
 
-# In[111]:
+# In[ ]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1460,7 +1517,7 @@ print(flattened_matrix)
 
 # Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
 
-# In[112]:
+# In[ ]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1474,7 +1531,7 @@ print(first_letters)
 # 
 # Now, the same as a set comprehension: 
 
-# In[113]:
+# In[ ]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1534,7 +1591,7 @@ print(first_letters)
 # 
 # First try this:
 
-# In[114]:
+# In[ ]:
 
 
 _a_global = 10 # a global variable
@@ -1570,7 +1627,7 @@ print("Outside the function, the value of _b_global is ", _b_global)
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
-# In[115]:
+# In[ ]:
 
 
 _a_global = 10
@@ -1592,7 +1649,7 @@ print("Outside the function, the value of _a_global is", _a_global)
 # 
 # If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
 
-# In[116]:
+# In[ ]:
 
 
 _a_global = 10
@@ -1618,7 +1675,7 @@ print("Outside the function, the value of _a_global now is", _a_global)
 # 
 # The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
 
-# In[117]:
+# In[ ]:
 
 
 def a_function():
@@ -1645,7 +1702,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Compare the above with this: 
 
-# In[118]:
+# In[ ]:
 
 
 _a_global = 10
@@ -1669,7 +1726,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 
 # Now, because `_a_global` was defined in advance (outside the first function), it get modified when changes in the inner function (it does not exist as a local within the scope of `_a_function`, but is "inherited" from the main scope / workspace / namespace).
 # 
-# $\star$ Collect all three blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
+# $\star$ Collect all blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
 # 
 # ```{note}
 # In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. 
@@ -1685,7 +1742,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Let's look at an example to understand this: 
 
-# In[119]:
+# In[ ]:
 
 
 def modify_list_1(some_list):
@@ -1694,7 +1751,7 @@ def modify_list_1(some_list):
     print('set to', some_list)
 
 
-# In[120]:
+# In[ ]:
 
 
 my_list = [1, 2, 3]
@@ -1702,13 +1759,13 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[121]:
+# In[ ]:
 
 
 modify_list_1(my_list)
 
 
-# In[122]:
+# In[ ]:
 
 
 print('after, my_list =', my_list)
@@ -1718,7 +1775,7 @@ print('after, my_list =', my_list)
 # 
 # This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
 
-# In[123]:
+# In[ ]:
 
 
 def modify_list_2(some_list):
@@ -1728,13 +1785,13 @@ def modify_list_2(some_list):
     return some_list
 
 
-# In[124]:
+# In[ ]:
 
 
 my_list = modify_list_2(my_list)
 
 
-# In[125]:
+# In[ ]:
 
 
 print('after, my_list =', my_list)
@@ -1744,7 +1801,7 @@ print('after, my_list =', my_list)
 # 
 # And if we do want to modify the original list *in place*, use `append`:
 
-# In[126]:
+# In[ ]:
 
 
 def modify_list_3(some_list):
@@ -1757,13 +1814,13 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[127]:
+# In[ ]:
 
 
 modify_list_3(my_list)
 
 
-# In[128]:
+# In[ ]:
 
 
 print('after, my_list =', my_list)
@@ -1830,13 +1887,13 @@ print('after, my_list =', my_list)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[129]:
+# In[ ]:
 
 
 cd "../code"  
 
 
-# In[130]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -1859,13 +1916,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[131]:
+# In[ ]:
 
 
 import boilerplate
 
 
-# In[132]:
+# In[ ]:
 
 
 help(boilerplate)
@@ -1896,7 +1953,7 @@ help(boilerplate)
 # 
 # How do you import? Simply as (in python or ipython shell):
 
-# In[133]:
+# In[ ]:
 
 
 import boilerplate
@@ -1904,7 +1961,7 @@ import boilerplate
 
 # Then type
 
-# In[134]:
+# In[ ]:
 
 
 boilerplate
@@ -1932,7 +1989,7 @@ boilerplate
 # 
 # Now run it:
 
-# In[135]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -1940,7 +1997,7 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[136]:
+# In[ ]:
 
 
 import using_name
@@ -1967,19 +2024,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[137]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[138]:
+# In[ ]:
 
 
 run sysargv.py var1 var2
 
 
-# In[139]:
+# In[ ]:
 
 
 run sysargv.py 1 2 var3
@@ -2091,7 +2148,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[140]:
+# In[ ]:
 
 
 run control_flow.py
@@ -2099,7 +2156,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[141]:
+# In[ ]:
 
 
 even_or_odd(11)
@@ -2209,22 +2266,22 @@ even_or_odd(11)
 #         return "%d is Even!" % x
 #     return "%d is Odd!" % x
 # 
-# # def main(argv): 
-# #     print even_or_odd(22)
-# #     print even_or_odd(33)
-# #     return 0
+# def main(argv): 
+#     print(even_or_odd(22))
+#     print(even_or_odd(33))
+#     return 0
 # 
-# # if (__name__ == "__main__"):
-# #     status = main(sys.argv)
+# if (__name__ == "__main__"):
+#     status = main(sys.argv)
 # 
 # doctest.testmod()   # To run with embedded tests
 # ```
 
-# Note that we suppressed the block of code containing `def main()` and `if (__name__ == "__main__")` because we don't want them for unit testing with `doctest`. 
+# You can also suppress the block of code containing `def main()` and `if (__name__ == "__main__")` because you don't want/need to unit test that section of yuor script. 
 # 
 # Now run it:
 
-# In[142]:
+# In[ ]:
 
 
 run test_control_flow.py -v
@@ -2233,14 +2290,14 @@ run test_control_flow.py -v
 # You can also run doctest "on the fly", without writing `doctest.testmod()` in the code, by typing in a terminal:
 # 
 # ```bash
-# python -m doctest -v your_function_to_test.py
+# python3 -m doctest -v your_function_to_test.py
 # ```
 # 
 # #### Other unit testing approaches
 # 
 # For more complex testing, see documentation of `doctest` [here](https://docs.python.org/3.8/library/doctest.html). 
 # 
-# Also check out the packages `nose`, `unittest`, and `pytest` for more comprehensive unit testing.
+# Also check out the packages `pytest`, `unittest`, and `nose` for more comprehensive and flexible unit testing.
 # 
 # Please start testing as early as possible, but don't try to test everything either! Remember, it is easier to test if code is compartmentalized into functions.
 # 
@@ -2254,17 +2311,18 @@ run test_control_flow.py -v
 # `debugme.py` in your ` Code` directory:
 # 
 # ```python
-# def makeabug(x):
-#     y = x**4
-#     z = 0.
-#     y = y/z
-#     return y
+# def buggyfunc(x):
+#     y = x
+#     for i in range(x):
+#         y = y-1
+#         z = x/y
+#     return z
 # 
-# makeabug(25)
+# buggyfunc(20)
 # ```
 # Now run it:
 
-# In[143]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('run', 'debugme.py')
@@ -2287,26 +2345,25 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # ```bash
 # ---------------------------------------------------------------------------
 # ZeroDivisionError                         Traceback (most recent call last)
-# ~/Documents/Teaching/SilBioComp/TheMulQuaBio/code/debugme.py in <module>()
-#       5     return y
-#       6 
-# ----> 7 makeabug(25)
+# ~/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/debugme.py in <module>
+#       6     return z
+#       7 
+# ----> 8 buggyfunc(20)
 # 
-# ~/Documents/Teaching/SilBioComp/TheMulQuaBio/code/debugme.py in makeabug(x)
-#       2     y = x**4
-#       3     z = 0.
-# ----> 4     y = y/z
-#       5     return y
-#       6 
+# ~/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/debugme.py in buggyfunc(x)
+#       3     for i in range(x):
+#       4         y = y-1
+# ----> 5         z = x/y
+#       6     return z
+#       7 
 # 
-# ZeroDivisionError: float division by zero
-# 
-# > /home/mhasoba/Documents/Teaching/SilBioComp/TheMulQuaBio/code/debugme.py(4)makeabug()
-#       2     y = x**4
-#       3     z = 0.
-# ----> 4     y = y/z
-#       5     return y
-#       6 
+# ZeroDivisionError: division by zero
+# > /home/mhasoba/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/debugme.py(5)buggyfunc()
+#       3     for i in range(x):
+#       4         y = y-1
+# ----> 5         z = x/y
+#       6     return z
+#       7 
 # ```
 
 # Now you will be in the debugger shell, which has a different command prompt: `ipdb>`. 
@@ -2328,24 +2385,27 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # So let's continue our debugging:
 # 
 # ```bash
-# ipdb> p x
-# 25
-# ipdb> p y
-# 390625
-# ipdb> p z
-# 0.0
-# ipdb> p y/z
-# *** ZeroDivisionError: ZeroDivisionError
-# ('float division by zero',)
-# ipdb> l
-#       1 def makeabug(x):
-#       2     y = x**4
-#       3     z = 0.
-# ----> 4     y = y/z
-#       5     return y
-#       6 
-#       7 makeabug(25)
+# ipdb> p x                                                                                                                     
+# 20
 # 
+# ipdb> p y                                                                                                                     
+# 0
+# 
+# ipdb> p z                                                                                                                     
+# 20.0
+# 
+# ipdb> p x/y                                                                                                                   
+# *** ZeroDivisionError: division by zero
+# 
+# ipdb> l                                                                                                                       
+#       1 def buggyfunc(x):
+#       2     y = x
+#       3     for i in range(x):
+#       4         y = y-1
+# ----> 5         z = x/y
+#       6     return z
+#       7 
+#       8 buggyfunc(20)
 # ipdb> q
 # 
 # In []: %pdb
@@ -2369,7 +2429,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # ### Debugging using your IDE
 # 
-# If you are using a python-dedicated IDE like Spyder or PyCharm, you can do debugging, including setting breakpoints using a graphic user interface. Even more general-purpose code editors / IDEs like Visual Studio Code allow very good [graphical debugging](https://code.visualstudio.com/docs/editor/debugging).
+# If you are using a python-dedicated IDE like Spyder or PyCharm, you should do debugging, including setting breakpoints using a graphic user interface. Even more general-purpose code editors / IDEs like Visual Studio Code allow very good [graphical debugging](https://code.visualstudio.com/docs/editor/debugging).
 
 # ## Functions, Modules, and code compartmentalization
 # 
