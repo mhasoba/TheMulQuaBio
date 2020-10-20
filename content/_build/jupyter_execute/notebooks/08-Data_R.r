@@ -1,4 +1,6 @@
-library(repr) ; options(repr.plot.width=5, repr.plot.height= 5) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.width=7, repr.plot.height= 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
+
+setwd("../code/")
 
 MyData <- as.matrix(read.csv("../data/PoundHillData.csv",header = F,  stringsAsFactors = F))
 MyMetaData <- read.csv("../data/PoundHillMetaData.csv",header = T,  sep=";", stringsAsFactors = F)
@@ -43,7 +45,7 @@ dplyr::tbl_df(MyWrangledData) #like head(), but nicer!
 
 dplyr::glimpse(MyWrangledData) #like str(), but nicer!
 
-dplyr::filter(MyWrangledData, Count > 100) #like subset(), but nicer!
+dplyr::filter(MyWrangledData, Count  100) #like subset(), but nicer!
 
 dplyr::slice(MyWrangledData, 10:15) # Look at an arbitrary set of data rows
 
@@ -58,6 +60,10 @@ head(MyDF)
 
 require(dplyr)
 dplyr::glimpse(MyDF)
+
+MyDF$Type.of.feeding.interaction <- as.factor(MyDF$Type.of.feeding.interaction)
+MyDF$Location <- as.factor(MyDF$Location)
+str(MyDF)
 
 plot(MyDF$Predator.mass,MyDF$Prey.mass)
 
@@ -110,10 +116,6 @@ boxplot(log(MyDF$Predator.mass) ~ MyDF$Type.of.feeding.interaction,
  boxplot(log(MyDF$Prey.mass), axes=FALSE)
  mtext("Fancy Predator-prey scatterplot", side=3, outer=TRUE, line=-3)
 
-library(lattice)
-
-densityplot(~log(Predator.mass) | Type.of.feeding.interaction, data=MyDF)
-
 pdf("../results/Pred_Prey_Overlay.pdf", # Open blank pdf page using a relative path
     11.7, 8.3) # These numbers are page dimensions in inches
 hist(log(MyDF$Predator.mass), # Plot predator histogram (note 'rgb')
@@ -125,7 +127,7 @@ legend('topleft',c('Predators','Prey'), # Add legend
     fill=c(rgb(1, 0, 0, 0.5), rgb(0, 0, 1, 0.5))) 
 graphics.off(); #you can also use dev.off() 
 
-require(ggplot2)  ## Load the package
+require(ggplot2)
 
 qplot(Prey.mass, Predator.mass, data = MyDF)
 
@@ -187,12 +189,6 @@ qplot(log(Prey.mass/Predator.mass), data = MyDF, geom =  "density",
 qplot(log(Prey.mass/Predator.mass), facets = Type.of.feeding.interaction ~., data = MyDF, geom =  "density")
 
 qplot(log(Prey.mass/Predator.mass), facets =  .~ Type.of.feeding.interaction, data = MyDF, geom =  "density")
-
-qplot(log(Prey.mass/Predator.mass), facets = .~ Type.of.feeding.interaction + Location, 
-      data = MyDF, geom =  "density")
-
-qplot(log(Prey.mass/Predator.mass), facets = .~ Location + Type.of.feeding.interaction, 
-    data = MyDF, geom =  "density")
 
 qplot(Prey.mass, Predator.mass, data = MyDF, log="xy")
 
@@ -256,7 +252,18 @@ q
 
 q + theme(legend.position = "none") + theme(aspect.ratio=1)
 
+#p <- ggplot(MyDF, aes(x = log(log(Prey.mass/Predator.mass)), y = log(Prey.mass), colour = Type.of.feeding.interaction ))
+
+
+#qplot(log(Prey.mass/Predator.mass), facets = .~ Type.of.feeding.interaction + Location, 
+#      data = MyDF, geom =  "density")
+
+
+#qplot(log(Prey.mass/Predator.mass), facets = .~ Location + Type.of.feeding.interaction, 
+ #   data = MyDF, geom =  "density")
+
 require(reshape2)
+require(plotly)
 
 GenerateMatrix <- function(N){
     M <- matrix(runif(N * N), N, N)
@@ -266,12 +273,12 @@ GenerateMatrix <- function(N){
 M <- GenerateMatrix(10)
 Melt <- melt(M)
 
-p <- ggplot(Melt, aes(Var1, Var2, fill = value)) + geom_tile() + theme(aspect.ratio=1)
+p <- ggplot(Melt, aes(Var1, Var2, fill = value)) + geom_tile() + theme(aspect.ratio = 1)
 p
 
-p + geom_tile(colour = "black") + theme(aspect.ratio=1)
+p + geom_tile(colour = "black") + theme(aspect.ratio = 1)
 
-p + theme(legend.position = "none") + theme(aspect.ratio=1)
+p + theme(legend.position = "none") + theme(aspect.ratio = 1)
 
 p + theme(legend.position = "none", 
      panel.background = element_blank(),
@@ -292,6 +299,8 @@ p + scale_fill_gradientn(colours = grey.colors(10))
 p + scale_fill_gradientn(colours = rainbow(10))
 
 p + scale_fill_gradientn(colours = c("red", "white", "blue"))
+
+ggplotly(p, tooltip="text")
 
 build_ellipse <- function(hradius, vradius){ # function that returns an ellipse
   npoints = 250

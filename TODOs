@@ -1,8 +1,13 @@
 ### General
 
+* Include a Glossary as an appendix to reduce repetition across chapters/languages (e.g., oop, data structure, function, module, etc)
+
 * For deployment of the notebooks online: https://tljh.jupyter.org/en/latest/install/azure.html (<100 students); Jupyterhub on Kubernetes scales better: https://zero-to-jupyterhub.readthedocs.io/en/latest/microsoft/step-zero-azure.html (from Florian J Song, Chemistry)
 
 * Outline coding principles in a general way right at the start of the Intro or Unix chapter
+    * Explain steps in the way to writing a program: outline steps/agorithm, write pseudocode, write functions, etc  
+
+* CMEE miniproject --- cap the usage of packages --- make students keep it simpler
 
 ### Git 
 * git chapter to be updated with most common/useful scenarios
@@ -10,6 +15,8 @@
 * https://www.red-gate.com/simple-talk/sysadmin/devops/git-anatomy/ 
 
 ### Unix
+
+* Explain what colors of items returned by ls mean (directory/file type and permissions): https://unix.stackexchange.com/questions/94498/what-causes-this-green-background-in-ls-output (green background means all user have w permission on that directory (and its contents)) - explain the implications of this in words.
 
 * grep -r -n -w -l '.' -e 'ecology and evolution*'
  
@@ -30,18 +37,18 @@
 ### Python
 
 * https://johnsbutler.netlify.app/talk/primaryschooltalk2019/
-* CMEE miniproject --- cap the usage of packages --- make students keep it simpler
-https://towardsdatascience.com/6-simple-tips-for-prettier-and-customised-plots-in-seaborn-python-22f02ecc2393
+* https://towardsdatascience.com/6-simple-tips-for-prettier-and-customised-plots-in-seaborn-python-22f02ecc2393
 
 ### R/Python
 
  * Debugging include options (error = browser) for entering interactive debugging
 
-### Stats
+* boxplot() and plot() not equivalent in some R versions? 
 
-* As of R version 4.0.0 of R released in April 2020 the default for
-`stringsAsFactors` was changed to false:
-(https://cran.r-project.org/doc/manuals/r-devel/NEWS.html) 
+* https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram
+
+
+### Stats
 
 * In the Data exploration chapter, link to explanations of distributions that appears in GLM chapter. 
 
@@ -49,12 +56,7 @@ https://towardsdatascience.com/6-simple-tips-for-prettier-and-customised-plots-i
 omit - you can check that by using getOption("na.action").  Have a look at
 https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test 
 
-* Perhaps it would be could to edit the notebooks to put diff <- mean.gs[[1]][1] -
-mean.gs[[2]][1] to avoid confusion? 
-
-* boxplot() and plot() not equivalent in some R versions? 
-
-* https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram
+* Perhaps it would be could to edit the notebooks to put diff <- mean.gs[[1]][1] - mean.gs[[2]][1] to avoid confusion? 
 
 * Clarify SD vs SE: The standard deviation (often SD) is a measure of
 variability. When we calculate the standard deviation of a sample, we are using
@@ -68,7 +70,8 @@ the 2 standard deviation limits, though those outside may all be at one end. We
 may choose a different summary statistic, however, when data have a skewed
 distribution. 
 
-When we calculate the sample mean we are usually interested not in the mean of this particular sample, but in the mean for individuals of this type—in statistical terms, of the population from which the sample comes. We usually collect data in order to generalise from them and so use the sample mean as an estimate of the mean for the whole population. Now the sample mean will vary from sample to sample; the way this variation occurs is described by the “sampling distribution” of the mean. We can estimate how much sample means will vary from the standard deviation of this sampling distribution, which we call the standard error (SE) of the estimate of the mean. As the standard error is a type of standard deviation, confusion is understandable. Another way of considering the standard error is as a measure of the precision of the sample mean.
+When we calculate the sample mean we are usually interested not in the mean of this particular sample, but in the mean for individuals of this type—in statistical terms, of the population from which the sample comes. We usually collect data in order to generalise from them and so use the sample mean as an estimate of the mean for the whole population. Now the sample mean will vary from sample to sample; the way this variation occurs is described by the “sampling distri# TODO: 
+ deviation, confusion is understandable. Another way of considering the standard error is as a measure of the precision of the sample mean.
 
 The standard error of the sample mean depends on both the standard deviation and the sample size, by the simple relation SE = SD/√(sample size). The standard error falls as the sample size increases, as the extent of chance variation is reduced—this idea underlies the sample size calculation for a controlled trial, for example. By contrast the standard deviation will not tend to change as we increase the size of our sample.
 
@@ -136,3 +139,17 @@ Some questions that are arising:
 
 - Family-wise error rateIn statistics, family-wise error rate (FWER) is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.
 
+### Feedback Script
+
+# * Hard-code a dictionary that has names of weekly code files to compare against
+# * Bug: week 1, but also 10 will end up being assessed if it exists
+# * Allow Week to be set to 0 for only git checking out
+# * Call a warning a warning and error an error
+# * Count up lines of code in each script and report it
+# * Include a weekly list of expected code files to check against?
+# * Include "using repository state at time..."?
+# * Allocate points to each expected and independent code file as weighted
+#   percent of 100, weight determined by number of code lines; Update marking
+#   criteria accordingly; Total baseline points are weighted average of these
+#   two, from   which additional points are deleted for poor project
+#   organization, readme,  etc.

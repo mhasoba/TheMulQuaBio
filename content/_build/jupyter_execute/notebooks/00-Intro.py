@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Introduction <span class="tocSkip"></span> <a name="chap:Intro"></a>
+# # Introduction <a name="chap:Intro"></a>
 # 
 # > *It is hard for me to say confidently that, after fifty more years of explosive growth of computer science, there will still be a lot of fascinating unsolved problems at peoples' fingertips, that it won't be pretty much working on refinements of well-explored things. Maybe all of the simple stuff and the really great stuff has been discovered. It may not be true, but I can't predict an unending growth. I can't be as confident about computer science as I can about biology. Biology easily has 500 years of exciting problems to work on, it's at that level.*
 # >
 # > — *Donald Knuth*
 # 
 
-# ## About these notes
+# ## About
 #     
 # These online notes have emerged from the development of content for modules on Biological Computing taught in various past and present courses at the Department of Life Sciences, Imperial College London. These courses include Year 1 & 2 Computational Biostatistics modules at the South Kensington Campus, the Computational Methods in Ecology and Evolution [(CMEE) Masters program](http://www.imperial.ac.uk/life-sciences/postgraduate/masters-courses/computational-methods-in-ecology-and-evolution/) at the Silwood Park Campus, the Quantitative Methods in Ecology and Evolution Centre for Doctoral Training ([QMEE CDT](https://www.imperial.ac.uk/qmee-cdt/)), and the training workshops of the [VectorBiTE RCN](http://vectorbite.org).
 # 
@@ -129,24 +129,22 @@
 # * Your typical approach should be to serach online the main keywords along the programming language name (e.g., "unix mv vs cp" or "R create empty dataframe"). 
 # * Look for [stackoverflow](https://stackoverflow.com/) or [stackexchange](https://stackexchange.com/) based results in particular. Look for number of endorsements for both the question that has been asked, and for its answer.
 # * Be selective - there will often be multiple solutions to the same issue or problem - don't just blindly use the first one you find. 
-# * Also, every time a mysterious, geeky-sounding term like "relative path" or "version control" appears, please google it as well!
+# * Also, every time a mysterious, geeky-sounding term like "relative path" or "version control" appears, please search (e.g., google) it online it as well!
 # ```
-# 
+
 # ### To IDE or not to IDE?
 # 
 # As you embark on your journey to becoming a competent practitioner of biological computing, you will be faced with a Hamletian question: "To IDE or not to IDE" (anagram alert!). *OK, maybe not that dramatic or Hamletian...*
 # 
 # An interactive Development Environment (IDE) is a text editor with additional features that can make life easy by allowing auto-formatting of code, running code, providing a graphic view of the workspace (your active functions, variables, etc.), graphic debugging and profiling (you will see these delightful things later), and allowing integrated version control (e.g., using `git`). 
 # 
-# You will benefit a lot if you use a code editor that can also offer an IDE. Four commonly-used and very powerful multi-lingual code editors/IDEs are: Emacs, Vim, Visual Studio Code (AKA vscode), and Atom. 
-# 
-# At the very least, your IDE should offer:
+# You will benefit a lot if you use a code editor that can also offer an IDE. At the very least, your IDE should offer:
 # 
 # * Auto-indentation
 # 
 # * Automatic code wrapping (e.g., keeping lines <80 characters long)
 # 
-# * Syntax highlighting (e.g., commands vs. variables)
+# * [Syntax highlighting](https://en.wikipedia.org/wiki/Syntax_highlighting) (language elements such as variables, commands, and brackets are differently colored)
 # 
 # * Code folding (fold large blocks of code, say an entire function or loop)
 # 
@@ -156,7 +154,14 @@
 # 
 # * Sending commands to terminal / shell
 # 
-# And if you end up using multiple programming languages, you will want an IDE that can handle them. For example, `RStudio` is great for R, but cannot handle other languages. I use visual studio `code`, which has many plugins that make multi-language (multilingual!) code development much easier. Other good options are `atom`, `vim` or `emacs`. The last two have a steeper learning curve, but are very powerful once you have mastered them. 
+# * Debugging
+# 
+# 
+# If you end up using multiple programming languages, you will want an IDE that can handle them. Four commonly-used and very powerful multi-lingual code editors/IDEs are: Emacs, Vim, Visual Studio Code (AKA VS Code), and Atom.  We will use [Visual Studio Code](https://code.visualstudio.com) in this course, because it is freely available, is relatively easy to master,  and has many plugins that make multilingual code development easier. Atom, Vim and Emacs are also great alternatives. The last having a steeper learning curve, but are very powerful once you have mastered them. 
+# 
+# #### Gooey IDEs
+# 
+# IDEs come with graphic user interfaces (GUI's, or "gooeys") of differing levels of sophistication and shiny-ness. Some go over and above the call of duty to offer further useful features like embedded data and plot views and package management. One such example is th freelty available [RStudio](http://rstudio.org), which is dedicated to R.  However, there is a tradeoff &ndash; these are necessarily specialized to one language (e.g., RStudio). It is up to you if you want to use multiple, language specific IDEs, or one somewhat less shiny multi-lingual IDE.   
 # 
 # ### Assessment
 # 

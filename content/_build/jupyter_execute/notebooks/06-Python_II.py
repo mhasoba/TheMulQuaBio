@@ -3,9 +3,6 @@
 
 # # Biological Computing in Python II
 
-# >> ...some things in life are bad. They can really make you mad. Other things just make you swear and curse. When you're chewing on life's gristle, don't grumble; give a whistle, and this'll help things turn out for the best. And... always look on the bright side of life... 
-# — *Guess who?*
-
 # In this chapter, we will build on the [first Python Chapter](05-Python_I.ipynb). We cover some more advanced topics that will round-off your training in Biological Computing in Python. 
 # 
 # ## Numerical computing in Python

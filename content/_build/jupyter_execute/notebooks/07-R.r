@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.width=4, repr.plot.height= 4) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.width=6, repr.plot.height= 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
 
 a <- 4  # store 4 as variable a
 
@@ -32,7 +32,18 @@ wing.width.cm <- 1.2 #Using dot notation
 
 wing.length.cm <- c(4.7, 5.2, 4.8)
 
+li = list(c(1,2,3))
+
+class(li)
+
+
+
+
+
 v <- TRUE
+
+v
+
 class(v)
 
 v <- 3.2
@@ -45,6 +56,8 @@ v <- "A string"
 class(v)
 
 b <- NA
+class(b)
+
 is.na(b)
 
 b <- 0/0
@@ -103,6 +116,8 @@ v1
 mat1 <- matrix(1:25, 5, 5)
 mat1
 
+print(mat1)
+
 mat1 <- matrix(1:25, 5, 5, byrow=TRUE)
 mat1
 
@@ -125,6 +140,8 @@ Col3 <- runif(10) # 10 random numbers from a uniform distribution
 Col3
 
 MyDF <- data.frame(Col1, Col2, Col3)
+MyDF
+
 print(MyDF)
 
 names(MyDF) <- c("MyFirstColumn", "My Second Column", "My.Third.Column")
@@ -155,21 +172,6 @@ head(MyDF)
 
 tail(MyDF)
 
-a <- as.factor(c(1,2))
-a
-
-class(a)
-
-levels(a)
-
-class(MyDF$MySecondColumn)
-
-MyDF$MySecondColumn <- as.character(MyDF$MySecondColumn)
-
-class(MyDF$MySecondColumn)
-
-str(MyDF)
-
 MyList <- list(species=c("Quercus robur","Fraxinus excelsior"), age=c(123, 84))
 MyList
 
@@ -197,6 +199,10 @@ pop3<-list(lat=32,long=-10,
            pop=c(12,11,2,1,14))
 pops<-list(sp1=pop1,sp2=pop2,sp3=pop3)
 pops
+
+pops$sp1 # check out species 1
+
+pops$sp1["pop"] # sp1's population sizes
 
 pops[[2]]$lat #latitude of second species
 
@@ -291,6 +297,8 @@ paste("Quercus", "robur",sep = ", ") #insert comma to separate
 
 paste('Year is:', 1990:2000)
 
+strsplit("String; to; Split",';')# Split the string at ';'
+
 set.seed(1234567)
 rnorm(1)
 
@@ -299,17 +307,19 @@ rnorm(10)
 set.seed(1234567)
 rnorm(11)
 
+setwd("../code/")
+
 MyData <- read.csv("../data/trees.csv")
 
-ls() #Check that MyData has appeared 
+ls() #Check that MyData has appeared
 
-ls.str()
+class(MyData)
 
 head(MyData) # Have a quick look at the data frame
 
-str(MyData) # Have a quick look at the column types
+str(MyData) # Note the data types of the three columns
 
-MyData <- read.csv("../data/trees.csv", header = F) # ignoring headers
+MyData <- read.csv("../data/trees.csv", header = F) # Import ignoring headers
 
 head(MyData)
 
@@ -331,57 +341,53 @@ write.table(MyData, "../results/MyData.csv", col.names=FALSE) # ignore col names
 
 source("basic_io.R")
 
-## If statement
 a <- TRUE
 if (a == TRUE){
-	print ("a is TRUE")
-	} else {
-	print ("a is FALSE")
+    print ("a is TRUE")
+    } else {
+    print ("a is FALSE")
 }
 
-## If statement on a single line
-z <- runif(1) ## uniformly distributed random number
+z <- runif(1) ## Generate a uniformly distributed random number
 if (z <= 0.5) {print ("Less than a half")}
 
-## For loop using a sequence
 for (i in 1:10){
-	j <- i * i
-	print(paste(i, " squared is", j ))
+    j <- i * i
+    print(paste(i, " squared is", j ))
 }
 
-## For loop over vector of strings
+1:10
+
 for(species in c('Heliodoxa rubinoides', 
                  'Boissonneaua jardini', 
                  'Sula nebouxii')){
   print(paste('The species is', species))
 }
 
-## for loop using a vector
 v1 <- c("a","bc","def")
 for (i in v1){
-	print(i)
+    print(i)
 }
 
-## While loop
 i <- 0
-while (i<10){
-	i <- i+1
-	print(i^2)
+while (i < 10){
+    i <- i+1
+    print(i^2)
 }
 
 i <- 0 #Initialize i
-	while(i < Inf) {
-		if (i == 10) {
-			break 
+    while(i < Inf) {
+        if (i == 10) {
+            break 
              } # Break out of the while loop! 
-		else { 
-			cat("i equals " , i , " \n")
-			i <- i + 1 # Update i
-	}
+        else { 
+            cat("i equals " , i , " \n")
+            i <- i + 1 # Update i
+    }
 }
 
 for (i in 1:10) {
-  if ((i %% 2) == 0) 
+  if ((i %% 2) == 0) # check if the number is odd
     next # pass to next iteration of loop 
   print(i)
 }
@@ -392,7 +398,7 @@ ls()
 
 class(MyFunction)
 
-# Is the integer even?
+# Checks if an integer is even
 is.even <- function(n = 2){
   if (n %% 2 == 0)
   {
@@ -400,9 +406,10 @@ is.even <- function(n = 2){
   } 
   return(paste(n,'is odd!'))
 }
+
 is.even(6)
 
-# Is the number a power of 2?
+# Checks if a number is a power of 2
 is.power2 <- function(n = 2){
   if (log2(n) %% 1==0)
   {
@@ -410,9 +417,10 @@ is.power2 <- function(n = 2){
   } 
   return(paste(n,'is not a power of 2!'))
 }
+
 is.power2(4)
 
-# Is it a prime number?
+# Checks if a number is prime
 is.prime <- function(n){
   if (n==0){
     return(paste(n,'is a zero!'))
@@ -426,6 +434,7 @@ is.prime <- function(n){
   } 
   return(paste(n,'is a composite!'))
 }
+
 is.prime(3)
 
 a <- 1.0
@@ -450,20 +459,27 @@ print(system.time(SumAllElements(M)))
 print("Using the in-built vectorized function, the time taken is:")
 print(system.time(sum(M)))
 
-a <- NA
-for (i in 1:10) {
-    a <- c(a, i)
-    print(a)
-    print(object.size(a))
+NoPreallocFun <- function(x){
+    a <- vector() # empty vector
+    for (i in 1:x) {
+        a <- c(a, i)
+        print(a)
+        print(object.size(a))
+    }
 }
 
-a <- rep(NA, 10)
+system.time(NoPreallocFun(10))
 
-for (i in 1:10) {
-    a[i] <- i
-    print(a)
-    print(object.size(a))
+PreallocFun <- function(x){
+    a <- rep(NA, x) # pre-allocated vector
+    for (i in 1:x) {
+        a[i] <- i
+        print(a)
+        print(object.size(a))
+    }
 }
+
+system.time(PreallocFun(10))
 
 ## Build a random matrix
 M <- matrix(rnorm(100), 10, 10)
@@ -500,42 +516,42 @@ myexperiment <- function(popn,n){
 
 ## Calculate means using a for loop without preallocation:
 loopy_sample1 <- function(popn, n, num){
-	result1 <- vector() #Initialize empty vector of size 1 
-	for(i in 1:num){
-		result1 <- c(result1, myexperiment(popn, n))
+    result1 <- vector() #Initialize empty vector of size 1 
+    for(i in 1:num){
+        result1 <- c(result1, myexperiment(popn, n))
     }
-	return(result1)
+    return(result1)
 }
 
 ## To run "num" iterations of the experiment using a for loop on a vector with preallocation:
 loopy_sample2 <- function(popn, n, num){
-	result2 <- vector(,num) #Preallocate expected size
-	for(i in 1:num){
-		result2[i] <- myexperiment(popn, n)
+    result2 <- vector(,num) #Preallocate expected size
+    for(i in 1:num){
+        result2[i] <- myexperiment(popn, n)
     }
-	return(result2)
+    return(result2)
 }
 
 ## To run "num" iterations of the experiment using a for loop on a list with preallocation:
 loopy_sample3 <- function(popn, n, num){
-	result3 <- vector("list", num) #Preallocate expected size
-	for(i in 1:num){
-		result3[[i]] <- myexperiment(popn, n)
+    result3 <- vector("list", num) #Preallocate expected size
+    for(i in 1:num){
+        result3[[i]] <- myexperiment(popn, n)
     }
-	return(result3)
+    return(result3)
 }
 
 
 ## To run "num" iterations of the experiment using vectorization with lapply:
 lapply_sample <- function(popn, n, num){
-	result4 <- lapply(1:num, function(i) myexperiment(popn, n))
-	return(result4)
+    result4 <- lapply(1:num, function(i) myexperiment(popn, n))
+    return(result4)
 }
 
 ## To run "num" iterations of the experiment using vectorization with lapply:
 sapply_sample <- function(popn, n, num){
-	result5 <- sapply(1:num, function(i) myexperiment(popn, n))
-	return(result5)
+    result5 <- sapply(1:num, function(i) myexperiment(popn, n))
+    return(result5)
 }
 
 popn <- rnorm(1000) # Generate the population
@@ -594,14 +610,14 @@ Ricker <- function(N0=1, r=1, K=10, generations=50)
 plot(Ricker(generations=10), type="l")
 
 doit <- function(x){
-	temp_x <- sample(x, replace = TRUE)
-	if(length(unique(temp_x)) > 30) {#only take mean if sample was sufficient
-		 print(paste("Mean of this sample was:", as.character(mean(temp_x))))
-		} 
-	else {
-		stop("Couldn't calculate mean: too few unique values!")
-		}
-	}
+    temp_x <- sample(x, replace = TRUE)
+    if(length(unique(temp_x)) > 30) {#only take mean if sample was sufficient
+         print(paste("Mean of this sample was:", as.character(mean(temp_x))))
+        } 
+    else {
+        stop("Couldn't calculate mean: too few unique values!")
+        }
+    }
 
 popn <- rnorm(50) #Generate your population
 
@@ -615,5 +631,5 @@ result
 
 result <- vector("list", 15) #Preallocate/Initialize
 for(i in 1:15) {
-	result[[i]] <- try(doit(popn), FALSE)
-	}
+    result[[i]] <- try(doit(popn), FALSE)
+    }

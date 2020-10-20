@@ -20,14 +20,8 @@ interpreting the output.
 Masters students
 ****************
 
-Both your practical computing work itself (including any
-writeups), and whether you are following good programming and workflow
-practices will be assessed, usually on a weekly basis. Note that practicals in the weeks not
-included in this book (e.g., GIS and Genomics) will also be included in
-the assessment (what "assessment" of these weeks' practicals means is
-explained below). So keep the workflow in those weeks organized, even if
-the analyses or pipelines/workflows you were taught we not fully
-reusable or machine-reproducible.
+Both your practical computing work itself (including any writeups), and whether you are following good programming and workflow
+practices will be assessed, usually on a weekly basis. Note that practicals in the weeks not included in this book (e.g., GIS and Genomics) will also be included in the assessment (what "assessment" of these weeks' practicals means is explained below). So keep the workflow in those weeks organized, even if the analyses or pipelines/workflows you were taught we not fully reusable or machine-reproducible.
 
 The basic rules you must follow, irrespective of a Week's content are:
 
@@ -39,7 +33,7 @@ The basic rules you must follow, irrespective of a Week's content are:
 
 * If you have files that don't fit in these categories, put them additional, meaningfully named directories. For example, you can create a ``writeup`` directory to hold your (:math:`\LaTeX`) written work, and include your compiled pdf of the written report there.
 
-* No single file should be greater than 100 mb, either data or script/code. If a script needs a data file, but the example data file is >100 mb, reduce it to a minimum working dataset and upload that, keeping the main data file(s) under ``.gitignore`` (see the `Git Chapter <03-Git.ipynb>`__). Keep the main data backed up, of course \ `1 <#intro:testdata>`__\ !.
+* No single file should be greater than 100 mb, either data or script/code. If a script needs a data file, but the example data file is >100 mb, reduce it to a minimum working dataset and upload that, keeping the main data file(s) under ``.gitignore`` (see the [Git Chapter](./03-Git.ipynb). Keep the main data backed up, of course \ `1 <#intro:testdata>`__\ !.
 
 * Most importantly, all Python, R, bash, and :math:`\LaTeX` scripts should run without errors, taking in data and spitting out the    results as necessary.
 
@@ -110,9 +104,10 @@ Execution
 
 * Each student group will assign a "scribe" to the group who will create a **new Groupwork repository** where all assigned groupwork practicals will be tackled collaboratively.
 * The group members will collaborate to develop the solution by creating branches of the script. 
-* Once the group has reached a solution, all branches should be merged and the final script  transferred to each student's main coursework repository.   
+    * Every group member MUST create their own branch and work on each of the groupwork practicals. 
+* Once the group has reached a solution, all branches should be merged and the final script transferred to each student's main coursework repository.
 * Please read about git brancing/merging, including the resources given at the end of the `Git Chapter <03-Git.ipynb>`__    
-* You are not expected to finish an the groupwork assignments within a week. These will be taken into account only at the final assessment (next section). The specific dealine will be given in class.
+* You are not expected to finish an the groupwork assignments within a week. These will be taken into account only at the final assessment (next section). The specific deadline will be given in class.
 
 Assessment
 ----------

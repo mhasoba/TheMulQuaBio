@@ -1,0 +1,47 @@
+\documentclass[xcolor=x11names,compress]{article}
+
+% \usepackage{svg}
+\usepackage{tikz}
+\usetikzlibrary{positioning, fit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{center}
+    \begin{tikzpicture}[bx/.style={draw=green!30!black, rectangle, very thick, rounded corners, 
+                                   minimum height=20pt, minimum width=4cm, text depth=0pt},
+                        zn/.style={rectangle, rounded corners, fill=black!10, minimum width=5 cm, minimum height=5cm},
+                        lb/.style={right=0pt, yshift=7pt, font=\small, green!30!black},
+                        every path/.style={-stealth, very thick, green!30!black}]
+    
+        \node (R)       {\includegraphics[width=2cm]{Rlogo.pdf}};                    
+        \node (inputs)  [zn, left= of R] {};
+        \node (outputs) [zn, right= of R] {};
+        \node (lab)     [lb, at=(inputs.north west), black] {Input files};
+        \node (lab)     [lb, at=(outputs.north west), black] {Output files (all to {\tt Results})};
+    
+        \node (Rin)     [bx, above=1cm of inputs.center, anchor=center] {MyScript.R};
+        \node (data)    [bx, below=1cm of inputs.center, anchor=center] {MyData.csv};
+        
+        \node (lab)     [lb, at=(Rin.north west)] {R script file (from {\tt Code})};
+        \node (lab)     [lb, at=(data.north west)] {Text data file (from {\tt Data})} ;
+    
+        \node (Results) [bx, at=(outputs.center)]{MyTextResults.txt};
+        \node (image)   [bx, above=1.5cm of outputs.center, anchor=center]{MyGraphicResults.pdf};
+        \node (Rdata)   [bx, below=1.5cm of outputs.center, anchor=center]{MyRData.Rda};
+    
+        \node (lab)     [lb, at=(Results.north west)] {Results output};
+        \node (lab)     [lb, at=(image.north west)] {Graphics file};
+        \node (lab)     [lb, at=(Rdata.north west)] {R data file};
+    
+        \draw [bend left, shorten > = -8pt] (Rin.east) to (R);
+        \draw [bend right, shorten > = -8pt](data.east) to (R);
+    
+        \draw [bend left, shorten < = -1pt]  (R) to (image.west);
+        \draw [bend right, shorten < = -1pt, stealth-stealth] (R) to (Rdata.west);
+        \draw (R) -- (Results.west);
+    
+    \end{tikzpicture}
+    \end{center}
+    
+    \end{document}

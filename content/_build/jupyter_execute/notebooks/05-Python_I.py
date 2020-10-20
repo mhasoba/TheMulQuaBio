@@ -79,6 +79,10 @@
 # |Object|  A particular instance of a class (every object belongs to a class) that is created in a session and eventually destroyed; everything in your workspace is an object in python!|
 
 # This Module vs. Class vs. Object business is confusing. These constructs are created to make an (object-oriented) programming language like Python more flexible and user friendly (though it might not seem so to you currently!). In practice, at least for your current purposes, you will not build you own python classes much (but will use the inbuilt Python classes).You will however write your own modules. More on all this later (in the second Python Chapter). 
+# 
+# ```{note}
+# **Data "structures" vs. "objects"**: You will often see the terms "object" and "data structure" thrown around in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like Python and R. A data structure is just a "dumb" container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function. Python, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity &mdash; each object type has its own set of rules for operations and manipulations that Python uses when interpreting your commands. 
+# ```
 
 # ## Getting started with Python
 # 
@@ -2189,7 +2193,8 @@ even_or_odd(11)
 # 
 # * Also, add some test arguments to show that they work (again, like `control_flow.py`) — for example, ``foo_5(10)``. Thus, running `cfexercises1.py` should now output evaluations of all the `foo_x` functions.
 
-# ## Errors in your python code
+# (Python:errors)=
+# ## Errors in your Python code
 # 
 # What do you want from your code? Rank the following by importance:
 # 
@@ -2301,6 +2306,7 @@ run test_control_flow.py -v
 # 
 # Please start testing as early as possible, but don't try to test everything either! Remember, it is easier to test if code is compartmentalized into functions.
 # 
+# (Python:Debugging)=
 # ### Debugging
 # 
 # OK, so you unit-tested, let's go look at life through beer-goggles... BUT NO! YOU WILL VERY LIKELY RUN INTO BUGS!
@@ -2414,7 +2420,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 
 # Once in the debugger, use `pp locals()` and/or `pp globals()` to see all local or global objects (including variables and functions) available at the point where the debugger stopped in the script. `pp` stands for "pretty print".
 # 
-# ### Paranoid programming: debugging with breakpoints
+# #### Paranoid programming: debugging with breakpoints
 # 
 # You may want to pause the program run and inspect a given line or block  of code (`*why?*` — impromptu unit-testing is one reason). To do so, simply put this snippet of code where you want to pause and start a debugging session and then run the program again:
 # 
@@ -2427,9 +2433,66 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # *If you are serious about programming, please start using a debugger (R, Python, whatever...)!*
 # 
-# ### Debugging using your IDE
+# #### Debugging using your IDE
 # 
 # If you are using a python-dedicated IDE like Spyder or PyCharm, you should do debugging, including setting breakpoints using a graphic user interface. Even more general-purpose code editors / IDEs like Visual Studio Code allow very good [graphical debugging](https://code.visualstudio.com/docs/editor/debugging).
+
+# ### Errors that cannot be debugged 
+# 
+# In many scenarios, you *do not* want to, or cannot, debug away an error in your program. The two most common such scenarios are:
+# 
+# * An error that arises when a particular condition is not met in your program.
+# * You *want* the code to continue running despite an error.
+# 
+# to "handle" such errors, you can use the `try` - `except` keywords. 
+# 
+# Let's expand our previous `debugme.py` example to understand how this works. 
+
+# In[16]:
+
+
+def buggyfunc(x):
+    y = x
+    for i in range(x):
+        try: 
+            y = y-1
+            z = x/y
+        except:
+            print(f"This didn't work; x = {x}; y = {y}")
+    return z
+
+buggyfunc(20)
+
+
+# $\star$ Run this block of code yourself in the ipython console using `%cpaste`.
+# 
+# So, `try` does what the name suggests - tries to do something (the division), and if it does not work (any error happens), transfers control to the `except` block and whatever you ask Python to do in that block gets executed. This is a good strategy if you want your program to give feedback, or that particular error is not common.
+# 
+# You can also "catch" specific types of errors. For example, modify the code further:
+
+# In[15]:
+
+
+def buggyfunc(x):
+    y = x
+    for i in range(x):
+        try: 
+            y = y-1
+            z = x/y
+        except ZeroDivisionError:
+            print(f"The result of dividing a number by zero is undefined")
+        except:
+            print(f"This didn't work; x = {x}; y = {y}")
+        else:
+            print(f"OK; x = {x}; y = {y}, z = {z};")
+    return z
+
+buggyfunc(20)
+
+
+# So here we anticipated a `ZeroDivisionError` and gave feedback on that. As such, `ZeroDivisionError` is a pre-defined error type in Python. Another example is `TypeError`, which you will get if you try to run the above script with something non-numeric, such as a string.
+# 
+# Note that we also used `else` (just like in the case of `if`-`else`) here to give feedback on every successful calculation. There is also a `finally` keyword that enables you to execute sections of code that should always run, with or without any previously encountered exceptions.
 
 # ## Functions, Modules, and code compartmentalization
 # 
@@ -2493,7 +2556,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # * Convert `align_seqs.py` to a Python program that takes the DNA sequences as an input from a single external file and saves the best alignment along with its corresponding score in a single text file (your choice of format and file type) to an appropriate location. No external input should be required; that is, you should still only need to use `python align_seq.py` to run it.
 #     For example, the input file can be a single `.csv` file with the two example sequences given at the top of the original script.
 #     
-# #### Align DNA sequences Groupwork Practical 1 
+# ### Groupwork Practical on Align DNA sequences 
 # 
 # Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
@@ -2501,7 +2564,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # ``` 
 # However, it should still run if no inputs were given, using two fasta sequences from the `data` directory as defaults.
 # 
-# #### Align DNA sequences Groupwork Practical 2
+# ### Groupwork Practical on Align DNA sequences 2
 # 
 # The current script/program runs through all possible starting points on the main sequence and then just takes the first of the alignments with the highest score. This should be apparent if you closely examine this part of the script:
 # ```python
@@ -2525,7 +2588,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # * Modify your doctests approriately, and  modify your script such that it can handle cases where there is a typo (such as 'Quercuss') or there is a genus name that is not strictly 'Quercus'. 
 # 
-# #### Missing oaks problem Groupwork Practical 1 
+# ### Groupwork Practical on Missing oaks problem 
 # 
 # You might have noticed that the headers in the data column are being included in the program as if they were a genus and species. That is, the first block of the program's output is:
 # ```bash
@@ -2560,12 +2623,16 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # * The IPython [documentation](https://ipython.readthedocs.io/en/stable)
 # * [Cookbooks](https://github.com/ipython/ipython/wiki) can be very useful
 # 
+# ### Python data structures
+# * Read more about native Python data structures [here](https://diveintopython3.problemsolving.io/native-datatypes.html)
+# 
 # ### Elements of the Python program 
 # * Read more about the python shebang [here](https://www.python.org/dev/peps/pep-0394/#recommendation)
 # * See the [official docstring conventions](https://www.python.org/dev/peps/pep-0257/).
 # 
-# ### Python data structures
-# * Read more about native Python data structures [here](https://diveintopython3.problemsolving.io/native-datatypes.html)
+# ### Errors and Debugging
+# 
+# * https://docs.python.org/3/tutorial/errors.html
 # 
 # ### Functions, Modules, and Classes
 # * For functions vs. modules vs. classes in Python, have a look [at this]( http://learnpythonthehardway.org/book/ex40.html).
