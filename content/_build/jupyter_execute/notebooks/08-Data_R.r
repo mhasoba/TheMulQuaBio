@@ -2,10 +2,11 @@ library(repr) ; options(repr.plot.width=7, repr.plot.height= 6) # Change plot si
 
 setwd("../code/")
 
-MyData <- as.matrix(read.csv("../data/PoundHillData.csv",header = F,  stringsAsFactors = F))
-MyMetaData <- read.csv("../data/PoundHillMetaData.csv",header = T,  sep=";", stringsAsFactors = F)
-
+MyData <- as.matrix(read.csv("../data/PoundHillData.csv",header = FALSE))
 class(MyData)
+
+MyMetaData <- read.csv("../data/PoundHillMetaData.csv",header = TRUE,  sep=";")
+class(MyMetaData)
 
 head(MyData)
 
@@ -27,7 +28,7 @@ head(TempData)
 rownames(TempData) <- NULL
 head(TempData)
 
-require(reshape2) # load the reshape2 package
+require(reshape2)# load the reshape2 package
 
 MyWrangledData <- melt(TempData, id=c("Cultivation", "Block", "Plot", "Quadrat"), variable.name = "Species", value.name = "Count")
 head(MyWrangledData); tail(MyWrangledData)
@@ -39,17 +40,17 @@ MyWrangledData[, "Quadrat"] <- as.factor(MyWrangledData[, "Quadrat"])
 MyWrangledData[, "Count"] <- as.integer(MyWrangledData[, "Count"])
 str(MyWrangledData)
 
-require(dplyr)
+require(tidyverse)
 
-dplyr::tbl_df(MyWrangledData) #like head(), but nicer!
+tidyverse_packages(include_self = TRUE) # the include_self = TRUE means list "tidyverse" as well 
+
+tibble::as_tibble(MyWrangledData) 
 
 dplyr::glimpse(MyWrangledData) #like str(), but nicer!
 
-dplyr::filter(MyWrangledData, Count  100) #like subset(), but nicer!
+dplyr::filter(MyWrangledData, Count>100) #like subset(), but nicer!
 
 dplyr::slice(MyWrangledData, 10:15) # Look at an arbitrary set of data rows
-
-library(dplyr)
 
 MyDF <- read.csv("../data/EcolArchives-E089-51-D1.csv")
 dim(MyDF) #check the size of the data frame you loaded
@@ -58,7 +59,7 @@ str(MyDF)
 
 head(MyDF)
 
-require(dplyr)
+require(tidyverse)
 dplyr::glimpse(MyDF)
 
 MyDF$Type.of.feeding.interaction <- as.factor(MyDF$Type.of.feeding.interaction)
@@ -252,18 +253,39 @@ q
 
 q + theme(legend.position = "none") + theme(aspect.ratio=1)
 
-#p <- ggplot(MyDF, aes(x = log(log(Prey.mass/Predator.mass)), y = log(Prey.mass), colour = Type.of.feeding.interaction ))
+p <- ggplot(MyDF, aes(x = log(Prey.mass/Predator.mass), fill = Type.of.feeding.interaction )) + geom_density()
+p
 
+p <- ggplot(MyDF, aes(x = log(Prey.mass/Predator.mass), fill = Type.of.feeding.interaction)) + geom_density(alpha=0.5)
+p
 
-#qplot(log(Prey.mass/Predator.mass), facets = .~ Type.of.feeding.interaction + Location, 
-#      data = MyDF, geom =  "density")
+options(repr.plot.width=12, repr.plot.height= 8) # Change plot size (in cm)
 
+p <- ggplot(MyDF, aes(x = log(Prey.mass/Predator.mass), fill = Type.of.feeding.interaction )) +  geom_density() + facet_wrap( .~ Type.of.feeding.interaction)
+p
 
-#qplot(log(Prey.mass/Predator.mass), facets = .~ Location + Type.of.feeding.interaction, 
- #   data = MyDF, geom =  "density")
+p <- ggplot(MyDF, aes(x = log(Prey.mass/Predator.mass), fill = Type.of.feeding.interaction )) +  geom_density() + facet_wrap( .~ Type.of.feeding.interaction, scales = "free")
+p
+
+options(repr.plot.width=10, repr.plot.height= 12) # Change plot size (in cm)
+
+p <- ggplot(MyDF, aes(x = log(Prey.mass/Predator.mass))) +  geom_density() + facet_wrap( .~ Location, scales = "free")
+p
+
+p <- ggplot(MyDF, aes(x = log(Prey.mass), y = log(Predator.mass))) +  geom_point() + facet_wrap( .~ Location, scales = "free")
+p
+
+options(repr.plot.width=12, repr.plot.height= 14) # Change plot size (in cm)
+
+p <- ggplot(MyDF, aes(x = log(Prey.mass), y = log(Predator.mass))) +  geom_point() + facet_wrap( .~ Location + Type.of.feeding.interaction, scales = "free")
+p
+
+p <- ggplot(MyDF, aes(x = log(Prey.mass), y = log(Predator.mass))) +  geom_point() + facet_wrap( .~ Type.of.feeding.interaction + Location, scales = "free")
+p
+
+options(repr.plot.width=7, repr.plot.height= 6) # Change plot size (in cm)
 
 require(reshape2)
-require(plotly)
 
 GenerateMatrix <- function(N){
     M <- matrix(runif(N * N), N, N)
@@ -299,8 +321,6 @@ p + scale_fill_gradientn(colours = grey.colors(10))
 p + scale_fill_gradientn(colours = rainbow(10))
 
 p + scale_fill_gradientn(colours = c("red", "white", "blue"))
-
-ggplotly(p, tooltip="text")
 
 build_ellipse <- function(hradius, vradius){ # function that returns an ellipse
   npoints = 250

@@ -619,7 +619,9 @@ doit <- function(x){
         }
     }
 
-popn <- rnorm(50) #Generate your population
+popn <- rnorm(50)
+
+hist(popn)
 
 lapply(1:15, function(i) doit(popn))
 

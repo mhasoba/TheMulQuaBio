@@ -145,7 +145,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Data Analyses and Statistics
+  Basic Data Analyses and Statistics
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -206,6 +206,13 @@
    Generalised Linear Models
   </a>
  </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting.html">
    Model Fitting in Ecology and Evolution
@@ -224,13 +231,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
   </a>
  </li>
  <li class="toctree-l1">
@@ -811,6 +818,11 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-testing">
+     Unit testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#debugging">
      Debugging
     </a>
@@ -1292,7 +1304,7 @@
 <div class="section" id="variable-types">
 <h2>Variable types<a class="headerlink" href="#variable-types" title="Permalink to this headline">¶</a></h2>
 <p>There are different kinds of data variable types in R, but you will basically need to know four for most of your work: integer, float (or “numeric”, including real numbers), string (or “character”, e.g.,
-text), and Boolean (“logical”; <code class="docutils literal notranslate"> <span class="pre">True</span></code>or <code class="docutils literal notranslate"> <span class="pre">False</span></code>).</p>
+text), and Boolean (“logical”; <code class="docutils literal notranslate"> <span class="pre">True</span></code>or <code class="docutils literal notranslate"> <span class="pre">FALSE</span></code>).</p>
 <p>Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1548,6 +1560,12 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"> <
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">3.33333333333333e-09</div></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Boolean arguments in R</strong>: In <code class="docutils literal notranslate"><span class="pre">R</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> respectively. To see this, type</p>
+<p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;-</span> <span class="pre">T</span></code></p>
+<p>in the R commandline, and then see what R returns when you type <code class="docutils literal notranslate"><span class="pre">a</span></code>. Using <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> respectively is not necessarily good practice, but be aware that this option exists.</p>
 </div>
 </div>
 </div>
@@ -4097,8 +4115,8 @@ The syntax for R functions is quite simple, with each function accepting “argu
 <div class="cell_output docutils container">
 <div class="output text_html">'numeric'</div></div>
 </div>
-<p>R automatically figures out that <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is an floating point number (you don’t have to tell the computer to do that manually), and find a place in the system memory for it with registered as <code class="docutils literal notranslate"><span class="pre">a</span></code> “pointer” to it.</p>
-<p>In contrast, in C, for example, you would do:</p>
+<p>R automatically figures out that <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is an floating point number, and finds a place in the system memory for it with <code class="docutils literal notranslate"><span class="pre">a</span></code> registered as a “pointer” to it.</p>
+<p>In contrast, in C, for example, you would have to do so manually by giving <code class="docutils literal notranslate"><span class="pre">a</span></code> an address and space in memory:</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="n">a</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
@@ -4411,7 +4429,7 @@ for some guidelines.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07-R_290_0.png" src="../_images/07-R_290_0.png" />
+<img alt="../_images/07-R_291_0.png" src="../_images/07-R_291_0.png" />
 </div>
 </div>
 <p>Now run and time the different functions:</p>
@@ -4798,7 +4816,7 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07-R_310_0.png" src="../_images/07-R_310_0.png" />
+<img alt="../_images/07-R_311_0.png" src="../_images/07-R_311_0.png" />
 </div>
 </div>
 <p>Now open and run the script <code class="docutils literal notranslate"><span class="pre">Vectorize2.R</span></code> (available on the TheMulQuaBio repository). This is the stochastic Ricker model (compare with the above script to see where the stochasticity (random error) enters). Now modify the script to complete the exercise given.
@@ -4811,19 +4829,21 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 <div class="section" id="errors-and-debugging">
 <h2>Errors and Debugging<a class="headerlink" href="#errors-and-debugging" title="Permalink to this headline">¶</a></h2>
-<p>As we learned in <a class="reference internal" href="05-Python_I.html#python-errors"><span class="std std-ref">this section of the Python Chapter</span></a>, dealing with errors is a fundamental programming task that never really goes away!</p>
+<p>As we learned in <a class="reference internal" href="05-Python_I.html#python-errors"><span class="std std-ref">this section of the Python Chapter I</span></a>, dealing with errors is a fundamental programming task that never really goes away!</p>
+<div class="section" id="unit-testing">
+<h3>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h3>
+<p>We will not cover unit testing here, which we <a class="reference internal" href="05-Python_I.html#python-errors"><span class="std std-ref">did in the Python Chapter I</span></a> (reab about the concept there). Unit testing in R is equally recommended if you are going to develop complex code and packages.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A very convenient tool for R unit testing is <a class="reference external" href="https://testthat.r-lib.org"><code class="docutils literal notranslate"><span class="pre">testthat</span></code></a>.</p>
+</div>
+<p>In addition, you can use other “<a class="reference external" href="https://en.wikipedia.org/wiki/Defensive_programming">defensive programming</a>” methods in R to keep an eye on errors that might arise in special circumstances in an complex program. A good option for this is to convert warnings to errors using the <a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/stopifnot.html"><code class="docutils literal notranslate"><span class="pre">stopifnot()</span></code></a>. This is a bit like <code class="docutils literal notranslate"><span class="pre">try</span></code> (which we will cover below, and we also covered in <a class="reference internal" href="05-Python_I.html#python-errors"><span class="std std-ref">Python Chapter I</span></a>).</p>
+</div>
 <div class="section" id="debugging">
 <h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
-<p>Once you have found an error, you would like to fix it, or worse, there may be “silent” errors that pass without you noticing them. The solution is to debug your code. Here are some useful debugging functions in R :</p>
-<ul class="simple">
-<li><p>Warnings vs Errors; converting warnings to errors: <code class="docutils literal notranslate"><span class="pre">stopifnot()</span></code>– a bit like <code class="docutils literal notranslate"> <span class="pre">try</span></code> (which we will cover below)</p></li>
-<li><p>What to do when you get an error: <code class="docutils literal notranslate"><span class="pre">traceback()</span></code></p></li>
-<li><p>Simple <code class="docutils literal notranslate"><span class="pre">print</span></code> commands in the right places can be useful for testing (but not strongly recommended)</p></li>
-<li><p>Use of <code class="docutils literal notranslate"><span class="pre">browser()</span></code> at key points in code — my favourite option (also look up  <code class="docutils literal notranslate"><span class="pre">recover()</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">debug(fn)</span></code>, <code class="docutils literal notranslate"><span class="pre">undebug(fn)</span></code> : More technical approach to debugging — explore them</p></li>
-</ul>
-<p>Let’s look at an example using <code class="docutils literal notranslate"> <span class="pre">browser()</span></code>, which is particularly handy because it will allow you to insert a breakpoint in your script (where the running of the script is stopped) and then step through your code. Place it within your script at the point you want to examine local variables  (e.g. inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop).</p>
-<p>Here’s an  example usage of <code class="docutils literal notranslate"><span class="pre">browser()</span></code>.</p>
+<p>Once you have found an error, you need to debug it. Assuming you have an idea about where (or the general area) in your code the error is, a simple way to debug is to use the  <code class="docutils literal notranslate"><span class="pre">browser()</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">browser()</span></code> function allows you to insert a breakpoint in your script (where the running of the script is stopped) and then step through your code. Place it within your script at the point you want to examine local variables  (e.g. inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop).</p>
+<p>Let’s look at an example usage of <code class="docutils literal notranslate"><span class="pre">browser()</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Type the following in a script file called <code class="docutils literal notranslate"><span class="pre">browse.R</span></code> and save in <code class="docutils literal notranslate"><span class="pre">code</span></code>:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">Exponential</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">N0</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">generations</span> <span class="o">=</span> <span class="m">10</span><span class="p">){</span>
   <span class="c1"># Runs a simulation of exponential growth</span>
@@ -4852,12 +4872,18 @@ for examples.    There you will also see a comparison of speed of <code class="d
 <li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: exit browser and continue</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code>: exit browser and abort, return to top-level.</p></li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We will not cover advanced debugging here as we did <a class="reference internal" href="05-Python_I.html#python-errors"><span class="std std-ref">in Python Chapter I</span></a>, but look up <code class="docutils literal notranslate"><span class="pre">traceback()</span></code> (to find where the errors(s) are when a program crashes), and <code class="docutils literal notranslate"><span class="pre">debug()</span></code> (to debug a whole function).</p>
+</div>
 </div>
 <div class="section" id="catching-errors">
 <h3>“Catching” errors<a class="headerlink" href="#catching-errors" title="Permalink to this headline">¶</a></h3>
-<p>Often, you don’t know if a simulation or a R function will work on a particular data or variable, or a value of a variable (can happen in many stats functions).</p>
+<p>Often, you don’t know if a simulation or a R function will work on a particular data or variable, or a value of a variable (can happen in many statistical functions).</p>
 <p>Indeed, as most of you must have already experienced by now, there can be frustrating, puzzling bugs in programs that lead to mysterious errors. Often, the error and warning messages you get are un-understandable, especially in R!</p>
-<p>Rather than having R throw you out of the code, you would rather catch the error and keep going. This can be done using <code class="docutils literal notranslate"> <span class="pre">try</span></code>. Lets try <code class="docutils literal notranslate"><span class="pre">try</span></code>. First, let’s write a function that runs a simulation that involves sampling from a synthetic population with replacement and takes its mean, but only if at least 30 unique samples are obtained.</p>
+<p>Rather than having R throw you out of the code, you would rather catch the error and keep going. This can be done by using the <code class="docutils literal notranslate"><span class="pre">try</span></code> keyword.</p>
+<p>Lets try <code class="docutils literal notranslate"><span class="pre">try</span></code>!</p>
+<p>First, let’s write a function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">doit</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
@@ -4873,15 +4899,21 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 </div>
 </div>
+<p>This function runs a simulation that involves sampling from a synthetic population with replacement and takes its mean, but <em>only</em> if at least 30 unique samples are obtained. Note that we have used another keyword here: <code class="docutils literal notranslate"><span class="pre">stop()</span></code>. Pay close attention to <code class="docutils literal notranslate"><span class="pre">sample()</span></code>, and <code class="docutils literal notranslate"><span class="pre">stop()</span></code> in the above script (check out what they are by using R help or searching online).</p>
+<p>Now, generate your population:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">popn</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">50</span><span class="p">)</span> <span class="c1">#Generate your population</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">popn</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">popn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/07-R_318_0.png" src="../_images/07-R_318_0.png" />
 </div>
-<p>Pay close attention to  the functions/commands <code class="docutils literal notranslate"><span class="pre">sample</span></code>, and <code class="docutils literal notranslate"><span class="pre">stop</span></code> in the above script (check out what they are by using R help or online).</p>
-<p>Now try running it using <code class="docutils literal notranslate"><span class="pre">lapply</span></code> as you did <a class="reference external" href="#A-vectorization-example">above</a>, repeating the sampling exercise 15 times:</p>
+</div>
+<p>Now try running it using <code class="docutils literal notranslate"><span class="pre">lapply</span></code> as you did above, repeating the sampling exercise 15 times:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">doit</span><span class="p">(</span><span class="n">popn</span><span class="p">))</span>
@@ -4889,10 +4921,8 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Mean of this sample was: -0.130946570872659&quot;
-[1] &quot;Mean of this sample was: 0.223985023337968&quot;
-[1] &quot;Mean of this sample was: 0.143677799141895&quot;
-[1] &quot;Mean of this sample was: 0.0341182781577799&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Mean of this sample was: -0.0819495413387692&quot;
+[1] &quot;Mean of this sample was: 0.0239552450301257&quot;
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">doit</span><span class="p">(</span><span class="n">popn</span><span class="p">):</span> <span class="n">Couldn</span><span class="s1">&#39;t calculate mean: too few unique values!</span>
@@ -4915,15 +4945,21 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Mean of this sample was: -0.215760341430501&quot;
-[1] &quot;Mean of this sample was: 0.0244506397411278&quot;
-[1] &quot;Mean of this sample was: -0.0468663486706912&quot;
-[1] &quot;Mean of this sample was: -0.089301171141933&quot;
-[1] &quot;Mean of this sample was: 0.0275130219602047&quot;
-[1] &quot;Mean of this sample was: 0.0980264939402886&quot;
-[1] &quot;Mean of this sample was: 0.00224895672697098&quot;
-[1] &quot;Mean of this sample was: 0.474615690961151&quot;
-[1] &quot;Mean of this sample was: 0.150343985155713&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Mean of this sample was: -0.121221064404979&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: -0.173759374437533&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: 0.00274247326407021&quot;
+[1] &quot;Mean of this sample was: -0.193057628828299&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: -0.259135797305263&quot;
+[1] &quot;Mean of this sample was: -0.177113866182732&quot;
+[1] &quot;Mean of this sample was: -0.15086835618164&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: -0.177809532764058&quot;
+[1] &quot;Mean of this sample was: -0.0554061223415571&quot;
+[1] &quot;Mean of this sample was: -0.144011561341331&quot;
+[1] &quot;Mean of this sample was: -0.186395187133434&quot;
 </pre></div>
 </div>
 </div>
@@ -4948,17 +4984,13 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1]]
-[1] &quot;Mean of this sample was: -0.0626134323800103&quot;
+[1] &quot;Mean of this sample was: -0.0749210536751678&quot;
 
 [[2]]
-[1] &quot;Mean of this sample was: 0.141592038273338&quot;
+[1] &quot;Mean of this sample was: 0.309587889027464&quot;
 
 [[3]]
-[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
-attr(,&quot;class&quot;)
-[1] &quot;try-error&quot;
-attr(,&quot;condition&quot;)
-&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
+[1] &quot;Mean of this sample was: -0.0302045891614826&quot;
 
 [[4]]
 [1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
@@ -4968,53 +5000,45 @@ attr(,&quot;condition&quot;)
 &lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
 
 [[5]]
-[1] &quot;Mean of this sample was: 0.193347290428195&quot;
+[1] &quot;Mean of this sample was: 0.0531384819728952&quot;
 
 [[6]]
-[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
-attr(,&quot;class&quot;)
-[1] &quot;try-error&quot;
-attr(,&quot;condition&quot;)
-&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
+[1] &quot;Mean of this sample was: 0.230357914714637&quot;
 
 [[7]]
-[1] &quot;Mean of this sample was: 0.108449651189628&quot;
+[1] &quot;Mean of this sample was: 0.160404748347107&quot;
 
 [[8]]
-[1] &quot;Mean of this sample was: -0.0645208526558483&quot;
+[1] &quot;Mean of this sample was: 0.258898568120462&quot;
 
 [[9]]
-[1] &quot;Mean of this sample was: 0.102197564974161&quot;
+[1] &quot;Mean of this sample was: 0.298835673168724&quot;
 
 [[10]]
-[1] &quot;Mean of this sample was: 0.0930743076955465&quot;
+[1] &quot;Mean of this sample was: 0.40940643543227&quot;
 
 [[11]]
-[1] &quot;Mean of this sample was: -0.0512480874860339&quot;
+[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
+attr(,&quot;class&quot;)
+[1] &quot;try-error&quot;
+attr(,&quot;condition&quot;)
+&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
 
 [[12]]
-[1] &quot;Mean of this sample was: -0.0423857712591236&quot;
+[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
+attr(,&quot;class&quot;)
+[1] &quot;try-error&quot;
+attr(,&quot;condition&quot;)
+&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
 
 [[13]]
-[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
-attr(,&quot;class&quot;)
-[1] &quot;try-error&quot;
-attr(,&quot;condition&quot;)
-&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
+[1] &quot;Mean of this sample was: 0.193746178208431&quot;
 
 [[14]]
-[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
-attr(,&quot;class&quot;)
-[1] &quot;try-error&quot;
-attr(,&quot;condition&quot;)
-&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
+[1] &quot;Mean of this sample was: 0.049761708834821&quot;
 
 [[15]]
-[1] &quot;Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!\n&quot;
-attr(,&quot;class&quot;)
-[1] &quot;try-error&quot;
-attr(,&quot;condition&quot;)
-&lt;simpleError in doit(popn): Couldn&#39;t calculate mean: too few unique values!&gt;
+[1] &quot;Mean of this sample was: 0.0139927255534974&quot;
 </pre></div>
 </div>
 </div>
@@ -5030,17 +5054,21 @@ attr(,&quot;condition&quot;)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Mean of this sample was: 0.0124128789001811&quot;
-[1] &quot;Mean of this sample was: 0.166903943403399&quot;
-[1] &quot;Mean of this sample was: -0.0643309317021095&quot;
-[1] &quot;Mean of this sample was: 0.135679158555082&quot;
-[1] &quot;Mean of this sample was: 0.075244209895303&quot;
-[1] &quot;Mean of this sample was: 0.0536254225839131&quot;
-[1] &quot;Mean of this sample was: -0.00387520078585474&quot;
-[1] &quot;Mean of this sample was: 0.106474217928657&quot;
-[1] &quot;Mean of this sample was: -0.317879300279975&quot;
-[1] &quot;Mean of this sample was: 0.109095413835189&quot;
-[1] &quot;Mean of this sample was: 0.123860128716328&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: 0.279031226403986&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: -0.0219088573358361&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: 0.109154079397255&quot;
+[1] &quot;Mean of this sample was: 0.259256957371067&quot;
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+Error in doit(popn) : Couldn&#39;t calculate mean: too few unique values!
+[1] &quot;Mean of this sample was: 0.211124799765074&quot;
+[1] &quot;Mean of this sample was: -0.015175901793773&quot;
+[1] &quot;Mean of this sample was: 0.262309113486109&quot;
 </pre></div>
 </div>
 </div>
@@ -5048,7 +5076,7 @@ attr(,&quot;condition&quot;)
 <p>Now have a look at the new <code class="docutils literal notranslate"><span class="pre">result</span></code>; it will have similar content as the one you got from using <code class="docutils literal notranslate"><span class="pre">lapply</span></code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Also check out <code class="docutils literal notranslate"><span class="pre">tryCatch</span></code> as an alternative to <code class="docutils literal notranslate"><span class="pre">try</span></code>.</p>
+<p>Also check out <code class="docutils literal notranslate"><span class="pre">tryCatch()</span></code> as an alternative to <code class="docutils literal notranslate"><span class="pre">try()</span></code>.</p>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Type the above blocks of code illustrating <code class="docutils literal notranslate"><span class="pre">try</span></code> into a script file called <code class="docutils literal notranslate"><span class="pre">try.R</span></code> and save in <code class="docutils literal notranslate"><span class="pre">code</span></code>. The script, when <code class="docutils literal notranslate"><span class="pre">source</span></code>d, should run without errors (that is, don’t run the sampling function without <code class="docutils literal notranslate"><span class="pre">try</span></code>!).</p>
 </div>
@@ -5070,6 +5098,7 @@ attr(,&quot;condition&quot;)
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install r-cran-tidyverse
 </pre></div>
 </div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go ahead and install <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> if you don’t have it yet. We will be using it <a class="reference internal" href="08-Data_R.html"><span class="doc std std-doc">soon</span></a>!</p>
 <div class="section" id="building-your-own">
 <h3>Building your own<a class="headerlink" href="#building-your-own" title="Permalink to this headline">¶</a></h3>
 <p>You can combine your code, data sets and documentation to make a <em>bona fide</em> R package. You may wish to do this for particularly large projects that you think will be useful for others. Read the <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html"><em>Writing R Extensions</em></a> manual and see <em>package.skeleton</em> to get started.</p>
@@ -5081,15 +5110,20 @@ attr(,&quot;condition&quot;)
 <div class="section" id="autocorrelation-in-weather">
 <h3>Autocorrelation in weather<a class="headerlink" href="#autocorrelation-in-weather" title="Permalink to this headline">¶</a></h3>
 <p>This Practical assumes you know about correlation coefficients and p-values.</p>
-<p>Your goal is to write an R script that will help answer the question: <em>Are temperatures of one year significantly correlated with the next year (successive years), across years in a given location</em>? For this, you need to calculate the correlation between <span class="math notranslate nohighlight">\(n-1\)</span> pairs of years, where <span class="math notranslate nohighlight">\(n\)</span> is the total number of years. However, you can’t use the standard p-value calculated for a correlation coefficient, because measurements of climatic variables in successive time-points in a time series (successive seconds, minutes, hours, months, years, etc.) are <em>not independent</em>. The general guidelines are:
-* Make a new script named <code class="docutils literal notranslate"> <span class="pre">TAutoCorr.R</span></code>, and save in <code class="docutils literal notranslate"> <span class="pre">code</span></code>directory
-* At the start of the script, load and examine and plot <code class="docutils literal notranslate"><span class="pre">KeyWestAnnualMeanTemperature.Rdata</span></code>, using <code class="docutils literal notranslate"> <span class="pre">load()</span></code>. This is the temperature in Key West, Florida for the 20th century.
-* Now extend the script to:
-* Compute the appropriate correlation coefficient between successive years and store it (look at the help file for <code class="docutils literal notranslate"><span class="pre">cor()</span></code>
-* Repeat this calculation 10000 times by – randomly permuting the time series, and then recalculating the correlation coefficient for each randomly permuted year sequence and storing it.
-<em>Hint</em>: you can use the <code class="docutils literal notranslate"><span class="pre">sample</span></code> function that we learned about). Read the help file for this function and experiment with it.
-*  Then calculate what fraction of the correlation coefficients from the previous step were greater than that from step 1 (this is your approximate p-value).
-* <em>How do you interpret these results? Why?</em> Present your results and their interpretation in a pdf document written in <span class="math notranslate nohighlight">\(\LaTeX\)</span> (please include the the document’s source code as well).</p>
+<p>Your goal is to write an R script that will help answer the question: <em>Are temperatures of one year significantly correlated with the next year (successive years), across years in a given location</em>? For this, you need to calculate the correlation between <span class="math notranslate nohighlight">\(n-1\)</span> pairs of years, where <span class="math notranslate nohighlight">\(n\)</span> is the total number of years. However, you can’t use the standard p-value calculated for a correlation coefficient, because measurements of climatic variables in successive time-points in a time series (successive seconds, minutes, hours, months, years, etc.) are <em>not independent</em>. The general guidelines are:</p>
+<ul class="simple">
+<li><p>Make a new script named <code class="docutils literal notranslate"> <span class="pre">TAutoCorr.R</span></code>, and save in <code class="docutils literal notranslate"> <span class="pre">code</span></code>directory</p></li>
+<li><p>At the start of the script, load and examine and plot <code class="docutils literal notranslate"><span class="pre">KeyWestAnnualMeanTemperature.Rdata</span></code>, using <code class="docutils literal notranslate"> <span class="pre">load()</span></code>. This is the temperature in Key West, Florida for the 20th century.</p></li>
+<li><p>Now extend the script to:</p>
+<ul>
+<li><p>Compute the appropriate correlation coefficient between successive years and store it (look at the help file for <code class="docutils literal notranslate"><span class="pre">cor()</span></code></p></li>
+<li><p>Repeat this calculation 10000 times by – randomly permuting the time series, and then recalculating the correlation coefficient for each randomly permuted year sequence and storing it.
+<em>Hint</em>: you can use the <code class="docutils literal notranslate"><span class="pre">sample</span></code> function that we learned about). Read the help file for this function and experiment with it.</p></li>
+<li><p>Then calculate what fraction of the correlation coefficients from the previous step were greater than that from step 1 (this is your approximate p-value).</p></li>
+</ul>
+</li>
+<li><p><em>How do you interpret these results? Why?</em> Present your results and their interpretation in a pdf document written in <span class="math notranslate nohighlight">\(\LaTeX\)</span> (please include the the document’s source code as well).</p></li>
+</ul>
 </div>
 <div class="section" id="groupwork-practical-on-tree-heights">
 <h3>Groupwork Practical on Tree Heights<a class="headerlink" href="#groupwork-practical-on-tree-heights" title="Permalink to this headline">¶</a></h3>
@@ -5129,9 +5163,11 @@ attr(,&quot;condition&quot;)
 <div class="section" id="id3">
 <h3>Debugging<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://adv-r.hadley.nz/debugging.html">Debugging in R</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">testthat</span></code>(https://testthat.r-lib.org/): Unit Testing for R by Hadley Wickham (also developer of the <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> package, including <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>).</p></li>
+<li><p><a class="reference external" href="https://adv-r.hadley.nz/debugging.html">Notes on debugging in R by Wickham</a></p></li>
+<li><p>A good <a class="reference external" href="https://data-flair.training/blogs/debugging-in-r-programming">overview of debugging methods in R with examples</a></p></li>
 <li><p><a class="reference external" href="http://www.biostat.jhsph.edu/~rpeng/docs/R-debug-tools.pdf">An introduction to the Interactive Debugging Tools in R</a> by Roger D Peng.</p></li>
-<li><p>If you are using RStudio, <a class="reference external" href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">see this</a></p></li>
+<li><p>If you are using RStudio, <a class="reference external" href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">see this</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="sweave-and-knitr">

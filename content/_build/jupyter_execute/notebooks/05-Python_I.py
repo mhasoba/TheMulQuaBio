@@ -2560,7 +2560,7 @@ buggyfunc(20)
 # 
 # Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
-# python align_seqs_fasta.py seq1.csv seq2.csv
+# python3 align_seqs_fasta.py seq1.csv seq2.csv
 # ``` 
 # However, it should still run if no inputs were given, using two fasta sequences from the `data` directory as defaults.
 # 
@@ -2574,9 +2574,9 @@ buggyfunc(20)
 #         my_best_align = "." * i + s2
 #         my_best_score = z
 # ```
-# This means when multiple alignments have the same score (highly likely in longer sequences), you lose all the equally good alignments, keeping only the last one. 
+# The `if z > my_best_score` condition means that when a new alignment has the same score as the current one, the current one will be kept and the new one discarded. As a result, multiple alignments with the same score will be lost even if they are all equally good alignments (highly likely in longer sequences), with only the first one retained. 
 # 
-# * Modify the script so that all the equally best alignments are recorded and saved to the `results` directory in an appropriate file format (Hint: recall `pickle`). Call your new script `align_seqs_better.py`.
+# * Modify the script so that all the equally-best alignments are recorded and saved to the `results` directory in an appropriate file format (Hint: recall `pickle`). Call your new script `align_seqs_better.py`.
 # 
 # ### Missing oaks problem
 # 
@@ -2614,6 +2614,8 @@ buggyfunc(20)
 # 
 # ### General
 # 
+# * M. Fowler, Refactoring: improving the design of existing code (2000), Addison-Wesley Professional
+# * R. C. Martin, Clean code, A handbook of agile software craftsmanship (2009), Prentice Hall
 # * Browse the Python [tutorial](https://docs.python.org/3/tutorial)
 # * Shaw, Zed. 2017. Learn Python 3 the Hard Way: A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code. Boston : Addison-Wesley (likely available in your University library)
 # * Python style guide from [the Hitchhiker's Guide to Python](https://docs.python-guide.org/writing/style)

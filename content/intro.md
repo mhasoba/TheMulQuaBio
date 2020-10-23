@@ -7,8 +7,6 @@ Welcome to The Multilingual Quantitative Biologist!
 
 ## About
 
-There are two sections in this Notes: COMPUTING and DATA ANALYSES AND STATISTICS
-
 These notes have emerged from the development of content for modules on
 Biological Computing taught in various past and present courses at the
 Department of Life Sciences, Imperial College London. These courses include Year
