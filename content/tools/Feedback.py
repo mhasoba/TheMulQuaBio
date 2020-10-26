@@ -1,5 +1,5 @@
 """
-	Code to giving automated feedback on computing practical work for TheMulQuaBio
+	Code to give automated feedback on TheMulQuaBio computing practical work.  
 
 	USAGE 
 	
@@ -25,14 +25,13 @@
 					. If used, repo is pulled and contents of feedback
 					directory pushed, nothing else.
 """
-import subprocess, os, csv, argparse, re
+import subprocess, os, csv, argparse, re, time
 
 def run_popen(command, timeout):
 	""" 
 	Runs a sub-program in subprocess.Popen using the given COMMAND and
-	TIMEOUT (seconds). 
+	TIMEOUT (seconds). Requires the `time` module. 
 	"""
-	import time
 
 	start = time.time()
 
@@ -131,7 +130,7 @@ for Stdnt in Stdnts:
 
 		subprocess.check_output(["git","-C", RepoPath,"pull"])
 
-		p, output, err, time = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
+		p, output, err, time_used = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
 
 		Keys = list([row.split(': ')[0] for row in output.splitlines()])
 		Vals = list([row.split(': ')[1] for row in output.splitlines()])
@@ -143,7 +142,7 @@ for Stdnt in Stdnts:
 		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
 		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
 		# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
-		# p, log, err, time = run_popen('git log --format="%s"', timeout)
+		# p, log, err, time_used = run_popen('git log --format="%s"', timeout)
 		# (log, _) = p.communicate()
 		# log = log.strip('\n\x1e').split("\x1e")
 		# log = [row.strip().split("\x1f") for row in log]
@@ -155,17 +154,13 @@ for Stdnt in Stdnts:
 	if not os.path.exists(AzzPath):
 		os.makedirs(AzzPath)
 
-	#~ Open feedback file:
-	azzFileName = args.Week + '_'+'Feedback.txt'
-	azz = open(AzzPath + '/'+ azzFileName,'w+')
-	# if not os.path.exists(AzzPath + '/'+ azzFileName):
-		# azz = open(AzzPath + '/'+ azzFileName,'w+')
-	# else:
-		# print('\nAssesment file for ' + args.Week+  ' already exists, cannot continue! Check and delete existing file and try again.\n\n')
-		# break
-	print('='*70 + '\n' + 'Starting weekly feedback for '+ Stdnt[Hdrs.index('First_name')] + ' ' + Stdnt[Hdrs.index('Second_name')]+ ', ' + args.Week +'\n' + '='*70 + '\n\n')
+	#~ Open feedback log file:
 
-	azz.write('Starting weekly feedback for '+ Stdnt[Hdrs.index('First_name')] + ', ' + args.Week +'\n\n')
+	azzFileName = args.Week + '_' + 'Feedback'+ '_' + time.strftime("%Y%m%d") + '.txt'
+	azz = open(AzzPath + '/'+ azzFileName,'w+')
+	print('='*70 + '\n' + 'Starting code feedback for '+ Stdnt[Hdrs.index('First_name')] + ' ' + Stdnt[Hdrs.index('Second_name')]+ ', ' + args.Week +'\n' + '='*70 + '\n\n')
+
+	azz.write('Starting code feedback for '+ Stdnt[Hdrs.index('First_name')] + ', ' + args.Week +'\n\n')
 	azz.write('Current Points = ' + str(Points) + '\n\n')
 	azz.write('Note that: \n')
 	azz.write('(1) Major sections begin with a double "====" line \n')
@@ -348,7 +343,7 @@ for Stdnt in Stdnts:
 			print('Testing ' + os.path.basename(name) + '...\n\n')
 						
 			if os.path.basename(name).lower().endswith('.sh'):
-				p, output, err, time = run_popen('bash ' + os.path.basename(name), timeout)
+				p, output, err, time_used = run_popen('bash ' + os.path.basename(name), timeout)
 			elif os.path.basename(name).lower().endswith('.py'):
 				azz.write(os.path.basename(name) + ' is a Python script file;\n\nchecking for docstrings...\n\n')
 				with open(os.path.basename(name)) as f:
@@ -377,10 +372,10 @@ for Stdnt in Stdnts:
 
 				azz.write('Current Points = ' + str(Points) + '\n\n')
 
-				p, output, err,	time = run_popen('python3 ' + os.path.basename(name), timeout)
+				p, output, err,	time_used = run_popen('python3 ' + os.path.basename(name), timeout)
 			
 			elif os.path.basename(name).lower().endswith('.r'):
-				p, output, err,	time = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
+				p, output, err,	time_used = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
 			else:
 				os.chdir(scrptPath)
 				continue
@@ -401,7 +396,7 @@ for Stdnt in Stdnts:
 			azz.write('\n' + '*'*70 + '\n')
 			if not err:
 				azz.write('\nCode ran without errors\n\n')
-				azz.write('Time consumed = ' +"{:.5f}".format(time)+ 's\n\n')
+				azz.write('Time consumed = ' +"{:.5f}".format(time_used)+ 's\n\n')
 			else:
 				errors += 1
 				azz.write('\nEncountered error (or warning):\n')

@@ -961,8 +961,8 @@ s.upper().strip() # can perform sequential operations
 
 # Furthermore,
 # 
-# * Use "docstrings" to **document how to use the code**, and **comments to explain why and how the code works**
-# * Naming conventions (bit of a mess, you'll learn as you go!):
+# * Use "docstrings" to document how to use the code, and *comments* to explain why and how the code works (we will learn about docstrings soon, below)
+# * Follow naming conventions, especially:
 #     * `_internal_global_variable` (for use inside module only)
 #     * `a_variable`
 #     * `SOME_CONSTANT`
@@ -1932,6 +1932,11 @@ import boilerplate
 help(boilerplate)
 
 
+# ```{note}
+# **Docstrings vs. Comments**: In short, Docstrings tell the user how to use some Python code, while and Comments explain why and how certain parts of the code work. Thus Docstrings are are enhanced comments that serve as documentation for Python code, including for any functions/modules and classes in it. Comments explain non-obvious portions of the code.
+# ```
+# 
+# 
 # #### Internal Variables
 # 
 # "`__`" signal "internal" variables (never name your variables so!). These are special variables names reserved by python for its own purposes. For more on the usage of underscores in python, [see this](https://www.datacamp.com/community/tutorials/role-underscore-python). 

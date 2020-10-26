@@ -5,16 +5,15 @@
 
 # We have talked a lot about workflows and confronting models with data. It's time to do something concrete with all the techniques you have been learning.
 # 
-# The CMEE Miniproject gives you an opportunity to try the "whole nine yards" of developing and implementing a workflow and delivering a "finished product" — where you ask and answer a scientific question in biology (potentially involving multiple sub-questions/hypotheses). It will give you an opportunity to perform a "dry run" of executing your actual dissertation project, and you may use it to trial some of the techniques and/or explore some of the data/theory you might use in your Dissertation project.
+# The CMEE Miniproject gives you an opportunity to try the "whole nine yards" of developing and implementing a project workflow and delivering a "finished product" — where you ask and answer a scientific question in biology (potentially involving multiple sub-questions/hypotheses). It will give you an opportunity to perform a "dry run" of executing your actual Dissertation project.
 # 
 # ## Objectives
 # 
 # **The general question you will address is:** *What mathematical model best fits an empirical dataset?*
 # 
-# You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but an alternative model to describe an observed phenomenon, as you will have learned in the lectures on model fitting.
+# You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in the model fitting lectures.
 # 
-# The Project 
-# -----------
+# ## The Project 
 # 
 # You will choose a dataset and set of alternative models from the options provided to you.
 # 
@@ -22,11 +21,11 @@
 # 
 # The Miniproject must satisfy the following criteria (and follow the accompanying guidelines):
 # 
-# 1. It should employ all the biological computing tools you have learned so far: shell (bash) scripting, git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., Python vs R) is your choice. This is part of the assessment. 
+# 1. **It employs *as many* of the biological computing tools you have learned so far as necessary**: shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.
 # 
-# 2. *At least* two different models (hypotheses) must be fitted to the data. The models should be fitted and selected using an appropriate method. Specifically, irrespective of the problem/dataset you choose (see below), use Nonlinear Least Squares (NLLS) to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper). You may choose additional means for model comparison/selection beyond these.*
+# 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may Nonlinear Least Squares (NLLS) to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings & Resources section below).*
 # 
-# 3. The project should be fully reproducible. Write a script that "glues" the workflow together and runs it, from data processing to model fitting to plotting (e.g., in R) to compilation of the LaTeX written report (*More detailed instructions on report below*). Look back at the TheMulQuaBio to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in Python. The assessor should be able to run just this script to get everything to work without errors. Use Python or to write this main script. If using bash, call it `run_MiniProject.sh` and if using Python, called it  `run_MiniProject.py`.
+# 3. **The project should be fully reproducible.** Write a script that "glues" the workflow together and runs it, from data processing to model fitting to plotting to compilation of the written report (*More detailed instructions on report below*). refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors. 
 # 
 # *You will be given lectures and practicals on model fitting before you start on your Miniproject.*
 # 
@@ -35,31 +34,29 @@
 # 
 # The report should,
 # 
-# * be written in LaTeX  using the article document class, in 11pt (any font will do, within reason!).
+# * be written in LaTeX using the article document class, in 11pt (any font will do, within reason!).
 # 
 # * be double-spaced, with *continuous* line numbers.
 # 
-# * have a title, author name with affiliation and wordcount (next point) on a separate title page.
+# * have a Title, Author name with Affiliation and Word count on a separate Title page.
 # 
-# * have an introduction with objectives of the study, and appropriate additional sections such as methods, data, results, discussion, etc.
+# * have an Introduction with objectives of the study, and appropriate additional sections such as Methods, Data, Results, Discussion, etc.
 # 
-# * should contain in the *Methods* a sub-section called "Computing tools" which states briefly how each of the three scripting language (bash, R, Python) and what packages within them were used and a justification of why.
+# * should contain in the *Methods* a sub-section called "Computing tools" which states briefly how each of the scripting languages (bash, R, Python) was used and what packages within them were used and a justification of why.
 # 
-# * must contain $\leq$3500 words *excluding the contents of the title page, references, and Figure or Table captions+legends*; there should be a word count at the beginning of the document (typically using the `texcount` package).
+# * must contain $\leq$3500 words *excluding the contents of the title page, references, and Figure or Table captions+legends*. There should be a word count at the beginning of the document (typically using the `texcount` package).
 # 
 # * have references properly cited in text and formatted in a list using bibtex.
 # 
-# For the writeup, you probably should read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
+# For the report, you probably should read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
 # 
-# Submission
-# ----------
+# ## Submission
 # 
-# Add, commit and push all your work to your bitbucket repository using a directory called `MiniProject` at the same level as the Week1, Week2 etc. directories, by the Miniproject deadline given in your course guidebook.
+# Add, commit and push all your work to your bitbucket repository using a directory called `MiniProject` at the same level as the Week1, Week2 etc. directories, by the Miniproject deadline given to you.
 # 
-# At this stage you are not going to be told you how to organize your project — that's part of the marking criteria (see next section).
+# At this stage, you are not going to be told you how to organize your project — that's part of the marking criteria (see next section).
 # 
-# Marking criteria
-# ----------------
+# ## Marking criteria
 # 
 # *Equal weightage will be given to the code+workflow and writeup components — each component will be marked to a max of 100 pts and then rescaled to a single mark / 100 using equal weightage*
 # 
@@ -73,17 +70,16 @@
 # 
 #     * Version of each language used
 # 
-# * A project that runs smoothly, without any errors once the appropriate script (i.e., `run_MiniProject.py` or `run_MiniProject.sh`) is called. 
+# * A project that runs smoothly and efficiently, without any errors once a single script is called. The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`). 
 # 
-# * A report that contains all the components indicated above in "The Report" subsection, with some original thought and synthesis in the **Introduction** and **Discussion** sections.
+# * A report that contains all the components indicated above in "The Report" subsection, with some original thought and synthesis in the *Introduction* and *Discussion* sections.
 # 
 # * Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.
 # 
-# * The marking criteria you may refer to is the [summative marking criteria](./MARKING_CRITERIA.pdf).
+# * The marking criteria you may refer to is the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf).
 # 
 # 
-# The Model Fitting Problems
-# --------------------------
+# ## The Model Fitting Problems
 # 
 # You can pick from one of the following three options. 
 # 
@@ -99,69 +95,69 @@
 # 
 # The dataset is called `ThermRespData.csv`. It contains a subset of the full "BioTraits" database. This subset contains hundreds of "thermal responses" for growth, respiration and photosynthesis rates in plants and bacteria (both aquatic and terrestrial). These data were collected through lab experiments across the world, and compiled by various people over the years. The field names are defined in a file called `BiotraitsTemplateDescription.pdf`, also in the `data` directory. The two main fields of interest are `OriginalTraitValue` (the trait values responding to temperature), and `ConTemp` (the temperature). Individual thermal response curves can be identified by `ID` values --- each `ID` corresponds to one thermal performance curve.
 
-# In[1]:
+# In[2]:
 
 
 # Some imports to explore the datasets in Python
 import pandas as pd
 import scipy as sc
 import matplotlib.pylab as pl
-import seaborn as sns # You might need to install this (e.g., sudo pip install seaborn)
+import seaborn as sns # You might need to install this (e.g., pip install seaborn)
 
 
 # Let's have a look at the data:
 
-# In[54]:
+# In[3]:
 
 
 data = pd.read_csv("../data/ThermRespData.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[55]:
+# In[4]:
 
 
 data.head()
 
 
-# In[56]:
+# In[5]:
 
 
 print(data.columns.values)
 
 
-# In[57]:
+# In[6]:
 
 
 print(data.OriginalTraitUnit.unique()) #units of the response variable 
 
 
-# In[58]:
+# In[7]:
 
 
 print(data.ConTempUnit.unique()) #units of the independent variable 
 
 
-# In[59]:
+# In[8]:
 
 
 print(data.ID.unique()) #units of the independent variable 
 
 
-# In[60]:
+# In[9]:
 
 
 data_subset = data[data['ID']==110]
 data_subset.head()
 
 
-# In[61]:
+# In[11]:
 
 
-sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False) # you may ignore the warning taht appears below
+sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 
 
-# ### The Models
+# #### The Models
 # 
 # *All the following parameters and variables are in SI units*.
 # 
@@ -220,71 +216,71 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False) # y
 # 
 # Note that the cubic model (Equation \ref{eq:cubic}) has the same number of parameters as the the reduced Schoolfield models (eq. \ref{eq:schoolfH} & \ref{eq:schoolfL}). Also, the temperature parameter ($T$) of the cubic model (Equation \ref{eq:cubic}) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.
 # 
-# ## Functional Responses
+# ### Functional Responses
 # 
-# ### The Question 
+# #### The Question 
 # 
 # *How well do different mathematical models, e.g., based upon foraging theory (mechanistic) principles  vs. phenomenological ones, fit to functional responses data across species?*
 # 
 # In ecological parlance, a functional response is the relationship between a consumer's (e.g., predator) biomass consumption rate and abundance of the target resource (e.g., prey). Functional responses arise from fundamental biological and physical constraints on consumer-resource interactions (e.g., Holling 1959, Pawar et al, 2012), and determine the rate of biomass flow between species in ecosystems across the full scale of sizes, from the smallest (e.g., microbes) to the largest (e.g., blue whales). Functional responses also play a key sole in determining the stability (responses to perturbations) of the food webs that underpin ecosystems.
 # 
-# ### The Data
+# #### The Data
 # 
 # The dataset is called `CRat.csv`. It contains measurements of rates of consumption of a single resource (e.g., prey, plants) species' by a consumer species (e.g., predators, grazers). These data were collected through lab and field experiments across the world. The field names are defined in a file called `BiotraitsTemplateDescription.pdf`, also in the `data` directory. The two main fields of interest are `N_TraitValue` (The number of resources consumed per consumer per unit time), and `ResDensity` (the resource abundance). Individual functional response curves can be identified by `ID` values --- each `ID` corresponds to one curve. Or you can reconstruct them as unique combinations of `Citation` (where the functional response dataset came from), `ConTaxa` (consumer species ID), `ResTaxa` (resource species ID).
 
 # Let's have a look at the data:
 
-# In[11]:
+# In[12]:
 
 
 data = pd.read_csv("../data/CRat.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[12]:
+# In[13]:
 
 
 data.head()
 
 
-# In[13]:
+# In[14]:
 
 
 print(data.columns.values)
 
 
-# In[14]:
+# In[15]:
 
 
 print(data.TraitUnit.unique()) #units of the response variable 
 
 
-# In[15]:
+# In[16]:
 
 
 print(data.ResDensityUnit.unique()) #units of the independent variable 
 
 
-# In[16]:
+# In[17]:
 
 
 print(data.ID.unique()) #units of the independent variable 
 
 
-# In[17]:
+# In[18]:
 
 
 data_subset = data[data['ID']==39982]
 data_subset.head()
 
 
-# In[18]:
+# In[19]:
 
 
 sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 
 
-# ### The Models
+# #### The Models
 # 
 # *All the following parameters and variables are in SI units*.
 # 
@@ -328,52 +324,52 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).  
 # 
 # 
-# ## Population Growth
+# ### Population Growth
 # 
-# ### The Question 
+# #### The Question 
 # 
 # *How well do different mathematical models, e.g., based upon population growth (mechanistic) theory  vs. phenomenological ones, fit to functional responses data across species?*
 # 
 # Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase &ndash; the slope of the line gives the maximum growth rate ($r_{max}$). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve. 
 # 
-# ### The Data
+# #### The Data
 # 
 # The dataset is called `LogisticGrowthData.csv`. It contains measurements of change in biomass or number of cells of microbes over time. These data were collected through lab experiments across the world. The field names are defined in a file called  `LogisticGrowthMetaData.csv`, also in the `data` directory. The two main fields of interest are `PopBio` (abundance), and `Time`. Single population growth rate curves can be identified by as unique  temperature-species-medium-citation-replicate combinations (concatenate them to get a new string variable that identifies unique growth curves).
 # 
 # Let's have a look at the data:
 
-# In[19]:
+# In[20]:
 
 
 data = pd.read_csv("../data/LogisticGrowthData.csv")
 print("Loaded {} columns.".format(len(data.columns.values)))
 
 
-# In[22]:
+# In[21]:
 
 
 print(data.columns.values)
 
 
-# In[20]:
+# In[22]:
 
 
 pd.read_csv("../data/LogisticGrowthMetaData.csv")
 
 
-# In[21]:
+# In[23]:
 
 
 data.head()
 
 
-# In[23]:
+# In[24]:
 
 
 print(data.PopBio_units.unique()) #units of the response variable 
 
 
-# In[24]:
+# In[25]:
 
 
 print(data.Time_units.unique()) #units of the independent variable 
@@ -381,7 +377,7 @@ print(data.Time_units.unique()) #units of the independent variable
 
 # Unlike the previous two datasets there are no ID coulmns, so you will have to  infer single growth curves by combining `Species`, `Medium`, `Temp` and `Citation` columns (each species-medium-citation combination is unique):
 
-# In[44]:
+# In[26]:
 
 
 data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium + "_" + data.Citation)
@@ -389,7 +385,7 @@ data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium
 
 # Note that the `map()` method coverts temperature values to string (`str`) for concatenation.
 
-# In[46]:
+# In[27]:
 
 
 print(data.ID.unique()) #units of the independent variable 
@@ -397,20 +393,20 @@ print(data.ID.unique()) #units of the independent variable
 
 # These are rather ungainly IDs, so you might want to replace them with numbers!
 
-# In[47]:
+# In[28]:
 
 
 data_subset = data[data['ID']=='Chryseobacterium.balustinum_5_TSB_Bae, Y.M., Zheng, L., Hyun, J.E., Jung, K.S., Heu, S. and Lee, S.Y., 2014. Growth characteristics and biofilm formation of various spoilage bacteria isolated from fresh produce. Journal of food science, 79(10), pp.M2072-M2080.']
 data_subset.head()
 
 
-# In[49]:
+# In[29]:
 
 
 sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give warning - you can ignore it
 
 
-# ### The Models
+# #### The Models
 # 
 # Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the "death phase" of population growth).For mechanistic models of population, growth, have a look at the Model fitting notebook's [section on this](./Appendix-ModelFitting.ipynb#Population-growth-rate-example).
 # 
@@ -468,6 +464,8 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # 
 # * Exports the results to a csv that the [final plotting script](#Final-plotting-script) can read.
 # 
+# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.*
+# 
 # #### Obtaining starting values 
 # 
 # The main challenge for NLLS fitting is finding starting values. Ideally, you should determine starting values specific to each dataset (e.g., single thermal performance, functional response, or population growth rate curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. For example, in the Gompertz population growth rate model(eq. \ref{eq:Gompertz}), your starting values generator would essentially be an algorithm which, for each dataset,   
@@ -505,9 +503,7 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # 
 # * Figure out, using a minimal example (say, with one, "nice-looking" thermal performance, functional response, or population growth curve/dataset) to see how the NLLS fitting package and its commands work. This is your minimal example
 # 
-# * next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
-# 
-# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.*
+# * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
 
 # ## Readings
 # 
