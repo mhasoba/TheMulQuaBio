@@ -1,33 +1,33 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # The Computing Miniproject  <a name="Apx:Miniproj"></a>
+# # The Computing Miniproject
 
-# We have talked a lot about workflows and confronting models with data. It's time to do something concrete with all the techniques you have been learning.
+# It's time to do something concrete with all the computational biology techniques you have been learning.
 # 
-# The CMEE Miniproject gives you an opportunity to try the "whole nine yards" of developing and implementing a project workflow and delivering a "finished product" — where you ask and answer a scientific question in biology (potentially involving multiple sub-questions/hypotheses). It will give you an opportunity to perform a "dry run" of executing your actual Dissertation project.
+# The computing Miniproject gives you an opportunity to try the "whole nine yards" of *asking and answering* a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a **fully reproducible way**. It will in essence give you an opportunity to perform a useful "dry run" of executing your actual Dissertation project.
 # 
 # ## Objectives
 # 
-# **The general question you will address is:** *What mathematical model best fits an empirical dataset?*
+# **The general question you will address is:** *What mathematical models best fit an empirical dataset?*
 # 
 # You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in the model fitting lectures.
 # 
 # ## The Project 
 # 
-# You will choose a dataset and set of alternative models from the options provided to you.
-# 
-# *Please read the papers in the [Readings](#Readings) section* — these will help orient you in the right direction for tackling your miniproject.
+# From the options provided to you (below), you will choose an empirical dataset, and a set of alternative models to fit to the data in that dataset.
 # 
 # The Miniproject must satisfy the following criteria (and follow the accompanying guidelines):
 # 
 # 1. **It employs *as many* of the biological computing tools you have learned so far as necessary**: shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.
 # 
-# 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may Nonlinear Least Squares (NLLS) to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings & Resources section below).*
+# 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings & Resources section below).*
 # 
-# 3. **The project should be fully reproducible.** Write a script that "glues" the workflow together and runs it, from data processing to model fitting to plotting to compilation of the written report (*More detailed instructions on report below*). refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors. 
+# 3. **The project should be fully reproducible.** You will write a script that "glues" the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (*More detailed instructions on report below*). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors. 
 # 
 # *You will be given lectures and practicals on model fitting before you start on your Miniproject.*
+# 
+# *Please read the papers in the **Readings and Resources** section below* — these will help orient you in the right direction for tackling your Miniproject.
 # 
 # 
 # ## The Report
@@ -36,19 +36,19 @@
 # 
 # * be written in LaTeX using the article document class, in 11pt (any font will do, within reason!).
 # 
-# * be double-spaced, with *continuous* line numbers.
+# * be 1.5-spaced, with *continuous* line numbers.
 # 
-# * have a Title, Author name with Affiliation and Word count on a separate Title page.
+# * have a Title, Author name with Affiliation and Word count on a *separate Title page*.
 # 
 # * have an Introduction with objectives of the study, and appropriate additional sections such as Methods, Data, Results, Discussion, etc.
 # 
-# * should contain in the *Methods* a sub-section called "Computing tools" which states briefly how each of the scripting languages (bash, R, Python) was used and what packages within them were used and a justification of why.
+# * contain in the *Methods* a sub-section called "Computing tools" which states briefly how each of the scripting languages (bash, R, Python) was used and what packages within them were used and a justification of why.
 # 
-# * must contain $\leq$3500 words *excluding the contents of the title page, references, and Figure or Table captions+legends*. There should be a word count at the beginning of the document (typically using the `texcount` package).
+# * have References properly cited in text and formatted in a list using bibtex.
 # 
-# * have references properly cited in text and formatted in a list using bibtex.
+# * contain $\leq$3500 words *excluding the contents of the title page, references, and Figure or Table captions+legends*. There should be a word count at the beginning of the document (typically using the `texcount` package).
 # 
-# For the report, you probably should read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
+# For the Report, you should read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
 # 
 # ## Submission
 # 
@@ -64,158 +64,35 @@
 # 
 # * A well-organized project where code, results, data, etc., are easy to locate, inspect, and use. In the project's README also include:
 # 
+#     * Version of each language used
+# 
 #     * Any dependencies or special packages the user/marker should be aware of
 # 
 #     * What each package you used is for
 # 
-#     * Version of each language used
-# 
-# * A project that runs smoothly and efficiently, without any errors once a single script is called. The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`). 
+# * A project that runs smoothly and efficiently, without any errors once a single script is called. The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`).
 # 
 # * A report that contains all the components indicated above in "The Report" subsection, with some original thought and synthesis in the *Introduction* and *Discussion* sections.
 # 
 # * Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.
 # 
 # * The marking criteria you may refer to is the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf).
-# 
-# 
-# ## The Model Fitting Problems
-# 
-# You can pick from one of the following three options. 
-# 
-# ### Thermal Performance Curves
-# 
-# #### The Question 
-# 
-# *How well do different mathematical models, e.g., based upon biochemical (mechanistic) principles  vs. phenomenological ones, fit to the thermal responses of metabolic traits?*
-# 
-# This is currently a "hot" (no pun intended!) topic in biology. On the *ecological side*, because the temperature-dependence of metabolic rate sets the rate of intrinsic $r_\text{max}$ (papers by Savage et al., Brown et al.) as well as interactions between species, it has a strong effect on population dynamics. In this context, note that 99.9% of life on earth is ectothermic! On the *evolutionary side*, the temperature-dependence of fitness and species interactions also means that warmer environments may have stronger rates of evolution. This may be compounded by the fact that mutation rates may also increase with temperature (papers by Gillooly et al.).
-# 
-# #### The Data
-# 
-# The dataset is called `ThermRespData.csv`. It contains a subset of the full "BioTraits" database. This subset contains hundreds of "thermal responses" for growth, respiration and photosynthesis rates in plants and bacteria (both aquatic and terrestrial). These data were collected through lab experiments across the world, and compiled by various people over the years. The field names are defined in a file called `BiotraitsTemplateDescription.pdf`, also in the `data` directory. The two main fields of interest are `OriginalTraitValue` (the trait values responding to temperature), and `ConTemp` (the temperature). Individual thermal response curves can be identified by `ID` values --- each `ID` corresponds to one thermal performance curve.
 
-# In[2]:
+# ## The Dataset and Model Options
+# 
+# You can pick from one of the following three sets of options. 
+# 
+# First, let's load some packages to explore the data sets in Python: 
+
+# In[1]:
 
 
-# Some imports to explore the datasets in Python
 import pandas as pd
 import scipy as sc
 import matplotlib.pylab as pl
 import seaborn as sns # You might need to install this (e.g., pip install seaborn)
 
 
-# Let's have a look at the data:
-
-# In[3]:
-
-
-data = pd.read_csv("../data/ThermRespData.csv")
-print("Loaded {} columns.".format(len(data.columns.values)))
-
-
-# In[4]:
-
-
-data.head()
-
-
-# In[5]:
-
-
-print(data.columns.values)
-
-
-# In[6]:
-
-
-print(data.OriginalTraitUnit.unique()) #units of the response variable 
-
-
-# In[7]:
-
-
-print(data.ConTempUnit.unique()) #units of the independent variable 
-
-
-# In[8]:
-
-
-print(data.ID.unique()) #units of the independent variable 
-
-
-# In[9]:
-
-
-data_subset = data[data['ID']==110]
-data_subset.head()
-
-
-# In[11]:
-
-
-sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
-
-
-# #### The Models
-# 
-# *All the following parameters and variables are in SI units*.
-# 
-# There are multiple models that might best describe these data. The simplest are the general quadratic and cubic polynomial models:
-# 
-# $$\label{eq:quad}
-#     B = B_0 + B_1 x + B_2 x^2
-# $$
-# 
-# 
-# $$\label{eq:cubic}
-#     B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
-# $$
-# 
-# These are phenomenological models, with the parameters $B_0$, $B_1$, $B_2$ and $B_3$ lacking any mechanistic interpretation. $x$ is the independent variable (in this case Temperature, $T$) 
-# 
-# Another phenomenological model option is the Briere model:
-# 
-# $$B = B_0 T (T-T_0) \sqrt{T_m-T}$$
-# 
-# Where $T$ is temperature, $T_0$ and $T_m$ are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and $B_0$ is a normalization constant.  
-# 
-# In contrast, the Schoolfield model (Schoolfield et al 1981) is a mechanistic option that is based upon thermodynamics and enzyme kinetics:
-# 
-# $$\label{eq:schoolf}
-#     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-#     { 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} + 
-#     e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-# $$
-# 
-# *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings](#Readings)). You may choose additional models listed in that paper for comparison, if you want.
-# 
-# Here, $k$ is the Boltzmann constant ($8.617 \times 10^{-5}$ eV $\cdot$ K$^{-1}$), $B$ the value of the trait at a given temperature $T$ (K) (K = $^\circ$C + 273.15), while $B_0$ is the trait value at 283.15 K (10$^\circ$C) which stands for the value of the growth rate at low temperature and controls the vertical offset of the curve. $E_l$ is the enzyme's low-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very low temperatures, and $T_l$ is the at which the enzyme is 50% low-temperature deactivated. $E_h$ is the
-# enzyme's high-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very high temperatures, and $T_h$ is the at which the enzyme is 50% high-temperature deactivated. $E$ is the activation energy (eV) which controls the rise of the curve up to the peak in the "normal operating range" for the enzyme (below the peak of the curve and above $T_h$).
-# 
-# ---
-# ![image](./graphics/SchoolfEx.png)
-# <small> <center>Example of the Sharpe-Schoolfield eqn, that is,  \ref{eq:quad} and \ref{eq:cubic}, . \ref{eq:schoolf}) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance. 
-#     </center> </small>
-# 
-# ---
-# 
-# In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.
-# 
-# $$\label{eq:schoolfH}
-#       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-#     { 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-# $$
-# 
-# In other cases, a different simplified Schoolfield model would be more appropriate, because high temperature inactivation was not detectable in the data because measurements were not made at sufficiently high temperatures:
-# 
-# $$\label{eq:schoolfL}
-#       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-#     { 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
-# $$
-# 
-# Note that the cubic model (Equation \ref{eq:cubic}) has the same number of parameters as the the reduced Schoolfield models (eq. \ref{eq:schoolfH} & \ref{eq:schoolfL}). Also, the temperature parameter ($T$) of the cubic model (Equation \ref{eq:cubic}) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.
-# 
 # ### Functional Responses
 # 
 # #### The Question 
@@ -227,7 +104,7 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # #### The Data
 # 
 # The dataset is called `CRat.csv`. It contains measurements of rates of consumption of a single resource (e.g., prey, plants) species' by a consumer species (e.g., predators, grazers). These data were collected through lab and field experiments across the world. The field names are defined in a file called `BiotraitsTemplateDescription.pdf`, also in the `data` directory. The two main fields of interest are `N_TraitValue` (The number of resources consumed per consumer per unit time), and `ResDensity` (the resource abundance). Individual functional response curves can be identified by `ID` values --- each `ID` corresponds to one curve. Or you can reconstruct them as unique combinations of `Citation` (where the functional response dataset came from), `ConTaxa` (consumer species ID), `ResTaxa` (resource species ID).
-
+# 
 # Let's have a look at the data:
 
 # In[12]:
@@ -419,19 +296,141 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # (See the [Model fitting notebook](./20-ModelFitting.ipynb) for more information)
 # 
 # ---
+
+# ### Thermal Performance Curves
+# 
+# #### The Question 
+# 
+# *How well do different mathematical models, e.g., based upon biochemical (mechanistic) principles  vs. phenomenological ones, fit to the thermal responses of metabolic traits?*
+# 
+# This is currently a "hot" (no pun intended!) topic in biology. On the *ecological side*, because the temperature-dependence of metabolic rate sets the rate of intrinsic $r_\text{max}$ (papers by Savage et al., Brown et al.) as well as interactions between species, it has a strong effect on population dynamics. In this context, note that 99.9% of life on earth is ectothermic! On the *evolutionary side*, the temperature-dependence of fitness and species interactions also means that warmer environments may have stronger rates of evolution. This may be compounded by the fact that mutation rates may also increase with temperature (papers by Gillooly et al.).
+# 
+# #### The Data
+# 
+# The dataset is called `ThermRespData.csv`. It contains a subset of the full "BioTraits" database. This subset contains hundreds of "thermal responses" for growth, respiration and photosynthesis rates in plants and bacteria (both aquatic and terrestrial). These data were collected through lab experiments across the world, and compiled by various people over the years. The field names are defined in a file called `BiotraitsTemplateDescription.pdf`, also in the `data` directory. The two main fields of interest are `OriginalTraitValue` (the trait values responding to temperature), and `ConTemp` (the temperature). Individual thermal response curves can be identified by `ID` values --- each `ID` corresponds to one thermal performance curve.
+# 
+# Let's have a look at the data:
+
+# In[3]:
+
+
+data = pd.read_csv("../data/ThermRespData.csv")
+print("Loaded {} columns.".format(len(data.columns.values)))
+
+
+# In[4]:
+
+
+data.head()
+
+
+# In[5]:
+
+
+print(data.columns.values)
+
+
+# In[6]:
+
+
+print(data.OriginalTraitUnit.unique()) #units of the response variable 
+
+
+# In[7]:
+
+
+print(data.ConTempUnit.unique()) #units of the independent variable 
+
+
+# In[8]:
+
+
+print(data.ID.unique()) #units of the independent variable 
+
+
+# In[9]:
+
+
+data_subset = data[data['ID']==110]
+data_subset.head()
+
+
+# In[11]:
+
+
+sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
+
+
+# #### The Models
+# 
+# *All the following parameters and variables are in SI units*.
+# 
+# There are multiple models that might best describe these data. The simplest are the general quadratic and cubic polynomial models:
+# 
+# $$\label{eq:quad}
+#     B = B_0 + B_1 x + B_2 x^2
+# $$
 # 
 # 
+# $$\label{eq:cubic}
+#     B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
+# $$
+# 
+# These are phenomenological models, with the parameters $B_0$, $B_1$, $B_2$ and $B_3$ lacking any mechanistic interpretation. $x$ is the independent variable (in this case Temperature, $T$) 
+# 
+# Another phenomenological model option is the Briere model:
+# 
+# $$B = B_0 T (T-T_0) \sqrt{T_m-T}$$
+# 
+# Where $T$ is temperature, $T_0$ and $T_m$ are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and $B_0$ is a normalization constant.  
+# 
+# In contrast, the Schoolfield model (Schoolfield et al 1981) is a mechanistic option that is based upon thermodynamics and enzyme kinetics:
+# 
+# $$\label{eq:schoolf}
+#     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+#     { 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} + 
+#     e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
+# $$
+# 
+# *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings](#Readings)). You may choose additional models listed in that paper for comparison, if you want.
+# 
+# Here, $k$ is the Boltzmann constant ($8.617 \times 10^{-5}$ eV $\cdot$ K$^{-1}$), $B$ the value of the trait at a given temperature $T$ (K) (K = $^\circ$C + 273.15), while $B_0$ is the trait value at 283.15 K (10$^\circ$C) which stands for the value of the growth rate at low temperature and controls the vertical offset of the curve. $E_l$ is the enzyme's low-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very low temperatures, and $T_l$ is the at which the enzyme is 50% low-temperature deactivated. $E_h$ is the
+# enzyme's high-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very high temperatures, and $T_h$ is the at which the enzyme is 50% high-temperature deactivated. $E$ is the activation energy (eV) which controls the rise of the curve up to the peak in the "normal operating range" for the enzyme (below the peak of the curve and above $T_h$).
+# 
+# ---
+# ![image](./graphics/SchoolfEx.png)
+# <small> <center>Example of the Sharpe-Schoolfield eqn, that is,  \ref{eq:quad} and \ref{eq:cubic}, . \ref{eq:schoolf}) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance. 
+#     </center> </small>
+# 
+# ---
+# 
+# In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.
+# 
+# $$\label{eq:schoolfH}
+#       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+#     { 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
+# $$
+# 
+# In other cases, a different simplified Schoolfield model would be more appropriate, because high temperature inactivation was not detectable in the data because measurements were not made at sufficiently high temperatures:
+# 
+# $$\label{eq:schoolfL}
+#       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+#     { 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
+# $$
+# 
+# Note that the cubic model (Equation \ref{eq:cubic}) has the same number of parameters as the the reduced Schoolfield models (eq. \ref{eq:schoolfH} & \ref{eq:schoolfL}). Also, the temperature parameter ($T$) of the cubic model (Equation \ref{eq:cubic}) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.
+
 # ## Additional models and questions you can tackle
 # 
-# In all three options above, you may try to tackle fitting to additional models you find in the literature. [Some readings](#Readings) have been provided for each of the three data types. In addtion, you may wish to tackle some other hypotheses or explore patterns by considering additional covariates. For example, 
-# 
-# *Do different models fit different types of thermal performance curves (e.g., Photosynthesis vs Respiration)?* 
+# In all three options above, you may try to tackle fitting to additional models you find in the literature. Some Readings have been provided for each of the three data types below. You may choose to tackle some other hypotheses or explore patterns by considering additional covariates. For example, 
 # 
 # *Do different taxa show different functional responses?*
 # 
 # *Does temperature or taxon identity affect which population growth rate model fits best?*
 # 
-# You may also want to revisit the results of another paper that has done comparisons of the models you have chosen with your new dataset. 
+# *Do different models fit different types of thermal performance curves (e.g., Photosynthesis vs Respiration)?* 
+# 
+# You may also choose to revisit the results of another paper that has done comparisons of the models you have chosen with your new dataset.
 
 # ## Suggested Workflow
 # 
@@ -439,55 +438,77 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # 
 # ### Data preparation script 
 # 
-# First, a script that imports the data and prepares it for NLLS fitting. This may be in Python or R, and will typically have the following features:
+# First, a script that imports the data and prepares it for Model fitting. This may be in Python or R, and will typically have the following features:
 # 
 # * Creates unique ids so that you can identify unique datasets (e.g., single thermal responses or functional responses). *This may not always be necessary because your data might already contain a field that delineates single curves (e.g., an `ID` field/column)* 
-# * Filters out datasets with less than $x$ data points, where $x$ is the minimum number of data points needed to fit the models. Note that this step is not necessary because in any case, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes anyway, and you can then filter these datasets *after* the NLLS fitting script (see below) has finished running and you are in the analysis phase.  
 # * Deals with missing, and other problematic data values.
 # * Saves the modified data to one or more csv file(s).
 # 
-# ### NLLS fitting script
 # 
-# A separate script that does the NLLS fitting. For example, it may have the following features: 
+# ### Model fitting script
+# 
+# A separate script that does the Model fitting. For example, it may have the following features: 
 # 
 # * Opens the (new, modified) dataset from previous step.
 # 
-# * Calculates [starting values](more on this [below](#Obtaining-starting-values)). 
-# 
-# * Does the NLLS fitting.
-#     * If you choose Python for this use `lmfit` (look up submodules `minimize`, `Parameters`, `Parameter`, and `report_fit`. *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). Lots if examples of using lmfit online.
-#     * If you choose `R`, examples are [here](Appendix-ModelFitting.ipynb). 
-#     
-# * Uses the `try` construct because not all runs will converge: for Python, see [this](https://docs.python.org/3.6/tutorial/errors.html); for R, [recall this](07-R.ipynb#Errors-and-Debugging). *The more data curves you are able to fit, the better — that is part of the challenge*
+# * Does model fitting
 # 
 # * Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include)
 # 
 # * Exports the results to a csv that the [final plotting script](#Final-plotting-script) can read.
+#  
 # 
-# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.*
+# ```{note}
+# * Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the `try` keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets *after* the Model fitting script has finished running and you are in the Analysis phase.  
+# ```
 # 
-# #### Obtaining starting values 
+# ### Final plotting and analysis script  
 # 
-# The main challenge for NLLS fitting is finding starting values. Ideally, you should determine starting values specific to each dataset (e.g., single thermal performance, functional response, or population growth rate curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. For example, in the Gompertz population growth rate model(eq. \ref{eq:Gompertz}), your starting values generator would essentially be an algorithm which, for each dataset,   
+# * Next, write a script that imports the results from the previous step and plots every curve with the two (or more) models (or none, if nothing converges) overlaid. 
+#     * Doing this will help you identify poor fits visually and help you decide whether the model fitting (e.g., using NLLS) can be further optimized. 
+#     * All plots should be saved in a single separate sub-directory. 
+# 
+# * This script will also perform any analyses of the results of the Model fitting, for example to summarize which model(s) fit(s) best, and address any biological questions involving co-variates.    
+# 
+# ### Report compiling script
+# 
+# * Then comes the $\LaTeX$ source code and a (typically, Bash) script that compiles it. 
+# 
+# ### A single script to run them all
+# 
+# * Finally, write a script called `run_MiniProject.py` or `run_MiniProject.sh` respectively, which runs the whole project, right down to compilation of the LaTeX  document.
+# 
+# 
+# ## For NLLS fitting 
+# 
+# **FIRST work through the [example practicals](./20-ModelFitting.ipynb).**
+# 
+# * If you choose `R`, examples are [here](Appendix-ModelFitting.ipynb). 
+# 
+# * If you choose Python for the model fitting component of your workflow, use `lmfit`: 
+#     * Look up submodules `minimize`, `Parameters`, `Parameter`, and `report_fit`. 
+#     * *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . 
+#     * You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). Lots of examples of using lmfit online.
+# 
+# * You will need to write a script that calculates [starting values](more on this below). 
+# 
+# * You will need to use the `try` keyword because not all runs will converge. *The more data curves you are able to fit, the better — that is part of the challenge*
+# 
+# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.* (As you did in the [example practicals](./20-ModelFitting.ipynb))
+# 
+# ### Obtaining starting values 
+# 
+# The main challenge for NLLS fitting is finding starting values for the parameters. 
+# 
+# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
 # *  Calculates a starting value for $r_{max}$ by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)
 # * Calculates a starting value of $t_{lag}$ by intersecting the fitted line with the x (time)-axis 
 # * Calculates a starting value for the asymptote $A$ as the highest data (abundance) value in the dataset. 
 # 
-# In general, a good strategy to optimize fits (and maximize how many dataseta are successfully fitted to a non-linear model) is to not sample starting values from a distribution. For example, you can choose a gaussian (high confidence in mean of parameter) or a uniform distribution (low confidence in mean, high confidence in the range of values that the parameter can take) with the mean being the value you inferred from the data.
+# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to not sample starting values from a distribution. For example, you can choose a gaussian (high confidence in mean of parameter) or a uniform distribution (low confidence in mean, high confidence in the range of values that the parameter can take) with the mean being the value you inferred from the data.
 # 
-# *We suggest you write a separate script/module/function that calculates starting values for the model parameters.*  
+# *We suggest you write a separate script/module/function that calculates starting values for the model parameters.* 
 # 
-# ### Final plotting and analysis script  
-# 
-# Next, you can import the results from the previous step and plot every curve with the two (or more) models (or none, if nothing converges) overlaid. Doing this will help you identify poor fits visually and help you decide whether the previous, NLLS fitting script can be further optimized (e.g., by improving the starting values generator). All plots should be saved in a single separate sub-directory. This script will also perform any analyses of the results of the Model fitting, for example to summarize which model(s) fit(s) best, and address any biological questions involving co-variates.    
-# 
-# ### Report compiling script
-# 
-# Then comes the $\LaTeX$ source code and a (typically, Bash) script that compiles it. 
-# 
-# ### A single script to run them all
-# 
-# Finally, write a Python or Bash script called `run_MiniProject.py` or `run_MiniProject.sh` respectively, which runs the whole project, right down to compilation of the LaTeX  document.
 # 
 # ## Getting started 
 # 
@@ -505,7 +526,7 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # 
 # * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
 
-# ## Readings
+# ## Readings & Resources
 # 
 # Many of these papers are in pdf format in the Readings directory on TheMulQuaBio repository.
 # 
@@ -519,16 +540,6 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # 
 # * Bolker, B. M. et al. (2013) Strategies for fitting nonlinear ecological models in R, AD Model Builder, and BUGS. Methods Ecol. Evol. 4, 501–512.
 #     
-# 
-# ### Thermal Performance Curves
-# 
-# * Schoolfield, R. M., P. J H Sharpe, and C. E. Magnuson. 1981. Non-Linear Regression of Biological Temperature-Dependent Rate Models Based on Absolute Reaction-Rate Theory. Journal of Theoretical Biology 88 (4): 719–31. https://doi.org/10.1016/0022-5193(81)90246-0.
-# 
-# * Zwietering, M. H.,  J. T de Koos, B. E. Hasenack, J. C. de Witt,  and K. van't Riet. 1991. Modeling of bacterial growth as a function of temperature. Appl. Environ. Microbiol. 57, 1094–101.
-# 
-# * Dell, A. I., S. Pawar, and V. M. Savage. 2011. Systematic Variation in the Temperature Dependence of Physiological and Ecological Traits. Proceedings of the National Academy of Sciences of the United States of America 108 (26): 10591–10596. https://doi.org/doi: 10.1073/pnas.1015178108.
-# 
-# * DeLong, J. P., J. P. Gibert, T. M. Luhring, G. Bachman, B. Reed, A. Neyer, and K. L. Montooth. 2017. The Combined Effects of Reactant Kinetics and Enzyme Stability Explain the Temperature Dependence of Metabolic Rates. Ecology and Evolution 7 (11): 3940–50. https://doi.org/10.1002/ece3.2955.
 # 
 # ### Functional responses
 # 
@@ -553,3 +564,13 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # * Grijspeerdt, K. and P. Vanrolleghem. 1999. Estimating the parameters of the Baranyi model for bacterial growth. Food Microbiol. 16, 593–605.
 # 
 # * Micha, P., and M. G. Corradini. 2011. Microbial Growth Curves: What the Models Tell Us and What They Cannot. Critical Reviews in Food Science and Nutrition. https://doi.org/10.1080/10408398.2011.570463.
+# 
+# ### Thermal Performance Curves
+# 
+# * Schoolfield, R. M., P. J H Sharpe, and C. E. Magnuson. 1981. Non-Linear Regression of Biological Temperature-Dependent Rate Models Based on Absolute Reaction-Rate Theory. Journal of Theoretical Biology 88 (4): 719–31. https://doi.org/10.1016/0022-5193(81)90246-0.
+# 
+# * Zwietering, M. H.,  J. T de Koos, B. E. Hasenack, J. C. de Witt,  and K. van't Riet. 1991. Modeling of bacterial growth as a function of temperature. Appl. Environ. Microbiol. 57, 1094–101.
+# 
+# * Dell, A. I., S. Pawar, and V. M. Savage. 2011. Systematic Variation in the Temperature Dependence of Physiological and Ecological Traits. Proceedings of the National Academy of Sciences of the United States of America 108 (26): 10591–10596. https://doi.org/doi: 10.1073/pnas.1015178108.
+# 
+# * DeLong, J. P., J. P. Gibert, T. M. Luhring, G. Bachman, B. Reed, A. Neyer, and K. L. Montooth. 2017. The Combined Effects of Reactant Kinetics and Enzyme Stability Explain the Temperature Dependence of Metabolic Rates. Ecology and Evolution 7 (11): 3940–50. https://doi.org/10.1002/ece3.2955.

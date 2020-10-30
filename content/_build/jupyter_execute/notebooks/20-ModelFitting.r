@@ -1,12 +1,7 @@
-library(repr) ; options(repr.plot.width=4, repr.plot.height= 4) # Change plot sizes (in cm) - THIS BIT OF CODE IS ONLY RELEVANT IF YOU ARE USING A JUPYTER NOTEBOOK -- IGNORE OTHERWISE
-
-# For starters, clear all variables and graphic devices and load necessary packages:
+library(repr) ; options(repr.plot.width=4, repr.plot.height= 4) # Change plot sizes (in cm)
 
 rm(list = ls())
 graphics.off()
-
-library(repr)
-options(repr.plot.width=4, repr.plot.height=4) # Change default plot size; not necessary if you are using Rstudio
 
 require("minpack.lm") # for Levenberg-Marquardt nlls fitting
 
@@ -43,7 +38,7 @@ coef(PowFit)["b"]
 
 Predic2PlotPow <- powMod(Lengths,coef(PowFit)["a"],coef(PowFit)["b"])
 
-plot(Data2Fit$TotalLength, Data2Fit$BodyWeight)
+Exercisesplot(Data2Fit$TotalLength, Data2Fit$BodyWeight)
 lines(Lengths, Predic2PlotPow, col = 'blue', lwd = 2.5)
 
 confint(PowFit)
