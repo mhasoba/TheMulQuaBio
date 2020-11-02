@@ -70,13 +70,14 @@
 # 
 #     * What each package you used is for
 # 
-# * A project that runs smoothly and efficiently, without any errors once a single script is called. The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`).
+# * A project that runs smoothly and efficiently, without any errors once a single script is called. 
+#     * The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`).
 # 
 # * A report that contains all the components indicated above in "The Report" subsection, with some original thought and synthesis in the *Introduction* and *Discussion* sections.
 # 
 # * Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.
 # 
-# * The marking criteria you may refer to is the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf).
+# * The marking criteria you may refer to are the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf).
 
 # ## The Dataset and Model Options
 # 
@@ -92,6 +93,104 @@ import scipy as sc
 import matplotlib.pylab as pl
 import seaborn as sns # You might need to install this (e.g., pip install seaborn)
 
+
+# ### Population Growth
+# 
+# #### The Question 
+# 
+# *How well do different mathematical models, e.g., based upon population growth (mechanistic) theory  vs. phenomenological ones, fit to functional responses data across species?*
+# 
+# Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase &ndash; the slope of the line gives the maximum growth rate ($r_{max}$). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve. 
+# 
+# #### The Data
+# 
+# The dataset is called `LogisticGrowthData.csv`. It contains measurements of change in biomass or number of cells of microbes over time. These data were collected through lab experiments across the world. The field names are defined in a file called  `LogisticGrowthMetaData.csv`, also in the `data` directory. The two main fields of interest are `PopBio` (abundance), and `Time`. Single population growth rate curves can be identified by as unique  temperature-species-medium-citation-replicate combinations (concatenate them to get a new string variable that identifies unique growth curves).
+# 
+# Let's have a look at the data:
+
+# In[20]:
+
+
+data = pd.read_csv("../data/LogisticGrowthData.csv")
+print("Loaded {} columns.".format(len(data.columns.values)))
+
+
+# In[21]:
+
+
+print(data.columns.values)
+
+
+# In[22]:
+
+
+pd.read_csv("../data/LogisticGrowthMetaData.csv")
+
+
+# In[23]:
+
+
+data.head()
+
+
+# In[24]:
+
+
+print(data.PopBio_units.unique()) #units of the response variable 
+
+
+# In[25]:
+
+
+print(data.Time_units.unique()) #units of the independent variable 
+
+
+# Unlike the previous two datasets there are no ID coulmns, so you will have to  infer single growth curves by combining `Species`, `Medium`, `Temp` and `Citation` columns (each species-medium-citation combination is unique):
+
+# In[26]:
+
+
+data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium + "_" + data.Citation)
+
+
+# Note that the `map()` method coverts temperature values to string (`str`) for concatenation.
+
+# In[27]:
+
+
+print(data.ID.unique()) #units of the independent variable 
+
+
+# These are rather ungainly IDs, so you might want to replace them with numbers!
+
+# In[28]:
+
+
+data_subset = data[data['ID']=='Chryseobacterium.balustinum_5_TSB_Bae, Y.M., Zheng, L., Hyun, J.E., Jung, K.S., Heu, S. and Lee, S.Y., 2014. Growth characteristics and biofilm formation of various spoilage bacteria isolated from fresh produce. Journal of food science, 79(10), pp.M2072-M2080.']
+data_subset.head()
+
+
+# In[29]:
+
+
+sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give warning - you can ignore it
+
+
+# #### The Models
+# 
+# Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the "death phase" of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the [Model Fitting Chapter](./20-ModelFitting.ipynb).
+# 
+# ---
+# 
+# ![image](./graphics/Pop_Grow.svg)
+# <small> <center> An example population growth curve dataset to which the modified Gompertz model (Zwietering et. al., 1990) has been fitted.
+# </center></small>
+# 
+# (See the [Model fitting notebook](./20-ModelFitting.ipynb) for more information)
+# 
+# ---
+# 
+# In addtion to the Gompertz model, two growth rate models that also include a lag phase are the Baranyi model (Baranyi, 1993), and the Buchanan model (or three-phase logistic model; Buchanan, 1997). Please see the Readings & Resources section below for the full references of these papers.
 
 # ### Functional Responses
 # 
@@ -198,104 +297,7 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # 
 # ---
 # 
-# There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).  
-# 
-# 
-# ### Population Growth
-# 
-# #### The Question 
-# 
-# *How well do different mathematical models, e.g., based upon population growth (mechanistic) theory  vs. phenomenological ones, fit to functional responses data across species?*
-# 
-# Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase &ndash; the slope of the line gives the maximum growth rate ($r_{max}$). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve. 
-# 
-# #### The Data
-# 
-# The dataset is called `LogisticGrowthData.csv`. It contains measurements of change in biomass or number of cells of microbes over time. These data were collected through lab experiments across the world. The field names are defined in a file called  `LogisticGrowthMetaData.csv`, also in the `data` directory. The two main fields of interest are `PopBio` (abundance), and `Time`. Single population growth rate curves can be identified by as unique  temperature-species-medium-citation-replicate combinations (concatenate them to get a new string variable that identifies unique growth curves).
-# 
-# Let's have a look at the data:
-
-# In[20]:
-
-
-data = pd.read_csv("../data/LogisticGrowthData.csv")
-print("Loaded {} columns.".format(len(data.columns.values)))
-
-
-# In[21]:
-
-
-print(data.columns.values)
-
-
-# In[22]:
-
-
-pd.read_csv("../data/LogisticGrowthMetaData.csv")
-
-
-# In[23]:
-
-
-data.head()
-
-
-# In[24]:
-
-
-print(data.PopBio_units.unique()) #units of the response variable 
-
-
-# In[25]:
-
-
-print(data.Time_units.unique()) #units of the independent variable 
-
-
-# Unlike the previous two datasets there are no ID coulmns, so you will have to  infer single growth curves by combining `Species`, `Medium`, `Temp` and `Citation` columns (each species-medium-citation combination is unique):
-
-# In[26]:
-
-
-data.insert(0, "ID", data.Species + "_" + data.Temp.map(str) + "_" + data.Medium + "_" + data.Citation)
-
-
-# Note that the `map()` method coverts temperature values to string (`str`) for concatenation.
-
-# In[27]:
-
-
-print(data.ID.unique()) #units of the independent variable 
-
-
-# These are rather ungainly IDs, so you might want to replace them with numbers!
-
-# In[28]:
-
-
-data_subset = data[data['ID']=='Chryseobacterium.balustinum_5_TSB_Bae, Y.M., Zheng, L., Hyun, J.E., Jung, K.S., Heu, S. and Lee, S.Y., 2014. Growth characteristics and biofilm formation of various spoilage bacteria isolated from fresh produce. Journal of food science, 79(10), pp.M2072-M2080.']
-data_subset.head()
-
-
-# In[29]:
-
-
-sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give warning - you can ignore it
-
-
-# #### The Models
-# 
-# Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the "death phase" of population growth).For mechanistic models of population, growth, have a look at the Model fitting notebook's [section on this](./Appendix-ModelFitting.ipynb#Population-growth-rate-example).
-# 
-# ---
-# 
-# ![image](./graphics/Pop_Grow.svg)
-# <small> <center> An example population growth curve dataset to which the modified Gompertz model (Zwietering et. al., 1990) has been fitted.
-# </center></small>
-# 
-# (See the [Model fitting notebook](./20-ModelFitting.ipynb) for more information)
-# 
-# ---
+# There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).
 
 # ### Thermal Performance Curves
 # 
@@ -434,11 +436,13 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 
 # ## Suggested Workflow
 # 
-# You will build a workflow that starts with the data and ends with a report written in LaTeX. I suggest the following components and sequence in your workflow (you may choose to do it differently):
+# You will build a workflow that starts with the data and ends with a report written in LaTeX. 
+# 
+# The following components and sequence of your workflow are suggested (you may choose to do it differently).
 # 
 # ### Data preparation script 
 # 
-# First, a script that imports the data and prepares it for Model fitting. This may be in Python or R, and will typically have the following features:
+# First, a script that imports the data and prepares it for model fitting. This may be in Python or R, and will typically have the following features:
 # 
 # * Creates unique ids so that you can identify unique datasets (e.g., single thermal responses or functional responses). *This may not always be necessary because your data might already contain a field that delineates single curves (e.g., an `ID` field/column)* 
 # * Deals with missing, and other problematic data values.
@@ -451,9 +455,9 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # * Opens the (new, modified) dataset from previous step.
 # 
-# * Does model fitting
+# * Does model fitting. Ultimately you need to fit at least one mechanistic/nonlinear model along with one or more linear models, but for building your workflow, just go ahead an fit a couple of different linear models (e.g., linear regression bvs quadratic and / or cubic polynomial).    
 # 
-# * Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include)
+# * Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include).
 # 
 # * Exports the results to a csv that the [final plotting script](#Final-plotting-script) can read.
 #  
@@ -500,14 +504,16 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # The main challenge for NLLS fitting is finding starting values for the parameters. 
 # 
-# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
+# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. 
+# 
+# For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
 # *  Calculates a starting value for $r_{max}$ by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)
 # * Calculates a starting value of $t_{lag}$ by intersecting the fitted line with the x (time)-axis 
 # * Calculates a starting value for the asymptote $A$ as the highest data (abundance) value in the dataset. 
 # 
-# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to not sample starting values from a distribution. For example, you can choose a gaussian (high confidence in mean of parameter) or a uniform distribution (low confidence in mean, high confidence in the range of values that the parameter can take) with the mean being the value you inferred from the data.
+# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to *sample starting values from a distribution*. For example, you can choose a Gaussian (if you have high confidence in mean value of parameter) or a uniform distribution (if you have low confidence in mean, but high confidence in the range of values that the parameter can take), with the mean of the sampling distribution  being the value you inferred from the data.
 # 
-# *We suggest you write a separate script/module/function that calculates starting values for the model parameters.* 
+# *Ideally, you should write a separate script/module/function that calculates starting values for the model parameters.* 
 # 
 # 
 # ## Getting started 
@@ -516,15 +522,15 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # Here are some suggested first steps to get started:
 # 
-# * Explore the data in R or Python (e.g., using Jupyter). 
+# * Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above). 
 # 
 # * Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.
 # 
-# * Explore the models you will be fitting. Basically, be able to plot them. Write them as functions in your Python/R script (you can then re-use these functions in your NLLS fitting script as well). Then do some plotting of the functions (you can suppress or sandbox those code lines for exploratory plotting of the functions in the final product).
+# * Explore the models you will be fitting. Basically, be able to plot them. Write them as functions in your Python/R script (you can then re-use these functions in your NLLS fitting script as well). Then do some plotting of the mathematical functions. You sandbox any code for exploratory plotting of the functions in the final product.
 # 
-# * Figure out, using a minimal example (say, with one, "nice-looking" thermal performance, functional response, or population growth curve/dataset) to see how the NLLS fitting package and its commands work. This is your minimal example
+# * **For NLLS fitting**, figure out, using one, "nice-looking" functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
 # 
-# * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
+#     * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
 
 # ## Readings & Resources
 # 

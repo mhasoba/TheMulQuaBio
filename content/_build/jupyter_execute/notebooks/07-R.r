@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.width=6, repr.plot.height= 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.width=6, repr.plot.height= 6) # Change plot sizes (in cm)
 
 a <- 4  # store 4 as variable a
 

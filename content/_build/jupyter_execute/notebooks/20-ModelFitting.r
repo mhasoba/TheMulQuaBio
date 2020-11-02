@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.width=4, repr.plot.height= 4) # Change plot sizes (in cm)
+library(repr) ; options(repr.plot.width = 5, repr.plot.height = 6) # Change plot sizes (in cm)
 
 rm(list = ls())
 graphics.off()
@@ -26,8 +26,6 @@ geom_point(size = (3),color="red") + theme_bw() +
 labs(y="Body mass (mg)", x = "Wing length (mm)")
 
 PowFit <- nlsLM(BodyWeight ~ powMod(TotalLength, a, b), data = Data2Fit, start = list(a = .1, b = .1))
-
-?nlsLM
 
 summary(PowFit)
 
@@ -142,7 +140,7 @@ N <- c(32500, 33000, 38000, 105000, 445000, 1430000, 3020000, 4720000, 5670000, 
 
 set.seed(1234) # set seed to ensure you always get the same random sequence  
 
-data <- data.frame(t, N + rnorm(length(time),sd=.1)) # add some random error
+data <- data.frame(t, N * (1 + rnorm(length(t), sd = 0.1))) # add some random error
 
 names(data) <- c("Time", "N")
 
@@ -159,7 +157,11 @@ ggplot(data, aes(x = t, y = LogN)) +
     geom_point(size = 3) +
     labs(x = "Time (Hours)", y = "log(cell number)")
 
-(data[data$Time == 10,]$LogN - data[data$Time == 4,]$LogN)/(10-4)
+(data[data$Time == 10,]$LogN - data[data$Time == 6,]$LogN)/(10-6)
+
+diff(data$LogN)
+
+max(diff(data$LogN))/2 # 2 is the difference in any successive pair of timepoints
 
 lm_growth <- lm(LogN ~ Time, data = data[data$Time > 2 & data$Time < 12,])
 summary(lm_growth)
@@ -171,17 +173,19 @@ logistic_model <- function(t, r_max, N_max, N_0){ # The classic logistic equatio
 # first we need some starting parameters for the model
 N_0_start <- min(data$N) # lowest population size
 N_max_start <- max(data$N) # highest population size
-r_max_start <- 0.62 # use our linear estimate from before
+r_max_start <- 0.62 # use our estimate from the OLS fitting from above
 
 fit_logistic <- nlsLM(N ~ logistic_model(t = Time, r_max, N_max, N_0), data,
                       list(r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))
 
 summary(fit_logistic)
 
-# plot it:
 timepoints <- seq(0, 22, 0.1)
 
-logistic_points <- logistic_model(t = timepoints, r_max = coef(fit_logistic)["r_max"], N_max = coef(fit_logistic)["N_max"], N_0 = coef(fit_logistic)["N_0"])
+logistic_points <- logistic_model(t = timepoints, 
+                                  r_max = coef(fit_logistic)["r_max"], 
+                                  N_max = coef(fit_logistic)["N_max"], 
+                                  N_0 = coef(fit_logistic)["N_0"])
 df1 <- data.frame(timepoints, logistic_points)
 df1$model <- "Logistic equation"
 names(df1) <- c("Time", "N", "model")
@@ -198,76 +202,63 @@ ggplot(data, aes(x = Time, y = LogN)) +
   theme(aspect.ratio=1)+ 
   labs(x = "Time", y = "log(Cell number)")
 
+ggplot(data, aes(x = N, y = LogN)) +
+  geom_point(size = 3) +
+  theme(aspect.ratio = 1)+ 
+  labs(x = "N", y = "log(N)")
+
+# gompertz_model <- function(t, r_max, N_max, N_0, t_lag){ # Modified gompertz growth model (Zwietering 1990)
+#     return(log(N_max / N_0) * exp(-exp(r_max * exp(1) * (t_lag - t)/log(N_max / N_0) + 1)))
+# }
+
 gompertz_model <- function(t, r_max, N_max, N_0, t_lag){ # Modified gompertz growth model (Zwietering 1990)
-    return(log(N_max / N_0) * exp(-exp(r_max * exp(1) * (t_lag - t)/log(N_max / N_0) + 1)))
-}
+    return(N_0 + (N_max - N_0) * exp(-exp(r_max * exp(1) * (t_lag - t)/((N_max - N_0) * log(10)) + 1)))
+}           
 
-gompertz_model2 <- function(t, r_max, N_max, N_0, t_lag){ # Modified gompertz growth model (Zwietering 1990)
-  return(log(N_0) + (log(N_max) - log(N_0)) * exp(-exp(r_max * exp(1) * (t_lag - t)/((log(N_max) - log(N_0)) * log(10)) + 1)))
-}
+N_0_start <- min(data$LogN) # lowest population size, note log scale
+N_max_start <- max(data$LogN) # highest population size, note log scale
+r_max_start <- 0.62 # use our previous estimate from the OLS fitting from above
+t_lag_start <- data$Time[which.max(diff(diff(data$LogN)))] # find last timepoint of lag phase
 
-# baranyi_model <- function(t, r_max, N_max, N_0, t_lag){  # Baranyi model (Baranyi 1993)
-#   return(N_max + log10((-1+exp(r_max*t_lag) + exp(r_max*t))/(exp(r_max*t) - 1 + exp(r_max*t_lag) * 10^(N_max-N_0))))
-# }
+diff(data$LogN) # same as what we did above - get differentials
 
-# buchanan_model <- function(t, r_max, N_max, N_0, t_lag){ # Buchanan model - three phase logistic (Buchanan 1997)
-#   return(N_0 + (t >= t_lag) * (t <= (t_lag + (N_max - N_0) * log(10)/r_max)) * r_max * (t - t_lag)/log(10) + (t >= t_lag) * (t > (t_lag + (N_max - N_0) * log(10)/r_max)) * (N_max - N_0))
-# }
+diff(diff(data$LogN)) # get the differentials of the differentials (approx 2nd order derivatives)
 
-N_0_start <- min(data$N)
-N_max_start <- max(data$N)
-t_lag_start <- data$Time[which.max(diff(diff(data$LogN)))]
-r_max_start <- max(diff(data$LogN))/mean(diff(data$Time))
+which.max(diff(diff(data$LogN))) # find the timepoint where this 2nd order derivative really takes off  
 
-fit_logistic <- nlsLM(N ~ logistic_model(t = Time, r_max, N_max, N_0), data,
-                      list(r_max=r_max_start, N_0=N_0_start, N_max=N_max_start))
+data$Time[which.max(diff(diff(data$LogN)))] # This then is a good guess for the last timepoint of the lag phase
 
-fit_gompertz <- nlsLM(LogN ~ gompertz_model2(t = Time, r_max, N_max, N_0, t_lag), data,
+fit_gompertz <- nlsLM(LogN ~ gompertz_model(t = Time, r_max, N_max, N_0, t_lag), data,
                       list(t_lag=t_lag_start, r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))
 
-
-# fit_baranyi <- nlsLM(LogN ~ baranyi_model(t = Time, r_max, N_max, N_0, t_lag), data,
-#               list(t_lag=t_lag_start, r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))
-
-# fit_buchanan <- nlsLM(LogN ~ buchanan_model(t = Time, r_max, N_max, N_0, t_lag), data,
-#                         list(t_lag=t_lag_start, r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))
-
-summary(fit_logistic)
-# summary(fit_baranyi)
-# summary(fit_buchanan)
-# summary(fit_gompertz)
+summary(fit_gompertz)
 
 timepoints <- seq(0, 24, 0.1)
 
-logistic_points <- logistic_model(t = timepoints, r_max = coef(fit_logistic)["r_max"], N_max = coef(fit_logistic)["N_max"], N_0 = coef(fit_logistic)["N_0"])
+logistic_points <- log(logistic_model(t = timepoints, 
+                                      r_max = coef(fit_logistic)["r_max"], 
+                                      N_max = coef(fit_logistic)["N_max"], 
+                                      N_0 = coef(fit_logistic)["N_0"]))
 
-baranyi_points <- baranyi_model(t = timepoints, r_max = coef(fit_baranyi)["r_max"], N_max = coef(fit_baranyi)["N_max"], N_0 = coef(fit_baranyi)["N_0"], t_lag = coef(fit_baranyi)["t_lag"])
-
-buchanan_points <- buchanan_model(t = timepoints, r_max = coef(fit_buchanan)["r_max"], N_max = coef(fit_buchanan)["N_max"], N_0 = coef(fit_buchanan)["N_0"], t_lag = coef(fit_buchanan)["t_lag"])
-
-gompertz_points <- gompertz_model(t = timepoints, r_max = coef(fit_gompertz)["r_max"], N_max = coef(fit_gompertz)["N_max"], N_0 = coef(fit_gompertz)["N_0"], t_lag = coef(fit_gompertz)["t_lag"])
+gompertz_points <- gompertz_model(t = timepoints, 
+                                  r_max = coef(fit_gompertz)["r_max"], 
+                                  N_max = coef(fit_gompertz)["N_max"], 
+                                  N_0 = coef(fit_gompertz)["N_0"], 
+                                  t_lag = coef(fit_gompertz)["t_lag"])
 
 df1 <- data.frame(timepoints, logistic_points)
-df1$model <- "Logistic"
-names(df1) <- c("t", "LogN", "model")
+df1$model <- "Logistic model"
+names(df1) <- c("Time", "LogN", "model")
 
-df2 <- data.frame(timepoints, baranyi_points)
-df2$model <- "Baranyi"
-names(df2) <- c("t", "LogN", "model")
+df2 <- data.frame(timepoints, gompertz_points)
+df2$model <- "Gompertz model"
+names(df2) <- c("Time", "LogN", "model")
 
-df3 <- data.frame(timepoints, buchanan_points)
-df3$model <- "Buchanan"
-names(df3) <- c("t", "LogN", "model")
+model_frame <- rbind(df1, df2)
 
-df4 <- data.frame(timepoints, gompertz_points)
-df4$model <- "Gompertz"
-names(df4) <- c("t", "LogN", "model")
-
-model_frame <- rbind(df1, df2, df3, df4)
-
-ggplot(data, aes(x = t, y = LogN)) +
+ggplot(data, aes(x = Time, y = LogN)) +
   geom_point(size = 3) +
-  geom_line(data = model_frame, aes(x = t, y = LogN, col = model), size = 1) +
+  geom_line(data = model_frame, aes(x = Time, y = LogN, col = model), size = 1) +
     theme_bw() + # make the background white
     theme(aspect.ratio=1)+ # make the plot square 
     labs(x = "Time", y = "log(Abundance)")

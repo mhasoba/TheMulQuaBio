@@ -458,13 +458,18 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#basic-linear-approach">
-       Basic linear approach
+      <a class="reference internal nav-link" href="#basic-approach">
+       Basic approach
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#fitting-non-linear-models-for-growth-trajectories">
-       Fitting non-linear models for growth trajectories
+      <a class="reference internal nav-link" href="#using-ols">
+       Using OLS
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#using-nlls">
+       Using NLLS
       </a>
      </li>
     </ul>
@@ -781,11 +786,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: minpack.lm
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="traits-data-as-an-example">
 <h3>Traits data as an example<a class="headerlink" href="#traits-data-as-an-example" title="Permalink to this headline">¶</a></h3>
@@ -871,7 +871,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_20_1.png" src="../_images/20-ModelFitting_20_1.png" />
+<img alt="../_images/20-ModelFitting_20_0.png" src="../_images/20-ModelFitting_20_0.png" />
 </div>
 </div>
 <p><em>Remember, when you write this analysis into a stand-alone R script, you should put all commands for loading packages (<code class="docutils literal notranslate"><span class="pre">library()</span></code>, <code class="docutils literal notranslate"><span class="pre">require()</span></code>) at the start of the script.</em></p>
@@ -884,12 +884,8 @@ y = a x^b
 </div>
 </div>
 <p>Before proceeding further, have a look at what nlsLM’s arguments are:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">nlsLM</span>
+<div class="highlight-rscript notranslate"><div class="highlight"><pre><span></span>?nlsLM
 </pre></div>
-</div>
-</div>
 </div>
 <p>Note that NLLS fitting requires “starting values” for the parameters (two in this case: <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>).</p>
 <p>Having obtained the fit, we can use <code class="docutils literal notranslate"><span class="pre">summary()</span></code> just like we would for a <code class="docutils literal notranslate"><span class="pre">lm()</span></code> fit object.</p>
@@ -935,7 +931,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><strong>a:</strong> 3.94068491030517e-06</div><div class="output text_html"><strong>b:</strong> 2.58504796772587</div></div>
+<div class="output text_html"><strong>a:</strong> 3.94068495559397e-06</div><div class="output text_html"><strong>b:</strong> 2.58504796499038</div></div>
 </div>
 <p>So, we can do the following:</p>
 <div class="cell docutils container">
@@ -954,7 +950,10 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_35_0.png" src="../_images/20-ModelFitting_35_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in Exercisesplot(Data2Fit$TotalLength, Data2Fit$BodyWeight): could not find function &quot;Exercisesplot&quot;
+Traceback:
+</pre></div>
+</div>
 </div>
 </div>
 <p>We can claculate the confidence intervals on the estimated parameters as we would in OLS fitting used for Linear Models:</p>
@@ -969,7 +968,10 @@ Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>2.5%</th><th scope=col>97.5%</th></tr></thead>
+<caption>A matrix: 2 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>2.5%</th><th scope=col>97.5%</th></tr>
+</thead>
 <tbody>
 	<tr><th scope=row>a</th><td>1.171935e-06</td><td>1.205273e-05</td></tr>
 	<tr><th scope=row>b</th><td>2.318292e+00</td><td>2.872287e+00</td></tr>
@@ -1030,7 +1032,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_45_0.png" src="../_images/20-ModelFitting_45_0.png" />
+<img alt="../_images/20-ModelFitting_44_0.png" src="../_images/20-ModelFitting_44_0.png" />
 </div>
 </div>
 <p>Very similar fits, except that the quadratic model seems to deviate a bit from the data at the lower end of the data range. Let’s do a proper, formal model comparison now to check which model better-fits the data.</p>
@@ -1068,7 +1070,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">-2.1474260812509</div></div>
+<div class="output text_html">-2.14742608125084</div></div>
 </div>
 <p>Of course, as you might have suspected, we can do this using an in-built function in R!</p>
 <div class="cell docutils container">
@@ -1102,7 +1104,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_55_0.png" src="../_images/20-ModelFitting_55_0.png" />
+<img alt="../_images/20-ModelFitting_54_0.png" src="../_images/20-ModelFitting_54_0.png" />
 </div>
 </div>
 <div class="section" id="fitting-the-three-models-using-nlls">
@@ -1187,7 +1189,7 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_64_0.png" src="../_images/20-ModelFitting_64_0.png" />
+<img alt="../_images/20-ModelFitting_63_0.png" src="../_images/20-ModelFitting_63_0.png" />
 </div>
 </div>
 <p>Next examine the residuals between the 3 models:</p>
@@ -1201,7 +1203,7 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_66_0.png" src="../_images/20-ModelFitting_66_0.png" />
+<img alt="../_images/20-ModelFitting_65_0.png" src="../_images/20-ModelFitting_65_0.png" />
 </div>
 </div>
 <p>The residuals for all 3 models still exhibit some patterns. In particular, the data seems to go down near the end of the observation period, but none of these models can capture that behavior.</p>
@@ -1248,7 +1250,7 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_72_0.png" src="../_images/20-ModelFitting_72_0.png" />
+<img alt="../_images/20-ModelFitting_71_0.png" src="../_images/20-ModelFitting_71_0.png" />
 </div>
 </div>
 <div class="section" id="the-tpc-models">
@@ -1305,7 +1307,7 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span> <span class="c1"># set seed to ensure you always get the same random sequence  </span>
 
-<span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">time</span><span class="p">),</span><span class="n">sd</span><span class="o">=</span><span class="n">.</span><span class="m">1</span><span class="p">))</span> <span class="c1"># add some random error</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)))</span> <span class="c1"># add some random error</span>
 
 <span class="nf">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="s">&quot;N&quot;</span><span class="p">)</span>
 
@@ -1315,18 +1317,24 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th scope=col>Time</th><th scope=col>N</th></tr></thead>
+<caption>A data.frame: 6 × 2</caption>
+<thead>
+	<tr><th></th><th scope=col>Time</th><th scope=col>N</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><td> 0        </td><td>  32499.88</td></tr>
-	<tr><td> 2        </td><td>  32999.88</td></tr>
-	<tr><td> 4        </td><td>  37999.88</td></tr>
-	<tr><td> 6        </td><td> 104999.88</td></tr>
-	<tr><td> 8        </td><td> 444999.88</td></tr>
-	<tr><td>10        </td><td>1429999.88</td></tr>
+	<tr><th scope=row>1</th><td> 0</td><td>  28577.04</td></tr>
+	<tr><th scope=row>2</th><td> 2</td><td>  33915.52</td></tr>
+	<tr><th scope=row>3</th><td> 4</td><td>  42120.88</td></tr>
+	<tr><th scope=row>4</th><td> 6</td><td>  80370.17</td></tr>
+	<tr><th scope=row>5</th><td> 8</td><td> 464096.05</td></tr>
+	<tr><th scope=row>6</th><td>10</td><td>1502365.99</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+<p>Note how we added some random “sampling” error using <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">rnorm(length(t),</span> <span class="pre">sd</span> <span class="pre">=</span> <span class="pre">.1))</span></code>.</p>
+<p>This means that we are adding an error at each time point <span class="math notranslate nohighlight">\(t\)</span> (let’s call this fluctuation <span class="math notranslate nohighlight">\(\epsilon_t\)</span>) as a <em>percentage</em> of the population (<span class="math notranslate nohighlight">\(N_t\)</span>) at that time point in a vectorized way. That is, we are performing the operation <span class="math notranslate nohighlight">\(N_t \times (1 + \epsilon_t)\)</span> at all time points at one go. This is important to note because this is often the way that errors appear – proportional to the value being measured.</p>
 <p>Now let’s plot these data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1337,13 +1345,12 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_81_1.png" src="../_images/20-ModelFitting_81_1.png" />
+<img alt="../_images/20-ModelFitting_81_0.png" src="../_images/20-ModelFitting_81_0.png" />
 </div>
 </div>
-<p>We have added a vector of normally distributed errors to emulate random “sampling errors”.</p>
 </div>
-<div class="section" id="basic-linear-approach">
-<h4>Basic linear approach<a class="headerlink" href="#basic-linear-approach" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="basic-approach">
+<h4>Basic approach<a class="headerlink" href="#basic-approach" title="Permalink to this headline">¶</a></h4>
 <p>The size of an exponentially growing population (<span class="math notranslate nohighlight">\(N\)</span>) at any given time (<span class="math notranslate nohighlight">\(t\)</span>) is given by:</p>
 <p><span class="math notranslate nohighlight">\(
 N(t) = N_0 \cdot e^{rt} ,
@@ -1365,21 +1372,50 @@ r = \frac{\log(N(t)) - \log(N_0)}{t} ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_84_1.png" src="../_images/20-ModelFitting_84_1.png" />
+<img alt="../_images/20-ModelFitting_83_0.png" src="../_images/20-ModelFitting_83_0.png" />
 </div>
 </div>
-<p>By eye the logged data looks fairly linear between hours 4 and 10, so we’ll use that time-period to calculate the growth rate.</p>
+<p>By eye the logged data looks fairly linear (beyond the initial “lag phase” of growth; see below) between hours 5 and 10, so we’ll use that time-period to calculate the growth rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">==</span> <span class="m">10</span><span class="p">,]</span><span class="o">$</span><span class="n">LogN</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">==</span> <span class="m">4</span><span class="p">,]</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">10-4</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">==</span> <span class="m">10</span><span class="p">,]</span><span class="o">$</span><span class="n">LogN</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">==</span> <span class="m">6</span><span class="p">,]</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">10-6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">0.604641109268539</div></div>
+<div class="output text_html">0.732038333517017</div></div>
 </div>
-<p>So our first, most basic estimate of <span class="math notranslate nohighlight">\(r\)</span> is 0.6.</p>
-<p>But we can do better than this. To account for some error in measurement, we shouldn’t really take the data points directly, but fit a linear model through them instead, where the slope gives our growth rate. This is pretty much the “traditional” way to calculate microbial growth rates - draw a straight line through the linear part on log-transformed data.</p>
+<p>This is our first, most basic estimate of <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p>Or, we can decide not to eyeball the data, but just pick the maximum observed gradient of the curve. For this, we can use the the <code class="docutils literal notranslate"><span class="pre">diff()</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>0.171269154259665</li><li>0.216670872460636</li><li>0.646099642770272</li><li>1.75344839347772</li><li>1.17470494059035</li><li>0.639023867964838</li><li>0.44952974020198</li><li>0.181493481601755</li><li>-0.000450183952025895</li><li>0.0544907101941003</li><li>-0.0546009242768832</li></ol>
+</div></div>
+</div>
+<p>This gives all the (log) population size differences between successive timepoint pairs. The max of this is what we want, divided by the time-step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">))</span><span class="o">/</span><span class="m">2</span> <span class="c1"># 2 is the difference in any successive pair of timepoints</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.87672419673886</div></div>
+</div>
+</div>
+<div class="section" id="using-ols">
+<h4>Using OLS<a class="headerlink" href="#using-ols" title="Permalink to this headline">¶</a></h4>
+<p>But we can do better than this. To account for some error in measurement, we shouldn’t really take the data points directly, but fit a linear model through them instead, where the slope gives our growth rate. This is pretty much the “traditional” way of calculating microbial growth rates – draw a straight line through the linear part of the log-transformed data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lm_growth</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">LogN</span> <span class="o">~</span> <span class="n">Time</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">&gt;</span> <span class="m">2</span> <span class="o">&amp;</span> <span class="n">data</span><span class="o">$</span><span class="n">Time</span> <span class="o">&lt;</span> <span class="m">12</span><span class="p">,])</span>
@@ -1394,28 +1430,29 @@ lm(formula = LogN ~ Time, data = data[data$Time &gt; 2 &amp; data$Time &lt;
 
 Residuals:
        3        4        5        6 
- 0.07297 -0.14342  0.06793  0.00252 
+ 0.21646 -0.38507  0.12076  0.04785 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  8.00684    0.20296   39.45 0.000642 ***
-Time         0.61638    0.02762   22.32 0.002002 ** 
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   7.9366     0.5350  14.835  0.00451 **
+Time          0.6238     0.0728   8.569  0.01335 * 
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.1235 on 2 degrees of freedom
-Multiple R-squared:  0.996,	Adjusted R-squared:  0.994 
-F-statistic:   498 on 1 and 2 DF,  p-value: 0.002002
+Residual standard error: 0.3256 on 2 degrees of freedom
+Multiple R-squared:  0.9735,	Adjusted R-squared:  0.9602 
+F-statistic: 73.42 on 1 and 2 DF,  p-value: 0.01335
 </pre></div>
 </div>
 </div>
 </div>
-<p>About the same <span class="math notranslate nohighlight">\(r \approx 0.62\)</span>.</p>
-<p>But this is still not ideal because we only guessed the exponential phase by eye. We could do it better by iterating through different windows of points, comparing the slopes and finding which the highest is to give the maximum growth rate, <span class="math notranslate nohighlight">\(r_{max}\)</span>. This is called a “rolling regression”. Or better still we can fit a more appropriate mathematical model using NLLS!</p>
+<p>Npw we get <span class="math notranslate nohighlight">\(r \approx 0.62\)</span>, which is probably closer to the “truth”.</p>
+<p>But this is still not ideal because we only guessed the exponential phase by eye. We could do it better by iterating through different windows of points, comparing the slopes and finding which the highest is to give the maximum growth rate, <span class="math notranslate nohighlight">\(r_{max}\)</span>. This is called a “rolling regression”.</p>
+<p>Or better still, we can fit a more appropriate mathematical model using NLLS!</p>
 </div>
-<div class="section" id="fitting-non-linear-models-for-growth-trajectories">
-<h4>Fitting non-linear models for growth trajectories<a class="headerlink" href="#fitting-non-linear-models-for-growth-trajectories" title="Permalink to this headline">¶</a></h4>
-<p>For starters, a classical, somewhat mechanistic model is the logistic equation:</p>
+<div class="section" id="using-nlls">
+<h4>Using NLLS<a class="headerlink" href="#using-nlls" title="Permalink to this headline">¶</a></h4>
+<p>For starters, a classical, (somewhat) mechanistic model is the logistic equation:</p>
 <div class="math notranslate nohighlight">
 \[
 N_t =   \frac{N_0  N_{max} e^{r t}}{N_{max} + N_0 (e^{r t} - 1)}
@@ -1437,7 +1474,7 @@ N_t =   \frac{N_0  N_{max} e^{r t}}{N_{max} + N_0 (e^{r t} - 1)}
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># first we need some starting parameters for the model</span>
 <span class="n">N_0_start</span> <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">N</span><span class="p">)</span> <span class="c1"># lowest population size</span>
 <span class="n">N_max_start</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">N</span><span class="p">)</span> <span class="c1"># highest population size</span>
-<span class="n">r_max_start</span> <span class="o">&lt;-</span> <span class="m">0.62</span> <span class="c1"># use our linear estimate from before</span>
+<span class="n">r_max_start</span> <span class="o">&lt;-</span> <span class="m">0.62</span> <span class="c1"># use our estimate from the OLS fitting from above</span>
 
 <span class="n">fit_logistic</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">N</span> <span class="o">~</span> <span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span>
                       <span class="nf">list</span><span class="p">(</span><span class="n">r_max</span><span class="o">=</span><span class="n">r_max_start</span><span class="p">,</span> <span class="n">N_0</span> <span class="o">=</span> <span class="n">N_0_start</span><span class="p">,</span> <span class="n">N_max</span> <span class="o">=</span> <span class="n">N_max_start</span><span class="p">))</span>
@@ -1451,27 +1488,30 @@ N_t =   \frac{N_0  N_{max} e^{r t}}{N_{max} + N_0 (e^{r t} - 1)}
 
 Parameters:
        Estimate Std. Error t value Pr(&gt;|t|)    
-r_max 6.379e-01  1.444e-02  44.186 7.78e-12 ***
-N_0   2.993e+03  5.051e+02   5.925 0.000222 ***
-N_max 5.988e+06  2.935e+04 204.044  &lt; 2e-16 ***
+r_max 6.309e-01  3.791e-02  16.641 4.56e-08 ***
+N_0   3.317e+03  1.451e+03   2.286   0.0481 *  
+N_max 5.538e+06  7.192e+04  76.995 5.32e-14 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 48220 on 9 degrees of freedom
+Residual standard error: 119200 on 9 degrees of freedom
 
-Number of iterations to convergence: 11 
+Number of iterations to convergence: 12 
 Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
 </div>
 </div>
+<p>We did not pay much attention to what starting values we used in the simpler example of fitting the allometric model because the power-law model is easy to fit using NLLS, and starting far from the optimal parameters does not matter too much. Here, we used the actual data to generate more realistic start values for each of the three parameters (<code class="docutils literal notranslate"><span class="pre">r_max</span></code>, <code class="docutils literal notranslate"><span class="pre">N_0</span></code>, <code class="docutils literal notranslate"><span class="pre">N_max</span></code>) of the Logistic equation.</p>
 <p>Now, plot the fit:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot it:</span>
-<span class="n">timepoints</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="m">0.1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">timepoints</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="m">0.1</span><span class="p">)</span>
 
-<span class="n">logistic_points</span> <span class="o">&lt;-</span> <span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">])</span>
+<span class="n">logistic_points</span> <span class="o">&lt;-</span> <span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> 
+                                  <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> 
+                                  <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> 
+                                  <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">])</span>
 <span class="n">df1</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">logistic_points</span><span class="p">)</span>
 <span class="n">df1</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Logistic equation&quot;</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="s">&quot;N&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
@@ -1485,10 +1525,10 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_95_1.png" src="../_images/20-ModelFitting_95_1.png" />
+<img alt="../_images/20-ModelFitting_99_0.png" src="../_images/20-ModelFitting_99_0.png" />
 </div>
 </div>
-<p>That looks nice, and it gives us an <span class="math notranslate nohighlight">\(r_{max}\)</span> estimate fairly close to what we had before: 0.64.</p>
+<p>That looks nice, and the <span class="math notranslate nohighlight">\(r_{max}\)</span> estimate we get (0.64) is fairly close to what we got above with OLS fitting.</p>
 <p>Note that we’ve done this fitting to the original non transformed data, whilst the linear regressions earlier were on log transformed data. What would this function look like on a log-transformed axis?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1501,180 +1541,182 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_97_1.png" src="../_images/20-ModelFitting_97_1.png" />
+<img alt="../_images/20-ModelFitting_101_0.png" src="../_images/20-ModelFitting_101_0.png" />
 </div>
 </div>
-<p>The model diverges from the data at the lower end! This is because the logistic model assumes that the population is growing right from the start (Time = 0), while in “reality” (in our synthetic “data”), this is not what’s happening; the population takes a while to grow truly exponentially (i.e., there is a time lag in the population growth). This time lag is seen frequently in the lab, and is also expected in nature, because when bacteria encounter fresh growth media (in the lab) or a new resource/environment (in the field), they take some time to acclimate, activating genes involved in nutrient uptake and metabolic processes, before beginning exponential growth. This is called the lag phase and can be seen in our example data where exponential growth doesn’t properly begin until around the 4th hour.</p>
-<p>Various models have been devised to describe bacterial growth curves which include a lag phase before exponential growth begins. Here we will look at three: the modified Gompertz model (Zwietering et. al., 1990), the Baranyi model (Baranyi, 1993), and the Buchanan model (or three-phase logistic model; Buchanan, 1997). Each of them contain our three parameters from before (<span class="math notranslate nohighlight">\(N_0\)</span>, <span class="math notranslate nohighlight">\(N_{max}\)</span> and <span class="math notranslate nohighlight">\(r_{max}\)</span>), and introduce a new one for length of the lag period.</p>
-<p>The (modified) Gompertz model has been used frequently in the literature to model bacterial growth:</p>
+<p>The model actually diverges from the data at the lower end! This was not visible in the previous plot where you examined the model in linear scale (without taking a log) because the deviation of the model is small, and only becomes clear in the log scale. This is because of the way logarithms work. Let’s have a look at this in our Cell counts “data”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">N</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LogN</span><span class="p">))</span> <span class="o">+</span>
+  <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme</span><span class="p">(</span><span class="n">aspect.ratio</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span> 
+  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;N&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&quot;log(N)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20-ModelFitting_103_0.png" src="../_images/20-ModelFitting_103_0.png" />
+</div>
+</div>
+<p>As you can see the logarithm is a strongly nonlinear transformation of any sequence of real numbers, with small numbers close to zero yielding disproportionately large deviations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may play with increasing the error (by increasing the value of <code class="docutils literal notranslate"><span class="pre">sd</span></code> in synthetic data generation step above) and re-evaluating all the subsequent model fitting steps above. However, note that above some values of <code class="docutils literal notranslate"><span class="pre">sd</span></code>, you will start to get negative values of populations, especially at early time points, which will raise issues with taking a logarithm.</p>
+</div>
+<p>The above seen deviation of the Logistic model from the data is because this model assumes that the population is growing right from the start (Time = 0), while in “reality” (in our synthetic “data”), this is not what’s happening; the population takes a while to grow truly exponentially (i.e., there is a time lag in the population growth). This time lag is seen frequently in the lab, and is also expected in nature, because when bacteria encounter fresh growth media (in the lab) or a new resource/environment (in the field), they take some time to acclimate, activating genes involved in nutrient uptake and metabolic processes, before beginning exponential growth. This is called the lag phase and can be seen in our example data where exponential growth doesn’t properly begin until around the 4th hour.</p>
+<p>To capture the lag phase, more complicated bacterial growth models have been designed.</p>
+<p>One of these is the modified Gompertz model (Zwietering et. al., 1990), which has been used frequently in the literature to model bacterial growth:</p>
 <div class="math notranslate nohighlight">
 \[ \label{eq:Gompertz}
-N_t = \ln\left(\frac{N_{max}}{N_0}\right) e^{-e^{\frac{r_{max}e(t_{lag} - t)}{\ln\left(\frac{N_{max}}{N_0}\right)} + 1}}
+     \log(N_t) =  N_0 + (N_{max} - N_0) e^{-e^{r_{max} \exp(1) \frac{t_{lag} - t}{(N_{max} - N_0) \log(10)} + 1}}
 \]</div>
-<p>Here maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>) is the tangent to the inflection point, <span class="math notranslate nohighlight">\(t_{lag}\)</span> is the x-axis intercept to this tangent (duration of the delay before the population starts growing exponentially) and <span class="math notranslate nohighlight">\(\ln\left(\frac{N_{max}}{N_0}\right)\)</span> is the asymptote of the log-transformed population growth trajectory, i.e., the log ratio of maximum population density <span class="math notranslate nohighlight">\(N_{max}\)</span> (aka “carrying capacity”) and initial cell (Population) <span class="math notranslate nohighlight">\(N_0\)</span> density.</p>
-<p>The Baranyi model is:</p>
-<div class="math notranslate nohighlight">
-\[ \label{eq:Baranyi}
-N_t = N_0 + r_{max}A_t - \ln \left( 1 + \frac{e^{r_{max}A_t} -1}{e^{N_{max} - N_0}} \right) ,
-\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight">
-\[ \label{eq:Baranyi_A}
-A_t = t + \frac{1}{r_{max}} \cdot \ln \left( \frac{e^{-r_{max}t} + h_{0}}{1 + h_{0}} \right).
-\]</div>
-<p>This model introduces a new, dimensionless parameter <span class="math notranslate nohighlight">\(h_{0}\)</span> which represents the initial physiological state of the cells. The length of the lag phase is determined by the value of <span class="math notranslate nohighlight">\(h_0\)</span> at inoculation and the post-inoculation environment.  Thus the definition of lag is independent from the shape of the growth curve, and the effect of the previous environment is separated from the effects of the present environment. This allows modeling growth without a lag period following inoculation from media favorable to growth to new media also favorable to growth. Using the above two equations, <span class="math notranslate nohighlight">\(r_{max}\)</span> and <span class="math notranslate nohighlight">\(h_0\)</span> can be related to obtain the lag time, <span class="math notranslate nohighlight">\(t_{lag}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[ \label{eq:Baranyi_lag}
-t_{lag} = \frac{\ln \left(1 + \frac{1}{h_0}\right)}{r_{max}},
-\]</div>
-<p>taking us back to the same four parameters as the Gompertz model.</p>
-<p>The Buchanan model, or “three-phase logistic model” is relatively simple:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \label{eq:Buchanan}
-N(t) =
-\left\{
-	\begin{array}{ll}
-		N_0  &amp; \mbox{if } t \leq t_{lag} \\
-		N_{max} + r_{max} \cdot (t-t_{lag})  &amp; \mbox{if } t_{lag} &lt; t &lt; t_{max} \\
-		N_{max}  &amp; \mbox{if } t \geq t_{max}
-	\end{array}
-\right.
-\end{split}\]</div>
-<p>Here, <span class="math notranslate nohighlight">\(t_{max}\)</span> is the time at which <span class="math notranslate nohighlight">\(N_{max}\)</span> is reached. This model makes three assumptions:</p>
-<p>i. growth rate during lag phase is zero,</p>
-<p>ii. growth rate during exponential phase is constant,</p>
-<p>iii. growth rate during stationary phase is zero.</p>
-<p>This is not a good description of the shape of the curve (no curvature), but the argument is that it captures the growth parameters well without the need for a more complicated model, and you can get a decent estimate of bacterial growth from a simple straight line through the exponential phase on the logged data (similar to what we did earlier). That is, the model says that at <span class="math notranslate nohighlight">\(N_0\)</span> and <span class="math notranslate nohighlight">\(N_{max}\)</span>, growth rate is zero, and between those points, growth rate is constant, with <span class="math notranslate nohighlight">\(r_{max}\)</span> simply the slope of the line (assuming the data are log transformed).</p>
-<p>In contrast, the Gompertz (using the log-transformed formulation of Zwietering, 1990) and Baranyi (Baranyi, 1993) models describe the full shape of the curve, with <span class="math notranslate nohighlight">\(r_{max}\)</span> the slope of the tangent at the inflection point of the curve.</p>
-<p>Thus, given a set of cell numbers (N) and time points, each of the three growth models can be described in terms of:</p>
-<p><span class="math notranslate nohighlight">\(N_0\)</span>:  Initial cell culture (Population) density (number of cells per unit volume)</p>
-<p><span class="math notranslate nohighlight">\(N_{max}\)</span>: Maximum culture density (aka “carrying capacity”, typically denoted by <span class="math notranslate nohighlight">\(K\)</span> in the ecological literature)</p>
-<p><span class="math notranslate nohighlight">\(r_{max}\)</span>: Maximum growth rate</p>
-<p><span class="math notranslate nohighlight">\(t_{lag}\)</span>: Duration of the lag phase before the population starts growing exponentially</p>
-<p>Let’s now will fit the four growth models. First let’s specify the function objects for the additional there models:</p>
+<p>Here maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>) is the tangent to the inflection point, <span class="math notranslate nohighlight">\(t_{lag}\)</span> is the x-axis intercept to this tangent (duration of the delay before the population starts growing exponentially) and <span class="math notranslate nohighlight">\(\log\left(\frac{N_{max}}{N_0}\right)\)</span> is the asymptote of the log-transformed population growth trajectory, i.e., the log ratio of maximum population density <span class="math notranslate nohighlight">\(N_{max}\)</span> (aka “carrying capacity”) and initial cell (Population) <span class="math notranslate nohighlight">\(N_0\)</span> density.</p>
+<p><em>Note that this model has been written in log scale.</em></p>
+<p>Now let’s fit and compare the two alternative nonlinear growth models: Logistic and Gompertz.</p>
+<p>First, specify the function object for the Gompertz model (we already defined the function for the Logistic model above):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">gompertz_model</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">){</span> <span class="c1"># Modified gompertz growth model (Zwietering 1990)</span>
-    <span class="nf">return</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">N_max</span> <span class="o">/</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nf">exp</span><span class="p">(</span><span class="n">r_max</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_lag</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="nf">log</span><span class="p">(</span><span class="n">N_max</span> <span class="o">/</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="p">)))</span>
-<span class="p">}</span>
-
-<span class="n">gompertz_model2</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">){</span> <span class="c1"># Modified gompertz growth model (Zwietering 1990)</span>
-  <span class="nf">return</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">N_0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">N_max</span><span class="p">)</span> <span class="o">-</span> <span class="nf">log</span><span class="p">(</span><span class="n">N_0</span><span class="p">))</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nf">exp</span><span class="p">(</span><span class="n">r_max</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_lag</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="nf">log</span><span class="p">(</span><span class="n">N_max</span><span class="p">)</span> <span class="o">-</span> <span class="nf">log</span><span class="p">(</span><span class="n">N_0</span><span class="p">))</span> <span class="o">*</span> <span class="nf">log</span><span class="p">(</span><span class="m">10</span><span class="p">))</span> <span class="o">+</span> <span class="m">1</span><span class="p">)))</span>
-<span class="p">}</span>
-
-<span class="c1"># baranyi_model &lt;- function(t, r_max, N_max, N_0, t_lag){  # Baranyi model (Baranyi 1993)</span>
-<span class="c1">#   return(N_max + log10((-1+exp(r_max*t_lag) + exp(r_max*t))/(exp(r_max*t) - 1 + exp(r_max*t_lag) * 10^(N_max-N_0))))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># gompertz_model &lt;- function(t, r_max, N_max, N_0, t_lag){ # Modified gompertz growth model (Zwietering 1990)</span>
+<span class="c1">#     return(log(N_max / N_0) * exp(-exp(r_max * exp(1) * (t_lag - t)/log(N_max / N_0) + 1)))</span>
 <span class="c1"># }</span>
 
-<span class="c1"># buchanan_model &lt;- function(t, r_max, N_max, N_0, t_lag){ # Buchanan model - three phase logistic (Buchanan 1997)</span>
-<span class="c1">#   return(N_0 + (t &gt;= t_lag) * (t &lt;= (t_lag + (N_max - N_0) * log(10)/r_max)) * r_max * (t - t_lag)/log(10) + (t &gt;= t_lag) * (t &gt; (t_lag + (N_max - N_0) * log(10)/r_max)) * (N_max - N_0))</span>
-<span class="c1"># }</span>
+<span class="n">gompertz_model</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">){</span> <span class="c1"># Modified gompertz growth model (Zwietering 1990)</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">N_0</span> <span class="o">+</span> <span class="p">(</span><span class="n">N_max</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nf">exp</span><span class="p">(</span><span class="n">r_max</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_lag</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">N_max</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="nf">log</span><span class="p">(</span><span class="m">10</span><span class="p">))</span> <span class="o">+</span> <span class="m">1</span><span class="p">)))</span>
+<span class="p">}</span>           
 </pre></div>
 </div>
 </div>
 </div>
-<p>It is important to note that we have written the functions in log (to the base 10 - can also be base 2 or natural log) scale because we want to do the fitting in log scale (both model and data linearized). The interpretation of each of the the estimated/fitted parameters does not change if we take a log of the model’s equation.</p>
-<p>Now let’s generate some starting values for the NLLS fitting. We did not pay much attention to what starting values we used in the above example on fitting an allometric model because the power-law model is easy to fit using NLLS, and starting far from the optimal parameters does not matter too much. Here, we derive the starting values by using the actual data:</p>
+<p>Again, note that unlike the Logistic growth function above, this function has been written in the log scale.</p>
+<p>Now let’s generate some starting values for the NLLS fitting of the Gompertz model.</p>
+<p>As we did above for the logistic equation, let’s derive the starting values by using the actual data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">N_0_start</span> <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">N</span><span class="p">)</span>
-<span class="n">N_max_start</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">N</span><span class="p">)</span>
-<span class="n">t_lag_start</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">Time</span><span class="p">[</span><span class="nf">which.max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)))]</span>
-<span class="n">r_max_start</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">))</span><span class="o">/</span><span class="nf">mean</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">Time</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">N_0_start</span> <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span> <span class="c1"># lowest population size, note log scale</span>
+<span class="n">N_max_start</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span> <span class="c1"># highest population size, note log scale</span>
+<span class="n">r_max_start</span> <span class="o">&lt;-</span> <span class="m">0.62</span> <span class="c1"># use our previous estimate from the OLS fitting from above</span>
+<span class="n">t_lag_start</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">Time</span><span class="p">[</span><span class="nf">which.max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)))]</span> <span class="c1"># find last timepoint of lag phase</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now fit the models:</p>
+<p><em>So how did we find a reasonable time lag from the data?</em></p>
+<p>Let’s break the last command down:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fit_logistic</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">N</span> <span class="o">~</span> <span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span>
-                      <span class="nf">list</span><span class="p">(</span><span class="n">r_max</span><span class="o">=</span><span class="n">r_max_start</span><span class="p">,</span> <span class="n">N_0</span><span class="o">=</span><span class="n">N_0_start</span><span class="p">,</span> <span class="n">N_max</span><span class="o">=</span><span class="n">N_max_start</span><span class="p">))</span>
-
-<span class="n">fit_gompertz</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">LogN</span> <span class="o">~</span> <span class="nf">gompertz_model2</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)</span> <span class="c1"># same as what we did above - get differentials</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>0.171269154259665</li><li>0.216670872460636</li><li>0.646099642770272</li><li>1.75344839347772</li><li>1.17470494059035</li><li>0.639023867964838</li><li>0.44952974020198</li><li>0.181493481601755</li><li>-0.000450183952025895</li><li>0.0544907101941003</li><li>-0.0546009242768832</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">diff</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">))</span> <span class="c1"># get the differentials of the differentials (approx 2nd order derivatives)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>0.0454017182009707</li><li>0.429428770309636</li><li>1.10734875070745</li><li>-0.578743452887371</li><li>-0.535681072625511</li><li>-0.189494127762858</li><li>-0.268036258600224</li><li>-0.181943665553781</li><li>0.0549408941461262</li><li>-0.109091634470984</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">which.max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)))</span> <span class="c1"># find the timepoint where this 2nd order derivative really takes off  </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">$</span><span class="n">Time</span><span class="p">[</span><span class="nf">which.max</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">LogN</span><span class="p">)))]</span> <span class="c1"># This then is a good guess for the last timepoint of the lag phase</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">4</div></div>
+</div>
+<p>Now fit the model using these start values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fit_gompertz</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">LogN</span> <span class="o">~</span> <span class="nf">gompertz_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">N_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span>
                       <span class="nf">list</span><span class="p">(</span><span class="n">t_lag</span><span class="o">=</span><span class="n">t_lag_start</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="n">r_max_start</span><span class="p">,</span> <span class="n">N_0</span> <span class="o">=</span> <span class="n">N_0_start</span><span class="p">,</span> <span class="n">N_max</span> <span class="o">=</span> <span class="n">N_max_start</span><span class="p">))</span>
-
-
-<span class="c1"># fit_baranyi &lt;- nlsLM(LogN ~ baranyi_model(t = Time, r_max, N_max, N_0, t_lag), data,</span>
-<span class="c1">#               list(t_lag=t_lag_start, r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))</span>
-
-<span class="c1"># fit_buchanan &lt;- nlsLM(LogN ~ buchanan_model(t = Time, r_max, N_max, N_0, t_lag), data,</span>
-<span class="c1">#                         list(t_lag=t_lag_start, r_max=r_max_start, N_0 = N_0_start, N_max = N_max_start))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in log(N_max):
-“NaNs produced”Warning message in log(N_max):
-“NaNs produced”
 </pre></div>
 </div>
 </div>
 </div>
-<p>You might get a warning that one or more of the models generated some NaNs during the fitting procedure for the given data. You can ignore the warning in this case. But not always – sometimes these NaNs mean that the equation is wrongly written, or that it generates NaNs across the whole range of the x-values, in which case the model is inappropriate for these data.</p>
-<p>Get the model summaries:</p>
+<p>You might one or more warning(s) that the model fitting iterations generated NaNs during the fitting procedure for these data (because at some point the NLLS fitting algorithm “wandered” to a combination of N_max and N_0 values that yields a NaN for log(N_max/N_0)).</p>
+<p>You can ignore these warning in this case. But not always – sometimes these NaNs mean that the equation is wrongly written, or that it generates NaNs across the whole range of the x-values, in which case the model is inappropriate for these data.</p>
+<p>Get the model summary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)</span>
-<span class="c1"># summary(fit_baranyi)</span>
-<span class="c1"># summary(fit_buchanan)</span>
-<span class="c1"># summary(fit_gompertz)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Formula: N ~ logistic_model(t = Time, r_max, N_max, N_0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Formula: LogN ~ gompertz_model(t = Time, r_max, N_max, N_0, t_lag)
 
 Parameters:
-       Estimate Std. Error t value Pr(&gt;|t|)    
-r_max 6.379e-01  1.444e-02  44.186 7.78e-12 ***
-N_0   2.993e+03  5.051e+02   5.925 0.000222 ***
-N_max 5.988e+06  2.935e+04 204.044  &lt; 2e-16 ***
+      Estimate Std. Error t value Pr(&gt;|t|)    
+t_lag  4.80680    0.18433   26.08 5.02e-09 ***
+r_max  1.86616    0.08749   21.33 2.45e-08 ***
+N_0   10.39142    0.05998  173.24 1.38e-15 ***
+N_max 15.54956    0.05056  307.57  &lt; 2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 48220 on 9 degrees of freedom
+Residual standard error: 0.09418 on 8 degrees of freedom
 
-Number of iterations to convergence: 14 
+Number of iterations to convergence: 10 
 Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
 </div>
 </div>
-<p>And see how the fits look:</p>
+<p>And see how the fits of the two nonlinear models compare:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">timepoints</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">24</span><span class="p">,</span> <span class="m">0.1</span><span class="p">)</span>
 
-<span class="n">logistic_points</span> <span class="o">&lt;-</span> <span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">])</span>
+<span class="n">logistic_points</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="nf">logistic_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> 
+                                      <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> 
+                                      <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> 
+                                      <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">]))</span>
 
-<span class="n">baranyi_points</span> <span class="o">&lt;-</span> <span class="nf">baranyi_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_baranyi</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_baranyi</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_baranyi</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">],</span> <span class="n">t_lag</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_baranyi</span><span class="p">)[</span><span class="s">&quot;t_lag&quot;</span><span class="p">])</span>
-
-<span class="n">buchanan_points</span> <span class="o">&lt;-</span> <span class="nf">buchanan_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_buchanan</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_buchanan</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_buchanan</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">],</span> <span class="n">t_lag</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_buchanan</span><span class="p">)[</span><span class="s">&quot;t_lag&quot;</span><span class="p">])</span>
-
-<span class="n">gompertz_points</span> <span class="o">&lt;-</span> <span class="nf">gompertz_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">],</span> <span class="n">t_lag</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;t_lag&quot;</span><span class="p">])</span>
+<span class="n">gompertz_points</span> <span class="o">&lt;-</span> <span class="nf">gompertz_model</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="n">timepoints</span><span class="p">,</span> 
+                                  <span class="n">r_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;r_max&quot;</span><span class="p">],</span> 
+                                  <span class="n">N_max</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;N_max&quot;</span><span class="p">],</span> 
+                                  <span class="n">N_0</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;N_0&quot;</span><span class="p">],</span> 
+                                  <span class="n">t_lag</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)[</span><span class="s">&quot;t_lag&quot;</span><span class="p">])</span>
 
 <span class="n">df1</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">logistic_points</span><span class="p">)</span>
-<span class="n">df1</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Logistic&quot;</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;t&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">df1</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Logistic model&quot;</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
 
-<span class="n">df2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">baranyi_points</span><span class="p">)</span>
-<span class="n">df2</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Baranyi&quot;</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;t&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">gompertz_points</span><span class="p">)</span>
+<span class="n">df2</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Gompertz model&quot;</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
 
-<span class="n">df3</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">buchanan_points</span><span class="p">)</span>
-<span class="n">df3</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Buchanan&quot;</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">df3</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;t&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">model_frame</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">)</span>
 
-<span class="n">df4</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">gompertz_points</span><span class="p">)</span>
-<span class="n">df4</span><span class="o">$</span><span class="n">model</span> <span class="o">&lt;-</span> <span class="s">&quot;Gompertz&quot;</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">df4</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;t&quot;</span><span class="p">,</span> <span class="s">&quot;LogN&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
-
-<span class="n">model_frame</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">,</span> <span class="n">df4</span><span class="p">)</span>
-
-<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LogN</span><span class="p">))</span> <span class="o">+</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LogN</span><span class="p">))</span> <span class="o">+</span>
   <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">geom_line</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_frame</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LogN</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">model</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">geom_line</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_frame</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LogN</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">model</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">+</span>
     <span class="nf">theme_bw</span><span class="p">()</span> <span class="o">+</span> <span class="c1"># make the background white</span>
     <span class="nf">theme</span><span class="p">(</span><span class="n">aspect.ratio</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="o">+</span> <span class="c1"># make the plot square </span>
     <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&quot;log(Abundance)&quot;</span><span class="p">)</span>
@@ -1682,15 +1724,16 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_111_1.png" src="../_images/20-ModelFitting_111_1.png" />
+<img alt="../_images/20-ModelFitting_122_0.png" src="../_images/20-ModelFitting_122_0.png" />
 </div>
 </div>
-<p>Clearly, the Logistic does not fit as well as the others in this case. You can now perform model selection like you did above in the allometric scaling example.</p>
+<p>Clearly, the Gompertz model fits way better than the logistic growth equation in this case! Note also that there is a big difference in the fitted value of <span class="math notranslate nohighlight">\(r_{max}\)</span> from the two models; the value is much lower from the Logistic model because it ignores the lag phase, including it into the exponential growth phase.</p>
+<p>You can now perform model selection like you did above in the allometric scaling example.</p>
 </div>
 </div>
 <div class="section" id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
-<p>(a) Calculate the confidence intervals on the parameters of each of the three fitted models, and use model selection (using AIC and/or BIC) as you did before to see if you can determine the best-fitting model among the three.</p>
+<p>(a) Calculate the confidence intervals on the parameters of each of the two fitted models, and use model selection (using AIC and/or BIC) as you did before to see if you can determine the best-fitting model among the three.</p>
 <p>(b) Alternatively, for a different random sequence of fluctuations, one or more of the models may fail to fit (a <code class="docutils literal notranslate"><span class="pre">singular</span> <span class="pre">gradiant</span> <span class="pre">matrix</span></code> error). Try repeating the above fitting with a different random seed (change the integers given to the <code class="docutils literal notranslate"><span class="pre">random.seed(</span> <span class="pre">)</span></code> function), or increase the sampling error by increasing the standard deviation and see if it happens. If/when the NLLS optimization does fail to converge (the RSS minimum was not found), you can try to fix it by changing the starting values.</p>
 <p>(c) Repeat the model comparison exercise 1000 times (You will have to write a loop), and determine if/whether one model generally wins more often than the others. Note that each run will generate a slightly different dataset, because we are adding a vector of random errors every time the “data” are generated. This may result in failure of the NLLS fitting to converge, in which case you will need to use the <a class="reference external" href="https://nbviewer.jupyter.org/github/mhasoba/TheMulQuaBio/blob/master/notebooks/07-R.ipynb"><code class="docutils literal notranslate"><span class="pre">try()</span></code> or <code class="docutils literal notranslate"><span class="pre">tryCatch</span></code> functions</a>.</p>
 <p>(d) Repeat (b), but increase the error by increasing the standard deviation of the normal error distribution, and see if there are differences in the robustness of the models to sampling/experimental errors. You may also want to try changing the distribution of the errors to some non-normal distribution and see what happens.</p>
@@ -1766,7 +1809,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_121_0.png" src="../_images/20-ModelFitting_121_0.png" />
+<img alt="../_images/20-ModelFitting_132_0.png" src="../_images/20-ModelFitting_132_0.png" />
 </div>
 </div>
 <div class="section" id="likelihood-profile">
@@ -1795,7 +1838,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_126_0.png" src="../_images/20-ModelFitting_126_0.png" />
+<img alt="../_images/20-ModelFitting_137_0.png" src="../_images/20-ModelFitting_137_0.png" />
 </div>
 </div>
 <p>The true value for b0 (10) is the red line, while the value that minimizes the log-likelihood (i.e., maximizes the negative log-likelihood) is the green line. These are not the same because maximum likelihood is providing an <em>estimate</em> of the true value given the measurement errors (that we ourselves generated in tgis synthetic dataset).</p>
@@ -1834,7 +1877,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 	<tr><td>10.48485</td><td>2.96    </td></tr>
 </tbody>
 </table>
-</div><img alt="../_images/20-ModelFitting_129_1.png" src="../_images/20-ModelFitting_129_1.png" />
+</div><img alt="../_images/20-ModelFitting_140_1.png" src="../_images/20-ModelFitting_140_1.png" />
 </div>
 </div>
 <p>There is a lot going on here. Make sure you ask one of us if some of the code does not make sense!</p>
@@ -1852,7 +1895,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_132_0.png" src="../_images/20-ModelFitting_132_0.png" />
+<img alt="../_images/20-ModelFitting_143_0.png" src="../_images/20-ModelFitting_143_0.png" />
 </div>
 </div>
 </div>
@@ -1931,7 +1974,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_139_0.png" src="../_images/20-ModelFitting_139_0.png" />
+<img alt="../_images/20-ModelFitting_150_0.png" src="../_images/20-ModelFitting_150_0.png" />
 </div>
 </div>
 </div>
@@ -2130,7 +2173,7 @@ such that \)</span>\mathrm{E}[x]=Np<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_161_0.png" src="../_images/20-ModelFitting_161_0.png" />
+<img alt="../_images/20-ModelFitting_172_0.png" src="../_images/20-ModelFitting_172_0.png" />
 </div>
 </div>
 </div>
@@ -2161,7 +2204,7 @@ such that \)</span>\mathrm{E}[x]=Np<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_164_0.png" src="../_images/20-ModelFitting_164_0.png" />
+<img alt="../_images/20-ModelFitting_175_0.png" src="../_images/20-ModelFitting_175_0.png" />
 </div>
 </div>
 <p><strong>NOTE:</strong> I’ve plotted the estimate of the <em>population</em> distribution here, but this is not the <em><strong>predictive distribution</strong></em> (which would be a Student T because we’re estimating both the mean and variance…).</p>
@@ -2269,7 +2312,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_170_0.png" src="../_images/20-ModelFitting_170_0.png" />
+<img alt="../_images/20-ModelFitting_181_0.png" src="../_images/20-ModelFitting_181_0.png" />
 </div>
 </div>
 </div>
@@ -2597,7 +2640,7 @@ Error: package or namespace load failed for ‘rjags’:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_198_0.png" src="../_images/20-ModelFitting_198_0.png" />
+<img alt="../_images/20-ModelFitting_209_0.png" src="../_images/20-ModelFitting_209_0.png" />
 </div>
 </div>
 <p>Note that the <span class="math notranslate nohighlight">\(\mu\)</span> data is u-shaped and the lifespan data is unimodal (hump-shaped).</p>
@@ -2613,7 +2656,7 @@ Error: package or namespace load failed for ‘rjags’:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_200_0.png" src="../_images/20-ModelFitting_200_0.png" />
+<img alt="../_images/20-ModelFitting_211_0.png" src="../_images/20-ModelFitting_211_0.png" />
 </div>
 </div>
 </div>
@@ -2886,7 +2929,7 @@ Traceback:
 7. eval(predvars, data, env)
 </pre></div>
 </div>
-<img alt="../_images/20-ModelFitting_215_1.png" src="../_images/20-ModelFitting_215_1.png" />
+<img alt="../_images/20-ModelFitting_226_1.png" src="../_images/20-ModelFitting_226_1.png" />
 </div>
 </div>
 </div>
@@ -3024,7 +3067,7 @@ Loading required package: lattice
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting_227_0.png" src="../_images/20-ModelFitting_227_0.png" />
+<img alt="../_images/20-ModelFitting_238_0.png" src="../_images/20-ModelFitting_238_0.png" />
 </div>
 </div>
 </div>
@@ -3405,7 +3448,7 @@ for the \)</span>i^{\mathrm th}<span class="math notranslate nohighlight">\( set
 <span class="mi">4</span><span class="o">.</span> <span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/20-ModelFitting_262_1.png" src="../_images/20-ModelFitting_262_1.png" />
+<img alt="../_images/20-ModelFitting_273_1.png" src="../_images/20-ModelFitting_273_1.png" />
 </div>
 </div>
 <p>Note that this only shows the uncertainty in the <em>mean function</em> – the assumed model with log normal noise says that the observations simply have this mean. The fit is attributing the majority of the observed noise to process error rather than parameter uncertainty.</p>

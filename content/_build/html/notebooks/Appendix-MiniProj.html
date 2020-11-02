@@ -397,8 +397,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#functional-responses">
-     Functional Responses
+    <a class="reference internal nav-link" href="#population-growth">
+     Population Growth
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -419,8 +419,8 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#population-growth">
-     Population Growth
+    <a class="reference internal nav-link" href="#functional-responses">
+     Functional Responses
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -608,10 +608,14 @@
 <li><p>What each package you used is for</p></li>
 </ul>
 </li>
-<li><p>A project that runs smoothly and efficiently, without any errors once a single script is called. The single script should be called <em>run_MiniProject</em>, with an appropriate extension (e.g., <code class="docutils literal notranslate"><span class="pre">run_MiniProject.py</span></code> or <code class="docutils literal notranslate"><span class="pre">run_MiniProject.sh</span></code>).</p></li>
+<li><p>A project that runs smoothly and efficiently, without any errors once a single script is called.</p>
+<ul>
+<li><p>The single script should be called <em>run_MiniProject</em>, with an appropriate extension (e.g., <code class="docutils literal notranslate"><span class="pre">run_MiniProject.py</span></code> or <code class="docutils literal notranslate"><span class="pre">run_MiniProject.sh</span></code>).</p></li>
+</ul>
+</li>
 <li><p>A report that contains all the components indicated above in “The Report” subsection, with some original thought and synthesis in the <em>Introduction</em> and <em>Discussion</em> sections.</p></li>
 <li><p>Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.</p></li>
-<li><p>The marking criteria you may refer to is the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf">summative marking criteria</a>.</p></li>
+<li><p>The marking criteria you may refer to are the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf">summative marking criteria</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="the-dataset-and-model-options">
@@ -628,587 +632,15 @@
 </div>
 </div>
 </div>
-<div class="section" id="functional-responses">
-<h3>Functional Responses<a class="headerlink" href="#functional-responses" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="the-question">
-<h4>The Question<a class="headerlink" href="#the-question" title="Permalink to this headline">¶</a></h4>
-<p><em>How well do different mathematical models, e.g., based upon foraging theory (mechanistic) principles  vs. phenomenological ones, fit to functional responses data across species?</em></p>
-<p>In ecological parlance, a functional response is the relationship between a consumer’s (e.g., predator) biomass consumption rate and abundance of the target resource (e.g., prey). Functional responses arise from fundamental biological and physical constraints on consumer-resource interactions (e.g., Holling 1959, Pawar et al, 2012), and determine the rate of biomass flow between species in ecosystems across the full scale of sizes, from the smallest (e.g., microbes) to the largest (e.g., blue whales). Functional responses also play a key sole in determining the stability (responses to perturbations) of the food webs that underpin ecosystems.</p>
-</div>
-<div class="section" id="the-data">
-<h4>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h4>
-<p>The dataset is called <code class="docutils literal notranslate"><span class="pre">CRat.csv</span></code>. It contains measurements of rates of consumption of a single resource (e.g., prey, plants) species’ by a consumer species (e.g., predators, grazers). These data were collected through lab and field experiments across the world. The field names are defined in a file called <code class="docutils literal notranslate"><span class="pre">BiotraitsTemplateDescription.pdf</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">N_TraitValue</span></code> (The number of resources consumed per consumer per unit time), and <code class="docutils literal notranslate"><span class="pre">ResDensity</span></code> (the resource abundance). Individual functional response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values — each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one curve. Or you can reconstruct them as unique combinations of <code class="docutils literal notranslate"><span class="pre">Citation</span></code> (where the functional response dataset came from), <code class="docutils literal notranslate"><span class="pre">ConTaxa</span></code> (consumer species ID), <code class="docutils literal notranslate"><span class="pre">ResTaxa</span></code> (resource species ID).</p>
-<p>Let’s have a look at the data:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/CRat.csv&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded </span><span class="si">{}</span><span class="s2"> columns.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded 68 columns.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>ID</th>
-      <th>DataType</th>
-      <th>ORIGINAL_TraitID</th>
-      <th>ORIGINAL_TraitDefinition</th>
-      <th>TraitValue</th>
-      <th>TraitUnit</th>
-      <th>N_TraitValue</th>
-      <th>ConTaxa</th>
-      <th>ResTaxa</th>
-      <th>ConTaxaStage</th>
-      <th>...</th>
-      <th>ConSizType</th>
-      <th>CON_ORIGINAL_value</th>
-      <th>CON_ORIGINAL_unit</th>
-      <th>Con_Siz_reference</th>
-      <th>ResSizType</th>
-      <th>RES_ORIGINAL_value</th>
-      <th>RES_ORIGINAL_unit</th>
-      <th>Res_Siz_reference</th>
-      <th>Citation</th>
-      <th>FigureTable</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>39835</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>8.67993</td>
-      <td>Individual/(Individual*120 mins)</td>
-      <td>0.001206</td>
-      <td>Cyclops bicuspidatus Claus 1857</td>
-      <td>Panagrolaimus spp.</td>
-      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
-      <td>...</td>
-      <td>dry mass</td>
-      <td>6.23E-009</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>dry mass</td>
-      <td>6.000000e-11</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
-      <td>Fig 1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>39835</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>7.66727</td>
-      <td>Individual/(Individual*120 mins)</td>
-      <td>0.001065</td>
-      <td>Cyclops bicuspidatus Claus 1857</td>
-      <td>Panagrolaimus spp.</td>
-      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
-      <td>...</td>
-      <td>dry mass</td>
-      <td>6.23E-009</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>dry mass</td>
-      <td>6.000000e-11</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
-      <td>Fig 1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>39835</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>8.67993</td>
-      <td>Individual/(Individual*120 mins)</td>
-      <td>0.001206</td>
-      <td>Cyclops bicuspidatus Claus 1857</td>
-      <td>Panagrolaimus spp.</td>
-      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
-      <td>...</td>
-      <td>dry mass</td>
-      <td>6.23E-009</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>dry mass</td>
-      <td>6.000000e-11</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
-      <td>Fig 1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>39835</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>18.44480</td>
-      <td>Individual/(Individual*120 mins)</td>
-      <td>0.002562</td>
-      <td>Cyclops bicuspidatus Claus 1857</td>
-      <td>Panagrolaimus spp.</td>
-      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
-      <td>...</td>
-      <td>dry mass</td>
-      <td>6.23E-009</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>dry mass</td>
-      <td>6.000000e-11</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
-      <td>Fig 1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>39835</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>17.35990</td>
-      <td>Individual/(Individual*120 mins)</td>
-      <td>0.002411</td>
-      <td>Cyclops bicuspidatus Claus 1857</td>
-      <td>Panagrolaimus spp.</td>
-      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
-      <td>...</td>
-      <td>dry mass</td>
-      <td>6.23E-009</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>dry mass</td>
-      <td>6.000000e-11</td>
-      <td>kilogram</td>
-      <td>original</td>
-      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
-      <td>Fig 1</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 68 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ID&#39; &#39;DataType&#39; &#39;ORIGINAL_TraitID&#39; &#39;ORIGINAL_TraitDefinition&#39;
- &#39;TraitValue&#39; &#39;TraitUnit&#39; &#39;N_TraitValue&#39; &#39;ConTaxa&#39; &#39;ResTaxa&#39;
- &#39;ConTaxaStage&#39; &#39;ResTaxaStage&#39; &#39;Con_ForagingMovement&#39;
- &#39;Con_RESDetectionDimensionality&#39; &#39;Res_ForagingMovement&#39;
- &#39;Res_CONDetectionDimensionality&#39; &#39;CON_MASS_value&#39; &#39;RES_MASS_value&#39;
- &#39;ResArenaSize_SI_UNIT&#39; &#39;ResDensity_SI_VALUE&#39; &#39;ResDensityUnit&#39;
- &#39;ResDensity&#39; &#39;ResArenaSize_SI_VALUE&#39; &#39;ConTemp&#39; &#39;ResTemp&#39; &#39;ResReplaceRate&#39;
- &#39;ResReplaceUnit&#39; &#39;ResReplace&#39; &#39;TraitSIValue&#39; &#39;TraitSIUnit&#39; &#39;N_TraitID&#39;
- &#39;N_TraitConversion&#39; &#39;N_CONVERTED&#39; &#39;N_TraitUnit&#39; &#39;Original_ErrorValue&#39;
- &#39;Original_ErrorValueUnit&#39; &#39;Replicates&#39; &#39;ConTaxon&#39; &#39;ConStage&#39; &#39;ConCommon&#39;
- &#39;Con_MovementDimensionality&#39; &#39;Con_Thermy&#39; &#39;Res_MovementDimensionality&#39;
- &#39;ResTaxon&#39; &#39;ResStage&#39; &#39;ResCommon&#39; &#39;Res_Thermy&#39; &#39;Habitat&#39; &#39;LabField&#39;
- &#39;ObservationtimeSI&#39; &#39;ObservationtimeSIUnits&#39; &#39;ConStarvationTimeSI&#39;
- &#39;ConStarvationTimeSIUnits&#39; &#39;ConArenaSiz_VALUE&#39; &#39;ConArenaSize_UNIT&#39;
- &#39;ConDensity&#39; &#39;ConDensityUnit&#39; &#39;ConDensity_SI_VALUE&#39; &#39;ConDensityConst&#39;
- &#39;ConSizType&#39; &#39;CON_ORIGINAL_value&#39; &#39;CON_ORIGINAL_unit&#39; &#39;Con_Siz_reference&#39;
- &#39;ResSizType&#39; &#39;RES_ORIGINAL_value&#39; &#39;RES_ORIGINAL_unit&#39; &#39;Res_Siz_reference&#39;
- &#39;Citation&#39; &#39;FigureTable&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">TraitUnit</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the response variable </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Individual/(Individual*120 mins)&#39; &#39;Individual/(Individual*90 mins)&#39;
- &#39;individual / (individual * second)&#39;
- &#39;individual / (5 individual * 24 hrs)&#39;
- &#39;individual / (1 individual * 3 hrs)&#39;
- &#39;individual / (1 individual * 5 hrs)&#39;
- &#39;individual / (1 individual * 8 hrs)&#39;
- &#39;individual / (1 individual * 6 hrs)&#39;
- &#39;individual / (1 individual * 24 hrs)&#39;
- &#39;individual / (1 individual *12 hrs)&#39;
- &#39;individual / (1 individual *24 hrs)&#39;
- &#39;individual / (1 individual *2 hrs)&#39;
- &#39;milligram (body mass - dry) / (sqrt (gram (body mass - wet)) * 1 minute)&#39;
- &#39;individual / (1 individual *3 hrs)&#39;
- &#39;cubic micrometer (yeast cell wet volume) / (gram (body mass - wet) * 1 hour)&#39;
- &#39;individual / (1 individual *30 mins)&#39; &#39;individual / (1 individual *day)&#39;
- &#39;individual / (1 individual * hr)&#39;
- &#39;gram (biomass - dry) / (individual * 1 minute)&#39;
- &#39;Individual/(Individual*1 mins)&#39; &#39;Individual/(Individual*1 hr)&#39;
- &#39;Individual/(Individual*1 day)&#39;
- &#39;gram (biomass - wet) / (individual * 3 hrs)&#39;
- &#39;Individual/(Individual * 1 hr)&#39; &#39;Individual/(Individual*7 days)&#39;
- &#39;gram (biomass - wet) / (individual * 22.5 minutes)&#39;
- &#39;Individual/(Individual * 8 hr)&#39; &#39;Individual/(Individual * day)&#39;
- &#39;Individual/(Individual * 106 days)&#39;
- &#39;milligram (biomass - dry) / (individual * 1 hr)&#39;
- &#39;Individual/(Individual * 12 hrs)&#39; &#39;Individual/(Individual * 1 day)&#39;
- &#39;Individual/(Individual * 2 day)&#39; &#39;Individual/(Individual * 3 day)&#39;
- &#39;Individual/(Individual * 15 mins)&#39;
- &#39;microgram (Carbon) / (individual * 1 hr)&#39;
- &#39;cubic micrometer (cell wet biovolume) / (gram (body mass - wet) * 1 hour)&#39;
- &#39;Individual/(Individual * 3 mins)&#39; &#39;Individual/(Individual*1 d)&#39;
- &#39;nanogram (chlorophyll a weight) / (milligram (body mass - dry) * 1 hour) &#39;
- &#39;Individuals / (milligram (body mass - dry) * 1 hour) &#39;
- &#39;individual / (1 individual * 1 day)&#39;
- &#39;individual / (1 individual * 1 hour)&#39;
- &#39;individual / (1 individual * 15 minutes)&#39;
- &#39;individual / (1 individual * 4 hour)&#39;
- &#39;nanogram (Carbon) / (individual * 1 hr)&#39;
- &#39;individual / (1 individual * 1 minute)&#39;
- &#39;individual / (1 individual * 1 second)&#39;
- &#39;Individual/(Individual*20 mins)&#39; &#39;Individual/(Individual * second)&#39;
- &#39;Individual/(Individual*1 hour)&#39; &#39;Individual/(Individual*111 day)&#39;
- &#39;Individual/(Individual*15 min)&#39; &#39;Individual/(Individual*1 min)&#39;
- &#39;Individual/(Individual*12 hour)&#39; &#39;Individual/(Individual*168 hour)&#39;
- &#39;Individual/(Individual*12 day)&#39; &#39;individual / (1 individual * 24 hour)&#39;
- &#39;individual / (1 individual * 6 hour)&#39;
- &#39;individual / (1 individual * 3 hour)&#39;
- &#39;individual / (1 individual * 1 hr)&#39;
- &#39;individual / (1 individual * 15 hrs)&#39;
- &#39;individual / (1 individual *5 mins)&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ResDensityUnit</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the independent variable </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Individuals per arena&#39; &#39;g (body - dry) per square meter&#39;
- &#39;cubic micrometer (yeast wet cell biovolume) per milliliter&#39;
- &#39;Individuals per liter&#39; &#39;Individuals per cubic centimeter&#39;
- &#39;kg (body - dry) per hectare&#39; &#39;Individuals per square meter&#39;
- &#39;Individuals per microliter&#39; &#39;g (body - wet) per square meter&#39;
- &#39;individuals per arena&#39; &#39;individuals per square km&#39;
- &#39;mg (body - dry) per square cm&#39; &#39;individuals per Liter&#39;
- &#39;mg (Carbon) per liter&#39;
- &#39;cubic micrometer (wet cell biovolume) per milliliter&#39;
- &#39;individuals per .15 ha&#39; &#39;microgram (Carbon) per liter&#39;
- &#39;Individuals per ml&#39; &#39;microgram (chlorophyll a weight) per liter&#39;
- &#39;Individuals per milliliter&#39; &#39;Individuals per 1 ha&#39;
- &#39;Individuals per cubic meter&#39; &#39;Individuals per 100 ha&#39;
- &#39;individual per milliliter (1)&#39; &#39;individual per arena (1)&#39;
- &#39;individual per liter (1)&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ID</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the independent variable </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[39835 39836 39837 39838 39839 39840 39841 39842 39843 39844 39845 39846
- 39847 39848 39849 39850 39851 39852 39853 39854 39855 39856 39857 39858
- 39859 39860 39861 39862 39863 39864 39865 39866 39867 39868 39869 39870
- 39871 39873 39874 39875 39876 39877 39878 39879 39880 39881 39882 39883
- 39884 39885 39886 39887 39888 39889 39890 39891 39892 39893 39894 39895
- 39896 39897 39898 39899 39900 39901 39902 39903 39904 39905 39906 39907
- 39908 39909 39910 39911 39912 39913 39914 39915 39916 39917 39918 39919
- 39920 39921 39922 39923 39924 39925 39926 39927 39928 39929 39931 39932
- 39933 39934 39935 39936 39937 39938 39939 39940 39941 39942 39943 39944
- 39945 39946 39947 39948 39949 39950 39951 39952 39953 39954 39955 39956
- 39957 39958 39959 39960 39961 39962 39963 39964 39965 39966 39967 39968
- 39969 39970 39971 39972 39973 39974 39975 39976 39977 39978 39979 39980
- 39981 39982 39983 39984 39985 39986 39987 39988 39989 39990 39991 39992
- 39993 39994 39995 39996 39997 39998 39999 40000 40001 40002 40003 40004
- 40005 40006 40007 40008 40009 40010 40011 40012 40013 40014 40015 40016
- 40017 40018 40019 40020 40021 40022 40023 40024 40025 40026 40027 40028
- 40029 40030 40031 40032 40033 40034 40035 40036 40037 40038 40039 40042
- 40043 40044 40045 40046 40047 40048 40049 40050 40051 40052 40053 40054
- 40055 40056 40057 40058 40059 40060 40061 40062 40063 40064 40065 40066
- 40067 40068 40069 40070 40071 40072 40073 40074 40075 40076 40077 40078
- 40079 40080 40081 40082 40083 40084 40085 40086 40087 40088 40089 40090
- 40091 40092 40093 40094 40095 40096 40097 40098 40099 40100 40101 40102
- 40103 40104 40105 40106 40107 40108 40109 40110 40111 40112   351   814
-    71   445     3     2   450   140    79   713   708   920   721   687
-   691     6   695 40114 40115 40116 40117 40118 40119 40120 40121 40122
- 40123 40124 40125 40126 40127 40128 40129 40130]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">39982</span><span class="p">]</span>
-<span class="n">data_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>ID</th>
-      <th>DataType</th>
-      <th>ORIGINAL_TraitID</th>
-      <th>ORIGINAL_TraitDefinition</th>
-      <th>TraitValue</th>
-      <th>TraitUnit</th>
-      <th>N_TraitValue</th>
-      <th>ConTaxa</th>
-      <th>ResTaxa</th>
-      <th>ConTaxaStage</th>
-      <th>...</th>
-      <th>ConSizType</th>
-      <th>CON_ORIGINAL_value</th>
-      <th>CON_ORIGINAL_unit</th>
-      <th>Con_Siz_reference</th>
-      <th>ResSizType</th>
-      <th>RES_ORIGINAL_value</th>
-      <th>RES_ORIGINAL_unit</th>
-      <th>Res_Siz_reference</th>
-      <th>Citation</th>
-      <th>FigureTable</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1552</th>
-      <td>39982</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>15.3020</td>
-      <td>Individual/(Individual * 1 hr)</td>
-      <td>0.004251</td>
-      <td>Mediomastus fragile Rasmussen 1973</td>
-      <td>Isochrysis galbana Parke</td>
-      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
-      <td>...</td>
-      <td>body volume</td>
-      <td>2500000</td>
-      <td>cubic micrometer</td>
-      <td>original</td>
-      <td>cell diameter</td>
-      <td>4.56</td>
-      <td>micrometer</td>
-      <td>original</td>
-      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
-      <td>Fig 6</td>
-    </tr>
-    <tr>
-      <th>1553</th>
-      <td>39982</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>17.6631</td>
-      <td>Individual/(Individual * 1 hr)</td>
-      <td>0.004906</td>
-      <td>Mediomastus fragile Rasmussen 1973</td>
-      <td>Isochrysis galbana Parke</td>
-      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
-      <td>...</td>
-      <td>body volume</td>
-      <td>2500000</td>
-      <td>cubic micrometer</td>
-      <td>original</td>
-      <td>cell diameter</td>
-      <td>4.56</td>
-      <td>micrometer</td>
-      <td>original</td>
-      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
-      <td>Fig 6</td>
-    </tr>
-    <tr>
-      <th>1554</th>
-      <td>39982</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>50.1713</td>
-      <td>Individual/(Individual * 1 hr)</td>
-      <td>0.013936</td>
-      <td>Mediomastus fragile Rasmussen 1973</td>
-      <td>Isochrysis galbana Parke</td>
-      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
-      <td>...</td>
-      <td>body volume</td>
-      <td>2500000</td>
-      <td>cubic micrometer</td>
-      <td>original</td>
-      <td>cell diameter</td>
-      <td>4.56</td>
-      <td>micrometer</td>
-      <td>original</td>
-      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
-      <td>Fig 6</td>
-    </tr>
-    <tr>
-      <th>1555</th>
-      <td>39982</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>47.9275</td>
-      <td>Individual/(Individual * 1 hr)</td>
-      <td>0.013313</td>
-      <td>Mediomastus fragile Rasmussen 1973</td>
-      <td>Isochrysis galbana Parke</td>
-      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
-      <td>...</td>
-      <td>body volume</td>
-      <td>2500000</td>
-      <td>cubic micrometer</td>
-      <td>original</td>
-      <td>cell diameter</td>
-      <td>4.56</td>
-      <td>micrometer</td>
-      <td>original</td>
-      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
-      <td>Fig 6</td>
-    </tr>
-    <tr>
-      <th>1556</th>
-      <td>39982</td>
-      <td>new</td>
-      <td>Resource Consumption Rate</td>
-      <td>The number of resource consumed per number of ...</td>
-      <td>78.3936</td>
-      <td>Individual/(Individual * 1 hr)</td>
-      <td>0.021776</td>
-      <td>Mediomastus fragile Rasmussen 1973</td>
-      <td>Isochrysis galbana Parke</td>
-      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
-      <td>...</td>
-      <td>body volume</td>
-      <td>2500000</td>
-      <td>cubic micrometer</td>
-      <td>original</td>
-      <td>cell diameter</td>
-      <td>4.56</td>
-      <td>micrometer</td>
-      <td>original</td>
-      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
-      <td>Fig 6</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 68 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="s2">&quot;ResDensity&quot;</span><span class="p">,</span> <span class="s2">&quot;N_TraitValue&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_subset</span><span class="p">,</span> <span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fd8af5963d0&gt;
-</pre></div>
-</div>
-<img alt="../_images/Appendix-MiniProj_12_1.png" src="../_images/Appendix-MiniProj_12_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="the-models">
-<h4>The Models<a class="headerlink" href="#the-models" title="Permalink to this headline">¶</a></h4>
-<p><em>All the following parameters and variables are in SI units</em>.</p>
-<p>The fundamental measure of interest (the response variable) is consumption rate (<span class="math notranslate nohighlight">\(c\)</span>). This is expressed in terms of biomass quantity or number of individuals of resource consumed <em>per unit time per unit consumer</em> (so units of Mass (or Individuals) / Time).</p>
-<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. \ref{eq:quad} and \ref{eq:cubic} (replace <span class="math notranslate nohighlight">\(x\)</span> with resource abundance).</p>
-<p>Then, there is the more mechanistic Holling Type II model (Holling, 1959):</p>
-<div class="math notranslate nohighlight">
-\[\label{eq:FR_II}
-      c = \frac{a x_R}{1 + h a x_R}
-\]</div>
-<p>Here, <span class="math notranslate nohighlight">\(x_R\)</span> is resource density (Mass / Area or Volume), <span class="math notranslate nohighlight">\(a\)</span> is consumer’s search rate (Area or Volume / Time ), and  <span class="math notranslate nohighlight">\(h\)</span> is handling time of the consumer for that resource (time taken to overpower and ingest it).</p>
-<p>Below is an example FR curve from the dataset you have been given with the Type II model fitted to it.</p>
-<hr class="docutils" />
-<p><img alt="image" src="../_images/3_FR.svg" />
-<small>  <center> Example of the a Type II model (eqn. \ref{eq:FR_II}) fitted to a functional response of a consumer on a resource.</p>
-</center> </small>
-<hr class="docutils" />
-<p>There is also the less-mechanistic “generalized” functional response model:</p>
-<div class="math notranslate nohighlight">
-\[\label{eq:FR_gen}
-      c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
-\]</div>
-<p>Where everything is same as \ref{eq:FR_II}, but the additional parameter <span class="math notranslate nohighlight">\(q\)</span> (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter <span class="math notranslate nohighlight">\(q\)</span> which does not have a formal biological meaning. Note that if <span class="math notranslate nohighlight">\(q=0\)</span>, eqn (\ref{eq:FR_gen} becomes same as the Type II model (eqn. \ref{eq:FR_II})).</p>
-<hr class="docutils" />
-<p><img alt="image" src="../_images/FR.svg" />
-<small> <center> The range of functional responses captured by the generalized functional response model (eqn. \ref{eq:FR_gen}).</p>
-</center>
-</small>
-<hr class="docutils" />
-<p>There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).</p>
-</div>
-</div>
 <div class="section" id="population-growth">
 <h3>Population Growth<a class="headerlink" href="#population-growth" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id1">
-<h4>The Question<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="the-question">
+<h4>The Question<a class="headerlink" href="#the-question" title="Permalink to this headline">¶</a></h4>
 <p><em>How well do different mathematical models, e.g., based upon population growth (mechanistic) theory  vs. phenomenological ones, fit to functional responses data across species?</em></p>
 <p>Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase – the slope of the line gives the maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve.</p>
 </div>
-<div class="section" id="id2">
-<h4>The Data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="the-data">
+<h4>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h4>
 <p>The dataset is called <code class="docutils literal notranslate"><span class="pre">LogisticGrowthData.csv</span></code>. It contains measurements of change in biomass or number of cells of microbes over time. These data were collected through lab experiments across the world. The field names are defined in a file called  <code class="docutils literal notranslate"><span class="pre">LogisticGrowthMetaData.csv</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">PopBio</span></code> (abundance), and <code class="docutils literal notranslate"><span class="pre">Time</span></code>. Single population growth rate curves can be identified by as unique  temperature-species-medium-citation-replicate combinations (concatenate them to get a new string variable that identifies unique growth curves).</p>
 <p>Let’s have a look at the data:</p>
 <div class="cell docutils container">
@@ -1872,21 +1304,594 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fd8ad27f220&gt;
 </pre></div>
 </div>
-<img alt="../_images/Appendix-MiniProj_26_1.png" src="../_images/Appendix-MiniProj_26_1.png" />
+<img alt="../_images/Appendix-MiniProj_17_1.png" src="../_images/Appendix-MiniProj_17_1.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id3">
-<h4>The Models<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<p>Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace <span class="math notranslate nohighlight">\(x\)</span> with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the “death phase” of population growth).For mechanistic models of population, growth, have a look at the Model fitting notebook’s <a class="reference external" href="./Appendix-ModelFitting.ipynb#Population-growth-rate-example">section on this</a>.</p>
+<div class="section" id="the-models">
+<h4>The Models<a class="headerlink" href="#the-models" title="Permalink to this headline">¶</a></h4>
+<p>Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace <span class="math notranslate nohighlight">\(x\)</span> with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the “death phase” of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the <a class="reference internal" href="20-ModelFitting.html"><span class="doc std std-doc">Model Fitting Chapter</span></a>.</p>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/Pop_Grow.svg" />
 <small> <center> An example population growth curve dataset to which the modified Gompertz model (Zwietering et. al., 1990) has been fitted.</p>
 </center></small>
 <p>(See the <a class="reference internal" href="20-ModelFitting.html"><span class="doc std std-doc">Model fitting notebook</span></a> for more information)</p>
-</div>
-</div>
 <hr class="docutils" />
+<p>In addtion to the Gompertz model, two growth rate models that also include a lag phase are the Baranyi model (Baranyi, 1993), and the Buchanan model (or three-phase logistic model; Buchanan, 1997). Please see the Readings &amp; Resources section below for the full references of these papers.</p>
+</div>
+</div>
+<div class="section" id="functional-responses">
+<h3>Functional Responses<a class="headerlink" href="#functional-responses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>The Question<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p><em>How well do different mathematical models, e.g., based upon foraging theory (mechanistic) principles  vs. phenomenological ones, fit to functional responses data across species?</em></p>
+<p>In ecological parlance, a functional response is the relationship between a consumer’s (e.g., predator) biomass consumption rate and abundance of the target resource (e.g., prey). Functional responses arise from fundamental biological and physical constraints on consumer-resource interactions (e.g., Holling 1959, Pawar et al, 2012), and determine the rate of biomass flow between species in ecosystems across the full scale of sizes, from the smallest (e.g., microbes) to the largest (e.g., blue whales). Functional responses also play a key sole in determining the stability (responses to perturbations) of the food webs that underpin ecosystems.</p>
+</div>
+<div class="section" id="id2">
+<h4>The Data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>The dataset is called <code class="docutils literal notranslate"><span class="pre">CRat.csv</span></code>. It contains measurements of rates of consumption of a single resource (e.g., prey, plants) species’ by a consumer species (e.g., predators, grazers). These data were collected through lab and field experiments across the world. The field names are defined in a file called <code class="docutils literal notranslate"><span class="pre">BiotraitsTemplateDescription.pdf</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">N_TraitValue</span></code> (The number of resources consumed per consumer per unit time), and <code class="docutils literal notranslate"><span class="pre">ResDensity</span></code> (the resource abundance). Individual functional response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values — each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one curve. Or you can reconstruct them as unique combinations of <code class="docutils literal notranslate"><span class="pre">Citation</span></code> (where the functional response dataset came from), <code class="docutils literal notranslate"><span class="pre">ConTaxa</span></code> (consumer species ID), <code class="docutils literal notranslate"><span class="pre">ResTaxa</span></code> (resource species ID).</p>
+<p>Let’s have a look at the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/CRat.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded </span><span class="si">{}</span><span class="s2"> columns.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded 68 columns.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>DataType</th>
+      <th>ORIGINAL_TraitID</th>
+      <th>ORIGINAL_TraitDefinition</th>
+      <th>TraitValue</th>
+      <th>TraitUnit</th>
+      <th>N_TraitValue</th>
+      <th>ConTaxa</th>
+      <th>ResTaxa</th>
+      <th>ConTaxaStage</th>
+      <th>...</th>
+      <th>ConSizType</th>
+      <th>CON_ORIGINAL_value</th>
+      <th>CON_ORIGINAL_unit</th>
+      <th>Con_Siz_reference</th>
+      <th>ResSizType</th>
+      <th>RES_ORIGINAL_value</th>
+      <th>RES_ORIGINAL_unit</th>
+      <th>Res_Siz_reference</th>
+      <th>Citation</th>
+      <th>FigureTable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>39835</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>8.67993</td>
+      <td>Individual/(Individual*120 mins)</td>
+      <td>0.001206</td>
+      <td>Cyclops bicuspidatus Claus 1857</td>
+      <td>Panagrolaimus spp.</td>
+      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
+      <td>...</td>
+      <td>dry mass</td>
+      <td>6.23E-009</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>dry mass</td>
+      <td>6.000000e-11</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
+      <td>Fig 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39835</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>7.66727</td>
+      <td>Individual/(Individual*120 mins)</td>
+      <td>0.001065</td>
+      <td>Cyclops bicuspidatus Claus 1857</td>
+      <td>Panagrolaimus spp.</td>
+      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
+      <td>...</td>
+      <td>dry mass</td>
+      <td>6.23E-009</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>dry mass</td>
+      <td>6.000000e-11</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
+      <td>Fig 1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>39835</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>8.67993</td>
+      <td>Individual/(Individual*120 mins)</td>
+      <td>0.001206</td>
+      <td>Cyclops bicuspidatus Claus 1857</td>
+      <td>Panagrolaimus spp.</td>
+      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
+      <td>...</td>
+      <td>dry mass</td>
+      <td>6.23E-009</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>dry mass</td>
+      <td>6.000000e-11</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
+      <td>Fig 1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39835</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>18.44480</td>
+      <td>Individual/(Individual*120 mins)</td>
+      <td>0.002562</td>
+      <td>Cyclops bicuspidatus Claus 1857</td>
+      <td>Panagrolaimus spp.</td>
+      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
+      <td>...</td>
+      <td>dry mass</td>
+      <td>6.23E-009</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>dry mass</td>
+      <td>6.000000e-11</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
+      <td>Fig 1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>39835</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>17.35990</td>
+      <td>Individual/(Individual*120 mins)</td>
+      <td>0.002411</td>
+      <td>Cyclops bicuspidatus Claus 1857</td>
+      <td>Panagrolaimus spp.</td>
+      <td>Cyclops bicuspidatus Claus 1857 [adult]</td>
+      <td>...</td>
+      <td>dry mass</td>
+      <td>6.23E-009</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>dry mass</td>
+      <td>6.000000e-11</td>
+      <td>kilogram</td>
+      <td>original</td>
+      <td>[91] Muschiol D. et al. Predator-prey relation...</td>
+      <td>Fig 1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 68 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ID&#39; &#39;DataType&#39; &#39;ORIGINAL_TraitID&#39; &#39;ORIGINAL_TraitDefinition&#39;
+ &#39;TraitValue&#39; &#39;TraitUnit&#39; &#39;N_TraitValue&#39; &#39;ConTaxa&#39; &#39;ResTaxa&#39;
+ &#39;ConTaxaStage&#39; &#39;ResTaxaStage&#39; &#39;Con_ForagingMovement&#39;
+ &#39;Con_RESDetectionDimensionality&#39; &#39;Res_ForagingMovement&#39;
+ &#39;Res_CONDetectionDimensionality&#39; &#39;CON_MASS_value&#39; &#39;RES_MASS_value&#39;
+ &#39;ResArenaSize_SI_UNIT&#39; &#39;ResDensity_SI_VALUE&#39; &#39;ResDensityUnit&#39;
+ &#39;ResDensity&#39; &#39;ResArenaSize_SI_VALUE&#39; &#39;ConTemp&#39; &#39;ResTemp&#39; &#39;ResReplaceRate&#39;
+ &#39;ResReplaceUnit&#39; &#39;ResReplace&#39; &#39;TraitSIValue&#39; &#39;TraitSIUnit&#39; &#39;N_TraitID&#39;
+ &#39;N_TraitConversion&#39; &#39;N_CONVERTED&#39; &#39;N_TraitUnit&#39; &#39;Original_ErrorValue&#39;
+ &#39;Original_ErrorValueUnit&#39; &#39;Replicates&#39; &#39;ConTaxon&#39; &#39;ConStage&#39; &#39;ConCommon&#39;
+ &#39;Con_MovementDimensionality&#39; &#39;Con_Thermy&#39; &#39;Res_MovementDimensionality&#39;
+ &#39;ResTaxon&#39; &#39;ResStage&#39; &#39;ResCommon&#39; &#39;Res_Thermy&#39; &#39;Habitat&#39; &#39;LabField&#39;
+ &#39;ObservationtimeSI&#39; &#39;ObservationtimeSIUnits&#39; &#39;ConStarvationTimeSI&#39;
+ &#39;ConStarvationTimeSIUnits&#39; &#39;ConArenaSiz_VALUE&#39; &#39;ConArenaSize_UNIT&#39;
+ &#39;ConDensity&#39; &#39;ConDensityUnit&#39; &#39;ConDensity_SI_VALUE&#39; &#39;ConDensityConst&#39;
+ &#39;ConSizType&#39; &#39;CON_ORIGINAL_value&#39; &#39;CON_ORIGINAL_unit&#39; &#39;Con_Siz_reference&#39;
+ &#39;ResSizType&#39; &#39;RES_ORIGINAL_value&#39; &#39;RES_ORIGINAL_unit&#39; &#39;Res_Siz_reference&#39;
+ &#39;Citation&#39; &#39;FigureTable&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">TraitUnit</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the response variable </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Individual/(Individual*120 mins)&#39; &#39;Individual/(Individual*90 mins)&#39;
+ &#39;individual / (individual * second)&#39;
+ &#39;individual / (5 individual * 24 hrs)&#39;
+ &#39;individual / (1 individual * 3 hrs)&#39;
+ &#39;individual / (1 individual * 5 hrs)&#39;
+ &#39;individual / (1 individual * 8 hrs)&#39;
+ &#39;individual / (1 individual * 6 hrs)&#39;
+ &#39;individual / (1 individual * 24 hrs)&#39;
+ &#39;individual / (1 individual *12 hrs)&#39;
+ &#39;individual / (1 individual *24 hrs)&#39;
+ &#39;individual / (1 individual *2 hrs)&#39;
+ &#39;milligram (body mass - dry) / (sqrt (gram (body mass - wet)) * 1 minute)&#39;
+ &#39;individual / (1 individual *3 hrs)&#39;
+ &#39;cubic micrometer (yeast cell wet volume) / (gram (body mass - wet) * 1 hour)&#39;
+ &#39;individual / (1 individual *30 mins)&#39; &#39;individual / (1 individual *day)&#39;
+ &#39;individual / (1 individual * hr)&#39;
+ &#39;gram (biomass - dry) / (individual * 1 minute)&#39;
+ &#39;Individual/(Individual*1 mins)&#39; &#39;Individual/(Individual*1 hr)&#39;
+ &#39;Individual/(Individual*1 day)&#39;
+ &#39;gram (biomass - wet) / (individual * 3 hrs)&#39;
+ &#39;Individual/(Individual * 1 hr)&#39; &#39;Individual/(Individual*7 days)&#39;
+ &#39;gram (biomass - wet) / (individual * 22.5 minutes)&#39;
+ &#39;Individual/(Individual * 8 hr)&#39; &#39;Individual/(Individual * day)&#39;
+ &#39;Individual/(Individual * 106 days)&#39;
+ &#39;milligram (biomass - dry) / (individual * 1 hr)&#39;
+ &#39;Individual/(Individual * 12 hrs)&#39; &#39;Individual/(Individual * 1 day)&#39;
+ &#39;Individual/(Individual * 2 day)&#39; &#39;Individual/(Individual * 3 day)&#39;
+ &#39;Individual/(Individual * 15 mins)&#39;
+ &#39;microgram (Carbon) / (individual * 1 hr)&#39;
+ &#39;cubic micrometer (cell wet biovolume) / (gram (body mass - wet) * 1 hour)&#39;
+ &#39;Individual/(Individual * 3 mins)&#39; &#39;Individual/(Individual*1 d)&#39;
+ &#39;nanogram (chlorophyll a weight) / (milligram (body mass - dry) * 1 hour) &#39;
+ &#39;Individuals / (milligram (body mass - dry) * 1 hour) &#39;
+ &#39;individual / (1 individual * 1 day)&#39;
+ &#39;individual / (1 individual * 1 hour)&#39;
+ &#39;individual / (1 individual * 15 minutes)&#39;
+ &#39;individual / (1 individual * 4 hour)&#39;
+ &#39;nanogram (Carbon) / (individual * 1 hr)&#39;
+ &#39;individual / (1 individual * 1 minute)&#39;
+ &#39;individual / (1 individual * 1 second)&#39;
+ &#39;Individual/(Individual*20 mins)&#39; &#39;Individual/(Individual * second)&#39;
+ &#39;Individual/(Individual*1 hour)&#39; &#39;Individual/(Individual*111 day)&#39;
+ &#39;Individual/(Individual*15 min)&#39; &#39;Individual/(Individual*1 min)&#39;
+ &#39;Individual/(Individual*12 hour)&#39; &#39;Individual/(Individual*168 hour)&#39;
+ &#39;Individual/(Individual*12 day)&#39; &#39;individual / (1 individual * 24 hour)&#39;
+ &#39;individual / (1 individual * 6 hour)&#39;
+ &#39;individual / (1 individual * 3 hour)&#39;
+ &#39;individual / (1 individual * 1 hr)&#39;
+ &#39;individual / (1 individual * 15 hrs)&#39;
+ &#39;individual / (1 individual *5 mins)&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ResDensityUnit</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the independent variable </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Individuals per arena&#39; &#39;g (body - dry) per square meter&#39;
+ &#39;cubic micrometer (yeast wet cell biovolume) per milliliter&#39;
+ &#39;Individuals per liter&#39; &#39;Individuals per cubic centimeter&#39;
+ &#39;kg (body - dry) per hectare&#39; &#39;Individuals per square meter&#39;
+ &#39;Individuals per microliter&#39; &#39;g (body - wet) per square meter&#39;
+ &#39;individuals per arena&#39; &#39;individuals per square km&#39;
+ &#39;mg (body - dry) per square cm&#39; &#39;individuals per Liter&#39;
+ &#39;mg (Carbon) per liter&#39;
+ &#39;cubic micrometer (wet cell biovolume) per milliliter&#39;
+ &#39;individuals per .15 ha&#39; &#39;microgram (Carbon) per liter&#39;
+ &#39;Individuals per ml&#39; &#39;microgram (chlorophyll a weight) per liter&#39;
+ &#39;Individuals per milliliter&#39; &#39;Individuals per 1 ha&#39;
+ &#39;Individuals per cubic meter&#39; &#39;Individuals per 100 ha&#39;
+ &#39;individual per milliliter (1)&#39; &#39;individual per arena (1)&#39;
+ &#39;individual per liter (1)&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ID</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="c1">#units of the independent variable </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[39835 39836 39837 39838 39839 39840 39841 39842 39843 39844 39845 39846
+ 39847 39848 39849 39850 39851 39852 39853 39854 39855 39856 39857 39858
+ 39859 39860 39861 39862 39863 39864 39865 39866 39867 39868 39869 39870
+ 39871 39873 39874 39875 39876 39877 39878 39879 39880 39881 39882 39883
+ 39884 39885 39886 39887 39888 39889 39890 39891 39892 39893 39894 39895
+ 39896 39897 39898 39899 39900 39901 39902 39903 39904 39905 39906 39907
+ 39908 39909 39910 39911 39912 39913 39914 39915 39916 39917 39918 39919
+ 39920 39921 39922 39923 39924 39925 39926 39927 39928 39929 39931 39932
+ 39933 39934 39935 39936 39937 39938 39939 39940 39941 39942 39943 39944
+ 39945 39946 39947 39948 39949 39950 39951 39952 39953 39954 39955 39956
+ 39957 39958 39959 39960 39961 39962 39963 39964 39965 39966 39967 39968
+ 39969 39970 39971 39972 39973 39974 39975 39976 39977 39978 39979 39980
+ 39981 39982 39983 39984 39985 39986 39987 39988 39989 39990 39991 39992
+ 39993 39994 39995 39996 39997 39998 39999 40000 40001 40002 40003 40004
+ 40005 40006 40007 40008 40009 40010 40011 40012 40013 40014 40015 40016
+ 40017 40018 40019 40020 40021 40022 40023 40024 40025 40026 40027 40028
+ 40029 40030 40031 40032 40033 40034 40035 40036 40037 40038 40039 40042
+ 40043 40044 40045 40046 40047 40048 40049 40050 40051 40052 40053 40054
+ 40055 40056 40057 40058 40059 40060 40061 40062 40063 40064 40065 40066
+ 40067 40068 40069 40070 40071 40072 40073 40074 40075 40076 40077 40078
+ 40079 40080 40081 40082 40083 40084 40085 40086 40087 40088 40089 40090
+ 40091 40092 40093 40094 40095 40096 40097 40098 40099 40100 40101 40102
+ 40103 40104 40105 40106 40107 40108 40109 40110 40111 40112   351   814
+    71   445     3     2   450   140    79   713   708   920   721   687
+   691     6   695 40114 40115 40116 40117 40118 40119 40120 40121 40122
+ 40123 40124 40125 40126 40127 40128 40129 40130]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">39982</span><span class="p">]</span>
+<span class="n">data_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>DataType</th>
+      <th>ORIGINAL_TraitID</th>
+      <th>ORIGINAL_TraitDefinition</th>
+      <th>TraitValue</th>
+      <th>TraitUnit</th>
+      <th>N_TraitValue</th>
+      <th>ConTaxa</th>
+      <th>ResTaxa</th>
+      <th>ConTaxaStage</th>
+      <th>...</th>
+      <th>ConSizType</th>
+      <th>CON_ORIGINAL_value</th>
+      <th>CON_ORIGINAL_unit</th>
+      <th>Con_Siz_reference</th>
+      <th>ResSizType</th>
+      <th>RES_ORIGINAL_value</th>
+      <th>RES_ORIGINAL_unit</th>
+      <th>Res_Siz_reference</th>
+      <th>Citation</th>
+      <th>FigureTable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1552</th>
+      <td>39982</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>15.3020</td>
+      <td>Individual/(Individual * 1 hr)</td>
+      <td>0.004251</td>
+      <td>Mediomastus fragile Rasmussen 1973</td>
+      <td>Isochrysis galbana Parke</td>
+      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
+      <td>...</td>
+      <td>body volume</td>
+      <td>2500000</td>
+      <td>cubic micrometer</td>
+      <td>original</td>
+      <td>cell diameter</td>
+      <td>4.56</td>
+      <td>micrometer</td>
+      <td>original</td>
+      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
+      <td>Fig 6</td>
+    </tr>
+    <tr>
+      <th>1553</th>
+      <td>39982</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>17.6631</td>
+      <td>Individual/(Individual * 1 hr)</td>
+      <td>0.004906</td>
+      <td>Mediomastus fragile Rasmussen 1973</td>
+      <td>Isochrysis galbana Parke</td>
+      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
+      <td>...</td>
+      <td>body volume</td>
+      <td>2500000</td>
+      <td>cubic micrometer</td>
+      <td>original</td>
+      <td>cell diameter</td>
+      <td>4.56</td>
+      <td>micrometer</td>
+      <td>original</td>
+      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
+      <td>Fig 6</td>
+    </tr>
+    <tr>
+      <th>1554</th>
+      <td>39982</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>50.1713</td>
+      <td>Individual/(Individual * 1 hr)</td>
+      <td>0.013936</td>
+      <td>Mediomastus fragile Rasmussen 1973</td>
+      <td>Isochrysis galbana Parke</td>
+      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
+      <td>...</td>
+      <td>body volume</td>
+      <td>2500000</td>
+      <td>cubic micrometer</td>
+      <td>original</td>
+      <td>cell diameter</td>
+      <td>4.56</td>
+      <td>micrometer</td>
+      <td>original</td>
+      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
+      <td>Fig 6</td>
+    </tr>
+    <tr>
+      <th>1555</th>
+      <td>39982</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>47.9275</td>
+      <td>Individual/(Individual * 1 hr)</td>
+      <td>0.013313</td>
+      <td>Mediomastus fragile Rasmussen 1973</td>
+      <td>Isochrysis galbana Parke</td>
+      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
+      <td>...</td>
+      <td>body volume</td>
+      <td>2500000</td>
+      <td>cubic micrometer</td>
+      <td>original</td>
+      <td>cell diameter</td>
+      <td>4.56</td>
+      <td>micrometer</td>
+      <td>original</td>
+      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
+      <td>Fig 6</td>
+    </tr>
+    <tr>
+      <th>1556</th>
+      <td>39982</td>
+      <td>new</td>
+      <td>Resource Consumption Rate</td>
+      <td>The number of resource consumed per number of ...</td>
+      <td>78.3936</td>
+      <td>Individual/(Individual * 1 hr)</td>
+      <td>0.021776</td>
+      <td>Mediomastus fragile Rasmussen 1973</td>
+      <td>Isochrysis galbana Parke</td>
+      <td>Mediomastus fragile Rasmussen 1973 [larva]</td>
+      <td>...</td>
+      <td>body volume</td>
+      <td>2500000</td>
+      <td>cubic micrometer</td>
+      <td>original</td>
+      <td>cell diameter</td>
+      <td>4.56</td>
+      <td>micrometer</td>
+      <td>original</td>
+      <td>Hansen B. 1993. ASPECTS OF FEEDING GROWTH AND ...</td>
+      <td>Fig 6</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 68 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="s2">&quot;ResDensity&quot;</span><span class="p">,</span> <span class="s2">&quot;N_TraitValue&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_subset</span><span class="p">,</span> <span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fd8af5963d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/Appendix-MiniProj_27_1.png" src="../_images/Appendix-MiniProj_27_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>The Models<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p><em>All the following parameters and variables are in SI units</em>.</p>
+<p>The fundamental measure of interest (the response variable) is consumption rate (<span class="math notranslate nohighlight">\(c\)</span>). This is expressed in terms of biomass quantity or number of individuals of resource consumed <em>per unit time per unit consumer</em> (so units of Mass (or Individuals) / Time).</p>
+<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. \ref{eq:quad} and \ref{eq:cubic} (replace <span class="math notranslate nohighlight">\(x\)</span> with resource abundance).</p>
+<p>Then, there is the more mechanistic Holling Type II model (Holling, 1959):</p>
+<div class="math notranslate nohighlight">
+\[\label{eq:FR_II}
+      c = \frac{a x_R}{1 + h a x_R}
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(x_R\)</span> is resource density (Mass / Area or Volume), <span class="math notranslate nohighlight">\(a\)</span> is consumer’s search rate (Area or Volume / Time ), and  <span class="math notranslate nohighlight">\(h\)</span> is handling time of the consumer for that resource (time taken to overpower and ingest it).</p>
+<p>Below is an example FR curve from the dataset you have been given with the Type II model fitted to it.</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/3_FR.svg" />
+<small>  <center> Example of the a Type II model (eqn. \ref{eq:FR_II}) fitted to a functional response of a consumer on a resource.</p>
+</center> </small>
+<hr class="docutils" />
+<p>There is also the less-mechanistic “generalized” functional response model:</p>
+<div class="math notranslate nohighlight">
+\[\label{eq:FR_gen}
+      c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
+\]</div>
+<p>Where everything is same as \ref{eq:FR_II}, but the additional parameter <span class="math notranslate nohighlight">\(q\)</span> (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter <span class="math notranslate nohighlight">\(q\)</span> which does not have a formal biological meaning. Note that if <span class="math notranslate nohighlight">\(q=0\)</span>, eqn (\ref{eq:FR_gen} becomes same as the Type II model (eqn. \ref{eq:FR_II})).</p>
+<hr class="docutils" />
+<p><img alt="image" src="../_images/FR.svg" />
+<small> <center> The range of functional responses captured by the generalized functional response model (eqn. \ref{eq:FR_gen}).</p>
+</center>
+</small>
+<hr class="docutils" />
+<p>There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).</p>
+</div>
+</div>
 <div class="section" id="thermal-performance-curves">
 <h3>Thermal Performance Curves<a class="headerlink" href="#thermal-performance-curves" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id4">
@@ -2418,7 +2423,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fd8af63a1f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/Appendix-MiniProj_36_1.png" src="../_images/Appendix-MiniProj_36_1.png" />
+<img alt="../_images/Appendix-MiniProj_37_1.png" src="../_images/Appendix-MiniProj_37_1.png" />
 </div>
 </div>
 </div>
@@ -2480,10 +2485,11 @@ enzyme’s high-temperature de-activation energy (eV) which controls the behavio
 </div>
 <div class="section" id="suggested-workflow">
 <h2>Suggested Workflow<a class="headerlink" href="#suggested-workflow" title="Permalink to this headline">¶</a></h2>
-<p>You will build a workflow that starts with the data and ends with a report written in LaTeX. I suggest the following components and sequence in your workflow (you may choose to do it differently):</p>
+<p>You will build a workflow that starts with the data and ends with a report written in LaTeX.</p>
+<p>The following components and sequence of your workflow are suggested (you may choose to do it differently).</p>
 <div class="section" id="data-preparation-script">
 <h3>Data preparation script<a class="headerlink" href="#data-preparation-script" title="Permalink to this headline">¶</a></h3>
-<p>First, a script that imports the data and prepares it for Model fitting. This may be in Python or R, and will typically have the following features:</p>
+<p>First, a script that imports the data and prepares it for model fitting. This may be in Python or R, and will typically have the following features:</p>
 <ul class="simple">
 <li><p>Creates unique ids so that you can identify unique datasets (e.g., single thermal responses or functional responses). <em>This may not always be necessary because your data might already contain a field that delineates single curves (e.g., an <code class="docutils literal notranslate"><span class="pre">ID</span></code> field/column)</em></p></li>
 <li><p>Deals with missing, and other problematic data values.</p></li>
@@ -2495,8 +2501,8 @@ enzyme’s high-temperature de-activation energy (eV) which controls the behavio
 <p>A separate script that does the Model fitting. For example, it may have the following features:</p>
 <ul class="simple">
 <li><p>Opens the (new, modified) dataset from previous step.</p></li>
-<li><p>Does model fitting</p></li>
-<li><p>Calculates AIC, BIC, R<span class="math notranslate nohighlight">\(^{2}\)</span>, and other statistical measures of model fit (you decide what you want to include)</p></li>
+<li><p>Does model fitting. Ultimately you need to fit at least one mechanistic/nonlinear model along with one or more linear models, but for building your workflow, just go ahead an fit a couple of different linear models (e.g., linear regression bvs quadratic and / or cubic polynomial).</p></li>
+<li><p>Calculates AIC, BIC, R<span class="math notranslate nohighlight">\(^{2}\)</span>, and other statistical measures of model fit (you decide what you want to include).</p></li>
 <li><p>Exports the results to a csv that the <a class="reference external" href="#Final-plotting-script">final plotting script</a> can read.</p></li>
 </ul>
 <div class="admonition note">
@@ -2550,14 +2556,15 @@ enzyme’s high-temperature de-activation energy (eV) which controls the behavio
 <div class="section" id="obtaining-starting-values">
 <h3>Obtaining starting values<a class="headerlink" href="#obtaining-starting-values" title="Permalink to this headline">¶</a></h3>
 <p>The main challenge for NLLS fitting is finding starting values for the parameters.</p>
-<p>Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,</p>
+<p>Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key.</p>
+<p>For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,</p>
 <ul class="simple">
 <li><p>Calculates a starting value for <span class="math notranslate nohighlight">\(r_{max}\)</span> by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)</p></li>
 <li><p>Calculates a starting value of <span class="math notranslate nohighlight">\(t_{lag}\)</span> by intersecting the fitted line with the x (time)-axis</p></li>
 <li><p>Calculates a starting value for the asymptote <span class="math notranslate nohighlight">\(A\)</span> as the highest data (abundance) value in the dataset.</p></li>
 </ul>
-<p>In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to not sample starting values from a distribution. For example, you can choose a gaussian (high confidence in mean of parameter) or a uniform distribution (low confidence in mean, high confidence in the range of values that the parameter can take) with the mean being the value you inferred from the data.</p>
-<p><em>We suggest you write a separate script/module/function that calculates starting values for the model parameters.</em></p>
+<p>In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to <em>sample starting values from a distribution</em>. For example, you can choose a Gaussian (if you have high confidence in mean value of parameter) or a uniform distribution (if you have low confidence in mean, but high confidence in the range of values that the parameter can take), with the mean of the sampling distribution  being the value you inferred from the data.</p>
+<p><em>Ideally, you should write a separate script/module/function that calculates starting values for the model parameters.</em></p>
 </div>
 </div>
 <div class="section" id="getting-started">
@@ -2565,11 +2572,14 @@ enzyme’s high-temperature de-activation energy (eV) which controls the behavio
 <p>Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way.</p>
 <p>Here are some suggested first steps to get started:</p>
 <ul class="simple">
-<li><p>Explore the data in R or Python (e.g., using Jupyter).</p></li>
+<li><p>Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above).</p></li>
 <li><p>Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.</p></li>
-<li><p>Explore the models you will be fitting. Basically, be able to plot them. Write them as functions in your Python/R script (you can then re-use these functions in your NLLS fitting script as well). Then do some plotting of the functions (you can suppress or sandbox those code lines for exploratory plotting of the functions in the final product).</p></li>
-<li><p>Figure out, using a minimal example (say, with one, “nice-looking” thermal performance, functional response, or population growth curve/dataset) to see how the NLLS fitting package and its commands work. This is your minimal example</p></li>
+<li><p>Explore the models you will be fitting. Basically, be able to plot them. Write them as functions in your Python/R script (you can then re-use these functions in your NLLS fitting script as well). Then do some plotting of the mathematical functions. You sandbox any code for exploratory plotting of the functions in the final product.</p></li>
+<li><p><strong>For NLLS fitting</strong>, figure out, using one, “nice-looking” functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!</p>
+<ul>
 <li><p>Next, write a loop over all unique datasets (data curves) using the <code class="docutils literal notranslate"><span class="pre">try</span></code> to catch errors in case the fitting doesn’t converge.</p></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="readings-resources">
