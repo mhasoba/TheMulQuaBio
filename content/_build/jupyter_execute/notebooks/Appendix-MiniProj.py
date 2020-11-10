@@ -3,9 +3,10 @@
 
 # # The Computing Miniproject
 
-# It's time to do something concrete with all the computational biology techniques you have been learning.
+# ## Introduction 
 # 
-# The computing Miniproject gives you an opportunity to try the "whole nine yards" of *asking and answering* a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a **fully reproducible way**. It will in essence give you an opportunity to perform a useful "dry run" of executing your actual Dissertation project.
+# The computing Miniproject gives you an opportunity to try the "whole nine yards" of *asking and answering* a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a **fully reproducible way**. It will in essence give you an opportunity to perform a useful "dry run" of executing your actual Dissertation project. *It is an opportunity to do something concrete with all the computational biology techniques you have been learning.*
+# 
 # 
 # ## Objectives
 # 
@@ -23,7 +24,7 @@
 # 
 # 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings & Resources section below).*
 # 
-# 3. **The project should be fully reproducible.** You will write a script that "glues" the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (*More detailed instructions on report below*). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors. 
+# 3. **It should be fully reproducible.** You will write a script that "glues" the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (*More detailed instructions on report below*). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors.
 # 
 # *You will be given lectures and practicals on model fitting before you start on your Miniproject.*
 # 
@@ -56,11 +57,17 @@
 # 
 # At this stage, you are not going to be told you how to organize your project — that's part of the marking criteria (see next section).
 # 
+# ```{note}
+# The single script that runs the whole project should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`).
+# ```
+# 
 # ## Marking criteria
 # 
 # *Equal weightage will be given to the code+workflow and writeup components — each component will be marked to a max of 100 pts and then rescaled to a single mark / 100 using equal weightage*
 # 
 # The assessor will be looking for the following while assessing your submission:
+# 
+# ### Computing
 # 
 # * A well-organized project where code, results, data, etc., are easy to locate, inspect, and use. In the project's README also include:
 # 
@@ -71,13 +78,123 @@
 #     * What each package you used is for
 # 
 # * A project that runs smoothly and efficiently, without any errors once a single script is called. 
-#     * The single script should be called *run_MiniProject*, with an appropriate extension (e.g., `run_MiniProject.py` or `run_MiniProject.sh`).
+# 
+# 
+# ### Report
 # 
 # * A report that contains all the components indicated above in "The Report" subsection, with some original thought and synthesis in the *Introduction* and *Discussion* sections.
 # 
 # * Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.
 # 
-# * The marking criteria you may refer to are the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf).
+# ### Overall
+# 
+# * The marking criteria you may refer to for both components are the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf). 
+# * The goal is to fit as many mathematical models as possible, but the minimum being 2 (to allow model comparison). You will get extra points for picking more "difficult" models to fit and compare (basically, one or more non-linear mathematical models).
+
+# ## Suggested Workflow
+# 
+# You will build a workflow that starts with the data and ends with a report written in LaTeX. 
+# 
+# The following components and sequence of your workflow are suggested (you may choose to do it differently).
+# 
+# ### Data preparation script 
+# 
+# First, a script that imports the data and prepares it for model fitting. This may be in Python or R, and will typically have the following features:
+# 
+# * Creates unique ids so that you can identify unique datasets (e.g., single thermal responses or functional responses). *This may not always be necessary because your data might already contain a field that delineates single curves (e.g., an `ID` field/column)* 
+# * Deals with missing, and other problematic data values.
+# * Saves the modified data to one or more csv file(s).
+# 
+# 
+# ### Model fitting script
+# 
+# A separate script that does the Model fitting. For example, it may have the following features: 
+# 
+# * Opens the (new, modified) dataset from previous step.
+# 
+# * Does model fitting. Ultimately you need to fit at least one mechanistic/nonlinear model along with one or more linear models, but for building your workflow, just go ahead an fit a couple of different linear models (e.g., linear regression bvs quadratic and / or cubic polynomial).    
+# 
+# * Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include).
+# 
+# * Exports the results to a csv that the [final plotting script](#Final-plotting-script) can read.
+#  
+# 
+# ```{note}
+# * Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the `try` keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets *after* the Model fitting script has finished running and you are in the Analysis phase.  
+# ```
+# 
+# ### Final plotting and analysis script  
+# 
+# * Next, write a script that imports the results from the previous step and plots every curve with the two (or more) models (or none, if nothing converges) overlaid. 
+#     * Doing this will help you identify poor fits visually and help you decide whether the model fitting (e.g., using NLLS) can be further optimized. 
+#     * All plots should be saved in a single separate sub-directory. 
+# 
+# * This script will also perform any analyses of the results of the Model fitting, for example to summarize which model(s) fit(s) best, and address any biological questions involving co-variates.    
+# 
+# ### Report compiling script
+# 
+# * Then comes the $\LaTeX$ source code and a (typically, Bash) script that compiles it. 
+# 
+# ### A single script to run them all
+# 
+# * Finally, write a script called `run_MiniProject.py` or `run_MiniProject.sh` respectively, which runs the whole project, right down to compilation of the LaTeX  document.
+# 
+# 
+# ## For NLLS fitting 
+# 
+# **FIRST work through the [example practicals](./20-ModelFitting.ipynb).**
+# 
+# * If you choose `R`, examples are [here](Appendix-ModelFitting.ipynb). 
+# 
+# * If you choose Python for the model fitting component of your workflow, use `lmfit`: 
+#     * Look up submodules `minimize`, `Parameters`, `Parameter`, and `report_fit`. 
+#     * *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . 
+#     * You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). Lots of examples of using lmfit online.
+# 
+# * You will need to write a script that calculates [starting values](more on this below). 
+# 
+# * You will need to use the `try` keyword because not all runs will converge. *The more data curves you are able to fit, the better — that is part of the challenge*
+# 
+# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.* (As you did in the [example practicals](./20-ModelFitting.ipynb))
+# 
+# ### Obtaining starting values 
+# 
+# The main challenge for NLLS fitting is finding starting values for the parameters. 
+# 
+# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. 
+# 
+# For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
+# *  Calculates a starting value for $r_{max}$ by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)
+# * Calculates a starting value of $t_{lag}$ by intersecting the fitted line with the x (time)-axis 
+# * Calculates a starting value for the asymptote $A$ as the highest data (abundance) value in the dataset. 
+# 
+# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to *sample starting values from a distribution*. For example, you can choose a Gaussian (if you have high confidence in mean value of parameter) or a uniform distribution (if you have low confidence in mean, but high confidence in the range of values that the parameter can take), with the mean of the sampling distribution  being the value you inferred from the data.
+# 
+# *Ideally, you should write a separate script/module/function that calculates starting values for the model parameters.* 
+# 
+# 
+# ### Getting started 
+# 
+# Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way. 
+#    
+# ```{tip}
+# The Miniproject is also an exercise in learning to pick the right size of (computational) problem given the amount of time you have to solve it. So even if you might be tempted to take on, at the very start, a very ambitious project (basically, picking both linear and non-linear models) and *then* trying to develop your workflow, you will very likely get stuck in "local optima" in terms of the overall workflow design and implementation. It is important that you first pick a "bite sized" problem (e.g., two linear models), and develop the overall computational work flow, from plotting and fitting to model selection. At the same time, *also start at least outlining  the report* based on the first, simple, tractable problem you pick.     
+# ```
+# 
+# Here are some suggested first steps to get started:
+# 
+# * Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above). 
+# 
+# * Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.
+# 
+# * Explore the models you will be fitting. Basically, plot them: Write mathematical functions you want to fit in a Python/R script (you can then re-use these functions in your model fitting script as well), and then evaluate them  numerically to see the shape of the function. 
+# 
+# ```{tip}
+# Remember to sandbox and/or gitignore any code and output for exploratory plotting of the functions in the final product.
+# ```
+# 
+# * **For NLLS fitting**, figure out, using one, "nice-looking" functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
+#    * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
 
 # ## The Dataset and Model Options
 # 
@@ -424,7 +541,9 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 
 # ## Additional models and questions you can tackle
 # 
-# In all three options above, you may try to tackle fitting to additional models you find in the literature. Some Readings have been provided for each of the three data types below. You may choose to tackle some other hypotheses or explore patterns by considering additional covariates. For example, 
+# In all three options above, you may try to tackle fitting to additional models you find in the literature. Some Readings have been provided for each of the three data types below. 
+# 
+# You may choose to tackle some biological hypotheses or explore patterns by considering additional covariates. For example, 
 # 
 # *Do different taxa show different functional responses?*
 # 
@@ -432,105 +551,7 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # *Do different models fit different types of thermal performance curves (e.g., Photosynthesis vs Respiration)?* 
 # 
-# You may also choose to revisit the results of another paper that has done comparisons of the models you have chosen with your new dataset.
-
-# ## Suggested Workflow
-# 
-# You will build a workflow that starts with the data and ends with a report written in LaTeX. 
-# 
-# The following components and sequence of your workflow are suggested (you may choose to do it differently).
-# 
-# ### Data preparation script 
-# 
-# First, a script that imports the data and prepares it for model fitting. This may be in Python or R, and will typically have the following features:
-# 
-# * Creates unique ids so that you can identify unique datasets (e.g., single thermal responses or functional responses). *This may not always be necessary because your data might already contain a field that delineates single curves (e.g., an `ID` field/column)* 
-# * Deals with missing, and other problematic data values.
-# * Saves the modified data to one or more csv file(s).
-# 
-# 
-# ### Model fitting script
-# 
-# A separate script that does the Model fitting. For example, it may have the following features: 
-# 
-# * Opens the (new, modified) dataset from previous step.
-# 
-# * Does model fitting. Ultimately you need to fit at least one mechanistic/nonlinear model along with one or more linear models, but for building your workflow, just go ahead an fit a couple of different linear models (e.g., linear regression bvs quadratic and / or cubic polynomial).    
-# 
-# * Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include).
-# 
-# * Exports the results to a csv that the [final plotting script](#Final-plotting-script) can read.
-#  
-# 
-# ```{note}
-# * Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the `try` keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets *after* the Model fitting script has finished running and you are in the Analysis phase.  
-# ```
-# 
-# ### Final plotting and analysis script  
-# 
-# * Next, write a script that imports the results from the previous step and plots every curve with the two (or more) models (or none, if nothing converges) overlaid. 
-#     * Doing this will help you identify poor fits visually and help you decide whether the model fitting (e.g., using NLLS) can be further optimized. 
-#     * All plots should be saved in a single separate sub-directory. 
-# 
-# * This script will also perform any analyses of the results of the Model fitting, for example to summarize which model(s) fit(s) best, and address any biological questions involving co-variates.    
-# 
-# ### Report compiling script
-# 
-# * Then comes the $\LaTeX$ source code and a (typically, Bash) script that compiles it. 
-# 
-# ### A single script to run them all
-# 
-# * Finally, write a script called `run_MiniProject.py` or `run_MiniProject.sh` respectively, which runs the whole project, right down to compilation of the LaTeX  document.
-# 
-# 
-# ## For NLLS fitting 
-# 
-# **FIRST work through the [example practicals](./20-ModelFitting.ipynb).**
-# 
-# * If you choose `R`, examples are [here](Appendix-ModelFitting.ipynb). 
-# 
-# * If you choose Python for the model fitting component of your workflow, use `lmfit`: 
-#     * Look up submodules `minimize`, `Parameters`, `Parameter`, and `report_fit`. 
-#     * *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . 
-#     * You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). Lots of examples of using lmfit online.
-# 
-# * You will need to write a script that calculates [starting values](more on this below). 
-# 
-# * You will need to use the `try` keyword because not all runs will converge. *The more data curves you are able to fit, the better — that is part of the challenge*
-# 
-# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.* (As you did in the [example practicals](./20-ModelFitting.ipynb))
-# 
-# ### Obtaining starting values 
-# 
-# The main challenge for NLLS fitting is finding starting values for the parameters. 
-# 
-# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. 
-# 
-# For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
-# *  Calculates a starting value for $r_{max}$ by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)
-# * Calculates a starting value of $t_{lag}$ by intersecting the fitted line with the x (time)-axis 
-# * Calculates a starting value for the asymptote $A$ as the highest data (abundance) value in the dataset. 
-# 
-# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to *sample starting values from a distribution*. For example, you can choose a Gaussian (if you have high confidence in mean value of parameter) or a uniform distribution (if you have low confidence in mean, but high confidence in the range of values that the parameter can take), with the mean of the sampling distribution  being the value you inferred from the data.
-# 
-# *Ideally, you should write a separate script/module/function that calculates starting values for the model parameters.* 
-# 
-# 
-# ## Getting started 
-# 
-# Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way. 
-# 
-# Here are some suggested first steps to get started:
-# 
-# * Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above). 
-# 
-# * Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.
-# 
-# * Explore the models you will be fitting. Basically, be able to plot them. Write them as functions in your Python/R script (you can then re-use these functions in your NLLS fitting script as well). Then do some plotting of the mathematical functions. You sandbox any code for exploratory plotting of the functions in the final product.
-# 
-# * **For NLLS fitting**, figure out, using one, "nice-looking" functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
-# 
-#     * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
+# You may also choose to revisit the results of another paper that has done comparisons of the models you have chosen with your new dataset (but remember, that may well become too ambitious a project given the time you have).
 
 # ## Readings & Resources
 # 
@@ -576,6 +597,8 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # * Schoolfield, R. M., P. J H Sharpe, and C. E. Magnuson. 1981. Non-Linear Regression of Biological Temperature-Dependent Rate Models Based on Absolute Reaction-Rate Theory. Journal of Theoretical Biology 88 (4): 719–31. https://doi.org/10.1016/0022-5193(81)90246-0.
 # 
 # * Zwietering, M. H.,  J. T de Koos, B. E. Hasenack, J. C. de Witt,  and K. van't Riet. 1991. Modeling of bacterial growth as a function of temperature. Appl. Environ. Microbiol. 57, 1094–101.
+# 
+# * Briere J. F., Pracros P., Le Roux A. Y., Pierre J. S. 1999. A novel rate model of temperature-dependent development for arthropods. Environ Entomol 28: 22–29.
 # 
 # * Dell, A. I., S. Pawar, and V. M. Savage. 2011. Systematic Variation in the Temperature Dependence of Physiological and Ecological Traits. Proceedings of the National Academy of Sciences of the United States of America 108 (26): 10591–10596. https://doi.org/doi: 10.1073/pnas.1015178108.
 # 
