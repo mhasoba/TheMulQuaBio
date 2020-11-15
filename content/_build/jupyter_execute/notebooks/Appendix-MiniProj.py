@@ -379,7 +379,7 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # 
 # The fundamental measure of interest (the response variable) is consumption rate ($c$). This is expressed in terms of biomass quantity or number of individuals of resource consumed *per unit time per unit consumer* (so units of Mass (or Individuals) / Time). 
 # 
-# Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. \ref{eq:quad} and \ref{eq:cubic} (replace $x$ with resource abundance).
+# Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. {eq}`eq:quad` and {eq}`eq:cubic` (replace $x$ with resource abundance).
 # 
 # Then, there is the more mechanistic Holling Type II model (Holling, 1959):
 # 
@@ -486,14 +486,14 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # There are multiple models that might best describe these data. The simplest are the general quadratic and cubic polynomial models:
 # 
-# $$\label{eq:quad}
+# $$
 #     B = B_0 + B_1 x + B_2 x^2
+# $$(eq:quad)
+# 
+# 
 # $$
-# 
-# 
-# $$\label{eq:cubic}
 #     B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
-# $$
+# $$(eq:cubic)
 # 
 # These are phenomenological models, with the parameters $B_0$, $B_1$, $B_2$ and $B_3$ lacking any mechanistic interpretation. $x$ is the independent variable (in this case Temperature, $T$) 
 # 
@@ -505,11 +505,11 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # In contrast, the Schoolfield model (Schoolfield et al 1981) is a mechanistic option that is based upon thermodynamics and enzyme kinetics:
 # 
-# $$\label{eq:schoolf}
+# $$
 #     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
 #     { 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} + 
 #     e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-# $$
+# $$(eq:schoolf)
 # 
 # *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings](#Readings)). You may choose additional models listed in that paper for comparison, if you want.
 # 
@@ -518,26 +518,26 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # ---
 # ![image](./graphics/SchoolfEx.png)
-# <small> <center>Example of the Sharpe-Schoolfield eqn, that is,  \ref{eq:quad} and \ref{eq:cubic}, . \ref{eq:schoolf}) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance. 
+# <small> <center>Example of the full Sharpe-Schoolfield model (Eqn. {eq}`eq:schoolf`) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance.
 #     </center> </small>
 # 
 # ---
 # 
 # In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.
 # 
-# $$\label{eq:schoolfH}
+# $$
 #       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
 #     { 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-# $$
+# $$(eq:schoolfH)
 # 
 # In other cases, a different simplified Schoolfield model would be more appropriate, because high temperature inactivation was not detectable in the data because measurements were not made at sufficiently high temperatures:
 # 
-# $$\label{eq:schoolfL}
+# $$
 #       B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
 #     { 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
-# $$
+# $$(eq:schoolfL)
 # 
-# Note that the cubic model (Equation \ref{eq:cubic}) has the same number of parameters as the the reduced Schoolfield models (eq. \ref{eq:schoolfH} & \ref{eq:schoolfL}). Also, the temperature parameter ($T$) of the cubic model (Equation \ref{eq:cubic}) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.
+# Note that the cubic model (Eqn. {eq}`eq:cubic`) has the same number of parameters as the the reduced Schoolfield models (Eqn. {eq}`eq:schoolfH` & {eq}`eq:schoolfL`). Also, the temperature parameter ($T$) of the cubic model (Eqn. {eq}`eq:cubic`) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.
 
 # ## Additional models and questions you can tackle
 # 

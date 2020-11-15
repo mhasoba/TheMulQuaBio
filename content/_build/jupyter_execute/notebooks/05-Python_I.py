@@ -37,19 +37,11 @@
 # 
 # * Using Python to patch together data analysis and/or numerical simulation work flows
 
+# (Why-python)=
 # ### Why Python?
 # 
 # Python was designed with readability and re-usability in mind. Time taken by programming + debugging + running is likely to be relatively lower in python than less intuitive or cluttered languages (e.g., FORTRAN, Perl). 
 # 
-# ---
-# 
-# ![image](./graphics/python.png)
-# <small> <center> (Source: [http://xkcd.com](http://xkcd.com))<br>
-#                 Is python the most common answer to your daily programming needs? Possibly!
-# </center> </small>
-# 
-# ---
-
 # Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
 # 
 # ---
@@ -57,6 +49,15 @@
 # ![image](./graphics/benchmarks.png)
 # <small><center>(Source: http://julialang.org/) <br>
 # Python's numerical computing performance compared (smaller numbers are better). Note that the y-axis is in $\log_{10}$ scale. 
+# </center> </small>
+# 
+# ---
+# 
+# ---
+# 
+# ![image](./graphics/python.png)
+# <small> <center> (Source: [http://xkcd.com](http://xkcd.com))<br>
+#                 Is python the most common answer to your daily programming needs? Possibly!
 # </center> </small>
 # 
 # ---

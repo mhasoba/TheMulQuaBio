@@ -19,11 +19,10 @@
  
     --gitpull 	  : Optional flag indicating whether to pull students' git 					    repositories only without feedback (default is False). 					    Only works if the student's repo already exists.
  
-    --gitpush     : Optional flag indicating whether to push the feedback log 				    file(s) to students' git repositories (default is False).
+    --gitpush     : Optional flag indicating whether to rgenerate the feedback 					and push the feedback log file(s) to students' git 							repositories (default is False).
 
 	--gitpush_fin   : Optional flag indicating whether to push the final 						feedback to students' git repositories (default is False)
-					. If used, repo is pulled and contents of feedback
-					directory pushed, nothing else.
+					. If used, repo is updated from remote and contents of feedback directory pushed, nothing else.
 """
 import subprocess, os, csv, argparse, re, time
 
@@ -37,7 +36,12 @@ def run_popen(command, timeout):
 
 	p = subprocess.Popen('timeout ' + str(timeout) + 's ' + command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-	stdout, stderr = p.communicate()
+	try:
+		stdout, stderr = p.communicate(timeout=timeout)
+	except subprocess.TimeoutExpired:
+		# import ipdb; ipdb.set_trace()
+		p.kill()
+		stdout, stderr = p.communicate()
 	
 	end = time.time()
 	
@@ -62,7 +66,7 @@ parser.add_argument("--gitpull", action="store_true",
 
 parser.add_argument("--gitpush", action="store_true", 
 								dest="gitpush", default=False,
-								help="Whether to push the feedback to students' git repositories")
+								help="Whether to re-run and send feedback to students' git repositories")
 
 parser.add_argument("--gitpush_fin", action="store_true", 
 								dest="gitpush_fin", default=False,
@@ -78,7 +82,7 @@ Hdrs = Stdnts[0] #store headers
 Stdnts.remove(Hdrs) #remove header row 
 
 scrptPath = os.path.dirname(os.path.realpath(__file__)) #store feedback script path
-timeout = 10 #set time out for each script's run (integer seconds)
+timeout = 30 #set time out for each script's run (integer seconds)
 charLim = 500 #set limit to output of each script's run to be printed
 
 for Stdnt in Stdnts:
@@ -87,48 +91,37 @@ for Stdnt in Stdnts:
 	RepoPath = args.RepoPath + '/' + Name
 	AzzPath = RepoPath + '/Feedback'
 	
-	if args.gitpush_fin:
+	Points = 100
+	totime = 0
+
+	if args.gitpush_fin: # Push the final feedback...
 		
 		print("...\n\n" + "Git pushing final feedback for " + Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")
-
-		# subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
 
 		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
 
 		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final feedback"])
 
-		subprocess.check_output(["git","-C", RepoPath,"push","-u", "origin",  "master"])
+		subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
 
-		# subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
+		continue # ...and skip the rest
 
-		continue
-	
-	if args.gitpull:
-		print("...\n\n"+"Pulling repository for "+ Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")		
-		if os.path.exists(RepoPath): # only if the repo exists already
-
-			# subprocess.check_output(["git","-C", RepoPath, "reset","--hard"])
-
-			# subprocess.check_output(["git","-C", RepoPath, "clean","-fd"])
-			
-			subprocess.check_output(["git", "-C", RepoPath, "pull"])
+	if not os.path.exists(RepoPath): # Clone repo if it does not already exist
 		
-		else: # Otherwise, clone repo first time
-			print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
-		
-			subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
-		continue
-
-	Points = 100
-	
-	if not os.path.exists(RepoPath): # Clone repo first time if it does not already exist
 		print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
 		
 		subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
-		continue
-	else:
+	
+	else: # otehrwise update the xisting repo
 
-		subprocess.check_output(["git","-C", RepoPath,"pull"])
+		print("...\n\n"+"Updating git repository of "+ Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")	
+		
+		# subprocess.check_output(["git", "-C", RepoPath, "pull"]) # or,
+		subprocess.check_output(["git","-C", RepoPath, "fetch","--all"])
+		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # discard all local changes
+		subprocess.check_output(["git","-C", RepoPath, "clean","-fd"]) # remove untracked files
+
+		if args.gitpull: continue # Just update the git repo and skip to next student
 
 		p, output, err, time_used = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
 
@@ -137,7 +130,7 @@ for Stdnt in Stdnts:
 		RepoStats = dict(zip(Keys, Vals))
 
 		########## block for accessing git log - to be finished ########### 
-		## Store gits codes, along with the corresponding field names in two lists:
+		## Store git code, along with the corresponding field names in two lists:
 		# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
 		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
 		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
@@ -376,10 +369,11 @@ for Stdnt in Stdnts:
 			
 			elif os.path.basename(name).lower().endswith('.r'):
 				p, output, err,	time_used = run_popen('/usr/lib/R/bin/Rscript ' + os.path.basename(name), timeout)
+			elif os.path.basename(name).lower().endswith('.tex'):
+				p, output, err,	time_used = run_popen('bash ~/Documents/Code_n_script/Bash/CompiLatex.sh ' + os.path.basename(name), timeout)
 			else:
 				os.chdir(scrptPath)
 				continue
-							
 
 			chars = 0
 						
@@ -395,23 +389,24 @@ for Stdnt in Stdnts:
 			
 			azz.write('\n' + '*'*70 + '\n')
 			if not err:
-				azz.write('\nCode ran without errors\n\n')
+				azz.write('\nCode ran without errors or warnings\n\n')
 				azz.write('Time consumed = ' +"{:.5f}".format(time_used)+ 's\n\n')
 			else:
 				errors += 1
-				azz.write('\nEncountered error (or warning):\n')
+				azz.write('\nEncountered error or warning:\n')
 				azz.write(err)
 				azz.write('\n')
+			
+			totime += time_used
 			
 			print('\nFinished with ' + os.path.basename(name)+  '\n\n')
 			os.chdir(scrptPath)
 				
-		azz.write('='*70 + '\n')
-		azz.write('='*70 + '\n')
-		azz.write('Finished running scripts\n\n')
-		azz.write('Ran into ' + str(errors)+' errors\n\n')
-	
 	azz.write('='*70 + '\n')
+	azz.write('='*70 + '\n')
+	azz.write('Finished running scripts\n\n')
+	azz.write('Ran into ' + str(errors)+' errors or warnings\n\n')
+	azz.write('Total time used: ' + "{:.2f}".format(totime)+ 's \n\n')
 	azz.write('='*70 + '\n')
 	azz.write('\nFINISHED WEEKLY ASSESSMENT\n\n')
 	azz.write('Current Points for the Week = ' + str(Points) + '\n\n')
@@ -427,11 +422,3 @@ for Stdnt in Stdnts:
 		subprocess.check_output(["git","-C", RepoPath, "commit", "-m", 'Pushed ' + args.Week + ' feedback'])
 				
 		subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
-		
-		# if not os.path.exists(AzzPath + '/'+ azzFileName):
-		# azz = open(AzzPath + '/'+ azzFileName,'w+')
-	# else:
-		# print('\nAssesment file for ' + args.Week+  ' already exists, cannot continue! Check and delete existing file and try again.\n\n')
-		# break
-		
-		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # Discard everything else that was changed
