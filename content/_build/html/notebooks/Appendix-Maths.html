@@ -250,8 +250,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="Appendix-MiniProj.html">
    The Computing Miniproject
-   <a name="Apx:Miniproj">
-   </a>
   </a>
  </li>
  <li class="toctree-l1">
@@ -1404,9 +1402,10 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="section" id="one-population-exponential-growth">
 <h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this headline">¶</a></h3>
 <p>Let’s look at how populations grow when there are no environmental constraints. The differential equation model is:</p>
-<p>\begin{equation}\label{eq:exp_growth}
-\frac{\text{d}N}{\text{d}t} = r_m N
-\end{equation}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4603ea5d-d340-4165-b7bd-760353a3ec69">
+<span class="eqno">(6)<a class="headerlink" href="#equation-4603ea5d-d340-4165-b7bd-760353a3ec69" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
+	\frac{\text{d}N}{\text{d}t} = r_m N
+\end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r_m\)</span> is the intrinsic, constant rate of population gowth (units of 1/time), and <span class="math notranslate nohighlight">\(N\)</span> is population size (or biomass abundance). I use the subscript <span class="math notranslate nohighlight">\(m\)</span> in <span class="math notranslate nohighlight">\(r_m\)</span> to denote both <a class="reference external" href="https://en.wikipedia.org/wiki/Malthusianism">Malthusian</a> and maximal population growth rate because, in theory, without any constraints, this growth rate is expected to at its theoretical/biological maximum.</p>
 <p>Let’s solve equation \ref{eq:exp_growth} so that we can calculate population size <span class="math notranslate nohighlight">\(N_t\)</span> at any given time <span class="math notranslate nohighlight">\(t\)</span> given a starting population size  <span class="math notranslate nohighlight">\(N_0\)</span> at time 0.</p>
 <p>First assign the symbolic variables:</p>
@@ -1465,9 +1464,10 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="math notranslate nohighlight">
 \[C_1 = N_0\]</div>
 <p>That is,</p>
-<p>\begin{equation}\label{eq:exp_growth_sol}
+<div class="amsmath math notranslate nohighlight" id="equation-759c8d24-5ca8-4bce-b7d5-6b460cab3070">
+<span class="eqno">(7)<a class="headerlink" href="#equation-759c8d24-5ca8-4bce-b7d5-6b460cab3070" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
 N{\left (t \right )} = N_0 e^{r_m t}
-\end{equation}</p>
+\end{equation}\]</div>
 <p>We could use Sympy for this last step as well (using <code class="docutils literal notranslate"><span class="pre">subs()</span></code> like you learned above), but that would be just plain silly – like using a sledge-hammer to drive in a nail!</p>
 <p>We can now have a go at plotting the model (eqn. \ref{eq:exp_growth}), and also the solution eqn. \ref{eq:exp_growth_sol}. First, let’s get an approximate solution by using numerical integration (which you learnt in the Advanced Python chapter):</p>
 <div class="cell docutils container">
@@ -1535,9 +1535,10 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="section" id="one-population-logistic-population-growth">
 <h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this headline">¶</a></h3>
 <p>Populations eventually run into contraints, even if they can grow exponentially at the start (eqn \ref{eq:exp_growth}). The classical model for logistic growth in population density (<span class="math notranslate nohighlight">\(N\)</span>) captures this dynamic:</p>
-<p>\begin{equation}\label{eq:logist_growth}
-\frac{\text{d}N}{\text{d}t} = r_m N \left(1-\frac{N}{K}\right)
-\end{equation}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3c8349c0-ec6a-4075-a763-fbc97814517b">
+<span class="eqno">(8)<a class="headerlink" href="#equation-3c8349c0-ec6a-4075-a763-fbc97814517b" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:logist_growth}
+	\frac{\text{d}N}{\text{d}t} = r_m N \left(1-\frac{N}{K}\right)
+\end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity of the environment, while <span class="math notranslate nohighlight">\(r_m\)</span> is the same parameter same as above. Let’s solve this one as well.</p>
 <p>As in the case of the exponential growth above, let’s find the solution to this equation for any arbitrary time point <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Again, first we define the vars and the function:</p>
@@ -1571,10 +1572,11 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <img alt="../_images/Appendix-Maths_177_0.png" src="../_images/Appendix-Maths_177_0.png" />
 </div>
 </div>
-<p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute <span class="math notranslate nohighlight">\(t = 0\)</span>, and then solve the resulting equation for the initital condition of <span class="math notranslate nohighlight">\(N_0\)</span>, which then gives This the time-dependent solution:
-\begin{equation}
-N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
-\end{equation}</p>
+<p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute <span class="math notranslate nohighlight">\(t = 0\)</span>, and then solve the resulting equation for the initital condition of <span class="math notranslate nohighlight">\(N_0\)</span>, which then gives This the time-dependent solution:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-92e6f082-d817-4f71-b0e3-dd0e9ec55e72">
+<span class="eqno">(9)<a class="headerlink" href="#equation-92e6f082-d817-4f71-b0e3-dd0e9ec55e72" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
+\end{equation}\]</div>
 <p>You can do the last steps to obtain this solution using Sympy as well (I leave it to you to try it).</p>
 <p>No let’s again compare the analytical solution against the numerical one:</p>
 <div class="cell docutils container">
@@ -1616,10 +1618,11 @@ N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
 <div class="section" id="two-interacting-populations-the-lotka-volterra-predator-prey-model">
 <h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this headline">¶</a></h3>
 <p>Now for the classical Lotka-Volterra model that you encountered in the advanced Python week (without logistic growth for the consumer, <span class="math notranslate nohighlight">\(C\)</span>).</p>
-<p>\begin{align}
-\frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\
+<div class="amsmath math notranslate nohighlight" id="equation-d3c5f324-cfde-4c46-b0ac-b4774f53dc80">
+<span class="eqno">(10)<a class="headerlink" href="#equation-d3c5f324-cfde-4c46-b0ac-b4774f53dc80" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\\
 \frac{dC}{dt} &amp;= e a N C - z C
-\end{align}</p>
+\end{align}\]</div>
 <p>here <span class="math notranslate nohighlight">\(r_m\)</span> and <span class="math notranslate nohighlight">\(K\)</span> is the Resource’s growth rate and carrying capacity respectively as in the Logistic equation, <span class="math notranslate nohighlight">\(a\)</span> is the consumer’s search rate for the resource, <span class="math notranslate nohighlight">\(e\)</span> is consumer’s biomass conversion efficiency, and <span class="math notranslate nohighlight">\(z\)</span> is it’s mortality rate.</p>
 <p>To solve this system of ODEs, we will take a different approach – We will solve for the equilibrum (steady state for the two species’ populations). Again, we start by define the vars:</p>
 <div class="cell docutils container">

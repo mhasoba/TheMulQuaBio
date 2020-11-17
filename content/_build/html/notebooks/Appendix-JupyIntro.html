@@ -250,8 +250,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="Appendix-MiniProj.html">
    The Computing Miniproject
-   <a name="Apx:Miniproj">
-   </a>
   </a>
  </li>
  <li class="toctree-l1">
@@ -403,6 +401,34 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-tmux">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       tmux
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#detaching-and-reattaching">
+       Detaching and Reattaching
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-use-tmux">
+       Why use
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         tmux
+        </span>
+       </code>
+       ?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#language-kernels">
      Language Kernels
     </a>
@@ -549,6 +575,34 @@ or <a class="reference external" href="https://www.maplesoft.com/">Maple</a> not
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook MyFirstJupyterNb.ipynb
 </pre></div>
 </div>
+<div class="section" id="using-tmux">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">tmux</span></code><a class="headerlink" href="#using-tmux" title="Permalink to this headline">¶</a></h3>
+<p>You may notice that jupyter locks up the terminal you launch it from until it is closed. This can be particularly frustrating, and there is an elegant solution. Enter <code class="docutils literal notranslate"><span class="pre">tmux</span></code>!</p>
+<p><code class="docutils literal notranslate"><span class="pre">tmux</span></code> is a “terminal multiplexer”, allowing you to run terminal sessions independent of (or “detatched” from) a terminal window. You can install tmux using apt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install tmux
+</pre></div>
+</div>
+<div class="section" id="detaching-and-reattaching">
+<h4>Detaching and Reattaching<a class="headerlink" href="#detaching-and-reattaching" title="Permalink to this headline">¶</a></h4>
+<p>To run jupyter in a tmux session, start tmux using the command <code class="docutils literal notranslate"><span class="pre">tmux</span></code>.From here you can use the tmux terminal as you would your usual terminal session (so launch <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> as before), however if at any time you decide that you want to do something else, you can <strong>detach</strong>.</p>
+<p>To detach your terminal window from the session, use the shortcut <code class="docutils literal notranslate"><span class="pre">ctrl+b,</span> <span class="pre">d</span></code> (ctrl+b, then let go of that and hit d). This kicks you back to the normal terminal, however your other session is still running in the background.</p>
+<p>To see which sessions are currently running, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux ls
+</pre></div>
+</div>
+<p>And to attach to the session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux a
+</pre></div>
+</div>
+<p><em>Note: you can attach to a session from a different terminal window or even terminal program!</em></p>
+<p>To quit tmux entirely, just quit the terminal session either with <code class="docutils literal notranslate"><span class="pre">ctrl+d</span></code> or <code class="docutils literal notranslate"><span class="pre">exit</span></code></p>
+</div>
+<div class="section" id="why-use-tmux">
+<h4>Why use <code class="docutils literal notranslate"><span class="pre">tmux</span></code>?<a class="headerlink" href="#why-use-tmux" title="Permalink to this headline">¶</a></h4>
+<p>While this is mostly just a quality of life suggestion, countless are the times that I have accidentally closed my terminal only to find that my jupyter session has also died. By decoupling the window from the terminal session, this no longer happens.</p>
+<p>Additionally tmux is absolutely invaluable when running long jobs on a remote server. In this case you can simply disconnect from the tmux session on the remote server. Then you can log in later (and/or from a different computer) and <strong>reattach to the interactive session</strong> (using <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">a</span></code>) to check progress. In combination with good logging for long jobs, this can make your life infinitely easier.</p>
+</div>
+</div>
 <div class="section" id="language-kernels">
 <h3>Language Kernels<a class="headerlink" href="#language-kernels" title="Permalink to this headline">¶</a></h3>
 <p>The Jupyter notebook can support almost <a class="reference external" href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">100 programming languages</a> (and counting).</p>
@@ -565,8 +619,9 @@ or <a class="reference external" href="https://www.maplesoft.com/">Maple</a> not
 <h4>The R kernel<a class="headerlink" href="#the-r-kernel" title="Permalink to this headline">¶</a></h4>
 <p>Let’s add the R kernel as well. First have a quick look at the <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/projects/kernels.html">Jupyter kernel documentation</a> .</p>
 <p>Now, go to the <a class="reference external" href="https://github.com/IRkernel/IRkernel">IRKernel github</a>, and follow the instructions for installing using the <code class="docutils literal notranslate"><span class="pre">devtools</span></code> package in R (This package will also soon be installable through CRAN).</p>
-<div style="padding:6px;background-color:cornsilk;line-height:1.4;">
-On Ubuntu 16.04, If you run into errors while installing the `devtools` package through R, very likely you might need to install the `curl` package using `sudo apt-get install` in a terminal first  (read the error messages you get in R).    
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>On Ubuntu, If you run into errors while installing the <code class="docutils literal notranslate"><span class="pre">devtools</span></code> package through R, very likely you might need to install the <code class="docutils literal notranslate"><span class="pre">curl</span></code> package using <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span></code> in a terminal first  (read the error messages you get in R).</p>
 </div>
 <p>After installing the R kernel, relaunch Jupyter as you did above, and then check your kernels in the drop-down Jupyter nb menu – you should now have both Python and R.</p>
 </div>
@@ -585,6 +640,11 @@ On Ubuntu 16.04, If you run into errors while installing the `devtools` package 
 <div class="section" id="equations">
 <h4>Equations<a class="headerlink" href="#equations" title="Permalink to this headline">¶</a></h4>
 <p>You can insert inline or standalone equations by using standard <span class="math notranslate nohighlight">\(\LaTeX\)</span> environments (and you can access more <span class="math notranslate nohighlight">\(\LaTeX\)</span> functionality and environments using the <a class="reference external" href="https://github.com/jfbercher/jupyter_latex_envs"><code class="docutils literal notranslate"><span class="pre">LaTeX_envs</span></code> extension</a>.). For example, how about the ecologist’s beloved logistic growth equation:</p>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span><span class="sb">$$</span><span class="nb"></span>
+<span class="nb">    </span><span class="nv">\frac</span><span class="nb">{dN}{dt} </span><span class="o">=</span><span class="nb"> rN </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="m">1</span><span class="o">-</span><span class="nv">\frac</span><span class="nb">{N}{K}</span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="s">$$</span>
+</pre></div>
+</div>
 <p>which will render as:</p>
 <div class="math notranslate nohighlight">
 \[\frac{dN}{dt} = rN \left( 1-\frac{N}{K}\right)\]</div>
@@ -686,7 +746,7 @@ On Ubuntu 16.04, If you run into errors while installing the `devtools` package 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-JupyIntro_14_0.png" src="../_images/Appendix-JupyIntro_14_0.png" />
+<img alt="../_images/Appendix-JupyIntro_16_0.png" src="../_images/Appendix-JupyIntro_16_0.png" />
 </div>
 </div>
 <p>Now lets try R. Switch to the R kernel, and try:</p>
@@ -705,7 +765,7 @@ On Ubuntu 16.04, If you run into errors while installing the `devtools` package 
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: ggplot2
 </pre></div>
 </div>
-<img alt="../_images/Appendix-JupyIntro_16_2.png" src="../_images/Appendix-JupyIntro_16_2.png" />
+<img alt="../_images/Appendix-JupyIntro_18_2.png" src="../_images/Appendix-JupyIntro_18_2.png" />
 </div>
 </div>
 </div>

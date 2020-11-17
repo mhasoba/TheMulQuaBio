@@ -1,4 +1,3 @@
-$$\frac{dN}{dt} = rN \left( 1-\frac{N}{K}\right)$$
 a = "this is python!"; print(a)
 
 a <- "this is R!"; cat(a)

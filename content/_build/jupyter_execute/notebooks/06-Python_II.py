@@ -10,45 +10,52 @@
 # 
 # ## Numerical computing in Python
 # 
-# Python is a good choice for numerical computing (recall [this comparison](Why-python)). The Python package `scipy` allows you to do serious number crunching, including:
+# Python is a good choice for numerical computing (recall [this comparison](Why-python)). Using the right packages, you can do some serious number crunching in Python.
+# 
+# We will use the `numpy` and `scipy` packages. The latter offers a data structure called numpy array that is suitable for efficient computing, along with basic operations on these arrays. 
+# 
+# On the other hand, scipy is proper numerical computing package (which *uses* numpy arrays) that can do a lot of things, including:
 # 
 # * Linear algebra (matrix and vector operations) using `scipy.linalg`
 # * Dealing with sparse matrix problems using `scipy.sparse`
 # * Numerical integration (including solving of Ordinary Differential Equations (ODEs)) using `scipy.integrate`
 # * Random number generation and using statistical functions and transformations using `scipy.stats`
 # * Optimization using `scipy.optimize`
+# * Fourier transforms using `scipy.fft`
 # * Signal Processing using `scipy.signal`
-
-# ### Numpy arrays
 # 
-# In the following sections, we will use the `numpy array` data structure for data manipulations and calculations. These arrays are similar in some respects to Python lists, but are homogeneous in type (the default is float), allow efficient (fast) manipulations, and are more naturally multidimensional (e.g., you can store multiple matrices in one array). 
+# We will learn more about scipy further below. First, let's start with `numpy`.
+
+# ### Numpy
+# 
+# Numpy provides the `numpy array` data structure, along with methods for for data creation, manipulations and basic numerical calculations. Numpy arrays are similar in some respects to Python lists, but are homogeneous in type (the default is float), allow efficient (fast) manipulations, and are more naturally multidimensional (e.g., you can store multiple matrices in one array). 
 # 
 # ```{note}
-# Thus numpy arrays are analogous to the [R `matrix`](R-matrices) data structure.
+# numpy arrays are analogous to the [R `matrix`](R-matrices) data structure.
 # ```
 # 
-# We will use the `scipy` package, which includes `numpy`, and a lot more. Let's try it:
+# Let's start by importing numpy:
 
-# In[43]:
-
-
-import scipy as sc
+# In[140]:
 
 
-# In[44]:
+import numpy as np
 
 
-a = sc.array(range(5)) # a one-dimensional array
+# In[141]:
+
+
+a = np.array(range(5)) # a one-dimensional array
 a
 
 
-# In[45]:
+# In[142]:
 
 
 print(type(a))
 
 
-# In[46]:
+# In[143]:
 
 
 print(type(a[0]))
@@ -63,14 +70,14 @@ print(type(a[0]))
 # 
 # You can also specify the data type of the array:
 
-# In[47]:
+# In[144]:
 
 
-a = sc.array(range(5), float)
+a = np.array(range(5), float)
 a
 
 
-# In[48]:
+# In[145]:
 
 
 a.dtype # Check type 
@@ -78,40 +85,42 @@ a.dtype # Check type
 
 # You can also get a 1-D arrays as follows:
 
-# In[49]:
+# In[146]:
 
 
-x = sc.arange(5)
+x = np.arange(5)
 x
 
 
-# In[50]:
+# In[147]:
 
 
-x = sc.arange(5.) #directly specify float using decimal
+x = np.arange(5.) #directly specify float using decimal
 x
 
 
 # As with other Python variables (e.g., created as a list or a dictionary), you can apply methods to variables created as numpy arrays. For example, type `x.` and hit TAB to see all methods you can apply to`x`. To see dimensions of `x`:
 
-# In[51]:
+# In[148]:
 
 
 x.shape
 
 
-# Remember, you can type `:?x.methodname` to get info on a particular method. For example, try `?x.shape`.
+# ```{tip}
+# Remember, you can type `:?x.methodname` to get info on a particular method (command). For example, try `?x.shape`.
+# ```
 # 
-# You can also convert to and from Python lists (recall [list comprehensions](./05-Python_I.ipynb#Comprehensions)):
+# You can also convert to and from Python lists (recall [list comprehensions](Python-Comprehensions) from the [Python I chapter](./05-Python_I.ipynb)):
 
-# In[52]:
+# In[149]:
 
 
-b = sc.array([i for i in range(10) if i % 2 == 1]) #odd numbers between 1 and 10 
+b = np.array([i for i in range(10) if i % 2 == 1]) #odd numbers between 1 and 10 
 b
 
 
-# In[53]:
+# In[150]:
 
 
 c = b.tolist() #convert back to list
@@ -120,14 +129,14 @@ c
 
 # To make a matrix, you need a 2-D numpy array:
 
-# In[54]:
+# In[151]:
 
 
-mat = sc.array([[0, 1], [2, 3]])
+mat = np.array([[0, 1], [2, 3]])
 mat
 
 
-# In[55]:
+# In[152]:
 
 
 mat.shape
@@ -137,13 +146,13 @@ mat.shape
 # 
 # As with other Python data objects such as lists, numpy array elements can be accessed using square brackets (`[ ]`) with the usual `[row,column]` reference. Indexing of numpy arrays works like that for other data structures, with index values starting at 0. So, you can obtain all the elements of a particular row as:
 
-# In[56]:
+# In[153]:
 
 
 mat[1] # accessing whole 2nd row, remember indexing starts at  0
 
 
-# In[57]:
+# In[154]:
 
 
 mat[:,1] #accessing whole second column  
@@ -151,13 +160,13 @@ mat[:,1] #accessing whole second column
 
 # And accessing particular elements:
 
-# In[58]:
+# In[155]:
 
 
 mat[0,0] # 1st row, 1st column element
 
 
-# In[59]:
+# In[156]:
 
 
 mat[1,0] # 2nd row, 1st column element
@@ -165,7 +174,7 @@ mat[1,0] # 2nd row, 1st column element
 
 # Note that (like all other programming languages) row index always comes before column index. That is, `mat[1]` is always going to mean "whole second row", and `mat[1,1]` means 1st row and 1st column element. Therefore, to access the whole second column, you need:
 
-# In[60]:
+# In[157]:
 
 
 mat[:,0] #accessing whole first column  
@@ -174,25 +183,25 @@ mat[:,0] #accessing whole first column
 # Python indexing also accepts negative values for going back to the start
 # from the end of an array:
 
-# In[61]:
+# In[158]:
 
 
 mat[0,1]
 
 
-# In[62]:
+# In[159]:
 
 
 mat[0,-1]
 
 
-# In[63]:
+# In[160]:
 
 
 mat[-1,0]
 
 
-# In[64]:
+# In[161]:
 
 
 mat[0,-2]
@@ -212,80 +221,80 @@ mat[0,-2]
 # 
 # Let's look at how you can replace, add, or delete an array element (a single entry, or whole row(s) or whole column(s)):
 
-# In[65]:
+# In[162]:
 
 
 mat[0,0] = -1 #replace a single element
 mat
 
 
-# In[66]:
+# In[163]:
 
 
 mat[:,0] = [12,12] #replace whole column
 mat
 
 
-# In[67]:
+# In[164]:
 
 
-sc.append(mat, [[12,12]], axis = 0) #append row, note axis specification
+np.append(mat, [[12,12]], axis = 0) #append row, note axis specification
 
 
-# In[68]:
+# In[165]:
 
 
-sc.append(mat, [[12],[12]], axis = 1) #append column
+np.append(mat, [[12],[12]], axis = 1) #append column
 
 
-# In[69]:
+# In[166]:
 
 
 newRow = [[12,12]] #create new row
 
 
-# In[70]:
+# In[167]:
 
 
-mat = sc.append(mat, newRow, axis = 0) #append that existing row
+mat = np.append(mat, newRow, axis = 0) #append that existing row
 mat
 
 
-# In[71]:
+# In[168]:
 
 
-sc.delete(mat, 2, 0) #Delete 3rd row
+np.delete(mat, 2, 0) #Delete 3rd row
 
 
 # And concatenation:
 
-# In[72]:
+# In[169]:
 
 
-mat = sc.array([[0, 1], [2, 3]])
-mat0 = sc.array([[0, 10], [-1, 3]])
-sc.concatenate((mat, mat0), axis = 0)
+mat = np.array([[0, 1], [2, 3]])
+mat0 = np.array([[0, 10], [-1, 3]])
+np.concatenate((mat, mat0), axis = 0)
 
 
 # #### Flattening or reshaping arrays
 # 
 # You can also "flatten" or "melt" arrays, that is, change array dimensions (e.g., from a matrix to a vector):
 
-# In[73]:
+# In[170]:
 
 
 mat.ravel()
 
 
-# In[74]:
+# In[171]:
 
 
 mat.reshape((4,1))
 
 
-# This is different from ravel: check the documentation by using `?sc.reshape`.
+# This is different from ravel: check the documentation by using `?np.reshape`.
 
-# In[75]:
+# In[172]:
 
 
 mat.reshape((1,4))
@@ -295,7 +304,7 @@ mat.reshape((1,4))
 # You might have noticed that flattening and reshaping is "row-priority": elements of the vector are allocated to a matrix row-wise, and vice versa(e.g., with `ravel` unraveling also happens row by row).
 # ```
 
-# In[76]:
+# In[173]:
 
 
 mat.reshape((3, 1))
@@ -311,26 +320,26 @@ mat.reshape((3, 1))
 # 
 # For example, if you know the size of your matrix or array, you can initialize it with ones or zeros:
 
-# In[77]:
+# In[174]:
 
 
-sc.ones((4,2)) #(4,2) are the (row,col) array dimensions
+np.ones((4,2)) #(4,2) are the (row,col) array dimensions
 
 
-# In[78]:
+# In[175]:
 
 
-sc.zeros((4,2)) # or zeros
+np.zeros((4,2)) # or zeros
 
 
-# In[79]:
+# In[176]:
 
 
-m = sc.identity(4) #create an identity matrix
+m = np.identity(4) #create an identity matrix
 m
 
 
-# In[80]:
+# In[177]:
 
 
 m.fill(16) #fill the matrix with 16
@@ -347,39 +356,39 @@ m
 # 
 # Now let's perform some common matrix-vector operations on arrays (you can also try the same using matrices instead of arrays):
 
-# In[81]:
+# In[178]:
 
 
-mm = sc.arange(16)
+mm = np.arange(16)
 mm = mm.reshape(4,4) #Convert to matrix
 mm
 
 
-# In[82]:
+# In[179]:
 
 
 mm.transpose()
 
 
-# In[83]:
+# In[180]:
 
 
 mm + mm.transpose()
 
 
-# In[84]:
+# In[181]:
 
 
 mm - mm.transpose()
 
 
-# In[85]:
+# In[182]:
 
 
 mm * mm.transpose() # Note that this is element-wise multiplication
 
 
-# In[86]:
+# In[183]:
 
 
 mm // mm.transpose()
@@ -387,19 +396,19 @@ mm // mm.transpose()
 
 # Note that we used integer division `//`. Note also the warning you get (because of zero division). So let's avoid the divide by zero:
 
-# In[87]:
+# In[184]:
 
 
 mm // (mm + 1).transpose()
 
 
-# In[88]:
+# In[185]:
 
 
-mm * sc.pi
+mm * np.pi
 
 
-# In[89]:
+# In[186]:
 
 
 mm.dot(mm) # No this is matric multiplication, or the dot product
@@ -407,14 +416,14 @@ mm.dot(mm) # No this is matric multiplication, or the dot product
 
 # There is also a numpy matrix class:
 
-# In[90]:
+# In[187]:
 
 
-mm = sc.matrix(mm) # convert to scipy/numpy matrix class
+mm = np.matrix(mm) # convert to scipy/numpy matrix class
 mm
 
 
-# In[91]:
+# In[188]:
 
 
 print(type(mm))
@@ -422,56 +431,191 @@ print(type(mm))
 
 # This data structure makes matrix multiplication syntactically easier:
 
-# In[92]:
+# In[189]:
 
 
 mm * mm # instead of mm.dot(mm)
 
 
-# However, it is not recommended that you use the numpy matrix class because it may be removed [in the future](https://numpy.org/doc/stable/reference/generated/numpy.matrix.html).    
-
-# ```{tip}
-# You can do a lot more by importing the `linalg` sub-package: `sc.linalg`.
+# ```{warning}
+# However, it is not recommended that you use the numpy matrix class because it may be removed [in the future](https://numpy.org/doc/stable/reference/generated/numpy.matrix.html).
 # ```
 
-# ### Two particularly useful `scipy` sub-packages
+# ```{tip}
+# You can do a lot more with matrices and vectors by importing the `linalg` sub-package from scipy: `scipy.linalg`.
+# ```
+
+# ### The `scipy` package
 # 
-# Two particularly useful `scipy` sub-packages are `sc.integrate` (*what will I need this for?*) and `sc.stats`. *Why not use `R` for this?* — because often you might just want to calculate some summary stats of your simulation results within Python.
+# Now let's move on to `scipy`. 
+# 
+# ```{note}
+# **scipy vs numpy**: It's a bit confusing. Please have a look at [this](https://www.scipy.org/scipylib/faq.html#what-is-the-difference-between-numpy-and-scipy) and [this](https://docs.scipy.org/doc/scipy/reference/release.1.4.0.html#scipy-deprecations). Basically, there is some overlap between what these two packages can do, and this redundancy will eventually be phased out completely. The recommended approach is to use numpy for creating and manipulating data and scipy for more complex numerical operations.
+# ```
+# 
+# We will look at two particularly useful `scipy` sub-packages here: `scipy.stats` and `scipy.integrate`. 
 # 
 # #### Scipy stats
 # 
-# Let's take a quick spin in `sc.stats`.
+# Let's take a quick spin in `scipy.stats`. 
+# 
+# *Why not use `R` for stats?* — because often you might just need to calculate some summary stats of your simulation results within Python, or you simulations may require the generation of random numbers.
+# 
+# First, import scipy:
 
-# In[93]:
-
-
-import scipy.stats
-
-
-# In[94]:
+# In[190]:
 
 
-scipy.stats.norm.rvs(size = 10) # 10 samples from N(0,1)
+import scipy as sc
 
 
-# In[95]:
+# Or you can use `from scipy import stats`. 
+# 
+# Let's generate 10 samples from the normal distribution ($\mathcal{N}(\mu,\,\sigma^{2})$):
+
+# In[191]:
 
 
-scipy.stats.randint.rvs(0, 10, size =7) # Random integers between 0 and 10
+sc.stats.norm.rvs(size = 10)
+
+
+# By default, [as in R](R-random-numbers), these are numbers from the *standard* normal distribution ($\mathcal{N}(0,\,1)$).
+
+# ```{tip}
+# **Continuing on the numpy vs scipy theme**: Both scipy and numpy can generate random numbers (e.g., `np.random.normal(size=10)` would work equally well above). In fact, scipy uses the `numpy.random` package under the hood for drawing random numbers. You may choose to use either, but for sanity, its probably a good idea to just stick with `scipy.stats` for all your stats number crunching.
+# ```
+# 
+# Also, as you learned [in R](R-random-numbers), you can "seed" random numbers to get the same sequence every time (important for reproducibility &ndash; when you need to know what specific random numbers were input into a particular program routine or algorithm).
+
+# In[192]:
+
+
+np.random.seed(1234)
+sc.stats.norm.rvs(size = 10)
+
+
+# But setting a *global* random number state is not always needed or in some many cases, recommended, because using something like `np.random.seed(1234)` will set the seed for all following instances where a random number is generated. In many scenarios a more robust way is to use the `random_state` argument for each specific generation of a set of random numbers:
+
+# In[193]:
+
+
+sc.stats.norm.rvs(size=5, random_state=1234)
+
+
+# We will not move on from `scipy.stats`. Before we do so, here's an example of generating random integers between 0 and 10:
+
+# In[194]:
+
+
+sc.stats.randint.rvs(0, 10, size = 7)
+
+
+# And again with a random seed:
+
+# In[195]:
+
+
+sc.stats.randint.rvs(0, 10, size = 7, random_state=1234)
+
+
+# In[196]:
+
+
+sc.stats.randint.rvs(0, 10, size = 7, random_state=3445) # a different seed
 
 
 # #### Numerical integration using  `scipy`
 # 
-# Numerical integration is the approximate computation of an integral using numerical techniques. You need numerical integration whenever you have a complicated function that cannot be integrated analytically using anti-derivatives. For example, calculating the area under a curve is a particularly useful application is solving ordinary differential equations (ODEs), commonly used for modelling biological systems.
+# OK, on to to and `scipy.integrate`. 
 # 
+# Numerical integration is the approximate computation of an integral using numerical techniques. You need numerical integration whenever you have a complicated function that cannot be integrated analytically using anti-derivatives. For example, calculating the area under a curve is a particularly useful application. Another one is solving ordinary differential equations (ODEs), commonly used for modelling biological systems.
+
+# In[197]:
+
+
+import scipy.integrate as integrate
+
+
+# ##### Area under a curve
+# 
+# Let's calculate the area under an arbitrary curve.
+
+# In[198]:
+
+
+y = np.array([5, 20, 18, 19, 18, 7, 4]) # The y values; can also use a python list here
+
+
+# Let's visualize the curve. We can use the `matplotlib` package for this: 
+
+# In[199]:
+
+
+import matplotlib.pylab as p
+
+
+# In[200]:
+
+
+p.plot(y)
+
+
+# Now compute the area using the [composite trapezoidal rule](https://en.wikipedia.org/wiki/Trapezoidal_rule):
+
+# In[201]:
+
+
+area = integrate.trapz(y, dx = 2)
+print("area =", area)
+
+
+# The argument `dx` defines the spacing between points of the curve (the x-axis values). The default is 1 (don't forget to check out the documentation: `?integrate.trapz`). Changing this will change the area, of course:
+
+# In[202]:
+
+
+area = integrate.trapz(y, dx = 1)
+print("area =", area)
+
+
+# In[203]:
+
+
+area = integrate.trapz(y, dx = 3)
+print("area =", area)
+
+
+# Now, the same, using [Simpson's rule](https://en.wikipedia.org/wiki/Simpson%27s_rule):
+
+# In[204]:
+
+
+area = integrate.simps(y, dx = 2)
+print("area =", area)
+
+
+# In[205]:
+
+
+area = integrate.simps(y, dx = 1)
+print("area =", area)
+
+
+# In[206]:
+
+
+area = integrate.simps(y, dx = 3)
+print("area =", area)
+
+
 # ##### The Lotka-Volterra model
 # 
-# Let's try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is: 
+# Now let's try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is: 
 # 
-# \begin{aligned}
+# \begin{align}
 #     \frac{dR}{dt} &= r R - a C R \\
 #     \frac{dC}{dt} &= - z C + e a C R
-# \end{aligned}
+# \end{align}
 # 
 # where, 
 # 
@@ -484,15 +628,9 @@ scipy.stats.randint.rvs(0, 10, size =7) # Random integers between 0 and 10
 # 
 # First, import `scipy`'s `integrate` submodule:
 
-# In[96]:
-
-
-import scipy.integrate as integrate
-
-
 # Now define a function that returns the growth rate of consumer and resource population at any given time step.
 
-# In[97]:
+# In[207]:
 
 
 def dCR_dt(pops, t=0):
@@ -502,10 +640,10 @@ def dCR_dt(pops, t=0):
     dRdt = r * R - a * R * C 
     dCdt = -z * C + e * a * R * C
     
-    return sc.array([dRdt, dCdt])
+    return np.array([dRdt, dCdt])
 
 
-# In[98]:
+# In[208]:
 
 
 type(dCR_dt)
@@ -515,7 +653,7 @@ type(dCR_dt)
 # 
 # Now assign some parameter values:
 
-# In[99]:
+# In[209]:
 
 
 r = 1.
@@ -526,33 +664,33 @@ e = 0.75
 
 # Define the time vector; let's integrate from time point 0 to 15, using 1000 sub-divisions of time:
 
-# In[100]:
+# In[210]:
 
 
-t = sc.linspace(0, 15, 1000)
+t = np.linspace(0, 15, 1000)
 
 
 # Note that the units of time are arbitrary here. 
 
 # Set the initial conditions for the two populations (10 resources and 5 consumers per unit area), and convert the two into an array (because our `dCR_dt` function take an array as input). 
 
-# In[101]:
+# In[211]:
 
 
 R0 = 10
 C0 = 5 
-RC0 = sc.array([R0, C0])
+RC0 = np.array([R0, C0])
 
 
 # Now numerically integrate this system forward from those starting conditions: 
 
-# In[102]:
+# In[212]:
 
 
 pops, infodict = integrate.odeint(dCR_dt, RC0, t, full_output=True)
 
 
-# In[103]:
+# In[213]:
 
 
 pops
@@ -560,13 +698,13 @@ pops
 
 # So `pops` contains the result (the population trajectories).  Also check what's in infodict (it's a  dictionary with additional information)
 
-# In[104]:
+# In[214]:
 
 
 type(infodict)
 
 
-# In[105]:
+# In[215]:
 
 
 infodict.keys()
@@ -574,7 +712,7 @@ infodict.keys()
 
 # Check what the `infodict` output is by reading the help documentation with `?scipy.integrate.odeint`. For example, you can return a message to screen about whether the integration was successful: 
 
-# In[106]:
+# In[216]:
 
 
 infodict['message']
@@ -584,13 +722,11 @@ infodict['message']
 # 
 # But we would like to visualize the results. Let's do it using the `matplotlib` package. 
 # 
-# ##### Plotting 
+# Again, to visualize the results of your numerical simulations in Python (or for data exploration/analyses), you can use `matplotlib`, which uses Matlab like plotting syntax.
 # 
-# To visualize the results of your numerical simulations in Python (or for data exploration/analyses), you can use `matplotlib`, which uses Matlab like plotting syntax.
-# 
-# First let's import the package:
+# First import the package:
 
-# In[107]:
+# In[217]:
 
 
 import matplotlib.pylab as p
@@ -598,13 +734,13 @@ import matplotlib.pylab as p
 
 # Now open an empty figure object (analogous to an R graphics object).
 
-# In[108]:
+# In[218]:
 
 
 f1 = p.figure()
 
 
-# In[109]:
+# In[219]:
 
 
 p.plot(t, pops[:,0], 'g-', label='Resource density') # Plot
@@ -619,7 +755,7 @@ p.show()# To display the figure
 
 # Finally, save the figure as a pdf:
 
-# In[110]:
+# In[220]:
 
 
 f1.savefig('../results/LV_model.pdf') #Save figure
@@ -658,7 +794,7 @@ f1.savefig('../results/LV_model.pdf') #Save figure
 # 
 # Let's write an illustrative program (name it `profileme.py`) and run it:
 
-# In[111]:
+# In[221]:
 
 
 def my_squares(iters):
@@ -720,7 +856,7 @@ run_my_funcs(10000000,"My string")
 # 
 # Let's try this alternative approach to writing the program (save it as `profileme2.py`, and again, run it):
 
-# In[112]:
+# In[222]:
 
 
 def my_squares(iters):
@@ -825,8 +961,8 @@ run_my_funcs(10000000,"My string")
 # ```python
 # %timeit my_squares_loops(iters)
 # %timeit my_squares_lc(iters)
-# %timeit(my_join_join(iters, mystring))
-# %timeit(my_join(iters, mystring))
+# %timeit (my_join_join(iters, mystring))
+# %timeit (my_join(iters, mystring))
 # ```
 # 
 # Note that embedding the `%timeit()` commands within the script won't work calling magic commands from inside a script is not a good idea!
@@ -870,26 +1006,26 @@ run_my_funcs(10000000,"My string")
 # 
 # Below are a loop-based function and a vectorized function to calculate the entrywise product of two 1D arrays of the same length. We will test them both on larger and larger 1D arrays to see how the vectorized approach is faster.
 
-# In[113]:
+# In[223]:
 
 
 def loop_product(a, b):
     N = len(a)
-    c = sc.zeros(N)
+    c = np.zeros(N)
     for i in range(N):
         c[i] = a[i] * b[i]   
     return c
 
 
 def vect_product(a, b):
-    return sc.multiply(a, b)
+    return np.multiply(a, b)
 
 
 # The `multiply` function from numpy is a vectorized implementation of the elementwise product that we have explicitly written in the function `loop_product` above it. In general, numpy is an excellent choice for vectorized implementations of functions involving matrix maths (or maths using higher-dimensional analogues of matricies).
 # 
 # Let's try comparing the runtimes of `loop_product` and `vect_product` on increasingly large randomly-generated 1D arrays:
 
-# In[114]:
+# In[224]:
 
 
 import timeit
@@ -901,23 +1037,25 @@ t_vect = []
 for N in array_lengths:
     print("\nSet N=%d" %N)
     #randomly generate our 1D arrays of length N
-    a = sc.random.rand(N)
-    b = sc.random.rand(N)
+    a = np.random.rand(N)
+    b = np.random.rand(N)
     
     # time loop_product 3 times and save the mean execution time.
     timer = timeit.repeat('loop_product(a, b)', globals=globals().copy(), number=3)
-    t_loop.append(1000 * sc.mean(timer))
+    t_loop.append(1000 * np.mean(timer))
     print("Loop method took %d ms on average." %t_loop[-1])
     
     # time vect_product 3 times and save the mean execution time.
     timer = timeit.repeat('vect_product(a, b)', globals=globals().copy(), number=3)
-    t_vect.append(1000 * sc.mean(timer))
+    t_vect.append(1000 * np.mean(timer))
     print("vectorized method took %d ms on average." %t_vect[-1])
 
 
+# Phew! That last one just exploded in terms of the time it took!
+# 
 # Now let's compare the timings on a plot:
 
-# In[115]:
+# In[252]:
 
 
 p.figure()
@@ -942,8 +1080,8 @@ p.show()
 # ```python
 # N = 1000000000
 # 
-# a = sc.random.rand(N)
-# b = sc.random.rand(N)
+# a = np.random.rand(N)
+# b = np.random.rand(N)
 # c = vect_product(a, b)
 # 
 # # if no error, remove a, b, c from memory.
@@ -959,7 +1097,7 @@ p.show()
 # *Check out the CMEE module on High Performance Computing to learn about using Imperial College's supercomputing cluster to run extremely large problems*
 # 
 # ```{tip}
-# You can use the `multiprocessing` package for "parallelizing" your code on own computer. 
+# You can use the `multiprocessing` package for parallelizing your code on your own computer. 
 # ```
 
 # ### Practicals
@@ -973,10 +1111,12 @@ p.show()
 # LV2.py arg1 arg2 ... etc
 # ```
 # *  It runs the Lotka-Volterra model with prey density dependence $r R \left(1 - \frac{R} {K}\right)$, which changes the coupled ODEs to,
-# \begin{aligned}
-#     \frac{dR}{dt} &= r R \left(1 - \frac{R} {K}\right) - a C R \\
+# 
+# \begin{align}
+#     \frac{dR}{dt} &= r R \left(1 - \frac{R} {K}\right) - a C R\\
 #     \frac{dC}{dt} &= - z C + e a C R
-# \end{aligned}
+# \end{align}
+# 
 # *  It saves the plot as `.pdf` in an appropriate location.
 # *  The chosen parameter values should show in the plot (e.g., $r = 1, a = .5 $, etc) You can change time length $t$ too.
 # * The parameters values should be adjusted such that both predator and prey persist with prey density dependence ( the final (non-zero) population values should be printed to screen).
@@ -1001,200 +1141,24 @@ p.show()
 # 
 # * Write a version of the discrete-time model (which you implemented in `LV3.py`) simulation with a random gaussian fluctuation in resource's growth rate at each time-step:
 # 
-# \begin{aligned}
+# \begin{align}
 #         R_{t+1} &= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
 #         C_{t+1} &= C_t (1 - z + e a R_t)
-# \end{aligned}
+# \end{align}
 # 
-# where $\epsilon$ is a random fluctuation drawn from a gaussian distribution (use `sc.stats`). Include this
+# where $\epsilon$ is a random fluctuation drawn from a gaussian distribution (use `sc.stats` or `np.random`). Include this
 # script in ` run_LV.py`, and profile it as well. You can also add fluctuations to both populations simultaneously this way: 
 # 
-# \begin{aligned}
+# \begin{align}
 #     R_{t+1} &= R_t (1 + \epsilon + r +  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
 #     C_{t+1} &= C_t (1 - z + \epsilon + e a R_t)
-# \end{aligned}
+# \end{align}
 # 
 # *As always, test, add, commit and push all your new code and data to your git repository.*
 
-# ## Networks in Python
-# 
-# ALL biological systems have a network representation, consisting of nodes for the biological entities of interest, and edges or links for the relationships between them. Here are some examples:
-# * Metabolic networks
-# * Gene regulatory networks
-# * Individual-Individual (e.g., social networks)
-# * Who-eats-whom (Food web) networks
-# * Mutualistic (e.g., plant-pollinator) networks
-# 
-# *Can you think of a few more examples from biology?*
-# 
-# You can easily simulate, analyze, and visualize biological networks in both `python` and `R` using some nifty packages. A full network analysis tutorial is out of the scope of our Python module's objectives, but let's try a simple visualization using the ` networkx` python package.
-# 
-# For this you need to first install the package, for example, by using:
-# 
-# ```bash
-# sudo apt-get install python3-networkx
-# ```
-# 
-# ### Food web network example
-# 
-# As an example, let's plot a food web network. 
-# 
-# The best way to store a food web dataset is as an "adjacency list" of who eats whom: a matrix with consumer name/id in 1st column, and resource name/id in 2nd column, and a separate matrix of species names/ids and properties such as biomass (node's abundance), or average body mass. You will see what these data structures look like below. 
-# 
-# First, import the necessary modules:
-
-# In[116]:
-
-
-import networkx as nx
-import scipy as sc
-import matplotlib.pylab as p
-
-
-# Let's generate a "synthetic" food web. We can do this with the following function that generates a random adjacency list of a $N$-species food web with "connectance probability" $C$: the probability of having a link between any pair of species in the food web. 
-
-# In[117]:
-
-
-def GenRdmAdjList(N = 2, C = 0.5):
-    """ 
-    """
-    Ids = range(N)
-    ALst = []
-    for i in Ids:
-        if sc.random.uniform(0,1,1) < C:
-            Lnk = sc.random.choice(Ids,2).tolist()
-            if Lnk[0] != Lnk[1]: #avoid self (e.g., cannibalistic) loops
-                ALst.append(Lnk)
-    return ALst
-
-
-# Note that we are using a uniform random distribution between `[0,1]` to generate a connectance probability between each species pair. 
-
-# Now assign number of species (`MaxN`) and connectance (`C`):
-
-# In[118]:
-
-
-MaxN = 30
-C = 0.75
-
-
-# Now generate an adjacency list representing a random food web:
-
-# In[119]:
-
-
-AdjL = sc.array(GenRdmAdjList(MaxN, C))
-AdjL
-
-
-# So that's what an adjacency list looks like. The two columns of numbers correspond to the consumer and resource ids, respectively.  
-# 
-# Now generate species (node) data:
-
-# In[120]:
-
-
-Sps = sc.unique(AdjL) # get species ids
-
-
-# Now generate body sizes for the species. We will use a log$_{10}$ scale because species body sizes tend to be [log-normally distributed](08-Data_R.ipynb#Histograms).
-
-# In[121]:
-
-
-SizRan = ([-10,10]) #use log10 scale
-Sizs = sc.random.uniform(SizRan[0],SizRan[1],MaxN)
-Sizs
-
-
-# Let's visualize the size distribution we have generated.
-
-# In[122]:
-
-
-p.hist(Sizs) #log10 scale
-
-
-# In[123]:
-
-
-p.hist(10 ** Sizs) #raw scale
-
-
-# Now let's plot the network, with node sizes proportional to (log) body size:
-
-# In[124]:
-
-
-p.close('all') # close all open plot objects
-
-
-# Let's use a circular configuration. For this, we need to calculate the coordinates, easily done using networkx:
-
-# In[125]:
-
-
-pos = nx.circular_layout(Sps)
-
-
-# See `networkx.layout` for inbuilt functions to compute other types of node coordinates.
-# 
-# Now generate a networkx graph object:
-
-# In[126]:
-
-
-G = nx.Graph()
-
-
-# Now add the nodes and links (edges) to it:
-
-# In[127]:
-
-
-G.add_nodes_from(Sps)
-G.add_edges_from(tuple(AdjL))
-
-
-# Note that the function `add_edges_from` needs the adjacency list as a tuple.
-
-# Now generate node sizes that are proportional to (log) body sizes:
-
-# In[128]:
-
-
-NodSizs= 1000 * (Sizs-min(Sizs))/(max(Sizs)-min(Sizs)) 
-
-
-# Now render (plot) the graph:
-
-# In[129]:
-
-
-nx.draw_networkx(G, pos, node_size = NodSizs)
-
-
-# You might get a warning. In that case, try upgrading the networkx package.   
-# 
-# ### Practicals
-# 
-# #### Plot the foodweb
-# 
-# Type the above code for plotting a food web network in a program file called `DrawFW.py`. This file should save the plotted network as a pdf.   
-# 
-# #### Groupwork: networks in R 
-# 
-# You can also do nice network visualizations in R. Here you will convert a network visualization script written in `R` using the `igraph` package to a python script that does the same thing.
-# 
-# * First copy the script file called `Nets.R` and the data files it calls and run it. This script visualizes the [QMEE CDT collaboration network](http://www.imperial.ac.uk/qmee-cdt), coloring the the nodes by the type of node (organization type: "University","Hosting Partner", "Non-hosting Partner").
-# 
-# * Now, convert this script to a Python script that does the same thing, including writing to a `.svg` file using the same QMEE CDT link and node data. You can use `networkx` or some other python network visualization package.
-
 # ## Regular expressions in Python
 # 
-# Let's shift gears now, and look at a very important skill that you should learn, or at least be aware of — *Regular expressions*. 
+# Let's shift gears now, and look at a very important tool set that you should learn, or at least be aware of — *Regular expressions*. 
 # 
 # Regular expressions (regex) are a tool to find patterns (not just a particular sequence of characters) in strings. For example, `your@email.com` is a specific sequence of characters, but, in fact, all email addresses have such a pattern: alphanumeric characters, a "@", alphanumeric characters, a ".", alphanumeric characters. Using regex, you can search for all email addresses in a text file by searching for this pattern.    
 # 
@@ -1220,58 +1184,87 @@ nx.draw_networkx(G, pos, node_size = NodSizs)
 # 
 # ### Metacharacters vs. regular characters
 # 
-# A regex may consist of a combination of "metacharacters" (modifiers) and "regular" or literal characters. There are 14 metacharacters: 
+# A regex may consist of a combination of special "metacharacters" (modifiers) and "regular" or literal characters. There are 14 metacharacters: 
 # 
-# <center> 
-# <code>[</code> <code>]</code> <code>{</code> <code>}</code> <code>(</code> <code>)</code> <code>\</code> <code>^</code> <code>&dollar;</code> <code>.</code> <code>|</code> <code>?</code> <code>*</code> <code>+</code> 
-# </center>
+# |Metacharacter|Description|
+# |:-|:-|
+# |`[` `]` |	Used to enclose a specific character "class" — the set of characters that you wish to match. For example,  `[12]` means match target to "1" and if that does not match then match target to "2"; `[0-9]` means match to any character in range "0" to "9"|
+# |`\`|	Inhibits the "specialness" of a (meta)character so that it can be interpreted literally. So, for example, use `\.` to match an actual period, and  `\\` to match an actual back slash. |
+# | `.` |	Match any character except line break (newline); e.g.,	`he..o` will match *hello* as well as *he12o*	|
+# |`^` |	Indicates that the string to be matched is at the start of a longer string; e.g., `^hello` will match "hello" in "hello fellow!", but not in "fellow, hello!" |
+# |`$` |	Match the end of a string; for example, `world$` will match "world" in "Hello world", but not in "Hello world!"  	|
+# |`*` |	Match zero or more occurrences of the character or pattern that precedes it.|
+# |`+` |	Match 1 or more occurrences of the character or pattern that precedes it.|
+# |`?`| Match the preceding pattern element zero *or* one times|
+# |`{` `}`| Match exactly the specified number of occurrences; e.g., `.{2}` finds the first two instances of any character (except newline)|
+# | `|`|	Match either or	|
+# |`(` `)`|	Capture and group; examples of this appear below |	 	 
 # 
-# These metacharacters do special things, for example:
+# Everything other than these metacharacters is interpreted literally (e.g., *a* is matched by entering `a` in the regex) &ndash; a regular character. 
 # 
-# * `[12]` means match target to *1* and if that does not match then match target to *2*
-# * `[0-9]` means match to any character in range *0* to *9*
-# * `[^Ff]` means anything except upper or lower case *f* and `[^a-z]` means everything except lower case *a* to *z*
+# ```{note} 
+# **The difference between `*`, `+`, and `?`**: 
+# `*` matches zero or more times, so whatever's being repeated may *not* be present at all, while `+` *requires* at least one occurrence. So, for example, `ra+t` will match "rat" (one 'a' is present) and "raaat" (three "a"s), but won't match "rt". On the other hand, `?` matches a pattern either once or zero times, so it makes the pattern matching more flexible. For example, `home-?brew` matches either "homebrew" or "home-brew".
+# ```
+
+# ### Regex special sequences
 # 
-# Everything else is interpreted literally (e.g., *a* is matched by entering `a` in the regex).
+# Along with inhibiting the "specialness" of a metacharacter so that it can be interpreted literally (see examples in table above), the backslash (`\`) can be followed by various standard character types to denote various *special sequences*. 
 # 
-# `[` and `]`, specify a character "class" — the set of characters that you wish to match. Metacharacters are not active inside classes. For example, <code>[a-z&dollar;]</code> will match any of the characters `a` to `z`, but also <code>&dollar;</code>, because inside a character class it loses its special metacharacter status.
+# Below is a list of *commonly encountered* special sequences in [Unicode](https://en.wikipedia.org/wiki/Unicode) string patterns. For a complete list look [here](https://docs.python.org/3/library/re.html#re-syntax).
 # 
-# ### regex elements
+# |Sequence|Description|
+# |:-|:-|
+# |`\d`| Matches any numeric (integer); this is equivalent to the regex class [0-9]|
+# |`\D`| Matches any non-digit character not covered by ` \d` (i.e., match a non-digit); this is equivalent to the class [^0-9]|
+# |`\n`| Matches a newline|
+# |`\t`| Matches a tab space|
+# |`\s`|Matches any whitespace character; this is equivalent to the class [ \t\n\r\f\v]| 
+# |`\S`| Matches any non-whitespace character; this is equivalent to the class [^ \t\n\r\f\v]|
+# |`\w`| Matches any "alphanumeric" character (including underscore); this is equivalent to the class [a-zA-Z0-9_]|
+# |`\W`| Matches any non-alphanumeric character not covered by `\w`, i.e., any non-alphanumeric character excluding underscore, such as `?`, `!`, `+`, `<`, etc. ; this is equivalent to the class [^a-zA-Z0-9_]|
 # 
-# A useful (not exhaustive) list of regex elements is:
+# In the above table, 
+# * `\r` stands for a "[carriage-return](https://en.wikipedia.org/wiki/Carriage_return#Computers)", which is usually (but not always) the same as as a newline (`\n`);
+# * `\f` stands fior ["form feed"](https://en.wikipedia.org/wiki/Page_break) (or a page break character)
+# * `\v` stands for  ["vertical whitespace"](https://en.wikipedia.org/wiki/Whitespace_character), which includes all characters treated as line breaks in the Unicode standard.
+# 
+# These are rarely encountered, but can exist in certain text files.
+# 
+# ```{note}
+# The reason why we have specified underscore as belonging to `\w` (i.e., the regex set [A-Za-z0-9_]) is because this is the specification of this class in Python regex in particular. This class definition is shared by most, but not all regex "flavors" (i.e., regex in other languages, such as Perl or Bash (recall `grep`)). The goal is to not to worry about it, but to keep in mind that `\w` will also match any pattern that includes one or more `_`'s!    
+# ```
+
+# ### Some regex examples
+# 
+# So combining metacharacters, regular characters and special sequences allows you to find pretty much any pattern. Here are some examples:
 # 
 # |Regex|Description|
 # |:-|:-|
-# |\ | inhibit the "specialness" of a (meta)character so that it can be interpreted literally. So, for example, use `\.` to match a period or `\\` to match a slash|
 # |`aX9`| match the character string *aX9* exactly (case sensitively)| 
+# |`aX9\n`| match the character string *aX9*  (case sensitively) followed by a newline| 
 # |`8`| match the number *8*|
-# |`\n`| match a newline|
-# |`\t`| match a tab |
-# |`\s`| match a whitespace |
-# |`.`| match any character except line break (newline)|
-# |`\w`|  match a single "word" character: any alphanumeric character (including underscore)|
-# |`\W`| match any character not covered by `\w`, i.e., match any non-alphanumeric character excluding underscore, such as `?`, `!`, `+`, `<`, etc. |
-# |`\d`| match a numeric (integer) character|
-# |`\D`| match any character not covered by ` \d` (i.e., match a non-digit)|
+# |`\d8`| match the number *8* preceded by any decimal number|
 # |`[atgc]` | match any character listed: `a`, `t`, `g`, `c`|
-# | <code>at&vert;gc</code>  | match `at` or `gc`|
+# | `at|gc`  | match `at` or `gc`|
 # |`[^atgc]`| match any character not listed: any character except `a`, `t`, `g`, `c`|
-# |`?`| match the preceding pattern element zero or one times|
-# |*|match the preceding pattern element zero or more times|
-# |`+`| match the preceding pattern element one or more times|
-# |`{n}`| match the preceding pattern element exactly `n` times|
-# |`{n,}`| match the preceding pattern element at least `n` times|
-# |`{n,m}`| match the preceding pattern element at least `n` but not more than `m` times|
-# |`^`| match the start of a string|
-# |<code>&dollar;</code>| match the end of a string|
+# | `[^a-z]` | match everything except lower case *a* to *z* |
+# | `[^Ff]`| match anything except upper or lower case *f* | 
+# |`\w{n}`| match the preceding pattern  element (any alphanumeric character) *exactly* `n` times|
+# |`\w{n,}`| match the preceding pattern element (any alphanumeric character) *at least* `n` times|
+# |`\w{n,m}`| match the preceding pattern element (any alphanumeric character) at least `n` but not more than `m` times|
 # 
+# ```{tip}
+# Metacharacters are not active inside classes. For example, `[a-z$]` will match any of the characters `a` to `z`, but also `$`, because inside a character class it loses its special metacharacter status.
+# ```
+
 # ### Regex in Python
 # 
 # Regex functions in python are in the module `re`. 
 # 
 # Let's import it:
 
-# In[130]:
+# In[253]:
 
 
 import re
@@ -1279,11 +1272,13 @@ import re
 
 # The simplest `python` regex function is `re.search`, which searches the string for match to a given pattern — returns a *match object* if a match is found and `None` if not. Thus, the command `match = re.search(pat, str)` finds matches of the pattern `pat` in the given string `str` and stores the search result in a variable named `match`.
 # 
-# > **Always** put `r` in front of your regex — it tells python to read the regex in its "raw" (literal) form. Without raw string notation (`r"text"`), every backslash (`\`) in a regular expression would have to be prefixed with another one to escape it. Read more about this [here](https://docs.python.org/3.5/library/re.html).
+# ```{tip} 
+# **Always** put `r` in front of your regex — it tells python to read the regex in its "raw" (literal) form. Without raw string notation (`r"text"`), every backslash (`\`) in a regular expression would have to be prefixed with another one to escape it. Read more about this [here](https://docs.python.org/3.5/library/re.html).
+# ```
 # 
 # OK, let's try some regexes (type all that follows in `regexs.py`):
 
-# In[131]:
+# In[254]:
 
 
 my_string = "a given string"
@@ -1291,7 +1286,7 @@ my_string = "a given string"
 
 # Find a space in the string:
 
-# In[132]:
+# In[255]:
 
 
 match = re.search(r'\s', my_string)
@@ -1302,7 +1297,7 @@ print(match)
 # 
 # To see the match, use:
 
-# In[133]:
+# In[256]:
 
 
 match.group()
@@ -1310,13 +1305,13 @@ match.group()
 
 # Now let's try another pattern:
 
-# In[134]:
+# In[257]:
 
 
 match = re.search(r'\d', my_string)
 
 
-# In[135]:
+# In[258]:
 
 
 print(match)
@@ -1326,7 +1321,7 @@ print(match)
 
 # To know whether a pattern was matched, we can use an `if`:
 
-# In[136]:
+# In[259]:
 
 
 MyStr = 'an example'
@@ -1341,35 +1336,35 @@ else:
 
 # Here are some more regexes (add all that follows to `regexs.py`):
 
-# In[137]:
+# In[260]:
 
 
 match = re.search(r'2' , "it takes 2 to tango")
 match.group()
 
 
-# In[138]:
+# In[261]:
 
 
 match = re.search(r'\d' , "it takes 2 to tango")
 match.group()
 
 
-# In[139]:
+# In[262]:
 
 
 match = re.search(r'\d.*' , "it takes 2 to tango")
 match.group()
 
 
-# In[140]:
+# In[263]:
 
 
 match = re.search(r'\s\w{1,3}\s', 'once upon a time')
 match.group()
 
 
-# In[141]:
+# In[264]:
 
 
 match = re.search(r'\s\w*$', 'once upon a time')
@@ -1378,13 +1373,13 @@ match.group()
 
 # Let's switch to a more compact syntax by directly returning the matched group (by directly appending `.group()` to the result).
 
-# In[142]:
+# In[265]:
 
 
 re.search(r'\w*\s\d.*\d', 'take 2 grams of H2O').group()
 
 
-# In[143]:
+# In[266]:
 
 
 re.search(r'^\w*.*\s', 'once upon a time').group() # 'once upon a '
@@ -1394,7 +1389,7 @@ re.search(r'^\w*.*\s', 'once upon a time').group() # 'once upon a '
 # 
 # As a result, they may match more text than you want. To make it non-greedy and terminate at the first found instance of a pattern, use `?`:
 
-# In[144]:
+# In[267]:
 
 
 re.search(r'^\w*.*?\s', 'once upon a time').group()
@@ -1402,7 +1397,7 @@ re.search(r'^\w*.*?\s', 'once upon a time').group()
 
 # To further illustrate greediness in regexes, let's try matching an HTML tag:
 
-# In[145]:
+# In[268]:
 
 
 re.search(r'<.+>', 'This is a <EM>first</EM> test').group()
@@ -1412,7 +1407,7 @@ re.search(r'<.+>', 'This is a <EM>first</EM> test').group()
 # 
 # It's because `+` is greedy. Instead, we can make `+` "lazy":
 
-# In[146]:
+# In[269]:
 
 
 re.search(r'<.+?>', 'This is a <EM>first</EM> test').group()
@@ -1420,7 +1415,7 @@ re.search(r'<.+?>', 'This is a <EM>first</EM> test').group()
 
 # OK, moving on from greed and laziness...
 
-# In[147]:
+# In[270]:
 
 
 re.search(r'\d*\.?\d*','1432.75+60.22i').group()
@@ -1432,13 +1427,13 @@ re.search(r'\d*\.?\d*','1432.75+60.22i').group()
 # 
 # A couple more examples:
 
-# In[148]:
+# In[271]:
 
 
 re.search(r'[AGTC]+', 'the sequence ATTCGT').group()
 
 
-# In[149]:
+# In[272]:
 
 
 re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper.").group()
@@ -1448,14 +1443,14 @@ re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper."
 # 
 # ![image](./graphics/thelodermaasper.JPG)
 # <small><center>
-#             In case you were wondering what *Theloderma asper*, the "bird-shit frog", looks like. I snapped this one in North-east India ages ago 
+#             In case you were wondering what *Theloderma asper*, the "bird-shit frog", looks like. I snapped this one in a North-East Indian rainforest ages ago. 
 # </center></small>
 # 
 # ---
 
 # How about looking for email addresses in a string? For example, let's try matching a string consisting of an academic's name, email address and research area or interest (no need to type this into any python file):
 
-# In[150]:
+# In[273]:
 
 
 MyStr = 'Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory'
@@ -1467,13 +1462,13 @@ match.group()
 # 
 # Let's see if this regex works on a different pattern of email addresses: 
 
-# In[151]:
+# In[274]:
 
 
 MyStr = 'Samraat Pawar, s-pawar@imperial.ac.uk, Systems biology and ecological theory'
 
 
-# In[152]:
+# In[275]:
 
 
 match = re.search(r"[\w\s]+,\s[\w\.@]+,\s[\w\s]+",MyStr)
@@ -1482,7 +1477,7 @@ match.group()
 
 # Nope! So let's make the email address part of the regex more robust:
 
-# In[ ]:
+# In[276]:
 
 
 match = re.search(r"[\w\s]+,\s[\w\.-]+@[\w\.-]+,\s[\w\s]+",MyStr)
@@ -1507,7 +1502,7 @@ match.group()
 # 
 # You can group regex patterns into meaningful blocks using parentheses. Let's look again at the example of finding  email addresses.
 
-# In[ ]:
+# In[277]:
 
 
 MyStr = 'Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory'
@@ -1517,7 +1512,7 @@ match.group()
 
 # Without grouping the regex:
 
-# In[ ]:
+# In[278]:
 
 
 match.group(0)
@@ -1525,7 +1520,7 @@ match.group(0)
 
 # Now create groups using `( )`:
 
-# In[ ]:
+# In[279]:
 
 
 match = re.search(r"([\w\s]+),\s([\w\.-]+@[\w\.-]+),\s([\w\s&]+)",MyStr)
@@ -1563,7 +1558,7 @@ if match:
 # 
 # Let's try this on an extension of the email example above for some data with multiple addresses: 
 
-# In[ ]:
+# In[280]:
 
 
 MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory; Another academic, a-academic@imperial.ac.uk, Some other stuff thats equally boring; Yet another academic, y.a_academic@imperial.ac.uk, Some other stuff thats even more boring"
@@ -1571,7 +1566,7 @@ MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological t
 
 # Now `re.findall()` returns a list of all the emails found:
 
-# In[ ]:
+# In[281]:
 
 
 emails = re.findall(r'[\w\.-]+@[\w\.-]+', MyStr) 
@@ -1587,7 +1582,7 @@ for email in emails:
 # 
 # Let's try finding all species names that correspond to Oaks in a data file:
 
-# In[ ]:
+# In[282]:
 
 
 f = open('../data/TestOaksData.csv', 'r')
@@ -1604,7 +1599,7 @@ found_oaks
 # 
 # Let's try it:
 
-# In[153]:
+# In[283]:
 
 
 MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory; Another academic, a.academic@imperial.ac.uk, Some other stuff thats equally boring; Yet another academic, y.a.academic@imperial.ac.uk, Some other stuff thats even more boring"
@@ -1613,7 +1608,7 @@ found_matches = re.findall(r"([\w\s]+),\s([\w\.-]+@[\w\.-]+)", MyStr)
 found_matches
 
 
-# In[154]:
+# In[284]:
 
 
 for item in found_matches:
@@ -1626,13 +1621,13 @@ for item in found_matches:
 # 
 # You will need a new package `urllib3`. Install it, and import it (also `import re` if needed). 
 
-# In[155]:
+# In[285]:
 
 
 import urllib3
 
 
-# In[156]:
+# In[286]:
 
 
 conn = urllib3.PoolManager() # open a connection
@@ -1642,7 +1637,7 @@ webpage_html = r.data #read in the webpage's contents
 
 # This is returned as bytes (not strings). 
 
-# In[157]:
+# In[287]:
 
 
 type(webpage_html)
@@ -1650,7 +1645,7 @@ type(webpage_html)
 
 # So decode it (remember, the default decoding that this method applies is *utf-8*):
 
-# In[158]:
+# In[288]:
 
 
 My_Data  = webpage_html.decode()
@@ -1659,7 +1654,7 @@ My_Data  = webpage_html.decode()
 
 # That's a lot of potentially useful information! Let's extract all the names of academics:
 
-# In[159]:
+# In[289]:
 
 
 pattern = r"Dr\s+\w+\s+\w+"
@@ -1668,15 +1663,17 @@ for match in regex.finditer(My_Data): # example use of re.finditer()
     print(match.group())
 
 
-# Again, nice! However, its' not perfect. You can improve this by:
+# Again, nice! However, its' not perfect. 
+# 
+# You can improve this by:
 # * Extracting Prof names as well
 # * Eliminating the repeated matches
 # * Grouping to separate title from first and second names
-# * Extracting names that have unexpected characters (e.g., "O'Gorman", which are currently not being matched properly)
+# * Extracting names that have unexpected characters, such as in hyphenated names (a "-" in the name)
 # 
 # *Try making these improvements.*
 # 
-# Of course, you can match and extract other types of patterns as well, such as urls and email addresses (though this example web page does not have email addresses). 
+# Of course, you can match and extract other types of patterns as well, such as urls and email addresses (though this example web page does not have email addresses).
 
 # ### Replacing text
 # 
@@ -1889,33 +1886,213 @@ subprocess.Popen("Rscript --verbose NonExistScript.R > ../Results/outputFile.Rou
 # 
 # * `git add`, `commit` and `push` all your week's code by the given deadline.
 
+# ## Networks in Python
+# 
+# ALL biological systems have a network representation, consisting of nodes for the biological entities of interest, and edges or links for the relationships between them. Here are some examples:
+# * Metabolic networks
+# * Gene regulatory networks
+# * Individual-Individual (e.g., social networks)
+# * Who-eats-whom (Food web) networks
+# * Mutualistic (e.g., plant-pollinator) networks
+# 
+# *Can you think of a few more examples from biology?*
+# 
+# You can easily simulate, analyze, and visualize biological networks in both `python` and `R` using some nifty packages. A full network analysis tutorial is out of the scope of our Python module's objectives, but let's try a simple visualization using the ` networkx` python package.
+# 
+# For this you need to first install the package, for example, by using:
+# 
+# ```bash
+# sudo apt-get install python3-networkx
+# ```
+# 
+# ### Food web network example
+# 
+# As an example, let's plot a food web network. 
+# 
+# The best way to store a food web dataset is as an "adjacency list" of who eats whom: a matrix with consumer name/id in 1st column, and resource name/id in 2nd column, and a separate matrix of species names/ids and properties such as biomass (node's abundance), or average body mass. You will see what these data structures look like below. 
+# 
+# First, import the necessary modules:
+
+# In[154]:
+
+
+import networkx as nx
+import scipy as sc
+import matplotlib.pylab as p
+
+
+# Let's generate a "synthetic" food web. We can do this with the following function that generates a random adjacency list of a $N$-species food web with "connectance probability" $C$: the probability of having a link between any pair of species in the food web. 
+
+# In[117]:
+
+
+def GenRdmAdjList(N = 2, C = 0.5):
+    """ 
+    """
+    Ids = range(N)
+    ALst = []
+    for i in Ids:
+        if np.random.uniform(0,1,1) < C:
+            Lnk = np.random.choice(Ids,2).tolist()
+            if Lnk[0] != Lnk[1]: #avoid self (e.g., cannibalistic) loops
+                ALst.append(Lnk)
+    return ALst
+
+
+# Note that we are using a uniform random distribution between `[0,1]` to generate a connectance probability between each species pair. 
+
+# Now assign number of species (`MaxN`) and connectance (`C`):
+
+# In[118]:
+
+
+MaxN = 30
+C = 0.75
+
+
+# Now generate an adjacency list representing a random food web:
+
+# In[119]:
+
+
+AdjL = np.array(GenRdmAdjList(MaxN, C))
+AdjL
+
+
+# So that's what an adjacency list looks like. The two columns of numbers correspond to the consumer and resource ids, respectively.  
+# 
+# Now generate species (node) data:
+
+# In[120]:
+
+
+Sps = np.unique(AdjL) # get species ids
+
+
+# Now generate body sizes for the species. We will use a log$_{10}$ scale because species body sizes tend to be [log-normally distributed](08-Data_R.ipynb#Histograms).
+
+# In[121]:
+
+
+SizRan = ([-10,10]) #use log10 scale
+Sizs = np.random.uniform(SizRan[0],SizRan[1],MaxN)
+Sizs
+
+
+# Let's visualize the size distribution we have generated.
+
+# In[122]:
+
+
+p.hist(Sizs) #log10 scale
+
+
+# In[123]:
+
+
+p.hist(10 ** Sizs) #raw scale
+
+
+# Now let's plot the network, with node sizes proportional to (log) body size:
+
+# In[124]:
+
+
+p.close('all') # close all open plot objects
+
+
+# Let's use a circular configuration. For this, we need to calculate the coordinates, easily done using networkx:
+
+# In[125]:
+
+
+pos = nx.circular_layout(Sps)
+
+
+# See `networkx.layout` for inbuilt functions to compute other types of node coordinates.
+# 
+# Now generate a networkx graph object:
+
+# In[126]:
+
+
+G = nx.Graph()
+
+
+# Now add the nodes and links (edges) to it:
+
+# In[127]:
+
+
+G.add_nodes_from(Sps)
+G.add_edges_from(tuple(AdjL))
+
+
+# Note that the function `add_edges_from` needs the adjacency list as a tuple.
+
+# Now generate node sizes that are proportional to (log) body sizes:
+
+# In[128]:
+
+
+NodSizs= 1000 * (Sizs-min(Sizs))/(max(Sizs)-min(Sizs)) 
+
+
+# Now render (plot) the graph:
+
+# In[129]:
+
+
+nx.draw_networkx(G, pos, node_size = NodSizs)
+
+
+# You might get a warning. In that case, try upgrading the networkx package.   
+# 
+# ### Practicals
+# 
+# #### Plot the foodweb
+# 
+# Type the above code for plotting a food web network in a program file called `DrawFW.py`. This file should save the plotted network as a pdf.   
+# 
+# #### Groupwork: networks in R 
+# 
+# You can also do nice network visualizations in R. Here you will convert a network visualization script written in `R` using the `igraph` package to a python script that does the same thing.
+# 
+# * First copy the script file called `Nets.R` and the data files it calls and run it. This script visualizes the [QMEE CDT collaboration network](http://www.imperial.ac.uk/qmee-cdt), coloring the the nodes by the type of node (organization type: "University","Hosting Partner", "Non-hosting Partner").
+# 
+# * Now, convert this script to a Python script that does the same thing, including writing to a `.svg` file using the same QMEE CDT link and node data. You can use `networkx` or some other python network visualization package.
+
 # ## Readings and Resources
 # 
 # ### Scientific computing
 # 
 # * In general, scores of good module/package-specific cookbooks are out there — google "cookbook" along with the name of the package you are interested in (e.g., "scipy cookbook").
 # 
-# * [The matplotlib website](http://matplotlib.org)
-# 
-# * For SciPy, the [official documentation is good](https://docs.scipy.org/doc/); Read about the scipy modules you think will be important to you.
+# * For SciPy, read the [official documentation](https://docs.scipy.org/doc/); in particular, read about the scipy [modules](https://docs.scipy.org/doc/scipy/reference/) you think will be important to you.
 # 
 # * The "ecosystem" for Scientific computing in python: <http://www.scipy-lectures.org/>
 # 
-# * A Primer on Scientific Programming with Python <http://www.springer.com/us/book/9783642549595>; Multiple copies of this book are available from the central library and can be requested to Silwood from the IC library website. You can also find a pdf - google it
+# * Many great examples of applications in the [scipy cookbook](https://scipy-cookbook.readthedocs.io/)
 # 
-# * Many great examples of applications in the [scipy cookbook](https://lagunita.stanford.edu/courses/DB/2014/SelfPaced/about)
+# * Scipy stats: https://docs.scipy.org/doc/scipy/reference/tutorial/stats.html
+# 
+# * A Primer on Scientific Programming with Python <http://www.springer.com/us/book/9783642549595>; Multiple copies of this book are available from the central library and can be requested to Silwood from the IC library website. You can also find a pdf - seach online.
 # 
 # ### Regular expressions
 # 
-# * For regex: <https://docs.python.org/2/howto/regex.html>
+# * Python regex documentation: https://docs.python.org/3.6/howto/regex.html
 # 
-# * Google's short class on regex in python: <https://developers.google.com/edu/python/regular-expressions>
+# * Google's short class on regex in python: https://developers.google.com/edu/python/regular-expressions
 # And this exercise: https://developers.google.com/edu/python/exercises/baby-names
 # 
-# * <http://www.regular-expressions.info/> has a good intro, tips and a great array of canned solutions
+# * Good intro to regex, tips and a great array of canned solutions: http://www.regular-expressions.info
 # 
 # * Use and abuse of regex: <https://blog.codinghorror.com/regex-use-vs-regex-abuse/>
 # 
 # ### Other stuff
+# 
+# * [The matplotlib website](http://matplotlib.org)
+# 
+# * Alternatives to matplotlib for plotting in python: https://towardsdatascience.com/matplotlib-vs-seaborn-vs-plotly-f2b79f5bddb
 # 
 # * Some of you might find the python package `biopython` particularly useful — check out <http://biopython.org/>, and especially, the cookbook

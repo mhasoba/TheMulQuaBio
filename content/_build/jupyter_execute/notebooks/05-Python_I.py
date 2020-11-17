@@ -1061,7 +1061,11 @@ for i in range(2, 10, 2): # skip odd numbers
 # The `range()` function in  Python 2 vs Python 3 are entirely different. The Python 3 range() function is actually what is called `xrange` in Python 2. There are in fact both `range` and `xrange` functions in Python 2. `xrange`, renamed as `range`, is now the default in Python 3 because it is more memory efficient. 
 # ```
 
-# OK, on to the variable `i` in our loop. This is a temporary placeholder for the value of `x` at each iteration of the loop (AKA the "iterator variable"). So, in the first iteration of the loop, i = 0, which is also the "index" value of the loop at that point. We have used `i`, but you can use any valid variable name, such as `j`, `k`, or even `num` (try it). 
+# OK, on to the variable `i` in our loop. This is a temporary placeholder for the value of `x` at each iteration of the loop (AKA the "iterator" variable). So, in the first iteration of the loop, i = 0, which is also the "index" value of the loop at that point. We have used `i`, but you can use any valid variable name, such as `j`, `k`, or even `num` (try it). 
+# 
+# ```{note}
+# **Iterator vs Iterable in Python": In Python an "Iterable" is an object that one can iterate over (e.g., a list or a tuple). In contrast, an "Iterator", also an object, can iterate over (go element by element through) an iterable. Technically, it is generated an by passing an iterable to an `iter()` method in Python. Iterators themselves have a `__next__()` method, which returns the next item of the object. Note that every iterator is also an iterable, but not every iterable is an iterator. For example, a list is iterable but not an iterator.
+# ```
 
 # ## Python Input/Output
 # 
@@ -1441,6 +1445,7 @@ type(y)
 # *Try to predict how many times "hello" will be printed before testing each of these functions*.
 # 
 
+# (Python-Comprehensions)=
 # ## Comprehensions
 # 
 # Python offers a way to combine loops and logical tests / conditionals in a single line of code to transform any *iterable* object (list, set, or dictionary, over which you can iterate) into another object, after performing some operations on the elements in the original object. That is, they are a compact way to create a new list, dictionary or object from an existing one. As you might expect, there are three types of comprehensions, each corresponding to what the target object is (list, set, dictionary). 
