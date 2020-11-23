@@ -248,6 +248,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="Appendix-MiniProj.html">
    The Computing Miniproject
   </a>
@@ -998,7 +1003,7 @@ Traceback:
 </div>
 </div>
 <div class="section" id="comparing-models">
-<h4>Comparing models<a class="headerlink" href="#comparing-models" title="Permalink to this headline">¶</a></h4>
+<span id="model-fitting-r-comparing-models"></span><h4>Comparing models<a class="headerlink" href="#comparing-models" title="Permalink to this headline">¶</a></h4>
 <p><em>How do we know that there isn’t a better or alternative model that adequately explains the pattern in your dataset?</em></p>
 <p>This is important consideration in all data analyses (and more generally, the scientific method!), so you must aim to compare your NLLS model with an one or more alternatives for a more extensive and reliable investigation of the problem.</p>
 <p>Let’s use  model comparison to investigate whether the relationship between body weight and length we found above is indeed allometric. For this, we need an alternative model that can be fitted to the same data. Let’s try a quadratic curve, which is of the form:</p>
@@ -1294,10 +1299,10 @@ N_t =   \frac{N_0  K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 <div class="section" id="abundances-as-an-example">
 <h3>Abundances as an example<a class="headerlink" href="#abundances-as-an-example" title="Permalink to this headline">¶</a></h3>
-<p>Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. For example, if vector population densities or their traits change at the same or shorter timescales than the rate of disease transmission, then (vector) abundance fluctuations can cause significant fluctuations in disease transmission rates. Indeed, most disease vectors are small ectotherms with short generation times and greater sensitivity to environmental conditions than their (invariably larger, longer-lived, and often, endothermic) hosts. So understanding how vector populations vary over time, space, and with respect to environmental variables such as temperature and preciptation is key. We will look at fitting models to the growth of a single population here. Time series analyses are covered in a separate <span class="xref myst">session</span>.</p>
+<p>Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. For example, if vector population densities or their traits change at the same or shorter timescales than the rate of disease transmission, then (vector) abundance fluctuations can cause significant fluctuations in disease transmission rates. Indeed, most disease vectors are small ectotherms with short generation times and greater sensitivity to environmental conditions than their (invariably larger, longer-lived, and often, endothermic) hosts. So understanding how populations vary over time, space, and with respect to environmental variables such as temperature and precipitation is key. We will look at fitting models to the growth of a single population here.</p>
 <div class="section" id="population-growth-rates">
-<h4>Population growth rates<a class="headerlink" href="#population-growth-rates" title="Permalink to this headline">¶</a></h4>
-<p>A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase.</p>
+<span id="model-fitting-r-population-growth"></span><h4>Population growth rates<a class="headerlink" href="#population-growth-rates" title="Permalink to this headline">¶</a></h4>
+<p>A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilizes, beginning the stationary phase.</p>
 <p>Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase – the slope of the line gives the maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve (e.g., using NLLS). Here we will take a look at these different approaches, from applying linear models to the exponential phase, through to fitting non-linear models to the full growth curve.</p>
 <p>Let’s first generate some “data” on the number of bacterial cells as a function of time that we can play with:</p>
 <div class="cell docutils container">

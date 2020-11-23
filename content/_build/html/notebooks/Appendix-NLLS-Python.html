@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model fitting in Python &#8212; TheMulQuaBio</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Computing Miniproject" href="Appendix-MiniProj.html" />
+    <link rel="prev" title="Databases" href="Appendix-Databases.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting.html">
+   Model Fitting in Ecology and Evolution
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Appendix-NLLS-Python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-NLLS-Python.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/Appendix-NLLS-Python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/TheMulQuaBio/blob/master/notebooks/Appendix-NLLS-Python.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-linear-model-to-the-data">
+   Fitting a Linear model to the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-nlls">
+     Using NLLS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-ols">
+     Using OLS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-the-nlls-and-ols-fits">
+     Comparing the NLLS and OLS fits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-the-residuals-etc">
+     Calculating the residuals, etc.
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise">
+       Exercise
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-non-linear-models-to-the-data">
+   Fitting Non-linear models to the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-model-fit">
+     Logistic model fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gompertz-model">
+     Gompertz model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="model-fitting-in-python">
+<h1>Model fitting in Python<a class="headerlink" href="#model-fitting-in-python" title="Permalink to this headline">¶</a></h1>
+<p>Python offers a wide range of tools for fitting mathematical models to data. Here we will look at using Python to fit non-linear models to data using Least Squares (NLLS).</p>
+<p>You may want to have a look at <a class="reference internal" href="20-ModelFitting.html"><span class="doc std std-doc">this Chapter</span></a>, and in particular, it NLLS section, and the lectures on <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">Model fitting</a> and <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/blob/master/content/lectures/NLLS">NLLS</a> before proceeding.</p>
+<p>WE will use the <code class="docutils literal notranslate"><span class="pre">Lmfit</span></code> package, which provides a high-level interface to non-linear optimization and curve fitting problems for Python.</p>
+<p>There are three main things that one needs in order to perform NLLS fitting succesfully in Python.</p>
+<ol class="simple">
+<li><p>Data</p></li>
+<li><p>Model specification</p></li>
+<li><p>Initial values for parameters in the model</p></li>
+</ol>
+<p>The image below summarizes how NLLS fitting works with these 3 entities.</p>
+<p><img alt="image" src="../_images/lmfit_workflow.jpg" /></p>
+<p>We will use population growth rates as an example, as we did the <a class="reference internal" href="20-ModelFitting.html#model-fitting-r-population-growth"><span class="std std-ref">model fitting chapter</span></a> (where we used R).</p>
+<p>First let’s import the necessary packages (you may need to install <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> first).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">Minimizer</span><span class="p">,</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">report_fit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, create some artificial data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">32500</span><span class="p">,</span> <span class="mi">33000</span><span class="p">,</span> <span class="mi">38000</span><span class="p">,</span> <span class="mi">105000</span><span class="p">,</span> <span class="mi">445000</span><span class="p">,</span> <span class="mi">1430000</span><span class="p">,</span> <span class="mi">3020000</span><span class="p">,</span> <span class="mi">4720000</span><span class="p">,</span> <span class="mi">5670000</span><span class="p">,</span> <span class="mi">5870000</span><span class="p">,</span> <span class="mi">5930000</span><span class="p">,</span> <span class="mi">5940000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c1">#Set random seed for reproducibility</span>
+
+<span class="n">N_rand</span> <span class="o">=</span> <span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">)))</span> <span class="c1">#Add some error to data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what the data look like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">N_rand</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$N$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;scientific&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-NLLS-Python_8_0.png" src="../_images/Appendix-NLLS-Python_8_0.png" />
+</div>
+</div>
+<div class="section" id="fitting-a-linear-model-to-the-data">
+<h2>Fitting a Linear model to the data<a class="headerlink" href="#fitting-a-linear-model-to-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Lets start with the simplest case; a linear model.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}\label{eq:linear_model}
+    N_t = at^3 + bt^2 + ct + d
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, are phenomenological parameters.</p>
+<div class="section" id="using-nlls">
+<h3>Using NLLS<a class="headerlink" href="#using-nlls" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create object for storing parameters</span>
+<span class="n">params_linear</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+
+<span class="c1">#Add parameters and initial values to it</span>
+<span class="n">params_linear</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">params_linear</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">params_linear</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">params_linear</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Write down the objective function that we want to minimize, i.e., the residuals </span>
+<span class="k">def</span> <span class="nf">residuals_linear</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate cubic growth and subtract data&quot;&quot;&quot;</span>
+    
+    <span class="c1">#Get an ordered dictionary of parameter values</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span>
+    
+    <span class="c1">#Cubic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">model</span> <span class="o">-</span> <span class="n">data</span>     <span class="c1">#Return residuals</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a Minimizer object</span>
+<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_linear</span><span class="p">,</span> <span class="n">params_linear</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span>
+
+<span class="c1">#Perform the minimization</span>
+<span class="n">fit_linear_NLLS</span> <span class="o">=</span> <span class="n">minner</span><span class="o">.</span><span class="n">minimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">fit_linear</span></code> belongs to a class called <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.MinimizerResult"><code class="docutils literal notranslate"><span class="pre">MinimizerResult</span></code></a>, which include data such as status and error messages, fit statistics, and the updated (i.e., best-fit) parameters themselves in the params attribute.</p>
+<p>Now get the summary of the fit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report_fit</span><span class="p">(</span><span class="n">fit_linear_NLLS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 10
+    # data points      = 12
+    # variables        = 4
+    chi-square         = 1.68617886
+    reduced chi-square = 0.21077236
+    Akaike info crit   = -15.5493005
+    Bayesian info crit = -13.6096739
+[[Variables]]
+    a: -0.00147820 +/- 5.3322e-04 (36.07%) (init = 1)
+    b:  0.03687009 +/- 0.01787451 (48.48%) (init = 1)
+    c:  0.14339899 +/- 0.16467922 (114.84%) (init = 1)
+    d:  10.0545124 +/- 0.39977042 (3.98%) (init = 1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(a, b) = -0.984
+    C(b, c) = -0.960
+    C(a, c) =  0.900
+    C(c, d) = -0.779
+    C(b, d) =  0.621
+    C(a, d) = -0.528
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-ols">
+<h3>Using OLS<a class="headerlink" href="#using-ols" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">lmfit</span></code>’s purpose is not to fit linear models, although it is general enough to do so. Recall that a 3rd degree polynomial is a Lienar model, and it can be fitted using <em>Ordinary Least Squares</em>. You can easily do this  with the function <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>.</p>
+<p>Let’s try this for the same data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_linear_OLS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># degree = 3 as this is a cubic </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now check the fitted coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fit_linear_OLS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.47819938e-03  3.68700893e-02  1.43398989e-01  1.00545124e+01]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="comparing-the-nlls-and-ols-fits">
+<h3>Comparing the NLLS and OLS fits<a class="headerlink" href="#comparing-the-nlls-and-ols-fits" title="Permalink to this headline">¶</a></h3>
+<p>Let’s compare the the coefficients obtained using NLLS (using <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>) vs using OLS (with <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>) above.</p>
+<p>First have a another look at the NLLS result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> a </td><td> -0.00147820 </td><td>  5.3322e-04 </td><td> (36.07%) </td><td> 1 </td><td>        -inf </td><td>         inf </td><td> True </td></tr><tr><td> b </td><td>  0.03687009 </td><td>  0.01787451 </td><td> (48.48%) </td><td> 1 </td><td>        -inf </td><td>         inf </td><td> True </td></tr><tr><td> c </td><td>  0.14339899 </td><td>  0.16467922 </td><td> (114.84%) </td><td> 1 </td><td>        -inf </td><td>         inf </td><td> True </td></tr><tr><td> d </td><td>  10.0545124 </td><td>  0.39977042 </td><td> (3.98%) </td><td> 1 </td><td>        -inf </td><td>         inf </td><td> True </td></tr></table></div></div>
+</div>
+<p>Now extract the just the estimated parameter values obtained with <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> (it takes some effort as these are saved in a Python dictionary within the fitted model object):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">par_dict</span> <span class="o">=</span> <span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+<span class="c1">#Transform these into an array</span>
+<span class="n">par</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">par_dict</span><span class="p">))</span>
+
+<span class="c1">#Check the difefrences in the the parameter values obtained with lmfit and polyfit</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fit_linear_OLS</span> <span class="o">-</span> <span class="n">par</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 2.18246428e-12  2.18860347e-12  7.76045894e-13 -1.61435310e-11]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are differences because NLLS is not an exact method. But these differences are <em>tiny</em>, showing that NLLS converges on pretty much the same solution as the (exact) OLS method.</p>
+<p>Next, you can calculate the residuals of the fit:</p>
+</div>
+<div class="section" id="calculating-the-residuals-etc">
+<h3>Calculating the residuals, etc.<a class="headerlink" href="#calculating-the-residuals-etc" title="Permalink to this headline">¶</a></h3>
+<p>Once you have done the model fitting you can calculate the residuals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Construct the fitted polynomial equation</span>
+<span class="n">my_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit_linear_OLS</span><span class="p">)</span>
+
+<span class="c1">#Compute predicted values</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">my_poly</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1">#Calculate residuals</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">ypred</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The residuals can be then used to calculate BIC, AIC, etc, as you <a class="reference internal" href="20-ModelFitting.html#model-fitting-r-comparing-models"><span class="std std-ref">learned previously</span></a>.</p>
+<div class="section" id="exercise">
+<h4>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>We calculated the residuals above using the OLS fit of the cubic model to the data. Calculate the residuals for the NLLS fit of the same model to the data (i.e., using the <code class="docutils literal notranslate"><span class="pre">fit_linear_NLLS</span></code> object).</p>
+<ul>
+<li><p><em>Hint</em>: To do this, you will need to first extract the coefficients, and then use the <code class="docutils literal notranslate"><span class="pre">residuals_linear</span></code> function that we created above.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="fitting-non-linear-models-to-the-data">
+<h2>Fitting Non-linear models to the data<a class="headerlink" href="#fitting-non-linear-models-to-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> to do what it was actually designed for: fitting non-linear mathematical models to data. We will fit the same two models that we fitted in the <a class="reference internal" href="20-ModelFitting.html#model-fitting-r-population-growth"><span class="std std-ref">Model Fitting Chapter</span></a> (where we used R).</p>
+<div class="section" id="logistic-model-fit">
+<h3>Logistic model fit<a class="headerlink" href="#logistic-model-fit" title="Permalink to this headline">¶</a></h3>
+<p>A classical, somewhat mechanistic model is the logistic growth equation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    N_t =   \frac{N_0  N_{max} e^{r t}}{N_{max} + N_0 (e^{r t} - 1)}
+\end{equation*}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(N_t\)</span> is population size at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(N_0\)</span> is initial population size, <span class="math notranslate nohighlight">\(r\)</span> is maximum growth rate (AKA <span class="math notranslate nohighlight">\(r_{max}\)</span>), and <span class="math notranslate nohighlight">\(N_{max}\)</span> is carrying capacity (commonly denoted by <span class="math notranslate nohighlight">\(K\)</span> in the ecological literature).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create object for parameter storing</span>
+<span class="n">params_logistic</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_logistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;N_0&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N_rand</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">params_logistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;N_max&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N_rand</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1">#Recall the value for growth rate obtained from a linear fit</span>
+<span class="n">params_logistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.62</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Write down the objective function that we want to minimize, i.e., the residuals </span>
+<span class="k">def</span> <span class="nf">residuals_logistic</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model a logistic growth and subtract data&#39;&#39;&#39;</span>
+    <span class="c1">#Get an ordered dictionary of parameter values</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span>
+    <span class="c1">#Logistic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_max&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">/</span> \
+    <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_max&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">)))</span>
+    <span class="c1">#Return residuals</span>
+    <span class="k">return</span> <span class="n">model</span> <span class="o">-</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a Minimizer object</span>
+<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_logistic</span><span class="p">,</span> <span class="n">params_logistic</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span>
+<span class="c1">#Perform the minimization</span>
+<span class="n">fit_logistic</span> <span class="o">=</span> <span class="n">minner</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that I am choosing the least squares as the optimization method. A table with alternative fitting algorithms offered by lmfit can be found <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#choosing-different-fitting-methods">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Get summary of the fit</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">fit_logistic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 34
+    # data points      = 12
+    # variables        = 3
+    chi-square         = 2.19693074
+    reduced chi-square = 0.24410342
+    Akaike info crit   = -14.3741446
+    Bayesian info crit = -12.9194246
+[[Variables]]
+    N_0:    13998.5739 +/- 4769.60185 (34.07%) (init = 34032.16)
+    N_max:  7108406.32 +/- 2165947.53 (30.47%) (init = 6529216)
+    r:      0.44848151 +/- 0.05161938 (11.51%) (init = 0.62)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(N_0, r)     = -0.807
+    C(N_max, r)   = -0.448
+    C(N_0, N_max) =  0.239
+</pre></div>
+</div>
+</div>
+</div>
+<p>Where function evals, is the number of iterations needed to reach the minimum. The <code class="docutils literal notranslate"><span class="pre">report_fit</span></code> function also offers estimations of goodness of fit such as <span class="math notranslate nohighlight">\(\chi^2\)</span>, BIC and AIC. These are calculated as specified <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#akaike-and-bayesian-information-criteria">here</a>. Finally, uncertainties of each parameter estimate, correlation levels between them are also calculated. Details and caveats about these values can be found <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#uncertainties-in-variable-parameters-and-their-correlations">here</a>.</p>
+</div>
+<div class="section" id="gompertz-model">
+<h3>Gompertz model<a class="headerlink" href="#gompertz-model" title="Permalink to this headline">¶</a></h3>
+<p>Another alternative is the Gompertz model, which has been used frequently in the literature to model bacterial growth</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}\label{eq:Gompertzlog}
+     \log(N_t) =  N_0 + (N_{max} - N_0) e^{-e^{r_{max} \exp(1) \frac{t_{lag} - t}{(N_{max} - N_0) \log(10)} + 1}}
+\end{equation*}\]</div>
+<p>Here maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>) is the tangent to the inflection point, <span class="math notranslate nohighlight">\(t_{lag}\)</span> is the x-axis intercept to this tangent (duration of the delay before the population starts growing exponentially) and <span class="math notranslate nohighlight">\(\log\left(\frac{N_{max}}{N_0}\right)\)</span> is the asymptote of the log-transformed population growth trajectory, i.e., the log ratio of maximum population density <span class="math notranslate nohighlight">\(N_{max}\)</span> (aka “carrying capacity”) and initial cell (Population) <span class="math notranslate nohighlight">\(N_0\)</span> density.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create object for parameter storing</span>
+<span class="n">params_gompertz</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="c1"># add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)</span>
+<span class="n">params_gompertz</span><span class="o">.</span><span class="n">add_many</span><span class="p">((</span><span class="s1">&#39;N_0&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                         <span class="p">(</span><span class="s1">&#39;N_max&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                         <span class="p">(</span><span class="s1">&#39;r_max&#39;</span><span class="p">,</span> <span class="mf">0.62</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                         <span class="p">(</span><span class="s1">&#39;t_lag&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="c1">#I see it in the graph</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Write down the objective function that we want to minimize, i.e., the residuals </span>
+<span class="k">def</span> <span class="nf">residuals_gompertz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model a logistic growth and subtract data&#39;&#39;&#39;</span>
+    <span class="c1">#Get an ordered dictionary of parameter values</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span>
+    <span class="c1">#Logistic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_0&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_max&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_0&#39;</span><span class="p">])</span> <span class="o">*</span> \
+    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;r_max&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;t_lag&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> \
+                   <span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_max&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;N_0&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#Return residuals</span>
+    <span class="k">return</span> <span class="n">model</span> <span class="o">-</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a Minimizer object</span>
+<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_gompertz</span><span class="p">,</span> <span class="n">params_gompertz</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span>
+<span class="c1">#Perform the minimization</span>
+<span class="n">fit_gompertz</span> <span class="o">=</span> <span class="n">minner</span><span class="o">.</span><span class="n">minimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Sumarize results</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 37
+    # data points      = 12
+    # variables        = 4
+    chi-square         = 0.11350314
+    reduced chi-square = 0.01418789
+    Akaike info crit   = -47.9299775
+    Bayesian info crit = -45.9903509
+[[Variables]]
+    N_0:    10.3910132 +/- 0.07901002 (0.76%) (init = 10.43506)
+    N_max:  15.6520240 +/- 0.06730933 (0.43%) (init = 15.6918)
+    r_max:  1.74097660 +/- 0.09837840 (5.65%) (init = 0.62)
+    t_lag:  4.52049075 +/- 0.24729695 (5.47%) (init = 5)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(r_max, t_lag) =  0.757
+    C(N_0, t_lag)   =  0.581
+    C(N_max, r_max) = -0.465
+    C(N_max, t_lag) = -0.318
+    C(N_0, N_max)   = -0.132
+    C(N_0, r_max)   =  0.115
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-results">
+<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="c1">#Linear</span>
+<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_linear</span><span class="p">,</span> <span class="s1">&#39;y.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Linear&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_linear</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Logistic</span>
+<span class="n">result_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_logistic</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_logistic</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_logistic</span> <span class="o">=</span> <span class="n">residuals_logistic</span><span class="p">(</span><span class="n">fit_logistic</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_logistic</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Gompertz</span>
+<span class="n">result_gompertz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_gompertz</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_gompertz</span><span class="p">,</span> <span class="s1">&#39;g.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Gompertz&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_gompertz</span> <span class="o">=</span> <span class="n">residuals_gompertz</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_gompertz</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Plot data points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">),</span> <span class="s1">&#39;r+&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="c1">#Plot legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log(N_t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;scientific&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-NLLS-Python_45_0.png" src="../_images/Appendix-NLLS-Python_45_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The generalized Logistic model (also known as Richards’ curve) is an extension of the logistic or sigmoid functions, allowing for more flexible S-shaped curves:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}\label{eq:Hill}
+    \log(N_t) = A + \frac{K - A}{1 + Q(e^{-Bt})^{1/\mu}}
+\end{equation*}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(A\)</span> is the lower asymptote, <span class="math notranslate nohighlight">\(K\)</span> is the higher asymptote. If <span class="math notranslate nohighlight">\(A=0\)</span> then <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity. <span class="math notranslate nohighlight">\(B\)</span> is the growth rate, <span class="math notranslate nohighlight">\(\mu &gt;0\)</span> affects near which asymptote maximum growth occurs. <span class="math notranslate nohighlight">\(Q\)</span> is related to the value <span class="math notranslate nohighlight">\(N(0)\)</span></p>
+<p>Fit this model to the data using as initial values for the parameters: <span class="math notranslate nohighlight">\(A = 10\)</span>, <span class="math notranslate nohighlight">\(K = 16\)</span>, <span class="math notranslate nohighlight">\(Q = 0.5\)</span>, <span class="math notranslate nohighlight">\(B = 1\)</span>, <span class="math notranslate nohighlight">\(\mu = 0.1\)</span>, <span class="math notranslate nohighlight">\(T = 7.5\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Define the parameter object</span>
+<span class="n">params_genlogistic</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="c1">#Add parameters and initial values</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">params_genlogistic</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Define the model</span>
+<span class="k">def</span> <span class="nf">residuals_genlogistic</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model a logistic growth and subtract data&#39;&#39;&#39;</span>
+    <span class="c1">#Get an ordered dictionary of parameter values</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span>
+    <span class="c1">#Logistic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;K&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">])</span> <span class="o">/</span> \
+    <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">])))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">])</span>
+    <span class="c1">#Return residuals</span>
+    <span class="k">return</span> <span class="n">model</span> <span class="o">-</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Perform the fit</span>
+<span class="c1">#Create a Minimizer object</span>
+<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_genlogistic</span><span class="p">,</span> <span class="n">params_genlogistic</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span>
+<span class="c1">#Perform the minimization</span>
+<span class="n">fit_genlogistic</span> <span class="o">=</span> <span class="n">minner</span><span class="o">.</span><span class="n">minimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Overlay the fit with the others</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="c1">#Linear</span>
+<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_linear</span><span class="p">,</span> <span class="s1">&#39;y.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Linear&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_linear</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Logistic</span>
+<span class="n">result_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_logistic</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_logistic</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_logistic</span> <span class="o">=</span> <span class="n">residuals_logistic</span><span class="p">(</span><span class="n">fit_logistic</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_logistic</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Gompertz</span>
+<span class="n">result_gompertz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_gompertz</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_gompertz</span><span class="p">,</span> <span class="s1">&#39;g.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Gompertz&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_gompertz</span> <span class="o">=</span> <span class="n">residuals_gompertz</span><span class="p">(</span><span class="n">fit_gompertz</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_gompertz</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Generalized logistic</span>
+<span class="n">result_genlogistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_genlogistic</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_genlogistic</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span> <span class="o">=</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> 
+         <span class="n">markeredgecolor</span> <span class="o">=</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Generalized Logistic&#39;</span><span class="p">)</span>
+<span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
+<span class="n">residual_smooth_genlogistic</span> <span class="o">=</span> <span class="n">residuals_genlogistic</span><span class="p">(</span><span class="n">fit_genlogistic</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_genlogistic</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Plot data points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">),</span> <span class="s1">&#39;r+&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="c1">#Plot legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log(N_t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;scientific&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">63</span><span class="o">-</span><span class="mi">136</span><span class="n">b3be8e0ef</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> 
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1">#Logistic</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">result_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_logistic</span><span class="o">.</span><span class="n">residual</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_logistic</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
+
+<span class="ne">NameError</span>: name &#39;fit_logistic&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/Appendix-NLLS-Python_50_1.png" src="../_images/Appendix-NLLS-Python_50_1.png" />
+</div>
+</div>
+<p>We can visually tell that the model that best fits the data is the Generalized Logistic model, closely followed by the Gompertz model. Does this mean that the Generalized Logistic model is a better model?</p>
+<p>No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as well as the Generalized Logistic (GL), but has less parameters, and these are more ‘mechanistic’ than the ones in GL, so it is clearly better.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Appendix-Databases.html" title="previous page">Databases <span class="tocSkip"></span></a>
+    <a class='right-next' id="next-link" href="Appendix-MiniProj.html" title="next page">The Computing Miniproject</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

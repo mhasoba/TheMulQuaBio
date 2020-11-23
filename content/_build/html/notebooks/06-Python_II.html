@@ -248,6 +248,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="Appendix-MiniProj.html">
    The Computing Miniproject
   </a>
@@ -1768,8 +1773,8 @@ from the end of an array:</p>
 <div class="section" id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Permalink to this headline">¶</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-833dbda3-b81c-4d84-adfa-c5584a374bf4">
-<span class="eqno">(1)<a class="headerlink" href="#equation-833dbda3-b81c-4d84-adfa-c5584a374bf4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-651f07b0-f2f9-4987-b7ca-0f1b699da9d4">
+<span class="eqno">(1)<a class="headerlink" href="#equation-651f07b0-f2f9-4987-b7ca-0f1b699da9d4" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2329,8 +2334,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>It runs the Lotka-Volterra model with prey density dependence <span class="math notranslate nohighlight">\(r R \left(1 - \frac{R} {K}\right)\)</span>, which changes the coupled ODEs to,</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-af9cefb3-87d7-4bb9-9bd9-dc4cd57751b3">
-<span class="eqno">(2)<a class="headerlink" href="#equation-af9cefb3-87d7-4bb9-9bd9-dc4cd57751b3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1b8dd994-0863-45bf-a6c4-027b8c04af91">
+<span class="eqno">(2)<a class="headerlink" href="#equation-1b8dd994-0863-45bf-a6c4-027b8c04af91" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2347,8 +2352,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-f26ed3db-0c91-4f7e-afe9-c099ea2cda8f">
-<span class="eqno">(3)<a class="headerlink" href="#equation-f26ed3db-0c91-4f7e-afe9-c099ea2cda8f" title="Permalink to this equation">¶</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-864f3a92-d026-4e8a-93b9-c8cd94afd684">
+<span class="eqno">(3)<a class="headerlink" href="#equation-864f3a92-d026-4e8a-93b9-c8cd94afd684" title="Permalink to this equation">¶</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
@@ -2359,15 +2364,15 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-14b9caa2-f24d-4e83-8163-cedeb75a589a">
-<span class="eqno">(4)<a class="headerlink" href="#equation-14b9caa2-f24d-4e83-8163-cedeb75a589a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f0e618ae-7016-4f6d-aed3-f4d8163483a6">
+<span class="eqno">(4)<a class="headerlink" href="#equation-f0e618ae-7016-4f6d-aed3-f4d8163483a6" title="Permalink to this equation">¶</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this
 script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a8f2a580-930f-46e5-bc56-35a8b21f6e71">
-<span class="eqno">(5)<a class="headerlink" href="#equation-a8f2a580-930f-46e5-bc56-35a8b21f6e71" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-89f84bee-d2c8-4a68-9e90-67c0c77c109d">
+<span class="eqno">(5)<a class="headerlink" href="#equation-89f84bee-d2c8-4a68-9e90-67c0c77c109d" title="Permalink to this equation">¶</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + \epsilon + r +  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - z + \epsilon + e a R_t)
 \end{align}\]</div>
@@ -3241,8 +3246,8 @@ Dr Aurelio Malo
 <p>This creates an object <code class="docutils literal notranslate"><span class="pre">p</span></code>, from which you can extract the output and other information of the command you ran. Before we do anything more, let’s look at our <code class="docutils literal notranslate"><span class="pre">subprocess.popen</span></code> call carefully.</p>
 <ul class="simple">
 <li><p>The command line arguments were passed as a list of strings, which avoids the need for escaping quotes or other special characters that might be interpreted by the shell (for example, in this case, there are apostrophes in the string that is being <code class="docutils literal notranslate"><span class="pre">echo</span></code>ed in bash).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stdout</span></code> is the output from the process “spawned” by your command. This is bytes sequence (which you will need to decode - more on this below).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stderr</span></code> is the error code (from which you can capture whether the process ran successfully or not). The method PIPE creates a new “pipe” to the “child process”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stdout</span></code> is the output from the process “spawned” by your command. This is a sequence of bytes (which you will need to decode - more on this below).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stderr</span></code> is the error code (from which you can capture whether the process ran successfully or not). The method PIPE creates a new “pipe” (literally, a connection) to the output of to the “child”  process.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3296,45 +3301,23 @@ Dr Aurelio Malo
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;ls&quot;</span><span class="p">,</span> <span class="s2">&quot;-l&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
 <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-<span class="c1"># print(stdout.decode())</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Now use <code class="docutils literal notranslate"><span class="pre">print(stdout.decode())</span></code> to see the output.</p>
 <p>Recall that the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> command lists all files in a long listing format.</p>
 <p>You can also call python itself from bash (!):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;boilerplate.py&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span> <span class="c1"># A bit silly! </span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;boilerplate.py&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span> <span class="c1"># A bit silly! </span>
 <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>This should give you the output of your <code class="docutils literal notranslate"><span class="pre">boilerplate.py</span></code> script (remember, your current path will need to be in the appropriate code directory of the relevant week’s directory).</p>
 <p>Similarly, to compile a <span class="math notranslate nohighlight">\(\LaTeX\)</span> document (using <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> in this case), you can do something like:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;pdflatex yourlatexdoc.tex&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
-<p>You can also do this instead:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;boilerplate.py&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span> <span class="c1"># A bit silly! </span>
-<span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -3570,7 +3553,7 @@ python script. A simple example, where the output is a platform-dependent direct
  &lt;a list of 10 Patch objects&gt;)
 </pre></div>
 </div>
-<img alt="../_images/06-Python_II_272_1.png" src="../_images/06-Python_II_272_1.png" />
+<img alt="../_images/06-Python_II_271_1.png" src="../_images/06-Python_II_271_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3587,7 +3570,7 @@ python script. A simple example, where the output is a platform-dependent direct
  &lt;a list of 10 Patch objects&gt;)
 </pre></div>
 </div>
-<img alt="../_images/06-Python_II_273_1.png" src="../_images/06-Python_II_273_1.png" />
+<img alt="../_images/06-Python_II_272_1.png" src="../_images/06-Python_II_272_1.png" />
 </div>
 </div>
 <p>Now let’s plot the network, with node sizes proportional to (log) body size:</p>
@@ -3641,7 +3624,7 @@ python script. A simple example, where the output is a platform-dependent direct
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06-Python_II_286_0.png" src="../_images/06-Python_II_286_0.png" />
+<img alt="../_images/06-Python_II_285_0.png" src="../_images/06-Python_II_285_0.png" />
 </div>
 </div>
 <p>You might get a warning. In that case, try upgrading the networkx package.</p>

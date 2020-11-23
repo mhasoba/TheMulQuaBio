@@ -1704,7 +1704,7 @@ New_Data = re.sub(r'\t'," ", My_Data) # replace all tabs with a space
 # 
 # First, import the module (this is part of the python standard library, so you won't need to install it):
 
-# In[161]:
+# In[1]:
 
 
 import subprocess
@@ -1718,7 +1718,7 @@ import subprocess
 # 
 # $\star$ In a terminal, first `cd` to your `code` directory,  launch `ipython3`, then and type:
 
-# In[162]:
+# In[2]:
 
 
 p = subprocess.Popen(["echo", "I'm talkin' to you, bash!"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -1727,16 +1727,16 @@ p = subprocess.Popen(["echo", "I'm talkin' to you, bash!"], stdout=subprocess.PI
 # This creates an object `p`, from which you can extract the output and other information of the command you ran. Before we do anything more, let's look at our `subprocess.popen` call carefully. 
 # 
 # * The command line arguments were passed as a list of strings, which avoids the need for escaping quotes or other special characters that might be interpreted by the shell (for example, in this case, there are apostrophes in the string that is being `echo`ed in bash).
-# * `stdout` is the output from the process "spawned" by your command. This is bytes sequence (which you will need to decode - more on this below). 
-# * `stderr` is the error code (from which you can capture whether the process ran successfully or not). The method PIPE creates a new "pipe" to the "child process". 
+# * `stdout` is the output from the process "spawned" by your command. This is a sequence of bytes (which you will need to decode - more on this below). 
+# * `stderr` is the error code (from which you can capture whether the process ran successfully or not). The method PIPE creates a new "pipe" (literally, a connection) to the output of to the "child"  process.
 
-# In[163]:
+# In[3]:
 
 
 stdout, stderr = p.communicate()
 
 
-# In[164]:
+# In[4]:
 
 
 stderr
@@ -1746,7 +1746,7 @@ stderr
 # 
 # Now check what's in `stdout`:
 
-# In[165]:
+# In[5]:
 
 
 stdout
@@ -1754,7 +1754,7 @@ stdout
 
 # Let's encode and print it.
 
-# In[166]:
+# In[6]:
 
 
 print(stdout.decode())
@@ -1764,25 +1764,27 @@ print(stdout.decode())
 # 
 # Let's try something else: 
 
-# In[167]:
+# In[7]:
 
 
 p = subprocess.Popen(["ls", "-l"], stdout=subprocess.PIPE)
 stdout, stderr = p.communicate()
-# print(stdout.decode())
 
+
+# Now use `print(stdout.decode())` to see the output.
 
 # Recall that the `ls -l` command lists all files in a long listing format. 
 # 
 # You can also call python itself from bash (!):
 
-# In[168]:
-
-
-p = subprocess.Popen(["python3", "boilerplate.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # A bit silly! 
-stdout, stderr = p.communicate()
-print(stdout.decode())
-
+# ```python
+# p = subprocess.Popen(["python3", "boilerplate.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # A bit silly! 
+# stdout, stderr = p.communicate()
+# 
+# print(stdout.decode())
+# ```
+# 
+# This should give you the output of your `boilerplate.py` script (remember, your current path will need to be in the appropriate code directory of the relevant week's directory). 
 
 # Similarly, to compile a $\LaTeX$ document (using `pdflatex` in this case), you can do something like:
 # 
@@ -1790,21 +1792,11 @@ print(stdout.decode())
 # subprocess.os.system("pdflatex yourlatexdoc.tex")
 # ```
 
-# You can also do this instead:
-
-# In[169]:
-
-
-p = subprocess.Popen(["python3", "boilerplate.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # A bit silly! 
-stdout, stderr = p.communicate()
-print(stdout.decode())
-
-
 # ### Handling directory and file paths
 # 
 # You can also use `subprocess.os` to make your code OS (Linux, Windows, Mac) independent. For example to assign paths:
 
-# In[170]:
+# In[9]:
 
 
 subprocess.os.path.join('directory', 'subdirectory', 'file')
@@ -1815,7 +1807,7 @@ subprocess.os.path.join('directory', 'subdirectory', 'file')
 # Note that in all cases you can "catch" the output of `subprocess` so that you can then use the output within your
 # python script. A simple example, where the output is a platform-dependent directory path, is:
 
-# In[171]:
+# In[10]:
 
 
 MyPath = subprocess.os.path.join('directory', 'subdirectory', 'file')
@@ -1840,7 +1832,7 @@ MyPath
 
 # Now, create a script `TestR.py` with the following content :
 
-# In[172]:
+# In[11]:
 
 
 import subprocess
@@ -1852,7 +1844,7 @@ subprocess.Popen("Rscript --verbose TestR.R > ../Results/TestR.Rout 2> ../Result
 # 
 # Also check what happens if you run (type directly in `ipython` or `python` console):
 
-# In[173]:
+# In[12]:
 
 
 subprocess.Popen("Rscript --verbose NonExistScript.R > ../Results/outputFile.Rout 2> ../Results/errorFile.Rout", shell=True).wait()
