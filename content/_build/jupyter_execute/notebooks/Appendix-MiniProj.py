@@ -49,7 +49,77 @@
 # 
 # * contain $\leq$3500 words *excluding the contents of the title page, references, and Figure or Table captions+legends*. There should be a word count at the beginning of the document (typically using the `texcount` package).
 # 
-# For the Report, you should read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
+# (Miniproject-report-guidelines)=
+# ### Guidelines
+# 
+# Please read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
+# 
+# ```{tip}
+# **Start writing early**. Its NEVER too early to start writing! Outline the structure of your report and attempt to write a brief introduction even if you don't have any results, or have not finalized your methods, computational work flow, or analyses. Doing this preliminary writing will force you to think about the logic of what you are planning to do, put your planned work in some context, and (in most cases!) motivate you.  
+# ```
+# 
+# Here are some additional suggestions/guidelines:
+# 
+# * **In General**:
+#     * In scientific writing (papers, reports), a "narrative" or "flow" is important. What this means (more on each of these components below):
+#         * Starting with the Title, and through the Introduction, Methods, Results and Discussion, there is a common thread (focal issue or topic).
+#         * The *Title* gives a summary of what the article is about, and may even convey what the main finding is.
+#         * The *Introduction* clearly and accurately builds and "expectation" for the reader, i.e., what to look for in the subsequent sections. 
+#         * The *Methods* and *Results*, to thee extent possible, follow the same sequence of topics (and questions/hypotheses) that were laid out in the Introduction
+#         * The *Discussion* reminds the reader about what the original goals of the study were, states out key findings succinctly, and then discusses their implications in the wider context and then finished off with some caveats and a conclusion that delivers the final take-away messages.     
+#     * Avoid sub-sectioning (with headers) the *Introduction* and *Discussion* sections as it breaks the flow of your "narrative". On the other hand, you will almost always sub-section the Methods, and to an extent the Results sections.
+#     * Pay attention to detail: 
+#         * Do a spell check on the final draft
+#         * Make sure that all graphics are rendered in good quality (use [vector graphic](https://en.wikipedia.org/wiki/Vector_graphics) formats as much as possible). Remember, $\LaTeX$ allows you to embed vector graphics in pdf.
+#         * Make sure that all the display items (Tables + Figures) have a text caption that states what the display item is for, and then a text legend that explains the figure and delivers any take home messages. 
+#     * The display items alone should be able to tell most of the story. Once you have an outline of the manuscript, first, before doing any more writing, put in the display items (generally, 4-6 should be enough) with Captions and Legends, and see if they are indeed telling the story you would like your paper/report to tell.   
+#     * Avoid the words "explore" or "look at" to describe your ob objectives 
+#     * Use direct speech (as it is YOUR work!)
+#         * So, for example, avoid phrases such as "This study investigates"; say "Here I investigate" or something like that instead.
+#         
+# * **The Title**
+#    * The Title should give a summary of what the article is about, and may even convey the main finding(s). Make it as result-focused as possible, and avoid being vague. 
+#    * Keep the number of words to a minimum (upto 10-15 words is reasonable).
+#        * Some succinct title examples:
+#            * "The role of xx in determining yy"
+#            * "The relative success of xx models in providing parameter estimates for yy"
+#            * *Or better still*: "xx models out-perform yy models for quantifying zz data"
+#            * *OR even better still*: "xx [organisms / traits] differ systematically across yy [some grouping variable, such as location or taxonomic categories]" 
+#        * Some not-so-nice title examples:
+#            * "A comparison of models for describing zz using Linear and no-linear model fitting with AIC/BIC"
+#            * "An exploration of xx models for describing yy data using Linear and Non-linear model fitting with model selection "
+# 
+# * **Abstract**: *The report must have an Abstract.*
+#     * It should be a "mini-paper" in itself: So, 1-2 lines on background, 1-2 lines on the paper's objectives, 1-2 lines on the methods, 1-2 lines on the main results, 1-2 lines on the main conclusions + take home messages. Remember the abstract counts towards the total work limit (at least as far as your Mini-project report is concerned), so you will need to be succinct. About 200 words is the suggested maximum.
+#     * Do not be vague about the take home messages at the end of the abstract. For example, do not say something like "Thus this study shows that more work needs to be done...", or "This study shows that model selection is useful...". Try instead to say something like "This study shows that in general, xx models are better suited for yy data..." or "This study provides evidence that in xx [organisms / traits], yy models tend to under-perform because..." (NOTE THAT THESE ARE HYPOTHETICAL/EXAMPLE STATEMENTS!).   
+#     
+# * **Introduction**:     
+#     * The Introduction should open with a general *enough* background (with citations). What is "general enough"? &ndash; A context that *justifies* the main focus of the study, and *motivates* the reader. So, for example, if the focus is population growth rates, then provide a context for why growth rates are important to study.  
+#     * Towards/At the end of the Introduction, provide some specific questions or hypotheses that will be addressed in the study. But do not present hypotheses if they are not backed by logical arguments or mathematical / computational modelling / theory. Asking questions is better than (logically/theoretically) unfounded hypotheses. The *narrative* of the Introduction should funnel the reader's attention *naturally* towards the stated hypotheses/questions; the hypotheses/questions should not come out of the blue.
+#     * And if you are going with hypotheses, add statements following the hypotheses that briefly explain the logic behind each hypothesis.
+#     
+# * **Methods**:
+#     * This will typically include subsections for key elements of your methods (e.g., Data, Models, Model fitting, etc).
+#     * Do not go overboard with describing every detail and every step of your workflow. For example, you do not need to state that "figures were plotted in ggplot and saved to a directory called xx". 
+#     * Note the additional requirement for the miniproject report to include a section on specific computing languages and tools used and the justification for using them.  
+# 
+# * **Results**:
+#     * These can also be sub-sectioned by the main questions/hypotheses/issues your are tackling. 
+#     * Avoid any discussion of the results. 
+#     * Reference the Figures and Tables clearly and specifically (e.g., refer to key sub-panels of figures when needed)   
+# 
+# * **Discussion**:
+#     * Stat by reminding the reader about what the original goals of the study were
+#     * State key findings succinctly
+#     * Then discuss their implications in the wider context (with additional referencing beyond what you had in the intro).
+#     * Include a paragraph or two of caveats/shortcomings with clear indication of what future work can do to address them.  
+#     * End with conclusion that delivers the final take-away messages.     
+#    
+# * **Supplementary Information** (SI):
+#     * If used, SI should be a separate document and cited in the main text.
+#     * Make sure it is a separate document that includes is own references and sections/subsections.
+#     * When citing the SI, cite specific sections/subsections.
+#     * The SI should be concatenated with the main document in the final submission.
 # 
 # ## Submission
 # 
@@ -86,10 +156,13 @@
 # 
 # * Quality of the presentation of the graphics and tables in your report, as well as any plots showing model fits to the data.
 # 
+# * Don't forget to read the report guidelines [above](Miniproject-report-guidelines).    
+# 
 # ### Overall
 # 
 # * The marking criteria you may refer to for both components are the [summative marking criteria](https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf). 
-# * The goal is to fit as many mathematical models as possible, but the minimum being 2 (to allow model comparison). You will get extra points for picking more "difficult" models to fit and compare (basically, one or more non-linear mathematical models).
+# * The goal is to fit as many mathematical models as possible, but the minimum being 2 (to allow model comparison). You will get more marks for picking more "difficult" models to fit and compare (basically, one or more non-linear mathematical models).
+#     * However, note that you need to pick a problem that is within reach. You will not get extra marks for attempting to fit one or more "difficult" models and then, failing overall to achieve a coherent report and model fitting exercise, because, for example, you ended up spending too much time on the "difficult" models(s).   
 
 # ## Suggested Workflow
 # 
@@ -138,42 +211,18 @@
 # ### A single script to run them all
 # 
 # * Finally, write a script called `run_MiniProject.py` or `run_MiniProject.sh` respectively, which runs the whole project, right down to compilation of the LaTeX  document.
-# 
-# 
+
 # ## For NLLS fitting 
 # 
-# **FIRST work through the [example practicals](./20-ModelFitting.ipynb).**
+# **FIRST work through the example practicals [here](./20-ModelFitting.ipynb) and [here](./Appendix-NLLS-Python.ipynb).**
 # 
-# * If you choose `R`, examples are [here](Appendix-ModelFitting.ipynb). 
-# 
-# * If you choose Python for the model fitting component of your workflow, use `lmfit`: 
-#     * Look up submodules `minimize`, `Parameters`, `Parameter`, and `report_fit`. 
-#     * *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . 
-#     * You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). Lots of examples of using lmfit online.
-# 
-# * You will need to write a script that calculates [starting values](more on this below). 
+# * You will typically need to write a script that calculates starting values (more on this topic [here](Model-Fitting-NLLS-Starting-Values)).
 # 
 # * You will need to use the `try` keyword because not all runs will converge. *The more data curves you are able to fit, the better — that is part of the challenge*
 # 
-# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence.* (As you did in the [example practicals](./20-ModelFitting.ipynb))
+# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence (as you did in the example practicals [here](./20-ModelFitting.ipynb) and [here](./Appendix-NLLS-Python.ipynb).
 # 
-# ### Obtaining starting values 
-# 
-# The main challenge for NLLS fitting is finding starting values for the parameters. 
-# 
-# Ideally, you should determine starting values specific to each dataset (e.g., every distinct functional response, population growth rate, or thermal performance curve) that you are trying to fit a model to. To do so, understanding how each parameter in the model corresponds to features of the actual data is key. 
-# 
-# For example, in the Gompertz population growth rate model, your starting values generator would essentially be an algorithm which, for each dataset,   
-# *  Calculates a starting value for $r_{max}$ by searching for the steepest slope of the growth curve using the first few data points (fitting a straight line using OLS)
-# * Calculates a starting value of $t_{lag}$ by intersecting the fitted line with the x (time)-axis 
-# * Calculates a starting value for the asymptote $A$ as the highest data (abundance) value in the dataset. 
-# 
-# In general, a good strategy to optimize fits (and maximize how many datasets are successfully fitted to a non-linear model) is to *sample starting values from a distribution*. For example, you can choose a Gaussian (if you have high confidence in mean value of parameter) or a uniform distribution (if you have low confidence in mean, but high confidence in the range of values that the parameter can take), with the mean of the sampling distribution  being the value you inferred from the data.
-# 
-# *Ideally, you should write a separate script/module/function that calculates starting values for the model parameters.* 
-# 
-# 
-# ### Getting started 
+# ## Getting started 
 # 
 # Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way. 
 #    
@@ -194,7 +243,7 @@
 # ```
 # 
 # * **For NLLS fitting**, figure out, using one, "nice-looking" functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
-#    * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors in case the fitting doesn't converge.
+#    * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors (and examine them carefully) in case the fitting doesn't converge.
 
 # ## The Dataset and Model Options
 # 
@@ -383,9 +432,9 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # 
 # Then, there is the more mechanistic Holling Type II model (Holling, 1959):
 # 
-# $$\label{eq:FR_II}
-#       c = \frac{a x_R}{1 + h a x_R}
 # $$
+#       c = \frac{a x_R}{1 + h a x_R}
+# $$(eq:FR_II)
 # 
 # Here, $x_R$ is resource density (Mass / Area or Volume), $a$ is consumer's search rate (Area or Volume / Time ), and  $h$ is handling time of the consumer for that resource (time taken to overpower and ingest it). 
 # 
@@ -393,28 +442,31 @@ sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 # 
 # ---
 # ![image](./graphics/3_FR.svg)
-# <small>  <center> Example of the a Type II model (eqn. \ref{eq:FR_II}) fitted to a functional response of a consumer on a resource. 
+# <small>  <center> Example of the a Type II model (eqn. {eq}`eq:FR_II`) fitted to a functional response of a consumer on a resource. 
 # </center> </small>
 # 
 # ---
 # 
 # There is also the less-mechanistic "generalized" functional response model:  
 # 
-# $$\label{eq:FR_gen}
-#       c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
 # $$
+#       c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
+# $$(eq:FR_gen)
 # 	   
-# Where everything is same as \ref{eq:FR_II}, but the additional parameter $q$ (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from "Type I" to "Type III". This model is less mechanistic because it includes a phenomenological parameter $q$ which does not have a formal biological meaning. Note that if $q=0$, eqn (\ref{eq:FR_gen} becomes same as the Type II model (eqn. \ref{eq:FR_II})). 
+# Where everything is same as eqn. {eq}`eq:FR_II`, but the additional parameter $q$ (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from "Type I" to "Type III". This model is less mechanistic because it includes a phenomenological parameter $q$ which does not have a formal biological meaning. 
 # 
+# ```{note}
+# Note that if $q=0$, eqn {eq}`eq:FR_gen` becomes same as the Type II model (eqn. {eq}`eq:FR_II`). 
+# ```
 # ---
 # ![image](./graphics/FR.svg)
-# <small> <center> The range of functional responses captured by the generalized functional response model (eqn. \ref{eq:FR_gen}). 
+# <small> <center> The range of functional responses captured by the generalized functional response model (eqn. {eq}`eq:FR_gen`). 
 # </center>
 # </small>
 # 
 # ---
 # 
-# There are other models for functional responses as well (some more mechanistic), that define parameters of the functional response in terms of body size of predator and prey (Pawar et al 2012).
+# There are not too many other models for functional responses, though you can and should try looking for them in the literature. One more mechanistic model that defines parameters of the Type II functional response in terms of body size of predator and prey can be found in  Pawar et al (2012).
 
 # ### Thermal Performance Curves
 # 
@@ -480,6 +532,7 @@ data_subset.head()
 sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 
 
+# (Miniproj-TPCs-Models)=
 # #### The Models
 # 
 # *All the following parameters and variables are in SI units*.
@@ -499,9 +552,30 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # Another phenomenological model option is the Briere model:
 # 
-# $$B = B_0 T (T-T_0) \sqrt{T_m-T}$$
+# $$
+# B = \left\{
+#         \begin{array}{ll}
+#             0 & \quad T \leq T_0 \\
+#             B_0 T (T-T_0) \sqrt{T_m-T} & \quad T_0 \leq T \leq T_m \\
+#             0 & \quad T \geq T_m
+#         \end{array}
+#     \right.
+# $$(eq:Briere1)
 # 
-# Where $T$ is temperature, $T_0$ and $T_m$ are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and $B_0$ is a normalization constant.  
+# Where $T$ is temperature, $T_0$ and $T_m$ are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and $B_0$ is a normalization constant.  Example R code for fitting this mdoel can be found [here](Model-Fitting-NLLS-TPCs).
+# 
+# If you look at the original paper, you will find that Briere et al also propose a more general version of this equation (by adding a new parameter $m$ to replace the square root above):
+# 
+# $$
+# B = \left\{
+#         \begin{array}{ll}
+#             0 & \quad T \leq T_0 \\
+#             B_0 T (T-T_0) (T_m-T)^\frac{1}{m} & \quad T_0 \leq T \leq T_m \\
+#             0 & \quad T \geq T_m
+#         \end{array}
+#     \right.
+# $$
+# 
 # 
 # In contrast, the Schoolfield model (Schoolfield et al 1981) is a mechanistic option that is based upon thermodynamics and enzyme kinetics:
 # 
@@ -511,16 +585,15 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 #     e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
 # $$(eq:schoolf)
 # 
-# *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings](#Readings)). You may choose additional models listed in that paper for comparison, if you want.
-# 
 # Here, $k$ is the Boltzmann constant ($8.617 \times 10^{-5}$ eV $\cdot$ K$^{-1}$), $B$ the value of the trait at a given temperature $T$ (K) (K = $^\circ$C + 273.15), while $B_0$ is the trait value at 283.15 K (10$^\circ$C) which stands for the value of the growth rate at low temperature and controls the vertical offset of the curve. $E_l$ is the enzyme's low-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very low temperatures, and $T_l$ is the at which the enzyme is 50% low-temperature deactivated. $E_h$ is the
 # enzyme's high-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very high temperatures, and $T_h$ is the at which the enzyme is 50% high-temperature deactivated. $E$ is the activation energy (eV) which controls the rise of the curve up to the peak in the "normal operating range" for the enzyme (below the peak of the curve and above $T_h$).
+# 
+# *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings & Resources](Miniproj-Readings)). You may choose additional models listed in that paper for comparison, if you want.
 # 
 # ---
 # ![image](./graphics/SchoolfEx.png)
 # <small> <center>Example of the full Sharpe-Schoolfield model (Eqn. {eq}`eq:schoolf`) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance.
 #     </center> </small>
-# 
 # ---
 # 
 # In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.
@@ -553,6 +626,7 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # 
 # You may also choose to revisit the results of another paper that has done comparisons of the models you have chosen with your new dataset (but remember, that may well become too ambitious a project given the time you have).
 
+# (Miniproj-Readings)=
 # ## Readings & Resources
 # 
 # Many of these papers are in pdf format in the Readings directory on TheMulQuaBio repository.

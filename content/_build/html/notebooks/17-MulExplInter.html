@@ -488,7 +488,8 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 </div>
 <p>Compared to the model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, there is an extra line at the bottom. The top two are the same and show that trophic level and ground dwelling both have independent main effects. The extra line
 shows that there is also an interaction between the two. It doesn’t explain a huge amount of variation, about half as much as trophic level, but it is significant.</p>
-<p>Again, we can calculate the <span class="math notranslate nohighlight">\(r^2\)</span> for the model: <span class="math notranslate nohighlight">\(\frac{0.81 + 2.75 + 0.43}{0.81+2.75+0.43+12.77} = 0.238\)</span></p>
+<p>Again, we can calculate the <span class="math notranslate nohighlight">\(r^2\)</span> for the model:</p>
+<p><span class="math notranslate nohighlight">\(\frac{0.81 + 2.75 + 0.43}{0.81+2.75+0.43+12.77} = 0.238\)</span></p>
 <p>The model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a> without the interaction had an <span class="math notranslate nohighlight">\(r^2 = 0.212\)</span> — our new
 model explains 2.6% more of the variation in the data.</p>
 <p>The summary table is as follows:</p>
@@ -542,15 +543,28 @@ F-statistic: 15.81 on 5 and 253 DF,  p-value: 1.504e-13
 <p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, which would allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interactions</em>. That is, this part of the model only includes a single difference ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary
 between levels because of the further effects of interactions.</p>
 <p>The table below show how these combine to give the predictions for each group combination, with those two new lines show in red:</p>
-<p><span class="math notranslate nohighlight">\(\begin{array}{|r|r|r|}
-\hline
- &amp; \textrm{Not ground} &amp;  \textrm{Ground} \\
-\hline
-\textrm{Carnivore} &amp; 0.96 = 0.96 &amp;  0.96+0.25=1.21 \\
-\textrm{Herbivore} &amp; 0.96 + 0.05 = 1.01 &amp; 0.96+0.05+0.25{\color{red}+0.03}=1.29\\
-\textrm{Omnivore} &amp; 0.96 + 0.23 = 1.19 &amp; 0.96+0.23+0.25{\color{red}-0.15}=1.29\\
-\hline
-\end{array}\)</span></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="text-align:left head"><p><strong>Not ground</strong></p></th>
+<th class="text-align:left head"><p><strong>Ground</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>Carnivore</strong></p></td>
+<td class="text-align:left"><p>0.96 = 0.96</p></td>
+<td class="text-align:left"><p>0.96 + 0.25 = 1.21</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>Herbivore</strong></p></td>
+<td class="text-align:left"><p>0.96 + 0.05 = 1.01</p></td>
+<td class="text-align:left"><p>0.96 + 0.05 + 0.25<span style="color:red"> + 0.03</span> = 1.29</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>Omnivore</strong></p></td>
+<td class="text-align:left"><p>0.96 + 0.23 = 1.19</p></td>
+<td class="text-align:left"><p>0.96 + 0.23 + 0.25<span style="color:red"> - 0.15</span> = 1.29</p></td>
+</tr>
+</tbody>
+</table>
 <p>So why are there two new coefficients? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not: 2 levels and trophic level: 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) =2\)</span>. It might be easier to understand why graphically:</p>
 <p><img alt="image" src="../_images/interactionsdiag.png" /></p>
 <p>The prediction for the white boxes above can be found by adding the main effects together but for the grey boxes, we need to find specific differences. So there are <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> interaction coefficients (count the number of grey boxes) to add.</p>
@@ -754,11 +768,12 @@ F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
 </li>
 </ul>
 <p>How do these hang together to give the two lines shown in the model? We can calculate these by hand:</p>
-<p>\begin{aligned}
-\textrm{Body Weight} &amp;= -2.40 + 1.01 \times \textrm{logGS} &amp; \textrm{[Anisoptera]}\
-\textrm{Body Weight} &amp;= (-2.40 -2.25) + (1.01 - 2.15) \times \textrm{logGS} &amp; \textrm{[Zygoptera]}\
-&amp;= -4.65 - 1.14 \times \textrm{logGS}
-\end{aligned}</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ \textrm{Body Weight} &amp;= -2.40 + 1.01 \times \textrm{logGS} &amp; \textrm{[Anisoptera]}\\
+ \textrm{Body Weight} &amp;= (-2.40 -2.25) + (1.01 - 2.15) \times \textrm{logGS} &amp; \textrm{[Zygoptera]}\\
+        &amp;= -4.65 - 1.14 \times \textrm{logGS}
+\end{align*}\]</div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add the above code into your script and check that you understand the outputs.</p>
 <p>We’ll use the <code class="docutils literal notranslate"><span class="pre">predict</span></code> function again to get the predicted values from the model and add lines to the plot above.</p>
 <p>First, we’ll create a set of numbers spanning the range of genome size:</p>

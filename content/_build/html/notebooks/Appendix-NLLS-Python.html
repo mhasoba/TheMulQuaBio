@@ -372,6 +372,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fitting-a-linear-model-to-the-data">
    Fitting a Linear model to the data
   </a>
@@ -432,6 +437,11 @@
    Exercise
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-resources">
+   Readings &amp; Resources
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -445,6 +455,8 @@
                 
   <div class="section" id="model-fitting-in-python">
 <h1>Model fitting in Python<a class="headerlink" href="#model-fitting-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Python offers a wide range of tools for fitting mathematical models to data. Here we will look at using Python to fit non-linear models to data using Least Squares (NLLS).</p>
 <p>You may want to have a look at <a class="reference internal" href="20-ModelFitting.html"><span class="doc std std-doc">this Chapter</span></a>, and in particular, it NLLS section, and the lectures on <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">Model fitting</a> and <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/blob/master/content/lectures/NLLS">NLLS</a> before proceeding.</p>
 <p>WE will use the <code class="docutils literal notranslate"><span class="pre">Lmfit</span></code> package, which provides a high-level interface to non-linear optimization and curve fitting problems for Python.</p>
@@ -492,11 +504,13 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$N$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;scientific&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/Appendix-NLLS-Python_8_0.png" src="../_images/Appendix-NLLS-Python_8_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="fitting-a-linear-model-to-the-data">
@@ -638,7 +652,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 2.18246428e-12  2.18860347e-12  7.76045894e-13 -1.61435310e-11]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 2.18245647e-12  2.18892265e-12  7.72548692e-13 -1.61293201e-11]
 </pre></div>
 </div>
 </div>
@@ -718,7 +732,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a Minimizer object</span>
-<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_logistic</span><span class="p">,</span> <span class="n">params_logistic</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span>
+<span class="n">minner</span> <span class="o">=</span> <span class="n">Minimizer</span><span class="p">(</span><span class="n">residuals_logistic</span><span class="p">,</span> <span class="n">params_logistic</span><span class="p">,</span> <span class="n">fcn_args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)))</span><span class="c1">#Plug in the logged data.</span>
 <span class="c1">#Perform the minimization</span>
 <span class="n">fit_logistic</span> <span class="o">=</span> <span class="n">minner</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
 </pre></div>
@@ -845,12 +859,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="c1">#Linear</span>
-<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">residual</span> <span class="c1"># These points lay on top of the theoretical fitted curve</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_linear</span><span class="p">,</span> <span class="s1">&#39;y.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Linear&#39;</span><span class="p">)</span>
 <span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
 <span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
-<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span><span class="c1">#Create a vector of ones.</span>
+<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_linear</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#Logistic</span>
@@ -942,15 +956,14 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Overlay the fit with the others</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="c1">#Linear</span>
-<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear</span><span class="o">.</span><span class="n">residual</span>
+<span class="n">result_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">residual</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_linear</span><span class="p">,</span> <span class="s1">&#39;y.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Linear&#39;</span><span class="p">)</span>
 <span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
 <span class="n">t_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">log_N_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_vec</span><span class="p">))</span>
-<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
+<span class="n">residual_smooth_linear</span> <span class="o">=</span> <span class="n">residuals_linear</span><span class="p">(</span><span class="n">fit_linear_NLLS</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">log_N_vec</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">residual_smooth_linear</span> <span class="o">+</span> <span class="n">log_N_vec</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#Logistic</span>
@@ -993,23 +1006,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">63</span><span class="o">-</span><span class="mi">136</span><span class="n">b3be8e0ef</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> 
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1">#Logistic</span>
-<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">result_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N_rand</span><span class="p">)</span> <span class="o">+</span> <span class="n">fit_logistic</span><span class="o">.</span><span class="n">residual</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result_logistic</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="c1">#Get a smooth curve by plugging a time vector to the fitted logistic model</span>
-
-<span class="ne">NameError</span>: name &#39;fit_logistic&#39; is not defined
-</pre></div>
-</div>
-<img alt="../_images/Appendix-NLLS-Python_50_1.png" src="../_images/Appendix-NLLS-Python_50_1.png" />
+<img alt="../_images/Appendix-NLLS-Python_50_0.png" src="../_images/Appendix-NLLS-Python_50_0.png" />
 </div>
 </div>
-<p>We can visually tell that the model that best fits the data is the Generalized Logistic model, closely followed by the Gompertz model. Does this mean that the Generalized Logistic model is a better model?</p>
-<p>No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as well as the Generalized Logistic (GL), but has less parameters, and these are more ‘mechanistic’ than the ones in GL, so it is clearly better.</p>
+<p>We can visually tell that the model that best fits the data is the Generalized Logistic model, closely followed by the Gompertz model. Does this mean that the Generalized Logistic model is a better model?
+No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as good as the Generalized Logistic (GL), but has less parameters, and these are more ‘mechanistic’ than the ones in GL, so it is clearly better.</p>
+</div>
+<div class="section" id="readings-resources">
+<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>If you choose Python for the model fitting component of your workflow, you will probably want to use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>.
+Look up documentation/help on submodules <code class="docutils literal notranslate"><span class="pre">minimize</span></code>, <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>, and <code class="docutils literal notranslate"><span class="pre">report_fit</span></code> in particular.</p>
+<ul>
+<li><p>Also <em>Have a look through</em> <a class="reference external" href="http://lmfit.github.io/lmfit-py">http://lmfit.github.io/lmfit-py</a>, especially <a class="reference external" href="http://lmfit.github.io/lmfit-py/fitting.html#minimize">http://lmfit.github.io/lmfit-py/fitting.html#minimize</a> .</p></li>
+</ul>
+</li>
+<li><p>You will have to install <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">easy_install</span></code>  (use sudo mode). <em>Lots of examples of using lmfit can be found online (for example, by searching for “lmfit examples”!)</em>.</p></li>
+</ul>
 </div>
 </div>
 

@@ -787,13 +787,14 @@ p.legend(['numerical approximation', 'analytical solution'], loc='best') # draw 
 N_vec - N_0 * sc.exp(r_m * t_vec)
 
 
+# (Logistic-Population-Growth)=
 # ### One population: Logistic Population growth
 # 
 # Populations eventually run into contraints, even if they can grow exponentially at the start (eqn \ref{eq:exp_growth}). The classical model for logistic growth in population density ($N$) captures this dynamic:
 # 
-# \begin{equation}\label{eq:logist_growth}
+# $$
 # 	\frac{\text{d}N}{\text{d}t} = r_m N \left(1-\frac{N}{K}\right)
-# \end{equation}
+# $$(eq:logist_growth)
 # 
 # where $K$ is the carrying capacity of the environment, while $r_m$ is the same parameter same as above. Let's solve this one as well. 
 # 

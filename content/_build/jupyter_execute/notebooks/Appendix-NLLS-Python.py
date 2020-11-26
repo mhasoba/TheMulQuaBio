@@ -3,6 +3,8 @@
 
 # # Model fitting in Python
 
+# ## Introduction 
+# 
 # Python offers a wide range of tools for fitting mathematical models to data. Here we will look at using Python to fit non-linear models to data using Least Squares (NLLS). 
 # 
 # You may want to have a look at [this Chapter](./20-ModelFitting.ipynb), and in particular, it NLLS section, and the lectures on [Model fitting](https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting) and [NLLS](https://github.com/mhasoba/TheMulQuaBio/blob/master/content/lectures/NLLS) before proceeding.    
@@ -22,7 +24,7 @@
 # 
 # First let's import the necessary packages (you may need to install `lmfit` first).
 
-# In[47]:
+# In[1]:
 
 
 from lmfit import Minimizer, Parameters, report_fit
@@ -32,14 +34,14 @@ import matplotlib.pylab as plt
 
 # Now, create some artificial data:
 
-# In[48]:
+# In[2]:
 
 
 t = np.arange(0, 24, 2)
 N = np.array([32500, 33000, 38000, 105000, 445000, 1430000, 3020000, 4720000, 5670000, 5870000, 5930000, 5940000])
 
 
-# In[49]:
+# In[3]:
 
 
 np.random.seed(1234) #Set random seed for reproducibility
@@ -49,13 +51,14 @@ N_rand = N*(1 + np.random.normal(scale = 0.1, size = len(N))) #Add some error to
 
 # Here's what the data look like:
 
-# In[50]:
+# In[4]:
 
 
 plt.plot(t, N_rand, 'r+', markersize = 15, markeredgewidth = 2, label = 'Data')
 plt.xlabel('t', fontsize = 20)
 plt.ylabel(r'$N$', fontsize = 20)
 plt.ticklabel_format(style='scientific', scilimits=[0,3])
+plt.yscale('log')
 
 
 # ## Fitting a Linear model to the data 
@@ -70,7 +73,7 @@ plt.ticklabel_format(style='scientific', scilimits=[0,3])
 
 # ### Using NLLS
 
-# In[51]:
+# In[5]:
 
 
 #Create object for storing parameters
@@ -83,7 +86,7 @@ params_linear.add('c', value = 1)
 params_linear.add('d', value = 1)
 
 
-# In[52]:
+# In[6]:
 
 
 #Write down the objective function that we want to minimize, i.e., the residuals 
@@ -99,7 +102,7 @@ def residuals_linear(params, t, data):
     return model - data     #Return residuals
 
 
-# In[53]:
+# In[7]:
 
 
 #Create a Minimizer object
@@ -113,7 +116,7 @@ fit_linear_NLLS = minner.minimize()
 # 
 # Now get the summary of the fit:
 
-# In[30]:
+# In[8]:
 
 
 report_fit(fit_linear_NLLS)
@@ -125,7 +128,7 @@ report_fit(fit_linear_NLLS)
 # 
 # Let's try this for the same data.
 
-# In[54]:
+# In[9]:
 
 
 fit_linear_OLS = np.polyfit(t, np.log(N_rand), 3) # degree = 3 as this is a cubic 
@@ -133,7 +136,7 @@ fit_linear_OLS = np.polyfit(t, np.log(N_rand), 3) # degree = 3 as this is a cubi
 
 # Now check the fitted coefficients: 
 
-# In[55]:
+# In[10]:
 
 
 print(fit_linear_OLS)
@@ -145,7 +148,7 @@ print(fit_linear_OLS)
 # 
 # First have a another look at the NLLS result: 
 
-# In[57]:
+# In[11]:
 
 
 fit_linear_NLLS.params
@@ -153,7 +156,7 @@ fit_linear_NLLS.params
 
 # Now extract the just the estimated parameter values obtained with `lmfit` (it takes some effort as these are saved in a Python dictionary within the fitted model object):
 
-# In[59]:
+# In[12]:
 
 
 par_dict = fit_linear_NLLS.params.valuesdict().values()
@@ -173,7 +176,7 @@ print(fit_linear_OLS - par)
 
 # Once you have done the model fitting you can calculate the residuals:
 
-# In[9]:
+# In[13]:
 
 
 #Construct the fitted polynomial equation
@@ -208,7 +211,7 @@ residuals = ypred - np.log(N_rand)
 # 
 # Here $N_t$ is population size at time $t$, $N_0$ is initial population size, $r$ is maximum growth rate (AKA $r_{max}$), and $N_{max}$ is carrying capacity (commonly denoted by $K$ in the ecological literature).
 
-# In[10]:
+# In[14]:
 
 
 #Create object for parameter storing
@@ -219,7 +222,7 @@ params_logistic.add('N_max', value = N_rand[-1])
 params_logistic.add('r', value = 0.62)
 
 
-# In[11]:
+# In[15]:
 
 
 #Write down the objective function that we want to minimize, i.e., the residuals 
@@ -233,18 +236,18 @@ def residuals_logistic(params, t, data):
     return model - data
 
 
-# In[12]:
+# In[16]:
 
 
 #Create a Minimizer object
-minner = Minimizer(residuals_logistic, params_logistic, fcn_args=(t, np.log(N_rand)))
+minner = Minimizer(residuals_logistic, params_logistic, fcn_args=(t, np.log(N_rand)))#Plug in the logged data.
 #Perform the minimization
 fit_logistic = minner.minimize(method = 'leastsq')
 
 
 # Note that I am choosing the least squares as the optimization method. A table with alternative fitting algorithms offered by lmfit can be found [here](https://lmfit.github.io/lmfit-py/fitting.html#choosing-different-fitting-methods).
 
-# In[13]:
+# In[17]:
 
 
 #Get summary of the fit
@@ -263,7 +266,7 @@ report_fit(fit_logistic)
 # 
 # Here maximum growth rate ($r_{max}$) is the tangent to the inflection point, $t_{lag}$ is the x-axis intercept to this tangent (duration of the delay before the population starts growing exponentially) and $\log\left(\frac{N_{max}}{N_0}\right)$ is the asymptote of the log-transformed population growth trajectory, i.e., the log ratio of maximum population density $N_{max}$ (aka “carrying capacity”) and initial cell (Population) $N_0$ density.
 
-# In[14]:
+# In[18]:
 
 
 #Create object for parameter storing
@@ -275,7 +278,7 @@ params_gompertz.add_many(('N_0', np.log(N_rand)[0] , True, 0, None, None, None),
                          ('t_lag', 5, True, 0, None, None, None))#I see it in the graph
 
 
-# In[15]:
+# In[19]:
 
 
 #Write down the objective function that we want to minimize, i.e., the residuals 
@@ -289,7 +292,7 @@ def residuals_gompertz(params, t, data):
     return model - data
 
 
-# In[16]:
+# In[20]:
 
 
 #Create a Minimizer object
@@ -298,7 +301,7 @@ minner = Minimizer(residuals_gompertz, params_gompertz, fcn_args=(t, np.log(N_ra
 fit_gompertz = minner.minimize()
 
 
-# In[17]:
+# In[21]:
 
 
 #Sumarize results
@@ -307,17 +310,17 @@ report_fit(fit_gompertz)
 
 # ### Plot the results
 
-# In[18]:
+# In[22]:
 
 
 plt.rcParams['figure.figsize'] = [20, 15]
 #Linear
-result_linear = np.log(N_rand) + fit_linear.residual
+result_linear = np.log(N_rand) + fit_linear_NLLS.residual # These points lay on top of the theoretical fitted curve
 plt.plot(t, result_linear, 'y.', markersize = 15, label = 'Linear')
 #Get a smooth curve by plugging a time vector to the fitted logistic model
 t_vec = np.linspace(0,24,1000)
-log_N_vec = np.ones(len(t_vec))
-residual_smooth_linear = residuals_linear(fit_linear.params, t_vec, log_N_vec)
+log_N_vec = np.ones(len(t_vec))#Create a vector of ones.
+residual_smooth_linear = residuals_linear(fit_linear_NLLS.params, t_vec, log_N_vec)
 plt.plot(t_vec, residual_smooth_linear + log_N_vec, 'orange', linestyle = '--', linewidth = 1)
 
 #Logistic
@@ -360,7 +363,7 @@ plt.ticklabel_format(style='scientific', scilimits=[0,3])
 # 
 # Fit this model to the data using as initial values for the parameters: $A = 10$, $K = 16$, $Q = 0.5$, $B = 1$, $\mu = 0.1$, $T = 7.5$
 
-# In[60]:
+# In[23]:
 
 
 #Define the parameter object
@@ -374,7 +377,7 @@ params_genlogistic.add('mu', value = 0.1, min = 0)
 params_genlogistic.add('T', value = 7.5, min = 0)
 
 
-# In[62]:
+# In[24]:
 
 
 #Define the model
@@ -388,7 +391,7 @@ def residuals_genlogistic(params, t, data):
     return model - data
 
 
-# In[21]:
+# In[25]:
 
 
 #Perform the fit
@@ -398,19 +401,18 @@ minner = Minimizer(residuals_genlogistic, params_genlogistic, fcn_args=(t, np.lo
 fit_genlogistic = minner.minimize()
 
 
-# In[63]:
+# In[26]:
 
 
 #Overlay the fit with the others
-
 plt.rcParams['figure.figsize'] = [20, 15]
 #Linear
-result_linear = np.log(N_rand) + fit_linear.residual
+result_linear = np.log(N_rand) + fit_linear_NLLS.residual
 plt.plot(t, result_linear, 'y.', markersize = 15, label = 'Linear')
 #Get a smooth curve by plugging a time vector to the fitted logistic model
 t_vec = np.linspace(0,24,1000)
 log_N_vec = np.ones(len(t_vec))
-residual_smooth_linear = residuals_linear(fit_linear.params, t_vec, log_N_vec)
+residual_smooth_linear = residuals_linear(fit_linear_NLLS.params, t_vec, log_N_vec)
 plt.plot(t_vec, residual_smooth_linear + log_N_vec, 'orange', linestyle = '--', linewidth = 1)
 
 #Logistic
@@ -452,5 +454,12 @@ plt.ticklabel_format(style='scientific', scilimits=[0,3])
 
 
 # We can visually tell that the model that best fits the data is the Generalized Logistic model, closely followed by the Gompertz model. Does this mean that the Generalized Logistic model is a better model?
+# No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as good as the Generalized Logistic (GL), but has less parameters, and these are more 'mechanistic' than the ones in GL, so it is clearly better.
+
+# ## Readings & Resources
 # 
-# No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as well as the Generalized Logistic (GL), but has less parameters, and these are more 'mechanistic' than the ones in GL, so it is clearly better.
+# * If you choose Python for the model fitting component of your workflow, you will probably want to use `lmfit`. 
+# Look up documentation/help on submodules `minimize`, `Parameters`, `Parameter`, and `report_fit` in particular. 
+#     * Also *Have a look through* <http://lmfit.github.io/lmfit-py>, especially <http://lmfit.github.io/lmfit-py/fitting.html#minimize> . 
+# 
+# * You will have to install `lmfit` using `pip` or `easy_install`  (use sudo mode). *Lots of examples of using lmfit can be found online (for example, by searching for "lmfit examples"!)*.

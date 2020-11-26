@@ -1407,8 +1407,8 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="section" id="one-population-exponential-growth">
 <h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this headline">¶</a></h3>
 <p>Let’s look at how populations grow when there are no environmental constraints. The differential equation model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c0b8958c-74cb-46e9-ad70-27c827834c7b">
-<span class="eqno">(6)<a class="headerlink" href="#equation-c0b8958c-74cb-46e9-ad70-27c827834c7b" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
+<div class="amsmath math notranslate nohighlight" id="equation-125debd4-d5e0-46cb-821e-7e4c7fdf676b">
+<span class="eqno">(7)<a class="headerlink" href="#equation-125debd4-d5e0-46cb-821e-7e4c7fdf676b" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
 	\frac{\text{d}N}{\text{d}t} = r_m N
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r_m\)</span> is the intrinsic, constant rate of population gowth (units of 1/time), and <span class="math notranslate nohighlight">\(N\)</span> is population size (or biomass abundance). I use the subscript <span class="math notranslate nohighlight">\(m\)</span> in <span class="math notranslate nohighlight">\(r_m\)</span> to denote both <a class="reference external" href="https://en.wikipedia.org/wiki/Malthusianism">Malthusian</a> and maximal population growth rate because, in theory, without any constraints, this growth rate is expected to at its theoretical/biological maximum.</p>
@@ -1469,8 +1469,8 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="math notranslate nohighlight">
 \[C_1 = N_0\]</div>
 <p>That is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-24ad67ea-7a45-432c-8780-472389b01021">
-<span class="eqno">(7)<a class="headerlink" href="#equation-24ad67ea-7a45-432c-8780-472389b01021" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
+<div class="amsmath math notranslate nohighlight" id="equation-2ec74c93-8731-4a21-b307-5e335e6eaf83">
+<span class="eqno">(8)<a class="headerlink" href="#equation-2ec74c93-8731-4a21-b307-5e335e6eaf83" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
 N{\left (t \right )} = N_0 e^{r_m t}
 \end{equation}\]</div>
 <p>We could use Sympy for this last step as well (using <code class="docutils literal notranslate"><span class="pre">subs()</span></code> like you learned above), but that would be just plain silly – like using a sledge-hammer to drive in a nail!</p>
@@ -1538,12 +1538,12 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="section" id="one-population-logistic-population-growth">
-<h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this headline">¶</a></h3>
+<span id="logistic-population-growth"></span><h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this headline">¶</a></h3>
 <p>Populations eventually run into contraints, even if they can grow exponentially at the start (eqn \ref{eq:exp_growth}). The classical model for logistic growth in population density (<span class="math notranslate nohighlight">\(N\)</span>) captures this dynamic:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-32a3d273-6d81-4876-b3c7-a037321d71f0">
-<span class="eqno">(8)<a class="headerlink" href="#equation-32a3d273-6d81-4876-b3c7-a037321d71f0" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:logist_growth}
+<div class="math notranslate nohighlight" id="equation-eq-logist-growth">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-logist-growth" title="Permalink to this equation">¶</a></span>\[
 	\frac{\text{d}N}{\text{d}t} = r_m N \left(1-\frac{N}{K}\right)
-\end{equation}\]</div>
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity of the environment, while <span class="math notranslate nohighlight">\(r_m\)</span> is the same parameter same as above. Let’s solve this one as well.</p>
 <p>As in the case of the exponential growth above, let’s find the solution to this equation for any arbitrary time point <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Again, first we define the vars and the function:</p>
@@ -1578,8 +1578,8 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute <span class="math notranslate nohighlight">\(t = 0\)</span>, and then solve the resulting equation for the initital condition of <span class="math notranslate nohighlight">\(N_0\)</span>, which then gives This the time-dependent solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e7520ac-171b-45a8-9056-a0ee824f363c">
-<span class="eqno">(9)<a class="headerlink" href="#equation-3e7520ac-171b-45a8-9056-a0ee824f363c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14c91f2f-6896-47ef-8ed3-ab16bf0cca7a">
+<span class="eqno">(10)<a class="headerlink" href="#equation-14c91f2f-6896-47ef-8ed3-ab16bf0cca7a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
 \end{equation}\]</div>
 <p>You can do the last steps to obtain this solution using Sympy as well (I leave it to you to try it).</p>
@@ -1623,8 +1623,8 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="section" id="two-interacting-populations-the-lotka-volterra-predator-prey-model">
 <h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this headline">¶</a></h3>
 <p>Now for the classical Lotka-Volterra model that you encountered in the advanced Python week (without logistic growth for the consumer, <span class="math notranslate nohighlight">\(C\)</span>).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5acb810c-8091-4ee8-a565-49ee6baddd13">
-<span class="eqno">(10)<a class="headerlink" href="#equation-5acb810c-8091-4ee8-a565-49ee6baddd13" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-30bd7ab9-641d-4bb2-8c59-02de1b07636e">
+<span class="eqno">(11)<a class="headerlink" href="#equation-30bd7ab9-641d-4bb2-8c59-02de1b07636e" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\\
 \frac{dC}{dt} &amp;= e a N C - z C
 \end{align}\]</div>
