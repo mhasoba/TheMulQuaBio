@@ -455,6 +455,7 @@ mm * mm # instead of mm.dot(mm)
 # 
 # We will look at two particularly useful `scipy` sub-packages here: `scipy.stats` and `scipy.integrate`. 
 # 
+# (Python-scipy-stats)=
 # #### Scipy stats
 # 
 # Let's take a quick spin in `scipy.stats`. 

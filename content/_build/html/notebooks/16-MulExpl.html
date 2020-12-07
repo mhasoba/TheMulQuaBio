@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -214,8 +215,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting.html">
-   Model Fitting in Ecology and Evolution
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
   </a>
  </li>
 </ul>
@@ -502,8 +513,8 @@
  $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
  $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
  $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
- - attr(*, &quot;na.action&quot;)=Class &#39;omit&#39;  Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
-  .. ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
+ - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
 </pre></div>
 </div>
 </div>
@@ -514,11 +525,14 @@
 <p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we used the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to fit a model just to dragonflies. You can use <code class="docutils literal notranslate"><span class="pre">subset</span></code> with plots too.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> to your script to split the graphics into two panels.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy over and modify the code from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to create a boxplot of genome size by trophic level into your script.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command):</p>
-<p><img alt="image" src="../_images/boxplots.svg" />
-<small> <center> Figure 1</p>
-</center> </small>
-<p>You can use the option <code class="docutils literal notranslate"><span class="pre">main</span></code> to add titles to a plot.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command).</p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/boxplots.svg"><img alt="../_images/boxplots.svg" src="../_images/boxplots.svg" width="600px" /></a>
+<hr class="docutils" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function’s option <code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">=</span> </code> to add titles to a plot.</p>
+</div>
 </div>
 <div class="section" id="lattice-again">
 <h3><code class="docutils literal notranslate"><span class="pre">lattice</span></code> again<a class="headerlink" href="#lattice-again" title="Permalink to this headline">¶</a></h3>
@@ -531,7 +545,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_9_1.png" src="../_images/16-MulExpl_9_1.png" />
+<img alt="../_images/16-MulExpl_9_0.png" src="../_images/16-MulExpl_9_0.png" />
 </div>
 </div>
 <p>The code <code class="docutils literal notranslate"><span class="pre">logCvalue</span> <span class="pre">~</span> <span class="pre">TrophicLevel</span> <span class="pre">|</span> <span class="pre">GroundDwelling</span></code> means plot the relationship between genome size and trophic level, but group within levels of ground dwelling. We are using the function <code class="docutils literal notranslate"><span class="pre">bwplot</span></code>, which is provided by <code class="docutils literal notranslate"><span class="pre">lattice</span></code> to create box and whisker plots.</p>
@@ -633,9 +647,11 @@ the bars and the length of error bar caps.</p>
 </div>
 <div class="section" id="plotting-means-and-confidence-intervals">
 <h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this headline">¶</a></h3>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> function again as an exercise to change graph settings and to prepare figures for reports and write ups. This is the figure you should be able to reproduce:</p>
-<p><img alt="image" src="../_images/plotmeans.svg" />
-<small> <center> Means and 95% confidence intervals for log genome size (picograms) in mammals for different trophic levels for a) ground dwelling species and b) other species. </center> </small></p>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> function again as an exercise to change graph settings and to prepare figures for reports and write ups. This is the figure you should be able to reproduce the figure below.</p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/plotmeans.svg"><img alt="../_images/plotmeans.svg" src="../_images/plotmeans.svg" width="600px" /></a>
+<p><small> <center> Means and 95% confidence intervals for log genome size (picograms) in mammals for different trophic levels for a) ground dwelling species and b) other species. </center> </small></p>
+<hr class="docutils" />
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> and the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to generate the two plots below. You will need to
 set the <code class="docutils literal notranslate"><span class="pre">ylim</span></code> option for the two plots to make them use the same <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">text</span></code> to add labels — the command <code class="docutils literal notranslate"><span class="pre">par('usr')</span></code> will show you the limits of the plot (<span class="math notranslate nohighlight">\(x_{min}, x_{max}, y_{min}, y_{max}\)</span>) and help pick a location for the labels.</p>
@@ -677,7 +693,7 @@ before we rush into interpretation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_21_0.png" src="../_images/16-MulExpl_21_0.png" />
+<img alt="../_images/16-MulExpl_22_0.png" src="../_images/16-MulExpl_22_0.png" />
 </div>
 </div>
 <p>Examine these diagnostic plots. There are six predicted values now - three trophic levels for each of the two levels of ground dwelling. Those plots look ok so now we can look at the analysis of variance table:</p>
@@ -689,11 +705,15 @@ before we rush into interpretation.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<caption>A anova: 3 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td> 0.8141063  </td><td>0.40705316  </td><td> 7.859815   </td><td>4.870855e-04</td></tr>
-	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td> 2.7469218  </td><td>2.74692183  </td><td>53.040485   </td><td>4.062981e-12</td></tr>
-	<tr><th scope=row>Residuals</th><td>255         </td><td>13.2062341  </td><td>0.05178915  </td><td>       NA   </td><td>          NA</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td> 0.8141063</td><td>0.40705316</td><td> 7.859815</td><td>4.870855e-04</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1</td><td> 2.7469218</td><td>2.74692183</td><td>53.040485</td><td>4.062981e-12</td></tr>
+	<tr><th scope=row>Residuals</th><td>255</td><td>13.2062341</td><td>0.05178915</td><td>       NA</td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -738,7 +758,7 @@ F-statistic: 22.92 on 3 and 255 DF,  p-value: 3.602e-13
 <p>Starting at the bottom of this output, <code class="docutils literal notranslate"><span class="pre">summary</span></code> has again calculated <span class="math notranslate nohighlight">\(r^2\)</span> for us and also an <span class="math notranslate nohighlight">\(F\)</span> statistic for the whole model, which matches the calculation above.</p>
 <p>The other important bits are the four coefficients. The intercept is now the reference level for two variables: it is the mean for carnivores that are not ground dwelling. We then have differences from this value for being an omnivore or herbivore and for being ground dwelling. There is a big change in genome size associated with ground dwelling and
 omnivory and both of these have large effects sizes, each introducing about a 20% difference in genome size from the non-ground dwelling carnivores. In contrast, herbivory makes a small difference — about 8%.</p>
-<p>Because the difference is small and the standard error is large, the <span class="math notranslate nohighlight">\(t\)</span> value suggests that this difference might arise just be chance. Put another way, it isn’t significant.</p>
+<p>Because the difference is small and the standard error is large, the <span class="math notranslate nohighlight">\(t\)</span> value suggests that this difference might arise just by chance. Put another way, it isn’t significant.</p>
 <p>The table below shows how these four coefficients combine to give the predicted values for each of the group means.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -762,7 +782,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 </tbody>
 </table>
 <div class="section" id="predicted-values">
-<h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">¶</a></h3>
+<span id="mulexp-predicted-values"></span><h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">¶</a></h3>
 <p>Getting the model predictions by hand in this way is tedious and error prone. There is a handy function called <code class="docutils literal notranslate"><span class="pre">predict</span></code> which uses the model directly to calculate values. The default is to give you the prediction for each point in the original data, but you can also ask for specific predictions.</p>
 <p>The first thing to do is to set up a small data frame containing the explanatory values we want to use. The variable names and the level name have to match <em>exactly</em>, so we’ll use the <code class="docutils literal notranslate"><span class="pre">levels</span></code> function to get the names. We want to look at all six combinations, so we’ll use the <code class="docutils literal notranslate"><span class="pre">rep</span></code> function to set this up. The <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">=</span> <span class="pre">2</span></code> option repeats each value twice in succession; the <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">3</span></code> options repeats the whole set of values three times.</p>
 <p>Let’s do it:</p>
@@ -832,7 +852,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_33_0.png" src="../_images/16-MulExpl_33_0.png" />
+<img alt="../_images/16-MulExpl_35_0.png" src="../_images/16-MulExpl_35_0.png" />
 </div>
 </div>
 <p>The red markers do not match to the calculated means. This is because the model only includes a single difference between ground and non-ground species, which has to be the same for each trophic group. That is, there is no interaction between trophic level and ground / non-ground identity of each species in the current model.</p>

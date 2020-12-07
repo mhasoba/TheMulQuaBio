@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.res = 100, repr.plot.width = 5, repr.plot.height = 5) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
 
 load('../data/mammals.Rdata')
 
@@ -42,8 +42,12 @@ arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3, len=0.05)
 
 model <- lm(logCvalue ~ TrophicLevel + GroundDwelling, data = mammals)    
 
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 7, repr.plot.height = 8) # Change plot size
+
 par(mfrow=c(2,2))
 plot(model)
+
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot size
 
 anova(model)
 

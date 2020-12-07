@@ -1,12 +1,16 @@
 library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot sizes (in cm) - this bit of code 6s only relevant i6 you are using a jupyter notebook - ignore otherwise
 
-genome <- read.csv('../data/GenomeSize.csv')
+genome <- read.csv('../data/GenomeSize.csv',stringsAsFactors = T) 
 
 head(genome)
+
+library(repr); options(repr.plot.res = 100, repr.plot.width = 10, repr.plot.height = 10)
 
 pairs(genome)
 
 pairs(genome, col=genome$Suborder)
+
+library(repr); options(repr.plot.res = 100, repr.plot.width = 8, repr.plot.height = 8) # change plot size
 
 # create a small data frame:
 dat <- data.frame(A = c("a", "b", "c", "d", "e"), B = c(1, 2, 3, 4, 5))
@@ -43,9 +47,11 @@ myColours <- c('red', 'blue') # Choose two colours
 mySymbols <- c(1,3) # And two different markers
 colnames(genome)
 
+library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # change plot size
+
 plot(logBW ~ GenomeSize , data = genome, #Now plot again
 col = myColours[Suborder], pch = mySymbols[Suborder],
-xlab='Body weight (mg)', ylab='Genome size (pg)')
+xlab='Genome size (pg)', ylab='log(Body weight) (mg)')
 
 legend("topleft", legend=levels(genome$Suborder), #Add legend at top left corner
        col= myColours, pch = mySymbols)
@@ -64,7 +70,7 @@ sum(resid(genomeSizeModelDragon) ^ 2)
 genomeSizeModelDamsel <- lm(logBW ~ logGS, data=genome,subset=Suborder=='Zygoptera')
 
 myCol <- c('red','blue')
-
+library(repr); options(repr.plot.res = 100, repr.plot.width = 8, repr.plot.height = 8) # change plot size
 plot(logBW ~ logGS, data=genome, col=myCol[Suborder], xlab='log Genome Size (pg)', ylab='log Body Weight (g)')
 
 abline(genomeSizeModelDragon, col='red')

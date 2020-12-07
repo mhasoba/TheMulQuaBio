@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>\(t\) and \(F\) tests &#8212; TheMulQuaBio</title>
+    <title>Basic hypothesis testing: \(t\) and \(F\) tests &#8212; TheMulQuaBio</title>
     
   <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
 
@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -214,8 +215,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting.html">
-   Model Fitting in Ecology and Evolution
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
   </a>
  </li>
 </ul>
@@ -394,6 +405,11 @@
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confidence-intervals">
+       Confidence Intervals
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#exercise">
        Exercise
       </a>
@@ -409,6 +425,11 @@
      tests
     </a>
     <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confidence-intervals-again">
+       Confidence Intervals again
+      </a>
+     </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id1">
        Exercise
@@ -465,8 +486,8 @@
         
               <div>
                 
-  <div class="section" id="t-and-f-tests">
-<h1><span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#t-and-f-tests" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="basic-hypothesis-testing-t-and-f-tests">
+<h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Aims of this chapter:</p>
@@ -502,20 +523,18 @@
 </div>
 <p>Making these many comparisons using something like a t-test is a problem because we neglect the covariance among measures and inflate the chance of falsely rejecting at least one null hypothesis (false positive, or <a class="reference external" href="12-ExpDesign.ipynb#Some-statistical-parlance">Type I error</a>).</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/multiple_comps.png" />
-<small> <center> Your Type I error rate increases with the number of pairwise comparisons you make using a single dataset.</p>
-</center></small>
+<a class="reference internal image-reference" href="../_images/multiple_comps.png"><img alt="../_images/multiple_comps.png" src="../_images/multiple_comps.png" style="width: 600px;" /></a>
 <hr class="docutils" />
 <p>Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</p>
-<p>Let’s A more-than-two-factors example would be if you were, say, comparing the means of more than two types of insect groups – below, we compared means of two groups (dragonflies and damselflies); if we added stoneflies to this comparison, the t-test would not be the way to go as we would be making three pairwise comparisons (n = 3, p = 3).</p>
-<p>OK, assuming you interested in making just one paiwise comparison, let’s learn about <span class="math notranslate nohighlight">\(t\)</span> tests.</p>
+<p>A more-than-two-factors example would be if you were, say, comparing the means of more than two types of insect groups – below, we compared means of two groups (dragonflies and damselflies); if we added stoneflies to this comparison, the t-test would not be the way to go as we would be making three pairwise comparisons (n = 3, p = 3).</p>
+<p>OK, assuming you are interested in making just one paiwise comparison, let’s learn about <span class="math notranslate nohighlight">\(t\)</span> tests.</p>
 <p>The basic idea behind the <span class="math notranslate nohighlight">\(t\)</span> test is to divide the difference between two values by a measure of how much uncertainty there is about the size of that difference. The measure of uncertainty used is the <em>standard error</em>.</p>
 <div class="math notranslate nohighlight">
 \[t=\frac{\textrm{difference between values}}{\textrm{standard error}}\]</div>
 <p>When there is no difference between the values <span class="math notranslate nohighlight">\(t\)</span> will be zero, but with big differences and/or small errors, will be larger. The <span class="math notranslate nohighlight">\(t\)</span> distribution below shows how commonly different values of <span class="math notranslate nohighlight">\(t\)</span> are found under the null hypothesis:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/tvals.png" />
-<small> <center>The <span class="math notranslate nohighlight">\(t\)</span> distribution. </center></small></p>
+<a class="reference internal image-reference" href="../_images/tvals.png"><img alt="../_images/tvals.png" src="../_images/tvals.png" style="width: 400px;" /></a>
+<p><small><br> <center>The <span class="math notranslate nohighlight">\(t\)</span> distribution. </center></small></p>
 <hr class="docutils" />
 <p>Some points about the plot above:</p>
 <ul class="simple">
@@ -659,9 +678,11 @@ mean of x
 </div>
 </div>
 <p>This confirms the values we calculated by hand and adds a <span class="math notranslate nohighlight">\(p\)</span> value. The output also gives the degrees of freedom. This is something we will come back to later, but the degrees of freedom are basically the number of data points minus the number of estimated parameters, which in this case is one mean.</p>
+<div class="section" id="confidence-intervals">
+<span id="t-f-tests-ci"></span><h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this headline">¶</a></h4>
 <p>The output also gives a confidence interval for the observed mean. The mean is the best estimate of the population mean given our sample of species of Odonata, but the actual mean for the order could be bigger or smaller. The confidence interval tells us the region in which we are 95% confident that this actual mean lies.</p>
 <p>It is calculated using the <span class="math notranslate nohighlight">\(t\)</span> distribution. Remember that <span class="math notranslate nohighlight">\(t\)</span> is a difference divided by a standard error; if we multiply <span class="math notranslate nohighlight">\(t\)</span> by a standard error, we get back to a difference. If we pick a pair of <span class="math notranslate nohighlight">\(t\)</span> values that contain the middle 95% of the <span class="math notranslate nohighlight">\(t\)</span> distribution, as in the plot on page 2, then we can multiply that by the standard error from the data to get a range above and below the mean. If we sampled lots of sets of 100 species of Odonata, we expect 95% of the observed means to lie inside this range. The code below shows the calculation of the confidence interval for the test above.</p>
-<p>First, find the edges of the middle 95% of a <span class="math notranslate nohighlight">\(t\)</span> distribution with 99 df</p>
+<p>First, find the edges of the middle 95% of a <span class="math notranslate nohighlight">\(t\)</span> distribution with 99 df:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tlim</span> <span class="o">&lt;-</span> <span class="nf">qt</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.025</span><span class="p">,</span><span class="m">0.975</span><span class="p">),</span> <span class="n">df</span> <span class="o">=</span> <span class="m">99</span><span class="p">)</span>
@@ -690,6 +711,7 @@ mean of x
 </ol>
 </div></div>
 </div>
+</div>
 <div class="section" id="exercise">
 <h4>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h4>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> code above as a template, test whether the body weight (in grams) of Odonata is different from the average for arthropods of 0.045 grams. Note that this slightly dodgy estimate comes from an estimated average volume for arthropods of 45.21 mm<span class="math notranslate nohighlight">\(^3\)</span>, and assuming a density of 1 gm per cm<span class="math notranslate nohighlight">\(^3\)</span>; see:</p>
@@ -706,8 +728,8 @@ mean of x
 </ul>
 <p>The main difference here is that with a one sample <span class="math notranslate nohighlight">\(t\)</span> test, we assume that one of the means is known exactly: the only error is in the single sample. With a two sample test, we are comparing two means estimated from samples and both contain error. The graph below illustrates this:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/twosampleIllustration.png" />
-<small> <center>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests. </center></small></p>
+<a class="reference internal image-reference" href="../_images/twosampleIllustration.png"><img alt="../_images/twosampleIllustration.png" src="../_images/twosampleIllustration.png" style="width: 500px;" /></a>
+<p><small> <br><center>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests. </center></small></p>
 <hr class="docutils" />
 <p>A few points to note about this figure:</p>
 <ul class="simple">
@@ -837,8 +859,11 @@ mean in group Anisoptera  mean in group Zygoptera
 </div>
 </div>
 <p>The output looks very similar to the one-sample t-test, except that the output now gives two estimated means, rather than one and it reports the <span class="math notranslate nohighlight">\(p\)</span> value for the calculated <span class="math notranslate nohighlight">\(t\)</span> value.</p>
-<p>Also, in the output above unlike the 95% interval of a 1 sample t-test, which provides the confidence intervals around the estimated mean of the single population, this output of the 2-sample test provides the confidence intervals around the observed difference in the means of the two samples. That is, the 95% confidence interval (-0.1442041,  0.1309104) above is around the observed difference in the sample means: 1.011774 − 1.018421 = −0.006647. This is essentially not distinguishable from zero as the intervals include the value 0 (and therefore, the p-value is also insignificant).</p>
+<div class="section" id="confidence-intervals-again">
+<span id="t-f-tests-ci2"></span><h4>Confidence Intervals again<a class="headerlink" href="#confidence-intervals-again" title="Permalink to this headline">¶</a></h4>
+<p>Also, in the output above unlike the 95% interval of a 1 sample t-test, which provides the confidence intervals around the estimated mean of the single population, this output of the 2-sample test provides the confidence intervals around the observed difference in the means of the two samples. That is, the 95% confidence interval (-0.1442041,  0.1309104) above is around the observed difference in the sample means: <span class="math notranslate nohighlight">\(1.011774 - 1.018421 = - 0.006647\)</span>. This is essentially not distinguishable from zero as the intervals include the value 0 (and therefore, the p-value is also insignificant).</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add this last step to your script and run it.</p>
+</div>
 <div class="section" id="id1">
 <h4>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p><span class="math notranslate nohighlight">\(\star\)</span>  Modify this code to test whether the body weight of the two suborders are different and add it to in your script.</p>
@@ -855,8 +880,8 @@ mean in group Anisoptera  mean in group Zygoptera
 <li><p>and if <span class="math notranslate nohighlight">\(\textrm{var}(a) &lt;  \textrm{var}(b)\)</span> then <span class="math notranslate nohighlight">\(F &lt; 1\)</span></p></li>
 </ul>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/fvals.png" />
-<small> <center>The F distribution. </center></small></p>
+<a class="reference internal image-reference" href="../_images/fvals.png"><img alt="../_images/fvals.png" src="../_images/fvals.png" style="width: 400px;" /></a>
+<p><small><br><center>The F distribution. </center></small></p>
 <hr class="docutils" />
 <p>In the above figure, note that:</p>
 <ul class="simple">
@@ -872,8 +897,8 @@ mean in group Anisoptera  mean in group Zygoptera
 <p>Add another boxplot beside it comparing the body weight of the two suborders.</p>
 <p>It should look like this:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/bxp.png" />
-<small> <center> Reproduce this figure.</center></small></p>
+<a class="reference internal image-reference" href="../_images/bxp.png"><img alt="../_images/bxp.png" src="../_images/bxp.png" style="width: 400px;" /></a>
+<p><small> <center> Reproduce this figure.</center></small></p>
 <hr class="docutils" />
 <p>Now, we can use R to calculate <span class="math notranslate nohighlight">\(F\)</span> for the variance in genome size in each of the two suborders. We calculated the variance for the <span class="math notranslate nohighlight">\(t\)</span> test above, so we can just do this:</p>
 <div class="cell docutils container">
@@ -921,8 +946,10 @@ the two samples are drawn from populations with the same variance, an
 sample test). What we actually see are smaller numbers, with the smallest being <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">60.503</span></code> for the two sample test of body weight.</p>
 <p>The explanation is that R is applying a <em>penalty</em> to the degrees of freedom to account for differences in variance. With fewer degrees for freedom, more extreme <span class="math notranslate nohighlight">\(t\)</span> values are more likely and so it is harder to find significant results. This doesn’t mean we can forget about checking the variances or plotting the data!</p>
 <p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we’ll look at it again when we learn about <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA</span></a>.</p>
-<p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution:</p>
-<p><img alt="image" src="../_images/transform.png" /></p>
+<p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution, as shown in the figure below.</p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/transform.png"><img alt="../_images/transform.png" src="../_images/transform.png" style="width: 600px;" /></a>
+<hr class="docutils" />
 <p>We can do a <span class="math notranslate nohighlight">\(\log_e\)</span> (natural log)  transform of our body weight data as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

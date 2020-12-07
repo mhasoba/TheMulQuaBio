@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="\(t\) and \(F\) tests" href="13-t_F_tests.html" />
+    <link rel="next" title="Basic hypothesis testing: \(t\) and \(F\) tests" href="13-t_F_tests.html" />
     <link rel="prev" title="Data Management and Visualization" href="08-Data_R.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -214,8 +215,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting.html">
-   Model Fitting in Ecology and Evolution
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
   </a>
  </li>
 </ul>
@@ -500,8 +511,8 @@
 <li><p><strong>(Statistical) Population</strong>: A <em>complete set</em> of items that share at least one <em>attribute</em> of interest. This attribute of interest is the target of your statistical analysis. For example, if we are interested in studying the weight of year-old cod in the Oceans, the population consists of <em>all</em> year-old cod, but more specifically, the weight measurements of all the individuals of the cod population is what we want to analyse.</p></li>
 </ul>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/Cod.jpg" />
-<small> <center>
+<a class="reference internal image-reference" href="../_images/Cod.jpg"><img alt="../_images/Cod.jpg" src="../_images/Cod.jpg" style="width: 500px;" /></a>
+<p><small> <center>
 (Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)
 Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</p>
 </center></small>
@@ -580,8 +591,8 @@ Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</p>
 <ul class="simple">
 <li><p><strong>Continuous numeric</strong>: Data that can take decimal values (real numbers) such as human height or weight. These may be unbounded (any value between negative infinity to positive infinity), or bounded (e.g., between or zero and some upper positive number) like human weight. This is the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
 <li><p><strong>Discrete numeric</strong>: Integer (whole) numbers such as counts of individuals in a population, e.g., The number of bacteria in a ml of pond water. This is the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type in R.</p></li>
-<li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This is also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
-<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference external" href="08-Data_R.ipynb#Basic-plotting-commands">used previously</a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
+<li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
+<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference external" href="08-Data_R.ipynb#Basic-plotting-commands">used previously</a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
 <li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
 </ul>
 <p>While designing experiments or exploring data, you need to keep in mind that each data type will often be best-represented by a particular <em>statistical distribution</em>. For example, continuous numeric data are <em>often</em> normally distributed. On the other hand, count data are likely to be distributed according to the Poisson distribution.</p>
@@ -919,8 +930,8 @@ binomial for each species in the table. The remaining columns are measurements o
 <code class="docutils literal notranslate"><span class="pre">bw=0.05</span></code>), and re-run these lines to see how this affects the graph. Basically, with both types of graph you can look at the data too coarsely or too finely.</p>
 <p>The graphs you’ve just created look at genome size. Add a copy of those two lines of code in the script and change them to look at the variable <code class="docutils literal notranslate"><span class="pre">TotalLength</span></code>. You will need to alter the <code class="docutils literal notranslate"><span class="pre">density</span></code> function to ignore missing values (<code class="docutils literal notranslate"><span class="pre">na.rm=TRUE</span></code>) and to play around with the bandwidth. You should get something like this:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/histTL1.png" /></p>
-<p><img alt="image" src="../_images/histTL2.png" /></p>
+<a class="reference internal image-reference" href="../_images/histTL1.png"><img alt="../_images/histTL1.png" src="../_images/histTL1.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/histTL2.png"><img alt="../_images/histTL2.png" src="../_images/histTL2.png" style="width: 300px;" /></a>
 </div>
 <hr class="docutils" />
 <div class="section" id="take-a-quick-look-at-effects-of-certain-factors">
@@ -946,7 +957,7 @@ variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. Th
 </div>
 <p>Duplicate and alter this line to look at the same plot for total length. You should get a plot like this:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/bxpTL.png" /></p>
+<a class="reference internal image-reference" href="../_images/bxpTL.png"><img alt="../_images/bxpTL.png" src="../_images/bxpTL.png" style="width: 300px;" /></a>
 <hr class="docutils" />
 <p>Although histograms are great for one variable, plotting two histograms on top of one another rarely works well because the overlapping bars are hard to interpret (recall the predator-prey body size example). Density plots don’t have this problem, but it takes a bit more code to create the plot.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Block 6 of the script uses the <code class="docutils literal notranslate"><span class="pre">subset</span></code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
@@ -996,7 +1007,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </div>
 <p>Duplicate these last two lines of code and edit them to generate a similar plot for total body length. You will need to edit the code to change the range of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes (<code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>) to get both curves to fit neatly on to the graph. It should look like this:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/densTL.png" /></p>
+<a class="reference internal image-reference" href="../_images/densTL.png"><img alt="../_images/densTL.png" src="../_images/densTL.png" style="width: 300px;" /></a>
 </div>
 <hr class="docutils" />
 <div class="section" id="explore-further-by-scatter-plotting-two-variables">
@@ -1058,7 +1069,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <p>You’ll see a long list of options to choose from, so pick two to replace red and blue in the plot above.</p>
 <p>The options for the plot symbols are shown below. Pick two to replace the current symbol choices.</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/pch.png" /></p>
+<a class="reference internal image-reference" href="../_images/pch.png"><img alt="../_images/pch.png" src="../_images/pch.png" style="width: 400px;" /></a>
 <hr class="docutils" />
 <p>Rerun the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function and see what you get!</p>
 </div>
@@ -1084,7 +1095,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
 <h2>From data exploration to statistical analysis<a class="headerlink" href="#from-data-exploration-to-statistical-analysis" title="Permalink to this headline">¶</a></h2>
 <p>After you have performed your data exploration, you are in a position to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/yr1_2_flowchart.svg" /></p>
+<a class="reference internal image-reference" href="../_images/yr1_2_flowchart.svg"><img alt="../_images/yr1_2_flowchart.svg" src="../_images/yr1_2_flowchart.svg" width="900px" /></a>
 </div>
 </div>
 
@@ -1117,7 +1128,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="08-Data_R.html" title="previous page">Data Management and Visualization</a>
-    <a class='right-next' id="next-link" href="13-t_F_tests.html" title="next page"><span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a>
+    <a class='right-next' id="next-link" href="13-t_F_tests.html" title="next page">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

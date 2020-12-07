@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -214,8 +215,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting.html">
-   Model Fitting in Ecology and Evolution
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
   </a>
  </li>
 </ul>
@@ -509,8 +520,8 @@
 <div class="section" id="what-is-anova">
 <h2>What is ANOVA?<a class="headerlink" href="#what-is-anova" title="Permalink to this headline">¶</a></h2>
 <p><u>An</u>alysis  <u>O</u>f  <u>Va</u>riance (ANOVA) is an extremely useful class of Linear models. It is very often appropriate when your response (dependent) variable is continuous, while your predictor (independent) variable is categorical. Specifically, <em>One-way ANOVA</em> is used to compare means of two or more samples representing numerical, continuous data in response to a single categorical variable (factor).</p>
-<p><img alt="image" src="../_images/ANOVA_is_LM.png" />
-<small><center>A dataset where an ANOVA is appropriate.
+<a class="reference internal image-reference" href="../_images/ANOVA_is_LM.png"><img alt="ANOVA example" src="../_images/ANOVA_is_LM.png" style="width: 300px;" /></a>
+<p><small><center>A dataset where an ANOVA is appropriate.
 <br>
 Performing an ANOVA on this dataset is the same as fitting the linear model <span class="math notranslate nohighlight">\(y  = \beta_1  + \beta_2 x_s + \beta_3 x_a\)</span>, where <span class="math notranslate nohighlight">\(x_s\)</span> and <span class="math notranslate nohighlight">\(x_a\)</span> are two levels (“treatments”, representing statistically separate populations) within the factor (games console ownership). Here, the first treatment, the control, is captured by the baseline value <span class="math notranslate nohighlight">\(\beta_1\)</span> (the sample with the lowest value, on the far left).</p>
 </center> </small>
@@ -521,7 +532,7 @@ Performing an ANOVA on this dataset is the same as fitting the linear model <spa
 <p>An extension of one-way ANOVA is two-way analysis of variance that examines the influence of two different categorical independent variables on one dependent variable — we will look at multiple predictor variables in <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">MulExpl</span></a> onwards.</p>
 </div>
 <div class="section" id="calculating-the-anova-test-statistic">
-<h2>Calculating the ANOVA test statistic<a class="headerlink" href="#calculating-the-anova-test-statistic" title="Permalink to this headline">¶</a></h2>
+<span id="anova-sos"></span><h2>Calculating the ANOVA test statistic<a class="headerlink" href="#calculating-the-anova-test-statistic" title="Permalink to this headline">¶</a></h2>
 <p>ANOVA uses of the <a class="reference external" href="13-t_F_tests.ipynb#The-%24F%24-test">F-Statistic</a>. To this end, an ANOVA “partitions” variability in your data as follows:</p>
 <p><strong>Total sum of squares (TSS)</strong>: This is the sum of the squared difference between the observed dependent variable (<span class="math notranslate nohighlight">\(y\)</span>) and the mean of the response variable <span class="math notranslate nohighlight">\(y\)</span> (denoted by <span class="math notranslate nohighlight">\(\bar{y}\)</span>), i.e.,</p>
 <div class="math notranslate nohighlight">
@@ -607,7 +618,7 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> to load the data in the data frame <code class="docutils literal notranslate"><span class="pre">mammals</span></code> and then <code class="docutils literal notranslate"><span class="pre">str</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to examine the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/MammalData.csv&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/MammalData.csv&#39;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -772,8 +783,10 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 <p>Now we need to draw all these pieces together into a script and get used to using them.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add all the lines of code from this section into your script. Run it and check you get the graph above.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use the second two chunks as a model to plot a similar graph for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. You should get something like the plot below.</p>
-<p><img alt="image" src="../_images/GDbarplot.png" /></p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/GDbarplot.png"><img alt="../_images/GDbarplot.png" src="../_images/GDbarplot.png" style="width: 400px;" /></a>
 </div>
+<hr class="docutils" />
 <div class="section" id="an-alternative-to-barplots">
 <h3>An alternative to barplots<a class="headerlink" href="#an-alternative-to-barplots" title="Permalink to this headline">¶</a></h3>
 <p>That is a lot of work to go through for a plot. Doing it the hard way uses some useful tricks, but one strength of R is that there is a huge list of add-on packages that you can use to get new functions that other people have written.</p>
@@ -792,14 +805,12 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘gplots’
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in library(gplots): there is no package called ‘gplots’
+Traceback:
 
-The following object is masked from ‘package:stats’:
-
-    lowess
+1. library(gplots)
 </pre></div>
 </div>
-<img alt="../_images/15-anova_19_1.png" src="../_images/15-anova_19_1.png" />
 </div>
 </div>
 </div>
@@ -826,10 +837,14 @@ model called <code class="docutils literal notranslate"><span class="pre">trophi
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<caption>A anova: 2 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td> 0.8268678  </td><td>0.41343388  </td><td>7.220365    </td><td>0.0008657029</td></tr>
-	<tr><th scope=row>Residuals</th><td>300         </td><td>17.1778247  </td><td>0.05725942  </td><td>      NA    </td><td>          NA</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td> 0.8268678</td><td>0.41343388</td><td>7.220365</td><td>0.0008657029</td></tr>
+	<tr><th scope=row>Residuals</th><td>300</td><td>17.1778247</td><td>0.05725942</td><td>      NA</td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -881,15 +896,16 @@ F-statistic:  7.22 on 2 and 300 DF,  p-value: 0.0008657
 <p>The next question must be — and actually, we should do this before we go anywhere near the model summaries — is the model appropriate to the data.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> to guide you, get the four model diagnostic
 plots for the trophic level model on a single figure.</p>
-<p>The four plots are:</p>
-<p><img alt="image" src="../_images/modelDiag.svg" />
-<small> <center>Figure 4 </center> </small></p>
+<p>The four plots are shown below.</p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/modelDiag.svg"><img alt="../_images/modelDiag.svg" src="../_images/modelDiag.svg" width="600px" /></a>
+<hr class="docutils" />
 <p>Note that in regression, the predicted (or fitted) values from the model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals
 normally distributed? The answer for this model looks to be yes.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Check the ground dwelling model in the same way.</p>
 </div>
 <div class="section" id="testing-pairwise-differences-between-levels">
-<h3>Testing pairwise differences between levels<a class="headerlink" href="#testing-pairwise-differences-between-levels" title="Permalink to this headline">¶</a></h3>
+<span id="anova-ci"></span><h3>Testing pairwise differences between levels<a class="headerlink" href="#testing-pairwise-differences-between-levels" title="Permalink to this headline">¶</a></h3>
 <p>The one thing that the trophic level model does not tell us is whether
 there is a difference in genome size between omnivores and herbivores —
 both are compared to carnivores, but not to each other. This is because
@@ -940,7 +956,7 @@ value.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_28_0.png" src="../_images/15-anova_28_0.png" />
+<img alt="../_images/15-anova_29_0.png" src="../_images/15-anova_29_0.png" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include the Tukey test in your script for both the trophic level and ground

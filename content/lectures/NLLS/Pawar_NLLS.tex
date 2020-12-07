@@ -30,6 +30,8 @@
 \usecolortheme{seahorse}
 \setbeamertemplate{headline}{}
 
+\usepackage{pdfpages}
+
 % ###Comment/Uncomment to display/hide navigation symbols at bottom:
 \setbeamertemplate{navigation symbols}{}
 
@@ -115,82 +117,75 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Linear models}
 
-	\begin{itemize}[<+->]\itemsep4pt
-
-	\item Which of these are Linear Models (fitted to data)? 
-		\includegraphics[width=\textwidth]{Linear.pdf}
-\end{itemize}
-
-\begin{center} 
-	{\tiny \href{https://www.mentimeter.com/s/befa8dbb37e8d1b0798e5f4669b40b67/1ba91b05de7a}{[link]}}
-
-	\vspace{10pt}
-	{\it Go to \url{www.menti.com} and enter code shown (phone or laptop)}
-  \vspace{10pt}
-\end{center}
-
-\end{frame}
-	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Linear models are great}
-
-	\begin{itemize}[<+->]\itemsep4pt
+	\begin{itemize}[<+->]\itemsep6pt
+	\item Which of these are Linear Models (fitted to data)? \\
+		\includegraphics[width=.9\textwidth]{Linear.pdf}
 
 	\item These are {\it all} good {\it Linear Models} (really?!)
 	\item The data can be modelled (aka "fitted to a mathematical model") as a {\it linear combination} of {\it variables} and {\it coefficients}
 	\item Easily fitted using {\it Ordinary Least Squares} (OLS) regression
-	\item Linear models can {\it include curved responses} (e.g. polynomial regression)
-	% \item OK, so then {\it why Non-Linear Least Squares (NLLS) fitting?} 
+	\item Linear models can {\it include curved responses} (e.g. Polynomial regression)
 \end{itemize}
 
+% \begin{center} 
+% 	{\tiny \href{https://www.mentimeter.com/s/befa8dbb37e8d1b0798e5f4669b40b67/1ba91b05de7a}{[link]}}
+
+% 	\vspace{10pt}
+% 	{\it Go to \url{www.menti.com} and enter code shown (phone or laptop)}
+%   \vspace{10pt}
+% \end{center}
 \end{frame}
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why NLLS? -- first, what makes a model non-linear?}
+\begin{frame}{What makes a model non-linear?}
 
 \begin{itemize}[<+->]\itemsep10pt
 
-	\item OLS can be used to fit both linear and nonlinear {\it equations} that {\it intrinsically linear}, e.g.,
+	\item OLS can be used to fit (model) equations that are {\it intrinsically linear},
+	e.g.,
 	\begin{itemize}
 		\item 	Straight line: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$
-		\item Polynomial: $y_i = \exp(\beta_0) + \beta_1 x_i + \beta_2 x_i^2 
-		+ \varepsilon_i$
+		\item Polynomial (quadratic): $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \varepsilon_i$
+		\item Another quadratic: $y_i = e^{\beta_0} + \beta_1 x_i + \beta_2 x_i^2 + \varepsilon_i$
 	\end{itemize} 	
-	\item Indeed, for OLS to work, we need {\it intrinsic linearity} --- 
-	i.e., the equation to be fitted (model) should be {\it linear in the parameters}	
+	\item What is {\it intrinsic linearity}? --- 
+	the equation of the model to be fitted should be {\it linear in the parameters} (the $\beta$'s)	
 	\item Are these models linear in their {\it parameters}?  
 	\begin{itemize}
 		\item $y_i = \beta_0 + \beta_1 x_i^{\beta_2} + \varepsilon_i$
 		\item $y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i$
+		\item $y_i = \frac{\beta_0 x_i}{\beta_1 + x_i} + \varepsilon_i$
 	\end{itemize}
-	\pause NO!
+	\pause NO: at least one parameter ($\beta$) is non-linear (e.g. $x_i^{\beta_2}$, $e^{\beta_2 x_i}$, etc.) 
 		
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{So what --- why is intrinsic non-linearity a problem?}
+\begin{frame}{Why is intrinsic non-linearity a problem for mdoel fitting?}
 
 {\bf Recall what the Least Squares method does:}
 
 	\begin{itemize}[<+->] \itemsep10pt
 
-		\item Consider a predictor $x$, data $y$, $n$ observations, and a 
-		model that we want to fit to the data: \\
+		\item Consider data on a response variable $y$, a predictor (independent) variable $x$, and $n$ observations. 
 		
-		$f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
+		\item Say we want to fit a model to these data: $
+		f(x_i,\boldsymbol\beta) + \varepsilon_i $ 
+		($\boldsymbol\beta = (\beta_0, \beta_1, \ldots,\beta_k)$ are 
+		the model's $k+1$ parameters) 
 		
-		where $\boldsymbol\beta = (\beta_1, \beta_2, \ldots,\beta_k)$ are 
-		the model's $k$ parameters
-	
-		\item The objective is to find estimates of values of the $k$ 
-		parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared 
-		residuals ($r_i$) (AKA RSS):
+		\item An example of $f(x_i,\boldsymbol\beta) + \varepsilon_i $ could be:
+		$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$
+
+		\item The objective of any {\it least squares} method  is to find estimates of values of the parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared residuals ($r_i$) (AKA RSS):
 		
-		$S = \sum\nolimits_{i=1}^n{\left[ y_i - f(x_i,\boldsymbol\beta) 
-		\right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
+		$$
+		\text{RSS} = S = \sum\nolimits_{i=1}^n{\left[ y_i - f(x_i,\boldsymbol\beta) 
+		\right]^2} = \sum\nolimits_{i=1}^n{r_i^2}
+		$$
 	
 	\end{itemize}
 
@@ -199,17 +194,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{The Least-squares solution}
 
-	OLS minimizes the {\it sum} of the {\it squared} residuals
+	\begin{itemize}[<+->] \itemsep10pt
+
+		\item The objective of any {\it least squares} method  is to find estimates of values of the parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared residuals ($r_i$) (AKA RSS):
+		
+		$$
+		\text{RSS} = S = \sum\nolimits_{i=1}^n{\left[ y_i - f(x_i,\boldsymbol\beta) 
+		\right]^2} = \sum\nolimits_{i=1}^n{r_i^2}
+		$$
+		
+		\item Let's picture this using a simple (OLS) example; fitting the model $y_1  = \beta_1 x_1  + {\color{red} \varepsilon_1 }$...
+
+	\end{itemize}
+
 	
-	\begin{columns}[T]
-	\column{\textwidth}
-		\animategraphics[width=\textwidth, controls, buttonsize=1em, %timeline=Varying_timeline.txt % does not work - TODO
-		]{10}{Varying}{}{}
-	\end{columns}
+	% \begin{columns}[T]
+	% \column{\textwidth}
+	% 	\animategraphics[width=\textwidth, controls, buttonsize=1em, %timeline=Varying_timeline.txt % does not work - TODO
+	% 	]{10}{Varying}{}{}
+	% \end{columns}
 	
 	\end{frame}
 
-	
+	{
+	\setbeamercolor{background canvas}{bg=}
+	\includepdf[pages=1-50]{Varying.pdf}
+	}	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{If the model is linear, the solution is easy using algebra}
 	
@@ -220,74 +230,55 @@
 		
 	\column{0.5\textwidth}
 		\begin{align*}
-		  y_1  & = \beta_0 + \beta_1 x_1  + {\color{red} \varepsilon_i }\\
+		  y_1  & = \beta_0 + \beta_1 x_1  + {\color{red} \varepsilon_1 }\\
 		  \\
 		  9.50  &= 5 + 4 \times 1 + {\color{red} 0.50}\\
 		  11.00 &= 5 + 4 \times 2 - {\color{red} 2.00}\\
 		  19.58 &= 5 + 4 \times 3 + {\color{red} 2.58}\\
 		  20.00 &= 5 + 4 \times 4 - {\color{red} 1.00} 
 		\end{align*}
-		
-		\[\beta_0 = 5; \beta_1 = 4\]
+		The least squares solution here is: $\beta_0 = 5; \beta_1 = 4$
 				
 \end{columns}		
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Intrinsic non-linearity does not allow a algebraic solution}
-
-\begin{itemize}[<+->]\itemsep10pt
-
-	\item So, then, in an {intrinsically non-linear model} such as $y_i = 
-	\beta_0 e^{\beta_2 x_i} + \varepsilon_i$ the derivatives 
-	$\frac{\partial r_i}{\partial \beta_j}$ are naughty
-	
-	\item That is, they are functions of both $x$ and the parameters 
-	$\beta_j$, so the gradient equations do not have a solution like the 
-	OLS case
-
-	\item So the nice trick of solving  $\mathbf{Y} = \mathbf{X 
-	\boldsymbol\beta  +  \boldsymbol\varepsilon}$ is impossible {\it 
-	mathematically}
-							
+\pause 
+\begin{itemize}
+	\item  \it This system of (linear) equations can be compactly represented (and solved using matrix algebra) as $\mathbf{Y} = \mathbf{X 
+\boldsymbol\beta  +  \boldsymbol\varepsilon}$ 
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{So --- Enter NLLS}
+\begin{frame}{What NLLS solves (and how)}
 
-But we can use brute-force computation to find close-to-optimal least squares minimization!
-	
 \begin{itemize}[<+->]\itemsep10pt
-	\item Choose initial values for the parameters we want to estimate ( $\beta_j$'s)
+
+	\item In an {intrinsically non-linear model} such as 
+	$$y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i ~,$$ 	
+	the nice trick of solving  $\mathbf{Y} = \mathbf{X \boldsymbol\beta  +
+	\boldsymbol\varepsilon}$ algebraically is impossible
 	
-	\item Then, ``refine'' the parameters {\it iteratively} by calculating 
-	$\frac{\partial r_i}{\partial \beta_j}$ {\it approximately} --- 
-	this approximation is the {\it Jacobian} (the gradient), which is a matrix of 
-	the $\frac{\partial r_i}{\partial \beta_j}$'s
+	\item But we can use brute-force computation to find close-to-optimal least squares minimization:
+	
+	\begin{itemize}[<+->]\itemsep6pt
+		\item Choose starting (initial values for the parameters we want to estimate ( $\beta_j$'s)
+	
+		\item Then, adjust the parameters {\it iteratively} (using a specific ``algorithm'' that is better than searching {\it randomly}) such that the RSS is gradually decreased 
 
-	\item Whether a refinement has taken place in any step of the 
-	iteration is determined by re-calculating the residuals at that 
-	step
-
-	\item Eventually, if it all goes well, we find a combination of 
-	$\beta_j$'s that is {\it very close} to the desired solution 
-	$\frac{\partial S}{\partial \beta_j} = 0, j = 0,1,2,\ldots,k$
+		\item Eventually, if it all goes well, a combination of
+	$\beta_j$'s that is {\it very close} to the desired solution (where the RSS is {\it approximately} minimized) can be found
 			
+	\end{itemize}
 \end{itemize}
 
 \end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[plain]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The NLLS optimization process}
 
-\begin{columns}[T]
-	\column{\textwidth}
-		\animategraphics[width=\textwidth, controls, buttonsize=1em, %timeline=Varying_timeline.txt % does not work - TODO
-		]{10}{Varying}{}{}
-	\end{columns}
+	\begin{center}
+		\includegraphics[width=\textwidth]{graphics/RSS_min.pdf}
+	\end{center}
 
 \end{frame}
 
@@ -305,17 +296,18 @@ But we can use brute-force computation to find close-to-optimal least squares mi
 
 	\begin{itemize}\itemsep2pt
 	
-		\item Logistic population growth
+		\item Michaelis-Menten biochemical (reaction) kinetics
 		
 		\item Allometric growth
-
-		\item Michaelis-Menten biochemical kinetics (two parameters 
-		$V_{\max}$ and $K_m$: $v = \frac{V_{\max}[S]}{K_{m} + [S]}$
 	
 		\item Responses of metabolic rates to changing temperature 
 
 		\item Consumer-Resource (e.g., predator-prey) functional responses 
 		
+		\item Individual growth
+
+		\item Population growth
+
 		\item Time-series data (e.g., fitting a sinusoidal function)
 			
 	\end{itemize}
@@ -361,52 +353,52 @@ But we can use brute-force computation to find close-to-optimal least squares mi
 % \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Example: Functional responses}
+% \begin{frame}{Example: Functional responses}
  
-\begin{columns}[c]
-  \column{2in}
-  \begin{center}
-			   $f(x_R) = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$
-	\scriptsize (Holling, 1959)
-	\end{center}
- \scriptsize
- $x_R$ = Resource density (Mass / Area or Volume)\\
- $a$ = Search rate (Area or Volume / Time )\\
- $h$ = Handling time \\
- $q$ = Shape parameter (dimensionless) 
- \column{2.3in}
-      \includegraphics[width=\textwidth]{graphics/FR.pdf}
-\end{columns}
+% \begin{columns}[c]
+%   \column{2in}
+%   \begin{center}
+% 			   $f(x_R) = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$
+% 	\scriptsize (Holling, 1959)
+% 	\end{center}
+%  \scriptsize
+%  $x_R$ = Resource density (Mass / Area or Volume)\\
+%  $a$ = Search rate (Area or Volume / Time )\\
+%  $h$ = Handling time \\
+%  $q$ = Shape parameter (dimensionless) 
+%  \column{2.3in}
+%       \includegraphics[width=\textwidth]{graphics/FR.pdf}
+% \end{columns}
 
-\vspace{10pt}
- Note that: 
-\begin{itemize}
-\item NLLS fitting can yield $h < 0$, $q < 0$, or both 
-\item $h < 0$ is biologically impossible but indicates an upward curving response
-\item $q < 0$ is biologically unlikely as it indicates a decline in 
-search rate with resource density (but is useful as a measure of 
-deviation away from a type III response) 
-\end{itemize}
+% \vspace{10pt}
+%  Note that: 
+% \begin{itemize}
+% \item NLLS fitting can yield $h < 0$, $q < 0$, or both 
+% \item $h < 0$ is biologically impossible but indicates an upward curving response
+% \item $q < 0$ is biologically unlikely as it indicates a decline in 
+% search rate with resource density (but is useful as a measure of 
+% deviation away from a type III response) 
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{NLLS fitting}
 
-So the general procedure is:
+The general procedure / algorithm is:
 
 \begin{enumerate}[<+->] \itemsep4pt
 	\item Start with an initial value for each parameter in the model
 	\item Generate the curve defined by the initial values
-	\item Calculate the residual sum-of-squares (rss)
+	\item Calculate the residual sum-of-squares (RSS)
 	\item Adjust the parameters to make the curve come closer to the data 
-	points. This the tricky part --- more on this in the next slide
+	points. {\it This the tricky part --- more on this in the next slide}
 	\item Adjust the parameters again so that the curve comes even closer 
-	to the points (rss decreases)
+	to the points (RSS decreases)
 	\item Repeat 4--5
 	\item Stop simulations when the adjustments make virtually no 
-	difference to the rss
+	difference to the RSS
 \end{enumerate}
 
 
@@ -417,25 +409,24 @@ So the general procedure is:
 \begin{frame}{NLLS fitting}
 
 The {\it tricky part --- adjust parameters to make curve come closer to 
-the data points} (step 4) has two main algorithms that you can choose between:
+the data points} (step 4) --- has two main algorithms that are generally used:
 
 \begin{itemize}[<+->]\itemsep10pt
 
-	\item The Gauss-Newton algorithm is the default in the {\tt nls} 
+	\item The {\bf Gauss-Newton} algorithm is the default in the {\tt nls} 
 	package (part of the {\tt stats} base package) --- good in many 
 	cases, but doesn't work very well if the model is mathematically 
 	weird (the optimization landscape is difficult) and the starting 
 	values for parameters are far-off-optimal
 	
-	\item The Levenberg-Marquardt (LM) switches switches between 
-	Gauss-Newton and ``gradient descent'' and is more robust against 
-	starting values that are far-off-optimal --- available in {\tt R} 
-	through the the {\tt minpack.lm} package {\small \url 
+	\item The {\bf Levenberg-Marquardt (LM)} algorithm switches switches between
+	Gauss-Newton and ``gradient descent'' and is more robust against starting
+	values that are far-off-optimal 
+	
+	\item the LM algorithm is available in {\tt R} through the the {\tt
+	minpack.lm} package {\small \url
 	{http://cran.r-project.org/web/packages/minpack.lm}}
-	
-	% %% \item It's an R front-end to a Fortran LM implementation of the 
-	% %% MINPACK package
-	
+		
 	\item The command is {\tt nlsLM}
 
 \end{itemize}   
@@ -443,32 +434,28 @@ the data points} (step 4) has two main algorithms that you can choose between:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{NLLS fitting}
+\begin{frame}{NLLS fits -- assessment and reporting}
 
 \begin{itemize}[<+->] \itemsep6pt
-\item Once the algorithm as converged (hopefully -- but you may be surprised 
-how well it usually works), you need to get the goodness of fit measures
+\item Once the NLLS fitting is done, you need to get the {\it goodness of fit measures}
 
 \item First, of course, examine the fits visually
 
-\item Also, report the best-fit results, including:
+\item Report the goodness-fit results:
 
 	\begin{itemize}
 	
 		\item Sums of deviations of the data points from the final model 
 		fit (final RSS)
-		\item $R^2$
 		\item Estimated coefficients
-		\item For each coefficient, standard error (can be used for CI's), t-statistic 
-		and corresponding (two-sided) p-value 
+		\item For each coefficient, standard error (can be used for CI's), t-statistic and corresponding (two-tailed) p-value 
 	\end{itemize} 
 
-\item The function {\tt summary.nls} will give you all these measures
+\item You will learn to calculate all these in the practicals   
 
-\item Remember, the precise parameter values you obtain will depend in part on 
-the initial values chosen and the convergence criteria 
+\item You may also want to {\it compare and select between multiple competing  models}  
 
-\item You may also want to compare multiple models.  
+\item Unlike Linear Models, R$^2$ values {\it should not} be used to interpret the quality of the fit of NLLS fit (more on this in the practicals).    
 
 \end{itemize}
 
@@ -486,160 +473,191 @@ NLLS-regression has all the assumptions of OLS-regression:
 		\item Data have constant normal variance --- errors in the $y$-axis 
 		are homogeneously distributed over the $x$-axis range
 		
-		\item The measurement/observation error distribution is Gaussian 
-		--- for example, what would the error distribution of this 
-		non-linear model be: $y_i = \beta_0 e^{\beta_2 x_i} + 
-		\varepsilon_i$ 
+		\item The measurement/observation errors are Normally distributed (Gaussian) 
+		% \pause 
+		% --- for example, what would the error distribution of this 
+		% non-linear model be: $y_i = \beta_0 e^{\beta_2 x_i} + 
+		% \varepsilon_i$? \pause
 		
-		\item What if the errors are not normal? --- use Maximum Likelihood 
-		or Bayesian methods instead.
+		\item What if the errors are not normal? --- Interpret results
+		cautiously, and use Maximum Likelihood or Bayesian fitting methods instead
 	
 	\end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Practical: Michaelis-Menten biochemical kinetics}
 
-\begin{frame}{More NLLS tips}
+\begin{columns}[c]
+	\column{.6\textwidth}
+	\begin{center}
+	$V = \frac{V_{\max}[S]}{K_{m} + [S]}$
+	\end{center}
 
-\begin{itemize}[<+->]\itemsep10pt
-	\item You can use mixed-effects modelling with NLLS in R; the package is {\tt nlme}
-	{\small \url 
-	{https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/nlme.html}}
-	(You are probably stuck with the Gauss-Newton algorithm with 
-	{\tt nlme} though)
+\begin{itemize} \scriptsize
+	\item $S$ = Substrate density
 	
-	\item You can also use Python --- look up {\tt lmfit} \url{https://lmfit.github.io/lmfit-py/index.html}. \\ {\tt python} seems to have a better Levenberg-Marqualdt implementation than {\tt R} 
+		\item $V_{\max}$ = Maximum reaction rate (at saturating substrate concentration)
 	
-\end{itemize}   
+	\item $K_m$ = Half-saturation constant; the $S$ at which reaction rate reaches half of possible maximum ($=\frac{1}{2}V_{\max}$)
+\end{itemize}
+	
+\column{.4\textwidth}
+		\includegraphics[width=\textwidth]{graphics/MM.pdf}
+\end{columns}
+
+\vspace{10pt}
+\begin{itemize}\itemsep10pt
+
+	\item You will use NLLS fitting to obtain estimates of $V_{\max}$ and $K_H$
+
+	\item Note that $V_{\max} \le 0 $ and $K_H \le 0$ are physically impossible (useful fir picking starting values)
+
+\end{itemize}
 
 \end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}{More NLLS tips}
+
+% \begin{itemize}[<+->]\itemsep10pt
+% 	\item You can use mixed-effects modelling with NLLS in R; the package is {\tt nlme}
+% 	{\small \url 
+% 	{https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/nlme.html}}
+% 	(You are probably stuck with the Gauss-Newton algorithm with 
+% 	{\tt nlme} though)
+	
+% 	\item You can also use Python --- look up {\tt lmfit} \url{https://lmfit.github.io/lmfit-py/index.html}. \\ {\tt python} seems to have a better Levenberg-Marqualdt implementation than {\tt R} 
+	
+% \end{itemize}   
+
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Readings and Resources}
+\begin{frame}{Readings}
 
 \begin{itemize}\itemsep16pt
 	
-	\item Motulsky, Harvey, and Arthur Christopoulos. Fitting models to 
-	biological data using linear and nonlinear regression: a practical 
+	\item Motulsky, Harvey, and Arthur Christopoulos. Fitting models to 	biological data using linear and nonlinear regression: a practical 
 	guide to curve fitting. OUP USA, 2004. 
 	
-	\item Johnson, J. B. \& Omland, K. S. 2004 Model selection in ecology 
-and evolution. Trends Ecol. Evol. 19, 101--108. 
+	% \item Johnson, J. B. \& Omland, K. S. 2004 Model selection in ecology and evolution. Trends Ecol. Evol. 19, 101--108. 
 
 \end{itemize}   
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why is intrinsic non-linearity a problem?}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Why is intrinsic non-linearity a problem?}
 
-% {\bf Let's use maths instead of brute-force computation!}
+% % {\bf Let's use maths instead of brute-force computation!}
 
-	\begin{itemize}[<+->] \itemsep16pt
+% 	\begin{itemize}[<+->] \itemsep16pt
 
-		\item Our model is $f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
+% 		\item Our model is $f(x_i,\boldsymbol\beta) + \varepsilon_i$ \\ 
 			
-		\item We want to find estimates of values of the parameters 
-		($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals 
-		($r_i$) (AKA ``RSS'') $S = \sum\nolimits_{i=1}^n{\left[ y_i - 
-		f(x_i,\boldsymbol\beta) \right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
+% 		\item We want to find estimates of values of the parameters 
+% 		($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals 
+% 		($r_i$) (AKA ``RSS'') $S = \sum\nolimits_{i=1}^n{\left[ y_i - 
+% 		f(x_i,\boldsymbol\beta) \right]^2} = \sum\nolimits_{i=1}^n{r_i^2}$
 
-		\item For this we can solve $\frac{\partial S}{\partial 
-		\beta_j} = 0, j = 0,1,2,\ldots,k$ to find the {\it minimum}
+% 		\item For this we can solve $\frac{\partial S}{\partial 
+% 		\beta_j} = 0, j = 0,1,2,\ldots,k$ to find the {\it minimum}
 	
-		\item That is, we need to solve	
-		$\frac{\partial \sum\nolimits_{i=1}^n{r_i^2}}{\partial \beta_j} = 
-		0$
+% 		\item That is, we need to solve	
+% 		$\frac{\partial \sum\nolimits_{i=1}^n{r_i^2}}{\partial \beta_j} = 
+% 		0$
 		
-		\item Or, $2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} = 0$
+% 		\item Or, $2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} = 0$
 	
-	\end{itemize}
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why is intrinsic non-linearity a problem?}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Why is intrinsic non-linearity a problem?}
 
-	\begin{itemize}[<+->] \itemsep16pt
+% 	\begin{itemize}[<+->] \itemsep16pt
 
-		\item Thus, solving $ 2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} 
-		= 0$ \\
+% 		\item Thus, solving $ 2 \sum\nolimits_{i=1}^n r_i \frac{\partial r_i}{\partial \beta_j} 
+% 		= 0$ \\
 		
-		boils down to finding the ``gradient'' $ \frac{\partial r_i}{\partial \beta_j} $
+% 		boils down to finding the ``gradient'' $ \frac{\partial r_i}{\partial \beta_j} $
 	
-		\item This is not a problem in linear models, because this gradient 
-		is fully solvable as the equation is {\it intrinsically linear}
+% 		\item This is not a problem in linear models, because this gradient 
+% 		is fully solvable as the equation is {\it intrinsically linear}
 		
-		\item That is, the solution of $ \frac{\partial r_i}{\partial 
-		\beta_j} $ is simple (enough)  
+% 		\item That is, the solution of $ \frac{\partial r_i}{\partial 
+% 		\beta_j} $ is simple (enough)  
 				
-	\end{itemize}
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why is intrinsic non-linearity a problem?}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Why is intrinsic non-linearity a problem?}
 
-	\begin{itemize}[<+->] \itemsep16pt
+% 	\begin{itemize}[<+->] \itemsep16pt
 		
-		\item For example, if $f(x_i,\boldsymbol\beta) + \varepsilon_i = \beta_0 + \beta_1 x_i + 
-		\varepsilon_i$ \\
+% 		\item For example, if $f(x_i,\boldsymbol\beta) + \varepsilon_i = \beta_0 + \beta_1 x_i + 
+% 		\varepsilon_i$ \\
 		
-		\item That is, our model is $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$ 
-		(Linear Regression)
+% 		\item That is, our model is $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$ 
+% 		(Linear Regression)
 		
-	\item Then we want to solve 
+% 	\item Then we want to solve 
 		
-		$\frac{\partial S}{\partial {\beta_0}} = 
-		\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
-		y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
-		}_{0}}}}=0 $ \\
+% 		$\frac{\partial S}{\partial {\beta_0}} = 
+% 		\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+% 		y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
+% 		}_{0}}}}=0 $ \\
 		 
-		$ \frac{\partial S}{\partial {{\beta 
-		}_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
-		{{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
-		\right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$
+% 		$ \frac{\partial S}{\partial {{\beta 
+% 		}_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+% 		{{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
+% 		\right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$
 		
-	\end{itemize}
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why is intrinsic non-linearity a problem?}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Why is intrinsic non-linearity a problem?}
 
-	\begin{itemize}[<+->] \itemsep16pt
+% 	\begin{itemize}[<+->] \itemsep16pt
 
-		\item And, solving\\ 		
-		$\frac{\partial S}{\partial {\beta_0}} = 
-		\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
-		y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
-		}_{0}}}}=0 $\\ 
+% 		\item And, solving\\ 		
+% 		$\frac{\partial S}{\partial {\beta_0}} = 
+% 		\sum\nolimits_{i=1}^{n}{\frac{\partial {{\left[ 
+% 		y_i-(\beta_0+\beta_1 x_i) \right]}^{2}}}{\partial {{\beta 
+% 		}_{0}}}}=0 $\\ 
 		 
-		$ \frac{\partial S}{\partial {{\beta }_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial 
-		{{\left[ {{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
-		\right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$ \\
+% 		$ \frac{\partial S}{\partial {{\beta }_{1}}}=\sum\nolimits_{i=1}^{n}{\frac{\partial 
+% 		{{\left[ {{y}_{i}}-({{\beta }_{0}}+{{\beta }_{1}}{{x}_{i}}) 
+% 		\right]}^{2}}}{\partial {{\beta }_{1}}}} = 0$ \\
 		
-		\vspace{6pt}
-		just boils down to solving two simultaneous equations because $ 
-		\frac{\partial r_i}{\partial \beta_j} $ is simple {\it because} the model 
-		is intrinsically linear:\\
+% 		\vspace{6pt}
+% 		just boils down to solving two simultaneous equations because $ 
+% 		\frac{\partial r_i}{\partial \beta_j} $ is simple {\it because} the model 
+% 		is intrinsically linear:\\
 		
-		\vspace{6pt}
-		$-n{{\beta }_{0}}+\sum\nolimits_{i=1}^{n}{{{y}_{i}}}+{{\beta 
-		}_{1}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}=0 $\\ 
+% 		\vspace{6pt}
+% 		$-n{{\beta }_{0}}+\sum\nolimits_{i=1}^{n}{{{y}_{i}}}+{{\beta 
+% 		}_{1}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}=0 $\\ 
 		
-		$ \sum\nolimits_{i=1}^{n}{{{x}_{i}}{{y}_{i}}}-{{\beta 
-		}_{0}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}+{{\beta 
-		}_{1}}\sum\nolimits_{i=1}^{n}{x_{i}^{2}}=0$
+% 		$ \sum\nolimits_{i=1}^{n}{{{x}_{i}}{{y}_{i}}}-{{\beta 
+% 		}_{0}}\sum\nolimits_{i=1}^{n}{{{x}_{i}}}+{{\beta 
+% 		}_{1}}\sum\nolimits_{i=1}^{n}{x_{i}^{2}}=0$
 
-		\item That is, we need to solve $\mathbf{Y} = \mathbf{X 
-		\boldsymbol\beta  +  \boldsymbol\varepsilon}$ ({\it this is what R 
-		solves when you use {\tt lm()}})
+% 		\item That is, we need to solve $\mathbf{Y} = \mathbf{X 
+% 		\boldsymbol\beta  +  \boldsymbol\varepsilon}$ ({\it this is what R 
+% 		solves when you use {\tt lm()}})
 
-	\end{itemize}
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

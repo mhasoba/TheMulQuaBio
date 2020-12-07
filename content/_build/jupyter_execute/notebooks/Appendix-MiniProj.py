@@ -214,13 +214,13 @@
 
 # ## For NLLS fitting 
 # 
-# **FIRST work through the example practicals [here](./20-ModelFitting.ipynb) and [here](./Appendix-NLLS-Python.ipynb).**
+# **FIRST read and work through the materials [here](./20-ModelFitting-NLLS.ipynb) (NLLS in R) and [here](./Appendix-NLLS-Python.ipynb) (NLLS in Python).**
 # 
 # * You will typically need to write a script that calculates starting values (more on this topic [here](Model-Fitting-NLLS-Starting-Values)).
 # 
 # * You will need to use the `try` keyword because not all runs will converge. *The more data curves you are able to fit, the better — that is part of the challenge*
 # 
-# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence (as you did in the example practicals [here](./20-ModelFitting.ipynb) and [here](./Appendix-NLLS-Python.ipynb).
+# *One thing to note is that you may need to do the NLLS fitting on the logarithm of the function (and therefore, the data) to facilitate convergence (examples are [here](./20-ModelFitting-NLLS.ipynb) and [here](./Appendix-NLLS-Python.ipynb).
 # 
 # ## Getting started 
 # 
@@ -344,7 +344,7 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 
 # #### The Models
 # 
-# Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the "death phase" of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the [Model Fitting Chapter](./20-ModelFitting.ipynb).
+# Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the "death phase" of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the [Model Fitting Chapter](./20-ModelFitting-NLLS.ipynb).
 # 
 # ---
 # 
@@ -352,7 +352,7 @@ sns.lmplot("Time", "PopBio", data = data_subset, fit_reg = False) # will give wa
 # <small> <center> An example population growth curve dataset to which the modified Gompertz model (Zwietering et. al., 1990) has been fitted.
 # </center></small>
 # 
-# (See the [Model fitting notebook](./20-ModelFitting.ipynb) for more information)
+# (See the [Model fitting in NLLS Chapter](./20-ModelFitting-NLLS.ipynb) for more information)
 # 
 # ---
 # 
@@ -422,6 +422,7 @@ data_subset.head()
 sns.lmplot("ResDensity", "N_TraitValue", data=data_subset, fit_reg=False)
 
 
+# (Miniproject-FR-Models)=
 # #### The Models
 # 
 # *All the following parameters and variables are in SI units*.
@@ -591,9 +592,10 @@ sns.lmplot("ConTemp", "OriginalTraitValue", data=data_subset, fit_reg=False)
 # *Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models* (see [Readings & Resources](Miniproj-Readings)). You may choose additional models listed in that paper for comparison, if you want.
 # 
 # ---
+# 
 # ![image](./graphics/SchoolfEx.png)
-# <small> <center>Example of the full Sharpe-Schoolfield model (Eqn. {eq}`eq:schoolf`) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance.
-#     </center> </small>
+# <small> <center>Example of the full Sharpe-Schoolfield model (Eqn. {eq}`eq:schoolf`) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance. </center> </small>
+# 
 # ---
 # 
 # In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.

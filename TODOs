@@ -7,16 +7,25 @@
 * Outline coding principles in a general way right at the start of the Intro or Unix chapter
     * Explain steps in the way to writing a program: outline steps/agorithm, write pseudocode, write functions, etc  
 
-* CMEE miniproject --- cap the usage of packages --- make students keep it simpler
+###  CMEE miniproject
 
-### Git 
-* git chapter to be updated with most common/useful scenarios
-* https://gist.github.com/digitaljhelms/4287848
-* https://www.red-gate.com/simple-talk/sysadmin/devops/git-anatomy/ 
+* Make clear where the "rule of thumb" of a difference of 2 in AIC/AICc comes from. It is indeed a bit fuzzy. We will use a simple rule of thumb for the purposes of the miniproject. SuggestStudents should be aware that the rule of thumb of 2 is a (somewhat) conservative way to pick models using AIC, but they should acknowledge its limitations. 
+
+This is a useful post: https://stats.stackexchange.com/questions/349883/what-is-the-logic-behind-rule-of-thumb-for-meaningful-differences-in-aic
+
+* Restrict usage of packages, by showing students how to keep things simpler.
+
+* Make clear up front in the Miniproject guidelines that the first target is to be able to perform, produce figures for, and interpret model comparisons using LMs. For example, finish the workflow, right down to a summary figure and/or table showing, which, out of straight line, cubic and quadratic, fit the data better, with some interpretation.
+
+* NLLS: 
+    * Explain what some of the common NLLS error messages (like singular gradient matrix) mean, with examples. 
+    * Illustrate approaches for getting starting values and the difefrence between sampling start values vs and bounding parameters. 
+    * Show graphical illustrations of how NLLS parameter searching works and what local minima mean intuitively. 
+
 
 ### Unix
 
-* Explain what colors of items returned by ls mean (directory/file type and permissions): https://unix.stackexchange.com/questions/94498/what-causes-this-green-background-in-ls-output (green background means all user have w permission on that directory (and its contents)) - explain the implications of this in words.
+* Explain what colors of items returned by ls mean (directory/file type and permissions): https://unix.stackexchange.com/questions/94498/what-causes-this-green-background-in-ls-output (green background means all users have w permission on that directory (and its contents)) - explain the implications of this in words.
 
 * grep -r -n -w -l '.' -e 'ecology and evolution*'
  
@@ -33,6 +42,12 @@
     grep --exclude-dir={dir1,dir2} -rnwl '/path/to/somewhere/' -e "pattern"
 
 * makefiles
+
+
+### Git 
+* git chapter to be updated with most common/useful scenarios
+* https://gist.github.com/digitaljhelms/4287848
+* https://www.red-gate.com/simple-talk/sysadmin/devops/git-anatomy/ 
 
 ### Python
 
@@ -100,8 +115,6 @@ In many publications a ± sign is used to join the standard deviation (SD) or st
 
 * Regression - add explanation of standard error of coefficients and calculation of CI's 
 
-
-
 * ### F-test vs ANOVA 
  
  - Defn 1: the ratio of the variance calculated across the samples (groups) (the null hypothesis) to the variance within the samples (groups).
@@ -125,19 +138,19 @@ Some questions that are arising:
 
 * How can the Tukey Honest Significant Difference test ensure a probability of 0.05 of a type I error across all tested pairs? What is different with an ordinary t-test?
 
-- Regarding the Tukey HSD test: You can actually think of it as a special kind of t-test, since the test statistic is very similar:
+    - Regarding the Tukey HSD test: You can actually think of it as a special kind of t-test, since the test statistic is very similar:
 
-- For the t-statistic we take the difference of the sample mean and the hypothesised mean, and divide by the standard error.
+    - For the t-statistic we take the difference of the sample mean and the hypothesised mean, and divide by the standard error.
 
-- For the Tukey statistic we are no longer comparing a single variable's sample mean to a hypothesised true mean. Instead we have multiple groups (think of the herbivores, omnivores and carnivores in the Jupyter notebook). The Tukey test looks at all pairwise combinations of your groups (in your case: Herb-Omni, Herb-Carni and Omni-Carni) and reports whether the difference in any of their group means is larger than expected.
+    - For the Tukey statistic we are no longer comparing a single variable's sample mean to a hypothesised true mean. Instead we have multiple groups (think of the herbivores, omnivores and carnivores in the Jupyter notebook). The Tukey test looks at all pairwise combinations of your groups (in your case: Herb-Omni, Herb-Carni and Omni-Carni) and reports whether the difference in any of their group means is larger than expected.
 
-- The test statistic it uses for this is philosophically very similar to the Student's t-test; we take a difference between means and divide it by a standard error. How is it different from the t-test you know and love?
+    - The test statistic it uses for this is philosophically very similar to the Student's t-test; we take a difference between means and divide it by a standard error. How is it different from the t-test you know and love?
 
-- We no longer have a "hypothesised" true mean to compare against, instead we separately take the difference between each of the pairwise group means for our numerator. For the denominator, rather than the standard error of the sample mean, we take the standard error of the sum of the group means.
+    - We no longer have a "hypothesised" true mean to compare against, instead we separately take the difference between each of the pairwise group means for our numerator. For the denominator, rather than the standard error of the sample mean, we take the standard error of the sum of the group means.
 
-- You can think of this as a t-test that corrects for a "family-wise" error rate, which is how the type I error applies to the entire testing of all group means against each other, rather than to each comparison individually.
+    - You can think of this as a t-test that corrects for a "family-wise" error rate, which is how the type I error applies to the entire testing of all group means against each other, rather than to each comparison individually.
 
-- Family-wise error rateIn statistics, family-wise error rate (FWER) is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.
+    - Family-wise error rate In statistics, family-wise error rate (FWER) is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.
 
 ### Feedback Script
 

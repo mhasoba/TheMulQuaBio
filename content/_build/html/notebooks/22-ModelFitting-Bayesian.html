@@ -1,0 +1,2257 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model Fitting the Bayesian Way &#8212; TheMulQuaBio</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Jupyter" href="Appendix-JupyIntro.html" />
+    <link rel="prev" title="Model Fitting using Maximum Likelihood" href="21-ModelFitting-MLE.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Model Fitting the Bayesian Way
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/22-ModelFitting-Bayesian.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/22-ModelFitting-Bayesian.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/22-ModelFitting-Bayesian.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/mhasoba/TheMulQuaBio/blob/master/notebooks/22-ModelFitting-Bayesian.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-likelihoods-exercise">
+   A Likelihoods exercise
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-binomial-distribution">
+     The Binomial Distribution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulating-from-the-binomial-using-r">
+       Simulating from the Binomial using R
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-of-moments-mom-estimators">
+     Method of Moments (MoM) Estimators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mle-for-binomial-distribution">
+     MLE for Binomial Distribution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#likelihood-and-log-likelihood">
+       Likelihood and Log Likelihood
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-the-likelihood-and-mle-in-r">
+     Computing the likelihood and MLE in R
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-midge-wing-length">
+   Example: Midge Wing Length
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bayesian-analysis">
+     Non-Bayesian analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-the-bayesian-model">
+     Setting up the Bayesian Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prior-information">
+       Prior Information
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analytic-posterior">
+     Analytic Posterior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-prior-sensitivity">
+     Exercise: Prior sensitivity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-evaluation-of-the-posterior-with-jags">
+     Numerical evaluation of the posterior with JAGS
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#specifying-the-model">
+       Specifying the model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-the-population-variance">
+     Estimating the population variance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-updating-the-bayesian-model">
+     Exercise: Updating the Bayesian model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aedes-data-revisited-using-bayesian-fitting">
+   Aedes data revisited using Bayesian fitting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-data">
+     The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-thermal-performance-curve-models">
+     Two thermal performance curve models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-thermal-response-model-file">
+     The thermal response model file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-diagnostics">
+     Running diagnostics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-fits">
+     Plot the fits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-analyses">
+     Additional analyses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-of-abundance-data">
+   Fitting of abundance data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specifying-the-growth-curve">
+     Specifying the growth curve
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     The thermal response model file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-settings-for-jags">
+     Additional settings for jags
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-the-model">
+     Fitting the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagnostics">
+     Diagnostics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-joint-posterior-of-parameters">
+     Visualizing the joint posterior of parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-posterior-distribution-of-the-mean-function">
+     The posterior distribution of the mean function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources-a-id-readings-a">
+   Readings and Resources
+   <a id="Readings">
+   </a>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="model-fitting-the-bayesian-way">
+<h1>Model Fitting the Bayesian Way<a class="headerlink" href="#model-fitting-the-bayesian-way" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this Chapter we will work through various examples of  model fitting  to biological data using Bayesian Methods. It is recommended that you see the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">lecture</a> on model fitting in Ecology and Evolution.</p>
+<p>Recall from the <a class="reference external" href="https://github.com/vectorbite/VBiTraining2/tree/master/lectures">lectures</a> that for Bayesian model fitting/inference, we need to:</p>
+<ol class="simple">
+<li><p><strong>Assess MCMC convergence</strong>: MCMC is family of algorithm for sampling probability distributions so that it can be adequately characterized (in the Bayesian context the posterior distribution). The MCMC procedure reaches * convergence * once we have sufficient random draws from the posterior distribution. To assess convergence we look at trace plots. The goal is to get “fuzzy caterpillars”-looking curves.</p></li>
+<li><p><strong>Summarize MCMC draws</strong>: Summarize and visualize outcome of the random draws using histograms for all draws for each parameter, and calculate expectation, variance, credibility interval, etc.</p></li>
+<li><p><strong>Prior Sensitivity</strong>: Assess prior sensitivity by changing prior values and check whether it affects the results or not. If it does, that means that the results are too sensitive to that prior, not good!</p></li>
+<li><p><strong>Make inferences</strong>: We use the values from item (2) to make inferences and answer the research question.</p></li>
+</ol>
+<p>Because likelihoods form the basis for Bayesian model fitting, we will first do an exercise to understand their calculation.</p>
+<p>We will use R. For starters, clear all variables and graphic devices and load necessary packages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">graphics.off</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="a-likelihoods-exercise">
+<h2>A Likelihoods exercise<a class="headerlink" href="#a-likelihoods-exercise" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-binomial-distribution">
+<h3>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<p>The Binomial distribution is used to model the number of “successes” in a set of trials (e.g., number of heads when you flip a coin <span class="math notranslate nohighlight">\(N\)</span> times). The pmf is</p>
+<div class="math notranslate nohighlight">
+\[
+{N \choose x} p^x(1-p)^{N-x}
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\mathrm{E}[x] = Np \)</span>. Throughout this “experiment”, you will assume that your experiment consists of flipping 20 coins, so that <span class="math notranslate nohighlight">\(N = 20\)</span>.</p>
+<p>Let’s use the Binomial distribution to practice two methods of estimating parameters for a probability distribution: method of moments and maximum likelihood.</p>
+<div class="section" id="simulating-from-the-binomial-using-r">
+<h4>Simulating from the Binomial using R<a class="headerlink" href="#simulating-from-the-binomial-using-r" title="Permalink to this headline">¶</a></h4>
+<p>First take 50 draws from a binomial (using <em>rbinom</em>) for each <span class="math notranslate nohighlight">\(p\in\)</span> 0.1, 0.5, 0.8 with <span class="math notranslate nohighlight">\(N=20\)</span>. For this, lets set seed so that we can reproduce this exact sequence of sampling (why?):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">54321</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## 50 draws with each p </span>
+<span class="n">pp</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">&lt;-</span> <span class="m">20</span>
+<span class="n">reps</span> <span class="o">&lt;-</span> <span class="m">50</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now plot the histograms of these draws together with the density functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## histograms + density here</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>
+
+<span class="c1"># Write more code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q1: Do the histograms look like the distributions for all 3 values of <span class="math notranslate nohighlight">\(p\)</span>? If not, what do you think is going on?</strong></p>
+<p>You’ll notice that for <span class="math notranslate nohighlight">\(p=0.1\)</span> the histogram and densities don’t look quite the same – the <code class="docutils literal notranslate"><span class="pre">hist()</span></code> function is lumping together the zeros and ones which makes it look off. This is typical for distributions that are truncated.</p>
+</div>
+</div>
+<div class="section" id="method-of-moments-mom-estimators">
+<h3>Method of Moments (MoM) Estimators<a class="headerlink" href="#method-of-moments-mom-estimators" title="Permalink to this headline">¶</a></h3>
+<p>To obtain a method of moments estimator, we equate the theoretical moments (which will be a function of the parameters of the distribution) with the corresponding sample moments, and solve for the parameters in order to obtain an estimate. For the binomial distribution, there is only one parameter, <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p><strong>Q2: Given the analytic expected value, above, and assuming that the sample mean is <span class="math notranslate nohighlight">\(m\)</span> (the mean number of observed heads across replicates), what is the MoM estimator for <span class="math notranslate nohighlight">\(p\)</span>?</strong></p>
+<p>Now calculate the MoM estimator for each of your 3 sets of simulated data sets to get the estimates for each of your values of <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## MOM estimators for 3 simulated sets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q3: How good are your estimates for <span class="math notranslate nohighlight">\(p\)</span>? Do you get something close to the true value?</strong></p>
+<p>For 1 of your values of <span class="math notranslate nohighlight">\(p\)</span>, take 20 draws from the binomial with <span class="math notranslate nohighlight">\(N=20\)</span> and calculate the MoM. Repeat this 100 times (hint: the <code class="docutils literal notranslate"><span class="pre">replicate()</span></code> and <code class="docutils literal notranslate"><span class="pre">lapply</span></code> functions may be useful.) Make a histogram of your estimates, and add a line/point to the plot to indicate the real value of <span class="math notranslate nohighlight">\(p\)</span> that you used to simulate the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## MoM estimates, histogram </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q4: Is the MoM successfully estimating <span class="math notranslate nohighlight">\(p\)</span>? Does your histogram for <span class="math notranslate nohighlight">\(p\)</span> look more or less normal? If so, what theorem might explain why this would be the case?</strong></p>
+</div>
+<div class="section" id="mle-for-binomial-distribution">
+<h3>MLE for Binomial Distribution<a class="headerlink" href="#mle-for-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="likelihood-and-log-likelihood">
+<h4>Likelihood and Log Likelihood<a class="headerlink" href="#likelihood-and-log-likelihood" title="Permalink to this headline">¶</a></h4>
+<p>Imagine that you flip a coin <span class="math notranslate nohighlight">\(N\)</span> times, and then repeat the experiment <span class="math notranslate nohighlight">\(n\)</span> times. Thus, you have data <span class="math notranslate nohighlight">\(x=x`1, x`2, \dots x`n\)</span> that are the number of times you observed a head in each trial. <span class="math notranslate nohighlight">\(p\)</span> is the probability of obtaining a head.</p>
+<p><strong>Q5: Write down the likelihood and log-likelihood for the data. Take the derivative of the negative log-likelihood, set this equal to zero, and find the MLE, <span class="math notranslate nohighlight">\(\hat{p}\)</span>.</strong></p>
+</div>
+</div>
+<div class="section" id="computing-the-likelihood-and-mle-in-r">
+<h3>Computing the likelihood and MLE in R<a class="headerlink" href="#computing-the-likelihood-and-mle-in-r" title="Permalink to this headline">¶</a></h3>
+<p>Simulate some data with <span class="math notranslate nohighlight">\(p=0.25\)</span>, <span class="math notranslate nohighlight">\(N=10\)</span>, and 10 replicates. Calculate the negative log-likelihood of your simulated data across a range of <span class="math notranslate nohighlight">\(p\)</span> (from 0 to 1), and plot them. You may do this by using the built in functions in R (specifically <code class="docutils literal notranslate"><span class="pre">dbinom</span></code>) or write your own function. This is called a “likelihood profile’’. Plot your likelihood profile with a line indicating the true value of <span class="math notranslate nohighlight">\(p\)</span>. Add lines indicating the MLE <span class="math notranslate nohighlight">\(\hat{p}\)</span> and the MoM estimator for <span class="math notranslate nohighlight">\(p\)</span> to your likelihood profile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">&lt;-</span> <span class="n">.</span><span class="m">25</span>
+<span class="n">N</span> <span class="o">&lt;-</span> <span class="m">10</span>
+<span class="n">reps</span> <span class="o">&lt;-</span> <span class="m">10</span>
+<span class="c1">## Make one set of data</span>
+
+<span class="c1">## the likelihood is always exactly zero</span>
+<span class="c1">## at p=0,1, so I skip those values</span>
+<span class="n">ps</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span> <span class="m">0.99</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.01</span><span class="p">)</span> 
+
+<span class="c1">## Likelihood</span>
+
+
+<span class="c1">## MLE/MoM estimators </span>
+
+<span class="c1">## now plot the negative log likelihood profile</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q6: How does your MLE compare to the true parameter value? How could you estimate the MLE from the likelihood profile if you didn’t have a way to calculate the MLE directly? If you chose another version of the random seed, do you get the same answer?</strong></p>
+</div>
+</div>
+<div class="section" id="example-midge-wing-length">
+<h2>Example: Midge Wing Length<a class="headerlink" href="#example-midge-wing-length" title="Permalink to this headline">¶</a></h2>
+<p>We will use this simple example to go through the steps of assessing a Bayesian model and we’ll see that MCMC can allow us to approximate the posterior distribution.</p>
+<p>Grogan and Wirth (1981) provide data on the wing length (in millimeters) of nine members of a species of midge (small, two-winged flies).</p>
+<p>From these measurements we wish to make inference about the population mean <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">WL.data</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/MidgeWingLength.csv&quot;</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">&lt;-</span> <span class="n">WL.data</span><span class="o">$</span><span class="n">WingLength</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Wing Length (mm)&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_20_0.png" src="../_images/22-ModelFitting-Bayesian_20_0.png" />
+</div>
+</div>
+<div class="section" id="non-bayesian-analysis">
+<h3>Non-Bayesian analysis<a class="headerlink" href="#non-bayesian-analysis" title="Permalink to this headline">¶</a></h3>
+<p>We might expect that these midge data could be draws from a <em>Normal</em> distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>. <a class="reference internal" href="21-ModelFitting-MLE.html"><span class="doc std std-doc">Recall</span></a> that the MLEs for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> here are simply the <em>sample mean</em> and <em>sample variance</em> respectively:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="n">s2</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">((</span><span class="n">Y</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="m">-1</span><span class="p">)</span>
+<span class="nf">round</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s2</span><span class="p">),</span> <span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1.804</li><li>0.017</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1.4</span><span class="p">,</span><span class="m">2.2</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Wing Length (mm)&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.4</span><span class="p">,</span> <span class="m">2.2</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> 
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s2</span><span class="p">)),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_23_0.png" src="../_images/22-ModelFitting-Bayesian_23_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have plotted the estimate of the <em>population</em> distribution here, but this is not the <em>predictive distribution</em> (which would be a Student’s <span class="math notranslate nohighlight">\(t\)</span> because we’re estimating both the mean and variance.)</p>
+</div>
+<p>The non-Bayesian version here has the advantage of being quick and familiar. However, from our point of view it has two weaknesses:</p>
+<ol class="simple">
+<li><p>Because we have so few data points estimates of the accuracy of our predictions aren’t available. 9 points is only barely enough to estimate a mean, so we don’t trust any of the variance calculations.</p></li>
+<li><p>We can’t easily incorporate things that we might already know about midges into our analysis.</p></li>
+</ol>
+<p>Let’s see how we can do a similar analysis using a Bayesian approach, first analytically, and the with JAGS.</p>
+</div>
+<div class="section" id="setting-up-the-bayesian-model">
+<h3>Setting up the Bayesian Model<a class="headerlink" href="#setting-up-the-bayesian-model" title="Permalink to this headline">¶</a></h3>
+<p>We need to define the likelihood and the priors for our Bayesian analysis. Given the analysis that we’ve just done, let’s assume that our data come from a normal distribution with unknown mean, <span class="math notranslate nohighlight">\(\mu\)</span> but that we know the variance is <span class="math notranslate nohighlight">\(\sigma^2 = 0.025\)</span>. That is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Y} \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(\mu, 0.025^2)
+\]</div>
+<div class="section" id="prior-information">
+<h4>Prior Information<a class="headerlink" href="#prior-information" title="Permalink to this headline">¶</a></h4>
+<p>Studies from other populations suggest that wing lengths are usually around 1.9 mm, so we set <span class="math notranslate nohighlight">\(\mu_0 = 1.9\)</span></p>
+<p>We also know that lengths must be positive (<span class="math notranslate nohighlight">\(\mu &gt;0\)</span>)</p>
+<p>We can approximate this restriction with a normal prior distribution for <span class="math notranslate nohighlight">\(\mu\)</span> as follows:</p>
+<p>Since most of the normal density is within two standard deviations of the mean we choose <span class="math notranslate nohighlight">\(\tau^2_0\)</span> so that</p>
+<div class="math notranslate nohighlight">
+\[ \mu_0 - 2\sigma_0 &gt;0 \Rightarrow \sigma_0 &lt;1.9/2 = 0.95 \]</div>
+<p>I will choose <span class="math notranslate nohighlight">\(\sigma_0=0.8\)</span> here. Thus our prior for mu will be:
+$<span class="math notranslate nohighlight">\(
+\mu \sim \mathcal{N}(1.9, 0.8^2)
+\)</span>$</p>
+<hr class="docutils" />
+<p>Together, then, our full model is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{Y} &amp; \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(\mu, 0.025^2)\\
+    \mu &amp;\sim \mathcal{N}(1.9, 0.8^2)
+\end{align*}\]</div>
+</div>
+</div>
+<div class="section" id="analytic-posterior">
+<h3>Analytic Posterior<a class="headerlink" href="#analytic-posterior" title="Permalink to this headline">¶</a></h3>
+<p>For this very simple case it is easy to write down the posterior distribution (up to some constant). First, note that the likelihood for the data can be written as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathcal{L} &amp;\propto \prod_{i=1}^n \frac{1}{\sigma} \exp\left(-\frac{1}{2\sigma^2}(Y_i-\mu)^2 \right) \\
+    &amp; = \frac{1}{\sigma^n} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n (Y_i-\mu)^2 \right)\\
+    &amp; \propto \exp\left(-\frac{n}{2\sigma^2} (\bar{Y}-\mu)^2 \right)
+\end{align*}\]</div>
+<p>Multiplying the prior through we get the following for the posterior:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{P}(\mu|\mathbf{Y}) \propto \exp \left(-\frac{n}{2\sigma^2} (\bar{Y}-\mu)^2 \right) \exp\left(-\frac{1}{2\sigma_0^2}(\mu-\mu_0)^2 \right)
+\]</div>
+<p>You can re-arrange, complete the square, etc, to get a new expression that is like</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{P}(\mu|\mathbf{Y}) \propto \exp \left(-\frac{1}{2\sigma_p^2} (\mu_p-\mu)^2 \right)
+\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu_p &amp; = \frac{n\sigma_0^2}{\sigma^2 + n\sigma_0^2} \bar{Y} + \frac{\sigma^2}{\frac{\sigma^2}{n} + \sigma_0^2} \mu_0\\
+&amp; \\
+\sigma_p^2 &amp; = \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1}
+\end{align*}\]</div>
+<p>Instead of writing this last in terms of the variances, we could instead use precision (the inverse variance) which gives a simpler expression:</p>
+<div class="math notranslate nohighlight">
+\[
+\tau_p = n\tau + \tau_0
+\]</div>
+<p>Just like in our earlier example, our estimate of the mean is a weighted average of the data and the prior, with the variance being determined by the data and prior variances.</p>
+<p>So lets write a little function to calculate <span class="math notranslate nohighlight">\(\mu_p\)</span> and <span class="math notranslate nohighlight">\(\tau_p\)</span> and the plug in our numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tau.post</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">tau0</span><span class="p">,</span> <span class="n">n</span><span class="p">){</span><span class="n">n</span> <span class="o">*</span> <span class="n">tau</span> <span class="o">+</span> <span class="n">tau0</span><span class="p">}</span>
+<span class="n">mu.post</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">Ybar</span><span class="p">,</span> <span class="n">mu0</span><span class="p">,</span> <span class="n">sig20</span><span class="p">,</span> <span class="n">sig2</span><span class="p">,</span> <span class="n">n</span><span class="p">){</span>
+ <span class="n">weight</span> <span class="o">&lt;-</span> <span class="n">sig2</span><span class="o">+</span><span class="n">n</span> <span class="o">*</span> <span class="n">sig20</span>
+ 
+ <span class="nf">return</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">sig20</span> <span class="o">*</span> <span class="n">Ybar</span><span class="o">/</span><span class="n">weight</span> <span class="o">+</span> <span class="n">sig2</span> <span class="o">*</span> <span class="n">mu0</span><span class="o">/</span><span class="n">weight</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot 3 things together – the data histogram, the prior, and the posterior:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mu0</span> <span class="o">&lt;-</span> <span class="m">1.9</span>
+<span class="n">s20</span> <span class="o">&lt;-</span> <span class="m">0.8</span>
+<span class="n">s2</span> <span class="o">&lt;-</span> <span class="m">0.025</span> <span class="c1">## &quot;true&quot; variance</span>
+
+<span class="n">mp</span> <span class="o">&lt;-</span> <span class="nf">mu.post</span><span class="p">(</span><span class="n">Ybar</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">mu0</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">sig20</span><span class="o">=</span><span class="n">s20</span><span class="p">,</span> <span class="n">sig2</span><span class="o">=</span><span class="n">s2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">tp</span> <span class="o">&lt;-</span> <span class="nf">tau.post</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="n">s2</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="n">s20</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span><span class="m">2.3</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Wing Length (mm)&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span> <span class="m">2.3</span><span class="p">),</span>
+  <span class="n">freq</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">8</span><span class="p">))</span> 
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s20</span><span class="p">)),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## prior</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mp</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">tp</span><span class="p">)),</span> <span class="n">col</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## posterior</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;prior&quot;</span><span class="p">,</span> <span class="s">&quot;posterior&quot;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_29_0.png" src="../_images/22-ModelFitting-Bayesian_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="exercise-prior-sensitivity">
+<h3>Exercise: Prior sensitivity<a class="headerlink" href="#exercise-prior-sensitivity" title="Permalink to this headline">¶</a></h3>
+<p>Change the values of the mean and the variance that you choose for the prior (“hyperparameters”). What does this do to the posterior distribution. E.g., what happens if the variance you choose is small, and <span class="math notranslate nohighlight">\(\mu_0 =2.5\)</span> or so. Is this what you expect?</p>
+</div>
+<div class="section" id="numerical-evaluation-of-the-posterior-with-jags">
+<h3>Numerical evaluation of the posterior with JAGS<a class="headerlink" href="#numerical-evaluation-of-the-posterior-with-jags" title="Permalink to this headline">¶</a></h3>
+<p>Let’s show that we can get the same thing from JAGS that we were able to get from the analytic results. You’ll need to make sure you have installed JAGS (which must be done outside of R) and then the libraries <code class="docutils literal notranslate"><span class="pre">rjags</span></code> and <code class="docutils literal notranslate"><span class="pre">coda</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load libraries</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">rjags</span><span class="p">)</span> <span class="c1"># does the fitting</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">coda</span><span class="p">)</span> <span class="c1"># makes diagnostic plots</span>
+<span class="c1">##require(mcmcplots) # another option for diagnostic plots</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="specifying-the-model">
+<h4>Specifying the model<a class="headerlink" href="#specifying-the-model" title="Permalink to this headline">¶</a></h4>
+<p>First we must encode our choices for our data model and priors to pass them to the fitting routines in JAGS. This involves setting up a <span class="math notranslate nohighlight">\({\tt model}\)</span> that includes the likelihood for each data point and a prior for every parameter we want to estimate. Here is an example of how we would do this for the simple model we fit for the midge data (note that JAGS uses the precision instead of the variance or sd for the normal distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">&lt;-</span> <span class="s">&quot;model{</span>
+
+<span class="s"> ## Likelihood</span>
+<span class="s"> for(i in 1:n){</span>
+<span class="s"> Y[i] ~ dnorm(mu,tau)</span>
+<span class="s"> }</span>
+
+<span class="s"> ## Prior for mu</span>
+<span class="s"> mu  ~ dnorm(mu0,tau0)</span>
+
+<span class="s">} ## close model </span>
+<span class="s">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now create the JAGS model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">jags.model</span><span class="p">(</span><span class="nf">textConnection</span><span class="p">(</span><span class="n">model1</span><span class="p">),</span> 
+     <span class="n">n.chains</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="c1">## usually do more</span>
+     <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="c1">## data</span>
+        <span class="n">mu0</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="n">s20</span><span class="p">,</span> <span class="c1">## hyperparams</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="m">1</span><span class="o">/</span><span class="n">s2</span> <span class="c1">## known precision</span>
+        <span class="p">),</span>
+     <span class="n">inits</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="m">3</span><span class="p">)</span> <span class="c1">## setting an starting val</span>
+     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 9
+   Unobserved stochastic nodes: 1
+   Total graph size: 14
+
+Initializing model
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll run the MCMC and, see how the output looks for a short chain with no burnin:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">samp</span> <span class="o">&lt;-</span> <span class="nf">coda.samples</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> 
+  <span class="n">variable.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;mu&quot;</span><span class="p">),</span> 
+  <span class="n">n.iter</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span> <span class="n">progress.bar</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">samp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_37_0.png" src="../_images/22-ModelFitting-Bayesian_37_0.png" />
+</div>
+</div>
+<p>MCMC is a rejection algorithm that often needs to converge or “burn-in” – that is we need to potentially move until we’re taking draws from the correct distribution. Unlike for optimization problems, this does not mean that the algorithm :eads toward a single value. Instead we’re looking for a pattern where the draws are seemingly unrelated and random. To assess convergence we look at trace plots, the goal is to get traces that look like “fuzzy caterpillars”.</p>
+<p>Sometimes at the beginning of a run, if we start far from the area near the posterior mean of the parameter, we will instead get something that looks like a trending time series. If this is the case we have to drop the samples that were taken during the burn-in phase. Here’s an example of how to do that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">update</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="n">progress.bar</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="c1"># Burnin for 10000 samples</span>
+
+<span class="n">samp</span> <span class="o">&lt;-</span> <span class="nf">coda.samples</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> 
+  <span class="n">variable.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;mu&quot;</span><span class="p">),</span> 
+  <span class="n">n.iter</span><span class="o">=</span><span class="m">20000</span><span class="p">,</span> <span class="n">progress.bar</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">samp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_39_0.png" src="../_images/22-ModelFitting-Bayesian_39_0.png" />
+</div>
+</div>
+<p>This is a very fuzzy caterpillar!</p>
+<p>We can also use the summary function to examine the samples generated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">samp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterations = 11001:31000
+Thinning interval = 1 
+Number of chains = 1 
+Sample size per chain = 20000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+          Mean             SD       Naive SE Time-series SE 
+      1.804998       0.052754       0.000373       0.000373 
+
+2. Quantiles for each variable:
+
+ 2.5%   25%   50%   75% 97.5% 
+1.702 1.769 1.805 1.840 1.908 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compare these draws to what we got with our analytic solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span><span class="m">2.3</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">samp</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;mu&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span> <span class="m">2.3</span><span class="p">),</span>
+  <span class="n">freq</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">8</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span><span class="s">&quot;posterior samples&quot;</span><span class="p">)</span> 
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s20</span><span class="p">)),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## prior</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mp</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">tp</span><span class="p">)),</span> <span class="n">col</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## posterior</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;prior&quot;</span><span class="p">,</span> <span class="s">&quot;analytic posterior&quot;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_43_0.png" src="../_images/22-ModelFitting-Bayesian_43_0.png" />
+</div>
+</div>
+<p>It worked!</p>
+<p>As with the analytic approach, it’s always a good idea when you run your analyses to see how sensitive is your result to the priors you choose. Unless you are purposefully choosing an informative prior, we usually want the prior and posterior to look different.</p>
+</div>
+</div>
+<div class="section" id="estimating-the-population-variance">
+<h3>Estimating the population variance<a class="headerlink" href="#estimating-the-population-variance" title="Permalink to this headline">¶</a></h3>
+<p>One advantage of the numerical approach is that we can choose almost anything we want for the priors on multiple parameters without worrying if they are conjugate, or if we want to include additional information. For example, let’s say that, not, we want to force the mean to be positive (and also the data, perhaps), and concurrently estimate the variance. Here is a possible model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">&lt;-</span> <span class="s">&quot;model{</span>
+
+<span class="s"> # Likelihood</span>
+<span class="s"> for(i in 1:n){</span>
+<span class="s"> Y[i] ~ dnorm(mu,tau) T(0,) ## truncates at 0</span>
+<span class="s"> }</span>
+
+<span class="s"> # Prior for mu</span>
+<span class="s"> mu ~ dnorm(mu0,tau0)</span>
+
+<span class="s"> # Prior for the precision</span>
+<span class="s"> tau ~ dgamma(a, b)</span>
+
+<span class="s"> # Compute the variance</span>
+<span class="s"> s2  &lt;- 1/tau</span>
+<span class="s">}&quot;</span>
+
+<span class="c1">## hyperparams for tau</span>
+<span class="n">a</span> <span class="o">&lt;-</span> <span class="m">0.01</span>
+<span class="n">b</span> <span class="o">&lt;-</span> <span class="m">0.01</span>
+
+<span class="n">m2</span> <span class="o">&lt;-</span> <span class="nf">jags.model</span><span class="p">(</span><span class="nf">textConnection</span><span class="p">(</span><span class="n">model2</span><span class="p">),</span> 
+     <span class="n">n.chains</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+     <span class="n">data</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+        <span class="n">mu0</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="n">s20</span><span class="p">,</span> <span class="c1">## mu hyperparams</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span> <span class="c1">## tau hyperparams</span>
+        <span class="p">),</span>
+     <span class="n">inits</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="m">10</span><span class="p">)</span> <span class="c1">## starting vals</span>
+    <span class="p">)</span>
+
+<span class="n">samp</span> <span class="o">&lt;-</span> <span class="nf">coda.samples</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> 
+  <span class="n">variable.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;mu&quot;</span><span class="p">,</span><span class="s">&quot;s2&quot;</span><span class="p">),</span> 
+  <span class="n">n.iter</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span> <span class="n">progress.bar</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">samp</span><span class="p">)</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">samp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 9
+   Unobserved stochastic nodes: 2
+   Total graph size: 740
+
+Initializing model
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterations = 1001:2000
+Thinning interval = 1 
+Number of chains = 1 
+Sample size per chain = 1000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+      Mean      SD  Naive SE Time-series SE
+mu 0.06889 0.10389 0.0032853       0.016476
+s2 0.01029 0.01799 0.0005689       0.002442
+
+2. Quantiles for each variable:
+
+        2.5%      25%      50%     75%  97.5%
+mu -0.288547 0.071837 0.103609 0.11822 0.1525
+s2  0.001188 0.002328 0.003969 0.01011 0.0590
+</pre></div>
+</div>
+<img alt="../_images/22-ModelFitting-Bayesian_45_2.png" src="../_images/22-ModelFitting-Bayesian_45_2.png" />
+</div>
+</div>
+<p>Now we plot each with their priors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">samp</span><span class="p">[[</span><span class="m">1</span><span class="p">]][,</span><span class="m">1</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;samples of mu&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;mu&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mu0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s20</span><span class="p">)),</span> 
+  <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## prior</span>
+
+<span class="n">x2</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">samp</span><span class="p">[[</span><span class="m">1</span><span class="p">]][,</span><span class="m">2</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;samples of tau&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;tau&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="nf">dgamma</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">b</span><span class="p">),</span> 
+  <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1">## prior</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_47_0.png" src="../_images/22-ModelFitting-Bayesian_47_0.png" />
+</div>
+</div>
+<p>We also want to look at the joint distribution of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">samp</span><span class="p">[[</span><span class="m">1</span><span class="p">]][,</span><span class="m">1</span><span class="p">]),</span> <span class="n">samp</span><span class="p">[[</span><span class="m">1</span><span class="p">]][,</span><span class="m">2</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;mu&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;s2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_49_0.png" src="../_images/22-ModelFitting-Bayesian_49_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="exercise-updating-the-bayesian-model">
+<h3>Exercise: Updating the Bayesian model<a class="headerlink" href="#exercise-updating-the-bayesian-model" title="Permalink to this headline">¶</a></h3>
+<p>Redo the previous analysis placing a gamma prior on <span class="math notranslate nohighlight">\(\mu\)</span> as well. Set the prior so that the mean and variance are the same as in the normal example from above (use moment matching). Do you get something similar?</p>
+</div>
+</div>
+<div class="section" id="aedes-data-revisited-using-bayesian-fitting">
+<h2>Aedes data revisited using Bayesian fitting<a class="headerlink" href="#aedes-data-revisited-using-bayesian-fitting" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s do some Bayesian model fitting to * Aedes * thermal performance data. Lets try out the <code class="docutils literal notranslate"><span class="pre">R2jags</span></code> package for this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">R2jags</span><span class="p">)</span> <span class="c1"># fitting</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">coda</span><span class="p">)</span> <span class="c1"># diagnostic plots</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: R2jags
+
+Loading required package: rjags
+
+Linked to JAGS 4.3.0
+
+Loaded modules: basemod,bugs
+
+
+Attaching package: ‘R2jags’
+
+
+The following object is masked from ‘package:coda’:
+
+    traceplot
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Aaeg.data</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/AeaegyptiTraitData.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-data">
+<h3>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h3>
+<p>These data are traits from * Aedes aegypti * mosquitoes measured across temperature in lab experiments. The traits we have data on thermal performance are:</p>
+<ul class="simple">
+<li><p>pEA: proportion surviving from egg to adulthood</p></li>
+<li><p>MDR: mosquito development rate</p></li>
+<li><p>PDR: parasite development rate (= 1/EIP the extrinsic incubation period)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> (mu): death rate (= 1/longevity)</p></li>
+</ul>
+<p>Note that some of the traits come in multiple forms (e.g., <span class="math notranslate nohighlight">\(\mu\)</span> and 1/<span class="math notranslate nohighlight">\(\mu\)</span>, PDR and EIP).</p>
+<p>Have a look at the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">Aaeg.data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A data.frame: 6 × 6</caption>
+<thead>
+	<tr><th></th><th scope=col>trait.name</th><th scope=col>T</th><th scope=col>trait</th><th scope=col>ref</th><th scope=col>trait2</th><th scope=col>trait2.name</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>pEA</td><td>22</td><td>0.90812</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>2</th><td>pEA</td><td>27</td><td>0.93590</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>3</th><td>pEA</td><td>32</td><td>0.81944</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>4</th><td>MDR</td><td>22</td><td>0.09174</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>5</th><td>MDR</td><td>27</td><td>0.13587</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+	<tr><th scope=row>6</th><td>MDR</td><td>32</td><td>0.15823</td><td>Westbrook_Thesis_2010</td><td>NA</td><td>NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mu.data</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">Aaeg.data</span><span class="p">,</span> <span class="n">trait.name</span> <span class="o">==</span> <span class="s">&quot;mu&quot;</span><span class="p">)</span>
+<span class="n">lf.data</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">Aaeg.data</span><span class="p">,</span> <span class="n">trait.name</span> <span class="o">==</span> <span class="s">&quot;1/mu&quot;</span><span class="p">)</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">bty</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span> 
+<span class="nf">plot</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="bp">T</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mu.data</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;mu&quot;</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="bp">T</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">lf.data</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;1/mu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_57_0.png" src="../_images/22-ModelFitting-Bayesian_57_0.png" />
+</div>
+</div>
+<p>Note that the <span class="math notranslate nohighlight">\(\mu\)</span> data is u-shaped and the lifespan data is unimodal (hump-shaped).</p>
+<p>Since thermal biology theory is based on unimodal thermal responses, we want to fit the trait as lifespan instead of <span class="math notranslate nohighlight">\(\mu\)</span>. Thus, we’ll need to convert the <span class="math notranslate nohighlight">\(\mu\)</span> data to lifespan by taking the inverse. The combined data should have a nice unimodal shape that we can fit a function to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mu.data.inv</span> <span class="o">&lt;-</span> <span class="n">mu.data</span> <span class="c1"># make a copy of the mu data</span>
+<span class="n">mu.data.inv</span><span class="o">$</span><span class="n">trait</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="n">mu.data</span><span class="o">$</span><span class="n">trait</span> <span class="c1"># take the inverse of the trait values to convert mu to lifespan</span>
+<span class="n">lf.data.comb</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">mu.data.inv</span><span class="p">,</span> <span class="n">lf.data</span><span class="p">)</span> <span class="c1"># combine both lifespan data sets together </span>
+ 
+<span class="nf">plot</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="bp">T</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">lf.data.comb</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;1/mu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_59_0.png" src="../_images/22-ModelFitting-Bayesian_59_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="two-thermal-performance-curve-models">
+<h3>Two thermal performance curve models<a class="headerlink" href="#two-thermal-performance-curve-models" title="Permalink to this headline">¶</a></h3>
+<p>Most thermal response curves can be reasonably fit using one of two thermal reponses. Traits that respond unimodally but symmetrically to temperature can be fit with a quadratic function:</p>
+<p><span class="math notranslate nohighlight">\( B = q (T-T_0) (T-T_m)\)</span></p>
+<p>Traits that respond unimodally but asymmetrically can be fitted with a Briere function (see definition <a class="reference internal" href="Appendix-MiniProj.html#miniproj-tpcs-models"><span class="std std-ref">here</span></a>).</p>
+<p>In both models, <span class="math notranslate nohighlight">\(T_0\)</span> is the lower thermal limit, <span class="math notranslate nohighlight">\(T_m\)</span> is the upper thermal limit (i.e., where the trait value goes to zero on either end), and <span class="math notranslate nohighlight">\(q\)</span> scales the elevation of the curve, (and so also the value at the optimum temperature).</p>
+</div>
+<div class="section" id="the-thermal-response-model-file">
+<h3>The thermal response model file<a class="headerlink" href="#the-thermal-response-model-file" title="Permalink to this headline">¶</a></h3>
+<p>Unlike the previous bayesian \example, here we will provide jags with the model written as a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file. THis can be in your working directory, or elsewhere (but then inout the full path to it — ideally a relative path).</p>
+<p>You can either write the text yourself directly to the file, or create it using the sink() function via your R script (see below):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sink</span><span class="p">(</span><span class="s">&quot;quad.txt&quot;</span><span class="p">)</span> <span class="c1"># create a file</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;</span>
+<span class="s"> model{</span>
+<span class="s"> </span>
+<span class="s"> ## Priors</span>
+<span class="s"> cf.q ~ dunif(0, 1)</span>
+<span class="s"> cf.T0 ~ dunif(0, 24)</span>
+<span class="s"> cf.Tm ~ dunif(25, 45)</span>
+<span class="s"> cf.sigma ~ dunif(0, 1000)</span>
+<span class="s"> cf.tau &lt;- 1 / (cf.sigma * cf.sigma)</span>
+<span class="s"> </span>
+<span class="s"> ## Likelihood</span>
+<span class="s"> for(i in 1:N.obs){</span>
+<span class="s"> trait.mu[i] &lt;- -1 * cf.q * (temp[i] - cf.T0) * (temp[i] - cf.Tm) * (cf.Tm &gt; temp[i]) * (cf.T0 &lt; temp[i])</span>
+<span class="s"> trait[i] ~ dnorm(trait.mu[i], cf.tau)</span>
+<span class="s"> }</span>
+<span class="s"> </span>
+<span class="s"> ## Derived Quantities and Predictions</span>
+<span class="s"> for(i in 1:N.Temp.xs){</span>
+<span class="s"> z.trait.mu.pred[i] &lt;- -1 * cf.q * (Temp.xs[i] - cf.T0) * (Temp.xs[i] - cf.Tm) * (cf.Tm &gt; Temp.xs[i]) * (cf.T0 &lt; Temp.xs[i])</span>
+<span class="s"> }</span>
+<span class="s"> } # close model</span>
+<span class="s">&quot;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">sink</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> model{
+ 
+ ## Priors
+ cf.q ~ dunif(0, 1)
+ cf.T0 ~ dunif(0, 24)
+ cf.Tm ~ dunif(25, 45)
+ cf.sigma ~ dunif(0, 1000)
+ cf.tau &lt;- 1 / (cf.sigma * cf.sigma)
+ 
+ ## Likelihood
+ for(i in 1:N.obs){
+ trait.mu[i] &lt;- -1 * cf.q * (temp[i] - cf.T0) * (temp[i] - cf.Tm) * (cf.Tm &gt; temp[i]) * (cf.T0 &lt; temp[i])
+ trait[i] ~ dnorm(trait.mu[i], cf.tau)
+ }
+ 
+ ## Derived Quantities and Predictions
+ for(i in 1:N.Temp.xs){
+ z.trait.mu.pred[i] &lt;- -1 * cf.q * (Temp.xs[i] - cf.T0) * (Temp.xs[i] - cf.Tm) * (cf.Tm &gt; Temp.xs[i]) * (cf.T0 &lt; Temp.xs[i])
+ }
+ } # close model
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the model file <code class="docutils literal notranslate"><span class="pre">quad.txt</span></code> has two mandatory sections (the priors and the likelihood) and one optional section (derived measures calculated from your fitted parameters).</p>
+<p>In the example below for a quadratic function, most of the priors are specified via uniform distributions (the two arguments specific the lower and upper bounds, respectively). Note that unlike in R and most other programs, in jags, the inverse of the variance of the normal distribution is used, denoted by <span class="math notranslate nohighlight">\(\tau (= \frac{1}{\sigma^2}\)</span>).</p>
+<p>The likelihood for can be interpreted as follows: the observed data are normally distributed where the mean at a given temperature follows the quadratic equation.</p>
+<p>Now, prepare the data for jags:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters to Estimate</span>
+<span class="n">parameters</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;cf.q&quot;</span><span class="p">,</span> <span class="s">&quot;cf.T0&quot;</span><span class="p">,</span> <span class="s">&quot;cf.Tm&quot;</span><span class="p">,</span><span class="s">&quot;cf.sigma&quot;</span><span class="p">,</span> <span class="s">&quot;z.trait.mu.pred&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initial values for the parameters</span>
+<span class="n">inits</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(){</span><span class="nf">list</span><span class="p">(</span>
+ <span class="n">cf.q</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span>
+ <span class="n">cf.Tm</span> <span class="o">=</span> <span class="m">35</span><span class="p">,</span>
+ <span class="n">cf.T0</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+ <span class="n">cf.sigma</span> <span class="o">=</span> <span class="nf">rlnorm</span><span class="p">(</span><span class="m">1</span><span class="p">))}</span>
+
+<span class="c1"># MCMC Settings: number of posterior dist elements = [(ni - nb) / nt ] * nc</span>
+<span class="n">ni</span> <span class="o">&lt;-</span> <span class="m">25000</span> <span class="c1"># number of iterations in each chain</span>
+<span class="n">nb</span> <span class="o">&lt;-</span> <span class="m">5000</span> <span class="c1"># number of &#39;burn in&#39; iterations to discard</span>
+<span class="n">nt</span> <span class="o">&lt;-</span> <span class="m">8</span> <span class="c1"># thinning rate - jags saves every nt iterations in each chain</span>
+<span class="n">nc</span> <span class="o">&lt;-</span> <span class="m">3</span> <span class="c1"># number of chains</span>
+
+<span class="c1"># Temperature sequence for derived quantity calculations</span>
+<span class="n">Temp.xs</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0.2</span><span class="p">)</span>
+<span class="n">N.Temp.xs</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">Temp.xs</span><span class="p">)</span>
+
+<span class="c1">### Fitting the trait thermal response; Pull out data columns as vectors</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">lf.data.comb</span> <span class="c1"># this lets us reuse the same generic code: we only change this first line</span>
+<span class="n">trait</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">trait</span>
+<span class="n">N.obs</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">trait</span><span class="p">)</span>
+<span class="n">temp</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="bp">T</span>
+
+<span class="c1"># Bundle all data in a list for JAGS</span>
+<span class="n">jag.data</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">trait</span> <span class="o">=</span> <span class="n">trait</span><span class="p">,</span> <span class="n">N.obs</span> <span class="o">=</span> <span class="n">N.obs</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">,</span> <span class="n">Temp.xs</span> <span class="o">=</span> <span class="n">Temp.xs</span><span class="p">,</span> <span class="n">N.Temp.xs</span> <span class="o">=</span> <span class="n">N.Temp.xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now run the fitting using jags:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lf.fit</span> <span class="o">&lt;-</span> <span class="nf">jags</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">jag.data</span><span class="p">,</span> <span class="n">inits</span><span class="o">=</span><span class="n">inits</span><span class="p">,</span> <span class="n">parameters.to.save</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> 
+    <span class="n">model.file</span><span class="o">=</span><span class="s">&quot;quad.txt&quot;</span><span class="p">,</span> <span class="n">n.thin</span><span class="o">=</span><span class="n">nt</span><span class="p">,</span> <span class="n">n.chains</span><span class="o">=</span><span class="n">nc</span><span class="p">,</span> <span class="n">n.burnin</span><span class="o">=</span><span class="n">nb</span><span class="p">,</span> 
+    <span class="n">n.iter</span><span class="o">=</span><span class="n">ni</span><span class="p">,</span> <span class="n">DIC</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">working.directory</span><span class="o">=</span><span class="nf">getwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module glm loaded
+
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;trait&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;N.obs&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;temp&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;Temp.xs&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;N.Temp.xs&quot; in data”
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compiling model graph
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">jags</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">init</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span><span class="p">,</span> <span class="p">:</span> <span class="n">Nothing</span> <span class="n">to</span> <span class="nb">compile</span>
+
+
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">jags</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">jag</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">inits</span><span class="p">,</span> <span class="n">parameters</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">model</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;quad.txt&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">thin</span> <span class="o">=</span> <span class="n">nt</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">nc</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">burnin</span> <span class="o">=</span> <span class="n">nb</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">n</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="n">ni</span><span class="p">,</span> <span class="n">DIC</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> <span class="n">working</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">getwd</span><span class="p">())</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">jags</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">init</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">n</span><span class="o">.</span><span class="n">adapt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Change into “mcmc” type samples for visualization with the <code class="docutils literal notranslate"><span class="pre">coda</span></code> package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lf.fit.mcmc</span> <span class="o">&lt;-</span> <span class="nf">as.mcmc</span><span class="p">(</span><span class="n">lf.fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="k">as</span><span class="o">.</span><span class="n">mcmc</span><span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">fit</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;lf.fit&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="k">as</span><span class="o">.</span><span class="n">mcmc</span><span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-diagnostics">
+<h3>Running diagnostics<a class="headerlink" href="#running-diagnostics" title="Permalink to this headline">¶</a></h3>
+<p>View the parameters (only the first 5 lines, or it will also show you all of your derived quantities):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">envir</span><span class="p">,</span> <span class="n">enclos</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;lf.fit&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the chains:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">lf.fit.mcmc</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">plot</span><span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">fit</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[,</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]):</span> <span class="nb">object</span> <span class="s1">&#39;lf.fit.mcmc&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">plot</span><span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">fit</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[,</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-fits">
+<h3>Plot the fits<a class="headerlink" href="#plot-the-fits" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="bp">T</span><span class="p">,</span> <span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">42</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">lf.data.comb</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;Lifespan for Ae. aegypti&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Temperature&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span><span class="p">[</span><span class="m">6</span><span class="o">:</span><span class="p">(</span><span class="m">6</span> <span class="o">+</span> <span class="n">N.Temp.xs</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="s">&quot;2.5%&quot;</span><span class="p">]</span> <span class="o">~</span> <span class="n">Temp.xs</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span><span class="p">[</span><span class="m">6</span><span class="o">:</span><span class="p">(</span><span class="m">6</span> <span class="o">+</span> <span class="n">N.Temp.xs</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="s">&quot;97.5%&quot;</span><span class="p">]</span> <span class="o">~</span> <span class="n">Temp.xs</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span><span class="p">[</span><span class="m">6</span><span class="o">:</span><span class="p">(</span><span class="m">6</span> <span class="o">+</span> <span class="n">N.Temp.xs</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="s">&quot;mean&quot;</span><span class="p">]</span> <span class="o">~</span> <span class="n">Temp.xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in eval(predvars, data, env): object &#39;lf.fit&#39; not found
+Traceback:
+
+1. lines(lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 1), &quot;2.5%&quot;] ~ 
+ .     Temp.xs, lty = 2)
+2. lines.formula(lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 1), 
+ .     &quot;2.5%&quot;] ~ Temp.xs, lty = 2)
+3. eval(m, eframe)
+4. eval(m, eframe)
+5. (function (formula, data = NULL, subset = NULL, na.action = na.fail, 
+ .     drop.unused.levels = FALSE, xlev = NULL, ...) 
+ . {
+ .     possible_newdata &lt;- !missing(data) &amp;&amp; is.data.frame(data) &amp;&amp; 
+ .         identical(substitute(data), quote(newdata)) &amp;&amp; (nr &lt;- nrow(data)) &gt; 
+ .         0
+ .     if (!missing(formula) &amp;&amp; nargs() == 1 &amp;&amp; is.list(formula) &amp;&amp; 
+ .         !is.null(m &lt;- formula$model)) 
+ .         return(m)
+ .     if (!missing(formula) &amp;&amp; nargs() == 1 &amp;&amp; is.list(formula) &amp;&amp; 
+ .         all(c(&quot;terms&quot;, &quot;call&quot;) %in% names(formula))) {
+ .         fcall &lt;- formula$call
+ .         m &lt;- match(c(&quot;formula&quot;, &quot;data&quot;, &quot;subset&quot;, &quot;weights&quot;, 
+ .             &quot;na.action&quot;), names(fcall), 0)
+ .         fcall &lt;- fcall[c(1, m)]
+ .         fcall[[1L]] &lt;- quote(stats::model.frame)
+ .         env &lt;- environment(formula$terms)
+ .         if (is.null(env)) 
+ .             env &lt;- parent.frame()
+ .         return(eval(fcall, env))
+ .     }
+ .     if (missing(formula)) {
+ .         if (!missing(data) &amp;&amp; inherits(data, &quot;data.frame&quot;) &amp;&amp; 
+ .             length(attr(data, &quot;terms&quot;))) 
+ .             return(data)
+ .         formula &lt;- as.formula(data)
+ .     }
+ .     else if (missing(data) &amp;&amp; inherits(formula, &quot;data.frame&quot;)) {
+ .         if (length(attr(formula, &quot;terms&quot;))) 
+ .             return(formula)
+ .         data &lt;- formula
+ .         formula &lt;- as.formula(data)
+ .     }
+ .     else formula &lt;- as.formula(formula)
+ .     if (missing(na.action)) {
+ .         if (!is.null(naa &lt;- attr(data, &quot;na.action&quot;)) &amp; mode(naa) != 
+ .             &quot;numeric&quot;) 
+ .             na.action &lt;- naa
+ .         else if (!is.null(naa &lt;- getOption(&quot;na.action&quot;))) 
+ .             na.action &lt;- naa
+ .     }
+ .     if (missing(data)) 
+ .         data &lt;- environment(formula)
+ .     else if (!is.data.frame(data) &amp;&amp; !is.environment(data) &amp;&amp; 
+ .         !is.null(attr(data, &quot;class&quot;))) 
+ .         data &lt;- as.data.frame(data)
+ .     else if (is.array(data)) 
+ .         stop(&quot;&#39;data&#39; must be a data.frame, not a matrix or an array&quot;)
+ .     if (!is.data.frame(data) &amp;&amp; !is.environment(data) &amp;&amp; !is.list(data) &amp;&amp; 
+ .         !is.null(data)) 
+ .         stop(&quot;&#39;data&#39; must be a data.frame, environment, or list&quot;)
+ .     if (!inherits(formula, &quot;terms&quot;)) 
+ .         formula &lt;- terms(formula, data = data)
+ .     env &lt;- environment(formula)
+ .     rownames &lt;- .row_names_info(data, 0L)
+ .     vars &lt;- attr(formula, &quot;variables&quot;)
+ .     predvars &lt;- attr(formula, &quot;predvars&quot;)
+ .     if (is.null(predvars)) 
+ .         predvars &lt;- vars
+ .     varnames &lt;- vapply(vars, deparse2, &quot; &quot;)[-1L]
+ .     variables &lt;- eval(predvars, data, env)
+ .     resp &lt;- attr(formula, &quot;response&quot;)
+ .     if (is.null(rownames) &amp;&amp; resp &gt; 0L) {
+ .         lhs &lt;- variables[[resp]]
+ .         rownames &lt;- if (is.matrix(lhs)) 
+ .             rownames(lhs)
+ .         else names(lhs)
+ .     }
+ .     if (possible_newdata &amp;&amp; length(variables)) {
+ .         nr2 &lt;- max(sapply(variables, NROW))
+ .         if (nr2 != nr) 
+ .             warning(sprintf(paste0(ngettext(nr, &quot;&#39;newdata&#39; had %d row&quot;, 
+ .                 &quot;&#39;newdata&#39; had %d rows&quot;), &quot; &quot;, ngettext(nr2, 
+ .                 &quot;but variable found had %d row&quot;, &quot;but variables found have %d rows&quot;)), 
+ .                 nr, nr2), call. = FALSE, domain = NA)
+ .     }
+ .     if (is.null(attr(formula, &quot;predvars&quot;))) {
+ .         for (i in seq_along(varnames)) predvars[[i + 1L]] &lt;- makepredictcall(variables[[i]], 
+ .             vars[[i + 1L]])
+ .         attr(formula, &quot;predvars&quot;) &lt;- predvars
+ .     }
+ .     extras &lt;- substitute(list(...))
+ .     extranames &lt;- names(extras[-1L])
+ .     extras &lt;- eval(extras, data, env)
+ .     subset &lt;- eval(substitute(subset), data, env)
+ .     data &lt;- .External2(C_modelframe, formula, rownames, variables, 
+ .         varnames, extras, extranames, subset, na.action)
+ .     if (length(xlev)) {
+ .         for (nm in names(xlev)) if (!is.null(xl &lt;- xlev[[nm]])) {
+ .             xi &lt;- data[[nm]]
+ .             if (is.character(xi)) 
+ .                 xi &lt;- as.factor(xi)
+ .             if (!is.factor(xi) || is.null(nxl &lt;- levels(xi))) 
+ .                 warning(gettextf(&quot;variable &#39;%s&#39; is not a factor&quot;, 
+ .                   nm), domain = NA)
+ .             else {
+ .                 ctr &lt;- attr(xi, &quot;contrasts&quot;)
+ .                 xi &lt;- xi[, drop = TRUE]
+ .                 nxl &lt;- levels(xi)
+ .                 if (any(m &lt;- is.na(match(nxl, xl)))) 
+ .                   stop(sprintf(ngettext(length(m), &quot;factor %s has new level %s&quot;, 
+ .                     &quot;factor %s has new levels %s&quot;), nm, paste(nxl[m], 
+ .                     collapse = &quot;, &quot;)), domain = NA)
+ .                 data[[nm]] &lt;- factor(xi, levels = xl, exclude = NULL)
+ .                 if (!identical(attr(data[[nm]], &quot;contrasts&quot;), 
+ .                   ctr)) 
+ .                   warning(gettext(sprintf(&quot;contrasts dropped from factor %s&quot;, 
+ .                     nm), domain = NA), call. = FALSE)
+ .             }
+ .         }
+ .     }
+ .     else if (drop.unused.levels) {
+ .         for (nm in names(data)) {
+ .             x &lt;- data[[nm]]
+ .             if (is.factor(x) &amp;&amp; length(unique(x[!is.na(x)])) &lt; 
+ .                 length(levels(x))) {
+ .                 ctr &lt;- attr(x, &quot;contrasts&quot;)
+ .                 data[[nm]] &lt;- x[, drop = TRUE]
+ .                 if (!identical(attr(data[[nm]], &quot;contrasts&quot;), 
+ .                   ctr)) 
+ .                   warning(gettext(sprintf(&quot;contrasts dropped from factor %s due to missing levels&quot;, 
+ .                     nm), domain = NA), call. = FALSE)
+ .             }
+ .         }
+ .     }
+ .     attr(formula, &quot;dataClasses&quot;) &lt;- vapply(data, .MFclass, &quot;&quot;)
+ .     attr(data, &quot;terms&quot;) &lt;- formula
+ .     data
+ . })(formula = lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 1), 
+ .     &quot;2.5%&quot;] ~ Temp.xs, na.action = NULL)
+6. eval(predvars, data, env)
+7. eval(predvars, data, env)
+</pre></div>
+</div>
+<img alt="../_images/22-ModelFitting-Bayesian_74_1.png" src="../_images/22-ModelFitting-Bayesian_74_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="additional-analyses">
+<h3>Additional analyses<a class="headerlink" href="#additional-analyses" title="Permalink to this headline">¶</a></h3>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">which.max()</span></code> function to find the optimal temperature for adult lifespan:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Temp.xs</span><span class="p">[</span><span class="nf">which.max</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span><span class="p">[</span><span class="m">6</span><span class="o">:</span><span class="p">(</span><span class="m">6</span> <span class="o">+</span> <span class="n">N.Temp.xs</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="s">&quot;mean&quot;</span><span class="p">]))]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in as.vector(lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 1), &quot;mean&quot;]): object &#39;lf.fit&#39; not found
+Traceback:
+
+1. which.max(as.vector(lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 
+ .     1), &quot;mean&quot;]))
+2. as.vector(lf.fit$BUGSoutput$summary[6:(6 + N.Temp.xs - 1), &quot;mean&quot;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also pull out the lifespan values for each iteration of the MCMC chain over the temperature gradient to calculate <span class="math notranslate nohighlight">\(R_0\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lf.grad</span> <span class="o">&lt;-</span> <span class="n">lf.fit</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">sims.list</span><span class="o">$</span><span class="n">z.trait.mu.pred</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">lf.grad</span><span class="p">)</span> <span class="c1"># A matrix with 7500 iterations of the MCMC chains at 226 temperatures</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">envir</span><span class="p">,</span> <span class="n">enclos</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;lf.fit&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fitting-of-abundance-data">
+<h2>Fitting of abundance data<a class="headerlink" href="#fitting-of-abundance-data" title="Permalink to this headline">¶</a></h2>
+<p>We will now perform a bayesian analysis of population growth data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">R2jags</span><span class="p">)</span> <span class="c1"># does the fitting</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">coda</span><span class="p">)</span> <span class="c1"># makes diagnostic plots</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">IDPmisc</span><span class="p">)</span> <span class="c1"># makes nice colored pairs plots to look at joint posteriors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: R2jags
+
+Loading required package: rjags
+
+Loading required package: coda
+
+Linked to JAGS 4.3.0
+
+Loaded modules: basemod,bugs
+
+
+Attaching package: ‘R2jags’
+
+
+The following object is masked from ‘package:coda’:
+
+    traceplot
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>The Data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>These data are observations of the amphibian fungal pathogen <em>Batrachochytrium dendrobatidis</em> being grown in liquid culture at multiple different temperatures. The experiment is conducted in 96 well plates with a fixed initial innoculation of fungal spores in each well, and the plate placed in a constant temperature incubator. Each day, 8 wells per plate are observed and the optical density (OD) is measured. We will focus on a single temperature trial across mulitple plates with OD as the response.</p>
+<p>We will fit a logistic model to these growth data.</p>
+<p>Let’s have a look at the data first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/lb_ab_temps.csv&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A data.frame: 6 × 10</caption>
+<thead>
+	<tr><th></th><th scope=col>X</th><th scope=col>EXP</th><th scope=col>TEMP</th><th scope=col>DAY</th><th scope=col>ISOLATE</th><th scope=col>PLATE</th><th scope=col>WELL</th><th scope=col>OD</th><th scope=col>NC_AVG</th><th scope=col>OD_SUB</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>1</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>1</td><td>0.120</td><td>0.1195</td><td>0.0005</td></tr>
+	<tr><th scope=row>2</th><td>2</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>2</td><td>0.120</td><td>0.1195</td><td>0.0005</td></tr>
+	<tr><th scope=row>3</th><td>3</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>3</td><td>0.122</td><td>0.1195</td><td>0.0025</td></tr>
+	<tr><th scope=row>4</th><td>4</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>4</td><td>0.123</td><td>0.1195</td><td>0.0035</td></tr>
+	<tr><th scope=row>5</th><td>5</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>5</td><td>0.125</td><td>0.1195</td><td>0.0055</td></tr>
+	<tr><th scope=row>6</th><td>6</td><td>2</td><td>5</td><td>1</td><td>LB_AB</td><td>P.16</td><td>6</td><td>0.125</td><td>0.1195</td><td>0.0055</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>We are only interested in a subset of these data, so we will subset out only those from experiment 2, and a temperature of 12<span class="math notranslate nohighlight">\(^\circ\)</span>C.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span> <span class="o">&lt;-</span> <span class="n">dat</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">EXP</span><span class="o">==</span><span class="m">2</span><span class="p">),</span><span class="m">2</span><span class="o">:</span><span class="m">8</span><span class="p">]</span>
+<span class="n">d2</span> <span class="o">&lt;-</span> <span class="n">d2</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="n">d2</span><span class="o">$</span><span class="n">TEMP</span><span class="o">==</span><span class="m">12</span><span class="p">),]</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      EXP         TEMP         DAY          ISOLATE             PLATE          
+ Min.   :2   Min.   :12   Min.   : 1.00   Length:730         Length:730        
+ 1st Qu.:2   1st Qu.:12   1st Qu.: 9.00   Class :character   Class :character  
+ Median :2   Median :12   Median :19.00   Mode  :character   Mode  :character  
+ Mean   :2   Mean   :12   Mean   :19.04                                        
+ 3rd Qu.:2   3rd Qu.:12   3rd Qu.:29.00                                        
+ Max.   :2   Max.   :12   Max.   :39.00                                        
+      WELL             OD        
+ Min.   :1.000   Min.   :0.0930  
+ 1st Qu.:2.000   1st Qu.:0.1630  
+ Median :4.000   Median :0.2580  
+ Mean   :4.315   Mean   :0.2437  
+ 3rd Qu.:6.000   3rd Qu.:0.3170  
+ Max.   :8.000   Max.   :0.4600  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now plot it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Temps</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="n">d2</span><span class="o">$</span><span class="n">DAY</span><span class="p">)</span><span class="m">-1</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+<span class="n">mycol</span> <span class="o">&lt;-</span> <span class="m">1</span> 
+<span class="n">my.ylim</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="n">my.title</span> <span class="o">&lt;-</span> <span class="s">&quot;LB-AB isolate, T=12C&quot;</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">d2</span><span class="o">$</span><span class="n">DAY</span><span class="m">-1</span><span class="p">,</span> <span class="n">d2</span><span class="o">$</span><span class="n">OD</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="n">Temps</span><span class="p">)),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">my.ylim</span><span class="p">,</span>
+ <span class="n">pch</span><span class="o">=</span><span class="p">(</span><span class="n">mycol</span><span class="m">+20</span><span class="p">),</span>
+ <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;time (days)&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+ <span class="n">main</span><span class="o">=</span><span class="n">my.title</span><span class="p">,</span>
+ <span class="n">col</span><span class="o">=</span><span class="n">mycol</span><span class="m">+1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22-ModelFitting-Bayesian_86_0.png" src="../_images/22-ModelFitting-Bayesian_86_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specifying-the-growth-curve">
+<h3>Specifying the growth curve<a class="headerlink" href="#specifying-the-growth-curve" title="Permalink to this headline">¶</a></h3>
+<p>Although logistic growth is often written as a differential equation, here we will work with the analytic solution of the model:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(t) = \frac{KY_0}{Y_0+(K-Y_0)\exp{(-rt)}}
+\]</div>
+<p>This gives the mean function that we want to fit. We will assume log-normal noise around this response, as the optical density is bounded to be greater than 0 and since we also have increasing variance over time (as the optical density increases).</p>
+</div>
+<div class="section" id="id2">
+<h3>The thermal response model file<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>JAGS needs the model written as a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.bug</span></code> file inside the working directory. You can either make the text file directly, or create it using the <code class="docutils literal notranslate"><span class="pre">sink()</span></code> function in your R script, as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sink</span><span class="p">(</span><span class="s">&quot;jags-logistic.bug&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;</span>
+<span class="s"> model {</span>
+<span class="s"> </span>
+<span class="s"> ## Likelihood</span>
+<span class="s"> for (i in 1:N) {</span>
+<span class="s">  Y[i] ~ dlnorm(log(mu[i]), tau)</span>
+<span class="s">  mu[i] &lt;- K * Y0/(Y0+(K-Y0) * exp(-r * t[i]))</span>
+<span class="s"> }</span>
+
+<span class="s"> ## Priors</span>
+<span class="s"> r~dexp(1000)</span>
+<span class="s"> K ~ dunif(0.01, 0.6)</span>
+<span class="s"> Y0 ~ dunif(0.09, 0.15)</span>
+<span class="s"> tau &lt;- 1/sigma^2</span>
+<span class="s"> sigma ~ dexp(0.1)</span>
+
+<span class="s"> } # close model</span>
+<span class="s"> &quot;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">sink</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  model {
+    
+    ## Likelihood
+    for (i in 1:N) {
+        Y[i] ~ dlnorm(log(mu[i]), tau)
+        mu[i] &lt;- K*Y0/(Y0+(K-Y0)*exp(-r*t[i]))
+    }
+
+    ## Priors
+    r~dexp(1000)
+    K ~ dunif(0.01, 0.6)
+    Y0 ~ dunif(0.09, 0.15)
+    tau&lt;-1/sigma^2
+    sigma ~ dexp(0.1)
+
+  } # close model
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the model file has two mandatory sections (the priors and the likelihood) and one optional section (derived quantiaties calculated from your fitted parameters).</p>
+<p>In the example below we will build the model function with the log-normal likelihood for the logistic growth function. Priors are a combination of uniform and exponential distributions. As with the normal distribution, jags uses <span class="math notranslate nohighlight">\(\tau\)</span> to parameterize the variance of the normal distribution (<span class="math notranslate nohighlight">\(\tau = 1/(\sigma^2)\)</span>). However it can be easier to specify the prior on sigma directly. In this example we will generate posterior samples of derived quantities outside of JAGS (so you can see what this is actually doing).</p>
+</div>
+<div class="section" id="additional-settings-for-jags">
+<h3>Additional settings for jags<a class="headerlink" href="#additional-settings-for-jags" title="Permalink to this headline">¶</a></h3>
+<p>Now for some additional settings/specifications for jags:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters to Estimate</span>
+<span class="n">parameters</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;Y0&#39;</span><span class="p">,</span> <span class="s">&#39;K&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;sigma&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial values for the parameters</span>
+<span class="n">inits</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(){</span><span class="nf">list</span><span class="p">(</span>
+ <span class="n">Y0</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span>
+ <span class="n">K</span> <span class="o">=</span> <span class="m">0.4</span><span class="p">,</span>
+ <span class="n">r</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span>
+ <span class="n">sigma</span> <span class="o">=</span> <span class="nf">rlnorm</span><span class="p">(</span><span class="m">1</span><span class="p">))}</span>
+
+<span class="c1"># MCMC Settings: number of posterior dist elements = [(ni - nb) / nt ] * nc</span>
+<span class="n">ni</span> <span class="o">&lt;-</span> <span class="m">6000</span> <span class="c1"># number of iterations in each chain</span>
+<span class="n">nb</span> <span class="o">&lt;-</span> <span class="m">1000</span> <span class="c1"># number of &#39;burn in&#39; iterations to discard</span>
+<span class="n">nt</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="c1"># thinning rate - jags saves every nt iterations in each chain</span>
+<span class="n">nc</span> <span class="o">&lt;-</span> <span class="m">5</span> <span class="c1"># number of chains</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fitting-the-model">
+<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this headline">¶</a></h3>
+<p>Now we can run jags:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pull out data columns as vectors</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">d2</span> <span class="c1"># this lets us reuse the same generic code: we only change this first line</span>
+<span class="n">Y</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">OD</span>
+<span class="n">N</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">DAY</span>
+
+<span class="c1"># Bundle all data in a list for JAGS</span>
+<span class="n">jag.data</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run JAGS</span>
+<span class="n">OD.12C</span> <span class="o">&lt;-</span> <span class="nf">jags</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">jag.data</span><span class="p">,</span> <span class="n">inits</span><span class="o">=</span><span class="n">inits</span><span class="p">,</span> <span class="n">parameters.to.save</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> 
+    <span class="n">model.file</span><span class="o">=</span><span class="s">&quot;jags-logistic.bug&quot;</span><span class="p">,</span> <span class="n">n.thin</span><span class="o">=</span><span class="n">nt</span><span class="p">,</span> <span class="n">n.chains</span><span class="o">=</span><span class="n">nc</span><span class="p">,</span> <span class="n">n.burnin</span><span class="o">=</span><span class="n">nb</span><span class="p">,</span> 
+    <span class="n">n.iter</span><span class="o">=</span><span class="n">ni</span><span class="p">,</span> <span class="n">DIC</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">working.directory</span><span class="o">=</span><span class="nf">getwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;Y&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;N&quot; in data”
+Warning message in jags.model(model.file, data = data, inits = init.values, n.chains = n.chains, :
+“Unused variable &quot;t&quot; in data”
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compiling model graph
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">jags</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">init</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span><span class="p">,</span> <span class="p">:</span> <span class="n">Nothing</span> <span class="n">to</span> <span class="nb">compile</span>
+
+
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">jags</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">jag</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">inits</span><span class="p">,</span> <span class="n">parameters</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">model</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;jags-logistic.bug&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">thin</span> <span class="o">=</span> <span class="n">nt</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">nc</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">n</span><span class="o">.</span><span class="n">burnin</span> <span class="o">=</span> <span class="n">nb</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="n">ni</span><span class="p">,</span> <span class="n">DIC</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> <span class="n">working</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">getwd</span><span class="p">())</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">jags</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">inits</span> <span class="o">=</span> <span class="n">init</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">chains</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">n</span><span class="o">.</span><span class="n">adapt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Change into “mcmc” type samples for visualization with <code class="docutils literal notranslate"><span class="pre">coda</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">OD.12C.mcmc</span> <span class="o">&lt;-</span> <span class="nf">as.mcmc</span><span class="p">(</span><span class="n">OD.12C</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="k">as</span><span class="o">.</span><span class="n">mcmc</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;OD.12C&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="k">as</span><span class="o">.</span><span class="n">mcmc</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="diagnostics">
+<h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h3>
+<p>As you did in the <a class="reference external" href="#Aedes-data-revisited-using-Bayesian-fitting">Traits bayesian fitting example</a>, there are a number of model diagnostics that we need to check. First we want to look at the chains and confirm that they look like “fuzzy caterpillars” – no linear/non-linear patterns across the chains, low auto-correlation, etc.</p>
+<p>First view the fitted parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">OD.12C</span><span class="o">$</span><span class="n">BUGSoutput</span><span class="o">$</span><span class="n">summary</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">envir</span><span class="p">,</span> <span class="n">enclos</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;OD.12C&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the chains using the coda package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">OD.12C.mcmc</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">h</span><span class="p">(</span><span class="n">simpleError</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">call</span><span class="p">)):</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">evaluating</span> <span class="n">the</span> <span class="n">argument</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">selecting</span> <span class="n">a</span> <span class="n">method</span> <span class="k">for</span> <span class="n">function</span> <span class="s1">&#39;plot&#39;</span><span class="p">:</span> <span class="nb">object</span> <span class="s1">&#39;OD.12C.mcmc&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">plot</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[,</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
+<span class="mi">2</span><span class="o">.</span> <span class="o">.</span><span class="n">handleSimpleError</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">cond</span><span class="p">)</span> 
+ <span class="o">.</span> <span class="o">.</span><span class="n">Internal</span><span class="p">(</span><span class="n">C_tryCatchHelper</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="mi">1</span><span class="n">L</span><span class="p">,</span> <span class="n">cond</span><span class="p">)),</span> <span class="s2">&quot;object &#39;OD.12C.mcmc&#39; not found&quot;</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">base</span><span class="p">::</span><span class="n">quote</span><span class="p">(</span><span class="n">plot</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[,</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])))</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">h</span><span class="p">(</span><span class="n">simpleError</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">call</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can examine the ACF of the chains as well, similarly to a time series:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">OD.12C.mcmc</span><span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">)</span> <span class="nf">acf</span><span class="p">(</span><span class="n">s1</span><span class="p">[,</span><span class="n">i</span><span class="p">],</span> <span class="n">lag.max</span><span class="o">=</span><span class="m">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]):</span> <span class="nb">object</span> <span class="s1">&#39;OD.12C.mcmc&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[[</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is still a bit of autocorrelation, but it isn’t too bad. The chain for <span class="math notranslate nohighlight">\(\sigma\)</span> is mixing best. We could reduce the autocorrelation even further by thinning the chain (i.e., change the <code class="docutils literal notranslate"><span class="pre">nt</span></code> parameter to 5 or 10).</p>
+<p>The last important diagnostic is to compare the prior and posterior distributions. Various packages in R have bespoke functions to do this. Here we use functions that we provide in the <code class="docutils literal notranslate"><span class="pre">mcmc_utils.R</span></code> file provided on the website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">&quot;../code/mcmc_utils.R&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in file(filename, &quot;r&quot;, encoding = encoding):
+“cannot open file &#39;../code/mcmc_utils.R&#39;: No such file or directory”
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span><span class="p">):</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">the</span> <span class="n">connection</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">source</span><span class="p">(</span><span class="s2">&quot;../code/mcmc_utils.R&quot;</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also can write a function to put the samples into a convenient format for visualizing, etc:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">samps</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nc</span><span class="p">){</span>
+ <span class="n">samps</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">OD.12C.mcmc</span><span class="p">[[</span><span class="n">i</span><span class="p">]]))</span>
+<span class="p">}</span>
+
+<span class="n">samps</span> <span class="o">&lt;-</span> <span class="n">samps</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[[</span><span class="n">i</span><span class="p">]]):</span> <span class="nb">object</span> <span class="s1">&#39;OD.12C.mcmc&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">rbind</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[[</span><span class="n">i</span><span class="p">]]))</span>
+<span class="mi">2</span><span class="o">.</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">OD</span><span class="o">.</span><span class="mi">12</span><span class="n">C</span><span class="o">.</span><span class="n">mcmc</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And also, we can building a list to hold all the information about the priors for each parameter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">priors</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">names</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Y0&quot;</span><span class="p">,</span> <span class="s">&quot;K&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">,</span><span class="s">&quot;sigma&quot;</span><span class="p">)</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">fun</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;uniform&quot;</span><span class="p">,</span> <span class="s">&quot;uniform&quot;</span><span class="p">,</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span><span class="s">&quot;exp&quot;</span><span class="p">)</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">hyper</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">hyper</span><span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.09</span><span class="p">,</span> <span class="m">0.15</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">hyper</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span> <span class="m">0.6</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+<span class="n">priors</span><span class="o">$</span><span class="n">hyper</span><span class="p">[,</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span> 
+<span class="n">priors</span><span class="o">$</span><span class="n">hyper</span><span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can plot the histograms of the posterior samples together with the prior distributions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot.hists</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="n">my.par</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">n.hists</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">priors</span><span class="o">=</span><span class="n">priors</span><span class="p">,</span> <span class="n">mai</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0.25</span><span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">hists</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="n">my</span><span class="o">.</span><span class="n">par</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">n</span><span class="o">.</span><span class="n">hists</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">priors</span> <span class="o">=</span> <span class="n">priors</span><span class="p">,</span> <span class="p">:</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">function</span> <span class="s2">&quot;plot.hists&quot;</span>
+<span class="ne">Traceback</span>:
+</pre></div>
+</div>
+</div>
+</div>
+<p>The prior distribution here is very different from the posterior. These data are highly informative for the parameters of interest and are very unlikely to be influenced much by the prior distribution (although you can always change the priors to check this). However, notice that <span class="math notranslate nohighlight">\(Y_0\)</span> (the initial condition) is truncated by the prior. This is a fairly strong prior, because we know something about the initial optical density that is typical for the esperimental set up with the density of innoculum used and with a properly calibrated set-up.</p>
+</div>
+<div class="section" id="visualizing-the-joint-posterior-of-parameters">
+<h3>Visualizing the joint posterior of parameters<a class="headerlink" href="#visualizing-the-joint-posterior-of-parameters" title="Permalink to this headline">¶</a></h3>
+<p>It’s often useful to also look at the joint distbution of all of your parameters together. Of course, if you have a high dimensional posterior, rendering a 2-D representation can be difficult. Instead, the standard is to examine the pair-wise posterior distribution, for instance as follows (using the <code class="docutils literal notranslate"><span class="pre">s1</span></code> data frame we created above):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ipairs</span><span class="p">(</span><span class="n">s1</span><span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">],</span> <span class="n">ztransf</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span><span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">&lt;</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="p">;</span> <span class="nf">log2</span><span class="p">(</span><span class="n">x</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="ow">is</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;s1&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">ipairs</span><span class="p">(</span><span class="n">s1</span><span class="p">[,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">ztransf</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+ <span class="o">.</span>     <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+ <span class="o">.</span>     <span class="n">log2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+ <span class="o">.</span> <span class="p">})</span>
+<span class="mi">2</span><span class="o">.</span> <span class="ow">is</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, estimates of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are highly correlated – not surprising given the interplay between them in the logistic growth function. This correlation is an important feature of the system, and we use the full posterior distribution that includes this correlation when we want to build the corresponding posterior distribution of the behavior of the logistic function.</p>
+</div>
+<div class="section" id="the-posterior-distribution-of-the-mean-function">
+<h3>The posterior distribution of the mean function<a class="headerlink" href="#the-posterior-distribution-of-the-mean-function" title="Permalink to this headline">¶</a></h3>
+<p>The final step is to check how well we are fitting the data. To do this we usually examine the posterior distribution of the mean function of our system, in this case the distribution of the logistic solution and compare this to the data. To do this, for each of our posterior samples (or a thinned subset), we plug the parameters for the <span class="math notranslate nohighlight">\(i^{\mathrm th}\)</span> sample <span class="math notranslate nohighlight">\(\theta_i\)</span> into our function of interest, and evaluate the function as a desired set of <span class="math notranslate nohighlight">\(x\)</span>’s. For instance, for logistic growth, we’ll evaluate
+$<span class="math notranslate nohighlight">\(
+\mu(t) = \frac{K_iY_{0,i}}{Y_{0,i}+(K_i-Y_{0,i})\exp{(-r_it)}}
+\)</span><span class="math notranslate nohighlight">\(
+for the \)</span>i^{\mathrm th}<span class="math notranslate nohighlight">\( set of parameters for a sequence of times, \)</span>t<span class="math notranslate nohighlight">\(. This we obtain points describing the curve \)</span>\mu_i(t)$ for each set of parameters. Here is one way to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">my.logistic</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">r</span><span class="p">){</span>
+ <span class="nf">return</span><span class="p">(</span><span class="n">K</span> <span class="o">*</span> <span class="n">Y0</span><span class="o">/</span><span class="p">(</span><span class="n">Y0</span><span class="o">+</span><span class="p">(</span><span class="n">K</span><span class="o">-</span><span class="n">Y0</span><span class="p">)</span> <span class="o">*</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">t</span><span class="p">)))</span>
+<span class="p">}</span>
+
+<span class="n">ts</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">40</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+<span class="n">ss</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">dim</span><span class="p">(</span><span class="n">samps</span><span class="p">)[</span><span class="m">1</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+<span class="n">my.curves</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">ss</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">ss</span><span class="p">)){</span>
+ <span class="n">my.curves</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span> <span class="o">&lt;-</span> <span class="nf">my.logistic</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">Y0</span><span class="o">=</span><span class="n">samps</span><span class="o">$</span><span class="n">Y0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">K</span><span class="o">=</span><span class="n">samps</span><span class="o">$</span><span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="n">samps</span><span class="o">$</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">(</span><span class="n">samps</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">by</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span> <span class="s1">&#39;to&#39;</span> <span class="n">must</span> <span class="n">be</span> <span class="n">of</span> <span class="n">length</span> <span class="mi">1</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">(</span><span class="n">samps</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">by</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">seq</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">(</span><span class="n">samps</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">by</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;&#39;to&#39; must be of length 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now plot all of these curves:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">my.curves</span><span class="p">[</span><span class="m">1</span><span class="p">,],</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.09</span><span class="p">,</span> <span class="m">0.36</span><span class="p">),</span> 
+  <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;predicted OD&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;time (days)&quot;</span><span class="p">)</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span> <span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">my.curves</span><span class="p">[</span><span class="n">i</span><span class="p">,],</span> <span class="n">col</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">h</span><span class="p">(</span><span class="n">simpleError</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">call</span><span class="p">)):</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">evaluating</span> <span class="n">the</span> <span class="n">argument</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">selecting</span> <span class="n">a</span> <span class="n">method</span> <span class="k">for</span> <span class="n">function</span> <span class="s1">&#39;plot&#39;</span><span class="p">:</span> <span class="nb">object</span> <span class="s1">&#39;my.curves&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">],</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="mf">0.36</span><span class="p">),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;predicted OD&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;time (days)&quot;</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="o">.</span><span class="n">handleSimpleError</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">cond</span><span class="p">)</span> 
+ <span class="o">.</span> <span class="o">.</span><span class="n">Internal</span><span class="p">(</span><span class="n">C_tryCatchHelper</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="mi">1</span><span class="n">L</span><span class="p">,</span> <span class="n">cond</span><span class="p">)),</span> <span class="s2">&quot;object &#39;my.curves&#39; not found&quot;</span><span class="p">,</span> 
+ <span class="o">.</span>     <span class="n">base</span><span class="p">::</span><span class="n">quote</span><span class="p">(</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">],</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> 
+ <span class="o">.</span>         <span class="n">ylim</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;predicted OD&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;time (days)&quot;</span><span class="p">)))</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">h</span><span class="p">(</span><span class="n">simpleError</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">call</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can summarize this posterior using the <code class="docutils literal notranslate"><span class="pre">apply</span></code> function to find the mean and the (for simplicity) quantile based 95% CI:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">m.log</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">my.curves</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">l.log</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">my.curves</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">quantile</span><span class="p">,</span> <span class="n">probs</span><span class="o">=</span><span class="m">0.025</span><span class="p">)</span>
+<span class="n">u.log</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">my.curves</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">quantile</span><span class="p">,</span> <span class="n">probs</span><span class="o">=</span><span class="m">0.975</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">apply</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mean</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;my.curves&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">apply</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For comparison, here is how to find the 95% HPD Interval across time, using the <code class="docutils literal notranslate"><span class="pre">HPDinterval</span></code> function from the <code class="docutils literal notranslate"><span class="pre">coda</span></code> package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hpd.log</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">ts</span><span class="p">)){</span>
+ <span class="n">hpd.log</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">hpd.log</span><span class="p">,</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">HPDinterval</span><span class="p">(</span><span class="nf">mcmc</span><span class="p">(</span><span class="n">my.curves</span><span class="p">[,</span><span class="n">i</span><span class="p">]))))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[,</span> <span class="n">i</span><span class="p">]):</span> <span class="nb">object</span> <span class="s1">&#39;my.curves&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">cbind</span><span class="p">(</span><span class="n">hpd</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">HPDinterval</span><span class="p">(</span><span class="n">mcmc</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[,</span> <span class="n">i</span><span class="p">]))))</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">HPDinterval</span><span class="p">(</span><span class="n">mcmc</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[,</span> <span class="n">i</span><span class="p">]))</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">my</span><span class="o">.</span><span class="n">curves</span><span class="p">[,</span> <span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And plot these together with the data (in this case the HPD and quantile based intervals are indistinguishable):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">my.ylim</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.09</span><span class="p">,</span> <span class="m">0.45</span><span class="p">)</span>
+<span class="n">my.title</span> <span class="o">&lt;-</span> <span class="s">&quot;LB-AB isolate, T=12C&quot;</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">d2</span><span class="o">$</span><span class="n">DAY</span><span class="m">-1</span><span class="p">,</span> <span class="n">d2</span><span class="o">$</span><span class="n">OD</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="n">Temps</span><span class="p">)),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">my.ylim</span><span class="p">,</span>
+ <span class="n">pch</span><span class="o">=</span><span class="p">(</span><span class="n">mycol</span><span class="m">+20</span><span class="p">),</span>
+ <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;time (days)&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+ <span class="n">main</span><span class="o">=</span><span class="n">my.title</span><span class="p">,</span>
+ <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">m.log</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">l.log</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">u.log</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">hpd.log</span><span class="p">[</span><span class="m">1</span><span class="p">,],</span> <span class="n">col</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">hpd.log</span><span class="p">[</span><span class="m">2</span><span class="p">,],</span> <span class="n">col</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;m.log&#39;</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">lines</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">lines</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">plot</span><span class="o">.</span><span class="n">xy</span><span class="p">(</span><span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="mi">4</span><span class="o">.</span> <span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/22-ModelFitting-Bayesian_122_1.png" src="../_images/22-ModelFitting-Bayesian_122_1.png" />
+</div>
+</div>
+<p>Note that this only shows the uncertainty in the * mean function * – the assumed model with log normal noise says that the observations simply have this mean. The fit is attributing the majority of the observed noise to process error rather than parameter uncertainty.</p>
+</div>
+</div>
+<div class="section" id="readings-and-resources-a-id-readings-a">
+<h2>Readings and Resources <a id='Readings'></a><a class="headerlink" href="#readings-and-resources-a-id-readings-a" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bolker, B. Ecological models and data in R. (Princeton University Press, 2008).</p></li>
+<li><p>https://cran.r-project.org/web/packages/bayestestR/vignettes/bayestestR.html</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="21-ModelFitting-MLE.html" title="previous page">Model Fitting using Maximum Likelihood</a>
+    <a class='right-next' id="next-link" href="Appendix-JupyIntro.html" title="next page">Introduction to Jupyter</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

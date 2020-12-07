@@ -1,6 +1,6 @@
-library(repr); options(repr.plot.res = 100, repr.plot.width = 5, repr.plot.height = 5) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
+library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
 
-mammals <- read.csv('../data/MammalData.csv')
+mammals <- read.csv('../data/MammalData.csv', stringsAsFactors = T)
 str(mammals)
 
 summary(mammals)
@@ -57,6 +57,8 @@ summary(trophicLM)
 
 TukeyTroph <- TukeyHSD(aov(trophicLM))
 print(TukeyTroph)
+
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 5, repr.plot.height = 5) # Change plot size
 
 par(las=1, mar=c(4,10,3,1))
 # las= 1 turns labels horizontal

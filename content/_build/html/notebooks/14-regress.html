@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Analysis of variance" href="15-anova.html" />
-    <link rel="prev" title="\(t\) and \(F\) tests" href="13-t_F_tests.html" />
+    <link rel="prev" title="Basic hypothesis testing: \(t\) and \(F\) tests" href="13-t_F_tests.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -214,8 +215,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting.html">
-   Model Fitting in Ecology and Evolution
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
   </a>
  </li>
 </ul>
@@ -387,10 +398,39 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#center-small">
+  <a class="reference internal nav-link" href="#transformations-and-allometric-scaling">
+   Transformations and allometric scaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performing-the-regression-analysis">
+   Performing the Regression analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-fitted-regression-model">
+     Plotting the fitted Regression model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-diagnostics">
+   Model diagnostics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reporting-the-model">
+   Reporting the model
   </a>
  </li>
 </ul>
+
         </nav>
         
     </div>
@@ -404,21 +444,32 @@
 <h1>Linear Models: Regression<a class="headerlink" href="#linear-models-regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Linear regression analysis, that is, fitting a linear model of the regression variety is very often a good choice if both, your response (dependent) and your predictor (independent) variables are continuous.</p>
-<p>In this chapter, you will learn:</p>
+<p>Linear Regression is a class of <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_model">Linear Models</a> that is frequently a good choice if both, your response (dependent) and your predictor (independent) variables are continuous. In this Chapter you will learn:</p>
 <ul class="simple">
-<li><p>More R functions for plotting data and models to visualize your data</p></li>
-<li><p>To calculate correlation coefficients to explore your data</p></li>
-<li><p>To fit a linear regression model to data and test its significance</p></li>
-<li><p>To use diagnostic plots to assess whether the linear model is appropriate for your data</p></li>
+<li><p>To <em>explore</em> your data in order to determine whether a Linear Model is a good choice by</p>
+<ul>
+<li><p>Visualizing your data (in R)</p></li>
+<li><p>Calculating correlations between variables</p></li>
 </ul>
-<p>As with the previous chapters, we’ll start with creating a new blank script for you to fill in during the practical (the script file <code class="docutils literal notranslate"><span class="pre">regress.R</span></code> is also available from TheMulQuaBio). We’ll also be using the genome size data again, so:</p>
+</li>
+<li><p>To <em>fit</em> a Linear Regression Model to data</p></li>
+<li><p>To determine whether the Model fits adequately your data (its “significance”) by</p>
+<ul>
+<li><p>Plotting the data and the fitted Model together</p></li>
+<li><p>Calculating goodness of fit measures and statistics</p></li>
+<li><p>Using diagnostic plots</p></li>
+</ul>
+</li>
+</ul>
+<p>It is expected that you have already been introduced to, or are familiar with the concepts (and/or theory) underlying Linear Models. If not, you may want to see the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/LinearModels">Linear Models lecture</a> (you can also watch the <a class="reference external" href="https://drive.google.com/drive/folders/12Sj56wHX6vcAnp9GE9qQ1gIXbn7QRHU2?usp=sharing">video</a>).</p>
+<p>As with the previous chapters, we’ll start with creating a new blank script for you to fill in during the practical (the script file <code class="docutils literal notranslate"><span class="pre">regress.R</span></code> is also available from <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/code">TheMulQuaBio repository</a>).</p>
+<p>We will use the genome size data (from the <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">previous chapter</span></a>) again. So,</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open R and <code class="docutils literal notranslate"><span class="pre">setwd</span></code> to your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">Regression.R</span></code> and add some introductory comments.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Add code to your script to load the genome size data into R and check it:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add code to your script to load the genome size data into R and check it (again, using the relative path prefix <code class="docutils literal notranslate"><span class="pre">../</span></code>, assuming that you working directory is <code class="docutils literal notranslate"><span class="pre">code</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">,</span><span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> 
 
 <span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
@@ -426,14 +477,18 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th scope=col>Suborder</th><th scope=col>Family</th><th scope=col>Species</th><th scope=col>GenomeSize</th><th scope=col>GenomeSE</th><th scope=col>GenomeN</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>HeadLength</th><th scope=col>ThoraxLength</th><th scope=col>AdbdomenLength</th><th scope=col>ForewingLength</th><th scope=col>HindwingLength</th><th scope=col>ForewingArea</th><th scope=col>HindwingArea</th><th scope=col>MorphologyN</th></tr></thead>
+<caption>A data.frame: 6 × 16</caption>
+<thead>
+	<tr><th></th><th scope=col>Suborder</th><th scope=col>Family</th><th scope=col>Species</th><th scope=col>GenomeSize</th><th scope=col>GenomeSE</th><th scope=col>GenomeN</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>HeadLength</th><th scope=col>ThoraxLength</th><th scope=col>AdbdomenLength</th><th scope=col>ForewingLength</th><th scope=col>HindwingLength</th><th scope=col>ForewingArea</th><th scope=col>HindwingArea</th><th scope=col>MorphologyN</th></tr>
+	<tr><th></th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna canadensis   </td><td>2.20                </td><td>  NA                </td><td>1                   </td><td>0.159               </td><td>67.58               </td><td>6.83                </td><td>11.81               </td><td>48.94               </td><td>45.47               </td><td>45.40               </td><td>369.57              </td><td>483.61              </td><td>2                   </td></tr>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna constricta   </td><td>1.76                </td><td>0.06                </td><td>4                   </td><td>0.228               </td><td>71.97               </td><td>6.84                </td><td>10.72               </td><td>54.41               </td><td>46.00               </td><td>45.48               </td><td>411.15              </td><td>517.38              </td><td>3                   </td></tr>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna eremita      </td><td>1.85                </td><td>  NA                </td><td>1                   </td><td>0.312               </td><td>78.80               </td><td>6.27                </td><td>16.19               </td><td>56.33               </td><td>51.24               </td><td>49.47               </td><td>460.72              </td><td>574.33              </td><td>1                   </td></tr>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna tuberculifera</td><td>1.78                </td><td>0.10                </td><td>2                   </td><td>0.218               </td><td>72.44               </td><td>6.62                </td><td>12.53               </td><td>53.29               </td><td>49.84               </td><td>48.82               </td><td>468.74              </td><td>591.42              </td><td>2                   </td></tr>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna umbrosa      </td><td>2.00                </td><td>  NA                </td><td>1                   </td><td>0.207               </td><td>73.05               </td><td>4.92                </td><td>11.11               </td><td>57.03               </td><td>46.51               </td><td>45.97               </td><td>382.48              </td><td>481.44              </td><td>1                   </td></tr>
-	<tr><td>Anisoptera          </td><td>Aeshnidae           </td><td>Aeshna verticalis   </td><td>1.59                </td><td>  NA                </td><td>1                   </td><td>0.220               </td><td>66.25               </td><td>6.48                </td><td>11.64               </td><td>48.13               </td><td>45.91               </td><td>44.91               </td><td>400.40              </td><td>486.97              </td><td>1                   </td></tr>
+	<tr><th scope=row>1</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna canadensis   </td><td>2.20</td><td>  NA</td><td>1</td><td>0.159</td><td>67.58</td><td>6.83</td><td>11.81</td><td>48.94</td><td>45.47</td><td>45.40</td><td>369.57</td><td>483.61</td><td>2</td></tr>
+	<tr><th scope=row>2</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna constricta   </td><td>1.76</td><td>0.06</td><td>4</td><td>0.228</td><td>71.97</td><td>6.84</td><td>10.72</td><td>54.41</td><td>46.00</td><td>45.48</td><td>411.15</td><td>517.38</td><td>3</td></tr>
+	<tr><th scope=row>3</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna eremita      </td><td>1.85</td><td>  NA</td><td>1</td><td>0.312</td><td>78.80</td><td>6.27</td><td>16.19</td><td>56.33</td><td>51.24</td><td>49.47</td><td>460.72</td><td>574.33</td><td>1</td></tr>
+	<tr><th scope=row>4</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna tuberculifera</td><td>1.78</td><td>0.10</td><td>2</td><td>0.218</td><td>72.44</td><td>6.62</td><td>12.53</td><td>53.29</td><td>49.84</td><td>48.82</td><td>468.74</td><td>591.42</td><td>2</td></tr>
+	<tr><th scope=row>5</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna umbrosa      </td><td>2.00</td><td>  NA</td><td>1</td><td>0.207</td><td>73.05</td><td>4.92</td><td>11.11</td><td>57.03</td><td>46.51</td><td>45.97</td><td>382.48</td><td>481.44</td><td>1</td></tr>
+	<tr><th scope=row>6</th><td>Anisoptera</td><td>Aeshnidae</td><td>Aeshna verticalis   </td><td>1.59</td><td>  NA</td><td>1</td><td>0.220</td><td>66.25</td><td>6.48</td><td>11.64</td><td>48.13</td><td>45.91</td><td>44.91</td><td>400.40</td><td>486.97</td><td>1</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -450,7 +505,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_5_0.png" src="../_images/14-regress_5_0.png" />
+<img alt="../_images/14-regress_6_0.png" src="../_images/14-regress_6_0.png" />
 </div>
 </div>
 <p>That’s messy! There are too many columns that we are plotting against each other, so its hard to get a meaningful picture (literally). So let’s try color-coding the scatterplot markers by suborder:</p>
@@ -461,7 +516,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_7_0.png" src="../_images/14-regress_7_0.png" />
+<img alt="../_images/14-regress_8_0.png" src="../_images/14-regress_8_0.png" />
 </div>
 </div>
 <p>The result is still too messy! There are far too many variables in <code class="docutils literal notranslate"><span class="pre">genome</span></code> for this to be useful. Before we proceed further,</p>
@@ -477,9 +532,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th scope=col>A</th><th scope=col>B</th></tr></thead>
+<caption>A data.frame: 1 × 2</caption>
+<thead>
+	<tr><th></th><th scope=col>A</th><th scope=col>B</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><td>a</td><td>1</td></tr>
+	<tr><th scope=row>1</th><td>a</td><td>1</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -491,13 +550,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><ol class=list-inline>
-	<li>1</li>
-	<li>2</li>
-	<li>3</li>
-	<li>4</li>
-	<li>5</li>
-</ol>
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
 </div></div>
 </div>
 <div class="cell docutils container">
@@ -507,7 +565,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">b</div></div>
+<div class="output text_html">'b'</div></div>
 </div>
 <p>Now let’s get resume the actual analysis. We will look at five key variables: genome size, body weight, total length, forewing length and forewing area. If you look at the output of <code class="docutils literal notranslate"><span class="pre">str(genome)</span></code>, you’ll see that these are in columns 4, 7, 8, 12 and 14. We can record the indices of these columns and use this to select the data in the pairs plot:</p>
 <div class="cell docutils container">
@@ -518,7 +576,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_13_0.png" src="../_images/14-regress_13_0.png" />
+<img alt="../_images/14-regress_15_0.png" src="../_images/14-regress_15_0.png" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add the code above to your script and run it.</p>
@@ -529,11 +587,10 @@
 <p>One way of summarising how strong the pair-wise relationships between these variables is to calculate a correlation coefficient. Pearson correlations look at the difference of each point from the mean of each variable (and since it uses means, it is a parametric statistic).</p>
 <p>It is calculated using the differences from the mean on each axis. The key calculation is — for each point – to get the product of the differences on each axis and add them up. If the points are mostly top left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then these products are mostly negative (<span class="math notranslate nohighlight">\(-xy\)</span>); if the points are mostly top right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then the products are mostly positive (<span class="math notranslate nohighlight">\(xy\)</span>).</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/corr.png" />
-<small> <br> Illustration of what the Pearson correlation coefficient means.</p>
-</div>
-<div class="section" id="center-small">
-<h2></center> </small><a class="headerlink" href="#center-small" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/corr.png"><img alt="Pearson's Correlation Coefficient" src="../_images/corr.png" style="width: 800px;" /></a>
+<p><small> <center> Illustration of what the Pearson correlation coefficient means.</p>
+</center> </small>
+<hr class="docutils" />
 <p>The plots above show three clear cases where all the values of <span class="math notranslate nohighlight">\(xy\)</span> are negative or positive or where both are present and sum to zero. The Pearson correlation coefficient simply scales these sums of <span class="math notranslate nohighlight">\(xy\)</span> to be between -1 (perfectly negatively correlated) and 1 (perfectly positively correlated) via zero (no correlation). Specifically, this correlation coefficient (<span class="math notranslate nohighlight">\(r\)</span>) is equal to the average product of the standardized values of the two variables (let’s call them <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[r_{xy}={\frac{\sum _{i=1}^{n}\left({\frac {x_{i}-{\bar {x}}}{s_{x}}}\right)\left({\frac {y_{i}-{\bar {y}}}{s_{y}}}\right)}{n-1}}\]</div>
@@ -556,7 +613,10 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>GenomeSize</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>ForewingLength</th><th scope=col>ForewingArea</th></tr></thead>
+<caption>A matrix: 5 × 5 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>GenomeSize</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>ForewingLength</th><th scope=col>ForewingArea</th></tr>
+</thead>
 <tbody>
 	<tr><th scope=row>GenomeSize</th><td>1.0000000</td><td>0.3430934</td><td>0.3407077</td><td>0.2544432</td><td>0.3107247</td></tr>
 	<tr><th scope=row>BodyWeight</th><td>0.3430934</td><td>1.0000000</td><td>0.9167995</td><td>0.8944228</td><td>0.9198821</td></tr>
@@ -670,7 +730,7 @@ variables listed above:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_26_0.png" src="../_images/14-regress_26_0.png" />
+<img alt="../_images/14-regress_28_0.png" src="../_images/14-regress_28_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -681,13 +741,16 @@ variables listed above:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>logGS</th><th scope=col>logBW</th><th scope=col>logTL</th><th scope=col>logFL</th><th scope=col>logFA</th></tr></thead>
+<caption>A matrix: 5 × 5 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>logGS</th><th scope=col>logBW</th><th scope=col>logTL</th><th scope=col>logFL</th><th scope=col>logFA</th></tr>
+</thead>
 <tbody>
-	<tr><th scope=row>logGS</th><td>1.00000000</td><td>0.08406293</td><td>0.2224443 </td><td>0.1150025 </td><td>0.06808306</td></tr>
-	<tr><th scope=row>logBW</th><td>0.08406293</td><td>1.00000000</td><td>0.8891899 </td><td>0.9456492 </td><td>0.94995683</td></tr>
-	<tr><th scope=row>logTL</th><td>0.22244431</td><td>0.88918989</td><td>1.0000000 </td><td>0.9157695 </td><td>0.86207098</td></tr>
-	<tr><th scope=row>logFL</th><td>0.11500250</td><td>0.94564919</td><td>0.9157695 </td><td>1.0000000 </td><td>0.97916470</td></tr>
-	<tr><th scope=row>logFA</th><td>0.06808306</td><td>0.94995683</td><td>0.8620710 </td><td>0.9791647 </td><td>1.00000000</td></tr>
+	<tr><th scope=row>logGS</th><td>1.00000000</td><td>0.08406293</td><td>0.2224443</td><td>0.1150025</td><td>0.06808306</td></tr>
+	<tr><th scope=row>logBW</th><td>0.08406293</td><td>1.00000000</td><td>0.8891899</td><td>0.9456492</td><td>0.94995683</td></tr>
+	<tr><th scope=row>logTL</th><td>0.22244431</td><td>0.88918989</td><td>1.0000000</td><td>0.9157695</td><td>0.86207098</td></tr>
+	<tr><th scope=row>logFL</th><td>0.11500250</td><td>0.94564919</td><td>0.9157695</td><td>1.0000000</td><td>0.97916470</td></tr>
+	<tr><th scope=row>logFA</th><td>0.06808306</td><td>0.94995683</td><td>0.8620710</td><td>0.9791647</td><td>1.00000000</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -695,7 +758,7 @@ variables listed above:</p>
 <p>The scatterplots show that logging the data has very successfully addressed curvature (non-linearity) due to allometric scaling between variables in the data.</p>
 </div>
 <div class="section" id="performing-the-regression-analysis">
-<h2>Performing the Regression analysis<a class="headerlink" href="#performing-the-regression-analysis" title="Permalink to this headline">¶</a></h2>
+<span id="regress-perform"></span><h2>Performing the Regression analysis<a class="headerlink" href="#performing-the-regression-analysis" title="Permalink to this headline">¶</a></h2>
 <p>We’ll now look at fitting the first linear model of this course, to explore whether log genome size explains log body weight. The first thing to do is to plot the data (as you did <a class="reference external" href="12-ExpDesign.ipynb#Explore-further-by-scatter-plotting-two-variables">previously</a>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -706,36 +769,19 @@ variables listed above:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><ol class=list-inline>
-	<li>'Suborder'</li>
-	<li>'Family'</li>
-	<li>'Species'</li>
-	<li>'GenomeSize'</li>
-	<li>'GenomeSE'</li>
-	<li>'GenomeN'</li>
-	<li>'BodyWeight'</li>
-	<li>'TotalLength'</li>
-	<li>'HeadLength'</li>
-	<li>'ThoraxLength'</li>
-	<li>'AdbdomenLength'</li>
-	<li>'ForewingLength'</li>
-	<li>'HindwingLength'</li>
-	<li>'ForewingArea'</li>
-	<li>'HindwingArea'</li>
-	<li>'MorphologyN'</li>
-	<li>'logGS'</li>
-	<li>'logBW'</li>
-	<li>'logTL'</li>
-	<li>'logFL'</li>
-	<li>'logFA'</li>
-</ol>
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Suborder'</li><li>'Family'</li><li>'Species'</li><li>'GenomeSize'</li><li>'GenomeSE'</li><li>'GenomeN'</li><li>'BodyWeight'</li><li>'TotalLength'</li><li>'HeadLength'</li><li>'ThoraxLength'</li><li>'AdbdomenLength'</li><li>'ForewingLength'</li><li>'HindwingLength'</li><li>'ForewingArea'</li><li>'HindwingArea'</li><li>'MorphologyN'</li><li>'logGS'</li><li>'logBW'</li><li>'logTL'</li><li>'logFL'</li><li>'logFA'</li></ol>
 </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">GenomeSize</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="c1">#Now plot again</span>
 <span class="n">col</span> <span class="o">=</span> <span class="n">myColours</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span>
-<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Body weight (mg)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">)</span>
+<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log(Body weight) (mg)&#39;</span><span class="p">)</span>
 
 <span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span> <span class="c1">#Add legend at top left corner</span>
        <span class="n">col</span><span class="o">=</span> <span class="n">myColours</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">)</span>
@@ -743,7 +789,7 @@ variables listed above:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_30_0.png" src="../_images/14-regress_30_0.png" />
+<img alt="../_images/14-regress_33_0.png" src="../_images/14-regress_33_0.png" />
 </div>
 </div>
 <p>It is clear that the two suborders have very different relationships: to begin with we will look at dragonflies (Anisoptera). We will calculate two linear models:</p>
@@ -819,18 +865,22 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<caption>A anova: 2 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><th scope=row>logGS</th><td> 1          </td><td> 8.52939    </td><td>8.5293897   </td><td>17.57907    </td><td>9.538946e-05</td></tr>
-	<tr><th scope=row>Residuals</th><td>58          </td><td>28.14168    </td><td>0.4852014   </td><td>      NA    </td><td>          NA</td></tr>
+	<tr><th scope=row>logGS</th><td> 1</td><td> 8.52939</td><td>8.5293897</td><td>17.57907</td><td>9.538946e-05</td></tr>
+	<tr><th scope=row>Residuals</th><td>58</td><td>28.14168</td><td>0.4852014</td><td>      NA</td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
 <p>This table is comparing the variation in log body weight explained by log genome size to the total variation in log body weight. We are interested in how much smaller the residuals are for the genome size model than the null model. Graphically, how much shorter are the red residuals than the blue residuals:</p>
 <hr class="docutils" />
-<p><img alt="image" src="../_images/regResid.png" />
-<small> <center>Comparison of the null and the regression models.</center></small></p>
+<a class="reference internal image-reference" href="../_images/regResid.png"><img alt="../_images/regResid.png" src="../_images/regResid.png" style="width: 500px;" /></a>
+<p><small><br> <center>Comparison of the null and the regression models.</center></small></p>
 <hr class="docutils" />
 <p>We can get the sums of the squares of these residuals from the two models using the function <code class="docutils literal notranslate"><span class="pre">resid</span></code>, and then square them and add them up:</p>
 <div class="cell docutils container">
@@ -883,7 +933,7 @@ Sq. This is used to test whether the explained variation is large or small.</p><
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myCol</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-
+<span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">);</span> <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.res</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">repr.plot.width</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">repr.plot.height</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span> <span class="c1"># change plot size</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">myCol</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&#39;log Genome Size (pg)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log Body Weight (g)&#39;</span><span class="p">)</span>
 
 <span class="nf">abline</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
@@ -891,17 +941,17 @@ Sq. This is used to test whether the explained variation is large or small.</p><
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_44_0.png" src="../_images/14-regress_44_0.png" />
+<img alt="../_images/14-regress_47_0.png" src="../_images/14-regress_47_0.png" />
 </div>
 </div>
 <p>Your final figure should look something like this:</p>
-<p><img alt="image" src="../_images/GenoRegModels.png" />
-<small> <center> Linear regression models fitted to the body weight vs. genome size to the Dragonfly (red) and Damselfly (blue) subsets of the data.</p>
+<a class="reference internal image-reference" href="../_images/GenoRegModels.png"><img alt="../_images/GenoRegModels.png" src="../_images/GenoRegModels.png" style="width: 300px;" /></a>
+<p><small> <center> Linear regression models fitted to the body weight vs. genome size to the Dragonfly (red) and Damselfly (blue) subsets of the data.</p>
 </center></small>
 </div>
 </div>
 <div class="section" id="model-diagnostics">
-<h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Permalink to this headline">¶</a></h2>
+<span id="regress-diagnostics"></span><h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our models, we need to check that they are appropriate for the data. For this, we will inspect “diagnostic plots”. Producing diagnostic plots is easy in R — if you <code class="docutils literal notranslate"><span class="pre">plot</span></code> the model object, then R produces a set of diagnostic plots!</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Try the following code (and include in the R script file):</p>
 <div class="cell docutils container">
@@ -912,7 +962,7 @@ Sq. This is used to test whether the explained variation is large or small.</p><
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_46_0.png" src="../_images/14-regress_46_0.png" />
+<img alt="../_images/14-regress_49_0.png" src="../_images/14-regress_49_0.png" />
 </div>
 </div>
 <p>These are the diagnostics for the <code class="docutils literal notranslate"><span class="pre">lm</span></code> fit to the Dragonfly data subset.</p>
@@ -925,7 +975,7 @@ Sq. This is used to test whether the explained variation is large or small.</p><
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_48_0.png" src="../_images/14-regress_48_0.png" />
+<img alt="../_images/14-regress_51_0.png" src="../_images/14-regress_51_0.png" />
 </div>
 </div>
 <p>The diagnostic plots are:</p>
@@ -935,8 +985,9 @@ Sq. This is used to test whether the explained variation is large or small.</p><
 <li><p><strong>Scale–Location</strong>: The x-axis on this plot is identical to the Residuals vs Fitted plot – these are the fitted values. The y-axis is the square root of the <em>standardized residuals</em>, which are residuals rescaled so that they have a mean of zero and a variance of one. As a result, all y-axis values are positive. Thus large residuals (both positive and negative) plot at the top, and small residuals plot at the bottom (so only their <em>scale</em> is retained). Thus, all of the numbered points (which will be the same in all plots) plot at the top here. The red line here shows the trend, just like the Residuals vs Fitted plot. The regression analysis has assumed homoscedasticity, that the variance in the residuals doesn’t change as a function of the predictor. If that assumption is correct, the red line should be relatively flat. It is not quite as flat as we would like, especially for the Dragonfly analysis.</p></li>
 <li><p><strong>Residuals vs Leverage</strong>: This plot shows the standardized residuals against leverage. “Leverage” is a measure of how much each data point influences the linear model’s coefficient estimates. Because the regression line must pass through the centroid (“pivot point”) of the data, points that lie far from the centroid have greater leverage, and their leverage increases if there are fewer points nearby. Here is an illustration:</p></li>
 </ul>
-<p><img alt="image" src="../_images/Leverage.png" />
-<small> <center> Leverage of data points on slope of a regression. The points further away from the centroid in the x-axis direction have more leverage, and
+<hr class="docutils" />
+<a class="reference internal image-reference" href="../_images/Leverage.png"><img alt="../_images/Leverage.png" src="../_images/Leverage.png" style="width: 250px;" /></a>
+<p><small> <center> Leverage of data points on slope of a regression. The points further away from the centroid in the x-axis direction have more leverage, and
 can therefore move the regression line up or down (dashed red lines)</p>
 </center> </small>
 <p>There are two key things to note about this plot:</p>
@@ -985,7 +1036,7 @@ slope: -1.14, se=0.35).</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="13-t_F_tests.html" title="previous page"><span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a>
+    <a class='left-prev' id="prev-link" href="13-t_F_tests.html" title="previous page">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a>
     <a class='right-next' id="next-link" href="15-anova.html" title="next page">Linear Models: Analysis of variance</a>
 
     </div>
