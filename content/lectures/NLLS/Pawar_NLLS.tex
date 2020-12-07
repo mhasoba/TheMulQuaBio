@@ -77,7 +77,7 @@
 \renewcommand{\>}{\end{column}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title[Least-squares model fitting]{\bf Fitting Mathematical Models to Biological Data using Non-Linear Least-Squares Minimization (NLLS)}
+\title[Non-linear Least-squares model fitting]{\bf Fitting Mathematical Models to Biological Data using Non-Linear Least-Squares (NLLS)}
 % \subtitle{ }
 \author[Samraat]{Samraat Pawar}
 % \institute{\it
@@ -106,24 +106,33 @@
 \begin{frame}{Outline}
 
 \begin{itemize}\itemsep16pt
-	\item Why Non-Linear Least Squares regression / fitting? 
+	\item Why NLLS? 
 	\item The NLLS fitting method 
-	\item NLLS in {\tt R}
-	\item Practicals overview
+	\item Practicals (in {\tt R}) overview
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+ 
+	\begin{center}\LARGE
+		\textsc{Why NLLS?}
+	\end{center}
+
+\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Linear models}
 
 	\begin{itemize}[<+->]\itemsep6pt
-	\item Which of these are Linear Models (fitted to data)? \\
+	% \item Which of these are Linear Models (fitted to data)? \\
+	\item These are {\it all} good {\it Linear Models} (really?!):\\
+	
 		\includegraphics[width=.9\textwidth]{Linear.pdf}
 
-	\item These are {\it all} good {\it Linear Models} (really?!)
-	\item The data can be modelled (aka "fitted to a mathematical model") as a {\it linear combination} of {\it variables} and {\it coefficients}
-	\item Easily fitted using {\it Ordinary Least Squares} (OLS) regression
+	\item The data can be modelled (aka ``a mathematical model fitted to them'') as a {\it linear combination} of {\it variables} and {\it coefficients}
+	\item Easily fitted using {\it Ordinary Least Squares} (OLS)
 	\item Linear models can {\it include curved responses} (e.g. Polynomial regression)
 \end{itemize}
 
@@ -151,20 +160,21 @@
 	\end{itemize} 	
 	\item What is {\it intrinsic linearity}? --- 
 	the equation of the model to be fitted should be {\it linear in the parameters} (the $\beta$'s)	
-	\item Are these models linear in their {\it parameters}?  
+	\item Some non-linear models:  
 	\begin{itemize}
+		\item $y_i = \beta_0 x_i^{\beta_1} + \varepsilon_i$
 		\item $y_i = \beta_0 + \beta_1 x_i^{\beta_2} + \varepsilon_i$
 		\item $y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i$
 		\item $y_i = \frac{\beta_0 x_i}{\beta_1 + x_i} + \varepsilon_i$
 	\end{itemize}
-	\pause NO: at least one parameter ($\beta$) is non-linear (e.g. $x_i^{\beta_2}$, $e^{\beta_2 x_i}$, etc.) 
+	\pause In all of these, at least one parameter (a $\beta$) is non-linear (e.g., $x_i^{\beta_2}$, $e^{\beta_2 x_i}$, etc.) 
 		
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why is intrinsic non-linearity a problem for mdoel fitting?}
+\begin{frame}{The Least-Squares Solution}
 
 {\bf Recall what the Least Squares method does:}
 
@@ -178,9 +188,9 @@
 		the model's $k+1$ parameters) 
 		
 		\item An example of $f(x_i,\boldsymbol\beta) + \varepsilon_i $ could be:
-		$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$
+		$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$ (linear regression)
 
-		\item The objective of any {\it least squares} method  is to find estimates of values of the parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared residuals ($r_i$) (AKA RSS):
+		\item The objective of any {\it least squares} method is to find estimates of values of the parameters ($\hat{\beta_j}$) that {\it minimize} the sum ($S$) of squared residuals ($r_i$) (AKA RSS):
 		
 		$$
 		\text{RSS} = S = \sum\nolimits_{i=1}^n{\left[ y_i - f(x_i,\boldsymbol\beta) 
@@ -192,9 +202,9 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{The Least-squares solution}
+\begin{frame}{The Least-Squares Solution}
 
-	\begin{itemize}[<+->] \itemsep10pt
+	\begin{itemize}[<+->] \itemsep20pt
 
 		\item The objective of any {\it least squares} method  is to find estimates of values of the parameters ($\hat{\beta_j}$) that minimize the sum ($S$) of squared residuals ($r_i$) (AKA RSS):
 		
@@ -203,7 +213,7 @@
 		\right]^2} = \sum\nolimits_{i=1}^n{r_i^2}
 		$$
 		
-		\item Let's picture this using a simple (OLS) example; fitting the model $y_1  = \beta_1 x_1  + {\color{red} \varepsilon_1 }$...
+		\item Let's picture this using a simple (OLS) example; fitting the model $y_i  = \beta_0 + \beta_1 x_i  +\varepsilon_i$...
 
 	\end{itemize}
 
@@ -221,7 +231,7 @@
 	\includepdf[pages=1-50]{Varying.pdf}
 	}	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{If the model is linear, the solution is easy using algebra}
+\begin{frame}{If the model is linear, the Least-Square solution is exact}
 	
 \begin{columns}[T]
 
@@ -230,7 +240,7 @@
 		
 	\column{0.5\textwidth}
 		\begin{align*}
-		  y_1  & = \beta_0 + \beta_1 x_1  + {\color{red} \varepsilon_1 }\\
+		  y_i  & = \beta_0 + \beta_1 x_i  + {\color{red} \varepsilon_i }\\
 		  \\
 		  9.50  &= 5 + 4 \times 1 + {\color{red} 0.50}\\
 		  11.00 &= 5 + 4 \times 2 - {\color{red} 2.00}\\
@@ -249,32 +259,144 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{What NLLS solves (and how)}
+\begin{frame}{Intrinsic non-linearity makes Least-Aquares model fitting difficult}
 
 \begin{itemize}[<+->]\itemsep10pt
 
-	\item In an {intrinsically non-linear model} such as 
-	$$y_i = \beta_0 e^{\beta_2 x_i} + \varepsilon_i ~,$$ 	
-	the nice trick of solving  $\mathbf{Y} = \mathbf{X \boldsymbol\beta  +
-	\boldsymbol\varepsilon}$ algebraically is impossible
-	
-	\item But we can use brute-force computation to find close-to-optimal least squares minimization:
-	
-	\begin{itemize}[<+->]\itemsep6pt
-		\item Choose starting (initial values for the parameters we want to estimate ( $\beta_j$'s)
-	
-		\item Then, adjust the parameters {\it iteratively} (using a specific ``algorithm'' that is better than searching {\it randomly}) such that the RSS is gradually decreased 
+	\item In an {intrinsically non-linear model} such as $y_i = \beta_0
+	e^{\beta_2 x_i} + \varepsilon_i$, the nice trick of solving  $\mathbf{Y} =
+	\mathbf{X \boldsymbol\beta  + \boldsymbol\varepsilon}$ {\it exactly} is
+	impossible	
 
-		\item Eventually, if it all goes well, a combination of
-	$\beta_j$'s that is {\it very close} to the desired solution (where the RSS is {\it approximately} minimized) can be found
-			
-	\end{itemize}
 \end{itemize}
+
+\pause 
+\begin{center}
+	\includegraphics[width=.9\textwidth]{graphics/RSS_min.pdf}
+\end{center}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{The NLLS optimization process}
+\begin{frame}{OK, fine, why would {\it I} ever need NLLS?}
+
+	\begin{itemize}[<+->]\itemsep10pt
+		\pause 
+		\item Many observations in biology are just {\it not} well-fitted by a linear model
+	
+		\item That is, the underlying biological phenomena/phenomenon are not 
+		well-described by a linear equation
+		
+		\item Examples:
+	
+		\begin{itemize}\itemsep2pt
+		
+			\item Michaelis-Menten biochemical (reaction) kinetics
+			
+			\item Allometric growth
+		
+			\item Responses of metabolic rates to changing temperature 
+	
+			\item Consumer-Resource (e.g., predator-prey) functional responses 
+			
+			\item Individual growth
+	
+			\item Population growth
+	
+			\item Time-series data (e.g., fitting a sinusoidal function)
+				
+		\end{itemize}
+	
+		\item \it Can you think of some examples? 
+	
+	\end{itemize}
+	
+\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Non-Linear Model Example: Temperature and metabolism}
+		  
+	\begin{columns}[c]
+	  \column{2.1in}
+	    \pause
+	      \includegraphics[width=\textwidth]{graphics/Photobacterium.pdf}
+	  \pause
+	  \column{2.7in}
+	    $B = B_0 \boxed {e^{-\frac{E}{kT}}}f(T,T_{pk},E_D)$\\
+	    \vspace{10pt}
+	    \raggedright{$T$ = temperature (K)\\
+	     $k$ = Boltzmann constant (eV K$^{-1}$)}\\
+	     $E$ = Activation energy (eV)\\
+	     $T_{pk}$ = Temperature of peak performance\\
+	     $E_D$ = Deactivation energy (eV)\\
+	    {\small (J H van’t Hoff 1884, S Arrhenius 1889)}
+	\end{columns}
+	 
+\end{frame}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% \begin{frame}{Example: Functional responses}
+	 
+	% \begin{columns}[c]
+	%   \column{2in}
+	%   \begin{center}
+	% 			   $f(x_R) = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$
+	% 	\scriptsize (Holling, 1959)
+	% 	\end{center}
+	%  \scriptsize
+	%  $x_R$ = Resource density (Mass / Area or Volume)\\
+	%  $a$ = Search rate (Area or Volume / Time )\\
+	%  $h$ = Handling time \\
+	%  $q$ = Shape parameter (dimensionless) 
+	%  \column{2.3in}
+	%       \includegraphics[width=\textwidth]{graphics/FR.pdf}
+	% \end{columns}
+	
+	% \vspace{10pt}
+	%  Note that: 
+	% \begin{itemize}
+	% \item NLLS fitting can yield $h < 0$, $q < 0$, or both 
+	% \item $h < 0$ is biologically impossible but indicates an upward curving response
+	% \item $q < 0$ is biologically unlikely as it indicates a decline in 
+	% search rate with resource density (but is useful as a measure of 
+	% deviation away from a type III response) 
+	% \end{itemize}
+	
+	% \end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+ 
+	\begin{center}\LARGE 
+		\textsc{The NLLS Fitting Method}
+	\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The NLLS method: Overview}
+
+	\begin{itemize}[<+->]\itemsep10pt
+			
+		\item OK, so we cannot find an exact, simple solution to the least-squares problem for non-linear models    
+		
+		\item But we can use a computer to find a {\it approximate but close-to-optimal} least-squares solution as follows:
+		
+		\begin{itemize}[<+->]\itemsep6pt
+			\item Choose starting (initial values for the parameters we want to estimate ( $\beta_j$'s)
+		
+			\item Then, adjust the parameters {\it iteratively} (using a specific ``algorithm'' that is better than searching {\it randomly}) such that the RSS is gradually decreased 
+	
+			\item Eventually, if it all goes well, a combination of
+		$\beta_j$'s that is {\it very close} to the desired solution (where the RSS is {\it approximately} minimized) can be found
+				
+		\end{itemize}
+	\end{itemize}
+	
+	\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The NLLS fitting / optimization process}
 
 	\begin{center}
 		\includegraphics[width=\textwidth]{graphics/RSS_min.pdf}
@@ -282,109 +404,10 @@
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{OK, fine, why would {\it I} ever need NLLS?}
-
-\begin{itemize}[<+->]\itemsep10pt
-	\pause 
-	\item Many observations in biology are just {\it not} well-fitted by a linear model
-
-	\item That is, the underlying biological phenomena/phenomenon are not 
-	well-described by a linear equation
-	
-	\item Examples:
-
-	\begin{itemize}\itemsep2pt
-	
-		\item Michaelis-Menten biochemical (reaction) kinetics
-		
-		\item Allometric growth
-	
-		\item Responses of metabolic rates to changing temperature 
-
-		\item Consumer-Resource (e.g., predator-prey) functional responses 
-		
-		\item Individual growth
-
-		\item Population growth
-
-		\item Time-series data (e.g., fitting a sinusoidal function)
-			
-	\end{itemize}
-
-	\item \it Can you think of some examples? 
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{Example: Temperature and metabolism}
-      
-% \begin{columns}[c]
-%   \column{2.1in}
-%     \pause
-%       \includegraphics[width=\textwidth]{graphics/Photobacterium.pdf}
-%   \pause
-%   \column{2.7in}
-%     $B = B_0 \boxed {e^{-\frac{E}{kT}}}f(T,T_{pk},E_D)$\\
-%     \vspace{10pt}
-%     \raggedright{$T$ = temperature (K)\\
-%      $k$ = Boltzmann constant (eV K$^{-1}$)}\\
-%      $E$ = Activation energy (eV)\\
-%      $T_{pk}$ = Temperature of peak performance\\
-%      $E_D$ = Deactivation energy (eV)\\
-%     {\small (J H van’t Hoff 1884, S Arrhenius 1889)}
-% \end{columns}
-
-% \begin{itemize}\setlength{\itemindent}{0em}
-%   \pause
-%   \item Surely there is more to thermal responses?
-%     \begin{itemize}\setlength{\itemindent}{-1em}
-%      \item Oxygen limitation
-%      \item Complexity of metabolic network
-%      \item Hormonal regulation
-%     \end{itemize}
-%     \pause
-%   \item \textit{What about {\it alternative models}?}\\
-
-% \end{itemize}
- 
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}{Example: Functional responses}
- 
-% \begin{columns}[c]
-%   \column{2in}
-%   \begin{center}
-% 			   $f(x_R) = \frac{{a x_R^{q + 1}}}{{1 + h a x_R^{q + 1}}}$
-% 	\scriptsize (Holling, 1959)
-% 	\end{center}
-%  \scriptsize
-%  $x_R$ = Resource density (Mass / Area or Volume)\\
-%  $a$ = Search rate (Area or Volume / Time )\\
-%  $h$ = Handling time \\
-%  $q$ = Shape parameter (dimensionless) 
-%  \column{2.3in}
-%       \includegraphics[width=\textwidth]{graphics/FR.pdf}
-% \end{columns}
-
-% \vspace{10pt}
-%  Note that: 
-% \begin{itemize}
-% \item NLLS fitting can yield $h < 0$, $q < 0$, or both 
-% \item $h < 0$ is biologically impossible but indicates an upward curving response
-% \item $q < 0$ is biologically unlikely as it indicates a decline in 
-% search rate with resource density (but is useful as a measure of 
-% deviation away from a type III response) 
-% \end{itemize}
-
-% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{NLLS fitting}
+\begin{frame}{The NLLS fitting / optimization process}
 
 The general procedure / algorithm is:
 
@@ -406,29 +429,19 @@ The general procedure / algorithm is:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{NLLS fitting}
+\begin{frame}{NLLS fitting / optimization algorithms}
 
 The {\it tricky part --- adjust parameters to make curve come closer to 
 the data points} (step 4) --- has two main algorithms that are generally used:
 
 \begin{itemize}[<+->]\itemsep10pt
 
-	\item The {\bf Gauss-Newton} algorithm is the default in the {\tt nls} 
-	package (part of the {\tt stats} base package) --- good in many 
-	cases, but doesn't work very well if the model is mathematically 
-	weird (the optimization landscape is difficult) and the starting 
-	values for parameters are far-off-optimal
+	\item The {\bf Gauss-Newton} algorithm is often used, but doesn't work very well if the model to be fitted is mathematically complicated (the parameter search ``landscape'' is difficult) and the {\it starting values} for parameters are far-off-optimal
 	
-	\item The {\bf Levenberg-Marquardt (LM)} algorithm switches switches between
+	\item The {\bf Levenberg-Marquardt} algorithm switches between
 	Gauss-Newton and ``gradient descent'' and is more robust against starting
-	values that are far-off-optimal 
+	values that are far-off-optimal and is more reliable in most scenarios.  
 	
-	\item the LM algorithm is available in {\tt R} through the the {\tt
-	minpack.lm} package {\small \url
-	{http://cran.r-project.org/web/packages/minpack.lm}}
-		
-	\item The command is {\tt nlsLM}
-
 \end{itemize}   
 
 \end{frame}
@@ -485,9 +498,53 @@ NLLS-regression has all the assumptions of OLS-regression:
 	\end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Practical: Michaelis-Menten biochemical kinetics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+ 
+	\begin{center}\LARGE 
+		\textsc{Practicals Overview}
+	\end{center}
 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{NLLS Fitting Practicals}
+	
+	\begin{itemize}[<+->]\itemsep16pt
+	
+		\item We will use {\tt R}
+		
+		\item For fitting simple non-linear models, the {\tt nls} function in R is sufficient 
+			\begin{itemize}
+				\item It uses the {\bf Gauss-Newton} algorithm by default
+				\item The command is {\tt nls()}
+				\item It is part of the {\tt stats} base package (so no extra installation and loading of package necessary)
+			\end{itemize} 
+			 
+		\item For fitting complex non-linear models the {\bf Levenberg-Marquardt
+		(LM)} algorithm is better
+
+		\begin{itemize}
+			\item The command is {\tt nlsLM()}
+			\item It is available through the the {\tt minpack.lm} package {\small \url{http://cran.r-project.org/web/packages/minpack.lm}}
+			\item It offers additional features like the ability to ``bound'' parameters to realistic values
+		\end{itemize} 
+
+	\end{itemize}   
+	
+	\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{NLLS Fitting Practicals}
+
+\begin{itemize}\itemsep10pt
+
+	\item We will start with NLLS fitting of the Michaelis-Menten model of biochemical reaction kinetics:
+
+\end{itemize}
+	
 \begin{columns}[c]
 	\column{.6\textwidth}
 	\begin{center}
@@ -509,9 +566,9 @@ NLLS-regression has all the assumptions of OLS-regression:
 \vspace{10pt}
 \begin{itemize}\itemsep10pt
 
-	\item You will use NLLS fitting to obtain estimates of $V_{\max}$ and $K_H$
+	\item You will use NLLS fitting to obtain estimates of $V_{\max}$ and $K_M$
 
-	\item Note that $V_{\max} \le 0 $ and $K_H \le 0$ are physically impossible (useful fir picking starting values)
+	\item Note that $V_{\max} \le 0 $ and $K_M \le 0$ are physically impossible (useful fir picking starting values)
 
 \end{itemize}
 
