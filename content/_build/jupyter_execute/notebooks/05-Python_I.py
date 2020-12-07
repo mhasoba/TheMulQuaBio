@@ -1159,6 +1159,46 @@ for i in range(2, 10, 2): # skip odd numbers
 # 
 # Note the `b` flag for reading a file, which stands for "binary". Basically, binary files are machine readable, but not human readable. For example, try opening `testp.p` in a text reader (e.g., your code editor)  and reading it - you will see considerable gibberish (compare with `testout.txt`)!
 
+# ### Safely opening files using `with open()`
+# Whilst `open()` and `close()` are useful to remember, it can be *very* problematic if `f.close()` is missed.
+# 
+# Luckily python has your back here. By using the `with` command, you can make sure that no matter what, the file is closed after you have finished working with it.
+# 
+# `with` is typically used in the following manner:
+# 
+# ```python
+# with open("../path/to/file.txt", "r") as myfile:
+#     # do things to myfile
+#     ...
+#     
+# ```
+# 
+# Note that running `myfile.close()` here is not necessary as the file is closed once you drop out of the with block.
+# 
+# Here's an example of `basic_io1.py` rewritten using the `with` statement.
+# 
+# ```python
+# #############################
+# # FILE INPUT
+# #############################
+# # Open a file for reading
+# with open('../sandbox/test.txt', 'r') as f:
+#     # use "implicit" for loop:
+#     # if the object is a file, python will cycle over lines
+#     for line in f:
+#         print(line)
+# 
+# # Once you drop out of the with, the file is automatically closed
+# 
+# # Same example, skip blank lines
+# with open('../sandbox/test.txt', 'r') as f:
+#     for line in f:
+#         if len(line.strip()) > 0:
+#             print(line)
+# ```
+# 
+# **The rest of this session will use the `with` method of opening files.**
+
 # ### Handling `csv`'s
 # 
 # The `csv` package makes it easy to manipulate CSV files. Let's try it.
@@ -1170,29 +1210,25 @@ for i in range(2, 10, 2): # skip odd numbers
 # 
 # # Read a file containing:
 # # 'Species','Infraorder','Family','Distribution','Body mass male (Kg)'
-# f = open('../data/testcsv.csv','r')
+# with open('../data/testcsv.csv','r') as f:
 # 
-# csvread = csv.reader(f)
-# temp = []
-# for row in csvread:
-#     temp.append(tuple(row))
-#     print(row)
-#     print("The species is", row[0])
-# 
-# f.close()
+#     csvread = csv.reader(f)
+#     temp = []
+#     for row in csvread:
+#         temp.append(tuple(row))
+#         print(row)
+#         print("The species is", row[0])
 # 
 # # write a file containing only species name and Body mass
-# f = open('../data/testcsv.csv','r')
-# g = open('../data/bodymass.csv','w')
+# with open('../data/testcsv.csv','r') as f:
+#     with open('../data/bodymass.csv','w') as g:
 # 
-# csvread = csv.reader(f)
-# csvwrite = csv.writer(g)
-# for row in csvread:
-#     print(row)
-#     csvwrite.writerow([row[0], row[4]])
+#         csvread = csv.reader(f)
+#         csvwrite = csv.writer(g)
+#         for row in csvread:
+#             print(row)
+#             csvwrite.writerow([row[0], row[4]])
 # 
-# f.close()
-# g.close()
 # ```
 # 
 # $\star$ Run this script from bash, bash with ipython, and from within ipython, like you did above for the `basic_io*.py` scripts. 

@@ -393,9 +393,21 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#enzyme-kinetics">
-   Enzyme Kinetics
+  <a class="reference internal nav-link" href="#biochemical-kinetics">
+   Biochemical Kinetics
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-data">
+     Generating data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-the-model">
+     Fitting the model
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#confidence-intervals">
@@ -602,12 +614,12 @@
 <div class="section" id="traits-data-as-an-example">
 <h2>Traits data as an example<a class="headerlink" href="#traits-data-as-an-example" title="Permalink to this headline">¶</a></h2>
 <p>Our first set of examples will focus on traits.</p>
-<p>A trait is any measurable feature of an individual organism. This includes physical traits (e.g., morphology, body mass, wing length), performance traits (e.g., enzyme kinetics, respiration rate, body velocity, fecundity), and behavioral traits (e.g., feeding preference, foraging strategy, mate choice). All natural populations show variation in traits across individuals. A trait is functional when it directly (e.g., mortality rate) or indirectly (e.g., somatic development or growth rate) determines individual fitness. Therefore, variation in (functional) traits can generate variation in the rate of increase and persistence of populations. When measured in the context of life cycles, without considering interactions with other organisms (e.g., predators or prey of the focal population), functional traits are typically called life history traits (such as mortality rate and fecundity). Other traits determine interactions both within the focal population (e.g., intra-specific interference or mating frequency) and between the focal population/species and others, including the species which may act as resources (prey, for example). Thus both life history and interaction traits determine population fitness and therefore abundance, which ultimately influences dynamics and functioning of the wider ecosystem, such as carbon fixation rate or disease transmission rate.</p>
+<p>A trait is any measurable feature of an individual organism. This includes physical traits (e.g., morphology, body mass, wing length), performance traits (e.g., biochemical kinetics, respiration rate, body velocity, fecundity), and behavioral traits (e.g., feeding preference, foraging strategy, mate choice). All natural populations show variation in traits across individuals. A trait is functional when it directly (e.g., mortality rate) or indirectly (e.g., somatic development or growth rate) determines individual fitness. Therefore, variation in (functional) traits can generate variation in the rate of increase and persistence of populations. When measured in the context of life cycles, without considering interactions with other organisms (e.g., predators or prey of the focal population), functional traits are typically called life history traits (such as mortality rate and fecundity). Other traits determine interactions both within the focal population (e.g., intra-specific interference or mating frequency) and between the focal population/species and others, including the species which may act as resources (prey, for example). Thus both life history and interaction traits determine population fitness and therefore abundance, which ultimately influences dynamics and functioning of the wider ecosystem, such as carbon fixation rate or disease transmission rate.</p>
 </div>
-<div class="section" id="enzyme-kinetics">
-<h2>Enzyme Kinetics<a class="headerlink" href="#enzyme-kinetics" title="Permalink to this headline">¶</a></h2>
-<p>The properties of an organism’s biological enzymes are arguably its most fundamental “traits”, because enzyme kinetics drive all “performance” traits, from photosynthesis and respiration, to movement and growth rate.</p>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Michaelis%E2%80%93Menten_kinetics">Michaelis-Menten</a> model is widely used to quantify enzyme kinetics data and estimate key biochemical parameters. This model relates enzyme reaction rate (<span class="math notranslate nohighlight">\(V\)</span>) (rate of formation of the product of the reaction), to concentration of the substrate (<span class="math notranslate nohighlight">\(S\)</span>):</p>
+<div class="section" id="biochemical-kinetics">
+<h2>Biochemical Kinetics<a class="headerlink" href="#biochemical-kinetics" title="Permalink to this headline">¶</a></h2>
+<p>The properties of an organism’s metabolic pathways, and the underlying (enzyme-mediated) biochemical reactions (kinetics) are arguably its most fundamental “traits”, because these drive all “performance” traits, from photosynthesis and respiration, to movement and growth rate.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Michaelis%E2%80%93Menten_kinetics">Michaelis-Menten</a> model is widely used to quantify reaction kinetics data and estimate key biochemical parameters. This model relates biochemical reaction rate (<span class="math notranslate nohighlight">\(V\)</span>) (rate of formation of the product of the reaction), to concentration of the substrate (<span class="math notranslate nohighlight">\(S\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-m-m">
 <span class="eqno">(6)<a class="headerlink" href="#equation-eq-m-m" title="Permalink to this equation">¶</a></span>\[ 
 V = \frac{V_{\max} S}{K_M + S} 
@@ -617,21 +629,59 @@ V = \frac{V_{\max} S}{K_M + S}
 <li><p><span class="math notranslate nohighlight">\(V_{\max}\)</span> is the maximum rate that can be achieved in the reaction system, which happens at saturating substrate concentration, and</p></li>
 <li><p><span class="math notranslate nohighlight">\(K_M\)</span> is the Michaelis or half-saturation constant, defined as the substrate concentration at which the reaction rate is half of <span class="math notranslate nohighlight">\(V_{\max }\)</span>.</p></li>
 </ul>
-<p>Biochemical reactions involving a single substrate are often well fitted by the Michaelis-Menten kinetics, suggesting that its fundamental assumptions are often valid.</p>
+<p>Biochemical reactions involving a single substrate are often well fitted by the Michaelis-Menten kinetics, suggesting that its assumptions are often valid.</p>
 <a class="reference internal image-reference" href="../_images/MM.png"><img alt="Michaelis-Menten model" src="../_images/MM.png" style="width: 400px;" /></a>
 <p><small><center>The Michaelis-Menten model.</center></small></p>
-<p>Let’s fit the Michaelis-Menten model to some data. For this, we will actually <em>generate</em> “data” (you can also import and use your own dataset at the start of the fitting steps below) as follows:</p>
+<p>Let’s fit the Michaelis-Menten model to some data.</p>
+<div class="section" id="generating-data">
+<h3>Generating data<a class="headerlink" href="#generating-data" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using real experimental data, we will actually <em>generate</em> some “data” because that way we know exactly what the errors in the data are. You can also import and use your own dataset for the fitting steps further below.</p>
+<p>We can generate some data as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">1456</span><span class="p">)</span> <span class="c1"># to get the same random fluctuations in the &quot;data&quot; every time</span>
-
-<span class="n">S_data</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Generate a sequence of substrate concentrartions</span>
-
-<span class="n">V_data</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">20</span><span class="p">)</span><span class="o">*</span><span class="n">S_data</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">))</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">51</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># apply the Michaelis-Menten model, with some random fluctuations to emulate measurement or process error</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">S_data</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Generate a sequence of substrate concentrations</span>
+<span class="n">S_data</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li><li>31</li><li>32</li><li>33</li><li>34</li><li>35</li><li>36</li><li>37</li><li>38</li><li>39</li><li>40</li><li>41</li><li>42</li><li>43</li><li>44</li><li>45</li><li>46</li><li>47</li><li>48</li><li>49</li><li>50</li></ol>
+</div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">V_data</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="m">12.5</span> <span class="o">*</span> <span class="n">S_data</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">7.1</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">))</span> <span class="c1"># Generate a Michaelis-Menten response with V_max = 12.5 and K_M = 7.1</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">S_data</span><span class="p">,</span> <span class="n">V_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20-ModelFitting-NLLS_8_0.png" src="../_images/20-ModelFitting-NLLS_8_0.png" />
+</div>
+</div>
+<p>Note that our choice of <span class="math notranslate nohighlight">\(V_{\max} = 12.5\)</span> and <span class="math notranslate nohighlight">\(K_M = 7.1\)</span> is completely arbitrary. As long as we make sure that <span class="math notranslate nohighlight">\(V_{\max} &gt; 0\)</span>, <span class="math notranslate nohighlight">\(K_H &gt; 0\)</span>, and <span class="math notranslate nohighlight">\(K_M\)</span> lies well within the lower half of the the range of substrate concentrations (0-50), these “data” will be physically biologically sensible.</p>
+<p>Now let’s add some random (normally-distributed) fluctuations to the data to emulate experimental / measurement error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">1456</span><span class="p">)</span> <span class="c1"># To get the same random fluctuations in the &quot;data&quot; every time</span>
+<span class="n">V_data</span> <span class="o">&lt;-</span> <span class="n">V_data</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Add random fluctuations to emulate error with standard deviation of 0.5</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">S_data</span><span class="p">,</span> <span class="n">V_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20-ModelFitting-NLLS_10_0.png" src="../_images/20-ModelFitting-NLLS_10_0.png" />
+</div>
+</div>
+<p>That looks real!</p>
+</div>
+<div class="section" id="fitting-the-model">
+<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Now, fit the model to the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -651,7 +701,7 @@ Consider specifying &#39;start&#39; or using a selfStart model”
 <p>This warning arises because <code class="docutils literal notranslate"><span class="pre">nls</span></code> requires “starting values” for the parameters (two in this case: <code class="docutils literal notranslate"><span class="pre">V_max</span></code> and <code class="docutils literal notranslate"><span class="pre">K_M</span></code>) to start searching for optimal combinations of parameter values (ones that minimize the RSS). Indeed, all NLLS fitting functions / algorithms require this. If you do not provide starting values, <code class="docutils literal notranslate"><span class="pre">nls</span></code> gives you a warning (as above) and uses a starting value of 1 for every parameter by default. For simple models, despite the warning, this works well enough.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Before proceeding further, have a look at what <code class="docutils literal notranslate"><span class="pre">nls()</span></code>’s arguments are using <code class="docutils literal notranslate"><span class="pre">?nls</span></code>.</p>
+<p>Before proceeding further, have a look at what <code class="docutils literal notranslate"><span class="pre">nls()</span></code>’s arguments are using <code class="docutils literal notranslate"><span class="pre">?nls</span></code>, or looking at the documentation <a class="reference external" href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/nls">online</a>.</p>
 </div>
 <p>We will address the issue of starting values soon enough, but first let’s look at how good the fit that we obtained looks. The first thing to do is to see how well the model fitted the data, for which plotting is the best  first option:</p>
 <div class="cell docutils container">
@@ -662,7 +712,7 @@ Consider specifying &#39;start&#39; or using a selfStart model”
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_11_0.png" src="../_images/20-ModelFitting-NLLS_11_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_15_0.png" src="../_images/20-ModelFitting-NLLS_15_0.png" />
 </div>
 </div>
 <p>This looks pretty good.</p>
@@ -683,15 +733,15 @@ Consider specifying &#39;start&#39; or using a selfStart model”
 
 Parameters:
       Estimate Std. Error t value Pr(&gt;|t|)    
-V_max  13.6499     0.3768  36.230  &lt; 2e-16 ***
-K_M     5.5018     0.7164   7.679 5.93e-10 ***
+V_max  13.5041     0.5345  25.265  &lt; 2e-16 ***
+K_M     9.4085     1.3198   7.128 4.67e-09 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.9879 on 49 degrees of freedom
+Residual standard error: 1.001 on 48 degrees of freedom
 
 Number of iterations to convergence: 7 
-Achieved convergence tolerance: 3.286e-06
+Achieved convergence tolerance: 1.938e-06
 </pre></div>
 </div>
 </div>
@@ -699,7 +749,7 @@ Achieved convergence tolerance: 3.286e-06
 <p>This looks a lot like the output of a linear model, and to be specific, of a <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Linear Regression</span></a>. For starters, compare the above output with the output of <code class="docutils literal notranslate"><span class="pre">summary(genomeSizeModelDragon)</span></code> in <a class="reference internal" href="14-regress.html#regress-perform"><span class="std std-ref">this section</span></a> of the Linear Regression chapter.</p>
 <p>So here are the main things to note about the output of <code class="docutils literal notranslate"><span class="pre">summary()</span></code> of an <code class="docutils literal notranslate"><span class="pre">nls()</span></code> model object:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Estimate</span></code>s are, as in the output of the <code class="docutils literal notranslate"><span class="pre">lm()</span></code> function for fitting linear models, the estimated values of the coefficients of the model that you fitted (<span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_(\max)\)</span>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Estimate</span></code>s are, as in the output of the <code class="docutils literal notranslate"><span class="pre">lm()</span></code> function for fitting linear models, the estimated values of the coefficients of the model that you fitted (<span class="math notranslate nohighlight">\(V_(\max)\)</span> and <span class="math notranslate nohighlight">\(K_M\)</span>). Note that although we generated our data using <span class="math notranslate nohighlight">\(V_{\max} = 12.5\)</span> and <span class="math notranslate nohighlight">\(K_M = 7.1\)</span>, the actual coefficients are quite different from what we are getting with the NLLS fitting (<span class="math notranslate nohighlight">\(\hat{V_{\max} = 13.5\)</span> and <span class="math notranslate nohighlight">\(\hat{K}_M = 9.4\)</span>). This is because we introduced random (normally-distributed) errors. This tell you something about how experimental and/or measurement errors can distort your image of the underlying mechanism or process.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Std.</span> <span class="pre">Error</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">Pr(&gt;|t|)</span></code> and <code class="docutils literal notranslate"><span class="pre">Residual</span> <span class="pre">standard</span> <span class="pre">error</span></code> have the same interpretation as in the output of <code class="docutils literal notranslate"><span class="pre">lm()</span></code> (please look back at the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Linear Regression Chapter</span></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">iterations</span> <span class="pre">to</span> <span class="pre">convergence</span></code> tells you how many times the NLLS algorithm had to adjust the parameter values till it managed to find a solution that minimizes the Residual Sum of Squares (RSS)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Achieved</span> <span class="pre">convergence</span> <span class="pre">tolerance</span></code> tells you on what basis the algorithm decided that it was close enough to the a solution; basically if the RSS does not improve more than a certain threshold despite parameter adjustments, the algorithm stops searching. This may or may not be close to an optimal solution (but in this case it is).</p></li>
@@ -719,10 +769,11 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499136300192</dd><dt>K_M</dt><dd>5.50175446877439</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041180721635</dd><dt>K_M</dt><dd>9.40846157841925</dd></dl>
 </div></div>
 </div>
 <p>Thus, much of the output of NLLS fitting using <code class="docutils literal notranslate"><span class="pre">nls()</span></code> is analogous to the output of an <code class="docutils literal notranslate"><span class="pre">lm()</span></code>. However, further statistical inference here cannot be done using Analysis of Variance (ANOVA), because the model is not a Linear Model. Try <code class="docutils literal notranslate"><span class="pre">anova(MM_model)</span></code>, and see what happens. We will address statistical inference with NLLS model fitting further below (with a different example).</p>
+</div>
 </div>
 <div class="section" id="confidence-intervals">
 <h2>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this headline">¶</a></h2>
@@ -743,13 +794,14 @@ Achieved convergence tolerance: 3.286e-06
 	<tr><th></th><th scope=col>2.5%</th><th scope=col>97.5%</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>V_max</th><td>12.95129</td><td>14.440660</td></tr>
-	<tr><th scope=row>K_M</th><td> 4.24145</td><td> 7.063196</td></tr>
+	<tr><th scope=row>V_max</th><td>12.538677</td><td>14.66093</td></tr>
+	<tr><th scope=row>K_M</th><td> 7.124685</td><td>12.36158</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">Waiting</span> <span class="pre">for</span> <span class="pre">profiling</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">done...</span></code> message reflects the fact that calculating the standard errors from which the CI’s are calculated requires a particular computational procedure (which we will not go into here) when it comes to NLLS fits. Calculating confidence intervals can be useful because, as you learned <a class="reference internal" href="13-t_F_tests.html#t-f-tests-ci"><span class="std std-ref">here</span></a>, <a class="reference internal" href="13-t_F_tests.html#t-f-tests-ci2"><span class="std std-ref">here</span></a>, and <a class="reference internal" href="15-anova.html#anova-ci"><span class="std std-ref">here</span></a> (among other places) you can use a coefficient/parameter estimate’s confidence intervals to test whether it is significantly different from some reference value. In particular, the intervals should not include zero for the coefficient to be statistically significant in itself, that is, different from zero.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Waiting</span> <span class="pre">for</span> <span class="pre">profiling</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">done...</span></code> message reflects the fact that calculating the standard errors from which the CI’s are calculated requires a particular computational procedure (which we will not go into here) when it comes to NLLS fits. Calculating confidence intervals can be useful because, as you learned <a class="reference internal" href="13-t_F_tests.html#t-f-tests-ci"><span class="std std-ref">here</span></a>, <a class="reference internal" href="13-t_F_tests.html#t-f-tests-ci2"><span class="std std-ref">here</span></a>, and <a class="reference internal" href="15-anova.html#anova-ci"><span class="std std-ref">here</span></a> (among other places) you can use a coefficient/parameter estimate’s confidence intervals to test whether it is significantly different from some reference value. Note that the intervals for <code class="docutils literal notranslate"><span class="pre">K_M</span></code> do not include the original value of <span class="math notranslate nohighlight">\(K_M = 7.1\)</span> that we used to generate the data!.</p>
+<p>Also, the intervals should not include zero for the coefficient to be statistically significant in itself, that is, different from zero.</p>
 </div>
 <div class="section" id="r-squared-values">
 <h2>R-squared values<a class="headerlink" href="#r-squared-values" title="Permalink to this headline">¶</a></h2>
@@ -781,13 +833,13 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499136300192</dd><dt>K_M</dt><dd>5.50175446877439</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041180721635</dd><dt>K_M</dt><dd>9.40846157841925</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.64989193467</dd><dt>K_M</dt><dd>5.50170746159531</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041046181521</dd><dt>K_M</dt><dd>9.40842557733051</dd></dl>
 </div></div>
 </div>
 <p>Not too different, but not exactly the same!</p>
@@ -795,12 +847,12 @@ Achieved convergence tolerance: 3.286e-06
 <p>Now, let’s try even more different start values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model3</span> <span class="o">&lt;-</span> <span class="nf">nls</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model3</span> <span class="o">&lt;-</span> <span class="nf">nls</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="n">.</span><span class="m">01</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Compare the coefficients of this model fit to the previous ones:</p>
+<p>Compare the coefficients of this model fit to the two previous ones:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">coef</span><span class="p">(</span><span class="n">MM_model</span><span class="p">)</span>
@@ -815,22 +867,22 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499136300192</dd><dt>K_M</dt><dd>5.50175446877439</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041180721635</dd><dt>K_M</dt><dd>9.40846157841925</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.64989193467</dd><dt>K_M</dt><dd>5.50170746159531</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041046181521</dd><dt>K_M</dt><dd>9.40842557733051</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>7.24774417723045</dd><dt>K_M</dt><dd>-1.39233343449235</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>2.95615964317118</dd><dt>K_M</dt><dd>-3.47473176418547</dd></dl>
 </div></div>
 </div>
-<p>The estimates in our latest model fit are completely different (in fact, <code class="docutils literal notranslate"><span class="pre">K_M</span></code> is negative)! let’s plot this model’s and the first model’s fit together:</p>
+<p>The estimates in our latest model fit are completely different (in fact, <code class="docutils literal notranslate"><span class="pre">K_M</span></code> is negative)! Let’s plot this model’s and the first model’s fit together:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">S_data</span><span class="p">,</span><span class="n">V_data</span><span class="p">)</span>  <span class="c1"># first plot the data </span>
@@ -840,7 +892,7 @@ Achieved convergence tolerance: 3.286e-06
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_30_0.png" src="../_images/20-ModelFitting-NLLS_30_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_34_0.png" src="../_images/20-ModelFitting-NLLS_34_0.png" />
 </div>
 </div>
 <p>As you would have guessed from the really funky coefficient estimates that were obtained in <code class="docutils literal notranslate"><span class="pre">MM_model3</span></code>, this is a pretty poor model fit to the data, with the negative value of <code class="docutils literal notranslate"><span class="pre">K_M</span></code> causing the fitted version of the Michaelis-Menten model to behave strangely.</p>
@@ -888,11 +940,11 @@ Achieved convergence tolerance: 3.286e-06
 </div>
 </div>
 </div>
-<p>In both the above cases, the model fitting was able to start, but eventually failed because the starting values were too far from the (approximately) optimal values (<span class="math notranslate nohighlight">\(V_{\max} \approx 13.65, K_M \approx 5.50\)</span>).</p>
+<p>In both the above cases, the model fitting was able to start, but eventually failed because the starting values were too far from the (approximately) optimal values (<span class="math notranslate nohighlight">\(V_{\max} \approx 13.5, K_M \approx 9.4\)</span>).</p>
 <p>And what happens if we start really close to the optimal values? Let’s try:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model4</span> <span class="o">&lt;-</span> <span class="nf">nls</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">13.65</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">5.50</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model4</span> <span class="o">&lt;-</span> <span class="nf">nls</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">13.5</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">9.4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -910,16 +962,17 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499136300192</dd><dt>K_M</dt><dd>5.50175446877439</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041180721635</dd><dt>K_M</dt><dd>9.40846157841925</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499036693507</dd><dt>K_M</dt><dd>5.50173289391371</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041023449919</dd><dt>K_M</dt><dd>9.40841948575323</dd></dl>
 </div></div>
 </div>
 <p>The results of the first model fit and this last one are still not exactly the same! This drives home the point that NLLS is not an “exact” procedure. However, the differences between these two solutions are minuscule, so the main thing to take away is that if the starting values are reasonable, NLLS is <em>exact enough</em>.</p>
+<p>Note that and even if you started the NLLS fitting with the exact parameter values with which you generated the data before introducing errors (so use <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">=</span> <span class="pre">list(V_max</span> <span class="pre">=</span> <span class="pre">12.5,</span> <span class="pre">K_M</span> <span class="pre">=</span> <span class="pre">7.1)</span></code> above instead), you would still get the same result for the coefficients (try it). This is because the NLLS fitting will converge back to the parameter estimates based on the actual data, errors and all.</p>
 </div>
 <div class="section" id="a-more-robust-nlls-algorithm">
 <h2>A more robust NLLS algorithm<a class="headerlink" href="#a-more-robust-nlls-algorithm" title="Permalink to this headline">¶</a></h2>
@@ -941,7 +994,7 @@ Achieved convergence tolerance: 3.286e-06
 <p>Now let’s try it (using the same starting values as <code class="docutils literal notranslate"><span class="pre">MM_model2</span></code> above):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model6</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">2</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model5</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -950,7 +1003,7 @@ Achieved convergence tolerance: 3.286e-06
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">coef</span><span class="p">(</span><span class="n">MM_model2</span><span class="p">)</span>
-<span class="nf">coef</span><span class="p">(</span><span class="n">MM_model6</span><span class="p">)</span>
+<span class="nf">coef</span><span class="p">(</span><span class="n">MM_model5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -960,41 +1013,41 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.64989193467</dd><dt>K_M</dt><dd>5.50170746159531</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041046181521</dd><dt>K_M</dt><dd>9.40842557733051</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499078332294</dd><dt>K_M</dt><dd>5.50174191342269</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041160772665</dd><dt>K_M</dt><dd>9.40845624487389</dd></dl>
 </div></div>
 </div>
 <p>Close enough.</p>
 <p>Now, let’s try fitting the model using all those starting parameter combinations that failed previously:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model7</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model6</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model8</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model7</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model9</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model8</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model10</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">-0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model9</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">-0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1002,11 +1055,11 @@ Achieved convergence tolerance: 3.286e-06
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">coef</span><span class="p">(</span><span class="n">MM_model2</span><span class="p">)</span>
+<span class="nf">coef</span><span class="p">(</span><span class="n">MM_model5</span><span class="p">)</span>
 <span class="nf">coef</span><span class="p">(</span><span class="n">MM_model6</span><span class="p">)</span>
 <span class="nf">coef</span><span class="p">(</span><span class="n">MM_model7</span><span class="p">)</span>
 <span class="nf">coef</span><span class="p">(</span><span class="n">MM_model8</span><span class="p">)</span>
 <span class="nf">coef</span><span class="p">(</span><span class="n">MM_model9</span><span class="p">)</span>
-<span class="nf">coef</span><span class="p">(</span><span class="n">MM_model10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1016,41 +1069,41 @@ Achieved convergence tolerance: 3.286e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.64989193467</dd><dt>K_M</dt><dd>5.50170746159531</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041046181521</dd><dt>K_M</dt><dd>9.40842557733051</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499078332294</dd><dt>K_M</dt><dd>5.50174191342269</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041160772665</dd><dt>K_M</dt><dd>9.40845624487389</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499212897823</dd><dt>K_M</dt><dd>5.50177106542218</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041188982262</dd><dt>K_M</dt><dd>9.40846378596541</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499188015229</dd><dt>K_M</dt><dd>5.50176567867927</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>6.23550733765091</dd><dt>K_M</dt><dd>-1.39250725071091</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499071239632</dd><dt>K_M</dt><dd>5.50174037506541</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041256272009</dd><dt>K_M</dt><dd>9.40848179662403</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>13.6499076368102</dd><dt>K_M</dt><dd>5.50174148399631</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>13.5041149588841</dd><dt>K_M</dt><dd>9.40845325190657</dd></dl>
 </div></div>
 </div>
-<p>Nice, these all worked with <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> even though they had failed with <code class="docutils literal notranslate"><span class="pre">nls</span></code>!</p>
-<p>But <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code>also has its limits. Let’s try more absurd starting values:</p>
+<p>Nice, these all worked with <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> even though they had failed with <code class="docutils literal notranslate"><span class="pre">nls</span></code>! But one of them (model 7) still gives you poor values for the coefficients.</p>
+<p>But <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> also has its limits. Let’s try more absurd starting values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">-10</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">-10</span><span class="p">))</span>
@@ -1078,10 +1131,10 @@ Achieved convergence tolerance: 3.286e-06
 </div>
 <div class="section" id="bounding-parameter-values">
 <span id="modelfitting-nlls-bounding"></span><h2>Bounding parameter values<a class="headerlink" href="#bounding-parameter-values" title="Permalink to this headline">¶</a></h2>
-<p>You can also bound starting values…</p>
+<p>You can also bound the starting values, i.e., prevent them from exceeding some minimum and maximum value <em>during</em> the NLLS fitting process:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1090,10 +1143,10 @@ Achieved convergence tolerance: 3.286e-06
   model: V_data ~ V_max * S_data/(K_M + S_data)
    data: parent.frame()
  V_max    K_M 
-13.650  5.502 
- residual sum-of-squares: 47.82
+13.504  9.408 
+ residual sum-of-squares: 48.06
 
-Number of iterations to convergence: 8 
+Number of iterations to convergence: 9 
 Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
@@ -1101,7 +1154,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">-1</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">100</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.4</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">100</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1110,10 +1163,10 @@ Achieved convergence tolerance: 1.49e-08
   model: V_data ~ V_max * S_data/(K_M + S_data)
    data: parent.frame()
  V_max    K_M 
-13.650  5.502 
- residual sum-of-squares: 47.82
+13.504  9.408 
+ residual sum-of-squares: 48.06
 
-Number of iterations to convergence: 7 
+Number of iterations to convergence: 8 
 Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
@@ -1123,7 +1176,7 @@ Achieved convergence tolerance: 1.49e-08
 <p>However, if you bound the parameters too much (to excessively narrow ranges), the algorithm cannot search sufficient parameter space (combinations of parameters), and will fail to converge on a good solution. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span>  <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">-1</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">50</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span>  <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.4</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="m">20</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1132,20 +1185,16 @@ Achieved convergence tolerance: 1.49e-08
   model: V_data ~ V_max * S_data/(K_M + S_data)
    data: parent.frame()
 V_max   K_M 
-30.17 50.00 
- residual sum-of-squares: 333.9
+17.21 20.00 
+ residual sum-of-squares: 78.58
 
-Number of iterations to convergence: 4 
+Number of iterations to convergence: 3 
 Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here the algorithm converged on a poor solution, and in fact took fewer iterations (4) than before to do so. This is because it could not explore sufficient parameter combinations of <code class="docutils literal notranslate"><span class="pre">V_max</span></code> and <code class="docutils literal notranslate"><span class="pre">K_M</span></code> because we narrowed the range that both these parameters could be allowed to take during the optimization.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For the remaining examples, we will switch to using <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> instead of <code class="docutils literal notranslate"><span class="pre">nls</span></code>.</p>
-</div>
+<p>Here the algorithm converged on a poor solution, and in fact took fewer iterations (3) than before to do so. This is because it could not explore sufficient parameter combinations of <code class="docutils literal notranslate"><span class="pre">V_max</span></code> and <code class="docutils literal notranslate"><span class="pre">K_M</span></code> as we have narrowed the range that both these parameters could be allowed to take during the optimization too much.</p>
 </div>
 <div class="section" id="diagnostics-of-an-nlls-fit">
 <h2>Diagnostics of an NLLS fit<a class="headerlink" href="#diagnostics-of-an-nlls-fit" title="Permalink to this headline">¶</a></h2>
@@ -1163,11 +1212,15 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_64_0.png" src="../_images/20-ModelFitting-NLLS_64_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_68_0.png" src="../_images/20-ModelFitting-NLLS_68_0.png" />
 </div>
 </div>
-<p>The residuals look OK. But this should not come as a surprise because we generated these “data” ourselves using Normally distributed errors!</p>
+<p>The residuals look OK. But this should not come as a surprise because we generated these “data” ourselves using normally-distributed errors!</p>
 <p>You may also want to look at further diagnostics, as we did <a class="reference internal" href="14-regress.html#regress-diagnostics"><span class="std std-ref">previously</span></a> in the case of Linear models. The most convenient way to do this is to use the <code class="docutils literal notranslate"><span class="pre">nlstools</span></code> package. We will not go into it here, but you can have a look at its <a class="reference external" href="https://rdrr.io/rforge/nlstools/">documentation</a>. Note that you will need to install this package as it is not one of the core (base) R packages.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the remaining examples, we will switch to using <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> instead of <code class="docutils literal notranslate"><span class="pre">nls</span></code>.</p>
+</div>
 </div>
 <div class="section" id="allometric-scaling-of-traits">
 <h2>Allometric scaling of traits<a class="headerlink" href="#allometric-scaling-of-traits" title="Permalink to this headline">¶</a></h2>
@@ -1227,7 +1280,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_75_0.png" src="../_images/20-ModelFitting-NLLS_75_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_80_0.png" src="../_images/20-ModelFitting-NLLS_80_0.png" />
 </div>
 </div>
 <p>Or, using <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>:</p>
@@ -1242,7 +1295,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_77_0.png" src="../_images/20-ModelFitting-NLLS_77_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_82_0.png" src="../_images/20-ModelFitting-NLLS_82_0.png" />
 </div>
 </div>
 <p>You can see these body weights of dragonflies does not increase proportionally with body length – they curve upwards w.r.t. wing length (so the allometric constant <span class="math notranslate nohighlight">\(b\)</span> in eqn <a class="reference internal" href="#equation-eq-allom">(7)</a> mustbe greater than 1), instead of increasing as a straight line (in which case <span class="math notranslate nohighlight">\(b = 1\)</span> (isometry, instead of allometry).</p>
@@ -1304,7 +1357,7 @@ y = a x^b
 <span class="mi">4</span><span class="o">.</span> <span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/20-ModelFitting-NLLS_87_1.png" src="../_images/20-ModelFitting-NLLS_87_1.png" />
+<img alt="../_images/20-ModelFitting-NLLS_92_1.png" src="../_images/20-ModelFitting-NLLS_92_1.png" />
 </div>
 </div>
 <p>Now lets get some stats of this NLLS fit. Having obtained the fit object (<code class="docutils literal notranslate"><span class="pre">PowMod</span></code>), we can use <code class="docutils literal notranslate"><span class="pre">summary()</span></code> just like we would for a <code class="docutils literal notranslate"><span class="pre">lm()</span></code> fit object:</p>
@@ -1419,7 +1472,7 @@ y = a + b x + c x^2
 <span class="mi">4</span><span class="o">.</span> <span class="n">xy</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/20-ModelFitting-NLLS_102_1.png" src="../_images/20-ModelFitting-NLLS_102_1.png" />
+<img alt="../_images/20-ModelFitting-NLLS_107_1.png" src="../_images/20-ModelFitting-NLLS_107_1.png" />
 </div>
 </div>
 <p>Very similar fits, except that the quadratic model seems to deviate a bit from the data at the lower end of the data range. Let’s do a proper, formal model comparison now to check which model better-fits the data.</p>
@@ -1493,7 +1546,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_112_0.png" src="../_images/20-ModelFitting-NLLS_112_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_117_0.png" src="../_images/20-ModelFitting-NLLS_117_0.png" />
 </div>
 </div>
 <div class="section" id="fitting-the-three-models-using-nlls">
@@ -1578,7 +1631,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_121_0.png" src="../_images/20-ModelFitting-NLLS_121_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_126_0.png" src="../_images/20-ModelFitting-NLLS_126_0.png" />
 </div>
 </div>
 <p>Next examine the residuals between the 3 models:</p>
@@ -1592,7 +1645,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_123_0.png" src="../_images/20-ModelFitting-NLLS_123_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_128_0.png" src="../_images/20-ModelFitting-NLLS_128_0.png" />
 </div>
 </div>
 <p>The residuals for all 3 models still exhibit some patterns. In particular, the data seems to go down near the end of the observation period, but none of these models can capture that behavior.</p>
@@ -1639,7 +1692,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_129_0.png" src="../_images/20-ModelFitting-NLLS_129_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_134_0.png" src="../_images/20-ModelFitting-NLLS_134_0.png" />
 </div>
 </div>
 <div class="section" id="the-thermal-performance-curve-models">
@@ -1741,7 +1794,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_141_0.png" src="../_images/20-ModelFitting-NLLS_141_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_146_0.png" src="../_images/20-ModelFitting-NLLS_146_0.png" />
 </div>
 </div>
 <div class="section" id="basic-approach">
@@ -1767,7 +1820,7 @@ r = \frac{\log(N(t)) - \log(N_0)}{t} ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_143_0.png" src="../_images/20-ModelFitting-NLLS_143_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_148_0.png" src="../_images/20-ModelFitting-NLLS_148_0.png" />
 </div>
 </div>
 <p>By eye the logged data looks fairly linear (beyond the initial “lag phase” of growth; see below) between hours 5 and 10, so we’ll use that time-period to calculate the growth rate.</p>
@@ -1924,7 +1977,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_159_0.png" src="../_images/20-ModelFitting-NLLS_159_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_164_0.png" src="../_images/20-ModelFitting-NLLS_164_0.png" />
 </div>
 </div>
 <p>That looks nice, and the <span class="math notranslate nohighlight">\(r_{max}\)</span> estimate we get (0.64) is fairly close to what we got above with OLS fitting.</p>
@@ -1940,7 +1993,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_161_0.png" src="../_images/20-ModelFitting-NLLS_161_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_166_0.png" src="../_images/20-ModelFitting-NLLS_166_0.png" />
 </div>
 </div>
 <p>The model actually diverges from the data at the lower end! This was not visible in the previous plot where you examined the model in linear scale (without taking a log) because the deviation of the model is small, and only becomes clear in the log scale. This is because of the way logarithms work. Let’s have a look at this in our Cell counts “data”:</p>
@@ -1954,7 +2007,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_163_0.png" src="../_images/20-ModelFitting-NLLS_163_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_168_0.png" src="../_images/20-ModelFitting-NLLS_168_0.png" />
 </div>
 </div>
 <p>As you can see the logarithm is a strongly nonlinear transformation of any sequence of real numbers, with small numbers close to zero yielding disproportionately large deviations.</p>
@@ -2124,7 +2177,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_182_0.png" src="../_images/20-ModelFitting-NLLS_182_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_187_0.png" src="../_images/20-ModelFitting-NLLS_187_0.png" />
 </div>
 </div>
 <p>Clearly, the Gompertz model fits way better than the logistic growth equation in this case! Note also that there is a big difference in the fitted value of <span class="math notranslate nohighlight">\(r_{max}\)</span> from the two models; the value is much lower from the Logistic model because it ignores the lag phase, including it into the exponential growth phase.</p>

@@ -1,13 +1,17 @@
-library(repr) ; options(repr.plot.width = 5, repr.plot.height = 4) # Change plot sizes (in cm)
+library(repr) ; options(repr.plot.width = 4, repr.plot.height = 4) # Change plot sizes (in cm)
 
 rm(list = ls())
 graphics.off()
 
-set.seed(1456) # to get the same random fluctuations in the "data" every time
+S_data <- seq(1,50,1) # Generate a sequence of substrate concentrations
+S_data
 
-S_data <- seq(0,50,1) # Generate a sequence of substrate concentrartions
+V_data <- ((12.5 * S_data)/(7.1 + S_data)) # Generate a Michaelis-Menten response with V_max = 12.5 and K_M = 7.1
+plot(S_data, V_data)
 
-V_data <- ((runif(1,10,20)*S_data)/(runif(1,0,10) + S_data)) + rnorm(51,0,1) # apply the Michaelis-Menten model, with some random fluctuations to emulate measurement or process error
+set.seed(1456) # To get the same random fluctuations in the "data" every time
+V_data <- V_data + rnorm(50,0,1) # Add random fluctuations to emulate error with standard deviation of 0.5
+plot(S_data, V_data)
 
 MM_model <- nls(V_data ~ V_max * S_data / (K_M + S_data))
 
@@ -25,7 +29,7 @@ MM_model2 <- nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 
 coef(MM_model)
 coef(MM_model2)
 
-MM_model3 <- nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 1, K_M = 10))
+MM_model3 <- nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = .01, K_M = 10))
 
 coef(MM_model)
 coef(MM_model2)
@@ -41,40 +45,40 @@ nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.1, K_M = 10
 
 nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = -0.1, K_M = 100))
 
-MM_model4 <- nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 13.65, K_M = 5.50))
+MM_model4 <- nls(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 13.5, K_M = 9.4))
 
 coef(MM_model)
 coef(MM_model4)
 
 require("minpack.lm")
 
-MM_model6 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 2, K_M = 2))
+MM_model5 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 2, K_M = 2))
 
 coef(MM_model2)
-coef(MM_model6)
+coef(MM_model5)
 
-MM_model7 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 1, K_M = 10))
+MM_model6 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 1, K_M = 10))
 
-MM_model8 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0, K_M = 0.1))
+MM_model7 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0, K_M = 0.1))
 
-MM_model9 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.1, K_M = 100))
+MM_model8 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.1, K_M = 100))
 
-MM_model10 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = -0.1, K_M = 100))
+MM_model9 <- nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = -0.1, K_M = 100))
 
 coef(MM_model2)
+coef(MM_model5)
 coef(MM_model6)
 coef(MM_model7)
 coef(MM_model8)
 coef(MM_model9)
-coef(MM_model10)
 
 nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = -10, K_M = -10))
 
-nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.1, K_M = 0.1))
+nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.5, K_M = 0.5))
 
-nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.1, K_M = 0.1), lower=c(-1,-1), upper=c(100,100))
+nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start = list(V_max = 0.5, K_M = 0.5), lower=c(0.4,0.4), upper=c(100,100))
 
-nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start =  list(V_max = 0.1, K_M = 0.1), lower=c(-1,-1), upper=c(50,50))
+nlsLM(V_data ~ V_max * S_data / (K_M + S_data), start =  list(V_max = 0.5, K_M = 0.5), lower=c(0.4,0.4), upper=c(20,20))
 
 hist(residuals(MM_model6))
 

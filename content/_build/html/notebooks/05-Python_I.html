@@ -166,6 +166,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
    <span class="math notranslate nohighlight">
     \(t\)
    </span>
@@ -519,6 +520,19 @@
    Python Input/Output
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#safely-opening-files-using-with-open">
+     Safely opening files using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       with
+      </span>
+      <span class="pre">
+       open()
+      </span>
+     </code>
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-csv-s">
      Handling
@@ -2249,6 +2263,40 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 <p>Note the <code class="docutils literal notranslate"><span class="pre">b</span></code> flag for reading a file, which stands for “binary”. Basically, binary files are machine readable, but not human readable. For example, try opening <code class="docutils literal notranslate"><span class="pre">testp.p</span></code> in a text reader (e.g., your code editor)  and reading it - you will see considerable gibberish (compare with <code class="docutils literal notranslate"><span class="pre">testout.txt</span></code>)!</p>
+<div class="section" id="safely-opening-files-using-with-open">
+<h3>Safely opening files using <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open()</span></code><a class="headerlink" href="#safely-opening-files-using-with-open" title="Permalink to this headline">¶</a></h3>
+<p>Whilst <code class="docutils literal notranslate"><span class="pre">open()</span></code> and <code class="docutils literal notranslate"><span class="pre">close()</span></code> are useful to remember, it can be <em>very</em> problematic if <code class="docutils literal notranslate"><span class="pre">f.close()</span></code> is missed.</p>
+<p>Luckily python has your back here. By using the <code class="docutils literal notranslate"><span class="pre">with</span></code> command, you can make sure that no matter what, the file is closed after you have finished working with it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">with</span></code> is typically used in the following manner:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../path/to/file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">myfile</span><span class="p">:</span>
+    <span class="c1"># do things to myfile</span>
+    <span class="o">...</span>
+    
+</pre></div>
+</div>
+<p>Note that running <code class="docutils literal notranslate"><span class="pre">myfile.close()</span></code> here is not necessary as the file is closed once you drop out of the with block.</p>
+<p>Here’s an example of <code class="docutils literal notranslate"><span class="pre">basic_io1.py</span></code> rewritten using the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#############################</span>
+<span class="c1"># FILE INPUT</span>
+<span class="c1">#############################</span>
+<span class="c1"># Open a file for reading</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../sandbox/test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># use &quot;implicit&quot; for loop:</span>
+    <span class="c1"># if the object is a file, python will cycle over lines</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># Once you drop out of the with, the file is automatically closed</span>
+
+<span class="c1"># Same example, skip blank lines</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../sandbox/test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>The rest of this session will use the <code class="docutils literal notranslate"><span class="pre">with</span></code> method of opening files.</strong></p>
+</div>
 <div class="section" id="handling-csv-s">
 <h3>Handling <code class="docutils literal notranslate"><span class="pre">csv</span></code>’s<a class="headerlink" href="#handling-csv-s" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> package makes it easy to manipulate CSV files. Let’s try it.</p>
@@ -2257,29 +2305,25 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 
 <span class="c1"># Read a file containing:</span>
 <span class="c1"># &#39;Species&#39;,&#39;Infraorder&#39;,&#39;Family&#39;,&#39;Distribution&#39;,&#39;Body mass male (Kg)&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/testcsv.csv&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/testcsv.csv&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
-<span class="n">csvread</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvread</span><span class="p">:</span>
-    <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The species is&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">csvread</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvread</span><span class="p">:</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The species is&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="c1"># write a file containing only species name and Body mass</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/testcsv.csv&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">g</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/bodymass.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/testcsv.csv&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/bodymass.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
 
-<span class="n">csvread</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">csvwrite</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvread</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-    <span class="n">csvwrite</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
+        <span class="n">csvread</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">csvwrite</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvread</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">csvwrite</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
 
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">g</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Run this script from bash, bash with ipython, and from within ipython, like you did above for the <code class="docutils literal notranslate"><span class="pre">basic_io*.py</span></code> scripts.</p>
