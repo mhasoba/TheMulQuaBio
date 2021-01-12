@@ -137,13 +137,14 @@ We can write these directly into a printf() statement:
 printf(mystring1, mystring2);
 ```
 
-As you can see, we only need the variable names for the string. Try writing this program for yourself and see what the output is on screen.
+However, the proper way to do this is to use a formatted string literal in your `printf` call:
 
-The result on my screen is:
+```C
+printf("%s%s");
+```
 
-`This is a really boring string exampleThis is another boring string examplembrazeau@lb-mbrazeau CMEE_C_module $ `
+Try this and see what you get. You might find there's a problem with the output. How could you fix it?
 
-How can we modify the string text to have nicer output?
 
 ### The terminal 'null' character.
 
