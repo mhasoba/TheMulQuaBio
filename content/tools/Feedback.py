@@ -23,6 +23,7 @@
 
 	--gitpush_fin   : Optional flag indicating whether to push the final 						feedback to students' git repositories (default is False)
 					. If used, repo is updated from remote and contents of feedback directory pushed, nothing else.
+	--noGit			: Optional flag to disable GitHub activity. Default is False.
 """
 import subprocess, os, csv, argparse, re, time
 
@@ -55,9 +56,9 @@ def run_popen(command, timeout):
 parser = argparse.ArgumentParser("Gives Automated Feedback on CMEE Masters weekly computing practical work")
 
 # positional argument inputs
-parser.add_argument("StudentsFile", help="Input file containing student details (full path)")
-parser.add_argument("RepoPath", help="Location for git repositories (full path)")
-parser.add_argument("Week", help="Name of week to give feedback on (Week1, Week2, etc.)")
+parser.add_argument("--StudentsFile", help="Input file containing student details (full path)")
+parser.add_argument("--RepoPath", help="Location for git repositories (full path)")
+parser.add_argument("--Week", help="Name of week to give feedback on (Week1, Week2, etc.)")
 
 # Optional argument inputs
 parser.add_argument("--gitpull", action="store_true", 
@@ -71,6 +72,10 @@ parser.add_argument("--gitpush", action="store_true",
 parser.add_argument("--gitpush_fin", action="store_true", 
 								dest="gitpush_fin", default=False,
 								help="Whether to push final feedback to students' git repositories")
+
+parser.add_argument("--noGit", action="store_true",
+								dest="noGit", default=True,
+								help="Optionally disables all Git functionality of the program. Useful for markers" )
 
 args = parser.parse_args() 
 
@@ -88,60 +93,79 @@ charLim = 500 #set limit to output of each script's run to be printed
 for Stdnt in Stdnts:
 	
 	Name = (Stdnt[Hdrs.index('First_name')] + Stdnt[Hdrs.index('Second_name')]+ '_' + Stdnt[Hdrs.index('Username')]).replace(" ","").replace("'","") #Remove any spaces from name
+	print(Name)
 	RepoPath = args.RepoPath + '/' + Name
+	print(RepoPath)
 	AzzPath = RepoPath + '/Feedback'
 	
 	Points = 100
 	totime = 0
 
-	if args.gitpush_fin: # Push the final feedback...
+	if args.noGit == False:
+
+		if args.gitpush_fin: # Push the final feedback...
+			
+			print("...\n\n" + "Git pushing final feedback for " + Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")
+
+			subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
+
+			subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final feedback"])
+
+			subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
+
+			continue # ...and skip the rest
+
+		if not os.path.exists(RepoPath): # Clone repo if it does not already exist
+			
+			print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
+			
+			subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
 		
-		print("...\n\n" + "Git pushing final feedback for " + Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")
+		else: # otehrwise update the xisting repo
 
-		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])
+			print("...\n\n"+"Updating git repository of "+ Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")	
+			
+			subprocess.check_output(["git", "-C", RepoPath, "pull"]) # or,
+			subprocess.check_output(["git","-C", RepoPath, "fetch","--all"])
+			subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # discard all local changes
+			subprocess.check_output(["git","-C", RepoPath, "clean","-fd"]) # remove untracked files
+			print(RepoPath)
+			if args.gitpull: continue # Just update the git repo and skip to next student
 
-		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed final feedback"])
+			p, output, err, time_used = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
+			print(output)
 
-		subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
+			Keys = list([row.split(': ')[0] for row in output.splitlines()])
+			print(Keys)
+			Vals = list([row.split(': ')[1] for row in output.splitlines()])
+			RepoStats = dict(zip(Keys, Vals))
+			# print(RepoStats)
+			########## block for accessing git log - to be finished ########### 
+			## Store git code, along with the corresponding field names in two lists:
+			# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
+			# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
+			##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
+			# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
+			# p, log, err, time_used = run_popen('git log --format="%s"', timeout)
+			# (log, _) = p.communicate()
+			# log = log.strip('\n\x1e').split("\x1e")
+			# log = [row.strip().split("\x1f") for row in log]
+			# log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
+			###################################################################
+	else:
+		print("No git option selected. \n Running script without connecting to repos.")
 
-		continue # ...and skip the rest
-
-	if not os.path.exists(RepoPath): # Clone repo if it does not already exist
-		
-		print("...\n\n"+"Student's repository does not exist; Cloning it...\n\n")
-		
-		subprocess.check_output(["git","clone", Stdnt[Hdrs.index('GitRepo')], RepoPath])
-	
-	else: # otehrwise update the xisting repo
-
-		print("...\n\n"+"Updating git repository of "+ Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")	
-		
-		# subprocess.check_output(["git", "-C", RepoPath, "pull"]) # or,
-		subprocess.check_output(["git","-C", RepoPath, "fetch","--all"])
-		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # discard all local changes
-		subprocess.check_output(["git","-C", RepoPath, "clean","-fd"]) # remove untracked files
-
-		if args.gitpull: continue # Just update the git repo and skip to next student
+		print("...\n\n"+"Getting data on git repository of "+ Stdnt[Hdrs.index('First_name')] +
+			 								" "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")	
 
 		p, output, err, time_used = run_popen("git -C " + RepoPath + " count-objects -vH", timeout)
+		print(output)
 
 		Keys = list([row.split(': ')[0] for row in output.splitlines()])
+		print(Keys)
 		Vals = list([row.split(': ')[1] for row in output.splitlines()])
 		RepoStats = dict(zip(Keys, Vals))
-
-		########## block for accessing git log - to be finished ########### 
-		## Store git code, along with the corresponding field names in two lists:
-		# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
-		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
-		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
-		# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
-		# p, log, err, time_used = run_popen('git log --format="%s"', timeout)
-		# (log, _) = p.communicate()
-		# log = log.strip('\n\x1e').split("\x1e")
-		# log = [row.strip().split("\x1f") for row in log]
-		# log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
-		###################################################################
-
+		print(RepoStats)
 	#~ Now open feedback directory inside repository:	
 
 	if not os.path.exists(AzzPath):
@@ -231,6 +255,8 @@ for Stdnt in Stdnts:
 	for week in WeekDirs:
 		if not args.Week.lower() in week.lower().replace(" ", ""):
 			continue # only assess for current week - no week 10 and 1, for eg
+		if week.lower() != args.Week.lower(): # This shouldn't be needed to prevent week1 also marking week10, but it is? Odd.
+			continue # should probably really refactor the above two statements into one...
 		azz.write('='*70 + '\n')
 		WeekPth = RepoPath+'/'+week
 		azz.write('Assessing ' + week.upper()+'...\n\n')
