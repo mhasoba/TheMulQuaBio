@@ -76,7 +76,7 @@ parser.add_argument("--gitpush_fin", action="store_true",
 								help="Whether to push final feedback to students' git repositories")
 
 parser.add_argument("--noGit", action="store_true",
-								dest="noGit", default=True,
+								dest="noGit", default=False,
 								help="Optionally disables all Git functionality of the program. Useful for markers" )
 parser.add_argument("--garbageCollect", action="store_true",
 								dest="garbageCollect", default=False,
