@@ -179,19 +179,19 @@ for Stdnt in Stdnts:
 	#~ initialize list of expected files, on a per week basis 
 	if args.Week.lower() == 'week1' :
 		expectedFiles = ['boilerplate.sh', 'CompileLatex.sh', 'ConcatenateTwoFiles.sh', 'CountLines.sh', 'csvtospace.sh', 'FirstBiblio.bib', 
-		'FirstExample.tex', 'MyExampleScript.sh', 'tabtocsv.sh', 'tiff2png.sh', 'UnixPrac.txt', 'variables.sh'] # check for more in the workbook	
+		'FirstExample.tex', 'MyExampleScript.sh', 'tabtocsv.sh', 'tiff2png.sh', 'UnixPrac1.txt', 'variables.sh'] 
 	if args.Week.lower() == 'week2' :
 		expectedFiles = ['align_seqs.py', 'align_seqs_better.py', 'align_seqs_fasta.py', 'basic_csv.py', 'basic_io1.py', 'basic_io2.py', 'basic_io3.py',
 		'boilerplate.py', 'cfexercises1.py', 'cfexercises2.py', 'control_flow.py', 'debugme.py', 'dictionary.py', 'lc1.py', 'lc2.py', 'loops.py', 'oaks.py',
-		'oaks_debugme.py', 'scope.py', 'sysargv.py', 'test_control_flow.py', 'tuple.py', 'using_name.py'] # check for more in workbook		
+		'oaks_debugme.py', 'scope.py', 'sysargv.py', 'test_control_flow.py', 'tuple.py', 'using_name.py'] 
 	if args.Week.lower() == 'week3' :
-		expectedFiles = ['apply1.R', 'apply2.R', 'basic_io.R', 'boilerplate.R', 'break.R', 'browse.R', 'control_flow.R', 'DataWrang.R', 'DataWrangTidy.R',
-		'get_TreeHeight.py', 'get_TreeHeight.R', 'Girko.R', 'GPDD_Data.R', 'MyBars.R', 'plotLin.R', 'PP_Dists.R', 'PP_Regress_loc.R', 'PP_Regress.R',
-		'preallocate.R', 'R_Conditionals.R', 'Ricker.R', 'run_get_TreeHeight.sh', 'sample.R', 'SQLinR.R', 'TAutoCorr.R', 'TAutoCorr.tex', 'TreeHeight.R',
-		'try.R', 'Vectorize1.py', 'Vectorize1.R', 'Vectorize2.py', 'Vectorize2.R', 'vectorize_timer.sh']  # check for more in workbook		
+		expectedFiles = ['apply1.R', 'apply2.R', 'ANOVA_Prac.R', 'basic_io.R', 'boilerplate.R', 'break.R', 'browse.R', 'control_flow.R', 'DataWrang.R', 'DataWrangTidy.R',
+		'ExpDesign.R', 'Ftests.R', 'get_TreeHeight.py', 'get_TreeHeight.R', 'Girko.R', 'GPDD_Data.R', 'Interactions.R', 'MyGLM.R', 'MulExpl.R', 'MyBars.R', 'MyModelSimp.R', 'next.R', 'plotLin.R', 'PP_Dists.R', 'PP_Regress_loc.R', 'PP_Regress.R',
+		'preallocate.R', 'R_conditionals.R', 'Regression.R', 'Ricker.R', 'run_get_TreeHeight.sh', 'sample.R', 'SQLinR.R', 'TAutoCorr.R', 'TAutoCorr.tex', 'TreeHeight.R',
+		'try.R', 'ttests.R', 'Vectorize1.py', 'Vectorize1.R', 'Vectorize2.py', 'Vectorize2.R']   # optionally include a 'vectorize_timer.sh'?
 	if args.Week.lower() == 'week7' :
-		expectedFiles = ['blackbirds.py', 'fmr.R', 'LV1.py', 'LV2.py', 'LV3.py', 'LV4.py', 'MyFirstJupyterNb.ipynb', 'profileme2.py', 'profileme.py',
-		're4.py', 'regexs.py', 'run_fmr_R.py', 'run_LVs.py', 'TestR.py', 'TestR.R', 'timeitme.py', 'using_os.py'] # check for more in workbook		
+		expectedFiles = ['blackbirds.py', 'DrawFW.py', 'fmr.R', 'LV1.py', 'LV2.py', 'LV3.py', 'LV4.py', 'Nets.R', 'Nets.py', 'profileme2.py', 'profileme.py',
+		're4.py', 'regexs.py', 'run_fmr_R.py', 'run_LV.py', 'TestR.py', 'TestR.R', 'timeitme.py', 'using_os.py'] # could include 'MyFirstJupyterNb.ipynb'
 		
 
 	#~ Open feedback log file:
