@@ -1,4 +1,4 @@
-library(repr); options(repr.plot.res = 100, repr.plot.width = 5, repr.plot.height = 4) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
+library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 4) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a juyter notebook - ignore otherwise
 
 par(mfrow=c(1,2)) 
 hist(rpois(1000, lambda = 1),xlab = "Value", main="")
@@ -12,7 +12,7 @@ par(mfrow=c(1,2))
 hist(rgamma(1000,1,1),xlab = "Value", main = "")
 hist(rgamma(1000,100,1),xlab = "Value", main = "")
 
-colonies <- read.csv("../data/PracData.csv")
+colonies <- read.csv("../data/PracData.csv", stringsAsFactors = T)
 str(colonies)
 head(colonies)
 
@@ -43,15 +43,19 @@ str(coloniesCN)
 coloniesCN <- droplevels(coloniesCN)
 str(coloniesCN)
 
-library(lattice)
+library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 4) # Change plot size
 
-bwplot(logCC ~ Strain | Treatment, data=coloniesCN)
+library(ggplot2)
+ggplot(coloniesCN, aes(x = Strain, y= logCC)) + 
+    geom_boxplot() + facet_grid(. ~ Treatment)
 
 tab <- tapply(coloniesCN$ColonyCount, list(coloniesCN$Treatment, coloniesCN$Strain), mean, na.rm=TRUE)
 
 print(tab)
 
 barplot(tab, beside=TRUE, log= 'y' )    
+
+library(repr); options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot size
 
 modLM <- lm(logCC ~ Strain * Treatment, data=coloniesCN)
 par(mfrow=c(2,2), mar=c(3,3,3,1), mgp=c(2,0.8,0))

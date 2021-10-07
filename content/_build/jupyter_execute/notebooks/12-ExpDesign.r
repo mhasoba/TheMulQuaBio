@@ -29,7 +29,7 @@ par(mfg = c(2,1)); hist(MySample40, col = rgb(1,1,0), main = 'n = 40')
 par(mfg = c(2,2)); hist(MySample80, col = rgb(1,1,0), main = 'n = 80') 
 par(mfg = c(2,3)); hist(MySample160, col = rgb(1,1,0), main = 'n = 160') 
 
-genome <- read.csv('../data/GenomeSize.csv')
+genome <- read.csv('../data/GenomeSize.csv', stringsAsFactors = T)
 
 head(genome) # this won't look so nice on your computer!
 
@@ -59,7 +59,7 @@ myColours <- c('red', 'blue') # So choose two colours
 mySymbols <- c(1,3) # And two different markers
 
 plot(GenomeSize ~ TotalLength , data = genome, #Now plot again
-col = myColours[Suborder], pch = mySymbols[Suborder],
+col = myColours, pch = mySymbols,
 xlab='Total length (mm)', ylab='Genome size (pg)')
 
 legend("topleft", legend=levels(genome$Suborder), #Add legend at top left corner

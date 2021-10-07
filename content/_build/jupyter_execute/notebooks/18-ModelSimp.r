@@ -1,4 +1,4 @@
-mammals <- read.csv('../data/MammalData.csv')
+mammals <- read.csv('../data/MammalData.csv', stringsAsFactors = T)
 
 #get logs of continuous variables
 mammals$logLS <- log(mammals$LitterSize)

@@ -3,14 +3,18 @@
 
 # # Biological Computing in Python II
 
-# >> ...some things in life are bad. They can really make you mad. Other things just make you swear and curse. When you're chewing on life's gristle, don't grumble; give a whistle, and this'll help things turn out for the best. And... always look on the bright side of life... 
-# — *Guess who?*
+# ```{epigraph}
+# ...some things in life are bad. They can really make you mad. Other things just make you swear and curse. When you're chewing on life's gristle, don't grumble; give a whistle, and this'll help things turn out for the best. And... always look on the bright side of life... 
+# 
+# -- Monty Python
+# 
+# ```
 
 # In this chapter, we will build on the [first Python Chapter](05-Python_I.ipynb), covering some more advanced topics.
 # 
 # ## Numerical computing in Python
 # 
-# Python is a good choice for numerical computing (recall [this comparison](Why-python)). Using the right packages, you can do some serious number crunching in Python.
+# Python is a good choice for numerical computing (recall [this comparison](05-Python_I:Why-python)). Using the right packages, you can do some serious number crunching in Python.
 # 
 # We will use the `numpy` and `scipy` packages. The latter offers a data structure called numpy array that is suitable for efficient computing, along with basic operations on these arrays. 
 # 
@@ -63,10 +67,15 @@ print(type(a[0]))
 
 # Thus the last two outputs tell you that firstly, that numpy arrays belong to a data structure type (and a class) called `numpy.ndarray`, and secondly, that at position `0` (remember, Python indexing starts at 0) it holds an [64 bit integer](https://en.wikipedia.org/wiki/9,223,372,036,854,775,807). All elements in `a` are of type `int` because that is what `range()` returns (try `?range`).
 # 
-# ![image](./graphics/numpyarray.png)
-# <small><center>A graphical depiction of numpy/numpy arrays, which can have multiple dimensions (even greater than 3).<br> 
-#     Source: [http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html)
-# </center> </small>
+# ---
+# :::{figure} python-arrays
+# <img src="./graphics/numpyarray.png" alt="Python arrays" width="700px">
+# 
+# **A graphical depiction of numpy/numpy arrays.** These can have multiple dimensions (even greater than 3). <br>
+# (Source: [http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html))
+# :::
+# 
+# ---
 # 
 # You can also specify the data type of the array:
 
@@ -614,7 +623,7 @@ print("area =", area)
 # Now let's try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is: 
 # 
 # \begin{align}
-#     \frac{dR}{dt} &= r R - a C R \\
+#     \frac{dR}{dt} &= r R - a C R  \nonumber \\
 #     \frac{dC}{dt} &= - z C + e a C R
 # \end{align}
 # 
@@ -770,10 +779,14 @@ f1.savefig('../results/LV_model.pdf') #Save figure
 # 
 # 1. Create a self-standing script using the above example and save it as `LV1.py` in your code directory. In addition to generating the above figure, it should also generate the following figure: 
 # 
-# ![image](./graphics/LV_model_CR.png)
-# <small><center>
-#             Generate this figure as part of the `LV1.py` script.
-# </center></small>
+# ---
+# :::{figure} LV-practical-1
+# <img src="./graphics/LV_model_CR.png" alt="Lotka-Volterra phase plot" width="400px">
+# 
+# **Generate this figure as part of the `LV1.py` script.** 
+# :::
+# 
+# ---
 # 
 # It should save both figures in pdf to the `results` directory, *without displaying them on screen*.
 
@@ -1147,12 +1160,11 @@ p.show()
 #         C_{t+1} &= C_t (1 - z + e a R_t)
 # \end{align}
 # 
-# where $\epsilon$ is a random fluctuation drawn from a gaussian distribution (use `sc.stats` or `np.random`). Include this
-# script in ` run_LV.py`, and profile it as well. You can also add fluctuations to both populations simultaneously this way: 
+# where $\epsilon$ is a random fluctuation drawn from a gaussian distribution (use `sc.stats` or `np.random`). Include this script in ` run_LV.py`, and profile it as well. You can also add fluctuations to both populations simultaneously this way: 
 # 
 # \begin{align}
-#     R_{t+1} &= R_t (1 + \epsilon + r +  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
-#     C_{t+1} &= C_t (1 - z + \epsilon + e a R_t)
+#     R_{t+1} &= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
+#     C_{t+1} &= C_t (1 - (z + \epsilon) + e a R_t)
 # \end{align}
 # 
 # *As always, test, add, commit and push all your new code and data to your git repository.*
@@ -1172,14 +1184,17 @@ p.show()
 # 
 # Thus, if you are interested in data mining, need to clean or process data in any other way, or convert a bunch of information into usable data, knowing regex is absolutely necessary.
 # 
-# ---
-# 
-# ![image](./graphics/regex.png)
-# <small><center>(Source: [www.xkcd.com](https://www.xkcd.com/208/))
-#     Regular expressions can really improve your quality of life! 
-# </center></small>
 # 
 # ---
+# :::{figure} XKCD-regex
+# <img src="./graphics/regex.png" alt="XKCD on Regex" width="400px">
+# 
+# **Regular expressions can really improve your quality of life.**<br> (Source: [XKCD](https://www.xkcd.com/208/)) 
+# :::
+# 
+# ---
+# 
+# 
 # 
 # Regex packages are available for most programming languages (recall [`grep` in UNIX](01-Unix.ipynb#Using-`grep`); that is how regex first became popular).
 # 
@@ -1440,12 +1455,13 @@ re.search(r'[AGTC]+', 'the sequence ATTCGT').group()
 re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper.").group()
 
 
-# ---
 # 
-# ![image](./graphics/thelodermaasper.JPG)
-# <small><center>
-#             In case you were wondering what *Theloderma asper*, the "bird-shit frog", looks like. I snapped this one in a North-East Indian rainforest ages ago. 
-# </center></small>
+# ---
+# :::{figure} bird-shit-frog
+# <img src="./graphics/thelodermaasper.JPG" alt="ANOVA example" width="350px">
+# 
+# **In case you were wondering what *Theloderma asper*, the "bird-shit frog", looks like.** Samraat snapped this one in a North-East Indian rainforest ages ago. 
+# :::
 # 
 # ---
 

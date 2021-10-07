@@ -36,10 +36,6 @@ li = list(c(1,2,3))
 
 class(li)
 
-
-
-
-
 v <- TRUE
 
 v

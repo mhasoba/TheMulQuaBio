@@ -37,7 +37,7 @@
 # 
 # * Using Python to patch together data analysis and/or numerical simulation work flows
 
-# (Why-python)=
+# (05-Python_I:Why-python)=
 # ### Why Python?
 # 
 # Python was designed with readability and re-usability in mind. Time taken by programming + debugging + running is likely to be relatively lower in python than less intuitive or cluttered languages (e.g., FORTRAN, Perl). 
@@ -45,20 +45,12 @@
 # Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
 # 
 # ---
+# :::{figure} python-benchmarks
+# <img src="./graphics/benchmarks.svg" alt="Language speeds" width="700px">
 # 
-# ![image](./graphics/benchmarks.png)
-# <small><center>(Source: http://julialang.org/) <br>
-# Python's numerical computing performance compared (smaller numbers are better). Note that the y-axis is in $\log_{10}$ scale. 
-# </center> </small>
-# 
-# ---
-# 
-# ---
-# 
-# ![image](./graphics/python.png)
-# <small> <center> (Source: [http://xkcd.com](http://xkcd.com))<br>
-#                 Is python the most common answer to your daily programming needs? Possibly!
-# </center> </small>
+# **Python's numerical computing performance compared to some others**. Smaller numbers are better. Note that the y-axis is in $\log_{10}$ scale. <br>
+# (Source: <http://julialang.org/>)
+# :::
 # 
 # ---
 
@@ -99,31 +91,19 @@
 # >>>
 # ```
 
-# Now type `import this`, which should give:
+# Now type:
+
+# In[1]:
+
+
+import this
+
+
+# They are Python's programming principles.
 # 
-# ```
-# Beautiful is better than ugly.
-# Explicit is better than implicit.
-# Simple is better than complex.
-# Complex is better than complicated.
-# Flat is better than nested.
-# Sparse is better than dense.
-# Readability counts.
-# Special cases aren't special enough to break the rules.
-# Although practicality beats purity.
-# Errors should never pass silently.
-# Unless explicitly silenced.
-# In the face of ambiguity, refuse the temptation to guess.
-# There should be one-- and preferably only one --obvious way to do it.
-# Although that way may not be obvious at first unless you're Dutch.
-# Now is better than never.
-# Although never is often better than *right* now.
-# If the implementation is hard to explain, it's a bad idea.
-# If the implementation is easy to explain, it may be a good idea.
-# Namespaces are one honking great idea -- let's do more of those!
-# ```
+# *Think about and discuss what each of these programming principles mean.* 
 # 
-# *Think about and discuss what each of these programming principles mean.* The "Dutch" in one of them refers to  Guido van Rossum, inventor of the python language. [Here](https://inventwithpython.com/blog/2018/08/17/the-zen-of-python-explained/)'s one set of interpretations of these.
+# The "Dutch" in one of them refers to  Guido van Rossum, inventor of the python language. [Here](https://inventwithpython.com/blog/2018/08/17/the-zen-of-python-explained/)'s one set of interpretations of these.
 
 # ### Baby steps
 # 
@@ -1440,12 +1420,14 @@ type(y)
 # ```
 # 
 # ---
-# ![image](./graphics/Geronimo.jpg)
-# <small> <center>(Source: Wikipedia) 
-# In case you were wondering who Geronimo was.
-# </center> </small>
+# :::{figure} Geronimo
+# <img src="./graphics/Geronimo.jpg" alt="ANOVA example" width="300px">
+# 
+# **In case you were wondering what Geronimo looked like.** <br> (Source: Wikipedia) 
+# :::
 # 
 # ---
+# 
 
 # ### Loops and conditionals combined
 # 
@@ -2607,7 +2589,7 @@ buggyfunc(20)
 # 
 # Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
-# python3 align_seqs_fasta.py seq1.csv seq2.csv
+# python3 align_seqs_fasta.py seq1.fasta seq2.fasta
 # ``` 
 # However, it should still run if no inputs were given, using two fasta sequences from the `data` directory as defaults.
 # 
@@ -2656,6 +2638,17 @@ buggyfunc(20)
 # *  Also annotate your code lines as much and as often as necessary using `#`.
 # *  Keep all code files organized in `code` in your weekly directory in your coursework repository (e.g., in CMEECourseWork/Week2). 
 # * `git add`, `commit` and `push` all your code and data files to your git repository by given deadline.*
+# 
+# 
+# ---
+# :::{figure} XKCD-python
+# <img src="./graphics/python.png" alt="Language speeds" width="300px">
+# 
+# **Is python the most common answer to your daily programming needs?** Possibly! <br>
+# (Source: [XKCD](http://xkcd.com))
+# :::
+# 
+# ---
 
 # ## Readings and Resources
 # 

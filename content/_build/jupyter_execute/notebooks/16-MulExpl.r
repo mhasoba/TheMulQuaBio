@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 5) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
 
 load('../data/mammals.Rdata')
 
@@ -9,8 +9,10 @@ logCvalue))
 mammals <- na.omit(mammals)
 str(mammals)
 
-library(lattice)
-bwplot(logCvalue ~ TrophicLevel | GroundDwelling, data= mammals)
+library(ggplot2)
+
+ggplot(mammals, aes(x = TrophicLevel, y= logCvalue)) + 
+    geom_boxplot() + facet_grid(. ~ GroundDwelling)
 
 groups <- list(mammals$GroundDwelling, mammals$TrophicLevel)
 groupMeans <- tapply(mammals$logCvalue, groups, FUN = mean)
@@ -47,7 +49,7 @@ library(repr) ; options(repr.plot.res = 100, repr.plot.width = 7, repr.plot.heig
 par(mfrow=c(2,2))
 plot(model)
 
-library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 6) # Change plot size
+library(repr) ; options(repr.plot.res = 100, repr.plot.width = 6, repr.plot.height = 5) # Change plot size back
 
 anova(model)
 

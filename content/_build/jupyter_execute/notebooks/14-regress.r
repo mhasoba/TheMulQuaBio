@@ -56,12 +56,15 @@ xlab='Genome size (pg)', ylab='log(Body weight) (mg)')
 legend("topleft", legend=levels(genome$Suborder), #Add legend at top left corner
        col= myColours, pch = mySymbols)
 
-nullModelDragon <- lm(logBW ~ 1, data = genome, subset = Suborder ==  "Anisoptera")
 genomeSizeModelDragon <- lm(logBW ~ logGS, data = genome, subset =  Suborder == "Anisoptera")
+
+coef(genomeSizeModelDragon) 
 
 summary(genomeSizeModelDragon) 
 
 anova(genomeSizeModelDragon)
+
+nullModelDragon <- lm(logBW ~ 1, data = genome, subset = Suborder ==  "Anisoptera")
 
 sum(resid(nullModelDragon) ^ 2)
 

@@ -1,9 +1,11 @@
 Welcome to The Multilingual Quantitative Biologist!
 ===================================================
 
-> *It is hard for me to say confidently that, after fifty more years of explosive growth of computer science, there will still be a lot of fascinating unsolved problems at peoples' fingertips, that it won't be pretty much working on refinements of well-explored things. Maybe all of the simple stuff and the really great stuff has been discovered. It may not be true, but I can't predict an unending growth. I can't be as confident about computer science as I can about biology. Biology easily has 500 years of exciting problems to work on, it's at that level.*
->
-> — *Donald Knuth*
+```{epigraph}
+"It is hard for me to say confidently that, after fifty more years of explosive growth of computer science, there will still be a lot of fascinating unsolved problems at peoples' fingertips, that it won't be pretty much working on refinements of well-explored things. Maybe all of the simple stuff and the really great stuff has been discovered. It may not be true, but I can't predict an unending growth. I can't be as confident about computer science as I can about biology. Biology easily has 500 years of exciting problems to work on, it's at that level." 
+
+-- Donald Knuth
+```
 
 ## About
 
@@ -43,11 +45,19 @@ files you need.
 
 ---
 
-![image](./notebooks/graphics/programming.png)
+```{figure} ./notebooks/graphics/programming.png
+---
+width: 400px
+name: xkcd-programming
+alt: xkcd on programming
+align: center
+---
+Logical workflows are important, but don't get married to yours!
 <small> <center>(Source: [xkcd](http://xkcd.com/974)) 
 </center></small>
+```
 
----
+
 
 It is important that you work through the exercises and problems in each chapter. This document does not tell you every single thing you need to know to perform the exercises in it. In programming and computing, you learn faster by trying to solve problems (including computer crashes!) on your own, often by liberally googling the problem!
 
@@ -74,17 +84,17 @@ complexity through precise specification and modularization of complicated analy
 
 There are several hundred programming languages currently available – which ones should a biologist choose? Ideally, a quantitative biologist should be multilingual, knowing:
 
-1. A compiled (or semi-compiled) '[procedural](https://en.wikipedia.org/wiki/Procedural_programming)' language like `C`
+1. A modern, easy-to-write, interpreted (or semi-compiled) language that is "reasonably" fast, like `Python`
 
-2. A modern, easy-to-write, interpreted (or semi-compiled) language that is still quite fast, like `python`
+2. Mathematical/statistical software with programming and graphing capabilities, like `R`
 
-3. Mathematical/statistical software with programming and graphing capabilities like `R`
+3. A compiled (or semi-compiled) '[procedural](https://en.wikipedia.org/wiki/Procedural_programming)' language, like `C`
 
-And all these because one language doesn't fit all purposes. Something like `C` is the first item in the list above because learning a procedural language forces you to deal with the real workings of your computer ubner the hood (memory management, pointers, etc.), which other languages hide (for ease of programming and running code). Without an understanding of these 'low-level' aspects of computer programming you will be limited if you try to develop an application that needs to run in a memory or performance constrained environment. Languages like Python and R obscure a lot of details of the underlying computer science.  
+And all these because one language doesn't fit all purposes. Something like `C`, the last item in the list above, is a "procedural" language that forces you to deal with the real "under the hood" workings of your computer (especially, memory management). Without an understanding of these 'low-level' aspects of computer programming, you will be limited in your ability to develop applications that either intrinsically require you to optimize performance, or need to be run in a memory- or performance-constrained environment (combination of computer hardware and operating system). Languages like Python and R intentionally obscure a lot of details of the underlying computer science, trading-off performance in favor of ease of programming and running code. However, they are sufficient for the purposes of most research and industry programming requirements.
 
-Therefore you will learn a few different languages in this course — hopefully, just the right number! Among the languages you will learn here — ` python`, `R`, and `C` are three of the [most popular currently](https://www.tiobe.com/tiobe-index) (also [see this page](https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018)), and with good reasons.
+You will learn `Python` and `R` (along with the `bash` language) on this course. These two are among the most popular languages [currently](https://www.tiobe.com/tiobe-index) (also [see this](https://spectrum.ieee.org/top-programming-languages-2021)), and with good reasons. We will not learn any procedural languages here, but it may be necessary for some of you to learn something like `C` in certain lines of research or industry jobs. Just be aware if this, and keep your mind open to the possibility of learning yet another language!
 
-Our goal is to teach you not just programming, but also good computing practices. In this course, you will write plenty of code, deal with different data files, and produce text and graphic outputs. You will learn to keep your project and coursework organized in logical, efficient, error-free and reproducible *workflows* (that's a mouthful, but an important mouthful).
+Our goal is to teach you not just programming, but also good computing practices. In this course, you will write plenty of code, deal with different data files, and produce text and graphic outputs. You will learn to keep your project and coursework organized in logical, efficient, error-free, and reproducible *workflows* (that's a mouthful, but an important mouthful).
 
 ## Some guidelines, conventions and rules
 
@@ -99,12 +109,18 @@ In the following chapters, you will practice many examples where you are require
 separate directories (e.g., named `Data` and ` Results`) respectively. Your instructor(s) will help you get set up and abide by this "workflow".
 
 ---
-![image](./notebooks/graphics/workflow.png)
-<small> 
-    <center>(Source: [xkcd](http://xkcd.com/1172)) <br> 
-            Logical workflows are important, but don't get married to yours!
-     </center>
-</small>
+
+```{figure} ./notebooks/graphics/workflow.png
+---
+width: 300px
+name: xkcd-workflows
+alt: xkcd on workflows
+align: center
+---
+Logical workflows are important, but don't get married to yours!
+<small> <center>(Source: [xkcd](https://xkcd.com/1172/)) 
+</center></small>
+```
 
 ---
 
@@ -120,15 +136,13 @@ You will find all command line/console arguments, code snippets and output in bo
 
 You should type the commands/code that you see in such boxes into the relevant command line. Don't copy-and-paste - you likely need all the command / syntax typing practice you can get ! Also, copying-and-pasting chunks of code without understanding them, i.e., blindly shoveling data into a black box and assuming the output is correct and meaningful, will eventually lead to frustrations, and if you are unlucky, embarrassments or even catastrophes!
 
-Note that the commandline prompt you will see on your own terminal/console will vary with the programming language: `$` for UNIX, `>>>` for Python, `>` for R, etc. 
+Note that the commandline prompt you will see on your own terminal/console will vary with the programming language: `$` for UNIX, `>>>` for Python, `>` for R, etc.
 
 Also note that:
 
-$\star$ Lines marked with a star like this will be specific instructions for you to follow
-
+&#9733; Lines starting with a star like this will be specific instructions for you to follow
 
 And there will be notes, tips and warnings that you should pay particular attention to, which will appear like this:  
-
 
 ```{note}
 This is a note
@@ -191,4 +205,4 @@ Your computing coursework may be assessed. If you have been told that it will, p
 
 **Footnotes**
 
-<a name="intro:robot">1</a>: That way you can traipse around the forest catching rare butterflies and frogs while the robot does the boring data collecting for you
+<a name="intro:robot">1</a>: That way you can traipse around the forest catching rare butterflies and frogs while the robot does the boring data collecting for you.
