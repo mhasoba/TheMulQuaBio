@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -45,7 +44,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -74,6 +73,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
@@ -83,7 +86,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -358,7 +361,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
@@ -1396,8 +1399,8 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="section" id="one-population-exponential-growth">
 <h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this headline">¶</a></h3>
 <p>Let’s look at how populations grow when there are no environmental constraints. The differential equation model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3d5be5eb-b98c-4608-884d-34c359b36b70">
-<span class="eqno">(6)<a class="headerlink" href="#equation-3d5be5eb-b98c-4608-884d-34c359b36b70" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
+<div class="amsmath math notranslate nohighlight" id="equation-d7e48bda-d791-43f1-b9f7-443340221a36">
+<span class="eqno">(6)<a class="headerlink" href="#equation-d7e48bda-d791-43f1-b9f7-443340221a36" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
 	\frac{\text{d}N}{\text{d}t} = r_m N
 \end{equation}\]</div>
 <p>where $r_m$ is the intrinsic, constant rate of population gowth (units of 1/time), and $N$ is population size (or biomass abundance). I use the subscript $m$ in $r_m$ to denote both <a class="reference external" href="https://en.wikipedia.org/wiki/Malthusianism">Malthusian</a> and maximal population growth rate because, in theory, without any constraints, this growth rate is expected to at its theoretical/biological maximum.</p>
@@ -1457,8 +1460,8 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <p>If you remember your high-school calculus, you might recall that $C_1$ here is an arbitrary constant. We now need to re-express it in terms of the initial conditions. We can do so by setting $t = 0$, and then setting that equal to $N(0)$ at time 0:</p>
 <p>$$C_1 = N_0$$</p>
 <p>That is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-573cc89c-f00e-428e-93d8-2fa6388a89c6">
-<span class="eqno">(7)<a class="headerlink" href="#equation-573cc89c-f00e-428e-93d8-2fa6388a89c6" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
+<div class="amsmath math notranslate nohighlight" id="equation-2de3c2a2-4487-4da7-b4b1-dc0ec4a26614">
+<span class="eqno">(7)<a class="headerlink" href="#equation-2de3c2a2-4487-4da7-b4b1-dc0ec4a26614" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
 N{\left (t \right )} = N_0 e^{r_m t}
 \end{equation}\]</div>
 <p>We could use Sympy for this last step as well (using <code class="docutils literal notranslate"><span class="pre">subs()</span></code> like you learned above), but that would be just plain silly – like using a sledge-hammer to drive in a nail!</p>
@@ -1565,8 +1568,8 @@ $$(eq:logist_growth)</p>
 </div>
 </div>
 <p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute $t = 0$, and then solve the resulting equation for the initital condition of $N_0$, which then gives This the time-dependent solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6a2a6f55-6ba2-48e1-bef0-844a2833cd0b">
-<span class="eqno">(8)<a class="headerlink" href="#equation-6a2a6f55-6ba2-48e1-bef0-844a2833cd0b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4e832c33-01d6-4574-930f-cb1b96e396e5">
+<span class="eqno">(8)<a class="headerlink" href="#equation-4e832c33-01d6-4574-930f-cb1b96e396e5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
 \end{equation}\]</div>
 <p>You can do the last steps to obtain this solution using Sympy as well (I leave it to you to try it).</p>
@@ -1610,8 +1613,8 @@ $$(eq:logist_growth)</p>
 <div class="section" id="two-interacting-populations-the-lotka-volterra-predator-prey-model">
 <h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this headline">¶</a></h3>
 <p>Now for the classical Lotka-Volterra model that you encountered in the advanced Python week (without logistic growth for the consumer, $C$).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-169ca31c-7cc9-4446-8406-5cec7a12fa2c">
-<span class="eqno">(9)<a class="headerlink" href="#equation-169ca31c-7cc9-4446-8406-5cec7a12fa2c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0ed57eeb-8f37-4122-acd0-780d725efa7e">
+<span class="eqno">(9)<a class="headerlink" href="#equation-0ed57eeb-8f37-4122-acd0-780d725efa7e" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\\
 \frac{dC}{dt} &amp;= e a N C - z C
 \end{align}\]</div>
@@ -1804,16 +1807,36 @@ $$(eq:logist_growth)</p>
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Appendix-Data-Python.html" title="previous page">Data analyses  with Python &amp; Jupyter</a>
-    <a class='right-next' id="next-link" href="Appendix-Databases.html" title="next page">Databases <span class="tocSkip"></span></a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Appendix-Data-Python.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Data analyses  with Python &amp; Jupyter</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Appendix-Databases.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Databases <span class="tocSkip"></span></p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
