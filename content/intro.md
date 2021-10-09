@@ -57,8 +57,6 @@ Logical workflows are important, but don't get married to yours!
 </center></small>
 ```
 
-
-
 It is important that you work through the exercises and problems in each chapter. This document does not tell you every single thing you need to know to perform the exercises in it. In programming and computing, you learn faster by trying to solve problems (including computer crashes!) on your own, often by liberally googling the problem!
 
 
@@ -199,7 +197,7 @@ IDEs come with graphic user interfaces (GUI's, or "gooeys") of differing levels 
 
 ### Assessment
 
-Your computing coursework may be assessed. If you have been told that it will, please see [this Appendix](./notebooks/Appendix-Assessment.rst) if you are a *Masters student*. If you are an *Undergrad student*, you may have a computer based test, the format for which will be explained to you elsewhere.
+Your computing coursework may be assessed. If you have been told that it will, please see [this Appendix](./notebooks/Appendix-Assessment.md) if you are a *Masters student*. If you are an *Undergrad student*, you may have a computer based test, the format for which will be explained to you elsewhere.
 
 ---
 
