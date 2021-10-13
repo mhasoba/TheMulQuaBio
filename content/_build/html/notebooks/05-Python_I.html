@@ -493,6 +493,13 @@
    </code>
    function
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterator-vs-iterable-in-python">
+     Iterator vs Iterable in Python
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python-input-output">
@@ -885,11 +892,9 @@
 <p>Python was designed with readability and re-usability in mind. Time taken by programming + debugging + running is likely to be relatively lower in python than less intuitive or cluttered languages (e.g., FORTRAN, Perl).</p>
 <p>Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below).</p>
 <hr class="docutils" />
-<p>:::{figure} python-benchmarks
-<a class="reference internal" href="../_images/benchmarks.svg"><img alt="Language speeds" src="../_images/benchmarks.svg" width="700px" /></a></p>
+<a class="reference internal image-reference" href="../_images/benchmarks.svg"><img alt="Language speeds" src="../_images/benchmarks.svg" width="700px" /></a>
 <p><strong>Python’s numerical computing performance compared to some others</strong>. Smaller numbers are better. Note that the y-axis is in $\log_{10}$ scale. <br>
-(Source: <a class="reference external" href="http://julialang.org/">http://julialang.org/</a>)
-:::</p>
+(Source: <a class="reference external" href="http://julialang.org/">http://julialang.org/</a>)</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="python-versions">
@@ -897,7 +902,7 @@
 <p>We will use python 3. But most of the code in the Python chapters will work in python 2.7.xx as well. If you are interested in the python 2 vs 3 history, <a class="reference external" href="https://wiki.python.org/moin/Python2orPython3">read this</a>.</p>
 </div>
 <div class="section" id="some-terminology">
-<h3>Some terminology<a class="headerlink" href="#some-terminology" title="Permalink to this headline">¶</a></h3>
+<span id="python-i-some-terminology"></span><h3>Some terminology<a class="headerlink" href="#some-terminology" title="Permalink to this headline">¶</a></h3>
 <p><em>What does “float” mean?</em> You will inevitably run into some such jargon in this chapter. The main ones you need to know are (you will learn more about these along the way):</p>
 <table class="colwidths-auto table">
 <thead>
@@ -929,7 +934,7 @@
 <p>This Module vs. Class vs. Object business is confusing. These constructs are created to make an (object-oriented) programming language like Python more flexible and user friendly (though it might not seem so to you currently!). In practice, at least for your current purposes, you will not build you own python classes much (but will use the inbuilt Python classes).You will however write your own modules. More on all this later (in the second Python Chapter).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Data “structures” vs. “objects”</strong>: You will often see the terms “object” and “data structure” thrown around in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like Python and R. A data structure is just a “dumb” container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function. Python, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity — each object type has its own set of rules for operations and manipulations that Python uses when interpreting your commands.</p>
+<p><strong>Data “structures” vs. “objects”</strong>: You will often see the terms “object” and “data structure” used in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like Python and R. A data structure is just a “dumb” container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function. Python, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity — each object type has its own set of rules for operations and manipulations that Python uses when interpreting your commands.</p>
 </div>
 </div>
 </div>
@@ -948,31 +953,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren&#39;t special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&#39;re Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it&#39;s a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&#39;s do more of those!
 </pre></div>
 </div>
 </div>
@@ -1102,7 +1082,7 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interactive namespace is empty.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FoodWeb	 MyList	 a	 a_function	 my_iterable	 my_iterator	 this	 x	 y	 
 </pre></div>
 </div>
 </div>
@@ -1122,7 +1102,7 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a	 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FoodWeb	 MyList	 a	 a_function	 my_iterable	 my_iterator	 this	 x	 y	 
 </pre></div>
 </div>
 </div>
@@ -1134,9 +1114,17 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type    Data/Info
-----------------------------
-a          int     1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable      Type             Data/Info
+----------------------------------------
+FoodWeb       list             n=4
+MyList        list             n=5
+a             int              1
+a_function    function         &lt;function a_function at 0x7f68c78ddca0&gt;
+my_iterable   list             n=3
+my_iterator   list_iterator    &lt;list_iterator object at 0x7f68c7276610&gt;
+this          module           &lt;module &#39;this&#39; from &#39;/usr/lib/python3.8/this.py&#39;&gt;
+x             str              My string
+y             int              2
 </pre></div>
 </div>
 </div>
@@ -1170,7 +1158,7 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </div>
 </div>
 <div class="section" id="python-variables">
-<h2>Python variables<a class="headerlink" href="#python-variables" title="Permalink to this headline">¶</a></h2>
+<span id="python-i-python-variables"></span><h2>Python variables<a class="headerlink" href="#python-variables" title="Permalink to this headline">¶</a></h2>
 <p>Now, let’s continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1231,6 +1219,10 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 <p>The idea of what a class is should be a little bit clearer to you now.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like <code class="docutils literal notranslate"><span class="pre">R</span></code>, unlike <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>). This is convenient, but can make programs slow. More on efficient computing <a class="reference internal" href="06-Python_II.html"><span class="doc std std-doc">later</span></a>.</p>
+</div>
 </div>
 <div class="section" id="python-operators">
 <h2>Python operators<a class="headerlink" href="#python-operators" title="Permalink to this headline">¶</a></h2>
@@ -1416,7 +1408,7 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">27</span><span class="o">-</span><span class="n">cd60f97aa77f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">115</span><span class="o">-</span><span class="n">cd60f97aa77f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
 <span class="ne">TypeError</span>: can only concatenate str (not &quot;int&quot;) to str
@@ -1428,6 +1420,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;My string2&#39;
 </pre></div>
 </div>
 </div>
@@ -1445,6 +1442,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;My string88&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1452,16 +1454,17 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90
+</pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like <code class="docutils literal notranslate"><span class="pre">R</span></code>, unlike <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>). This is convenient, but can make programs slow. More on efficient computing <a class="reference internal" href="06-Python_II.html"><span class="doc std std-doc">later</span></a>.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="python-data-structures">
 <h2>Python data structures<a class="headerlink" href="#python-data-structures" title="Permalink to this headline">¶</a></h2>
-<p>python variables can be stored and manipulated in:</p>
+<p>Python variables can be stored and manipulated in:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p></p></th>
@@ -1483,6 +1486,10 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What about <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.array.html">arrays</a> as a data structure? We will learn about them later. These are inherently slower (less computationally efficient) than <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays, and are best used in the right context (e.g., they make basic data exploration or visualizations more convenient).</p>
+</div>
 <div class="section" id="lists">
 <h3>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
 <p>These are the most versatile, and can contain compound data. They are “mutable”, as will be illustrated below. Try this:</p>
@@ -1499,10 +1506,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.44
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
@@ -1511,6 +1528,16 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyList</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">123</span><span class="o">-</span><span class="mi">24</span><span class="n">c1fb55db2a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">MyList</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="ne">IndexError</span>: list index out of range
 </pre></div>
 </div>
 </div>
@@ -1529,6 +1556,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2.44, &#39;blue&#39;, True]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1544,10 +1576,31 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable      Type             Data/Info
+----------------------------------------
+FoodWeb       list             n=4
+MyList        list             n=5
+a             bool             True
+a_function    function         &lt;function a_function at 0x7f68c78ddca0&gt;
+my_iterable   list             n=3
+my_iterator   list_iterator    &lt;list_iterator object at 0x7f68c7276610&gt;
+this          module           &lt;module &#39;this&#39; from &#39;/usr/lib/python3.8/this.py&#39;&gt;
+x             str              My string
+y             int              2
+z             str              88
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">MyList</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
 </pre></div>
 </div>
 </div>
@@ -1558,14 +1611,24 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In Python3 there is no difference between “classes” and “types”. They are in most cases used as synonyms.</p>
+<p>In Python3 there is no difference between “class” and “type”. They are in most cases used as synonyms.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyList</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2.44, &#39;blue&#39;, True, &#39;a new item&#39;]
 </pre></div>
 </div>
 </div>
@@ -1580,6 +1643,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyList</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2.44, True, &#39;a new item&#39;]
 </pre></div>
 </div>
 </div>
@@ -1600,10 +1668,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;a&#39;, &#39;b&#39;), (&#39;a&#39;, &#39;c&#39;), (&#39;b&#39;, &#39;c&#39;), (&#39;c&#39;, &#39;c&#39;)]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FoodWeb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;b&#39;)
 </pre></div>
 </div>
 </div>
@@ -1614,10 +1692,25 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FoodWeb</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bbb&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">136</span><span class="o">-</span><span class="mi">5</span><span class="n">ea591e0b234</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">FoodWeb</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bbb&quot;</span>
+
+<span class="ne">TypeError</span>: &#39;tuple&#39; object does not support item assignment
 </pre></div>
 </div>
 </div>
@@ -1634,6 +1727,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FoodWeb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;bbb&#39;, &#39;ccc&#39;)
 </pre></div>
 </div>
 </div>
@@ -1658,11 +1756,8 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">a</span>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, [])
 </pre></div>
 </div>
 </div>
@@ -1671,6 +1766,24 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, [1000])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, [1000, 1000])
 </pre></div>
 </div>
 </div>
@@ -1679,6 +1792,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, [1000, 1000, (100, 10)])
 </pre></div>
 </div>
 </div>
@@ -1698,6 +1816,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, 3, 4, 5, 6)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1706,11 +1829,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 3, 4, 5, 6)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 3, 4, 5, 6)
 </pre></div>
 </div>
 </div>
@@ -1723,11 +1856,16 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;1&#39;, 2, True)
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="sets">
 <h3>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h3>
-<p>You can convert a list to an immutable “set” — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:</p>
+<p>You can convert a list to an mutable “set” — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
@@ -1748,6 +1886,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{5, 6, 7, 8, 9}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1762,10 +1905,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{5, 6}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">|</span> <span class="n">c</span> <span class="c1"># union</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{3, 4, 5, 6, 7, 8, 9}
 </pre></div>
 </div>
 </div>
@@ -1812,10 +1965,22 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Homo sapiens&#39;: 3200.0,
+ &#39;Escherichia coli&#39;: 4.6,
+ &#39;Arabidopsis thaliana&#39;: 157.0}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GenomeSize</span><span class="p">[</span><span class="s1">&#39;Arabidopsis thaliana&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>157.0
 </pre></div>
 </div>
 </div>
@@ -1833,6 +1998,14 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Homo sapiens&#39;: 3200.0,
+ &#39;Escherichia coli&#39;: 4.6,
+ &#39;Arabidopsis thaliana&#39;: 157.0,
+ &#39;Saccharomyces cerevisiae&#39;: 12.1}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1844,6 +2017,14 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GenomeSize</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Homo sapiens&#39;: 3200.0,
+ &#39;Escherichia coli&#39;: 4.6,
+ &#39;Arabidopsis thaliana&#39;: 157.0,
+ &#39;Saccharomyces cerevisiae&#39;: 12.1}
 </pre></div>
 </div>
 </div>
@@ -1859,6 +2040,14 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GenomeSize</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Homo sapiens&#39;: 3201.1,
+ &#39;Escherichia coli&#39;: 4.6,
+ &#39;Arabidopsis thaliana&#39;: 157.0,
+ &#39;Saccharomyces cerevisiae&#39;: 12.1}
 </pre></div>
 </div>
 </div>
@@ -1903,6 +2092,12 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4]
+[1, 2, 3, 4]
+</pre></div>
+</div>
+</div>
 </div>
 <p>So <code class="docutils literal notranslate"><span class="pre">b</span></code> changed as well! This is because <code class="docutils literal notranslate"><span class="pre">b</span></code> is just a “pointer” or “reference” to <code class="docutils literal notranslate"><span class="pre">a</span></code>, not an actual copy in memory.</p>
 <p>Now, try:</p>
@@ -1922,6 +2117,12 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4]
+[1, 2, 3]
+</pre></div>
+</div>
+</div>
 </div>
 <p>That worked! But what about more complex lists? Try this nested list:</p>
 <div class="cell docutils container">
@@ -1933,6 +2134,12 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2], [3, 4]]
+[[1, 2], [3, 4]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now, modify <code class="docutils literal notranslate"><span class="pre">a</span></code>, and then inspect both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
 <div class="cell docutils container">
@@ -1940,6 +2147,12 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">22</span> <span class="c1"># Note how I accessed this 2D list</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 22], [3, 4]]
+[[1, 22], [3, 4]]
 </pre></div>
 </div>
 </div>
@@ -1956,6 +2169,12 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">22</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 22], [3, 4]]
+[[1, 2], [3, 4]]
 </pre></div>
 </div>
 </div>
@@ -1976,10 +2195,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;-&quot;</span><span class="p">)</span> <span class="c1"># Substitute spaces &quot; &quot; with dashes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;-this-is-a-string-&#39;
 </pre></div>
 </div>
 </div>
@@ -1990,10 +2219,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">)</span><span class="c1"># Count the number of &quot;s&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
@@ -2005,11 +2244,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;this&#39;, &#39;is&#39;, &#39;a&#39;, &#39;string&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; is &quot;</span><span class="p">)</span> <span class="c1"># Split the string using &quot; is &quot; and make a list out of it</span>
 <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39; this&#39;, &#39;a string &#39;]
 </pre></div>
 </div>
 </div>
@@ -2021,10 +2270,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;this is a string&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; THIS IS A STRING &#39;
 </pre></div>
 </div>
 </div>
@@ -2035,10 +2294,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;THIS IS A STRING&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;WORD&#39;</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1"># can perform operations directy on a literal string </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;word&#39;
 </pre></div>
 </div>
 </div>
@@ -2058,20 +2327,24 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <p>Now let’s learn to write and run python code from a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. But first, some guidelines for good code-writing practices (also see the official <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">python style guide</a>):</p>
 <ul class="simple">
 <li><p>Wrap lines to be &lt;80 characters long. You can use parentheses <code class="docutils literal notranslate"><span class="pre">()</span></code> or signal that the line continues using a backslash <code class="docutils literal notranslate"><span class="pre">\</span></code></p></li>
-<li><p>Use either 4 spaces for indentation or tabs, but not both! (I use tabs!)</p></li>
+<li><p>Use either 4 spaces for indentation or tabs, but not both. (Spaces are the preferred indentation method according to <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#indentation">pep8</a>)</p></li>
 <li><p>Separate functions using a blank line</p></li>
 <li><p>When possible, write comments on separate lines</p></li>
 </ul>
 <p>Make sure you have chosen a particular indent type (space or tab) in whatever code IDE/editor you are using — indentation is all-important in python.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>IDEs / code editors, by default, will typically impose consistency of which indentation (tab or 4 spaces) is used in and across Python scripts. For example, 4 spaces is usually the default, and if you use a tab (easier, quicker) to indent code while writing, the editor will automatically convert it to 4 spaces. If your code editor does not do this automatically, you should be able to configure it to do so.</p>
+</div>
 <p>Furthermore,</p>
 <ul class="simple">
 <li><p>Use “docstrings” to document how to use the code, and <em>comments</em> to explain why and how the code works (we will learn about docstrings soon, below)</p></li>
 <li><p>Follow naming conventions, especially:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">_internal_global_variable</span></code> (for use inside module only)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">a_variable</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a_variable</span></code> (this is “snake case”; use underscores, not spaces in variable names)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_internal_variable</span></code> (allowed, but use as a module-specific variable only)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SOME_CONSTANT</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">a_function</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a_function</span></code> (and don’t use capital letters in function names)</p></li>
 </ul>
 </li>
 <li><p>Never call a variable <code class="docutils literal notranslate"><span class="pre">l</span></code> or <code class="docutils literal notranslate"><span class="pre">O</span></code> or <code class="docutils literal notranslate"><span class="pre">o</span></code> (<em>why not?</em> – you are likely to confuse it with <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code>!)</p></li>
@@ -2106,6 +2379,17 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+5
+6
+7
+8
+9
+10
+</pre></div>
+</div>
+</div>
 </div>
 <p>Of course, this code is simple, so directly pasting works. For more complex code, you may need to use the ipython <code class="docutils literal notranslate"><span class="pre">%cpaste</span></code> magic function.</p>
 </div>
@@ -2122,12 +2406,31 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></div>
+</div>
+</div>
 </div>
 <p>The start point is 0 because this is Python (it will start at 1 in R, for example). Note that if you try to run<code class="docutils literal notranslate"><span class="pre">range()</span></code> by itself, it will not actually produce a range of numbers. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>range(0, 10)
 </pre></div>
 </div>
 </div>
@@ -2143,6 +2446,15 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+</pre></div>
+</div>
+</div>
 </div>
 <p>Yes, it is slightly counter-intuitive that you have to use <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">6)</span></code> to generate numbers from 1 to 5, but that’s inevitable (and something to get used to) because of the fact that Python’s indexing starts at 0!</p>
 <p>You can also generate a set of indices that skips values using <code class="docutils literal notranslate"><span class="pre">range()</span></code> like so:</p>
@@ -2153,6 +2465,14 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+4
+6
+8
+</pre></div>
+</div>
+</div>
 </div>
 <p>Play around with range a bit, and also check out its documentation. This is a very important function that you will use again and again!</p>
 <div class="admonition note">
@@ -2160,9 +2480,99 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <p>The <code class="docutils literal notranslate"><span class="pre">range()</span></code> function in  Python 2 vs Python 3 are entirely different. The Python 3 range() function is actually what is called <code class="docutils literal notranslate"><span class="pre">xrange</span></code> in Python 2. There are in fact both <code class="docutils literal notranslate"><span class="pre">range</span></code> and <code class="docutils literal notranslate"><span class="pre">xrange</span></code> functions in Python 2. <code class="docutils literal notranslate"><span class="pre">xrange</span></code>, renamed as <code class="docutils literal notranslate"><span class="pre">range</span></code>, is now the default in Python 3 because it is more memory efficient.</p>
 </div>
 <p>OK, on to the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> in our loop. This is a temporary placeholder for the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> at each iteration of the loop (AKA the “iterator” variable). So, in the first iteration of the loop, i = 0, which is also the “index” value of the loop at that point. We have used <code class="docutils literal notranslate"><span class="pre">i</span></code>, but you can use any valid variable name, such as <code class="docutils literal notranslate"><span class="pre">j</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, or even <code class="docutils literal notranslate"><span class="pre">num</span></code> (try it).</p>
+<div class="section" id="iterator-vs-iterable-in-python">
+<h3>Iterator vs Iterable in Python<a class="headerlink" href="#iterator-vs-iterable-in-python" title="Permalink to this headline">¶</a></h3>
+<p>Loops in Python work by generating and then “iterating” over an “iterator”.</p>
+<p>In Python an “iterable” is an object that be can iterated over (e.g., a list or a tuple). In contrast, an “iterator”, also an object, can iterate over an iterable (go element by element through it). An object is called iterable if we can obtain an iterator from it. Built-in Python data structures - lists, tuples, dictionaries - as well as data types like strings are iterables.</p>
+<p>Thus, a list is iterable but not an iterator.</p>
+<p>Technically, in Python an iterator is generated by passing an iterable to an <code class="docutils literal notranslate"><span class="pre">iter()</span></code> method. Iterators themselves have a <code class="docutils literal notranslate"><span class="pre">__next__()</span></code> method, which returns the next item of the object.</p>
+<p>To see how what an iterator vs an iterable is, try out the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_iterable</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">my_iterable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">my_iterable</span><span class="p">)</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list_iterator
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span> <span class="c1"># same as my_iterator.__next__()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StopIteration</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">192</span><span class="o">-</span><span class="mi">26</span><span class="n">be35a80dc3</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">next</span><span class="p">(</span><span class="n">my_iterator</span><span class="p">)</span>
+
+<span class="ne">StopIteration</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once, when you iterated all items in an iterator, and no more data are available, and a <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> exception is raised.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>**Iterator vs Iterable in Python”: In Python an “Iterable” is an object that one can iterate over (e.g., a list or a tuple). In contrast, an “Iterator”, also an object, can iterate over (go element by element through) an iterable. Technically, it is generated an by passing an iterable to an <code class="docutils literal notranslate"><span class="pre">iter()</span></code> method in Python. Iterators themselves have a <code class="docutils literal notranslate"><span class="pre">__next__()</span></code> method, which returns the next item of the object. Note that every iterator is also an iterable, but not every iterable is an iterator. For example, a list is iterable but not an iterator.</p>
+<p><strong>Generator vs Iterator</strong>: By now you might be wondering what the difference between a <em>generator</em> and an <em>iterator</em> is. The simple answer is “Every iterator is not a generator, but every generator is an iterator”. Its of course not as simple as that because if you try to use the output of <code class="docutils literal notranslate"><span class="pre">range()</span></code> like a normal iterator (e.g., by applying the <code class="docutils literal notranslate"><span class="pre">next()</span></code> method to it), it will not work.  The proper answer is a bit technical, and we do not need to go into it; what matters is that <code class="docutils literal notranslate"><span class="pre">range()</span></code> works for you when looping! You can read more about the difference between generators and iterators <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#iterator-types">here</a> and <a class="reference external" href="https://www.geeksforgeeks.org/difference-between-iterator-vs-generator/">here</a>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="python-input-output">
@@ -2282,7 +2692,10 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
             <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>The rest of this session will use the <code class="docutils literal notranslate"><span class="pre">with</span></code> method of opening files.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The rest of this session will use the <code class="docutils literal notranslate"><span class="pre">with</span></code> method of opening files</p>
+</div>
 </div>
 <div class="section" id="handling-csv-s">
 <h3>Handling <code class="docutils literal notranslate"><span class="pre">csv</span></code>’s<a class="headerlink" href="#handling-csv-s" title="Permalink to this headline">¶</a></h3>
@@ -2368,12 +2781,44 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable      Type             Data/Info
+----------------------------------------
+FoodWeb       list             n=4
+GenomeSize    dict             n=4
+MyList        list             n=4
+a             range            range(0, 10)
+a_function    function         &lt;function a_function at 0x7f68c78ddca0&gt;
+b             list             n=2
+c             set              {3, 4, 5, 6}
+copy          module           &lt;module &#39;copy&#39; from &#39;/usr/lib/python3.8/copy.py&#39;&gt;
+foo           function         &lt;function foo at 0x7f68c78dd790&gt;
+i             int              8
+my_iterable   list             n=3
+my_iterator   list_iterator    &lt;list_iterator object at 0x7f68c7261880&gt;
+s             str               this is a string 
+t             str              this is a string
+this          module           &lt;module &#39;this&#39; from &#39;/usr/lib/python3.8/this.py&#39;&gt;
+x             int              11
+y             int              2
+z             str              88
+</pre></div>
+</div>
+</div>
 </div>
 <p>So, <code class="docutils literal notranslate"><span class="pre">foo</span></code> is a function stored in memory (at address given by the value <code class="docutils literal notranslate"><span class="pre">0x...</span></code> in the <code class="docutils literal notranslate"><span class="pre">Data/Info</span></code> column), and ready to serve you!</p>
 <p>Now “call it”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
@@ -2391,6 +2836,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2398,10 +2848,20 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
 </pre></div>
 </div>
 </div>
@@ -2418,6 +2878,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2432,13 +2897,18 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NoneType
+</pre></div>
+</div>
+</div>
 </div>
 <p>So, if we don’t explicitly <code class="docutils literal notranslate"><span class="pre">return</span></code> the value of <code class="docutils literal notranslate"><span class="pre">x</span></code>, the output of <code class="docutils literal notranslate"><span class="pre">foo</span></code> cannot be stored.</p>
 </div>
 <div class="section" id="conditionals">
 <h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h3>
 <p>Now that we know how to define functions in Python, let’s look at <em>conditionals</em> that allow you fine-grained control over the function’s operations.</p>
-<p>$\star$ Run the following functions <em>one by one</em>, by pasting the block in the ipython command line. First, type all them all in a script and save it as <code class="docutils literal notranslate"><span class="pre">cfexercises1.py</span></code>. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a keybinding (typically , ctrl+enter).</p>
+<p>$\star$ Run the following functions <em>one by one</em>, by pasting the block in the ipython command line. First, type all them all in a script and save it as <code class="docutils literal notranslate"><span class="pre">cfexercises1.py</span></code>. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a key binding (typically , <code class="docutils literal notranslate"><span class="pre">ctrl+enter</span></code>).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># What does each of foo_x do? </span>
 <span class="k">def</span> <span class="nf">foo_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.5</span>
@@ -2468,7 +2938,7 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <span class="k">def</span> <span class="nf">foo_5</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="c1"># a recursive function that calculates the factorial of x</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">foo5</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">foo_5</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
      
 <span class="k">def</span> <span class="nf">foo_6</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="c1"># Calculate the factorial of x in a different way</span>
     <span class="n">facto</span> <span class="o">=</span> <span class="mi">1</span>
@@ -2478,7 +2948,6 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
     <span class="k">return</span> <span class="n">facto</span>
 </pre></div>
 </div>
-<p>For example:</p>
 <p><em>Think about what each of the foo_x function does before running it.</em> Note that <code class="docutils literal notranslate"><span class="pre">foo_5</span></code> is a recursive function, meaning that the function <a class="reference external" href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">calls itself</a>.</p>
 </div>
 <div class="section" id="loops">
@@ -2511,10 +2980,8 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 <hr class="docutils" />
-<p>:::{figure} Geronimo
-<a class="reference internal" href="../_images/Geronimo.jpg"><img alt="ANOVA example" src="../_images/Geronimo.jpg" style="width: 300px;" /></a></p>
-<p><strong>In case you were wondering what Geronimo looked like.</strong> <br> (Source: Wikipedia)
-:::</p>
+<a class="reference internal image-reference" href="../_images/Geronimo.jpg"><img alt="Geronimo" src="../_images/Geronimo.jpg" style="width: 300px;" /></a>
+<p><strong>In case you were wondering what Geronimo looked like.</strong> <br> (Source: Wikipedia)</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="loops-and-conditionals-combined">
@@ -2560,6 +3027,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
 </div>
 <p>This is the same as writing the following loop:</p>
 <div class="cell docutils container">
@@ -2571,12 +3043,22 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Here’s another example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;LIST&quot;</span><span class="p">,</span><span class="s2">&quot;COMPREHENSIONS&quot;</span><span class="p">,</span><span class="s2">&quot;ARE&quot;</span><span class="p">,</span><span class="s2">&quot;COOL&quot;</span><span class="p">]]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;list&#39;, &#39;comprehensions&#39;, &#39;are&#39;, &#39;cool&#39;]
 </pre></div>
 </div>
 </div>
@@ -2591,6 +3073,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;list&#39;, &#39;comprehensions&#39;, &#39;are&#39;, &#39;cool&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Or this loop:</p>
 <div class="cell docutils container">
@@ -2600,6 +3087,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span> <span class="c1"># implicit loop</span>
     <span class="n">x_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;list&#39;, &#39;comprehensions&#39;, &#39;are&#39;, &#39;cool&#39;]
 </pre></div>
 </div>
 </div>
@@ -2616,6 +3108,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
 </div>
 <p>A list comprehension to do the same:</p>
 <div class="cell docutils container">
@@ -2623,6 +3120,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
 <span class="n">flattened_matrix</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">flattened_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 7, 8, 9]
 </pre></div>
 </div>
 </div>
@@ -2638,6 +3140,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;w&#39;, &#39;T&#39;, &#39;a&#39;, &#39;s&#39;}
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note that sets are unordered (the first letters don’t appear in the order you might expect).</p>
 <p>Now, the same as a set comprehension:</p>
@@ -2646,6 +3153,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="p">([</span><span class="s2">&quot;These&quot;</span><span class="p">,</span> <span class="s2">&quot;are&quot;</span><span class="p">,</span> <span class="s2">&quot;some&quot;</span><span class="p">,</span> <span class="s2">&quot;words&quot;</span><span class="p">])</span>
 <span class="n">first_letters</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">first_letters</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;w&#39;, &#39;T&#39;, &#39;a&#39;, &#39;s&#39;}
 </pre></div>
 </div>
 </div>
@@ -2703,30 +3215,61 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 
 <span class="k">if</span> <span class="n">_a_global</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
     <span class="n">_b_global</span> <span class="o">=</span> <span class="n">_a_global</span> <span class="o">+</span> <span class="mi">5</span> <span class="c1"># also a global variable</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, outside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, outside the function, the value of _b_global is&quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">a_function</span><span class="p">():</span>
-    <span class="n">_a_global</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># a local variable</span>
+    <span class="n">_a_global</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># a local variable</span>
     
-    <span class="k">if</span> <span class="n">_a_global</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_a_global</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
         <span class="n">_b_global</span> <span class="o">=</span> <span class="n">_a_global</span> <span class="o">+</span> <span class="mi">5</span> <span class="c1"># also a local variable</span>
     
-    <span class="n">_a_local</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_a_local</span> <span class="o">=</span> <span class="mi">3</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _b_global is &quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_local is &quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _b_global is&quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_local is&quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">a_function</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside the function, the value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside the function, the value of _b_global is &quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _a_global is (still)&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _b_global is (still)&quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _a_local is &quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before calling a_function, outside the function, the value of _a_global is 10
+Before calling a_function, outside the function, the value of _b_global is 15
+Inside the function, the value of _a_global is 4
+Inside the function, the value of _b_global is 9
+Inside the function, the value of _a_local is 3
+After calling a_function, outside the function, the value of _a_global is (still) 10
+After calling a_function, outside the function, the value of _b_global is (still) 15
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">263</span><span class="o">-</span><span class="n">bd878af2fd8d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _b_global is (still)&quot;</span><span class="p">,</span> <span class="n">_b_global</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> 
+<span class="ne">---&gt; </span><span class="mi">28</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _a_local is &quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;_a_local&#39; is not defined
 </pre></div>
 </div>
 </div>
 </div>
-<p>Thus,though <code class="docutils literal notranslate"><span class="pre">_a_global</span></code> was overwritten inside the function, what happened inside the function remained inside the function (<em>What happens in Vegas…</em>) . Note that <code class="docutils literal notranslate"><span class="pre">_a_global</span></code> is just a naming convention – nothing special about this variable as such.</p>
+<p>The things to note from this example:</p>
+<ul class="simple">
+<li><p>Although <code class="docutils literal notranslate"><span class="pre">_a_global</span></code> was overwritten inside the function, what happened inside the function remained inside the function (<em>What happens in Vegas…</em>)</p></li>
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">_a_local</span></code> does not persist outside the function (therefore you get the <code class="docutils literal notranslate"><span class="pre">NameError</span></code> at the end)</p></li>
+<li><p>Also note that <code class="docutils literal notranslate"><span class="pre">_a_global</span></code> is just a naming convention – nothing special about this variable as such.</p></li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong><code class="docutils literal notranslate"><span class="pre">return</span></code>ing a <code class="docutils literal notranslate"><span class="pre">None</span></code>:</strong> Why <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">None</span></code> in the above script? The short answer is, it good practice to do so, much as putting in an explicit <code class="docutils literal notranslate"><span class="pre">exit</span></code> in a shell script is. The <strong><code class="docutils literal notranslate"><span class="pre">None</span></code></strong> keyword is used to define a NULL value (no value at all). It is is actually a special dummy value and has a data type of its own called <code class="docutils literal notranslate"><span class="pre">NoneType</span></code> (try <code class="docutils literal notranslate"><span class="pre">type(None)</span></code>). As such, Python functions do have a default return value, which is in fact <code class="docutils literal notranslate"><span class="pre">None</span></code> if no return expression is given, or <code class="docutils literal notranslate"><span class="pre">return</span></code> is given on its own.</p>
@@ -2739,14 +3282,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <span class="k">def</span> <span class="nf">a_function</span><span class="p">():</span>
     <span class="n">_a_local</span> <span class="o">=</span> <span class="mi">4</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value _a_local is &quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value _a_local is&quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">a_function</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inside the function, the value _a_local is 4
+Inside the function, the value of _a_global is 10
+Outside the function, the value of _a_global is 10
 </pre></div>
 </div>
 </div>
@@ -2757,21 +3307,29 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_a_global</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, outside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">a_function</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">_a_global</span>
     <span class="n">_a_global</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">_a_local</span> <span class="o">=</span> <span class="mi">4</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value _a_local is &quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside the function, the value _a_local is&quot;</span><span class="p">,</span> <span class="n">_a_local</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">a_function</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside the function, the value of _a_global now is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling a_function, outside the function, the value of _a_global now is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before calling a_function, outside the function, the value of _a_global is 10
+Inside the function, the value of _a_global is 5
+Inside the function, the value _a_local is 4
+After calling a_function, outside the function, the value of _a_global now is 5
 </pre></div>
 </div>
 </div>
@@ -2787,17 +3345,24 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
         <span class="k">global</span> <span class="n">_a_global</span>
         <span class="n">_a_global</span> <span class="o">=</span> <span class="mi">20</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
 
     <span class="n">_a_function2</span><span class="p">()</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling _a_function2, value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling _a_function2, value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">a_function</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of a_global in main workspace / namespace is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of a_global in main workspace / namespace is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before calling a_function, value of _a_global is 10
+After calling _a_function2, value of _a_global is 10
+The value of a_global in main workspace / namespace is 20
 </pre></div>
 </div>
 </div>
@@ -2814,28 +3379,35 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
         <span class="k">global</span> <span class="n">_a_global</span>
         <span class="n">_a_global</span> <span class="o">=</span> <span class="mi">20</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before calling a_function, value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
 
     <span class="n">_a_function2</span><span class="p">()</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling _a_function2, value of _a_global is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After calling _a_function2, value of _a_global is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
 
 <span class="n">a_function</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of a_global in main workspace / namespace is &quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of a_global in main workspace / namespace is&quot;</span><span class="p">,</span> <span class="n">_a_global</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before calling a_function, value of _a_global is 10
+After calling _a_function2, value of _a_global is 20
+The value of a_global in main workspace / namespace is 20
 </pre></div>
 </div>
 </div>
 </div>
 <p>Now, because <code class="docutils literal notranslate"><span class="pre">_a_global</span></code> was defined in advance (outside the first function), it get modified when changes in the inner function (it does not exist as a local within the scope of <code class="docutils literal notranslate"><span class="pre">_a_function</span></code>, but is “inherited” from the main scope / workspace / namespace).</p>
 <p>$\star$ Collect all blocks of code above illustrating variable scope into one script called <code class="docutils literal notranslate"><span class="pre">scope.py</span></code> and test it (run and check for errors).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>In general, avoid assigning globals because you run the risk of “exposing” unwanted variables to all functions within your workspace / namespace.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>In some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as  global at the start of the script/program, but a better, safer option is to create a separate module (say, called <code class="docutils literal notranslate"><span class="pre">config.py</span></code>) to hold the global variables and then <code class="docutils literal notranslate"><span class="pre">import</span></code> it where needed.</p>
+<p>But in some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as global at the start of the script/program, but a better, safer option is to create a separate module (say, called <code class="docutils literal notranslate"><span class="pre">config.py</span></code>) to hold the global variables and then <code class="docutils literal notranslate"><span class="pre">import</span></code> it where needed.</p>
 </div>
 <div class="section" id="importance-of-the-return-directive">
 <h3>Importance of the <code class="docutils literal notranslate"><span class="pre">return</span></code> directive<a class="headerlink" href="#importance-of-the-return-directive" title="Permalink to this headline">¶</a></h3>
@@ -2859,10 +3431,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>before, my_list = [1, 2, 3]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modify_list_1</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>got [1, 2, 3]
+set to [1, 2, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -2873,8 +3456,13 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>after, my_list = [1, 2, 3]
+</pre></div>
 </div>
-<p>The original list remains the same even though it is changed inside the function!</p>
+</div>
+</div>
+<p>The original list remains the same even though it is changed inside the function, as you would expect (what happens in Vegas…)</p>
 <p>This is where the <code class="docutils literal notranslate"><span class="pre">return</span></code> directive becomes important. Now modify the function to <code class="docutils literal notranslate"><span class="pre">return</span></code> the value of the input list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2893,10 +3481,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>got [1, 2, 3]
+set to [1, 2, 3, 4]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;after, my_list =&#39;</span><span class="p">,</span> <span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>after, my_list = [1, 2, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -2916,6 +3515,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>before, my_list = [1, 2, 3]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2923,10 +3527,21 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>got [1, 2, 3]
+changed to [1, 2, 3, 4]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;after, my_list =&#39;</span><span class="p">,</span> <span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>after, my_list = [1, 2, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -2988,6 +3603,11 @@ then edit the <code class="docutils literal notranslate"><span class="pre">ipyth
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is a boilerplate
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="components-of-the-python-program">
 <h3>Components of the Python program<a class="headerlink" href="#components-of-the-python-program" title="Permalink to this headline">¶</a></h3>
@@ -3012,6 +3632,35 @@ stripped. Hence, you can access your docstrings at run time. It is a good idea t
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">boilerplate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on module boilerplate:
+
+NAME
+    boilerplate
+
+DESCRIPTION
+    Description of this program or application.
+    You can use several lines
+
+FUNCTIONS
+    main(argv)
+        Main entry point of the program
+
+DATA
+    __appname__ = &#39;[application name here]&#39;
+    __license__ = &#39;License for this code/program&#39;
+
+VERSION
+    0.0.1
+
+AUTHOR
+    Your Name (your@email.address)
+
+FILE
+    /home/mhasoba/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/boilerplate.py
 </pre></div>
 </div>
 </div>
@@ -3054,6 +3703,11 @@ stripped. Hence, you can access your docstrings at run time. It is a good idea t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;boilerplate&#39; from &#39;/home/mhasoba/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/boilerplate.py&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>So when you ran your module by itself using <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">boilerplate.py</span></code> (as you did above by opening a separate bash shell), having <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">=</span> <span class="pre">&quot;__main__&quot;</span></code> made the Python interpreter assign the string <code class="docutils literal notranslate"><span class="pre">&quot;__main__&quot;</span></code> to the <code class="docutils literal notranslate"><span class="pre">__name__</span></code> variable inside the module, so that the your module execution was forced to start with the control flow <em>first</em> passing through the <code class="docutils literal notranslate"><span class="pre">main</span></code> function.</p>
 <p>On the other hand, if <em>some other module</em> (not <code class="docutils literal notranslate"><span class="pre">boilerplate</span></code>) is the main program, and you want to import the boilerplate module into it (with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">boilerplate</span></code>), the interpreter looks at the filename of your module (<code class="docutils literal notranslate"><span class="pre">boilerplate.py</span></code>), strips off the <code class="docutils literal notranslate"><span class="pre">.py</span></code>, and assigns that string (<code class="docutils literal notranslate"><span class="pre">boilerplate</span></code>) to the imported module’s <code class="docutils literal notranslate"><span class="pre">__name__</span></code> variable instead, skipping the command(s) under the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement of <code class="docutils literal notranslate"><span class="pre">boilerplate.py</span></code>.</p>
@@ -3077,11 +3731,23 @@ stripped. Hence, you can access your docstrings at run time. It is a good idea t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This program is being run by itself
+This module&#39;s name is: __main__
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now, try:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">using_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I am being imported from another module
+This module&#39;s name is: using_name
 </pre></div>
 </div>
 </div>
@@ -3110,6 +3776,13 @@ stripped. Hence, you can access your docstrings at run time. It is a good idea t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the name of the script:  sysargv.py
+Number of arguments:  1
+The arguments are:  [&#39;sysargv.py&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3117,10 +3790,24 @@ stripped. Hence, you can access your docstrings at run time. It is a good idea t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the name of the script:  sysargv.py
+Number of arguments:  3
+The arguments are:  [&#39;sysargv.py&#39;, &#39;var1&#39;, &#39;var2&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">sysargv</span><span class="o">.</span><span class="n">py</span> <span class="mi">1</span> <span class="mi">2</span> <span class="n">var3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the name of the script:  sysargv.py
+Number of arguments:  4
+The arguments are:  [&#39;sysargv.py&#39;, &#39;1&#39;, &#39;2&#39;, &#39;var3&#39;]
 </pre></div>
 </div>
 </div>
@@ -3228,11 +3915,129 @@ this main function where the printing of the line “This is a boilerplate” ha
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22 is Even!
+33 is Odd!
+The largest divisor of 120 is 5
+No divisor found for 121!
+60 is not a prime: 2 is a divisor
+False
+59 is a prime!
+True
+2 is a prime!
+3 is a prime!
+4 is not a prime: 2 is a divisor
+5 is a prime!
+6 is not a prime: 2 is a divisor
+7 is a prime!
+8 is not a prime: 2 is a divisor
+9 is not a prime: 3 is a divisor
+10 is not a prime: 2 is a divisor
+11 is a prime!
+12 is not a prime: 2 is a divisor
+13 is a prime!
+14 is not a prime: 2 is a divisor
+15 is not a prime: 3 is a divisor
+16 is not a prime: 2 is a divisor
+17 is a prime!
+18 is not a prime: 2 is a divisor
+19 is a prime!
+20 is not a prime: 2 is a divisor
+21 is not a prime: 3 is a divisor
+22 is not a prime: 2 is a divisor
+23 is a prime!
+24 is not a prime: 2 is a divisor
+25 is not a prime: 5 is a divisor
+26 is not a prime: 2 is a divisor
+27 is not a prime: 3 is a divisor
+28 is not a prime: 2 is a divisor
+29 is a prime!
+30 is not a prime: 2 is a divisor
+31 is a prime!
+32 is not a prime: 2 is a divisor
+33 is not a prime: 3 is a divisor
+34 is not a prime: 2 is a divisor
+35 is not a prime: 5 is a divisor
+36 is not a prime: 2 is a divisor
+37 is a prime!
+38 is not a prime: 2 is a divisor
+39 is not a prime: 3 is a divisor
+40 is not a prime: 2 is a divisor
+41 is a prime!
+42 is not a prime: 2 is a divisor
+43 is a prime!
+44 is not a prime: 2 is a divisor
+45 is not a prime: 3 is a divisor
+46 is not a prime: 2 is a divisor
+47 is a prime!
+48 is not a prime: 2 is a divisor
+49 is not a prime: 7 is a divisor
+50 is not a prime: 2 is a divisor
+51 is not a prime: 3 is a divisor
+52 is not a prime: 2 is a divisor
+53 is a prime!
+54 is not a prime: 2 is a divisor
+55 is not a prime: 5 is a divisor
+56 is not a prime: 2 is a divisor
+57 is not a prime: 3 is a divisor
+58 is not a prime: 2 is a divisor
+59 is a prime!
+60 is not a prime: 2 is a divisor
+61 is a prime!
+62 is not a prime: 2 is a divisor
+63 is not a prime: 3 is a divisor
+64 is not a prime: 2 is a divisor
+65 is not a prime: 5 is a divisor
+66 is not a prime: 2 is a divisor
+67 is a prime!
+68 is not a prime: 2 is a divisor
+69 is not a prime: 3 is a divisor
+70 is not a prime: 2 is a divisor
+71 is a prime!
+72 is not a prime: 2 is a divisor
+73 is a prime!
+74 is not a prime: 2 is a divisor
+75 is not a prime: 3 is a divisor
+76 is not a prime: 2 is a divisor
+77 is not a prime: 7 is a divisor
+78 is not a prime: 2 is a divisor
+79 is a prime!
+80 is not a prime: 2 is a divisor
+81 is not a prime: 3 is a divisor
+82 is not a prime: 2 is a divisor
+83 is a prime!
+84 is not a prime: 2 is a divisor
+85 is not a prime: 5 is a divisor
+86 is not a prime: 2 is a divisor
+87 is not a prime: 3 is a divisor
+88 is not a prime: 2 is a divisor
+89 is a prime!
+90 is not a prime: 2 is a divisor
+91 is not a prime: 7 is a divisor
+92 is not a prime: 2 is a divisor
+93 is not a prime: 3 is a divisor
+94 is not a prime: 2 is a divisor
+95 is not a prime: 5 is a divisor
+96 is not a prime: 2 is a divisor
+97 is a prime!
+98 is not a prime: 2 is a divisor
+99 is not a prime: 3 is a divisor
+100 is not a prime: 2 is a divisor
+There are 25 primes between 2 and 100
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+</pre></div>
+</div>
+</div>
 </div>
 <p>You can also call any of the functions within <code class="docutils literal notranslate"><span class="pre">control_flow.py</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">even_or_odd</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;11 is Odd!&#39;
 </pre></div>
 </div>
 </div>
@@ -3353,6 +4158,40 @@ this main function where the printing of the line “This is a boilerplate” ha
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22 is Even!
+33 is Odd!
+Trying:
+    even_or_odd(10)
+Expecting:
+    &#39;10 is Even!&#39;
+ok
+Trying:
+    even_or_odd(5)
+Expecting:
+    &#39;5 is Odd!&#39;
+ok
+Trying:
+    even_or_odd(3.2)
+Expecting:
+    &#39;3 is Odd!&#39;
+ok
+Trying:
+    even_or_odd(-2)
+Expecting:
+    &#39;-2 is Even!&#39;
+ok
+2 items had no tests:
+    __main__
+    __main__.main
+1 items passed all tests:
+   4 tests in __main__.even_or_odd
+4 tests in 3 items.
+4 passed and 0 failed.
+Test passed.
+</pre></div>
+</div>
+</div>
 </div>
 <p>You can also run doctest “on the fly”, without writing <code class="docutils literal notranslate"><span class="pre">doctest.testmod()</span></code> in the code, by typing in a terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m doctest -v your_function_to_test.py
@@ -3386,6 +4225,25 @@ this main function where the printing of the line “This is a boilerplate” ha
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> debugme.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">~/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Teaching</span><span class="o">/</span><span class="n">SilBioComp</span><span class="o">/</span><span class="n">TheMulQuaBio</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">debugme</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">z</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">buggyfunc</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nn">~/Documents/Teaching/SilBioComp/TheMulQuaBio/content/code/debugme.py</span> in <span class="ni">buggyfunc</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>         <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">z</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+
+<span class="ne">ZeroDivisionError</span>: division by zero
 </pre></div>
 </div>
 </div>
@@ -3709,14 +4567,12 @@ Genus
 <li><p>Include an appropriate docstring (if one is missing) at the beginning of <code class="docutils literal notranslate"><span class="pre">*each*</span></code> of each of the python script/ module files you have written, as well as at the start of every function (sub-module) in a module.</p></li>
 <li><p>Also annotate your code lines as much and as often as necessary using <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p></li>
 <li><p>Keep all code files organized in <code class="docutils literal notranslate"><span class="pre">code</span></code> in your weekly directory in your coursework repository (e.g., in CMEECourseWork/Week2).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code> all your code and data files to your git repository by given deadline.*</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code> all your code and data files to your git repository by given deadline.</p></li>
 </ul>
 <hr class="docutils" />
-<p>:::{figure} XKCD-python
-<a class="reference internal" href="../_images/python.png"><img alt="Language speeds" src="../_images/python.png" style="width: 300px;" /></a></p>
+<a class="reference internal image-reference" href="../_images/python.png"><img alt="XKCD on Python" src="../_images/python.png" style="width: 300px;" /></a>
 <p><strong>Is python the most common answer to your daily programming needs?</strong> Possibly! <br>
-(Source: <a class="reference external" href="http://xkcd.com">XKCD</a>)
-:::</p>
+(Source: <a class="reference external" href="http://xkcd.com">XKCD</a>)</p>
 </div>
 </div>
 <hr class="docutils" />
@@ -3750,7 +4606,7 @@ Genus
 <h3>Elements of the Python program<a class="headerlink" href="#elements-of-the-python-program" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Read more about the python shebang <a class="reference external" href="https://www.python.org/dev/peps/pep-0394/#recommendation">here</a></p></li>
-<li><p>See the <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">official docstring conventions</a>.</p></li>
+<li><p>See the <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">official docstring conventions</a></p></li>
 </ul>
 </div>
 <div class="section" id="errors-and-debugging">
@@ -3762,7 +4618,7 @@ Genus
 <div class="section" id="functions-modules-and-classes">
 <h3>Functions, Modules, and Classes<a class="headerlink" href="#functions-modules-and-classes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>For functions vs. modules vs. classes in Python, have a look <a class="reference external" href="http://learnpythonthehardway.org/book/ex40.html">at this</a>.</p></li>
+<li><p>For functions vs. modules vs. classes in Python, have a look <a class="reference external" href="http://learnpythonthehardway.org/book/ex40.html">at this</a></p></li>
 </ul>
 </div>
 <div class="section" id="id5">

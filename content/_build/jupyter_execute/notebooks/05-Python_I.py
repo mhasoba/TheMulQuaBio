@@ -3,11 +3,11 @@
 
 # # Biological Computing in Python I
 
-# **First, the UNIX Chapter's challenge question!**
+# <!-- **First, the UNIX Chapter's challenge question!**
 # ```bash
 # find . -type f -exec ls -s {} \; | sort -n | head -10
 # ```
-# *What is the command doing? How has it been built (explain the components)?*
+# *What is the command doing? How has it been built (explain the components)?* -->
 
 # ## Introduction
 # 
@@ -45,12 +45,10 @@
 # Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
 # 
 # ---
-# :::{figure} python-benchmarks
 # <img src="./graphics/benchmarks.svg" alt="Language speeds" width="700px">
 # 
 # **Python's numerical computing performance compared to some others**. Smaller numbers are better. Note that the y-axis is in $\log_{10}$ scale. <br>
 # (Source: <http://julialang.org/>)
-# :::
 # 
 # ---
 
@@ -58,6 +56,7 @@
 # 
 # We will use python 3. But most of the code in the Python chapters will work in python 2.7.xx as well. If you are interested in the python 2 vs 3 history, [read this](https://wiki.python.org/moin/Python2orPython3).
 
+# (05-Python_I:Some-terminology)=
 # ### Some terminology 
 # 
 # *What does "float" mean?* You will inevitably run into some such jargon in this chapter. The main ones you need to know are (you will learn more about these along the way):
@@ -74,7 +73,7 @@
 # This Module vs. Class vs. Object business is confusing. These constructs are created to make an (object-oriented) programming language like Python more flexible and user friendly (though it might not seem so to you currently!). In practice, at least for your current purposes, you will not build you own python classes much (but will use the inbuilt Python classes).You will however write your own modules. More on all this later (in the second Python Chapter). 
 # 
 # ```{note}
-# **Data "structures" vs. "objects"**: You will often see the terms "object" and "data structure" thrown around in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like Python and R. A data structure is just a "dumb" container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function. Python, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity &mdash; each object type has its own set of rules for operations and manipulations that Python uses when interpreting your commands. 
+# **Data "structures" vs. "objects"**: You will often see the terms "object" and "data structure" used in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like Python and R. A data structure is just a "dumb" container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function. Python, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity &mdash; each object type has its own set of rules for operations and manipulations that Python uses when interpreting your commands. 
 # ```
 
 # ## Getting started with Python
@@ -93,7 +92,7 @@
 
 # Now type:
 
-# In[1]:
+# In[88]:
 
 
 import this
@@ -109,19 +108,19 @@ import this
 # 
 # Now, try some simple operations:
 
-# In[1]:
+# In[89]:
 
 
 2 + 2 # Summation; note that comments still start with #
 
 
-# In[2]:
+# In[90]:
 
 
 2 * 2 # Multiplication
 
 
-# In[3]:
+# In[91]:
 
 
 2 / 2 # division
@@ -129,19 +128,19 @@ import this
 
 # To specify an integer division, use `//`:
 
-# In[4]:
+# In[92]:
 
 
 2//2
 
 
-# In[5]:
+# In[93]:
 
 
 2 > 3 # logical operation
 
 
-# In[6]:
+# In[94]:
 
 
 2 >= 2 # another one
@@ -179,7 +178,7 @@ import this
 
 # You can try any or all of these now. For example:
 
-# In[7]:
+# In[95]:
 
 
 get_ipython().run_line_magic('who', '')
@@ -187,19 +186,19 @@ get_ipython().run_line_magic('who', '')
 
 # That is, there are no objects in your workspace yet. Let's create one:
 
-# In[8]:
+# In[96]:
 
 
 a = 1
 
 
-# In[9]:
+# In[97]:
 
 
 get_ipython().run_line_magic('who', '')
 
 
-# In[10]:
+# In[98]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -211,7 +210,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # This will give you detailed information about this variable (which is an object, belonging to a particular class, because this is python!). You can also check a variable's type: 
 
-# In[11]:
+# In[99]:
 
 
 type(a)
@@ -229,32 +228,33 @@ type(a)
 # 
 # ```
 
+# (05-Python_I:Python-variables)=
 # ## Python variables
 # 
 # Now, let's continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:
 
-# In[12]:
+# In[100]:
 
 
 a = 2 #integer
 type(a)
 
 
-# In[13]:
+# In[101]:
 
 
 a = 2. #Float
 type(a)
 
 
-# In[14]:
+# In[102]:
 
 
 a = "Two" #String
 type(a)
 
 
-# In[15]:
+# In[103]:
 
 
 a = True #Boolean
@@ -270,6 +270,10 @@ type(a)
 # The class bool is a subclass of the class int, and cannot be subclassed.
 # ```
 # The idea of what a class is should be a little bit clearer to you now. 
+# 
+# ```{note}
+# In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like `R`, unlike `C` or `FORTRAN`). This is convenient, but can make programs slow. More on efficient computing [later](./06-Python_II.ipynb).
+# ```
 # 
 # 
 # ## Python operators
@@ -297,25 +301,25 @@ type(a)
 # 
 # Try the following:
 
-# In[16]:
+# In[104]:
 
 
 2 == 2
 
 
-# In[17]:
+# In[105]:
 
 
 2 != 2
 
 
-# In[18]:
+# In[106]:
 
 
 3 / 2
 
 
-# In[19]:
+# In[107]:
 
 
 3 // 2
@@ -323,49 +327,49 @@ type(a)
 
 # *What happened here*? This is an integer division, so the decimal part is lost.  
 
-# In[20]:
+# In[108]:
 
 
 'hola, ' + 'mi llamo Samraat' #why not learn two languages at the same time?! 
 
 
-# In[21]:
+# In[109]:
 
 
 x = 5
 
 
-# In[22]:
+# In[110]:
 
 
 x + 3
 
 
-# In[23]:
+# In[111]:
 
 
 y = 2
 
 
-# In[24]:
+# In[112]:
 
 
 x + y
 
 
-# In[25]:
+# In[113]:
 
 
 x = 'My string'
 
 
-# In[26]:
+# In[114]:
 
 
 x + ' now has more stuff'
 
 
-# In[27]:
+# In[115]:
 
 
 x + y
@@ -373,37 +377,33 @@ x + y
 
 # Doesn't work. No problem, we can convert from one type to another:
 
-# In[ ]:
+# In[116]:
 
 
 x + str(y)
 
 
-# In[ ]:
+# In[117]:
 
 
 z = '88'
 
 
-# In[ ]:
+# In[118]:
 
 
 x + z
 
 
-# In[ ]:
+# In[119]:
 
 
 y + int(z)
 
 
-# ```{note}
-# In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like `R`, unlike `C` or `FORTRAN`). This is convenient, but can make programs slow. More on efficient computing [later](./06-Python_II.ipynb).
-# ```
-# 
 # ## Python data structures
 # 
-# python variables can be stored and manipulated in:
+# Python variables can be stored and manipulated in:
 # 
 # | | |
 # |:-  |:- | 
@@ -411,24 +411,29 @@ y + int(z)
 # |*Tuple*: |like a list, but "immutable" — like a read only list, enclosed in parentheses, `( )`|
 # |*Dictionary*: | a kind of "hash table" of key-value pairs enclosed by curly braces, `{ }` — key can be number or string, values can be any  python object|
 # |*numpy arrays*: |Fast, compact, convenient for numerical computing — more on this later|
+# 
+# ```{note}
+# What about [Pandas](https://pandas.pydata.org/) [arrays](https://pandas.pydata.org/docs/reference/api/pandas.array.html) as a data structure? We will learn about them later. These are inherently slower (less computationally efficient) than `numpy` arrays, and are best used in the right context (e.g., they make basic data exploration or visualizations more convenient). 
+# ```
+# 
 
 # ### Lists
 # 
 # These are the most versatile, and can contain compound data. They are "mutable", as will be illustrated below. Try this:
 
-# In[ ]:
+# In[120]:
 
 
 MyList = [3,2.44,'green',True]
 
 
-# In[ ]:
+# In[121]:
 
 
 MyList[1]
 
 
-# In[ ]:
+# In[122]:
 
 
 MyList[0]
@@ -436,7 +441,7 @@ MyList[0]
 
 # *Note that python "indexing" starts at 0, not 1!*
 
-# In[ ]:
+# In[123]:
 
 
 MyList[4]
@@ -444,19 +449,19 @@ MyList[4]
 
 # As expected!
 
-# In[ ]:
+# In[124]:
 
 
 MyList[2] = 'blue'
 
 
-# In[ ]:
+# In[125]:
 
 
 MyList
 
 
-# In[ ]:
+# In[126]:
 
 
 MyList.append('a new item')
@@ -464,41 +469,41 @@ MyList.append('a new item')
 
 # Note `.append`. This is an operation (a "method") that can be applied to any "object" with the "class" list. You can check the type of any object: 
 
-# In[ ]:
+# In[127]:
 
 
 get_ipython().run_line_magic('whos', '')
 
 
-# In[ ]:
+# In[128]:
 
 
 type(MyList)
 
 
-# In[ ]:
+# In[129]:
 
 
 print(type(MyList))
 
 
 # ```{note}
-# In Python3 there is no difference between "classes" and "types". They are in most cases used as synonyms.
+# In Python3 there is no difference between "class" and "type". They are in most cases used as synonyms.
 # ```
 
-# In[ ]:
+# In[130]:
 
 
 MyList
 
 
-# In[ ]:
+# In[131]:
 
 
 del MyList[2]
 
 
-# In[ ]:
+# In[132]:
 
 
 MyList
@@ -514,26 +519,26 @@ MyList
 # 
 # Try this:
 
-# In[ ]:
+# In[133]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[ ]:
+# In[134]:
 
 
 FoodWeb[0]
 
 
-# In[ ]:
+# In[135]:
 
 
 FoodWeb[0][0]
 
 
-# In[ ]:
+# In[136]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -543,13 +548,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[ ]:
+# In[137]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[ ]:
+# In[138]:
 
 
 FoodWeb[0]
@@ -570,28 +575,28 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[ ]:
+# In[139]:
 
 
 a = (1, 2, []) 
 a
 
 
-# In[ ]:
+# In[140]:
 
 
 a[2].append(1000)
 a
 
 
-# In[ ]:
+# In[141]:
 
 
 a[2].append(1000)
 a
 
 
-# In[ ]:
+# In[142]:
 
 
 a[2].append((100,10))
@@ -600,27 +605,27 @@ a
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[ ]:
+# In[143]:
 
 
 a = (1, 2, 3)
 
 
-# In[ ]:
+# In[144]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[ ]:
+# In[145]:
 
 
 c = b[1:]
 c
 
 
-# In[ ]:
+# In[146]:
 
 
 b = b[1:]
@@ -629,7 +634,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[ ]:
+# In[147]:
 
 
 a = ("1", 2, True)
@@ -638,39 +643,39 @@ a
 
 # ### Sets
 # 
-# You can convert a list to an immutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
+# You can convert a list to an mutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[ ]:
+# In[148]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[ ]:
+# In[149]:
 
 
 b = set(a)
 
 
-# In[ ]:
+# In[150]:
 
 
 b
 
 
-# In[ ]:
+# In[151]:
 
 
 c = set([3,4,5,6])
 
 
-# In[ ]:
+# In[152]:
 
 
 b & c # intersection
 
 
-# In[ ]:
+# In[153]:
 
 
 b | c # union
@@ -690,43 +695,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[ ]:
+# In[154]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[ ]:
+# In[155]:
 
 
 GenomeSize
 
 
-# In[ ]:
+# In[156]:
 
 
 GenomeSize['Arabidopsis thaliana']
 
 
-# In[ ]:
+# In[157]:
 
 
 GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
-# In[ ]:
+# In[158]:
 
 
 GenomeSize
 
 
-# In[ ]:
+# In[159]:
 
 
 GenomeSize['Escherichia coli'] = 4.6 
 
 
-# In[ ]:
+# In[160]:
 
 
 GenomeSize
@@ -734,13 +739,13 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[ ]:
+# In[161]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[ ]:
+# In[162]:
 
 
 GenomeSize
@@ -765,7 +770,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[ ]:
+# In[163]:
 
 
 a = [1, 2, 3]
@@ -774,13 +779,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[ ]:
+# In[164]:
 
 
 a.append(4)
 
 
-# In[ ]:
+# In[165]:
 
 
 print(a)
@@ -791,14 +796,14 @@ print(b)
 # 
 # Now, try:
 
-# In[ ]:
+# In[166]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[ ]:
+# In[167]:
 
 
 a.append(4)
@@ -808,7 +813,7 @@ print(b)
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[ ]:
+# In[168]:
 
 
 a = [[1, 2], [3, 4]]
@@ -819,7 +824,7 @@ print(b)
 
 # Now, modify `a`, and then inspect both `a` and `b`:
 
-# In[ ]:
+# In[169]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -833,7 +838,7 @@ print(b)
 # 
 # The solution is to do a "deep" copy:
 
-# In[ ]:
+# In[170]:
 
 
 import copy
@@ -855,65 +860,65 @@ print(b)
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[ ]:
+# In[171]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[ ]:
+# In[172]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[ ]:
+# In[173]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[ ]:
+# In[174]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[ ]:
+# In[175]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[ ]:
+# In[176]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[ ]:
+# In[177]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[ ]:
+# In[178]:
 
 
 s.upper()
 
 
-# In[ ]:
+# In[179]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[ ]:
+# In[180]:
 
 
 'WORD'.lower() # can perform operations directy on a literal string 
@@ -934,20 +939,24 @@ s.upper().strip() # can perform sequential operations
 # Now let's learn to write and run python code from a `.py` file. But first, some guidelines for good code-writing practices (also see the official [python style guide](https://www.python.org/dev/peps/pep-0008/?)):
 # 
 # * Wrap lines to be <80 characters long. You can use parentheses `()` or signal that the line continues using a backslash `\`
-# * Use either 4 spaces for indentation or tabs, but not both! (I use tabs!)
+# * Use either 4 spaces for indentation or tabs, but not both. (Spaces are the preferred indentation method according to [pep8](https://www.python.org/dev/peps/pep-0008/#indentation))
 # * Separate functions using a blank line
 # * When possible, write comments on separate lines
 # 
 # Make sure you have chosen a particular indent type (space or tab) in whatever code IDE/editor you are using — indentation is all-important in python. 
+# 
+# ```{tip}
+# IDEs / code editors, by default, will typically impose consistency of which indentation (tab or 4 spaces) is used in and across Python scripts. For example, 4 spaces is usually the default, and if you use a tab (easier, quicker) to indent code while writing, the editor will automatically convert it to 4 spaces. If your code editor does not do this automatically, you should be able to configure it to do so.
+# ```
 
 # Furthermore,
 # 
 # * Use "docstrings" to document how to use the code, and *comments* to explain why and how the code works (we will learn about docstrings soon, below)
 # * Follow naming conventions, especially:
-#     * `_internal_global_variable` (for use inside module only)
-#     * `a_variable`
+#     * `a_variable` (this is "snake case"; use underscores, not spaces in variable names)
+#     * `_internal_variable` (allowed, but use as a module-specific variable only)
 #     * `SOME_CONSTANT`
-#     * `a_function`
+#     * `a_function` (and don't use capital letters in function names)
 # * Never call a variable `l` or `O` or `o` (*why not?* – you are likely to confuse it with `1` or `0`!)
 # * Use spaces around operators and after commas:
 # ```python
@@ -967,7 +976,7 @@ s.upper().strip() # can perform sequential operations
 # ```
 # Now, assign some integer value to a variable `x`:
 
-# In[ ]:
+# In[181]:
 
 
 x = 11
@@ -975,7 +984,7 @@ x = 11
 
 # Then, paste this code at the ipython prompt (`ctrl+shift+v`), and hit enter: 
 
-# In[ ]:
+# In[182]:
 
 
 for i in range(x):
@@ -993,7 +1002,7 @@ for i in range(x):
 # 
 # First, let's understand the `range()` function. This function generates, as the name suggests, a range of integers depending on the input to it. So, for example, range(10) generates 10 numbers, starting at 0:
 
-# In[ ]:
+# In[183]:
 
 
 for i in range(10):
@@ -1002,7 +1011,7 @@ for i in range(10):
 
 # The start point is 0 because this is Python (it will start at 1 in R, for example). Note that if you try to run`range()` by itself, it will not actually produce a range of numbers. For example:
 
-# In[ ]:
+# In[184]:
 
 
 a = range(10)
@@ -1017,7 +1026,7 @@ a
 
 # You can also use `range()` to generate numbers (and loop over) from a specific range of integers. For example, to generate a range from 1 to 5, do:
 
-# In[ ]:
+# In[185]:
 
 
 for i in range(1, 6):
@@ -1028,7 +1037,7 @@ for i in range(1, 6):
 # 
 # You can also generate a set of indices that skips values using `range()` like so:
 
-# In[ ]:
+# In[186]:
 
 
 for i in range(2, 10, 2): # skip odd numbers
@@ -1043,8 +1052,62 @@ for i in range(2, 10, 2): # skip odd numbers
 
 # OK, on to the variable `i` in our loop. This is a temporary placeholder for the value of `x` at each iteration of the loop (AKA the "iterator" variable). So, in the first iteration of the loop, i = 0, which is also the "index" value of the loop at that point. We have used `i`, but you can use any valid variable name, such as `j`, `k`, or even `num` (try it). 
 # 
-# ```{note}
-# **Iterator vs Iterable in Python": In Python an "Iterable" is an object that one can iterate over (e.g., a list or a tuple). In contrast, an "Iterator", also an object, can iterate over (go element by element through) an iterable. Technically, it is generated an by passing an iterable to an `iter()` method in Python. Iterators themselves have a `__next__()` method, which returns the next item of the object. Note that every iterator is also an iterable, but not every iterable is an iterator. For example, a list is iterable but not an iterator.
+# ### Iterator vs Iterable in Python
+# 
+# Loops in Python work by generating and then "iterating" over an "iterator". 
+# 
+# In Python an "iterable" is an object that be can iterated over (e.g., a list or a tuple). In contrast, an "iterator", also an object, can iterate over an iterable (go element by element through it). An object is called iterable if we can obtain an iterator from it. Built-in Python data structures - lists, tuples, dictionaries - as well as data types like strings are iterables. 
+# 
+# Thus, a list is iterable but not an iterator.
+# 
+# Technically, in Python an iterator is generated by passing an iterable to an `iter()` method. Iterators themselves have a `__next__()` method, which returns the next item of the object. 
+# 
+# To see how what an iterator vs an iterable is, try out the following:
+
+# In[187]:
+
+
+my_iterable = [1,2,3]
+
+type(my_iterable)
+
+
+# In[188]:
+
+
+my_iterator = iter(my_iterable)
+
+type(my_iterator)
+
+
+# In[189]:
+
+
+next(my_iterator) # same as my_iterator.__next__()
+
+
+# In[190]:
+
+
+next(my_iterator)
+
+
+# In[191]:
+
+
+next(my_iterator)
+
+
+# In[192]:
+
+
+next(my_iterator)
+
+
+# Once, when you iterated all items in an iterator, and no more data are available, and a `StopIteration` exception is raised.
+
+# ```{note} 
+# **Generator vs Iterator**: By now you might be wondering what the difference between a *generator* and an *iterator* is. The simple answer is "Every iterator is not a generator, but every generator is an iterator". Its of course not as simple as that because if you try to use the output of `range()` like a normal iterator (e.g., by applying the `next()` method to it), it will not work.  The proper answer is a bit technical, and we do not need to go into it; what matters is that `range()` works for you when looping! You can read more about the difference between generators and iterators [here](https://docs.python.org/3/library/stdtypes.html#iterator-types) and [here](https://www.geeksforgeeks.org/difference-between-iterator-vs-generator/). 
 # ```
 
 # ## Python Input/Output
@@ -1177,7 +1240,10 @@ for i in range(2, 10, 2): # skip odd numbers
 #             print(line)
 # ```
 # 
-# **The rest of this session will use the `with` method of opening files.**
+# ```{note}
+# The rest of this session will use the `with` method of opening files
+# 
+# ```
 
 # ### Handling `csv`'s
 # 
@@ -1256,7 +1322,7 @@ for i in range(2, 10, 2): # skip odd numbers
 # 
 # In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
 
-# In[ ]:
+# In[193]:
 
 
 def foo(x):
@@ -1267,7 +1333,7 @@ def foo(x):
 
 # Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
 
-# In[ ]:
+# In[194]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -1277,7 +1343,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # Now "call it":
 
-# In[ ]:
+# In[195]:
 
 
 foo(2)
@@ -1287,7 +1353,7 @@ foo(2)
 # 
 # To see this distinction, let's try the following.
 
-# In[ ]:
+# In[196]:
 
 
 def foo(x):
@@ -1298,13 +1364,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[ ]:
+# In[197]:
 
 
 y
 
 
-# In[ ]:
+# In[198]:
 
 
 type(y)
@@ -1312,7 +1378,7 @@ type(y)
 
 # Thus, the output of `foo` was stored as a new variable `y`. 
 
-# In[ ]:
+# In[199]:
 
 
 def foo(x):
@@ -1323,13 +1389,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[ ]:
+# In[200]:
 
 
 y
 
 
-# In[ ]:
+# In[201]:
 
 
 type(y)
@@ -1341,7 +1407,7 @@ type(y)
 # 
 # Now that we know how to define functions in Python, let's look at *conditionals* that allow you fine-grained control over the function's operations.
 # 
-# $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a keybinding (typically , ctrl+enter). 
+# $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a key binding (typically , `ctrl+enter`). 
 # 
 # 
 # ```python
@@ -1374,7 +1440,7 @@ type(y)
 # def foo_5(x): # a recursive function that calculates the factorial of x
 #     if x == 1:
 #         return 1
-#     return x * foo5(x - 1)
+#     return x * foo_5(x - 1)
 #      
 # def foo_6(x): # Calculate the factorial of x in a different way
 #     facto = 1
@@ -1383,8 +1449,6 @@ type(y)
 #         x = x - 1
 #     return facto
 # ```
-# 
-# For example:
 
 # *Think about what each of the foo_x function does before running it.* Note that `foo_5` is a recursive function, meaning that the function [calls itself](https://en.wikipedia.org/wiki/Recursion_(computer_science)). 
 
@@ -1420,11 +1484,10 @@ type(y)
 # ```
 # 
 # ---
-# :::{figure} Geronimo
-# <img src="./graphics/Geronimo.jpg" alt="ANOVA example" width="300px">
+# 
+# <img src="./graphics/Geronimo.jpg" alt="Geronimo" width="300px">
 # 
 # **In case you were wondering what Geronimo looked like.** <br> (Source: Wikipedia) 
-# :::
 # 
 # ---
 # 
@@ -1470,7 +1533,7 @@ type(y)
 # 
 # Let's look at how list comprehensions work:
 
-# In[ ]:
+# In[202]:
 
 
 x = [i for i in range(10)]
@@ -1479,7 +1542,7 @@ print(x)
 
 # This is the same as writing the following loop:
 
-# In[ ]:
+# In[203]:
 
 
 x = []
@@ -1490,7 +1553,7 @@ print(x)
 
 # Here's another example:  
 
-# In[ ]:
+# In[204]:
 
 
 x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
@@ -1499,7 +1562,7 @@ print(x)
 
 # Which is same as the loop:
 
-# In[ ]:
+# In[205]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1510,7 +1573,7 @@ print(x)
 
 # Or this loop:
 
-# In[ ]:
+# In[206]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1522,7 +1585,7 @@ print(x_new)
 
 # How about a nested loop? Let's try an example:
 
-# In[ ]:
+# In[207]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1535,7 +1598,7 @@ print(flattened_matrix)
 
 # A list comprehension to do the same:
 
-# In[ ]:
+# In[208]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1545,7 +1608,7 @@ print(flattened_matrix)
 
 # Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
 
-# In[ ]:
+# In[209]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1559,7 +1622,7 @@ print(first_letters)
 # 
 # Now, the same as a set comprehension: 
 
-# In[ ]:
+# In[210]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1619,35 +1682,44 @@ print(first_letters)
 # 
 # First try this:
 
-# In[ ]:
+# In[263]:
 
 
 _a_global = 10 # a global variable
 
 if _a_global >= 5:
     _b_global = _a_global + 5 # also a global variable
+    
+print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
+print("Before calling a_function, outside the function, the value of _b_global is", _b_global)
 
 def a_function():
-    _a_global = 5 # a local variable
+    _a_global = 4 # a local variable
     
-    if _a_global >= 5:
+    if _a_global >= 4:
         _b_global = _a_global + 5 # also a local variable
     
-    _a_local = 4
+    _a_local = 3
     
-    print("Inside the function, the value of _a_global is ", _a_global)
-    print("Inside the function, the value of _b_global is ", _b_global)
-    print("Inside the function, the value of _a_local is ", _a_local)
+    print("Inside the function, the value of _a_global is", _a_global)
+    print("Inside the function, the value of _b_global is", _b_global)
+    print("Inside the function, the value of _a_local is", _a_local)
     
     return None
 
 a_function()
 
-print("Outside the function, the value of _a_global is ", _a_global)
-print("Outside the function, the value of _b_global is ", _b_global)
+print("After calling a_function, outside the function, the value of _a_global is (still)", _a_global)
+print("After calling a_function, outside the function, the value of _b_global is (still)", _b_global)
+
+print("After calling a_function, outside the function, the value of _a_local is ", _a_local)
 
 
-# Thus,though `_a_global` was overwritten inside the function, what happened inside the function remained inside the function (*What happens in Vegas...*) . Note that `_a_global` is just a naming convention &ndash; nothing special about this variable as such. 
+# The things to note from this example: 
+# 
+# * Although `_a_global` was overwritten inside the function, what happened inside the function remained inside the function (*What happens in Vegas...*)
+# * The variable `_a_local` does not persist outside the function (therefore you get the `NameError` at the end)
+# * Also note that `_a_global` is just a naming convention &ndash; nothing special about this variable as such. 
 # 
 # ```{tip}
 # **`return`ing a `None`:** Why `return None` in the above script? The short answer is, it good practice to do so, much as putting in an explicit `exit` in a shell script is. The **`None`** keyword is used to define a NULL value (no value at all). It is is actually a special dummy value and has a data type of its own called `NoneType` (try `type(None)`). As such, Python functions do have a default return value, which is in fact `None` if no return expression is given, or `return` is given on its own. 
@@ -1655,7 +1727,7 @@ print("Outside the function, the value of _b_global is ", _b_global)
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
-# In[ ]:
+# In[265]:
 
 
 _a_global = 10
@@ -1663,8 +1735,8 @@ _a_global = 10
 def a_function():
     _a_local = 4
     
-    print("Inside the function, the value _a_local is ", _a_local)
-    print("Inside the function, the value of _a_global is ", _a_global)
+    print("Inside the function, the value _a_local is", _a_local)
+    print("Inside the function, the value of _a_global is", _a_global)
     
     return None
 
@@ -1677,33 +1749,33 @@ print("Outside the function, the value of _a_global is", _a_global)
 # 
 # If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
 
-# In[ ]:
+# In[266]:
 
 
 _a_global = 10
 
-print("Outside the function, the value of _a_global is", _a_global)
+print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
 
 def a_function():
     global _a_global
     _a_global = 5
     _a_local = 4
     
-    print("Inside the function, the value of _a_global is ", _a_global)
-    print("Inside the function, the value _a_local is ", _a_local)
+    print("Inside the function, the value of _a_global is", _a_global)
+    print("Inside the function, the value _a_local is", _a_local)
     
     return None
 
 a_function()
 
-print("Outside the function, the value of _a_global now is", _a_global)
+print("After calling a_function, outside the function, the value of _a_global now is", _a_global)
 
 
 # So, using the `global` specification converted `_a_global` to a truly global variable that became available outside that function (overwriting the original `_a_global`). 
 # 
 # The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
 
-# In[ ]:
+# In[267]:
 
 
 def a_function():
@@ -1713,24 +1785,24 @@ def a_function():
         global _a_global
         _a_global = 20
     
-    print("Before calling a_function, value of _a_global is ", _a_global)
+    print("Before calling a_function, value of _a_global is", _a_global)
 
     _a_function2()
     
-    print("After calling _a_function2, value of _a_global is ", _a_global)
+    print("After calling _a_function2, value of _a_global is", _a_global)
     
     return None
 
 a_function()
 
-print("The value of a_global in main workspace / namespace is ", _a_global)
+print("The value of a_global in main workspace / namespace is", _a_global)
 
 
 # That is, using the `global` keyword inside the inner function `_a_function2` resulted in changing the value of `_a_global` in the main worspace / namespace to 20, but within the scope of `_a_function`, remained 10! 
 # 
 # Compare the above with this: 
 
-# In[ ]:
+# In[262]:
 
 
 _a_global = 10
@@ -1741,27 +1813,27 @@ def a_function():
         global _a_global
         _a_global = 20
     
-    print("Before calling a_function, value of _a_global is ", _a_global)
+    print("Before calling a_function, value of _a_global is", _a_global)
 
     _a_function2()
     
-    print("After calling _a_function2, value of _a_global is ", _a_global)
+    print("After calling _a_function2, value of _a_global is", _a_global)
 
 a_function()
 
-print("The value of a_global in main workspace / namespace is ", _a_global)
+print("The value of a_global in main workspace / namespace is", _a_global)
 
 
 # Now, because `_a_global` was defined in advance (outside the first function), it get modified when changes in the inner function (it does not exist as a local within the scope of `_a_function`, but is "inherited" from the main scope / workspace / namespace).
 # 
 # $\star$ Collect all blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
 # 
-# ```{note}
+# ```{warning}
 # In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. 
 # ```
 # 
 # ```{tip}
-# In some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as  global at the start of the script/program, but a better, safer option is to create a separate module (say, called `config.py`) to hold the global variables and then `import` it where needed.
+# But in some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as global at the start of the script/program, but a better, safer option is to create a separate module (say, called `config.py`) to hold the global variables and then `import` it where needed.
 # ```
 
 # ### Importance of the `return` directive 
@@ -1770,7 +1842,7 @@ print("The value of a_global in main workspace / namespace is ", _a_global)
 # 
 # Let's look at an example to understand this: 
 
-# In[ ]:
+# In[268]:
 
 
 def modify_list_1(some_list):
@@ -1779,7 +1851,7 @@ def modify_list_1(some_list):
     print('set to', some_list)
 
 
-# In[ ]:
+# In[269]:
 
 
 my_list = [1, 2, 3]
@@ -1787,23 +1859,23 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[ ]:
+# In[270]:
 
 
 modify_list_1(my_list)
 
 
-# In[ ]:
+# In[271]:
 
 
 print('after, my_list =', my_list)
 
 
-# The original list remains the same even though it is changed inside the function!
+# The original list remains the same even though it is changed inside the function, as you would expect (what happens in Vegas...)
 # 
 # This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
 
-# In[ ]:
+# In[220]:
 
 
 def modify_list_2(some_list):
@@ -1813,13 +1885,13 @@ def modify_list_2(some_list):
     return some_list
 
 
-# In[ ]:
+# In[221]:
 
 
 my_list = modify_list_2(my_list)
 
 
-# In[ ]:
+# In[222]:
 
 
 print('after, my_list =', my_list)
@@ -1829,7 +1901,7 @@ print('after, my_list =', my_list)
 # 
 # And if we do want to modify the original list *in place*, use `append`:
 
-# In[ ]:
+# In[223]:
 
 
 def modify_list_3(some_list):
@@ -1842,13 +1914,13 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[ ]:
+# In[224]:
 
 
 modify_list_3(my_list)
 
 
-# In[ ]:
+# In[225]:
 
 
 print('after, my_list =', my_list)
@@ -1915,13 +1987,13 @@ print('after, my_list =', my_list)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[ ]:
+# In[226]:
 
 
 cd "../code"  
 
 
-# In[ ]:
+# In[227]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -1944,13 +2016,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[ ]:
+# In[228]:
 
 
 import boilerplate
 
 
-# In[ ]:
+# In[229]:
 
 
 help(boilerplate)
@@ -1986,7 +2058,7 @@ help(boilerplate)
 # 
 # How do you import? Simply as (in python or ipython shell):
 
-# In[ ]:
+# In[230]:
 
 
 import boilerplate
@@ -1994,7 +2066,7 @@ import boilerplate
 
 # Then type
 
-# In[ ]:
+# In[231]:
 
 
 boilerplate
@@ -2022,7 +2094,7 @@ boilerplate
 # 
 # Now run it:
 
-# In[ ]:
+# In[232]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -2030,7 +2102,7 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[ ]:
+# In[233]:
 
 
 import using_name
@@ -2057,19 +2129,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[ ]:
+# In[234]:
 
 
 get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[ ]:
+# In[235]:
 
 
 run sysargv.py var1 var2
 
 
-# In[ ]:
+# In[236]:
 
 
 run sysargv.py 1 2 var3
@@ -2181,7 +2253,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[ ]:
+# In[237]:
 
 
 run control_flow.py
@@ -2189,7 +2261,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[ ]:
+# In[238]:
 
 
 even_or_odd(11)
@@ -2315,7 +2387,7 @@ even_or_odd(11)
 # 
 # Now run it:
 
-# In[ ]:
+# In[239]:
 
 
 run test_control_flow.py -v
@@ -2357,7 +2429,7 @@ run test_control_flow.py -v
 # ```
 # Now run it:
 
-# In[ ]:
+# In[240]:
 
 
 get_ipython().run_line_magic('run', 'debugme.py')
@@ -2477,7 +2549,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # Let's expand our previous `debugme.py` example to understand how this works. 
 
-# In[16]:
+# In[241]:
 
 
 def buggyfunc(x):
@@ -2499,7 +2571,7 @@ buggyfunc(20)
 # 
 # You can also "catch" specific types of errors. For example, modify the code further:
 
-# In[15]:
+# In[242]:
 
 
 def buggyfunc(x):
@@ -2637,16 +2709,15 @@ buggyfunc(20)
 # *  Include an appropriate docstring (if one is missing) at the beginning of `*each*` of each of the python script/ module files you have written, as well as at the start of every function (sub-module) in a module.
 # *  Also annotate your code lines as much and as often as necessary using `#`.
 # *  Keep all code files organized in `code` in your weekly directory in your coursework repository (e.g., in CMEECourseWork/Week2). 
-# * `git add`, `commit` and `push` all your code and data files to your git repository by given deadline.*
+# * `git add`, `commit` and `push` all your code and data files to your git repository by given deadline.
 # 
 # 
 # ---
-# :::{figure} XKCD-python
-# <img src="./graphics/python.png" alt="Language speeds" width="300px">
+# 
+# <img src="./graphics/python.png" alt="XKCD on Python" width="300px">
 # 
 # **Is python the most common answer to your daily programming needs?** Possibly! <br>
 # (Source: [XKCD](http://xkcd.com))
-# :::
 # 
 # ---
 
@@ -2670,14 +2741,14 @@ buggyfunc(20)
 # 
 # ### Elements of the Python program 
 # * Read more about the python shebang [here](https://www.python.org/dev/peps/pep-0394/#recommendation)
-# * See the [official docstring conventions](https://www.python.org/dev/peps/pep-0257/).
+# * See the [official docstring conventions](https://www.python.org/dev/peps/pep-0257/)
 # 
 # ### Errors and Debugging
 # 
 # * https://docs.python.org/3/tutorial/errors.html
 # 
 # ### Functions, Modules, and Classes
-# * For functions vs. modules vs. classes in Python, have a look [at this]( http://learnpythonthehardway.org/book/ex40.html).
+# * For functions vs. modules vs. classes in Python, have a look [at this]( http://learnpythonthehardway.org/book/ex40.html)
 # 
 # ### Python Packages
 # * Look up <https://docs.python.org/3/library/index.html> – Read about the packages you think will be important to you

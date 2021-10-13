@@ -97,6 +97,10 @@ Using the points obtained by each student in each week based on the criteria gob
 The weekly log files are to help you spot general, as well as programming language-specific issues with your computing coursework on a
 regular basis. You may and should fix bugs and other problems that the feedback logs bring to your attention. The assessor will have a look at how much you addressed the issues in the final assessment (by re-running all the weeks' scripts). The final assessment will necessarily be more subjective than the weekly assessments, because the goal is to provide an overall, summative picture of how you did and what you can improve on. You will get feedback if these issues needed to be addressed in the final written assessment. The final marks will be based upon the weekly points and a [coursework marking criteria](<https://github.com/mhasoba/TheMulQuaBio/raw/master/content/readings/MARKING_CRITERIA.pdf>). The contribution of each week to the overall marks will be up- or down-weighed based upon the difficulty level.
 
+## Plagiarism
+
+Students are encouraged to collaborate on these courses (e.g., CMEE). You may often exchange code snippets (solutions to sub-problems within the bigger problem, if you like) or blocks of code to test them. Also, two implementations of a coding solution / algorithm might often be very convergent and relatively similar. However, unless it is a groupwork practical (see above), extremely similar or identical scripts / code files will be reviewed carefully by markers. To this end,  the assessment script will perform a diff on pairs of (non-groupwork) code files to detect "inordinate" degrees of similarity.
+
 *Alright, full steam ahead then!*
 
 <!-- You could make a separate directory called ``TestData`` as the default input and reference the main Data file in the ``.gitignore`` file (see the `Git Chapter <03-Git.ipynb>`__) -->
