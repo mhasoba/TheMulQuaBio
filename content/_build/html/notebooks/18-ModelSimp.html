@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -116,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,13 +130,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -158,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -433,21 +446,21 @@ model that says that none of your variables are important. Hopefully, there is a
 <a class="reference internal image-reference" href="../_images/minmodflow.png"><img alt="../_images/minmodflow.png" src="../_images/minmodflow.png" style="width: 600px;" /></a>
 <div class="section" id="chapter-aims">
 <h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">¶</a></h3>
-<p>The main aim of this chapter<a class="reference external" href="#fn1">$^{[1]}$</a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
+<p>The main aim of this chapter<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
 </div>
 <div class="section" id="the-process-of-model-simplification">
 <h3>The process of model simplification<a class="headerlink" href="#the-process-of-model-simplification" title="Permalink to this headline">¶</a></h3>
 <p>Model simplification is an iterative process. The flow diagram below shows how it works: at each stage you try and find an acceptable simplification. If successful, then you start again with the new simpler model and try and find a way to simplify this, until eventually, you can’t find anything more to remove.</p>
 <a class="reference internal image-reference" href="../_images/maxmodflow.png"><img alt="../_images/maxmodflow.png" src="../_images/maxmodflow.png" style="width: 600px;" /></a>
-<p>As always, we can use an $F$-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the $F$-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
+<p>As always, we can use an <span class="math notranslate nohighlight">\(F\)</span>-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
 </div>
 </div>
 <div class="section" id="an-example">
 <h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
 <p>We’ll be using the mammal dataset for this practical, so once again:</p>
-<p>$\star$ Make sure you have changed the working directory to your stats module <code class="docutils literal notranslate"><span class="pre">code</span></code> folder.</p>
-<p>$\star$  Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MyModelSimp.R</span></code>.</p>
-<p>$\star$  Load the mammals data into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to your stats module <code class="docutils literal notranslate"><span class="pre">code</span></code> folder.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MyModelSimp.R</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Load the mammals data into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/MammalData.csv&#39;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
@@ -473,7 +486,7 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 </div>
 </div>
-<p>$\star$ Copy the code above into your script and run it</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code above into your script and run it</p>
 <p>Check that the data you end up with has this structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -505,8 +518,8 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 </div>
 </div>
-<p>$\star$ Add this model-fitting step in your script.</p>
-<p>$\star$ Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add this model-fitting step in your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
 <p>Scared? Don’t be! There are a number of points to this exercise:</p>
 <ol class="simple">
 <li><p>These tables show exactly the kind of output you’ve seen before. Sure, there are lots of rows but each row is just asking whether a model term (<code class="docutils literal notranslate"><span class="pre">anova</span></code>) or a model coefficient (<code class="docutils literal notranslate"><span class="pre">summary</span></code>) is significant.</p></li>
@@ -563,14 +576,14 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 <p>The first lines are the <em>main effects</em>, which are all significant or near significant. Then there are the six interactions. One of these is very significant: <code class="docutils literal notranslate"><span class="pre">logBM:GroundDwelling</span></code>,
 which suggests that the slope of log C value with body mass differs between ground dwelling and non-ground dwelling species. The other interactions are non-significant although some are close.</p>
-<p>$\star$ Run this model in your script.</p>
-<p>$\star$ Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
-<p>$\star$ Generate and inspect the model diagnostic plots.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run this model in your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Generate and inspect the model diagnostic plots.</p>
 </div>
 <div class="section" id="id1">
 <h2>Model simplification<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s simplify the model we fitted above. Model simplification is not as straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
-<p>But how much is “tiny amount”? This is what we will learn now by using the $F$-test.   Again, remember: significance of the $F$-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
+<p>But how much is “tiny amount”? This is what we will learn now by using the <span class="math notranslate nohighlight">\(F\)</span>-test.   Again, remember: significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
 <p>The first question is: <em>what terms can you remove from a model</em>? Obviously, you only want to remove non-significant terms, but there is another rule – you cannot remove a main effect or an interaction while those main effects or interactions are present in a more complex interaction. For example, in the model <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">a:b</span> <span class="pre">+</span> <span class="pre">a:c</span> <span class="pre">+</span> <span class="pre">b:c</span></code>, you cannot drop <code class="docutils literal notranslate"><span class="pre">c</span></code> without dropping both <code class="docutils literal notranslate"><span class="pre">a:c</span></code> and <code class="docutils literal notranslate"><span class="pre">b:c</span></code>.</p>
 <p>The R function <code class="docutils literal notranslate"><span class="pre">drop.scope</span></code> tells you what you can drop from a model. Some examples:</p>
 <div class="cell docutils container">
@@ -718,14 +731,14 @@ which suggests that the slope of log C value with body mass differs between grou
 <ol class=list-inline><li>'logLS:logBM'</li><li>'logLS:TrophicLevel'</li><li>'logLS:GroundDwelling'</li><li>'logBM:TrophicLevel'</li><li>'logBM:GroundDwelling'</li></ol>
 </div></div>
 </div>
-<p>$\star$ Add this first simplification to your script and re-run it.</p>
-<p>$\star$  Look at the output above and decide what is the next possible term to delete</p>
-<p>$\star$ Using the code above as a model, create <code class="docutils literal notranslate"><span class="pre">model3</span></code> as the next simplification. (remember to use <code class="docutils literal notranslate"><span class="pre">model2</span></code> in your <code class="docutils literal notranslate"><span class="pre">update</span></code> call and not <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add this first simplification to your script and re-run it.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Look at the output above and decide what is the next possible term to delete</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above as a model, create <code class="docutils literal notranslate"><span class="pre">model3</span></code> as the next simplification. (remember to use <code class="docutils literal notranslate"><span class="pre">model2</span></code> in your <code class="docutils literal notranslate"><span class="pre">update</span></code> call and not <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
 </div>
 <div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Now for a more difficult exercise:</p>
-<p>$\star$ Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where $N$ is the current step).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where <span class="math notranslate nohighlight">\(N\)</span> is the current step).</p>
 <p>It can be important to consider both <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables. It can be worth trying to remove things that look significant in one table but not the other — some terms can explain significant variation on the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table but the coefficients are not significant.</p>
 <p>Remember to remove <em>terms</em>: with categorical variables, several coefficients in the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table may come from one term in the model and have to be removed together.</p>
 <p>When you have got your final model, save the model as an R data file: <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='myFinalModel.Rda')</span></code>.</p>

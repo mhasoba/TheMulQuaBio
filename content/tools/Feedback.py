@@ -1,5 +1,5 @@
 """
-	Code to give automated feedback on TheMulQuaBio computing practical work.  
+	Code to provide automated feedback on TheMulQuaBio computing practical work.  
 
 	USAGE 
 	
@@ -25,8 +25,11 @@
 					. If used, repo is pulled and contents of feedback
 					directory pushed, nothing else.
 """
+################ Imports #####################
+
 import subprocess, os, csv, argparse, re, time
 
+################ Functions #####################
 def run_popen(command, timeout):
 	""" 
 	Runs a sub-program in subprocess.Popen using the given COMMAND and
@@ -37,16 +40,18 @@ def run_popen(command, timeout):
 
 	p = subprocess.Popen('timeout ' + str(timeout) + 's ' + command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-	stdout, stderr = p.communicate()
+	try:
+		stdout, stderr = p.communicate(timeout=timeout)
+	except subprocess.TimeoutExpired:
+		p.kill()
+		stdout, stderr = p.communicate()
 	
 	end = time.time()
 	
 	return p, stdout.decode(), stderr.decode(), (end - start) # decode: binary --> string
 
-################################################
-################ Main Code #####################		
-################################################
 
+################ Main Code #####################		
 # set up the argument parser 
 parser = argparse.ArgumentParser("Gives Automated Feedback on CMEE Masters weekly computing practical work")
 
@@ -69,6 +74,18 @@ parser.add_argument("--gitpush_fin", action="store_true",
 								help="Whether to push final feedback to students' git repositories")
 
 args = parser.parse_args() 
+
+################ Initializations #####################
+#~ Initialize list of expected files, on a per week basis
+
+if args.Week.lower() == 'week1' :
+	expectedFiles = ['boilerplate.sh', 'CompileLatex.sh', 'ConcatenateTwoFiles.sh', 'CountLines.sh', 'csvtospace.sh', 'FirstBiblio.bib', 'FirstExample.tex', 'MyExampleScript.sh', 'tabtocsv.sh', 'tiff2png.sh', 'UnixPrac1.txt', 'variables.sh'] 
+if args.Week.lower() == 'week2' :
+	expectedFiles = ['align_seqs.py', 'align_seqs_better.py', 'align_seqs_fasta.py', 'basic_csv.py', 'basic_io1.py', 'basic_io2.py', 'basic_io3.py', 'boilerplate.py', 'cfexercises1.py', 'cfexercises2.py', 'control_flow.py', 'debugme.py', 'dictionary.py', 'lc1.py', 'lc2.py', 'loops.py', 'oaks.py', 'oaks_debugme.py', 'scope.py', 'sysargv.py', 'test_control_flow.py', 'tuple.py', 'using_name.py'] 
+if args.Week.lower() == 'week3' :
+	expectedFiles = ['apply1.R', 'apply2.R', 'ANOVA_Prac.R', 'basic_io.R', 'boilerplate.R', 'break.R', 'browse.R', 'control_flow.R', 'DataWrang.R', 'DataWrangTidy.R', 'ExpDesign.R', 'Ftests.R', 'get_TreeHeight.py', 'get_TreeHeight.R', 'Girko.R', 'GPDD_Data.R', 'Interactions.R', 'MyGLM.R', 'MulExpl.R', 'MyBars.R', 'MyModelSimp.R', 'next.R', 'plotLin.R', 'PP_Dists.R', 'PP_Regress_loc.R', 'PP_Regress.R', 'preallocate.R', 'R_conditionals.R', 'Regression.R', 'Ricker.R', 'run_get_TreeHeight.sh', 'sample.R', 'SQLinR.R', 'TAutoCorr.R', 'TAutoCorr.tex', 'TreeHeight.R', 'try.R', 'ttests.R', 'Vectorize1.py', 'Vectorize1.R', 'Vectorize2.py', 'Vectorize2.R']   # optionally include a 'vectorize_timer.sh'?
+if args.Week.lower() == 'week7' :
+	expectedFiles = ['blackbirds.py', 'DrawFW.py', 'fmr.R', 'LV1.py', 'LV2.py', 'LV3.py', 'LV4.py', 'Nets.R', 'Nets.py', 'profileme2.py', 'profileme.py', 're4.py', 'regexs.py', 'run_fmr_R.py', 'run_LV.py', 'TestR.py', 'TestR.R', 'timeitme.py', 'using_os.py'] # could include 'MyFirstJupyterNb.ipynb'
 
 f = open(args.StudentsFile,'r') # Read in and store the student data
 csvread = csv.reader(f)
@@ -326,9 +343,7 @@ for Stdnt in Stdnts:
 		for name in Scripts:
 			## cd to current script's directory
 			os.chdir(os.path.dirname(name))								
-			
 			azz.write('='*70 + '\n')
-
 			azz.write('Inspecting script file ' + os.path.basename(name) + '...\n\n')
 			azz.write('File contents are:\n')
 			azz.write('\n' + '*'*70 + '\n')
@@ -379,7 +394,6 @@ for Stdnt in Stdnts:
 			else:
 				os.chdir(scrptPath)
 				continue
-							
 
 			chars = 0
 						
@@ -422,16 +436,10 @@ for Stdnt in Stdnts:
 	if args.gitpush:
 		print("Git pushing...\n")
 		
-		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"]) # Add only feedbacks/logs
+		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"]) # Add only feedback/log files
 		
 		subprocess.check_output(["git","-C", RepoPath, "commit", "-m", 'Pushed ' + args.Week + ' feedback'])
 				
 		subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
-		
-		# if not os.path.exists(AzzPath + '/'+ azzFileName):
-		# azz = open(AzzPath + '/'+ azzFileName,'w+')
-	# else:
-		# print('\nAssesment file for ' + args.Week+  ' already exists, cannot continue! Check and delete existing file and try again.\n\n')
-		# break
 		
 		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # Discard everything else that was changed

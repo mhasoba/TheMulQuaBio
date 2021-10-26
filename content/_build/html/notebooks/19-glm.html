@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -116,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,13 +130,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -158,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -467,7 +480,7 @@
 <h1>Generalised Linear Models<a class="headerlink" href="#generalised-linear-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Aims of this chapter<a class="reference external" href="#fn1">$^{[1]}$</a>:</p>
+<p>Aims of this chapter<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
 <ul class="simple">
 <li><p>Develop an intuitive understanding of generalized linear models</p></li>
 <li><p>Learn to fit generalized linear models to count data</p></li>
@@ -500,11 +513,11 @@
 </div>
 <p>The main things to note about these plots (and poisson-distributed data):</p>
 <ul class="simple">
-<li><p>This distribution is appropriate for response data that can only take integer values, such as counts (technically, only for values of $\lambda \ge 1$, but this does not really concern you as far fitting glms in R is concerned).</p></li>
-<li><p>A single parameter $\lambda$ (“lambda”) controls the shape, the scale (the range of the variable) and the location (mean value, or central tendency) of the distribution.</p></li>
+<li><p>This distribution is appropriate for response data that can only take integer values, such as counts (technically, only for values of <span class="math notranslate nohighlight">\(\lambda \ge 1\)</span>, but this does not really concern you as far fitting glms in R is concerned).</p></li>
+<li><p>A single parameter <span class="math notranslate nohighlight">\(\lambda\)</span> (“lambda”) controls the shape, the scale (the range of the variable) and the location (mean value, or central tendency) of the distribution.</p></li>
 <li><p>Thus, this distribution can represent a variety of shapes that count data can take, from right skewed (left plot) to bell-shaped (right plot)  – these variants of shapes and scales make up the Poisson distribution “family”.</p></li>
 </ul>
-<p>$\star$ Play with the above code and generate different shapes (and inevitably, scales) of poisson-distributed data.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate different shapes (and inevitably, scales) of poisson-distributed data.</p>
 </div>
 <div class="section" id="the-binomial-distribution">
 <h3>The Binomial distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">¶</a></h3>
@@ -526,12 +539,12 @@
 <li><p>The two main parameters of interest are <code class="docutils literal notranslate"><span class="pre">size</span></code> (number of trials), and <code class="docutils literal notranslate"><span class="pre">prob</span></code> (the probability of an outcome in each trial). So,</p>
 <ul>
 <li><p>The left plot is the distribution of outcomes of a single try of a 50:50 (0.5 probability, like a coin-flip) outcome, re-generated 1000 times (e.g., a thousand coin flips) – as expected, there are about 500 each of 0’s and 1’s (e.g., 0 = head, 1 = tail). Each of the 1000 such success/failure experiments is called a Bernoulli trial/experiment. For repeated experiments of a single trial, i.e., <code class="docutils literal notranslate"><span class="pre">size</span></code> = 1 in the R code above, the binomial distribution is a Bernoulli distribution (so the left plot is a bernoulli distribution).</p></li>
-<li><p>The right plot is the binomial distribution that you will encounter more often, which is appropriate for modeling the number of successes in a sample of a given size. In the above code, <code class="docutils literal notranslate"><span class="pre">size</span></code> = 100, with 1000 repetitions of this “experiment”). Thus in the right plot, the distribution will on average have a mean value of 50 ($0.5\times100$ trials) (recall the <a class="reference internal" href="12-ExpDesign.html#expdesign-data-types-and-distributions"><span class="std std-ref">Central Limit Theorem</span></a>).</p></li>
+<li><p>The right plot is the binomial distribution that you will encounter more often, which is appropriate for modeling the number of successes in a sample of a given size. In the above code, <code class="docutils literal notranslate"><span class="pre">size</span></code> = 100, with 1000 repetitions of this “experiment”). Thus in the right plot, the distribution will on average have a mean value of 50 (<span class="math notranslate nohighlight">\(0.5\times100\)</span> trials) (recall the <a class="reference internal" href="12-ExpDesign.html#expdesign-data-types-and-distributions"><span class="std std-ref">Central Limit Theorem</span></a>).</p></li>
 </ul>
 </li>
 <li><p>Thus, the binomial distribution family is appropriate for binomial <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>, which is a GLM analysis where your sample of binary (yes/no, 0/1, etc) outcomes is fitted as a function of one or more continuous or categorical predictors.</p></li>
 </ul>
-<p>$\star$ Play with the above code and generate variants of binomial-distributed data distributions. They will all be bell-shaped, but can take different mean and spread values.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate variants of binomial-distributed data distributions. They will all be bell-shaped, but can take different mean and spread values.</p>
 </div>
 <div class="section" id="the-gamma-distribution">
 <h3>The Gamma distribution<a class="headerlink" href="#the-gamma-distribution" title="Permalink to this headline">¶</a></h3>
@@ -554,7 +567,7 @@
 <li><p>The main parameters of interest are the <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">rate</span></code>. The latter controls the distribution’s scale (over what values the distributions spreads).</p></li>
 <li><p>This distribution can be right-skewed or bell-shaped, depending on choice of the <code class="docutils literal notranslate"><span class="pre">shape</span></code> parameter.</p></li>
 </ul>
-<p>$\star$ Play with the above code and generate variants in the gamma-distributed data family.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate variants in the gamma-distributed data family.</p>
 </div>
 <div class="section" id="other-distributions">
 <h3>Other distributions<a class="headerlink" href="#other-distributions" title="Permalink to this headline">¶</a></h3>
@@ -567,9 +580,9 @@
 <p>We will use mutation data collected in the Genetics Practical by a previous year’s batch.</p>
 <p>The students were basically counting colonies looking for mutations. There were a number of bacterial strains which were different mutants of <em>Salmonella</em>. Each group applied a mutagen Nitroguanisine (NG) as well as histidine and streptomycine. A control plate was also tested.</p>
 <p>The data file is called <code class="docutils literal notranslate"><span class="pre">PracData.csv</span></code> (so it’s a comma-separated values file), and is available from TheMulQuaBio’s  <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p>$\star$ Save the <code class="docutils literal notranslate"><span class="pre">PracData.csv</span></code> dataset into your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p>$\star$ Create a new script called MyGLM.R in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Use the code below to load and check your data.</p>
-<p>$\star$ Start R and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Save the <code class="docutils literal notranslate"><span class="pre">PracData.csv</span></code> dataset into your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new script called MyGLM.R in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Use the code below to load and check your data.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start R and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/PracData.csv&quot;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
@@ -620,7 +633,7 @@
 </div>
 </div>
 <p>There are two immediate things to note.</p>
-<p>(1) The distributions of colony counts are very <em>skewed</em> — many small counts and a few large counts. We’ve already seen that taking a log of data sometimes works in these cases. However, as the tables above show, we have zero counts for all treatments and $\log(0)$ is undefined. A common trick is therefore to use $\log(n+1)$ (add 1 and take a log) when dealing with count data like this:</p>
+<p>(1) The distributions of colony counts are very <em>skewed</em> — many small counts and a few large counts. We’ve already seen that taking a log of data sometimes works in these cases. However, as the tables above show, we have zero counts for all treatments and <span class="math notranslate nohighlight">\(\log(0)\)</span> is undefined. A common trick is therefore to use <span class="math notranslate nohighlight">\(\log(n+1)\)</span> (add 1 and take a log) when dealing with count data like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="o">$</span><span class="n">logCC</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span>
@@ -665,7 +678,7 @@
 </div></div>
 </div>
 <p>There is indeed no variation at all in colony count for histidine and streptomycine — colonies never grow in these treatments. We don’t really need statistics for this observation and, in fact, variation is needed for statistics to work. So, for the rest of this analysis, we will reduce the dataset to the control and nitroguanisine treatments.</p>
-<p>$\star$ Update your script by including the code for these plots.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Update your script by including the code for these plots.</p>
 <p>We’ll use a new piece of code here to get the right subset. <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">%in%</span> <span class="pre">c('a','b','c')</span></code> finds all the entries in <code class="docutils literal notranslate"><span class="pre">var</span></code> whose values are equal to <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'b'</span></code> OR <code class="docutils literal notranslate"><span class="pre">'c'</span></code>.</p>
 <p>This is new syntax, so let’s make sure we understand it. For example, try the following:</p>
 <div class="cell docutils container">
@@ -793,7 +806,7 @@ we’ll use the <code class="docutils literal notranslate"><span class="pre">dro
 </div>
 </div>
 </div>
-<p>$\star$ Add these commands for sub-setting your data to your script file.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add these commands for sub-setting your data to your script file.</p>
 </div>
 <div class="section" id="looking-at-strains-too">
 <h3>Looking at strains too<a class="headerlink" href="#looking-at-strains-too" title="Permalink to this headline">¶</a></h3>
@@ -819,7 +832,7 @@ we’ll use the <code class="docutils literal notranslate"><span class="pre">dro
 <li><p>The strains are doing <em>very</em> different things under the two treatments. Hopefully this now leaps out at you as suggesting that the two variables (Strain and Treatment) are <em>interacting</em>.</p></li>
 <li><p>The distributions are still pretty ugly — the variances differ hugely between combinations and four combinations have a median of zero.</p></li>
 </ol>
-<p>We can also use a barplot of means here. We’ll use the original data to get the means, but can use a log scale on the $y$ axis (<code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">=</span> <span class="pre">'y'</span></code>).</p>
+<p>We can also use a barplot of means here. We’ll use the original data to get the means, but can use a log scale on the <span class="math notranslate nohighlight">\(y\)</span> axis (<code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">=</span> <span class="pre">'y'</span></code>).</p>
 <p>Let’s do it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,7 +878,7 @@ NG       61.28571   5.517241 292.71429 593.000 523.9000
 <img alt="../_images/19-glm_42_0.png" src="../_images/19-glm_42_0.png" />
 </div>
 </div>
-<p>$\star$ Include Run this code and have a close look at the plots.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Include Run this code and have a close look at the plots.</p>
 <p>That normal Q-Q plot is not good. Our suspicions were justified and it doesn’t look like we can use a simple log transformation. We’re not even going to look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables — if the diagnostic plots are bad enough, then the model outputs are not
 to be trusted.</p>
 </div>
@@ -894,7 +907,7 @@ to be trusted.</p>
 </div>
 </div>
 </div>
-<p>First, we’ll look at the summary table for this model. We have 5 levels of strain and 2 levels of factor in the subset so we get an intercept ($i$), 4 differences for strains($s_{2-5}$), one difference for treatment ($t_2$) and then four differences for the interaction ($s_{2-5}t_2$). These combine like this:</p>
+<p>First, we’ll look at the summary table for this model. We have 5 levels of strain and 2 levels of factor in the subset so we get an intercept (<span class="math notranslate nohighlight">\(i\)</span>), 4 differences for strains(<span class="math notranslate nohighlight">\(s_{2-5}\)</span>), one difference for treatment (<span class="math notranslate nohighlight">\(t_2\)</span>) and then four differences for the interaction (<span class="math notranslate nohighlight">\(s_{2-5}t_2\)</span>). These combine like this:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p></p></th>
@@ -904,24 +917,24 @@ to be trusted.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:left"><p>421</p></td>
-<td class="text-align:left"><p>$i$</p></td>
-<td class="text-align:left"><p>$i+t_2$</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i+t_2\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p>712</p></td>
-<td class="text-align:left"><p>$i + s_2$</p></td>
-<td class="text-align:left"><p>$i + s_2 + t_2 + s_2 t_2$</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_2\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_2 + t_2 + s_2 t_2\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p>881</p></td>
-<td class="text-align:left"><p>$i + s_3$</p></td>
-<td class="text-align:left"><p>$i+s_3 + t_2 + s_3 t_2$</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_3\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i+s_3 + t_2 + s_3 t_2\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p>889</p></td>
-<td class="text-align:left"><p>$ + s_4$</p></td>
-<td class="text-align:left"><p>$i + s_4 + t_2 + s_4 t_2$</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\( + s_4\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_4 + t_2 + s_4 t_2\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p>TA102</p></td>
-<td class="text-align:left"><p>$i + s_5$</p></td>
-<td class="text-align:left"><p>$ + s_5 + t_2  + s_5 t_2$</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_5\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\( + s_5 + t_2  + s_5 t_2\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -976,7 +989,7 @@ negative.</p></li>
 <li><p>The overall effect of nitrogaunasine is to decrease the number of colonies — again a negative coefficient — but then the positive interactions show big increases in colony counts for nitroguanisine for specific strains. Everything is hugely significant.</p></li>
 <li><p>Two types of deviance are in the model output. Deviance is a measure of goodness of fit of a GLM. The null deviance shows how well the response variable is predicted by a model that includes only the intercept (overall mean). In our example, we have a value of 134445 on 293 degrees of freedom. Including the independent variables (strain and treatment) decreased the deviance to 61579 points on 284 degrees of freedom (remember, lust like linear models, the df are decreased by the number of parameters minus 1). This is a significant reduction in deviance, so the model fit is significant.</p></li>
 </ul>
-<p>$\star$ Copy the code in this section into your script and explore the model a bit more.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code in this section into your script and explore the model a bit more.</p>
 <div class="section" id="overdispersion">
 <h3>Overdispersion<a class="headerlink" href="#overdispersion" title="Permalink to this headline">¶</a></h3>
 <p>There’s a problem. You may have already spotted it:</p>
@@ -995,7 +1008,7 @@ negative.</p></li>
 <p>The problem here is <em>overdispersion</em>. The Poisson distribution predicts that the variance at a point in the model is equal to the prediction — the mean count at that point. Our count data shows much more variance than this — particularly that there are some huge counts given the means.</p>
 <p>There is a simple way to check the dispersion of count data using the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table: the ratio of the residual deviance to the residual degrees of freedom should be approximately 1. This expectation is actually given in the table:</p>
 <p><code class="docutils literal notranslate"><span class="pre">(Dispersion</span> <span class="pre">parameter</span> <span class="pre">for</span> <span class="pre">poisson</span> <span class="pre">family</span> <span class="pre">taken</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">1)</span></code></p>
-<p>In this case, the ratio is $61579/284=216.8$. That’s very strongly overdispersed. Fortunately, we can allow for this by using a different model.</p>
+<p>In this case, the ratio is <span class="math notranslate nohighlight">\(61579/284=216.8\)</span>. That’s very strongly overdispersed. Fortunately, we can allow for this by using a different model.</p>
 </div>
 <div class="section" id="fitting-a-glm-using-a-quasi-poisson-distribution">
 <h3>Fitting a GLM using a quasi-poisson distribution<a class="headerlink" href="#fitting-a-glm-using-a-quasi-poisson-distribution" title="Permalink to this headline">¶</a></h3>
@@ -1050,7 +1063,7 @@ Number of Fisher Scoring iterations: 7
 </div>
 </div>
 </div>
-<p>This is pretty similar to the previous table but there are two differences. First, the dispersion parameter line has changed. Second, all the $p$ values have got less significant – this is the effect of controlling for the overdispersion.</p>
+<p>This is pretty similar to the previous table but there are two differences. First, the dispersion parameter line has changed. Second, all the <span class="math notranslate nohighlight">\(p\)</span> values have got less significant – this is the effect of controlling for the overdispersion.</p>
 <p>Let’s look at the model diagnostic plots next:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1065,7 +1078,7 @@ Number of Fisher Scoring iterations: 7
 </div>
 <p>The residuals and leverage plot is now ok. The Q-Q plot is not better, but is still an improvement over the original linear model. We can’t improve the model fit any more — it isn’t perfect but we’ll accept those imperfections. It is worth thinking about the imperfections though — what might give rise to occasional larger than expected counts of
 colonies?</p>
-<p>We’ll look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table next. Technically, this is now analysis of deviance not analysis of variance but the concept is the same. Different tests are appropriate for different families of distribution, but we can use $F$ here:</p>
+<p>We’ll look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table next. Technically, this is now analysis of deviance not analysis of variance but the concept is the same. Different tests are appropriate for different families of distribution, but we can use <span class="math notranslate nohighlight">\(F\)</span> here:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="s">&quot;F&quot;</span><span class="p">)</span>
@@ -1120,7 +1133,7 @@ colonies?</p>
 </div></div>
 </div>
 <p>No, that makes the model much worse, so we now have our final model.</p>
-<p>$\star$ Include this new model fitting in your script and check you’ve got the same results.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Include this new model fitting in your script and check you’ve got the same results.</p>
 </div>
 <div class="section" id="model-predictions">
 <h3>Model predictions<a class="headerlink" href="#model-predictions" title="Permalink to this headline">¶</a></h3>
@@ -1158,8 +1171,8 @@ colonies?</p>
 <li><p>How did you check the suitability of the model? Are there any problems with the model and, if so, what might cause them?</p></li>
 <li><p>If you summarise stats in text, you must include all the information about the test.</p>
 <ul>
-<li><p>For $F$ tests, this is $F$, the two degrees of freedom and the p value. For example: ‘There is a significant interaction between treatment and strain ($F_{4,284}=32.7, p &lt; 0.0001$)’.</p></li>
-<li><p>For $t$ tests, this is the coefficient, the standard error, $t$, the degrees of freedom and $p$. For example, ‘Across strains, the main effect of nitroguanisine is to reduce colony counts relative to the control (estimate=-2.17, s.e= 0.51, $t=-4.26$, df=284, $p &lt; 0.0001$)’.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(F\)</span> tests, this is <span class="math notranslate nohighlight">\(F\)</span>, the two degrees of freedom and the p value. For example: ‘There is a significant interaction between treatment and strain (<span class="math notranslate nohighlight">\(F_{4,284}=32.7, p &lt; 0.0001\)</span>)’.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(t\)</span> tests, this is the coefficient, the standard error, <span class="math notranslate nohighlight">\(t\)</span>, the degrees of freedom and <span class="math notranslate nohighlight">\(p\)</span>. For example, ‘Across strains, the main effect of nitroguanisine is to reduce colony counts relative to the control (estimate=-2.17, s.e= 0.51, <span class="math notranslate nohighlight">\(t=-4.26\)</span>, df=284, <span class="math notranslate nohighlight">\(p &lt; 0.0001\)</span>)’.</p></li>
 </ul>
 </li>
 <li><p>With more complex models, it is common to present either the anova table or the coefficients table as a summary of the model output. Just include the tables from R output, not the information around it. See Table 1 for an example.</p></li>
@@ -1271,7 +1284,7 @@ Halo 421 712 881 899 TA102
 </div>
 </div>
 </div>
-<p>So, lawns and halos are never recorded from nitroguanisine or the control. They’re nearly always found with histidine and different strains have different response to streptomysin. Again, treatment and strain interact. Although you can use a $\chi^2$ test with two-dimensional contingency tables to look for independence between factors, you can’t with a three-way table without using more specialized tests.</p>
+<p>So, lawns and halos are never recorded from nitroguanisine or the control. They’re nearly always found with histidine and different strains have different response to streptomysin. Again, treatment and strain interact. Although you can use a <span class="math notranslate nohighlight">\(\chi^2\)</span> test with two-dimensional contingency tables to look for independence between factors, you can’t with a three-way table without using more specialized tests.</p>
 <p>We will not go any further into this, but be aware that such gnarly statistical challenges may arise at times!</p>
 <hr class="docutils" />
 <p><a id="fn1"></a>

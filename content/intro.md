@@ -60,7 +60,7 @@ Logical workflows are important, but don't get married to yours!
 It is important that you work through the exercises and problems in each chapter. This document does not tell you every single thing you need to know to perform the exercises in it. In programming and computing, you learn faster by trying to solve problems (including computer crashes!) on your own, often by liberally googling the problem!
 
 
-### Learning goals
+## Learning goals
 
 The goal of these notes is to teach you to become (or at least show you the path towards becoming) a competent quantitative biologist. A large part of this involves learning computer programming. Why do biologists
 need to write computer programs? Here are some (hopefully compelling!) reasons:
@@ -76,25 +76,30 @@ complexity through precise specification and modularization of complicated analy
 
 * Reproducibility – you (or someone else) can just re-run the code to reproduce your analysis. This is also the key to maintaining scientific accountability, integrity, and accuracy.
 
-* Organised thinking – writing code requires you to do this!
+* Organized thinking – writing code requires you to do this!
 
 * Career prospects – good, scientific coders are in short supply in all fields, but most definitely in biology!
 
-There are several hundred programming languages currently available – which ones should a biologist choose? Ideally, a quantitative biologist should be multilingual, knowing:
+## Why *Multilingual*?
 
-1. A modern, easy-to-write, interpreted (or semi-compiled) language that is "reasonably" fast, like `Python`
+There are several hundred programming languages currently available – which ones should a biologist choose? These notes are built on the philosophy that quantitative biologists can significantly benefit from being multilingual programmers, knowing:
 
-2. Mathematical/statistical software with programming and graphing capabilities, like `R`
+1. A modern, easy-to-write, versatile, interpreted (or semi-compiled) language that is "reasonably" fast, like `Python`
+
+2. Mathematical and statistical software with programming and graphing capabilities, like `R`
 
 3. A compiled (or semi-compiled) '[procedural](https://en.wikipedia.org/wiki/Procedural_programming)' language, like `C`
 
 And all these because one language doesn't fit all purposes. Something like `C`, the last item in the list above, is a "procedural" language that forces you to deal with the real "under the hood" workings of your computer (especially, memory management). Without an understanding of these 'low-level' aspects of computer programming, you will be limited in your ability to develop applications that either intrinsically require you to optimize performance, or need to be run in a memory- or performance-constrained environment (combination of computer hardware and operating system). Languages like Python and R intentionally obscure a lot of details of the underlying computer science, trading-off performance in favor of ease of programming and running code. However, they are sufficient for the purposes of most research and industry programming requirements.
 
 You will learn `Python` and `R` (along with the `bash` language) on this course. These two are among the most popular languages [currently](https://www.tiobe.com/tiobe-index) (also [see this](https://spectrum.ieee.org/top-programming-languages-2021)), and with good reasons. We will not learn any procedural languages here, but it may be necessary for some of you to learn something like `C` in certain lines of research or industry jobs. Just be aware if this, and keep your mind open to the possibility of learning yet another language!
+### R vs. Python
 
-Our goal is to teach you not just programming, but also good computing practices. In this course, you will write plenty of code, deal with different data files, and produce text and graphic outputs. You will learn to keep your project and coursework organized in logical, efficient, error-free, and reproducible *workflows* (that's a mouthful, but an important mouthful).
+We will use R mainly for data analysis and visualization because it a great one stop solution for these purposes. If you are keen on trying data analyses in Python, see [this Appendix](./notebooks/Appendix-Data-Python.ipynb). In general, R will do the job for most of your purposes. There not much between these two languages for data science. Python is somewhat more computationally efficient, and is a multi-purpose programming language with a very clean and easy-to-learn syntax. It is generally used by data scientists in the industry to for exploratory data analysis and machine learning in team-driven production environments. R, on the other hand, has been built mainly by by academic researchers and statisticians, and has a wider range of *inbuilt* (not requiring additional packages) statistical analysis capabilities. Learn more about R vs Python for data science [here](https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html) and [here](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523009719/main-qimg-9dcf536c501455f073dfbc4e09798a51_vpijr0.png). 
 
 ## Some guidelines, conventions and rules
+
+Our goal is to teach you not just programming, but also good computing practices. In this course, you will write plenty of code, deal with different data files, and produce text and graphic outputs. You will learn to keep your project and coursework organized in logical, efficient, error-free, and reproducible *workflows* (that's a mouthful, but an important mouthful).
 
 ### Beware the dark forces
 

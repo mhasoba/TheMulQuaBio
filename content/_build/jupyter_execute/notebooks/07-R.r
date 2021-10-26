@@ -126,6 +126,9 @@ print(arr1)
 
 arr1[,,2]
 
+mat1[1,1] <- "one"
+mat1
+
 Col1 <- 1:10
 Col1
 
@@ -307,7 +310,7 @@ setwd("../code/")
 
 MyData <- read.csv("../data/trees.csv")
 
-ls() #Check that MyData has appeared
+ls(pattern = "My*") # Check that MyData has appeared
 
 class(MyData)
 
@@ -390,7 +393,7 @@ for (i in 1:10) {
 
 source("boilerplate.R")
 
-ls()
+ls(pattern = "MyFun*")
 
 class(MyFunction)
 
@@ -458,7 +461,7 @@ print(system.time(sum(M)))
 NoPreallocFun <- function(x){
     a <- vector() # empty vector
     for (i in 1:x) {
-        a <- c(a, i)
+        a <- c(a, i) # concatenate
         print(a)
         print(object.size(a))
     }
@@ -469,7 +472,7 @@ system.time(NoPreallocFun(10))
 PreallocFun <- function(x){
     a <- rep(NA, x) # pre-allocated vector
     for (i in 1:x) {
-        a[i] <- i
+        a[i] <- i # assign
         print(a)
         print(object.size(a))
     }
@@ -510,7 +513,7 @@ myexperiment <- function(popn,n){
     return(mean(pop_sample))
 }
 
-## Calculate means using a for loop without preallocation:
+## Calculate means using a FOR loop on a vector without preallocation:
 loopy_sample1 <- function(popn, n, num){
     result1 <- vector() #Initialize empty vector of size 1 
     for(i in 1:num){
@@ -519,7 +522,7 @@ loopy_sample1 <- function(popn, n, num){
     return(result1)
 }
 
-## To run "num" iterations of the experiment using a for loop on a vector with preallocation:
+## To run "num" iterations of the experiment using a FOR loop on a vector with preallocation:
 loopy_sample2 <- function(popn, n, num){
     result2 <- vector(,num) #Preallocate expected size
     for(i in 1:num){
@@ -528,7 +531,7 @@ loopy_sample2 <- function(popn, n, num){
     return(result2)
 }
 
-## To run "num" iterations of the experiment using a for loop on a list with preallocation:
+## To run "num" iterations of the experiment using a FOR loop on a list with preallocation:
 loopy_sample3 <- function(popn, n, num){
     result3 <- vector("list", num) #Preallocate expected size
     for(i in 1:num){
@@ -544,31 +547,32 @@ lapply_sample <- function(popn, n, num){
     return(result4)
 }
 
-## To run "num" iterations of the experiment using vectorization with lapply:
+## To run "num" iterations of the experiment using vectorization with sapply:
 sapply_sample <- function(popn, n, num){
     result5 <- sapply(1:num, function(i) myexperiment(popn, n))
     return(result5)
 }
 
-popn <- rnorm(1000) # Generate the population
+set.seed(12345)
+popn <- rnorm(10000) # Generate the population
 hist(popn)
 
-n <- 20 # sample size for each experiment
-num <- 1000 # Number of times to rerun the experiment
+n <- 100 # sample size for each experiment
+num <- 10000 # Number of times to rerun the experiment
 
-print("The loopy, non-preallocation approach takes:" )
+print("Using loops without preallocation on a vector took:" )
 print(system.time(loopy_sample1(popn, n, num)))
 
-print("The loopy, but with preallocation approach takes:" )
+print("Using loops with preallocation on a vector took:" )
 print(system.time(loopy_sample2(popn, n, num)))
 
-print("The loopy, non-preallocation approach on a list takes:" )
+print("Using loops with preallocation on a list took:" )
 print(system.time(loopy_sample3(popn, n, num)))
 
-print("The vectorized sapply approach takes:" )
+print("Using the vectorized sapply function (on a list) took:" )
 print(system.time(sapply_sample(popn, n, num)))
 
-print("The vectorized lapply approach takes:" )
+print("Using the vectorized lapply function (on a list) took:" )
 print(system.time(lapply_sample(popn, n, num)))
 
 x <- 1:20 # a vector
@@ -615,6 +619,8 @@ doit <- function(x){
         }
     }
 
+set.seed(1345) # again, to get the same result for illustration
+
 popn <- rnorm(50)
 
 hist(popn)
@@ -631,3 +637,15 @@ result <- vector("list", 15) #Preallocate/Initialize
 for(i in 1:15) {
     result[[i]] <- try(doit(popn), FALSE)
     }
+
+rm(list=ls())
+
+load("../data/KeyWestAnnualMeanTemperature.RData")
+
+ls()
+
+class(ats)
+
+head(ats)
+
+plot(ats)

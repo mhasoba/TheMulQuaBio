@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -51,7 +53,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basic hypothesis testing: $t$ and $F$ tests" href="13-t_F_tests.html" />
+    <link rel="next" title="Basic hypothesis testing: \(t\) and \(F\) tests" href="13-t_F_tests.html" />
     <link rel="prev" title="Data Management and Visualization" href="08-Data_R.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -116,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,13 +130,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -158,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -365,31 +378,35 @@
   <a class="reference internal nav-link" href="#introduction">
    Introduction
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-statistical-parlance">
-   Some statistical parlance
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-statistical-parlance">
+     Some statistical parlance
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#descriptive-statistics">
    Descriptive Statistics
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#descriptive-statistics-in-r">
-   Descriptive statistics in R
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-types-and-statistical-distributions">
-   Data types and (statistical) distributions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-from-distributions-in-r">
-   Sampling from distributions in R
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descriptive-statistics-in-r">
+     Descriptive statistics in R
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types-and-statistical-distributions">
+     Data types and (statistical) distributions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-from-distributions-in-r">
+     Sampling from distributions in R
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">
@@ -411,31 +428,26 @@
      A case study
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">
+     Visualise distributions of the variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">
+     Take a quick look at effects of certain factors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">
+     Explore further by scatter-plotting two variables
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">
-   Visualise distributions of the variables
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">
-   Take a quick look at effects of certain factors
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-distribution-of-the-variable-across-levels-of-a-factor">
-   Compare distribution of the variable across levels of a factor
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">
-   Explore further by scatter-plotting two variables
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#save-your-results">
-   Save your results
+  <a class="reference internal nav-link" href="#saving-your-results">
+   Saving your results
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -473,7 +485,7 @@
 <p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
 <p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
 <p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
-<p>(b) You might have somebody else’s data to analyse (very common in this era of “Big Data”).</p>
+<p>(b) You might have somebody else’s data to analyse.</p>
 <p>By the time you have worked through this chapter, you should be able to:</p>
 <ul class="simple">
 <li><p>Provided sufficient information is available, be able to judge whether the sampling design used to generate a particular dataset was appropriate</p></li>
@@ -482,48 +494,49 @@
 </ul>
 <p>We are going to start off with the simplest of scenarios for statistical testing — that you want to determine whether a sample, or a pair of samples meet some expectation (hypothesis) or not.</p>
 <p>First, some let’s revisit some key concepts and terminology.</p>
-</div>
 <div class="section" id="some-statistical-parlance">
-<h2>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Permalink to this headline">¶</a></h2>
+<span id="expdesign-some-statistical-parlance"></span><h3>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Permalink to this headline">¶</a></h3>
 <p>The following terms are important for you to get familiar with:</p>
 <ul class="simple">
 <li><p><strong>(Statistical) Population</strong>: A <em>complete set</em> of items that share at least one <em>attribute</em> of interest. This attribute of interest is the target of your statistical analysis. For example, if we are interested in studying the weight of year-old cod in the Oceans, the population consists of <em>all</em> year-old cod, but more specifically, the weight measurements of all the individuals of the cod population is what we want to analyse.</p></li>
 </ul>
 <hr class="docutils" />
-<p>:::{figure} cod-harvesting
-<a class="reference internal" href="../_images/Cod.jpg"><img alt="ANOVA example" src="../_images/Cod.jpg" style="width: 400px;" /></a></p>
-<p><strong>Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</strong> <br>(Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)
-:::</p>
+<div class="figure align-default" id="cod-collapse">
+<a class="reference internal image-reference" href="../_images/Cod.jpg"><img alt="Cod fisheries collapse" src="../_images/Cod.jpg" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</strong> <br>(Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)</span><a class="headerlink" href="#cod-collapse" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
 <ul class="simple">
 <li><p><strong>(Statistical) Distribution</strong>: A mathematical description (expressed as a mathematical equation) of the properties of a population of interest. Theoreticians have come up with a bunch of distributions (e.g., Gaussian or Normal, Poisson, Binomial, etc.) that are appropriate for different kinds of data. Figuring out which distribution best describes a population of interest is one of the first steps in a statistical analysis. The primary goal of experimental design is to collect and measure sufficient individuals of a population to adequately characterize the statistical properties of an attribute (e.g., body weight of yearling cod) of interest. That is, the <em>statistical distribution</em> that best characterizes the attribute.</p></li>
 <li><p><strong>(Data or Population) Sample</strong>: A data <em>sample</em> is a set of measurements of the attribute of interest collected from a  (statistical) <em>population</em> (all the individuals of interest) by a defined procedure (<em>sampling methodology</em>). In the cod example above, this could be the weight of every individual of a <em>subset</em> (the <em>sample</em>) of the year-old cod population. This could be from a particular location, such as the Atlantic ocean.</p></li>
 <li><p><strong>(Statistical) Parameter</strong> :   A measure of some attribute of the (theoretical) <em>statistical distribution</em> that is supposed to represent your population. An example would be the average weight of <em>all</em> yearling cod, which presumably follow some sort of distribution. In practice, this is not measurable because the population is much too large or incompletely inaccessible/invisible — imagine measuring the weight of every year-old cod individual in the Atlantic ocean!</p></li>
-<li><p><strong>Statistic</strong>(singular):  An <em>estimate</em> of a statistical parameter of the population of interest, obtained by calculating the measure for a <em>sample</em>. An example would be the average or mean weight of individuals in a sample of one-year old cod in the Atlantic Ocean. This is also known as a <em>descriptive statistic</em>. Therefore, a <em>Statistic</em> is to a <em>Statistical Parameter</em> what a  <em>Sample</em> is to the (Statistical) <em>Population</em>. For example, the average of a sample of cod weights is a statistic that  <em>estimates</em> the “real” average of the weights of the entire one-year Cod population (which is its statistical parameter). This real average is also the mean value of the theoretical distribution (e.g., Gaussian) that the population is expected to follow.</p></li>
-<li><p><strong>Hypothesis</strong>: An informed  <em>postulate</em> about an attribute of your population of interest. For example, you may hypothesize that the one-year old cod population’s mean weight has declined over the last two decades because of preferential fishing of larger individuals. You will typically confront your main hypothesis with a <em>Null Hypothesis</em>, to minimize the risk of making a significant <em>Type I error</em>. This is the probability of wrongly accepting an <em>alternative (or main) hypothesis</em> even is not really true, and rejecting the null hypothesis (e.g., the yearling cods have in reality not declined in weight, but you wrongly infer that they have). This is a big NO NO from a scientific and philosophical standpoint. The rate or probability of the Type I error is denoted by the Greek letter $\alpha$, and equals the <em>significance level</em> of a statistical test. Wrongly rejecting a true alternative (main) hypothesis is also  a <em>Type II</em> error</p></li>
+<li><p><strong>Statistic</strong> (singular):  An <em>estimate</em> of a statistical parameter of the population of interest, obtained by calculating the measure for a <em>sample</em>. An example would be the average or mean weight of individuals in a sample of one-year old cod in the Atlantic Ocean. This is also known as a <em>descriptive statistic</em>. Therefore, a <em>Statistic</em> is to a <em>Statistical Parameter</em> what a  <em>Sample</em> is to the (Statistical) <em>Population</em>. For example, the average of a sample of cod weights is a statistic that  <em>estimates</em> the “real” average of the weights of the entire one-year Cod population (which is its statistical parameter). This real average is also the mean value of the theoretical distribution (e.g., Gaussian) that the population is expected to follow.</p></li>
+<li><p><strong>Hypothesis</strong>: An informed  <em>postulate</em> about an attribute of your population of interest. For example, you may hypothesize that the one-year old cod population’s mean weight has declined over the last two decades because of preferential fishing of larger individuals. You will typically confront your main hypothesis with a <em>Null Hypothesis</em>, to minimize the risk of making a significant <em>Type I error</em>. This is the probability of wrongly accepting an <em>alternative (or main) hypothesis</em> even is not really true, and rejecting the null hypothesis (e.g., the yearling cods have in reality not declined in weight, but you wrongly infer that they have). This is a big NO NO from a scientific and philosophical standpoint. The rate or probability of the Type I error is denoted by the Greek letter <span class="math notranslate nohighlight">\(\alpha\)</span>, and equals the <em>significance level</em> of a statistical test. Wrongly rejecting a true alternative (main) hypothesis is also  a <em>Type II</em> error</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="descriptive-statistics">
 <span id="expdesign-descriptive-stats"></span><h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h2>
 <p>The key statistical measures that describe a sample (or a population) are:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic_mean"><strong>Mean</strong>  (or average, or more precisely, the arithmetic mean)</a>:  This is a measure of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_tendency"><em>central tendency</em></a> of the sample and population (what values most of the data tend to have). Given a sample $x_1,x_2,\ldots,x_n$ of size $n$, the mean is typically denoted by a $\bar{x}$:</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic_mean"><strong>Mean</strong>  (or average, or more precisely, the arithmetic mean)</a>:  This is a measure of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_tendency"><em>central tendency</em></a> of the sample and population (what values most of the data tend to have). Given a sample <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_n\)</span> of size <span class="math notranslate nohighlight">\(n\)</span>, the mean is typically denoted by a <span class="math notranslate nohighlight">\(\bar{x}\)</span>:</p></li>
 </ul>
-<p>$$\bar{x} =  \frac{x_{1} + x_{2} + \dots +x_{n}}{n} = \bar{x} = \frac{\sum_{i=1}^n x_i}{n}$$</p>
-<p>That is, it is the sum of all the values in a sample divided by the number, $n$, of items in the sample.</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} =  \frac{x_{1} + x_{2} + \dots +x_{n}}{n} = \bar{x} = \frac{\sum_{i=1}^n x_i}{n}\]</div>
+<p>That is, it is the sum of all the values in a sample divided by the number, <span class="math notranslate nohighlight">\(n\)</span>, of items in the sample.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation"><strong>Standard deviation</strong></a>: A measure of spread of the population around the mean. This is typically denoted by $s$,and is calculated as:</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation"><strong>Standard deviation</strong></a>: A measure of spread of the population around the mean. This is typically denoted by <span class="math notranslate nohighlight">\(s\)</span>,and is calculated as:</p></li>
 </ul>
-<p>$$s = \sqrt{\frac{(\bar{x} - x_{1})^{2} + (\bar{x} - x_{2})^2 + \dots + (\bar{x} - x_{n})^{2}}{n-1}} =  \sqrt{\frac{\sum_{i=1}^n (\bar{x} - x_{i})^2}{n-1}}$$</p>
-<p>That is, it is the square root of the sum of squares (“SS”) of the differences between each item in the sample and the mean, divided by the <em>degrees of freedom, “df”</em> remaining in the data set ($n-1$). df is the sample size, $n$, minus the number of statistical parameters estimated from the data set. This is to reduce the  <em>bias</em> in your <em>estimate</em> of the statistic, as you are calculating it from the sample, and not the whole theoretical population.</p>
-<p>Thus, the formula for $s$ above has $n-1$ in its denominator because, to work out the standard deviation, you must have already estimated the mean ($\bar{x}$) from the same data set. This removes 1 degree of freedom. Also, note that the sample variance, $s^2$ is the square of standard deviation. Or, in other words, the standard deviation is the square-root of the variance!</p>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{\frac{(\bar{x} - x_{1})^{2} + (\bar{x} - x_{2})^2 + \dots + (\bar{x} - x_{n})^{2}}{n-1}} =  \sqrt{\frac{\sum_{i=1}^n (\bar{x} - x_{i})^2}{n-1}}\]</div>
+<p>That is, it is the square root of the sum of squares (“SS”) of the differences between each item in the sample and the mean, divided by the <em>degrees of freedom, “df”</em> remaining in the data set (<span class="math notranslate nohighlight">\(n-1\)</span>). df is the sample size, <span class="math notranslate nohighlight">\(n\)</span>, minus the number of statistical parameters estimated from the data set. This is to reduce the  <em>bias</em> in your <em>estimate</em> of the statistic, as you are calculating it from the sample, and not the whole theoretical population.</p>
+<p>Thus, the formula for <span class="math notranslate nohighlight">\(s\)</span> above has <span class="math notranslate nohighlight">\(n-1\)</span> in its denominator because, to work out the standard deviation, you must have already estimated the mean (<span class="math notranslate nohighlight">\(\bar{x}\)</span>) from the same data set. This removes 1 degree of freedom. Also, note that the sample variance, <span class="math notranslate nohighlight">\(s^2\)</span> is the square of standard deviation. Or, in other words, the standard deviation is the square-root of the variance!</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Median"><strong>Median</strong></a>: The above two statistics (mean and sd) are particularly meaningful when the sample and population have a symmetric distribution (e.g., normal or gaussian). When the distribution is not symmetric (that is, it is <a class="reference external" href="https://en.wikipedia.org/wiki/Skewness"><em>skewed</em></a>), the <em>median</em>  is a better measure of central tendency. This is the middle value in the ordered set of data. That is, exactly 50% of the data lie below and 50% lie above the median.</p></li>
-<li><p>Other descriptive statistics you should keep in mind is the <a class="reference external" href="https://en.wikipedia.org/wiki/Range_(statistics)">range</a> (difference between the largest and smallest values), and the <a class="reference external" href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals $[{1\over4}, {1\over 2},{3\over 4}, 1]$ or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p></li>
+<li><p>Other descriptive statistics you should keep in mind is the <a class="reference external" href="https://en.wikipedia.org/wiki/Range_(statistics)">range</a> (difference between the largest and smallest values), and the <a class="reference external" href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals <span class="math notranslate nohighlight">\([{1\over4}, {1\over 2},{3\over 4}, 1]\)</span> or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p></li>
 </ul>
-</div>
 <div class="section" id="descriptive-statistics-in-r">
-<h2>Descriptive statistics in R<a class="headerlink" href="#descriptive-statistics-in-r" title="Permalink to this headline">¶</a></h2>
+<span id="expdesign-descriptive-statistics-in-r"></span><h3>Descriptive statistics in R<a class="headerlink" href="#descriptive-statistics-in-r" title="Permalink to this headline">¶</a></h3>
 <p>Here are the R commands for the key descriptive statistics:</p>
 <table class="colwidths-auto table">
 <thead>
@@ -563,7 +576,7 @@
 </table>
 </div>
 <div class="section" id="data-types-and-statistical-distributions">
-<span id="expdesign-data-types-and-distributions"></span><h2>Data types and (statistical) distributions<a class="headerlink" href="#data-types-and-statistical-distributions" title="Permalink to this headline">¶</a></h2>
+<span id="expdesign-data-types-and-distributions"></span><h3>Data types and (statistical) distributions<a class="headerlink" href="#data-types-and-statistical-distributions" title="Permalink to this headline">¶</a></h3>
 <p>You will typically encounter or sample the following main types of data:</p>
 <ul class="simple">
 <li><p><strong>Continuous numeric</strong>: Data that can take decimal values (real numbers) such as human height or weight. These may be unbounded (any value between negative infinity to positive infinity), or bounded (e.g., between or zero and some upper positive number) like human weight. This is the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
@@ -588,7 +601,7 @@
 </ul>
 </div>
 <div class="section" id="sampling-from-distributions-in-r">
-<span id="expdesign-sampling-from-distributions-in-r"></span><h2>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Permalink to this headline">¶</a></h2>
+<span id="expdesign-sampling-from-distributions-in-r"></span><h3>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Permalink to this headline">¶</a></h3>
 <p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling “experiment” . In particular, the following R commands are important:</p>
 <table class="colwidths-auto table">
 <thead>
@@ -607,10 +620,10 @@
 <td class="text-align:left"><p>Cumulative density function</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">runif(n,</span> <span class="pre">min=0,</span> <span class="pre">max=2)</span></code></p></td>
-<td class="text-align:left"><p>Twenty random numbers from uniform distribution with bounds $[0, 2]$</p></td>
+<td class="text-align:left"><p>Twenty random numbers from uniform distribution with bounds <span class="math notranslate nohighlight">\([0, 2]\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rpois(n,</span> <span class="pre">lambda=10)</span></code></p></td>
-<td class="text-align:left"><p>Twenty random numbers from the Poisson($\lambda$) distribution</p></td>
+<td class="text-align:left"><p>Twenty random numbers from the Poisson(<span class="math notranslate nohighlight">\(\lambda\)</span>) distribution</p></td>
 </tr>
 </tbody>
 </table>
@@ -689,6 +702,7 @@
 <p>Zero!</p>
 <p>Look up the documentation and examples for the other commands/functions listed above and many others that are available.</p>
 </div>
+</div>
 <div class="section" id="two-basic-rules-of-experimental-design-and-sampling">
 <h2>Two basic rules of experimental design and sampling<a class="headerlink" href="#two-basic-rules-of-experimental-design-and-sampling" title="Permalink to this headline">¶</a></h2>
 <p>In general, while designing experiments, and sampling from a  <em>population</em>, there are two key (and simple) rules:</p>
@@ -726,7 +740,7 @@
 <img alt="../_images/12-ExpDesign_18_0.png" src="../_images/12-ExpDesign_18_0.png" />
 </div>
 </div>
-<p>Rule 2 above states that if I was to repeat even $n = 5$ sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
+<p>Rule 2 above states that if I was to repeat even <span class="math notranslate nohighlight">\(n = 5\)</span> sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
 <p>If you give due regard to the two rules of experimental design above, and consider the type of distribution your population of interest follows, you will have taken some basic, important steps towards designing an effective study.</p>
 <p>A more rigorous method for designing experiments is to perform a <a class="reference external" href="https://en.wikipedia.org/wiki/Power_(statistics)">power analysis</a>. Power analyses allow you to estimate the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size. Covering this is outside the scope of the current course, but you might want to have a look at <a class="reference external" href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
 <p>OK, so you have performed your experiments or field sampling, or some data have fallen into your lap. Let’s move on to data exploration.</p>
@@ -738,7 +752,7 @@
 <p>Statistics is a bit of an art.</p>
 <p>That is why <em>a priori</em> visualization is important, and directly cutting to the (statistical) chase can often leave one floundering with confusing coefficient estimates and model fits (or over-fits) and overall uncertainty about whether you have picked the right statistical test.</p>
 <ul class="simple">
-<li><p>So no matter what, always first look at the distribution of the response (the “raw data”). If you see multi-modality (multiple peaks), it might mean that some process or effect is generating it. So, in the dragonfly-damselfly example below, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies $\mu_A$ and $\mu_B$).</p></li>
+<li><p>So no matter what, always first look at the distribution of the response (the “raw data”). If you see multi-modality (multiple peaks), it might mean that some process or effect is generating it. So, in the dragonfly-damselfly example below, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies <span class="math notranslate nohighlight">\(\mu_A\)</span> and <span class="math notranslate nohighlight">\(\mu_B\)</span>).</p></li>
 <li><p>If it is a regression-type problem, look at the marginal distributions (distributions of the x and y variables) - similar insights can be gained.</p></li>
 <li><p>Also, one can look at the distributions within the effects to look for consistency of both shape (sample of the underlying population’s distribution type) and spread (sample of the underlying population’s variance).</p>
 <ul>
@@ -757,9 +771,9 @@
 <div><p>Ardila-Garcia, AM &amp; Gregory, TR (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
 </div></blockquote>
 <p>You will work with the script file <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code>, which performs exploratory analyses on the data in <code class="docutils literal notranslate"><span class="pre">GenomeSize.csv</span></code>. Let’s go through the code block by block.</p>
-<p>$\star$ Get the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> from the TheMulQuaBio repository and put it in your own <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory.</p>
-<p>$\star$ Also get <code class="docutils literal notranslate"><span class="pre">GenomeSize.csv</span></code></p>
-<p>$\star$ Open the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> in RStudio (or some other text editor).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Get the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> from the TheMulQuaBio repository and put it in your own <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Also get <code class="docutils literal notranslate"><span class="pre">GenomeSize.csv</span></code></p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Open the script <code class="docutils literal notranslate"><span class="pre">ExpDesign.R</span></code> in RStudio (or some other text editor).</p>
 <p>Use the shift and arrow keys to select the code in block (2), including the comments. Now use the keyboard short cut (look back at the R Chapters if you don’t know how!) to run the highlighted block of code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -770,7 +784,7 @@
 </div>
 <p>Note the relative path <code class="docutils literal notranslate"><span class="pre">../</span></code>, which will work assuming that you are working from your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory (that is, you have set your working directory (using <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>) to <code class="docutils literal notranslate"><span class="pre">code</span></code>). Also note the <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">T</span></code> flag, which <a class="reference external" href="https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/">is necessary in any R version &gt; 4.0.0</a>.</p>
 <p>This first line (block (1)) reads in the data, as you have learned previously.</p>
-<p>$\star$ Now run the code in block (2) line by line.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now run the code in block (2) line by line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="c1"># this won&#39;t look so nice on your computer!</span>
@@ -824,9 +838,9 @@
 </div>
 </div>
 <p>Have a good look at the data. There are three factors (categorical variables): Suborder, splitting the species into dragonflies (Anisoptera) and damselflies (Zygoptera); Family, splitting the species further into 9 taxonomic families; and Species, giving the latin
-binomial for each species in the table. The remaining columns are measurements of genome size (in picograms) and measurements of body size and morphology (in grams, mm and mm$^2$). There are two columns ending with an N that show the sample size from which the observations for each species are taken and a column ending SE showing standard errors.</p>
+binomial for each species in the table. The remaining columns are measurements of genome size (in picograms) and measurements of body size and morphology (in grams, mm and mm<span class="math notranslate nohighlight">\(^2\)</span>). There are two columns ending with an N that show the sample size from which the observations for each species are taken and a column ending SE showing standard errors.</p>
 <p>One thing you should see in the output from <code class="docutils literal notranslate"><span class="pre">head</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code> is that there are some observations marked as <code class="docutils literal notranslate"><span class="pre">NA</span></code> – this is the way R shows <em>missing data</em>. It is important to check how much missing data there are in a dataset, so we’ll use another function that includes this information. Many R functions refuse to use variables containing missing data — this is just R being careful and you can add <code class="docutils literal notranslate"><span class="pre">na.rm=TRUE</span></code> into most functions to avoid this problem.</p>
-<p>$\star$ Run the <code class="docutils literal notranslate"><span class="pre">summary</span></code> line from the script window (block 3).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the <code class="docutils literal notranslate"><span class="pre">summary</span></code> line from the script window (block 3).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
@@ -872,15 +886,14 @@ binomial for each species in the table. The remaining columns are measurements o
 </div>
 <p>Note that each column gets a separate summary! Look carefully at the output. There is a column for each variable: for factors, it provides a short table of the number of observations in each level and for continuous variables, it provides some simple summary statistics about the distribution (range, quartiles, mean and median), and the number of missing values.</p>
 </div>
-</div>
 <div class="section" id="visualise-distributions-of-the-variables">
-<h2>Visualise distributions of the variables<a class="headerlink" href="#visualise-distributions-of-the-variables" title="Permalink to this headline">¶</a></h2>
+<h3>Visualise distributions of the variables<a class="headerlink" href="#visualise-distributions-of-the-variables" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">summary</span></code> function shows us the basic distribution (range, quartiles, mean and median) of a continuous variable, but this is easier to interpret if we visualise it. We’ll look at two ways:</p>
 <ul class="simple">
 <li><p><strong>Histogram</strong>: In the simplest form, this shows the number of observations of the variable falling into a set of bins spanning the range of the variable. The option <code class="docutils literal notranslate"><span class="pre">breaks</span></code> allows you to change the number of bins.</p></li>
 <li><p><strong>Density plot</strong>:   Rather than showing blocks of counts, the density plot shows a continuous smooth line. This is a <em>smoothed</em> estimate of the how frequently data is observed across the range of values and the <em>bandwidth</em> (<code class="docutils literal notranslate"><span class="pre">bw=0.1</span></code>) controls the degree of the smoothing.</p></li>
 </ul>
-<p>$\star$ Go to block (4) of the script and run each line separately, looking at the output.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (4) of the script and run each line separately, looking at the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">hist</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
@@ -909,15 +922,13 @@ binomial for each species in the table. The remaining columns are measurements o
 </div>
 <hr class="docutils" />
 <div class="section" id="take-a-quick-look-at-effects-of-certain-factors">
-<h2>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Permalink to this headline">¶</a></h2>
-<p>R has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the $y$ axis and the explanatory variable on the $x$ axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
+<h3>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Permalink to this headline">¶</a></h3>
+<p>R has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the <span class="math notranslate nohighlight">\(y\)</span> axis and the explanatory variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Genome</span> <span class="pre">Size</span> <span class="pre">~</span> <span class="pre">Suborder</span></code></p>
 <p>This formula tells R to model genome size ‘as a function of’ (<code class="docutils literal notranslate"><span class="pre">~</span></code>) the suborders of Odonata. When using this syntax in a <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> function, the result will be to plot genome size as a function of the suborders.</p>
-</div>
-<div class="section" id="compare-distribution-of-the-variable-across-levels-of-a-factor">
-<h2>Compare distribution of the variable across levels of a factor<a class="headerlink" href="#compare-distribution-of-the-variable-across-levels-of-a-factor" title="Permalink to this headline">¶</a></h2>
+<p>##’ Compare distribution of the variable across levels of a factor</p>
 <p>Although looking at the distribution of variables is a good first step, we often want to compare distributions. In this case, we might want to know how genome size varies between dragonflies and damselflies. The first way we will look at is using boxplots — these show the median and the 25% and 75% quantiles as a box, with whiskers extending to the minimum and maximum. More extreme outliers are plotted independently as points. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a boxplot when the explanatory variable is a factor (i.e., provided you have the necessary grouping columns deignated to be the <code class="docutils literal notranslate"><span class="pre">factor</span></code> class; review the variable types and data structures sections of <a class="reference internal" href="07-R.html"><span class="doc std std-doc">the R Chapter</span></a> if this sounds like greek to you).</p>
-<p>$\star$ Go to block 5 of the script and run the first line, looking at genome size between the two suborders:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block 5 of the script and run the first line, looking at genome size between the two suborders:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">)</span>
@@ -933,7 +944,7 @@ binomial for each species in the table. The remaining columns are measurements o
 <a class="reference internal image-reference" href="../_images/bxpTL.png"><img alt="../_images/bxpTL.png" src="../_images/bxpTL.png" style="width: 300px;" /></a>
 <hr class="docutils" />
 <p>Although histograms are great for one variable, plotting two histograms on top of one another rarely works well because the overlapping bars are hard to interpret (recall the predator-prey body size example). Density plots don’t have this problem, but it takes a bit more code to create the plot.</p>
-<p>$\star$ Block 6 of the script uses the <code class="docutils literal notranslate"><span class="pre">subset</span></code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Block 6 of the script uses the <code class="docutils literal notranslate"><span class="pre">subset</span></code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Anisoptera</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Anisoptera&#39;</span><span class="p">)</span> <span class="c1">#The dragonflies</span>
@@ -970,7 +981,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </div></div>
 </div>
 <p>Now that we’ve got the data separated we can go about plotting the two curves.</p>
-<p>$\star$ Run the next two lines of code in block 6. The first draws the plot for damselflies and the second adds a line for the dragonflies:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the next two lines of code in block 6. The first draws the plot for damselflies and the second adds a line for the dragonflies:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Zygoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">2.7</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1.7</span><span class="p">))</span>
@@ -982,15 +993,15 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <img alt="../_images/12-ExpDesign_37_0.png" src="../_images/12-ExpDesign_37_0.png" />
 </div>
 </div>
-<p>Duplicate these last two lines of code and edit them to generate a similar plot for total body length. You will need to edit the code to change the range of the $x$ and $y$ axes (<code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>) to get both curves to fit neatly on to the graph. It should look like this:</p>
+<p>Duplicate these last two lines of code and edit them to generate a similar plot for total body length. You will need to edit the code to change the range of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes (<code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>) to get both curves to fit neatly on to the graph. It should look like this:</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/densTL.png"><img alt="../_images/densTL.png" src="../_images/densTL.png" style="width: 300px;" /></a>
 </div>
 <hr class="docutils" />
 <div class="section" id="explore-further-by-scatter-plotting-two-variables">
-<h2>Explore further by scatter-plotting two variables<a class="headerlink" href="#explore-further-by-scatter-plotting-two-variables" title="Permalink to this headline">¶</a></h2>
+<h3>Explore further by scatter-plotting two variables<a class="headerlink" href="#explore-further-by-scatter-plotting-two-variables" title="Permalink to this headline">¶</a></h3>
 <p>Once we’ve looked at the distribution of variables, the next thing is to look at the relationships between continuous variables using scatterplots. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a scatterplot when the explanatory variable is continuous, so we can use the same syntax and structure as for the boxplot above.</p>
-<p>$\star$ Go to block (7) of the script and run the plot commands. The third one plots genome size as a function of body weight:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (7) of the script and run the plot commands. The third one plots genome size as a function of body weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">BodyWeight</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
@@ -1002,7 +1013,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 <p>The scatterplot seems to show a weak relationship between genome size and morphology. But maybe dragonflies and damselflies show different relationships, and we can’t distinguish between them! To explore this possibility, we need to plot the two orders using different colours or plot characters. In the next code block, we will customize the plots to show different types of points for each suborder. It is done by using <em>indexing</em> (recall the first <a class="reference external" href="07-R.ipynb#Acessing-parts-of-data-stuctures:-Indices-and-Indexing">R Chapter</a>).</p>
-<p>$\star$ Run the first three lines of code in block 8. There are two levels of suborder and these two lines set up a colour and a plot symbol that will be used for each one.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run the first three lines of code in block 8. There are two levels of suborder and these two lines set up a colour and a plot symbol that will be used for each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span> <span class="c1">#Confirm that there are two levels under suborders </span>
@@ -1042,7 +1053,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </div>
 <p>Thus each point gets the appropriate colour and symbol for its group. This is the indexing: <code class="docutils literal notranslate"><span class="pre">myColours[Suborder]</span></code> and <code class="docutils literal notranslate"><span class="pre">mySymbols[Suborder]</span></code> automatically assign the two colors and two symbols to the two suborders.</p>
 <p>There are a lot of built in colours and plot symbols in R, so the next thing to experiment with is changing these to your own versions.</p>
-<p>$\star$ In the R commandline, type in the function <code class="docutils literal notranslate"><span class="pre">colors()</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> In the R commandline, type in the function <code class="docutils literal notranslate"><span class="pre">colors()</span></code>.</p>
 <p>You’ll see a long list of options to choose from, so pick two to replace red and blue in the plot above.</p>
 <p>The options for the plot symbols are shown below. Pick two to replace the current symbol choices.</p>
 <hr class="docutils" />
@@ -1050,21 +1061,22 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <hr class="docutils" />
 <p>Rerun the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function and see what you get!</p>
 </div>
-<div class="section" id="save-your-results">
-<h2>Save your results<a class="headerlink" href="#save-your-results" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="saving-your-results">
+<h2>Saving your results<a class="headerlink" href="#saving-your-results" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="saving-the-exploratory-graphics">
 <h3>Saving the exploratory graphics<a class="headerlink" href="#saving-the-exploratory-graphics" title="Permalink to this headline">¶</a></h3>
 <p>The file ‘GenomeSize.pdf’ in the practical folder was created using the next block of code using the approach you <a class="reference external" href="08-Data_R.ipynb#Saving-your-graphics">learned previously</a>. The function <code class="docutils literal notranslate"><span class="pre">pdf</span></code> opens a new empty pdf file which can then be used to plot graphs. You can set the width and the height of the page size in the pdf but note that this is set in <em>inches</em>. When you have finished creating a plot, the function <code class="docutils literal notranslate"><span class="pre">dev.off</span></code> closes the pdf file and makes it readable.</p>
-<p>$\star$ Open ‘GenomeSize.pdf’ in a PDF reader. It uses the original colours and
+<p><span class="math notranslate nohighlight">\(\star\)</span> Open ‘GenomeSize.pdf’ in a PDF reader. It uses the original colours and
 plot symbols. Close the file and then delete it from the folder.</p>
-<p>$\star$ Now go back to the script in R and select and run all the code in block (9)</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now go back to the script in R and select and run all the code in block (9)</p>
 <p>Go back to the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder. The pdf file should have been recreated — open it and it should now use your choice of colours and symbols.</p>
 </div>
 <div class="section" id="saving-other-results">
 <h3>Saving other results<a class="headerlink" href="#saving-other-results" title="Permalink to this headline">¶</a></h3>
 <p>You can also save the data and variables in R format — the original data, two subsets of the data and the two sets of colours and symbols. This will make it easy to restart where you left off. However, We can recreate the data subsets easily, so we’ll just save the data and your colour sets.</p>
-<p>$\star$ Go to the script window and run the final line in block (10)</p>
-<p>Still in the script window, choose ‘File $\triangleright$ Save’ to save your changes to the script file.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Go to the script window and run the final line in block (10)</p>
+<p>Still in the script window, choose ‘File <span class="math notranslate nohighlight">\(\triangleright\)</span> Save’ to save your changes to the script file.</p>
 <p>Quit from R by typing <code class="docutils literal notranslate"><span class="pre">q()</span></code> at the R command prompt. You can also use ctrl+D in Unix).</p>
 </div>
 </div>
@@ -1118,7 +1130,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
         <a class="right-next" href="13-t_F_tests.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Basic hypothesis testing: $t$ and $F$ tests</p>
+                <p class="prevnext-title">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

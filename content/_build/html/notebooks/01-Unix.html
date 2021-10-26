@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -116,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,13 +130,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -158,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -535,6 +548,16 @@
                 
   <div class="section" id="unix-and-linux">
 <h1>UNIX and Linux<a class="headerlink" href="#unix-and-linux" title="Permalink to this headline">¶</a></h1>
+<blockquote class="epigraph">
+<div><p>The time has come,’ the Walrus said,
+To talk of many things:
+Of shoes — and ships — and sealing-wax —
+Of cabbages — and kings —
+And why the sea is boiling hot —
+And whether pigs have wings.’</p>
+<p class="attribution">—Lewis Carroll
+</p>
+</div></blockquote>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Here we are going to learn about the UNIX operating system, and in particular, it’s most popular user-friendly avatar, Linux (and even more specifically, Debian based Linux distributions, with focus on Ubuntu). If you are not a Unix/Linux user, you still need to learn the UNIX environment because under the hood, all other operating systems that need to do <em>serious</em> computing have to use Unix. Indeed, MacOS is built on UNIX, and Windows now a days has a UNIX sub-system to enable users to things that can only really be done in UNIX (like Genomics!).</p>
@@ -596,8 +619,10 @@
 </table>
 <p>This hierarchical directory structure makes navigating your computer from the terminal/shell (coming up next!) or encoding this navigation in your computer programs easier.</p>
 <hr class="docutils" />
+<div class="figure align-default" id="id1">
 <a class="bg-primary reference internal image-reference" href="../_images/unix-tree.png"><img alt="UNIX directory structure" class="bg-primary" src="../_images/unix-tree.png" style="width: 400px;" /></a>
-<p><strong>UNIX directory structure.</strong> The UNIX directory (same as “Folder”) structure is hierarchical, with a single tree starting from the “root” <code class="docutils literal notranslate"><span class="pre">/</span></code>. This is quite unlike Windows or MS-DOS, where there are separate trees for disk partitions, removable media, network, etc. <br> <small>(Source: <a class="reference external" href="https://pathanruet.files.wordpress.com/2012/05/unix-tree.png">https://pathanruet.files.wordpress.com/2012/05/unix-tree.png</a>)</small></p>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>UNIX directory structure.</strong> The UNIX directory (same as “Folder”) structure is hierarchical, with a single tree starting from the “root” <code class="docutils literal notranslate"><span class="pre">/</span></code>. This is quite unlike Windows or MS-DOS, where there are separate trees for disk partitions, removable media, network, etc. <br> <small>(Source: <a class="reference external" href="https://pathanruet.files.wordpress.com/2012/05/unix-tree.png">https://pathanruet.files.wordpress.com/2012/05/unix-tree.png</a>)</small></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="meet-the-unix-shell">
@@ -607,7 +632,7 @@
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">bash</span></code> stand for the “<code class="docutils literal notranslate"><span class="pre">B</span></code>ourne <code class="docutils literal notranslate"><span class="pre">A</span></code>gain <code class="docutils literal notranslate"><span class="pre">Sh</span></code>ell”, a pun (“born again” oh, us geeks!) on the name of the original Bourne shell (<code class="docutils literal notranslate"><span class="pre">sh</span></code>) that it replaces.</p>
 </div>
-<p>$\star$ To launch a <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell, do <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">t</span></code> (or use <code class="docutils literal notranslate"> <span class="pre">Meta</span></code> key) – try it now. (On Mac: <code class="docutils literal notranslate"><span class="pre">Cmd+Space</span></code> to open spotlight search, and type “terminal” and hit return).</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> To launch a <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell, do <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">t</span></code> (or use <code class="docutils literal notranslate"> <span class="pre">Meta</span></code> key) – try it now. (On Mac: <code class="docutils literal notranslate"><span class="pre">Cmd+Space</span></code> to open spotlight search, and type “terminal” and hit return).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>In Mac OS, the default shell will likely be <code class="docutils literal notranslate"><span class="pre">zsh</span></code> shell, assuming you are using one of the newer versions of the operating system. Most of the commands will be the same between these shells, but some may differ (look out for tips about this, and also <a class="reference external" href="https://apple.stackexchange.com/questions/361870/what-are-the-practical-differences-between-bash-and-zsh">read this</a>).</p>
@@ -812,16 +837,16 @@
 <div class="section" id="exploring-files-and-directories">
 <h3>Exploring files and directories<a class="headerlink" href="#exploring-files-and-directories" title="Permalink to this headline">¶</a></h3>
 <p>A fundamental command that you will probably use the most frequently of all is <code class="docutils literal notranslate"><span class="pre">ls</span></code> (this stands for <em>list</em> files and directories in current directory).</p>
-<p>$\star$ Type the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command in at the command prompt (which will have opened in your <code class="docutils literal notranslate"><span class="pre">home</span></code> directory) and hit Enter.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Type the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command in at the command prompt (which will have opened in your <code class="docutils literal notranslate"><span class="pre">home</span></code> directory) and hit Enter.</p>
 <p>You will see a number of directories and maybe some files in the output (this is currently what you have in your user account’s <code class="docutils literal notranslate"><span class="pre">home</span></code>).</p>
-<p>$\star$ Next try <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/</span></code></p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Next try <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/</span></code></p>
 <p>This will list what you have in your root, including the directories listed in the table <a class="reference external" href="#UNIX-directory-structure">above</a> .</p>
-<p>$\star$ The <code class="docutils literal notranslate"><span class="pre">ls</span></code> command by default does not list hidden directories and files. To see these, use</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> The <code class="docutils literal notranslate"><span class="pre">ls</span></code> command by default does not list hidden directories and files. To see these, use</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -a
 </pre></div>
 </div>
 <p>This will list all files and directories that start with a <code class="docutils literal notranslate"><span class="pre">.</span></code>, such as <code class="docutils literal notranslate"><span class="pre">.config</span></code> (this contains sub-directories and files containing the configuration settings for applications).</p>
-<p>$\star$ To see more info on the files and directories, use</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> To see more info on the files and directories, use</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l
 </pre></div>
 </div>
@@ -862,7 +887,7 @@
 <li><p>Each week’s directory should contain directories called <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">results</span></code>, and <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (can be all small(like in these example names), sentence (first letter capitalized), or all large case, but <em>be consistent</em>)</p></li>
 </ul>
 <p>You will bring your <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code> and all it’s contents under version control using Git (coming up in the <a class="reference internal" href="03-Git.html"><span class="doc std std-doc">Version Control Chapter</span></a>.</p>
-<p>$\star$ OK, make your coursework directory now. First, <code class="docutils literal notranslate"><span class="pre">cd</span></code> to an appropriate place (e.g., <code class="docutils literal notranslate"><span class="pre">Documents</span></code> on your <code class="docutils literal notranslate"><span class="pre">home</span></code>):</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> OK, make your coursework directory now. First, <code class="docutils literal notranslate"><span class="pre">cd</span></code> to an appropriate place (e.g., <code class="docutils literal notranslate"><span class="pre">Documents</span></code> on your <code class="docutils literal notranslate"><span class="pre">home</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Documents <span class="c1"># same as /home/YourUserName/Documents</span>
@@ -1314,8 +1339,8 @@ File1.csv  File1.txt  File2.csv  File2.txt  File4.csv  File4.txt
 </div>
 </div>
 <div class="section" id="using-grep">
-<h2>Using <code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#using-grep" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">grep</span></code> is a command that matches strings in a file (why is this useful?). It is based on regular expressions (more on this later). Let’s explore some basic usage of <code class="docutils literal notranslate"><span class="pre">grep</span></code>. For a test file let’s download a list of protected species from the web (to <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>):</p>
+<span id="id2"></span><h2>Using <code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#using-grep" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">grep</span></code> is a command that matches strings in a file (why is this useful?). It is based on regular expressions (more on this <a class="reference internal" href="06-Python_II.html#python-ii-python-regex"><span class="std std-ref">later</span></a>). Let’s explore some basic usage of <code class="docutils literal notranslate"><span class="pre">grep</span></code>. For a test file let’s download a list of protected species from the web (to <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../ <span class="c1"># move one level up from TestWild, back to sandbox</span>
@@ -1717,9 +1742,6 @@ File3.txt
 <h2>Installing or removing software in Ubuntu<a class="headerlink" href="#installing-or-removing-software-in-ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>You can install software in your <code class="docutils literal notranslate"><span class="pre">/home</span></code> directory. In UNIX you originally had to login as <code class="docutils literal notranslate"><span class="pre">root</span></code> (administrator). But in Ubuntu, it is sufficient to add <code class="docutils literal notranslate"><span class="pre">sudo</span></code> (<code class="docutils literal notranslate"><span class="pre">s</span></code>uper <code class="docutils literal notranslate"><span class="pre">u</span></code>ser <code class="docutils literal notranslate"><span class="pre">do</span></code>) in front of a command. To install packages in all Debian (including Ubuntu) distributions you need to use the <code class="docutils literal notranslate"><span class="pre">apt</span></code> group of commands which allow you to deal with various installation (and un-installation) tasks.</p>
 <hr class="docutils" />
-<a class="reference internal image-reference" href="../_images/sudo.png"><img alt="sudo" src="../_images/sudo.png" style="width: 250px;" /></a>
-<p><strong><code class="docutils literal notranslate"><span class="pre">sudo</span></code> rules.</strong> <small>(Source: <a class="reference external" href="http://xkcd.com/149/">XKCD</a>)</small></p>
-<hr class="docutils" />
 <div class="section" id="installing-from-the-main-repository">
 <h3>Installing from the main repository<a class="headerlink" href="#installing-from-the-main-repository" title="Permalink to this headline">¶</a></h3>
 <p>You can install anything that is in the main Ubuntu package/software repository.</p>
@@ -1871,7 +1893,7 @@ File3.txt
 <li><p>Print everything starting from the second line for the <code class="docutils literal notranslate"><span class="pre">E.</span> <span class="pre">coli</span></code> genome</p></li>
 <li><p>Count the sequence length of this genome</p></li>
 <li><p>Count the matches of a particular sequence, “ATGC” in the genome of <em>E. coli</em> (hint: Start by removing the first line and removing newline characters)</p></li>
-<li><p>Compute the AT/GC ratio. That is, the (A+T)/(G+C) ratio. This is a summary measure of base composition of double-stranded DNA. DNA from different organisms and lineages has different ratios of the A-to-T and G-to-C base pairs. For example DNA from organisms that live in hot springs have a higher GC content, which takes advantage of the increased thermal stability of the GC base pair (google “Chargaff’s rule”).</p></li>
+<li><p>Compute the AT/GC ratio. That is, the (A+T)/(G+C) ratio (as a single number). This is a summary measure of base composition of double-stranded DNA. DNA from different organisms and lineages has different ratios of the A-to-T and G-to-C base pairs  (google “Chargaff’s rule”). For example, DNA from organisms that live in hot springs have a higher GC content, the GC base pair is more thermally stable.</p></li>
 </ul>
 <p>Note that there may be some <code class="docutils literal notranslate"><span class="pre">Y</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code>’s in DNA sequences, denoting bases where there is uncertainty about identity, with R denoting purine (A or G) and Y pyrimidine (C or T) ribonucleotides. No agreed symbols exist for the other possible combinations, but these too may arbitrarily be reprsented by some non ATGC letters. To handle these, the calculation should be done by keeping these extra letters in place. That is, <em>do not delete</em> them before calculating the ratio, as this will shift the sequences.</p>
 <ul class="simple">
@@ -1889,7 +1911,7 @@ File3.txt
 <ul class="simple">
 <li><p>If you like history, <a class="reference external" href="https://www.howtogeek.com/182649/htg-explains-what-is-unix">see this</a>.</p></li>
 <li><p>Lots of UNIX tutorials out there. Try <a class="reference external" href="http://software-carpentry.org/lessons.html">http://software-carpentry.org/lessons.html</a> (Chapter “shell”).</p></li>
-<li><p>Some good <a class="reference external" href="http://www.ibm.com/developerworks/aix/library/au-badunixhabits.html">UNIX usage habits</a></p></li>
+<li><p>The bash reference manual: <a class="reference external" href="https://www.gnu.org/software/bash/manual/bash.html">https://www.gnu.org/software/bash/manual/bash.html</a></p></li>
 </ul>
 </div>
 <div class="section" id="repositories-and-packages-in-ubuntu">

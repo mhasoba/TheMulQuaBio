@@ -53,8 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Biological Computing in R" href="07-R.html" />
-    <link rel="prev" title="Biological Computing in Python I" href="05-Python_I.html" />
+    <link rel="next" title="Introduction to this section" href="../Stats-Intro.html" />
+    <link rel="prev" title="Biological Computing in R" href="07-R.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -118,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -126,14 +129,14 @@
    Biological Computing in Python I
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Biological Computing in Python II
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07-R.html">
    Biological Computing in R
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -160,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -522,13 +533,18 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#groupwork-practical-1">
-       Groupwork practical 1
+      <a class="reference internal nav-link" href="#groupwork-practical-compare-r-and-python-vectorization">
+       Groupwork practical: Compare R and Python Vectorization
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#groupwork-practical-2">
-       Groupwork practical 2
+      <a class="reference internal nav-link" href="#groupwork-practical-discrete-time-lv-model">
+       Groupwork practical: Discrete time LV Model
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#groupwork-practical-discrete-time-lv-model-with-stochasticity">
+       Groupwork practical: Discrete time LV model with stochasticity
       </a>
      </li>
     </ul>
@@ -827,11 +843,11 @@
 </div>
 <p>Thus the last two outputs tell you that firstly, that numpy arrays belong to a data structure type (and a class) called <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, and secondly, that at position <code class="docutils literal notranslate"><span class="pre">0</span></code> (remember, Python indexing starts at 0) it holds an <a class="reference external" href="https://en.wikipedia.org/wiki/9,223,372,036,854,775,807">64 bit integer</a>. All elements in <code class="docutils literal notranslate"><span class="pre">a</span></code> are of type <code class="docutils literal notranslate"><span class="pre">int</span></code> because that is what <code class="docutils literal notranslate"><span class="pre">range()</span></code> returns (try <code class="docutils literal notranslate"><span class="pre">?range</span></code>).</p>
 <hr class="docutils" />
-<p>:::{figure} python-arrays
-<a class="reference internal" href="../_images/numpyarray.png"><img alt="Python arrays" src="../_images/numpyarray.png" style="width: 700px;" /></a></p>
-<p><strong>A graphical depiction of numpy/numpy arrays.</strong> These can have multiple dimensions (even greater than 3). <br>
-(Source: <a class="reference external" href="http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html">http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html</a>)
-:::</p>
+<div class="figure align-default" id="python-numpy-array">
+<a class="reference internal image-reference" href="../_images/numpyarray.png"><img alt="Python numpy array" src="../_images/numpyarray.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>A graphical depiction of numpy/numpy arrays.</strong> These can have multiple dimensions (even greater than 3). <br>
+(Source: <a class="reference external" href="http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html">http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html</a>)</span><a class="headerlink" href="#python-numpy-array" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
 <p>You can also specify the data type of the array:</p>
 <div class="cell docutils container">
@@ -1554,7 +1570,7 @@ from the end of an array:</p>
 </div>
 </div>
 <p>Or you can use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">scipy</span> <span class="pre">import</span> <span class="pre">stats</span></code>.</p>
-<p>Let’s generate 10 samples from the normal distribution ($\mathcal{N}(\mu,,\sigma^{2})$):</p>
+<p>Let’s generate 10 samples from the normal distribution (<span class="math notranslate nohighlight">\(\mathcal{N}(\mu,\,\sigma^{2})\)</span>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
@@ -1568,7 +1584,7 @@ from the end of an array:</p>
 </div>
 </div>
 </div>
-<p>By default, <a class="reference internal" href="07-R.html#r-random-numbers"><span class="std std-ref">as in R</span></a>, these are numbers from the <em>standard</em> normal distribution ($\mathcal{N}(0,,1)$).</p>
+<p>By default, <a class="reference internal" href="07-R.html#r-random-numbers"><span class="std std-ref">as in R</span></a>, these are numbers from the <em>standard</em> normal distribution (<span class="math notranslate nohighlight">\(\mathcal{N}(0,\,1)\)</span>).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong>Continuing on the numpy vs scipy theme</strong>: Both scipy and numpy can generate random numbers (e.g., <code class="docutils literal notranslate"><span class="pre">np.random.normal(size=10)</span></code> would work equally well above). In fact, scipy uses the <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> package under the hood for drawing random numbers. You may choose to use either, but for sanity, its probably a good idea to just stick with <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> for all your stats number crunching.</p>
@@ -1767,17 +1783,17 @@ from the end of an array:</p>
 <div class="section" id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Permalink to this headline">¶</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1e29d43d-0df3-4079-9fcc-100da997acb6">
-<span class="eqno">(1)<a class="headerlink" href="#equation-1e29d43d-0df3-4079-9fcc-100da997acb6" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-98efdb28-7959-4839-97db-b6a699ccaeef">
+<span class="eqno">(2)<a class="headerlink" href="#equation-98efdb28-7959-4839-97db-b6a699ccaeef" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
 <p>where,</p>
 <ul class="simple">
-<li><p>$C$ and $R$ are consumer (e.g., predator) and resource (e.g., prey) population abundances (either number $\times$ area$^{-1}$ ).</p></li>
-<li><p>$r$ is the intrinsic (per-capita) growth rate of the resource population (time$^{-1}$).</p></li>
-<li><p>$a$ is per-capita “search rate” for the resource ($\text{area}\times \text{time}^{-1}$)  multiplied by its attack success probability, which determines the encounter and consumption rate of the consumer on the resource.</p></li>
-<li><p>$z$ is mortality rate ($\text{time}^{-1}$) and $e$ is the consumer’s efficiency (a fraction) in converting resource to consumer biomass.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are consumer (e.g., predator) and resource (e.g., prey) population abundances (either number <span class="math notranslate nohighlight">\(\times\)</span> area<span class="math notranslate nohighlight">\(^{-1}\)</span> ).</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the intrinsic (per-capita) growth rate of the resource population (time<span class="math notranslate nohighlight">\(^{-1}\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(a\)</span> is per-capita “search rate” for the resource (<span class="math notranslate nohighlight">\(\text{area}\times \text{time}^{-1}\)</span>)  multiplied by its attack success probability, which determines the encounter and consumption rate of the consumer on the resource.</p></li>
+<li><p><span class="math notranslate nohighlight">\(z\)</span> is mortality rate (<span class="math notranslate nohighlight">\(\text{time}^{-1}\)</span>) and <span class="math notranslate nohighlight">\(e\)</span> is the consumer’s efficiency (a fraction) in converting resource to consumer biomass.</p></li>
 </ul>
 <p>We have already imported scipy above (<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">scipy</span> <span class="pre">as</span> <span class="pre">sc</span></code>) so we can proceed to solve the LV model using numerical integration.</p>
 <p>First, import <code class="docutils literal notranslate"><span class="pre">scipy</span></code>’s <code class="docutils literal notranslate"><span class="pre">integrate</span></code> submodule:</p>
@@ -1965,10 +1981,10 @@ from the end of an array:</p>
 <li><p>Create a self-standing script using the above example and save it as <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> in your code directory. In addition to generating the above figure, it should also generate the following figure:</p></li>
 </ol>
 <hr class="docutils" />
-<p>:::{figure} LV-practical-1
-<a class="reference internal" href="../_images/LV_model_CR.png"><img alt="Lotka-Volterra phase plot" src="../_images/LV_model_CR.png" style="width: 400px;" /></a></p>
-<p><strong>Generate this figure as part of the <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> script.</strong>
-:::</p>
+<div class="figure align-default" id="lv-phase-plot">
+<a class="reference internal image-reference" href="../_images/LV_model_CR.png"><img alt="Lotka-Volterra phase plot" src="../_images/LV_model_CR.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>Generate this figure as part of the <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> script.</strong></span><a class="headerlink" href="#lv-phase-plot" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
 <p>It should save both figures in pdf to the <code class="docutils literal notranslate"><span class="pre">results</span></code> directory, <em>without displaying them on screen</em>.</p>
 </div>
@@ -2110,7 +2126,7 @@ from the end of an array:</p>
 </pre></div>
 </div>
 <p>Woo hoo! So we about halved the time! Not quite enough to grab a pint, but ah well…</p>
-<p>$\star$ Another approach would be to preallocate a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array instead of using a list for <code class="docutils literal notranslate"><span class="pre">my_squares</span></code> - <em>Try it</em></p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Another approach would be to preallocate a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array instead of using a list for <code class="docutils literal notranslate"><span class="pre">my_squares</span></code> - <em>Try it</em></p>
 <p>You can also modify how the profiling results are displayed, and more, by using flags. For example, <code class="docutils literal notranslate"><span class="pre">-s</span></code> allows sorting the report by a particular column,  <code class="docutils literal notranslate"><span class="pre">-l</span></code>  limits the number of lines displayed or filters the results by function name, and <code class="docutils literal notranslate"><span class="pre">-T</span></code> saves the report in a text file.</p>
 <p>For example, try</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">s</span> <span class="n">cumtime</span> <span class="n">profileme2</span><span class="o">.</span><span class="n">py</span>
@@ -2185,19 +2201,20 @@ from the end of an array:</p>
 </div>
 <div class="section" id="vectorization-revisited">
 <h3>Vectorization revisited<a class="headerlink" href="#vectorization-revisited" title="Permalink to this headline">¶</a></h3>
-<p>We have now had fairly extensive practice in iteratively creating solutions to problems using for loops. Thus far all our problems have been mathematically quite straightforward, and not very computationally intensive. As you begin to move on from your taught modules and into current research, you may find yourselves solving larger and more complex problems, at which point you will start to discover that for-loops have a fundamental weakness - speed!</p>
+<p>We have now had fairly extensive practice in iteratively creating solutions to problems using for loops. Thus far all our problems have been mathematically quite straightforward, and not very computationally intensive. As you begin to move on from your taught modules into project work, you may find yourselves solving larger and more complex problems, at which point you will start to discover that for-loops have a fundamental weakness - speed!</p>
 <p>In a nutshell, there are two issues keeping loops slow:</p>
 <ul class="simple">
 <li><p>Producing solutions to a large problem one loop iteration at a time means that our scripts and functions spend a lot of time doing stuff other than actually solving the problem we want them to solve - e.g. shuffling data around between variables in each loop iteration, or storing the result of the current loop’s calculations in a (sometimes temporary) variable.</p></li>
 <li><p>Loops (at least in Python) are not generally able to take advantage of the parallel computing capabilities of modern-day computers, and thus must literally compute a solution one loop iteration at a time. vectorized functions tend to be optimised to spread their computations over multiple processors/threads, which can be much faster!</p></li>
 </ul>
 <p>These issues become especially pronounced in the case of nested loops - which often appear in more spatially-explicit problems or time-dependent ones.</p>
-<p>Rather than expecting you to simply take my word for it, the following two examples will showcase the difference in runtime between a loop method and a vectorized method using numpy. The first is a relatively simple (if artificial) problem, intended to demonstrate basically at-a-glace the difference between the two approaches. The second is taken from current research on metabolic models of bacterial communities.</p>
+<p>The following two examples will showcase the difference in runtime between a loop method and a vectorized method using numpy. The first is a relatively simple (if artificial) problem, intended to demonstrate basically at-a-glace the difference between the two approaches. The second is taken from current research on metabolic models of bacterial communities.</p>
 <div class="section" id="an-example">
 <h4>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h4>
-<p>Let us imagine we have two simple 1D arrays $a = (a_1, a_2, … , a_N)$ and $b = (b_1, b_2, … ,b_N)$, each of length N, and that we want to calculate a new array $c$ in which each entry is just the product of the two corresponding entries in $a$ and $b$:</p>
-<p>$$c = (a_1 \times b_1, a_2 \times b_2, … , a_N \times b_N)$$</p>
-<p>This operation is called the <em>entrywise</em> product of $a$ and $b$.</p>
+<p>Let us imagine we have two simple 1D arrays <span class="math notranslate nohighlight">\(a = (a_1, a_2, ... , a_N)\)</span> and <span class="math notranslate nohighlight">\(b = (b_1, b_2, ... ,b_N)\)</span>, each of length N, and that we want to calculate a new array <span class="math notranslate nohighlight">\(c\)</span> in which each entry is just the product of the two corresponding entries in <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[c = (a_1 \times b_1, a_2 \times b_2, ... , a_N \times b_N)\]</div>
+<p>This operation is called the <em>entrywise</em> product of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
 <p>Below are a loop-based function and a vectorized function to calculate the entrywise product of two 1D arrays of the same length. We will test them both on larger and larger 1D arrays to see how the vectorized approach is faster.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2306,7 +2323,7 @@ vectorized method took 155 ms on average.
 <span class="k">del</span> <span class="n">c</span>
 </pre></div>
 </div>
-<p>This will almost certainly return a memory error (i.e. your computer ran out of RAM in which to store the entirety of the very large arrays $a$, $b$ and $c$ while it was still calculating (if you didn’t get an error, try again with an extra 0 in $N$).</p>
+<p>This will almost certainly return a memory error (i.e. your computer ran out of RAM in which to store the entirety of the very large arrays <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> while it was still calculating (if you didn’t get an error, try again with an extra 0 in <span class="math notranslate nohighlight">\(N\)</span>).</p>
 <p>Again, this is a rather contrived example - you probably won’t be taking element-wise products of arrays with a billion entries in your research - but more complex problems can easily become too big for memory while still remaining biologically reasonable!</p>
 <p><em>Check out the CMEE module on High Performance Computing to learn about using Imperial College’s supercomputing cluster to run extremely large problems</em></p>
 <div class="admonition tip">
@@ -2321,52 +2338,56 @@ vectorized method took 155 ms on average.
 <h4>Lotka-Volterra model problem<a class="headerlink" href="#lotka-volterra-model-problem" title="Permalink to this headline">¶</a></h4>
 <p>Copy and modify <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> into another script called <code class="docutils literal notranslate"><span class="pre">LV2.py</span></code> that has the following features:</p>
 <ul class="simple">
-<li><p>It takes arguments for the four LV model parameters $r$, $a$, $z$ ,$e$ from the command line:</p></li>
+<li><p>It takes arguments for the four LV model parameters <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(z\)</span> ,<span class="math notranslate nohighlight">\(e\)</span> from the command line:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LV2</span><span class="o">.</span><span class="n">py</span> <span class="n">arg1</span> <span class="n">arg2</span> <span class="o">...</span> <span class="n">etc</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>It runs the Lotka-Volterra model with prey density dependence $r R \left(1 - \frac{R} {K}\right)$, which changes the coupled ODEs to,</p></li>
+<li><p>It runs the Lotka-Volterra model with prey density dependence <span class="math notranslate nohighlight">\(r R \left(1 - \frac{R} {K}\right)\)</span>, which changes the coupled ODEs to,</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-47870a8b-b93c-4e30-b69b-09e8a4e81d1a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-47870a8b-b93c-4e30-b69b-09e8a4e81d1a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5d6f3a50-4c7e-4b8a-a34c-7b41889b36b7">
+<span class="eqno">(3)<a class="headerlink" href="#equation-5d6f3a50-4c7e-4b8a-a34c-7b41889b36b7" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
 <ul class="simple">
 <li><p>It saves the plot as <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> in an appropriate location.</p></li>
-<li><p>The chosen parameter values should show in the plot (e.g., $r = 1, a = .5 $, etc) You can change time length $t$ too.</p></li>
+<li><p>The chosen parameter values should show in the plot (e.g., <span class="math notranslate nohighlight">\(r = 1, a = .5 \)</span>, etc) You can change time length <span class="math notranslate nohighlight">\(t\)</span> too.</p></li>
 <li><p>The parameters values should be adjusted such that both predator and prey persist with prey density dependence ( the final (non-zero) population values should be printed to screen).</p></li>
 </ul>
 <p>Also, include a script that runs both <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> and <code class="docutils literal notranslate"><span class="pre">LV2.py</span></code> with appropriate arguments. This script should also profile the two scripts and print the results to screen for each of the scripts using the <code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">-p</span></code> approach. Look at and compare the speed bottlenecks in <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> and <code class="docutils literal notranslate"><span class="pre">LV2.py</span></code>. <em>Think about how you could further speed up the scripts.</em></p>
 </div>
-<div class="section" id="groupwork-practical-1">
-<h4>Groupwork practical 1<a class="headerlink" href="#groupwork-practical-1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="groupwork-practical-compare-r-and-python-vectorization">
+<h4>Groupwork practical: Compare R and Python Vectorization<a class="headerlink" href="#groupwork-practical-compare-r-and-python-vectorization" title="Permalink to this headline">¶</a></h4>
+<p>Implement the Python versions of <code class="docutils literal notranslate"><span class="pre">Vectorize1.R</span></code>and <code class="docutils literal notranslate"> <span class="pre">Vectorize2.R</span></code> <a class="reference internal" href="07-R.html#r-vectorization"><span class="std std-ref">from the R Chapter</span></a> (call them <code class="docutils literal notranslate"><span class="pre">Vectorize1.py</span></code> and <code class="docutils literal notranslate"><span class="pre">Vectorize2.py</span></code> respectively). Then write a shell script that compares the computational speed of the four scripts. the script should display meaningful summary of the results in the terminal. In particular, it should print the timings of the equivalent R and Python functions (not just the timing of the R and Python scripts as a whole).</p>
+</div>
+<div class="section" id="groupwork-practical-discrete-time-lv-model">
+<h4>Groupwork practical: Discrete time LV Model<a class="headerlink" href="#groupwork-practical-discrete-time-lv-model" title="Permalink to this headline">¶</a></h4>
 <p><em>Write every subsequent extra credit script file with a new name such as <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>,<code class="docutils literal notranslate"><span class="pre">LV4.py</span></code>, etc.</em></p>
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-ddc01ee1-675b-4c10-a8c6-b740d43857de">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ddc01ee1-675b-4c10-a8c6-b740d43857de" title="Permalink to this equation">¶</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-a2c46b41-19b9-4d76-8e7a-776661219174">
+<span class="eqno">(4)<a class="headerlink" href="#equation-a2c46b41-19b9-4d76-8e7a-776661219174" title="Permalink to this equation">¶</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
 <p>Include this script in <code class="docutils literal notranslate"><span class="pre">run_LV.py</span></code>, and profile it as well.</p>
 </div>
-<div class="section" id="groupwork-practical-2">
-<h4>Groupwork practical 2<a class="headerlink" href="#groupwork-practical-2" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="groupwork-practical-discrete-time-lv-model-with-stochasticity">
+<h4>Groupwork practical: Discrete time LV model with stochasticity<a class="headerlink" href="#groupwork-practical-discrete-time-lv-model-with-stochasticity" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-af606948-5c75-4d29-b37a-6e85acf9c3e2">
-<span class="eqno">(4)<a class="headerlink" href="#equation-af606948-5c75-4d29-b37a-6e85acf9c3e2" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7d846a7b-355a-444b-b9a3-e26807a035fd">
+<span class="eqno">(5)<a class="headerlink" href="#equation-7d846a7b-355a-444b-b9a3-e26807a035fd" title="Permalink to this equation">¶</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
-<p>where $\epsilon$ is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fcf2cbb2-5ce4-4954-845f-e54e22db1218">
-<span class="eqno">(5)<a class="headerlink" href="#equation-fcf2cbb2-5ce4-4954-845f-e54e22db1218" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e959286f-76e1-4b08-82dd-68182549e7c1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e959286f-76e1-4b08-82dd-68182549e7c1" title="Permalink to this equation">¶</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - (z + \epsilon) + e a R_t)
 \end{align}\]</div>
@@ -2375,7 +2396,7 @@ vectorized method took 155 ms on average.
 </div>
 </div>
 <div class="section" id="regular-expressions-in-python">
-<h2>Regular expressions in Python<a class="headerlink" href="#regular-expressions-in-python" title="Permalink to this headline">¶</a></h2>
+<span id="python-ii-python-regex"></span><h2>Regular expressions in Python<a class="headerlink" href="#regular-expressions-in-python" title="Permalink to this headline">¶</a></h2>
 <p>Let’s shift gears now, and look at a very important tool set that you should learn, or at least be aware of — <em>Regular expressions</em>.</p>
 <p>Regular expressions (regex) are a tool to find patterns (not just a particular sequence of characters) in strings. For example, <code class="docutils literal notranslate"><span class="pre">your&#64;email.com</span></code> is a specific sequence of characters, but, in fact, all email addresses have such a pattern: alphanumeric characters, a “&#64;”, alphanumeric characters, a “.”, alphanumeric characters. Using regex, you can search for all email addresses in a text file by searching for this pattern.</p>
 <p>There are many uses of regex, such as:</p>
@@ -2387,12 +2408,12 @@ vectorized method took 155 ms on average.
 </ul>
 <p>Thus, if you are interested in data mining, need to clean or process data in any other way, or convert a bunch of information into usable data, knowing regex is absolutely necessary.</p>
 <hr class="docutils" />
-<p>:::{figure} XKCD-regex
-<a class="reference internal" href="../_images/regex.png"><img alt="XKCD on Regex" src="../_images/regex.png" style="width: 400px;" /></a></p>
-<p><strong>Regular expressions can really improve your quality of life.</strong><br> (Source: <a class="reference external" href="https://www.xkcd.com/208/">XKCD</a>)
-:::</p>
+<div class="figure align-default" id="xkcd-on-regex">
+<a class="reference internal image-reference" href="../_images/regex.png"><img alt="XKCD on Regex" src="../_images/regex.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text"><strong>Regular expressions can really improve your quality of life.</strong><br> (Source: <a class="reference external" href="https://www.xkcd.com/208/">XKCD</a>)</span><a class="headerlink" href="#xkcd-on-regex" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
-<p>Regex packages are available for most programming languages (recall <a class="reference external" href="01-Unix.ipynb#Using-%60grep%60"><code class="docutils literal notranslate"><span class="pre">grep</span></code> in UNIX</a>; that is how regex first became popular).</p>
+<p>Regex packages are available for most programming languages (recall <a class="reference internal" href="01-Unix.html#using-grep"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">grep</span></code> in UNIX</span></a>; that is how regex first became popular).</p>
 <div class="section" id="metacharacters-vs-regular-characters">
 <h3>Metacharacters vs. regular characters<a class="headerlink" href="#metacharacters-vs-regular-characters" title="Permalink to this headline">¶</a></h3>
 <p>A regex may consist of a combination of special “metacharacters” (modifiers) and “regular” or literal characters. There are 14 metacharacters:</p>
@@ -2813,10 +2834,10 @@ vectorized method took 155 ms on average.
 </div>
 </div>
 <hr class="docutils" />
-<p>:::{figure} bird-shit-frog
-<a class="reference internal" href="../_images/thelodermaasper.JPG"><img alt="ANOVA example" src="../_images/thelodermaasper.JPG" style="width: 350px;" /></a></p>
-<p><strong>In case you were wondering what <em>Theloderma asper</em>, the “bird-shit frog”, looks like.</strong> Samraat snapped this one in a North-East Indian rainforest ages ago.
-:::</p>
+<div class="figure align-default" id="theloderma-asper">
+<a class="reference internal image-reference" href="../_images/thelodermaasper.JPG"><img alt="Bird-shit Frog" src="../_images/thelodermaasper.JPG" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>In case you were wondering what <em>Theloderma asper</em>, the “bird-shit frog”, looks like.</strong> Samraat snapped this one in a North-East Indian rainforest ages ago.</span><a class="headerlink" href="#theloderma-asper" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
 <p>How about looking for email addresses in a string? For example, let’s try matching a string consisting of an academic’s name, email address and research area or interest (no need to type this into any python file):</p>
 <div class="cell docutils container">
@@ -2894,7 +2915,7 @@ vectorized method took 155 ms on average.
 <ul>
 <li><p>Only seemingly valid dates match (i.e., year greater than 1900)</p></li>
 <li><p>First digit in month is either 0 or 1</p></li>
-<li><p>First digit in day $\leq 3$</p></li>
+<li><p>First digit in day <span class="math notranslate nohighlight">\(\leq 3\)</span></p></li>
 </ul>
 </li>
 </ul>
@@ -3212,7 +3233,7 @@ Dr Aurelio Malo
 </div>
 <div class="section" id="using-python-to-build-workflows">
 <h2>Using Python to build workflows<a class="headerlink" href="#using-python-to-build-workflows" title="Permalink to this headline">¶</a></h2>
-<p>You can use python to build an automated data analysis or simulation workflow that involves multiple languages, especially the ones you have already learnt: R, $\LaTeX$, and UNIX bash. For example, you could, in theory, write a single Python script to generate and update your masters dissertation, tables, plots, and all. Python is ideal for building such workflows because it has packages for practically every purpose.</p>
+<p>You can use python to build an automated data analysis or simulation workflow that involves multiple languages, especially the ones you have already learnt: R, <span class="math notranslate nohighlight">\(\LaTeX\)</span>, and UNIX bash. For example, you could, in theory, write a single Python script to generate and update your masters dissertation, tables, plots, and all. Python is ideal for building such workflows because it has packages for practically every purpose.</p>
 <p><em>Thus this topic may be useful for your <a class="reference internal" href="Appendix-MiniProj.html"><span class="doc std std-doc">Miniproject</span></a>, which will involve building a reproducible computational workflow.</em></p>
 <div class="section" id="using-subprocess">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">subprocess</span></code><a class="headerlink" href="#using-subprocess" title="Permalink to this headline">¶</a></h3>
@@ -3229,7 +3250,7 @@ Dr Aurelio Malo
 <h4>Running processes<a class="headerlink" href="#running-processes" title="Permalink to this headline">¶</a></h4>
 <p>There are two main ways to run commands through subprocess: <code class="docutils literal notranslate"><span class="pre">run</span></code> (available in Python 3.5 onwards) for basic usage, and <code class="docutils literal notranslate"><span class="pre">Popen</span></code> (<code class="docutils literal notranslate"><span class="pre">P</span></code>rocess <code class="docutils literal notranslate"><span class="pre">open</span></code>) for more advanced usage. We will work directly with <code class="docutils literal notranslate"><span class="pre">popen</span></code> because <code class="docutils literal notranslate"><span class="pre">run()</span></code> is a wrapper around <code class="docutils literal notranslate"><span class="pre">Popen</span></code>. Using <code class="docutils literal notranslate"><span class="pre">Popen</span></code> directly gives more control over how the command is run, and how its input and output are processed.</p>
 <p>Let’s try running some commands in the UNIX bash.</p>
-<p>$\star$ In a terminal, first <code class="docutils literal notranslate"><span class="pre">cd</span></code> to your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory,  launch <code class="docutils literal notranslate"><span class="pre">ipython3</span></code>, then and type:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> In a terminal, first <code class="docutils literal notranslate"><span class="pre">cd</span></code> to your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory,  launch <code class="docutils literal notranslate"><span class="pre">ipython3</span></code>, then and type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span> <span class="s2">&quot;I&#39;m talkin&#39; to you, bash!&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
@@ -3309,7 +3330,7 @@ Dr Aurelio Malo
 </pre></div>
 </div>
 <p>This should give you the output of your <code class="docutils literal notranslate"><span class="pre">boilerplate.py</span></code> script (remember, your current path will need to be in the appropriate code directory of the relevant week’s directory).</p>
-<p>Similarly, to compile a $\LaTeX$ document (using <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> in this case), you can do something like:</p>
+<p>Similarly, to compile a <span class="math notranslate nohighlight">\(\LaTeX\)</span> document (using <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> in this case), you can do something like:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;pdflatex yourlatexdoc.tex&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3354,7 +3375,7 @@ python script. A simple example, where the output is a platform-dependent direct
 <h3>Running <code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#running-r" title="Permalink to this headline">¶</a></h3>
 <p>R is likely an important part of your project’s analysis and data visualization components in particular — for example for statistical analyses and pretty plotting (<code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>!).</p>
 <p>You can run <code class="docutils literal notranslate"><span class="pre">R</span></code> from Python easily. Try the following:</p>
-<p>$\star$ Create an R script file called <code class="docutils literal notranslate"><span class="pre">TestR.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory with the following content:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create an R script file called <code class="docutils literal notranslate"><span class="pre">TestR.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory with the following content:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Hello, this is R!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3442,7 +3463,7 @@ python script. A simple example, where the output is a platform-dependent direct
 </div>
 </div>
 </div>
-<p>Let’s generate a “synthetic” food web. We can do this with the following function that generates a random adjacency list of a $N$-species food web with “connectance probability” $C$: the probability of having a link between any pair of species in the food web.</p>
+<p>Let’s generate a “synthetic” food web. We can do this with the following function that generates a random adjacency list of a <span class="math notranslate nohighlight">\(N\)</span>-species food web with “connectance probability” <span class="math notranslate nohighlight">\(C\)</span>: the probability of having a link between any pair of species in the food web.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GenRdmAdjList</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
@@ -3512,7 +3533,7 @@ python script. A simple example, where the output is a platform-dependent direct
 </div>
 </div>
 </div>
-<p>Now generate body sizes for the species. We will use a log$_{10}$ scale because species body sizes tend to be <a class="reference external" href="08-Data_R.ipynb#Histograms">log-normally distributed</a>.</p>
+<p>Now generate body sizes for the species. We will use a log<span class="math notranslate nohighlight">\(_{10}\)</span> scale because species body sizes tend to be <a class="reference external" href="08-Data_R.ipynb#Histograms">log-normally distributed</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SizRan</span> <span class="o">=</span> <span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span> <span class="c1">#use log10 scale</span>
@@ -3648,17 +3669,17 @@ python script. A simple example, where the output is a platform-dependent direct
 <li><p>For SciPy, read the <a class="reference external" href="https://docs.scipy.org/doc/">official documentation</a>; in particular, read about the scipy <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/">modules</a> you think will be important to you.</p></li>
 <li><p>The “ecosystem” for Scientific computing in python: <a class="reference external" href="http://www.scipy-lectures.org/">http://www.scipy-lectures.org/</a></p></li>
 <li><p>Many great examples of applications in the <a class="reference external" href="https://scipy-cookbook.readthedocs.io/">scipy cookbook</a></p></li>
-<li><p>Scipy stats: https://docs.scipy.org/doc/scipy/reference/tutorial/stats.html</p></li>
+<li><p>Scipy stats: <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats.html">https://docs.scipy.org/doc/scipy/reference/tutorial/stats.html</a></p></li>
 <li><p>A Primer on Scientific Programming with Python <a class="reference external" href="http://www.springer.com/us/book/9783642549595">http://www.springer.com/us/book/9783642549595</a>; Multiple copies of this book are available from the central library and can be requested to Silwood from the IC library website. You can also find a pdf - seach online.</p></li>
 </ul>
 </div>
 <div class="section" id="regular-expressions">
 <h3>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Python regex documentation: https://docs.python.org/3.6/howto/regex.html</p></li>
-<li><p>Google’s short class on regex in python: https://developers.google.com/edu/python/regular-expressions
-And this exercise: https://developers.google.com/edu/python/exercises/baby-names</p></li>
-<li><p>Good intro to regex, tips and a great array of canned solutions: http://www.regular-expressions.info</p></li>
+<li><p>Python regex documentation: <a class="reference external" href="https://docs.python.org/3.6/howto/regex.html">https://docs.python.org/3.6/howto/regex.html</a></p></li>
+<li><p>Google’s short class on regex in python: <a class="reference external" href="https://developers.google.com/edu/python/regular-expressions">https://developers.google.com/edu/python/regular-expressions</a>
+And this exercise: <a class="reference external" href="https://developers.google.com/edu/python/exercises/baby-names">https://developers.google.com/edu/python/exercises/baby-names</a></p></li>
+<li><p>Good intro to regex, tips and a great array of canned solutions: <a class="reference external" href="http://www.regular-expressions.info">http://www.regular-expressions.info</a></p></li>
 <li><p>Use and abuse of regex: <a class="reference external" href="https://blog.codinghorror.com/regex-use-vs-regex-abuse/">https://blog.codinghorror.com/regex-use-vs-regex-abuse/</a></p></li>
 </ul>
 </div>
@@ -3666,7 +3687,7 @@ And this exercise: https://developers.google.com/edu/python/exercises/baby-names
 <h3>Other stuff<a class="headerlink" href="#other-stuff" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="http://matplotlib.org">The matplotlib website</a></p></li>
-<li><p>Alternatives to matplotlib for plotting in python: https://towardsdatascience.com/matplotlib-vs-seaborn-vs-plotly-f2b79f5bddb</p></li>
+<li><p>Alternatives to matplotlib for plotting in python: <a class="reference external" href="https://towardsdatascience.com/matplotlib-vs-seaborn-vs-plotly-f2b79f5bddb">https://towardsdatascience.com/matplotlib-vs-seaborn-vs-plotly-f2b79f5bddb</a></p></li>
 <li><p>Some of you might find the python package <code class="docutils literal notranslate"><span class="pre">biopython</span></code> particularly useful — check out <a class="reference external" href="http://biopython.org/">http://biopython.org/</a>, and especially, the cookbook</p></li>
 </ul>
 </div>
@@ -3703,19 +3724,19 @@ And this exercise: https://developers.google.com/edu/python/exercises/baby-names
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="05-Python_I.html" title="previous page">
+        <a class="left-prev" href="07-R.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Biological Computing in Python I</p>
+                <p class="prevnext-title">Biological Computing in R</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="07-R.html" title="next page">
+        <a class="right-next" href="../Stats-Intro.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Biological Computing in R</p>
+                <p class="prevnext-title">Introduction to this section</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

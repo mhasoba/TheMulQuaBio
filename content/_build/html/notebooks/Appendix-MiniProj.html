@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -116,7 +118,10 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with $\LaTeX$
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,13 +130,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
   </a>
  </li>
 </ul>
@@ -158,7 +163,15 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing: $t$ and $F$ tests
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
   </a>
  </li>
  <li class="toctree-l1">
@@ -577,24 +590,24 @@
 <h1>The Computing Miniproject<a class="headerlink" href="#the-computing-miniproject" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The computing Miniproject gives you an opportunity to try the “whole nine yards” of <em>asking and answering</em> a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a <strong>fully reproducible way</strong>. It will in essence give you an opportunity to perform a useful “dry run” of executing your actual Dissertation project. <em>It is an opportunity to do something concrete with all the computational biology techniques you have been learning.</em></p>
+<p>The computing Miniproject gives you an opportunity to try the “whole nine yards” of <em>asking and answering</em> a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a <strong>fully reproducible way</strong>. It will in essence give you an opportunity to perform a useful “dry run” of executing your actual Dissertation project. <em>It is an opportunity to do apply the computational methods you have been learning to a biological problem.</em></p>
 </div>
 <div class="section" id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
 <p><strong>The general question you will address is:</strong> <em>What mathematical models best fit an empirical dataset?</em></p>
-<p>You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in the model fitting lectures.</p>
+<p>You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures">the model fitting lectures</a>.</p>
 </div>
 <div class="section" id="the-project">
 <h2>The Project<a class="headerlink" href="#the-project" title="Permalink to this headline">¶</a></h2>
 <p>From the options provided to you (below), you will choose an empirical dataset, and a set of alternative models to fit to the data in that dataset.</p>
 <p>The Miniproject must satisfy the following criteria (and follow the accompanying guidelines):</p>
 <ol class="simple">
-<li><p><strong>It employs <em>as many</em> of the biological computing tools you have learned so far as necessary</strong>: shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.</p></li>
-<li><p><strong>Fits and compares <em>at least</em> two alternative mathematical models to the data</strong>. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings &amp; Resources section below).*</p></li>
-<li><p><strong>It should be fully reproducible.</strong> You will write a script that “glues” the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (<em>More detailed instructions on report below</em>). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> module in the <a class="reference internal" href="06-Python_II.html"><span class="doc std std-doc">second Python Chapter</span></a>. The assessor should be able to run just this script to get everything to work without errors.</p></li>
+<li><p><strong>It employs the biological computing tools you have learned so far <em>as necessary</em></strong>: Shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.</p></li>
+<li><p><strong>Fits and compares <em>at least</em> two alternative mathematical models to the data</strong>. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit <span class="math notranslate nohighlight">\(\ge 2\)</span> alternative models to data, followed by model selection using AIC and BIC.</p></li>
+<li><p><strong>It should be fully reproducible.</strong> You will write a script that “glues” the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (<em>More detailed instructions on report below</em>). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile <span class="math notranslate nohighlight">\(\LaTeX\)</span> using the <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> module in the <a class="reference internal" href="06-Python_II.html"><span class="doc std std-doc">second Python Chapter</span></a>. The assessor should be able to run just this script to get everything to work without errors.</p></li>
 </ol>
-<p><em>You will be given lectures and practicals on model fitting before you start on your Miniproject.</em></p>
-<p><em>Please read the papers in the <strong>Readings and Resources</strong> section below</em> — these will help orient you in the right direction for tackling your Miniproject.</p>
+<p><em>You will be given lectures and practicals on model fitting using least squares before you start on your Miniproject.</em></p>
+<p><em>Please read the papers in the <strong>Readings &amp; Resources</strong> section below</em> (and in particular, the Johnson and Omland 2005 paper) — these will help orient you in the right direction for tackling your Miniproject.</p>
 </div>
 <div class="section" id="the-report">
 <h2>The Report<a class="headerlink" href="#the-report" title="Permalink to this headline">¶</a></h2>
@@ -606,14 +619,14 @@
 <li><p>have an Introduction with objectives of the study, and appropriate additional sections such as Methods, Data, Results, Discussion, etc.</p></li>
 <li><p>contain in the <em>Methods</em> a sub-section called “Computing tools” which states briefly how each of the scripting languages (bash, R, Python) was used and what packages within them were used and a justification of why.</p></li>
 <li><p>have References properly cited in text and formatted in a list using bibtex.</p></li>
-<li><p>contain $\leq$3500 words <em>excluding the contents of the title page, references, and Figure or Table captions+legends</em>. There should be a word count at the beginning of the document (typically using the <code class="docutils literal notranslate"><span class="pre">texcount</span></code> package).</p></li>
+<li><p>contain <span class="math notranslate nohighlight">\(\leq\)</span>3500 words <em>excluding the contents of the title page, references, and Figure or Table captions+legends</em>. There should be a word count at the beginning of the document (typically using the <code class="docutils literal notranslate"><span class="pre">texcount</span></code> package).</p></li>
 </ul>
 <div class="section" id="guidelines">
 <span id="miniproject-report-guidelines"></span><h3>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h3>
 <p>Please read the <em>general</em> (<em>not</em> word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>Start writing early</strong>. Its NEVER too early to start writing! Outline the structure of your report and attempt to write a brief introduction even if you don’t have any results, or have not finalized your methods, computational work flow, or analyses. Doing this preliminary writing will force you to think about the logic of what you are planning to do, put your planned work in some context, and (in most cases!) motivate you.</p>
+<p><strong>Start writing early</strong>. Its NEVER too early to start writing! Outline the structure of your report and attempt to write a brief introduction even if you don’t have any results, or have not finalized your methods, computational work flow, or analyses. Doing this preliminary writing will force you to think about the logic of what you are planning to do, put your planned work in some context, and help motivate you.</p>
 </div>
 <p>Here are some additional suggestions/guidelines:</p>
 <ul class="simple">
@@ -631,14 +644,14 @@
 <li><p>Avoid sub-sectioning (with headers) the <em>Introduction</em> and <em>Discussion</em> sections as it breaks the flow of your “narrative”. On the other hand, you will almost always sub-section the Methods, and often, the Results section.</p></li>
 <li><p>Pay attention to detail:</p>
 <ul>
-<li><p>Do a spell check on the final draft</p></li>
-<li><p>Make sure that all graphics are rendered in good quality (use <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_graphics">vector graphic</a> formats as much as possible). Remember, $\LaTeX$ allows you to embed vector graphics in pdf.</p></li>
+<li><p>Do a spell check on the final draft.</p></li>
+<li><p>Make sure that all graphics are rendered in good quality (use <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_graphics">vector graphic</a> formats as much as possible). Remember, <span class="math notranslate nohighlight">\(\LaTeX\)</span> allows you to embed vector graphics in pdf.</p></li>
 <li><p>Make sure that all the display items (Tables + Figures) have a text caption that states what the display item is for, and then a text legend that explains the figure and delivers any take home messages.</p></li>
 </ul>
 </li>
 <li><p>The display items alone should be able to tell most of the story. Once you have an outline of the manuscript, first, before doing any more writing, put in the display items (generally, 4-6 should be enough) with Captions and Legends, and see if they are indeed telling the story you would like your paper/report to tell.</p></li>
-<li><p>Avoid the words “explore” or “look at” to describe your objectives</p></li>
-<li><p>Use direct speech (as it is YOUR work!)</p>
+<li><p>Avoid the words “explore” or “look at” to describe your objectives.</p></li>
+<li><p>Use direct speech (as it is YOUR work!).</p>
 <ul>
 <li><p>So, for example, avoid phrases such as “This study investigates”; say “Here I investigate” or something like that instead.</p></li>
 </ul>
@@ -652,16 +665,16 @@
 <ul>
 <li><p>Some succinct title examples:</p>
 <ul>
-<li><p>“The role of xx in determining yy”</p></li>
-<li><p>“The relative success of xx models in providing parameter estimates for yy”</p></li>
+<li><p>“The role of xx in determining yy”/</p></li>
+<li><p>“The relative success of xx models in providing parameter estimates for yy”.</p></li>
 <li><p><em>Or better still</em>: “xx models out-perform yy models for quantifying zz data”</p></li>
-<li><p><em>OR even better still</em>: “xx [organisms / traits] differ systematically across yy [some grouping variable, such as location or taxonomic categories]”</p></li>
+<li><p><em>OR even better still</em>: “xx [organisms / traits] differ systematically across yy [some grouping variable, such as location or taxonomic categories]”.</p></li>
 </ul>
 </li>
 <li><p>Some not-so-nice title examples:</p>
 <ul>
-<li><p>“A comparison of models for describing zz using Linear and no-linear model fitting with AIC/BIC”</p></li>
-<li><p>“An exploration of xx models for describing yy data using Linear and Non-linear model fitting with model selection”</p></li>
+<li><p>“A comparison of models for describing zz using Linear and no-linear model fitting with AIC/BIC”.</p></li>
+<li><p>“An exploration of xx models for describing yy data using Linear and Non-linear model fitting with model selection”.</p></li>
 </ul>
 </li>
 </ul>
@@ -733,9 +746,9 @@
 <ul class="simple">
 <li><p>A well-organized project where code, results, data, etc., are easy to locate, inspect, and use. In the project’s README also include:</p>
 <ul>
-<li><p>Version of each language used</p></li>
-<li><p>Any dependencies or special packages the user/marker should be aware of</p></li>
-<li><p>What each package you used is for</p></li>
+<li><p>Version of each language used.</p></li>
+<li><p>Any dependencies or special packages the user/marker should be aware of.</p></li>
+<li><p>What each package you used is for.</p></li>
 </ul>
 </li>
 <li><p>A project that runs smoothly and efficiently, without any errors once a single script is called.</p></li>
@@ -780,14 +793,12 @@
 <ul class="simple">
 <li><p>Opens the (new, modified) dataset from previous step.</p></li>
 <li><p>Does model fitting. Ultimately you need to fit at least one mechanistic/nonlinear model along with one or more linear models, but for building your workflow, just go ahead an fit a couple of different linear models (e.g., linear regression bvs quadratic and / or cubic polynomial).</p></li>
-<li><p>Calculates AIC, BIC, R$^{2}$, and other statistical measures of model fit (you decide what you want to include).</p></li>
+<li><p>Calculates AIC, BIC, R<span class="math notranslate nohighlight">\(^{2}\)</span>, and other statistical measures of model fit (you decide what you want to include).</p></li>
 <li><p>Exports the results to a csv that the <a class="reference external" href="#Final-plotting-script">final plotting script</a> can read.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the <code class="docutils literal notranslate"><span class="pre">try</span></code> keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets <em>after</em> the Model fitting script has finished running and you are in the Analysis phase.</p></li>
-</ul>
+<p>Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is <span class="math notranslate nohighlight">\(\le k\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the <code class="docutils literal notranslate"><span class="pre">try</span></code> keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets <em>after</em> the Model fitting script has finished running and you are in the Analysis phase.</p>
 </div>
 </div>
 <div class="section" id="final-plotting-and-analysis-script">
@@ -805,7 +816,7 @@
 <div class="section" id="report-compiling-script">
 <h3>Report compiling script<a class="headerlink" href="#report-compiling-script" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Then comes the $\LaTeX$ source code and a (typically, Bash) script that compiles it.</p></li>
+<li><p>Then comes the <span class="math notranslate nohighlight">\(\LaTeX\)</span> source code and a (typically, Bash) script that compiles it.</p></li>
 </ul>
 </div>
 <div class="section" id="a-single-script-to-run-them-all">
@@ -827,31 +838,30 @@
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The Miniproject is also an exercise in learning to pick the right size of (computational) problem given the amount of time you have to solve it. So even if you might be tempted to take on, at the very start, a very ambitious project (basically, picking both linear and non-linear models) and <em>then</em> trying to develop your workflow, you will very likely get stuck in “local optima” in terms of the overall workflow design and implementation. It is important that you first pick a “bite sized” problem (e.g., two linear models), and develop the overall computational work flow, from plotting and fitting to model selection. At the same time, <em>also start at least outlining  the report</em> based on the first, simple, tractable problem you pick.</p>
 </div>
 <p>Here are some suggested first steps to get started:</p>
 <ul class="simple">
-<li><p>Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above).</p></li>
-<li><p>Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.</p></li>
-<li><p>Explore the models you will be fitting. Basically, plot them: Write mathematical functions you want to fit in a Python/R script (you can then re-use these functions in your model fitting script as well), and then evaluate them  numerically to see the shape of the function.</p></li>
-</ul>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Remember to sandbox and/or gitignore any code and output for exploratory plotting of the functions in the final product.</p>
-</div>
-<ul class="simple">
-<li><p><strong>For NLLS fitting</strong>, figure out, using one, “nice-looking” functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!</p>
+<li><p><strong>Explore the data</strong> in R or Python (e.g., using Jupyter) (first part of the suggested workflow above).</p></li>
+<li><p><strong>Write a preliminary version of the plotting script</strong> without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.</p></li>
+<li><p><strong>Explore the models you will be fitting</strong>: Basically, plot them: Write mathematical functions you want to fit in a Python/R script (you can then re-use these functions in your model fitting script as well), and then evaluate them  numerically to see the shape of the function.</p></li>
+<li><p><strong>Set and achieve you baseline target</strong>: First perform, produce figures for, and interpret model comparisons using LMs only. For example, finish the workflow, right down to a summary figure and/or table showing, which, out of straight line, cubic and quadratic, fit the data better, with some interpretation. As such, this will be sufficient to write up a report. The next step wuld be adding one or more non-linear model(s) to the set of mdoels you are comparing, fitted using NLLS.</p></li>
+<li><p><strong>For NLLS fitting</strong>: Figure out, using one, “nice-looking” dataset to test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!</p>
 <ul>
 <li><p>Next, write a loop over all unique datasets (data curves) using the <code class="docutils literal notranslate"><span class="pre">try</span></code> to catch errors (and examine them carefully) in case the fitting doesn’t converge.</p></li>
 </ul>
 </li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember to sandbox and/or gitignore any code and output for exploratory plotting of the functions in the final product.</p>
+</div>
 </div>
 <div class="section" id="the-dataset-and-model-options">
 <h2>The Dataset and Model Options<a class="headerlink" href="#the-dataset-and-model-options" title="Permalink to this headline">¶</a></h2>
-<p>You can pick from one of the following three sets of options.</p>
+<p>You will pick from one of the following three sets of options. All students will pick the same dataset (there will be a vote in class).</p>
 <p>First, let’s load some packages to explore the data sets in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -868,7 +878,7 @@
 <div class="section" id="the-question">
 <h4>The Question<a class="headerlink" href="#the-question" title="Permalink to this headline">¶</a></h4>
 <p><em>How well do different mathematical models, e.g., based upon population growth (mechanistic) theory  vs. phenomenological ones, fit to functional responses data across species?</em></p>
-<p>Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase – the slope of the line gives the maximum growth rate ($r_{max}$). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve.</p>
+<p>Fluctuations in the abundance (density) of single populations may play a crucial role in ecosystem dynamics and emergent functional characteristics, such as rates of carbon fixation or disease transmission. A population grows exponentially while its abundance is low and resources are not limiting (the Malthusian principle). This growth then slows and eventually stops as resources become limiting. There may also be a time lag before the population growth really takes off at the start. We will focus on microbial (specifically, bacterial) growth rates. Bacterial growth in batch culture follows a distinct set of phases; lag phase, exponential phase and stationary phase. During the lag phase a suite of transcriptional machinery is activated, including genes involved in nutrient uptake and metabolic changes, as bacteria prepare for growth. During the exponential growth phase, bacteria divide at a constant rate, the population doubling with each generation. When the carrying capacity of the media is reached, growth slows and the number of cells in the culture stabilises, beginning the stationary phase. Traditionally, microbial growth rates were measured by plotting cell numbers or culture density against time on a semi-log graph and fitting a straight line through the exponential growth phase – the slope of the line gives the maximum growth rate (<span class="math notranslate nohighlight">\(r_{max}\)</span>). Models have since been developed which we can use to describe the whole sigmoidal bacterial growth curve.</p>
 </div>
 <div class="section" id="the-data">
 <h4>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h4>
@@ -1541,7 +1551,7 @@
 </div>
 <div class="section" id="the-models">
 <h4>The Models<a class="headerlink" href="#the-models" title="Permalink to this headline">¶</a></h4>
-<p>Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace $x$ with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the “death phase” of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the <a class="reference internal" href="20-ModelFitting-NLLS.html"><span class="doc std std-doc">Model Fitting Chapter</span></a>.</p>
+<p>Yet again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. 1 and 2 above (replace <span class="math notranslate nohighlight">\(x\)</span> with Time). A Polynomial model may be able to capture decline in population size after some maximum value (the carrying capacity) has been reached (the “death phase” of population growth). For two mechanistic models of population growth (Logistic and Gompertz), have a look at the <a class="reference internal" href="20-ModelFitting-NLLS.html"><span class="doc std std-doc">Model Fitting Chapter</span></a>.</p>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/Pop_Grow.svg" />
 <small> <center> An example population growth curve dataset to which the modified Gompertz model (Zwietering et. al., 1990) has been fitted.</p>
@@ -2094,31 +2104,33 @@
 <div class="section" id="miniproject-fr-models">
 <span id="id3"></span><h4>The Models<a class="headerlink" href="#miniproject-fr-models" title="Permalink to this headline">¶</a></h4>
 <p><em>All the following parameters and variables are in SI units</em>.</p>
-<p>The fundamental measure of interest (the response variable) is consumption rate ($c$). This is expressed in terms of biomass quantity or number of individuals of resource consumed <em>per unit time per unit consumer</em> (so units of Mass (or Individuals) / Time).</p>
-<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. <code class="xref eq docutils literal notranslate"><span class="pre">eq:quad</span></code> and <code class="xref eq docutils literal notranslate"><span class="pre">eq:cubic</span></code> (replace $x$ with resource abundance).</p>
+<p>The fundamental measure of interest (the response variable) is consumption rate (<span class="math notranslate nohighlight">\(c\)</span>). This is expressed in terms of biomass quantity or number of individuals of resource consumed <em>per unit time per unit consumer</em> (so units of Mass (or Individuals) / Time).</p>
+<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. <a class="reference internal" href="#equation-eq-quad">(18)</a> and <a class="reference internal" href="#equation-eq-cubic">(19)</a> (replace <span class="math notranslate nohighlight">\(x\)</span> with resource abundance).</p>
 <p>Then, there is the more mechanistic Holling Type II model (Holling, 1959):</p>
-<p>$$
-c = \frac{a x_R}{1 + h a x_R}
-$$(eq:FR_II)</p>
-<p>Here, $x_R$ is resource density (Mass / Area or Volume), $a$ is consumer’s search rate (Area or Volume / Time ), and  $h$ is handling time of the consumer for that resource (time taken to overpower and ingest it).</p>
+<div class="math notranslate nohighlight" id="equation-eq-fr-ii">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-fr-ii" title="Permalink to this equation">¶</a></span>\[
+      c = \frac{a x_R}{1 + h a x_R}
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(x_R\)</span> is resource density (Mass / Area or Volume), <span class="math notranslate nohighlight">\(a\)</span> is consumer’s search rate (Area or Volume / Time ), and  <span class="math notranslate nohighlight">\(h\)</span> is handling time of the consumer for that resource (time taken to overpower and ingest it).</p>
 <p>Below is an example FR curve from the dataset you have been given with the Type II model fitted to it.</p>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/3_FR.svg" />
-<small>  <center> Example of the a Type II model (eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:FR_II</span></code>) fitted to a functional response of a consumer on a resource.</p>
+<small>  <center> Example of the a Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(16)</a>) fitted to a functional response of a consumer on a resource.</p>
 </center> </small>
 <hr class="docutils" />
 <p>There is also the less-mechanistic “generalized” functional response model:</p>
-<p>$$
-c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
-$$(eq:FR_gen)</p>
-<p>Where everything is same as eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:FR_II</span></code>, but the additional parameter $q$ (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter $q$ which does not have a formal biological meaning.</p>
+<div class="math notranslate nohighlight" id="equation-eq-fr-gen">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-fr-gen" title="Permalink to this equation">¶</a></span>\[
+      c = \frac{a x_R^{q + 1}}{1 + h a x_R^{q + 1}}
+\]</div>
+<p>Where everything is same as eqn. <a class="reference internal" href="#equation-eq-fr-ii">(16)</a>, but the additional parameter <span class="math notranslate nohighlight">\(q\)</span> (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter <span class="math notranslate nohighlight">\(q\)</span> which does not have a formal biological meaning.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Note that if $q=0$, eqn <code class="xref eq docutils literal notranslate"><span class="pre">eq:FR_gen</span></code> becomes same as the Type II model (eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:FR_II</span></code>).</p>
+<p>Note that if <span class="math notranslate nohighlight">\(q=0\)</span>, eqn <a class="reference internal" href="#equation-eq-fr-gen">(17)</a> becomes same as the Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(16)</a>).</p>
 </div>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/FR.svg" />
-<small> <center> The range of functional responses captured by the generalized functional response model (eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:FR_gen</span></code>).</p>
+<small> <center> The range of functional responses captured by the generalized functional response model (eqn. <a class="reference internal" href="#equation-eq-fr-gen">(17)</a>).</p>
 </center>
 </small>
 <hr class="docutils" />
@@ -2130,7 +2142,7 @@ $$(eq:FR_gen)</p>
 <div class="section" id="id4">
 <h4>The Question<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <p><em>How well do different mathematical models, e.g., based upon biochemical (mechanistic) principles  vs. phenomenological ones, fit to the thermal responses of metabolic traits?</em></p>
-<p>This is currently a “hot” (no pun intended!) topic in biology. On the <em>ecological side</em>, because the temperature-dependence of metabolic rate sets the rate of intrinsic $r_\text{max}$ (papers by Savage et al., Brown et al.) as well as interactions between species, it has a strong effect on population dynamics. In this context, note that 99.9% of life on earth is ectothermic! On the <em>evolutionary side</em>, the temperature-dependence of fitness and species interactions also means that warmer environments may have stronger rates of evolution. This may be compounded by the fact that mutation rates may also increase with temperature (papers by Gillooly et al.).</p>
+<p>This is currently a “hot” (no pun intended!) topic in biology. On the <em>ecological side</em>, because the temperature-dependence of metabolic rate sets the rate of intrinsic <span class="math notranslate nohighlight">\(r_\text{max}\)</span> (papers by Savage et al., Brown et al.) as well as interactions between species, it has a strong effect on population dynamics. In this context, note that 99.9% of life on earth is ectothermic! On the <em>evolutionary side</em>, the temperature-dependence of fitness and species interactions also means that warmer environments may have stronger rates of evolution. This may be compounded by the fact that mutation rates may also increase with temperature (papers by Gillooly et al.).</p>
 </div>
 <div class="section" id="id5">
 <h4>The Data<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
@@ -2664,58 +2676,65 @@ $$(eq:FR_gen)</p>
 <span id="id6"></span><h4>The Models<a class="headerlink" href="#miniproj-tpcs-models" title="Permalink to this headline">¶</a></h4>
 <p><em>All the following parameters and variables are in SI units</em>.</p>
 <p>There are multiple models that might best describe these data. The simplest are the general quadratic and cubic polynomial models:</p>
-<p>$$
-B = B_0 + B_1 x + B_2 x^2
-$$(eq:quad)</p>
-<p>$$
-B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
-$$(eq:cubic)</p>
-<p>These are phenomenological models, with the parameters $B_0$, $B_1$, $B_2$ and $B_3$ lacking any mechanistic interpretation. $x$ is the independent variable (in this case Temperature, $T$)</p>
+<div class="math notranslate nohighlight" id="equation-eq-quad">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-quad" title="Permalink to this equation">¶</a></span>\[
+    B = B_0 + B_1 x + B_2 x^2
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-cubic">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-cubic" title="Permalink to this equation">¶</a></span>\[
+    B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
+\]</div>
+<p>These are phenomenological models, with the parameters <span class="math notranslate nohighlight">\(B_0\)</span>, <span class="math notranslate nohighlight">\(B_1\)</span>, <span class="math notranslate nohighlight">\(B_2\)</span> and <span class="math notranslate nohighlight">\(B_3\)</span> lacking any mechanistic interpretation. <span class="math notranslate nohighlight">\(x\)</span> is the independent variable (in this case Temperature, <span class="math notranslate nohighlight">\(T\)</span>)</p>
 <p>Another phenomenological model option is the Briere model:</p>
-<p>$$
-B = \left{
-\begin{array}{ll}
-0 &amp; \quad T \leq T_0 \
-B_0 T (T-T_0) \sqrt{T_m-T} &amp; \quad T_0 \leq T \leq T_m \
-0 &amp; \quad T \geq T_m
-\end{array}
-\right.
-$$(eq:Briere1)</p>
-<p>Where $T$ is temperature, $T_0$ and $T_m$ are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and $B_0$ is a normalization constant.  Example R code for fitting this mdoel can be found <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-nlls-tpcs"><span class="std std-ref">here</span></a>.</p>
-<p>If you look at the original paper, you will find that Briere et al also propose a more general version of this equation (by adding a new parameter $m$ to replace the square root above):</p>
-<p>$$
-B = \left{
-\begin{array}{ll}
-0 &amp; \quad T \leq T_0 \
-B_0 T (T-T_0) (T_m-T)^\frac{1}{m} &amp; \quad T_0 \leq T \leq T_m \
-0 &amp; \quad T \geq T_m
-\end{array}
-\right.
-$$</p>
+<div class="math notranslate nohighlight" id="equation-eq-briere1">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-briere1" title="Permalink to this equation">¶</a></span>\[\begin{split}
+B = \left\{
+        \begin{array}{ll}
+            0 &amp; \quad T \leq T_0 \\
+            B_0 T (T-T_0) \sqrt{T_m-T} &amp; \quad T_0 \leq T \leq T_m \\
+            0 &amp; \quad T \geq T_m
+        \end{array}
+    \right.
+\end{split}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(T\)</span> is temperature, <span class="math notranslate nohighlight">\(T_0\)</span> and <span class="math notranslate nohighlight">\(T_m\)</span> are the minimum and maximum feasible temperatures for the trait (below or above which the traits goes to zero), and <span class="math notranslate nohighlight">\(B_0\)</span> is a normalization constant.  Example R code for fitting this mdoel can be found <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-nlls-tpcs"><span class="std std-ref">here</span></a>.</p>
+<p>If you look at the original paper, you will find that Briere et al also propose a more general version of this equation (by adding a new parameter <span class="math notranslate nohighlight">\(m\)</span> to replace the square root above):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B = \left\{
+        \begin{array}{ll}
+            0 &amp; \quad T \leq T_0 \\
+            B_0 T (T-T_0) (T_m-T)^\frac{1}{m} &amp; \quad T_0 \leq T \leq T_m \\
+            0 &amp; \quad T \geq T_m
+        \end{array}
+    \right.
+\end{split}\]</div>
 <p>In contrast, the Schoolfield model (Schoolfield et al 1981) is a mechanistic option that is based upon thermodynamics and enzyme kinetics:</p>
-<p>$$
-B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-{ 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} +
-e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-$$(eq:schoolf)</p>
-<p>Here, $k$ is the Boltzmann constant ($8.617 \times 10^{-5}$ eV $\cdot$ K$^{-1}$), $B$ the value of the trait at a given temperature $T$ (K) (K = $^\circ$C + 273.15), while $B_0$ is the trait value at 283.15 K (10$^\circ$C) which stands for the value of the growth rate at low temperature and controls the vertical offset of the curve. $E_l$ is the enzyme’s low-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very low temperatures, and $T_l$ is the at which the enzyme is 50% low-temperature deactivated. $E_h$ is the
-enzyme’s high-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very high temperatures, and $T_h$ is the at which the enzyme is 50% high-temperature deactivated. $E$ is the activation energy (eV) which controls the rise of the curve up to the peak in the “normal operating range” for the enzyme (below the peak of the curve and above $T_h$).</p>
+<div class="math notranslate nohighlight" id="equation-eq-schoolf">
+<span class="eqno">(21)<a class="headerlink" href="#equation-eq-schoolf" title="Permalink to this equation">¶</a></span>\[
+    B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+    { 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} + 
+    e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(k\)</span> is the Boltzmann constant (<span class="math notranslate nohighlight">\(8.617 \times 10^{-5}\)</span> eV <span class="math notranslate nohighlight">\(\cdot\)</span> K<span class="math notranslate nohighlight">\(^{-1}\)</span>), <span class="math notranslate nohighlight">\(B\)</span> the value of the trait at a given temperature <span class="math notranslate nohighlight">\(T\)</span> (K) (K = <span class="math notranslate nohighlight">\(^\circ\)</span>C + 273.15), while <span class="math notranslate nohighlight">\(B_0\)</span> is the trait value at 283.15 K (10<span class="math notranslate nohighlight">\(^\circ\)</span>C) which stands for the value of the growth rate at low temperature and controls the vertical offset of the curve. <span class="math notranslate nohighlight">\(E_l\)</span> is the enzyme’s low-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very low temperatures, and <span class="math notranslate nohighlight">\(T_l\)</span> is the at which the enzyme is 50% low-temperature deactivated. <span class="math notranslate nohighlight">\(E_h\)</span> is the
+enzyme’s high-temperature de-activation energy (eV) which controls the behavior of the enzyme (and the curve) at very high temperatures, and <span class="math notranslate nohighlight">\(T_h\)</span> is the at which the enzyme is 50% high-temperature deactivated. <span class="math notranslate nohighlight">\(E\)</span> is the activation energy (eV) which controls the rise of the curve up to the peak in the “normal operating range” for the enzyme (below the peak of the curve and above <span class="math notranslate nohighlight">\(T_h\)</span>).</p>
 <p><em>Please also have a look at the Delong et al 2017 paper, which lists this and other mechanistic TPC models</em> (see <a class="reference internal" href="#miniproj-readings"><span class="std std-ref">Readings &amp; Resources</span></a>). You may choose additional models listed in that paper for comparison, if you want.</p>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/SchoolfEx.png" />
-<small> <center>Example of the full Sharpe-Schoolfield model (Eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:schoolf</span></code>) fitted to the thermal response curve of a metabolic trait $x$ with resource abundance. </center> </small></p>
+<small> <center>Example of the full Sharpe-Schoolfield model (Eqn. <a class="reference internal" href="#equation-eq-schoolf">(21)</a>) fitted to the thermal response curve of a metabolic trait <span class="math notranslate nohighlight">\(x\)</span> with resource abundance. </center> </small></p>
 <hr class="docutils" />
 <p>In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.</p>
-<p>$$
-B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-{ 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
-$$(eq:schoolfH)</p>
+<div class="math notranslate nohighlight" id="equation-eq-schoolfh">
+<span class="eqno">(22)<a class="headerlink" href="#equation-eq-schoolfh" title="Permalink to this equation">¶</a></span>\[
+      B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+    { 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
+\]</div>
 <p>In other cases, a different simplified Schoolfield model would be more appropriate, because high temperature inactivation was not detectable in the data because measurements were not made at sufficiently high temperatures:</p>
-<p>$$
-B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
-{ 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
-$$(eq:schoolfL)</p>
-<p>Note that the cubic model (Eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:cubic</span></code>) has the same number of parameters as the the reduced Schoolfield models (Eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:schoolfH</span></code> &amp; <code class="xref eq docutils literal notranslate"><span class="pre">eq:schoolfL</span></code>). Also, the temperature parameter ($T$) of the cubic model (Eqn. <code class="xref eq docutils literal notranslate"><span class="pre">eq:cubic</span></code>) is in $^\circ$C, whereas the Temperature parameter in the Schoolfield model is in K.</p>
+<div class="math notranslate nohighlight" id="equation-eq-schoolfl">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-schoolfl" title="Permalink to this equation">¶</a></span>\[
+      B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
+    { 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
+\]</div>
+<p>Note that the cubic model (Eqn. <a class="reference internal" href="#equation-eq-cubic">(19)</a>) has the same number of parameters as the the reduced Schoolfield models (Eqn. <a class="reference internal" href="#equation-eq-schoolfh">(22)</a> &amp; <a class="reference internal" href="#equation-eq-schoolfl">(23)</a>). Also, the temperature parameter (<span class="math notranslate nohighlight">\(T\)</span>) of the cubic model (Eqn. <a class="reference internal" href="#equation-eq-cubic">(19)</a>) is in <span class="math notranslate nohighlight">\(^\circ\)</span>C, whereas the Temperature parameter in the Schoolfield model is in K.</p>
 </div>
 </div>
 </div>
@@ -2743,11 +2762,11 @@ $$(eq:schoolfL)</p>
 <div class="section" id="id7">
 <h3>Functional responses<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Holling, C. S. 1959. Some Characteristics of Simple Types of Predation and Parasitism. The Canadian Entomologist 91 (7): 385–98. https://doi.org/10.4039/Ent91385-7.</p></li>
+<li><p>Holling, C. S. 1959. Some Characteristics of Simple Types of Predation and Parasitism. The Canadian Entomologist 91 (7): 385–98. <a class="reference external" href="https://doi.org/10.4039/Ent91385-7">https://doi.org/10.4039/Ent91385-7</a>.</p></li>
 <li><p>Holling, C S. 1966. The Functional Response of Invertebrate Predators to Prey Density. Mem. Entomol. Soc. Canada 48 (48): 1–86.</p></li>
 <li><p>Aljetlawi, A. A., E. Sparrevik, and K. Leonardsson. 2004. Prey-predator size-dependent functional response: derivation and rescaling to the real world. J. Anim. Ecol. 73, 239–252.</p></li>
 <li><p>Jeschke, J. M.,  M. Kopp &amp; R. Tollrian. 2002. Predator functional responses: Discriminating between handling and digesting prey. Ecol. Monogr. 72, 95–112.</p></li>
-<li><p>Pawar, S., A. I. Dell, and V. M. Savage. 2012. Dimensionality of Consumer Search Space Drives Trophic Interaction Strengths. Nature 486 (7404): 485–89. https://doi.org/10.1038/nature11131.</p></li>
+<li><p>Pawar, S., A. I. Dell, and V. M. Savage. 2012. Dimensionality of Consumer Search Space Drives Trophic Interaction Strengths. Nature 486 (7404): 485–89. <a class="reference external" href="https://doi.org/10.1038/nature11131">https://doi.org/10.1038/nature11131</a>.</p></li>
 <li><p>Pritchard, D. W., R. A. Paterson, H. C. Bovy, and D. Barrios-O’Neill. 2017. frair: an R package for fitting and comparing consumer functional responses. Methods Ecol. Evol. 8, 1528–1534.</p></li>
 </ul>
 </div>
@@ -2755,19 +2774,19 @@ $$(eq:schoolfL)</p>
 <h3>Population Growth<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Zwietering, M. H., I. Jongenburger, F. M. Rombouts, and K. Van’t Riet. 1990. Modeling of the Bacterial Growth Curve. Applied and Environmental Microbiology 56 (6): 1875–81.</p></li>
-<li><p>Buchanan, R. L., R. C. Whiting, and W. C. Damert. 1997. When Is Simple Good Enough: A Comparison of the Gompertz, Baranyi, and Three-Phase Linear Models for Fitting Bacterial Growth Curves. Food Microbiology 14 (4): 313–26. https://doi.org/10.1006/fmic.1997.0125.</p></li>
+<li><p>Buchanan, R. L., R. C. Whiting, and W. C. Damert. 1997. When Is Simple Good Enough: A Comparison of the Gompertz, Baranyi, and Three-Phase Linear Models for Fitting Bacterial Growth Curves. Food Microbiology 14 (4): 313–26. <a class="reference external" href="https://doi.org/10.1006/fmic.1997.0125">https://doi.org/10.1006/fmic.1997.0125</a>.</p></li>
 <li><p>Grijspeerdt, K. and P. Vanrolleghem. 1999. Estimating the parameters of the Baranyi model for bacterial growth. Food Microbiol. 16, 593–605.</p></li>
-<li><p>Micha, P., and M. G. Corradini. 2011. Microbial Growth Curves: What the Models Tell Us and What They Cannot. Critical Reviews in Food Science and Nutrition. https://doi.org/10.1080/10408398.2011.570463.</p></li>
+<li><p>Micha, P., and M. G. Corradini. 2011. Microbial Growth Curves: What the Models Tell Us and What They Cannot. Critical Reviews in Food Science and Nutrition. <a class="reference external" href="https://doi.org/10.1080/10408398.2011.570463">https://doi.org/10.1080/10408398.2011.570463</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="id9">
 <h3>Thermal Performance Curves<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Schoolfield, R. M., P. J H Sharpe, and C. E. Magnuson. 1981. Non-Linear Regression of Biological Temperature-Dependent Rate Models Based on Absolute Reaction-Rate Theory. Journal of Theoretical Biology 88 (4): 719–31. https://doi.org/10.1016/0022-5193(81)90246-0.</p></li>
+<li><p>Schoolfield, R. M., P. J H Sharpe, and C. E. Magnuson. 1981. Non-Linear Regression of Biological Temperature-Dependent Rate Models Based on Absolute Reaction-Rate Theory. Journal of Theoretical Biology 88 (4): 719–31. <a class="reference external" href="https://doi.org/10.1016/0022-5193(81)90246-0">https://doi.org/10.1016/0022-5193(81)90246-0</a>.</p></li>
 <li><p>Zwietering, M. H.,  J. T de Koos, B. E. Hasenack, J. C. de Witt,  and K. van’t Riet. 1991. Modeling of bacterial growth as a function of temperature. Appl. Environ. Microbiol. 57, 1094–101.</p></li>
 <li><p>Briere J. F., Pracros P., Le Roux A. Y., Pierre J. S. 1999. A novel rate model of temperature-dependent development for arthropods. Environ Entomol 28: 22–29.</p></li>
-<li><p>Dell, A. I., S. Pawar, and V. M. Savage. 2011. Systematic Variation in the Temperature Dependence of Physiological and Ecological Traits. Proceedings of the National Academy of Sciences of the United States of America 108 (26): 10591–10596. https://doi.org/doi: 10.1073/pnas.1015178108.</p></li>
-<li><p>DeLong, J. P., J. P. Gibert, T. M. Luhring, G. Bachman, B. Reed, A. Neyer, and K. L. Montooth. 2017. The Combined Effects of Reactant Kinetics and Enzyme Stability Explain the Temperature Dependence of Metabolic Rates. Ecology and Evolution 7 (11): 3940–50. https://doi.org/10.1002/ece3.2955.</p></li>
+<li><p>Dell, A. I., S. Pawar, and V. M. Savage. 2011. Systematic Variation in the Temperature Dependence of Physiological and Ecological Traits. Proceedings of the National Academy of Sciences of the United States of America 108 (26): 10591–10596. <a class="reference external" href="https://doi.org/doi:">https://doi.org/doi:</a> 10.1073/pnas.1015178108.</p></li>
+<li><p>DeLong, J. P., J. P. Gibert, T. M. Luhring, G. Bachman, B. Reed, A. Neyer, and K. L. Montooth. 2017. The Combined Effects of Reactant Kinetics and Enzyme Stability Explain the Temperature Dependence of Metabolic Rates. Ecology and Evolution 7 (11): 3940–50. <a class="reference external" href="https://doi.org/10.1002/ece3.2955">https://doi.org/10.1002/ece3.2955</a>.</p></li>
 </ul>
 </div>
 </div>

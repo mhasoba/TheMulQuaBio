@@ -45,10 +45,13 @@
 # Python is a pretty good solution if you want to easily write readable code that is also reasonably efficient computationally (see the figure below). 
 # 
 # ---
+# :::{figure-md}
 # <img src="./graphics/benchmarks.svg" alt="Language speeds" width="700px">
 # 
 # **Python's numerical computing performance compared to some others**. Smaller numbers are better. Note that the y-axis is in $\log_{10}$ scale. <br>
 # (Source: <http://julialang.org/>)
+# 
+# :::
 # 
 # ---
 
@@ -92,7 +95,7 @@
 
 # Now type:
 
-# In[88]:
+# In[1]:
 
 
 import this
@@ -108,19 +111,19 @@ import this
 # 
 # Now, try some simple operations:
 
-# In[89]:
+# In[2]:
 
 
 2 + 2 # Summation; note that comments still start with #
 
 
-# In[90]:
+# In[3]:
 
 
 2 * 2 # Multiplication
 
 
-# In[91]:
+# In[4]:
 
 
 2 / 2 # division
@@ -128,19 +131,19 @@ import this
 
 # To specify an integer division, use `//`:
 
-# In[92]:
+# In[5]:
 
 
 2//2
 
 
-# In[93]:
+# In[6]:
 
 
 2 > 3 # logical operation
 
 
-# In[94]:
+# In[7]:
 
 
 2 >= 2 # another one
@@ -178,7 +181,7 @@ import this
 
 # You can try any or all of these now. For example:
 
-# In[95]:
+# In[8]:
 
 
 get_ipython().run_line_magic('who', '')
@@ -186,19 +189,19 @@ get_ipython().run_line_magic('who', '')
 
 # That is, there are no objects in your workspace yet. Let's create one:
 
-# In[96]:
+# In[9]:
 
 
 a = 1
 
 
-# In[97]:
+# In[10]:
 
 
 get_ipython().run_line_magic('who', '')
 
 
-# In[98]:
+# In[11]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -210,7 +213,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # This will give you detailed information about this variable (which is an object, belonging to a particular class, because this is python!). You can also check a variable's type: 
 
-# In[99]:
+# In[12]:
 
 
 type(a)
@@ -233,28 +236,28 @@ type(a)
 # 
 # Now, let's continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:
 
-# In[100]:
+# In[13]:
 
 
 a = 2 #integer
 type(a)
 
 
-# In[101]:
+# In[14]:
 
 
 a = 2. #Float
 type(a)
 
 
-# In[102]:
+# In[15]:
 
 
 a = "Two" #String
 type(a)
 
 
-# In[103]:
+# In[16]:
 
 
 a = True #Boolean
@@ -276,7 +279,7 @@ type(a)
 # ```
 # 
 # 
-# ## Python operators
+# ### Python operators
 # 
 # Here are the operators that you can use on variables in python:
 # 
@@ -301,25 +304,25 @@ type(a)
 # 
 # Try the following:
 
-# In[104]:
+# In[17]:
 
 
 2 == 2
 
 
-# In[105]:
+# In[18]:
 
 
 2 != 2
 
 
-# In[106]:
+# In[19]:
 
 
 3 / 2
 
 
-# In[107]:
+# In[20]:
 
 
 3 // 2
@@ -327,49 +330,49 @@ type(a)
 
 # *What happened here*? This is an integer division, so the decimal part is lost.  
 
-# In[108]:
+# In[21]:
 
 
 'hola, ' + 'mi llamo Samraat' #why not learn two languages at the same time?! 
 
 
-# In[109]:
+# In[22]:
 
 
 x = 5
 
 
-# In[110]:
+# In[23]:
 
 
 x + 3
 
 
-# In[111]:
+# In[24]:
 
 
 y = 2
 
 
-# In[112]:
+# In[25]:
 
 
 x + y
 
 
-# In[113]:
+# In[26]:
 
 
 x = 'My string'
 
 
-# In[114]:
+# In[27]:
 
 
 x + ' now has more stuff'
 
 
-# In[115]:
+# In[28]:
 
 
 x + y
@@ -377,25 +380,25 @@ x + y
 
 # Doesn't work. No problem, we can convert from one type to another:
 
-# In[116]:
+# In[29]:
 
 
 x + str(y)
 
 
-# In[117]:
+# In[30]:
 
 
 z = '88'
 
 
-# In[118]:
+# In[31]:
 
 
 x + z
 
 
-# In[119]:
+# In[32]:
 
 
 y + int(z)
@@ -421,19 +424,19 @@ y + int(z)
 # 
 # These are the most versatile, and can contain compound data. They are "mutable", as will be illustrated below. Try this:
 
-# In[120]:
+# In[33]:
 
 
 MyList = [3,2.44,'green',True]
 
 
-# In[121]:
+# In[34]:
 
 
 MyList[1]
 
 
-# In[122]:
+# In[35]:
 
 
 MyList[0]
@@ -441,7 +444,7 @@ MyList[0]
 
 # *Note that python "indexing" starts at 0, not 1!*
 
-# In[123]:
+# In[36]:
 
 
 MyList[4]
@@ -449,19 +452,19 @@ MyList[4]
 
 # As expected!
 
-# In[124]:
+# In[37]:
 
 
 MyList[2] = 'blue'
 
 
-# In[125]:
+# In[38]:
 
 
 MyList
 
 
-# In[126]:
+# In[39]:
 
 
 MyList.append('a new item')
@@ -469,19 +472,19 @@ MyList.append('a new item')
 
 # Note `.append`. This is an operation (a "method") that can be applied to any "object" with the "class" list. You can check the type of any object: 
 
-# In[127]:
+# In[40]:
 
 
 get_ipython().run_line_magic('whos', '')
 
 
-# In[128]:
+# In[41]:
 
 
 type(MyList)
 
 
-# In[129]:
+# In[42]:
 
 
 print(type(MyList))
@@ -491,19 +494,19 @@ print(type(MyList))
 # In Python3 there is no difference between "class" and "type". They are in most cases used as synonyms.
 # ```
 
-# In[130]:
+# In[43]:
 
 
 MyList
 
 
-# In[131]:
+# In[44]:
 
 
 del MyList[2]
 
 
-# In[132]:
+# In[45]:
 
 
 MyList
@@ -519,26 +522,26 @@ MyList
 # 
 # Try this:
 
-# In[133]:
+# In[46]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[134]:
+# In[47]:
 
 
 FoodWeb[0]
 
 
-# In[135]:
+# In[48]:
 
 
 FoodWeb[0][0]
 
 
-# In[136]:
+# In[49]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -548,13 +551,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[137]:
+# In[50]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[138]:
+# In[51]:
 
 
 FoodWeb[0]
@@ -575,28 +578,28 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[139]:
+# In[52]:
 
 
 a = (1, 2, []) 
 a
 
 
-# In[140]:
+# In[53]:
 
 
 a[2].append(1000)
 a
 
 
-# In[141]:
+# In[54]:
 
 
 a[2].append(1000)
 a
 
 
-# In[142]:
+# In[55]:
 
 
 a[2].append((100,10))
@@ -605,27 +608,27 @@ a
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[143]:
+# In[56]:
 
 
 a = (1, 2, 3)
 
 
-# In[144]:
+# In[57]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[145]:
+# In[58]:
 
 
 c = b[1:]
 c
 
 
-# In[146]:
+# In[59]:
 
 
 b = b[1:]
@@ -634,7 +637,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[147]:
+# In[60]:
 
 
 a = ("1", 2, True)
@@ -645,37 +648,37 @@ a
 # 
 # You can convert a list to an mutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[148]:
+# In[61]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[149]:
+# In[62]:
 
 
 b = set(a)
 
 
-# In[150]:
+# In[63]:
 
 
 b
 
 
-# In[151]:
+# In[64]:
 
 
 c = set([3,4,5,6])
 
 
-# In[152]:
+# In[65]:
 
 
 b & c # intersection
 
 
-# In[153]:
+# In[66]:
 
 
 b | c # union
@@ -695,43 +698,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[154]:
+# In[67]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[155]:
+# In[68]:
 
 
 GenomeSize
 
 
-# In[156]:
+# In[69]:
 
 
 GenomeSize['Arabidopsis thaliana']
 
 
-# In[157]:
+# In[70]:
 
 
 GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
-# In[158]:
+# In[71]:
 
 
 GenomeSize
 
 
-# In[159]:
+# In[72]:
 
 
 GenomeSize['Escherichia coli'] = 4.6 
 
 
-# In[160]:
+# In[73]:
 
 
 GenomeSize
@@ -739,13 +742,13 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[161]:
+# In[74]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[162]:
+# In[75]:
 
 
 GenomeSize
@@ -770,7 +773,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[163]:
+# In[76]:
 
 
 a = [1, 2, 3]
@@ -779,13 +782,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[164]:
+# In[77]:
 
 
 a.append(4)
 
 
-# In[165]:
+# In[78]:
 
 
 print(a)
@@ -796,14 +799,14 @@ print(b)
 # 
 # Now, try:
 
-# In[166]:
+# In[79]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[167]:
+# In[80]:
 
 
 a.append(4)
@@ -813,7 +816,7 @@ print(b)
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[168]:
+# In[81]:
 
 
 a = [[1, 2], [3, 4]]
@@ -824,7 +827,7 @@ print(b)
 
 # Now, modify `a`, and then inspect both `a` and `b`:
 
-# In[169]:
+# In[82]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -838,7 +841,7 @@ print(b)
 # 
 # The solution is to do a "deep" copy:
 
-# In[170]:
+# In[83]:
 
 
 import copy
@@ -860,65 +863,65 @@ print(b)
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[171]:
+# In[84]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[172]:
+# In[85]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[173]:
+# In[86]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[174]:
+# In[87]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[175]:
+# In[88]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[176]:
+# In[89]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[177]:
+# In[90]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[178]:
+# In[91]:
 
 
 s.upper()
 
 
-# In[179]:
+# In[92]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[180]:
+# In[93]:
 
 
 'WORD'.lower() # can perform operations directy on a literal string 
@@ -976,7 +979,7 @@ s.upper().strip() # can perform sequential operations
 # ```
 # Now, assign some integer value to a variable `x`:
 
-# In[181]:
+# In[94]:
 
 
 x = 11
@@ -984,7 +987,7 @@ x = 11
 
 # Then, paste this code at the ipython prompt (`ctrl+shift+v`), and hit enter: 
 
-# In[182]:
+# In[95]:
 
 
 for i in range(x):
@@ -994,7 +997,8 @@ for i in range(x):
 
 # Of course, this code is simple, so directly pasting works. For more complex code, you may need to use the ipython `%cpaste` magic function.
 
-# ## Looping, and the `range` function
+# (Python-loops)=
+# ## Loops
 # 
 # What exactly is going on in the piece of code above? What is `i`? What does `range(x)` do?  
 # 
@@ -1002,7 +1006,7 @@ for i in range(x):
 # 
 # First, let's understand the `range()` function. This function generates, as the name suggests, a range of integers depending on the input to it. So, for example, range(10) generates 10 numbers, starting at 0:
 
-# In[183]:
+# In[96]:
 
 
 for i in range(10):
@@ -1011,7 +1015,7 @@ for i in range(10):
 
 # The start point is 0 because this is Python (it will start at 1 in R, for example). Note that if you try to run`range()` by itself, it will not actually produce a range of numbers. For example:
 
-# In[184]:
+# In[97]:
 
 
 a = range(10)
@@ -1026,7 +1030,7 @@ a
 
 # You can also use `range()` to generate numbers (and loop over) from a specific range of integers. For example, to generate a range from 1 to 5, do:
 
-# In[185]:
+# In[98]:
 
 
 for i in range(1, 6):
@@ -1037,7 +1041,7 @@ for i in range(1, 6):
 # 
 # You can also generate a set of indices that skips values using `range()` like so:
 
-# In[186]:
+# In[99]:
 
 
 for i in range(2, 10, 2): # skip odd numbers
@@ -1052,7 +1056,7 @@ for i in range(2, 10, 2): # skip odd numbers
 
 # OK, on to the variable `i` in our loop. This is a temporary placeholder for the value of `x` at each iteration of the loop (AKA the "iterator" variable). So, in the first iteration of the loop, i = 0, which is also the "index" value of the loop at that point. We have used `i`, but you can use any valid variable name, such as `j`, `k`, or even `num` (try it). 
 # 
-# ### Iterator vs Iterable in Python
+# ### Iterator vs Iterable
 # 
 # Loops in Python work by generating and then "iterating" over an "iterator". 
 # 
@@ -1064,7 +1068,7 @@ for i in range(2, 10, 2): # skip odd numbers
 # 
 # To see how what an iterator vs an iterable is, try out the following:
 
-# In[187]:
+# In[100]:
 
 
 my_iterable = [1,2,3]
@@ -1072,7 +1076,7 @@ my_iterable = [1,2,3]
 type(my_iterable)
 
 
-# In[188]:
+# In[101]:
 
 
 my_iterator = iter(my_iterable)
@@ -1080,25 +1084,25 @@ my_iterator = iter(my_iterable)
 type(my_iterator)
 
 
-# In[189]:
+# In[102]:
 
 
 next(my_iterator) # same as my_iterator.__next__()
 
 
-# In[190]:
+# In[103]:
 
 
 next(my_iterator)
 
 
-# In[191]:
+# In[104]:
 
 
 next(my_iterator)
 
 
-# In[192]:
+# In[105]:
 
 
 next(my_iterator)
@@ -1108,6 +1112,729 @@ next(my_iterator)
 
 # ```{note} 
 # **Generator vs Iterator**: By now you might be wondering what the difference between a *generator* and an *iterator* is. The simple answer is "Every iterator is not a generator, but every generator is an iterator". Its of course not as simple as that because if you try to use the output of `range()` like a normal iterator (e.g., by applying the `next()` method to it), it will not work.  The proper answer is a bit technical, and we do not need to go into it; what matters is that `range()` works for you when looping! You can read more about the difference between generators and iterators [here](https://docs.python.org/3/library/stdtypes.html#iterator-types) and [here](https://www.geeksforgeeks.org/difference-between-iterator-vs-generator/). 
+# ```
+
+# ### Some loops examples
+# 
+# Write the following, and save them to `loops.py`:
+# 
+# ```python
+# # FOR loops
+# for i in range(5):
+#     print(i)
+# 
+# my_list = [0, 2, "geronimo!", 3.0, True, False]
+# for k in my_list:
+#     print(k)
+# 
+# total = 0
+# summands = [0, 1, 11, 111, 1111]
+# for s in summands:
+#     total = total + s
+#     print(total)
+# 
+# # WHILE loop
+# z = 0
+# while z < 100:
+#     z = z + 1
+#     print(z)
+# ```
+
+# ## Functions
+# 
+# In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
+
+# In[162]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    return x
+
+
+# Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
+
+# In[107]:
+
+
+get_ipython().run_line_magic('whos', '')
+
+
+# So, `foo` is a function stored in memory (at address given by the value `0x...` in the `Data/Info` column), and ready to serve you!
+# 
+# Now "call it":
+
+# In[108]:
+
+
+foo(2)
+
+
+# Note that the first,  `print` command only outputs the value of `x` to the terminal, whereas, the second `return` command actually outputs it so that you can "capture" and store it. 
+# 
+# To see this distinction, let's try the following.
+
+# In[115]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    return x
+
+y = foo(2)
+
+
+# In[116]:
+
+
+y
+
+
+# In[117]:
+
+
+type(y)
+
+
+# Thus, the output of `foo` was stored as a new variable `y`. 
+
+# In[118]:
+
+
+def foo(x):
+    x *= x # same as x = x*x
+    print (x)
+    # return x
+
+y = foo(2)
+
+
+# In[119]:
+
+
+y
+
+
+# In[120]:
+
+
+type(y)
+
+
+# So, if we don't explicitly `return` the value of `x`, the output of `foo` cannot be stored.
+
+# ## Running Python scripts
+# 
+# Instead of pasting or sending code to the Python command prompt like you did above, let's learn how to write it into a script and run it.  
+# 
+# $\star$ Write the following code into a file called `MyExampleScript.py`:
+# 
+# ```python
+# 
+# def foo(x):
+#     x *= x # same as x = x*x
+#     print(x)
+# 
+# foo(2)
+# ```
+# 
+# ### Using the UNIX shell
+# Open another bash terminal, and `cd ` to directory where you have saved this script file. Then, run it using:
+# 
+# ```bash
+# python3 MyExampleScript.py
+# ```
+# 
+# ### From the UNIX shell, using ipython 
+# 
+# Alternatively, you can use ipython:
+# 
+# ```bash
+# ipython MyExampleScript.py
+# ```
+# With the same result. 
+# 
+# ### From within the ipython shell
+# 
+# You can also execute python scripts from within the `ipython` shell with 
+# 
+# ```python
+# %run MyExampleScript.py
+# ```
+# 
+# That is, enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and then use the `run` command with the name of the script file. 
+# 
+# To run the script from the native Python shell, you would use `execfile("MyExampleScript.py")`, but we won't bother doing that (though you can/should try it out for fun!).
+# 
+
+# ## Control flow tools
+# 
+# OK, let's get deeper into python code. A computer script or program's control flow is the order in which the code executes. Upto now, you have written scripts with simple control flows, with the code executing statements from the top to bottom. But very often, you want more flexible flows of commands and statements, for example, where you can switch between alternative commands depending on some condition. This is possible using *control flow tools*. Let's learn python's control flow tools hands-on.   
+# 
+# ### Conditionals
+# 
+# Now that we know how to define functions in Python, let's look at *conditionals* that allow you fine-grained control over the function's operations.
+# 
+# $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a key binding (typically , `ctrl+enter`). 
+# 
+# 
+# ```python
+# 
+# def foo_1(x):
+#     return x ** 0.5
+# 
+# def foo_2(x, y):
+#     if x > y:
+#         return x
+#     return y
+# 
+# def foo_3(x, y, z):
+#     if x > y:
+#         tmp = y
+#         y = x
+#         x = tmp
+#     if y > z:
+#         tmp = z
+#         z = y
+#         y = tmp
+#     return [x, y, z]
+# 
+# def foo_4(x):
+#     result = 1
+#     for i in range(1, x + 1):
+#         result = result * i
+#     return result
+# 
+# def foo_5(x): # a recursive function that calculates the factorial of x
+#     if x == 1:
+#         return 1
+#     return x * foo_5(x - 1)
+#      
+# def foo_6(x): # Calculate the factorial of x in a different way
+#     facto = 1
+#     while x >= 1:
+#         facto = facto * x
+#         x = x - 1
+#     return facto
+# ```
+
+# *Think about what each of the foo_x function does before running it.* Note that `foo_5` is a recursive function, meaning that the function [calls itself](https://en.wikipedia.org/wiki/Recursion_(computer_science)). 
+
+# ### More examples of loops and conditionals combined
+# 
+# $\star$ Write the following functions and save them to `cfexercises2.py`:
+# 
+# ```python
+# 
+# ########################
+# def hello_1(x):
+#     for j in range(x):
+#         if j % 3 == 0:
+#             print('hello')
+#     print(' ')
+# 
+# hello_1(12)
+# 
+# ########################
+# def hello_2(x):
+#     for j in range(x):
+#         if j % 5 == 3:
+#             print('hello')
+#         elif j % 4 == 3:
+#             print('hello')
+#     print(' ')
+# 
+# hello_2(12)
+# 
+# ########################
+# def hello_3(x, y):
+#     for i in range(x, y):
+#         print('hello')
+#     print(' ')
+# 
+# hello_3(3, 17)
+# 
+# ########################
+# def hello_4(x):
+#     while x != 15:
+#         print('hello')
+#         x = x + 3
+#     print(' ')
+# 
+# hello_4(0)
+# 
+# ########################
+# def hello_5(x):
+#     while x < 100:
+#         if x == 31:
+#             for k in range(7):
+#                 print('hello')
+#         elif x == 18:
+#             print('hello')
+#         x = x + 1
+#     print(' ')
+# 
+# hello_5(12)
+# 
+# # WHILE loop with BREAK
+# def hello_6(x, y):
+#     while x: # while x is True
+#         print("hello! " + str(y))
+#         y += 1 # increment y by 1 
+#         if y == 6:
+#             break
+#     print(' ')
+# 
+# hello_6 (True, 0)
+# ```
+# 
+# *Try to predict how many times "hello" will be printed before testing each of these functions*.
+# 
+# ```{Note}
+# Note how, in the last function above, the `break` directive exits *the loop* when the condition is met. If you did not have this, you would get an infinite loop! (and would need to use `Ctrl+c` to stop it). Note also that `break` only breaks out of the current loop. It does not stop the execution of the rest of the code that may be in that program or script.
+# ```
+
+# (Python-Comprehensions)=
+# ## Comprehensions
+# 
+# Python offers a way to combine loops and logical tests / conditionals in a single line of code to transform any *iterable* object (list, set, or dictionary, over which you can iterate) into another object, after performing some operations on the elements in the original object. That is, they are a compact way to create a new list, dictionary or object from an existing one. As you might expect, there are three types of comprehensions, each corresponding to what the target object is (list, set, dictionary). 
+# 
+# Let's look at how list comprehensions work:
+
+# In[121]:
+
+
+x = [i for i in range(10)]
+print(x)
+
+
+# This is the same as writing the following loop:
+
+# In[122]:
+
+
+x = []
+for i in range(10):
+    x.append(i)
+print(x)
+
+
+# Here's another example:  
+
+# In[123]:
+
+
+x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
+print(x)
+
+
+# Which is same as the loop:
+
+# In[124]:
+
+
+x = ["LIST","COMPREHENSIONS","ARE","COOL"]
+for i in range(len(x)): # explicit loop
+    x[i] = x[i].lower()
+print(x)
+
+
+# Or this loop:
+
+# In[125]:
+
+
+x = ["LIST","COMPREHENSIONS","ARE","COOL"]
+x_new = []
+for i in x: # implicit loop
+    x_new.append(i.lower())
+print(x_new)
+
+
+# How about a nested loop? Let's try an example:
+
+# In[126]:
+
+
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+flattened_matrix = []
+for row in matrix:
+    for n in row:
+        flattened_matrix.append(n)
+print(flattened_matrix)
+
+
+# A list comprehension to do the same:
+
+# In[127]:
+
+
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+flattened_matrix = [n for row in matrix for n in row]
+print(flattened_matrix)
+
+
+# Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
+
+# In[128]:
+
+
+words = (["These", "are", "some", "words"])
+first_letters = set()
+for w in words:
+    first_letters.add(w[0])
+print(first_letters)
+
+
+# Note that sets are unordered (the first letters don't appear in the order you might expect). 
+# 
+# Now, the same as a set comprehension: 
+
+# In[129]:
+
+
+words = (["These", "are", "some", "words"])
+first_letters = {w[0] for w in words}
+print(first_letters)
+
+
+# Now, type the following in a script file called `oaks.py` and test it:
+# 
+# ```python
+# ## Finds just those taxa that are oak trees from a list of species
+# 
+# taxa = [ 'Quercus robur',
+#          'Fraxinus excelsior',
+#          'Pinus sylvestris',
+#          'Quercus cerris',
+#          'Quercus petraea',
+#        ]
+# 
+# def is_an_oak(name):
+#     return name.lower().startswith('quercus ')
+# 
+# ##Using for loops
+# oaks_loops = set()
+# for species in taxa:
+#     if is_an_oak(species):
+#         oaks_loops.add(species)
+# print(oaks_loops)
+# 
+# ##Using list comprehensions   
+# oaks_lc = set([species for species in taxa if is_an_oak(species)])
+# print(oaks_lc)
+# 
+# ##Get names in UPPER CASE using for loops
+# oaks_loops = set()
+# for species in taxa:
+#     if is_an_oak(species):
+#         oaks_loops.add(species.upper())
+# print(oaks_loops)
+# 
+# ##Get names in UPPER CASE using list comprehensions
+# oaks_lc = set([species.upper() for species in taxa if is_an_oak(species)])
+# print(oaks_lc)
+# ```
+# 
+# Carefully compare the looping vs list comprehension way for the two  tasks (find oak tree species names and get names in upper case) to make sure you understand what's going on.   
+# 
+# ```{note}
+# Don't go mad with list comprehensions — code readability is more important than squeezing lots into a single line! They can also make your code run more slowly or use more memory in some cases (we will learn about this more in the [second Python Chapter](./06-Python_II.ipynb)).
+# ```
+
+# ## Variable scope
+# 
+# One important thing to note about functions, in any programming language, is that variables created inside functions are invisible outside of it, nor do they persist once the function has run unless they are explicitly returned. These are called "local" variables, and are only accessible inside their function. 
+# 
+# Here is an example. First, type and run this block of code:
+
+# In[1]:
+
+
+i = 1
+x = 0
+for i in range(10):
+    x += 1
+print(x)
+print(i)
+
+
+# Thus, the operations on `i` and `x` inside the loop were in fact on the variables in the main workspace (they were changed everywhere). Now, let's encapsulate this loop in a function:
+
+# In[10]:
+
+
+i = 1
+x = 0
+def a_function(y):
+    x = 0
+    for i in range(y):
+        x += 1
+    return x
+x = a_function(10)
+print(x)
+print(i)
+
+
+# Two things to note from this output:
+# 
+# * Both `x` and `i` are variables localised to the function
+# * `x` was updated in the main workspace, outside the function, because it was explicitly `return`ed from the function
+# * `i` remained unchanged outside the function because it was not `return`ed.
+# 
+# *Try returning both `x` and `i` (with a `return x,y` instead of `return x` in the function).*
+
+# ### Global variables
+# 
+# In contrast, you can designate certain variables to be "global" so that they visible both inside and outside of functions in Python, like any other programming language.
+# 
+# To understand this, let's look at an example. 
+# 
+# First try this:
+
+# In[130]:
+
+
+_a_global = 10 # a global variable
+
+if _a_global >= 5:
+    _b_global = _a_global + 5 # also a global variable
+    
+print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
+print("Before calling a_function, outside the function, the value of _b_global is", _b_global)
+
+def a_function():
+    _a_global = 4 # a local variable
+    
+    if _a_global >= 4:
+        _b_global = _a_global + 5 # also a local variable
+    
+    _a_local = 3
+    
+    print("Inside the function, the value of _a_global is", _a_global)
+    print("Inside the function, the value of _b_global is", _b_global)
+    print("Inside the function, the value of _a_local is", _a_local)
+    
+a_function()
+
+print("After calling a_function, outside the function, the value of _a_global is (still)", _a_global)
+print("After calling a_function, outside the function, the value of _b_global is (still)", _b_global)
+
+print("After calling a_function, outside the function, the value of _a_local is ", _a_local)
+
+
+# The things to note from this example: 
+# 
+# * Although `_a_global` was overwritten inside the function, what happened inside the function remained inside the function (*What happens in Vegas...*)
+# * The variable `_a_local` does not persist outside the function (therefore you get the `NameError` at the end)
+# * Also note that `_a_global` is just a naming convention &ndash; nothing special about this variable as such. 
+# 
+# Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
+
+# In[131]:
+
+
+_a_global = 10
+
+def a_function():
+    _a_local = 4
+    
+    print("Inside the function, the value _a_local is", _a_local)
+    print("Inside the function, the value of _a_global is", _a_global)
+    
+a_function()
+
+print("Outside the function, the value of _a_global is", _a_global)
+
+
+# So `_a_global` was available to the function, and you were able to use it in the `print` command.
+# 
+# If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
+
+# In[132]:
+
+
+_a_global = 10
+
+print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
+
+def a_function():
+    global _a_global
+    _a_global = 5
+    _a_local = 4
+    
+    print("Inside the function, the value of _a_global is", _a_global)
+    print("Inside the function, the value _a_local is", _a_local)
+    
+a_function()
+
+print("After calling a_function, outside the function, the value of _a_global now is", _a_global)
+
+
+# So, using the `global` specification converted `_a_global` to a truly global variable that became available outside that function (overwriting the original `_a_global`). 
+# 
+# The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
+
+# In[133]:
+
+
+def a_function():
+    _a_global = 10
+
+    def _a_function2():
+        global _a_global
+        _a_global = 20
+    
+    print("Before calling a_function2, value of _a_global is", _a_global)
+
+    _a_function2()
+    
+    print("After calling a_function2, value of _a_global is", _a_global)
+    
+a_function()
+
+print("The value of a_global in main workspace / namespace now is", _a_global)
+
+
+# That is, using the `global` keyword inside the inner function `_a_function2` resulted in changing the value of `_a_global` in the main workspace / namespace to 20, but within the scope of `_a_function`, its value remained 10! 
+# 
+# Compare the above with this: 
+
+# In[134]:
+
+
+_a_global = 10
+
+def a_function():
+
+    def _a_function2():
+        global _a_global
+        _a_global = 20
+    
+    print("Before calling a_function2, value of _a_global is", _a_global)
+
+    _a_function2()
+    
+    print("After calling a_function2, value of _a_global is", _a_global)
+
+a_function()
+
+print("The value of a_global in main workspace / namespace is", _a_global)
+
+
+# Now, because `_a_global` was defined in advance (outside the first function), when `a_function` was run,
+# 1. This value was "inherited" within `a_function` from the main workspace / namespace,
+# 2. It was then given a **`global`** designation in the inner function `_a_function2`, 
+# 3. And then, in the inner function `_a_function2`, when it was changed to a different value, it was modified everywhere (both within the `a_function`'s scope/namespace and main workspace / namespace) . 
+# 
+# ```{warning}
+# In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. Furthermore, avoid assigning globals within functions or sub-functions, as we did in the last two examples above! 
+# ```
+# 
+# ```{tip}
+# But in some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as global at the start of the script/program, but a better, safer option is to create a separate module (say, called `config.py`) to hold the global variables and then `import` it where needed.
+# ```
+# 
+# 
+# $\star$ Collect all blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
+
+# ### Importance of the `return` directive 
+# 
+# In the context of scope of variables, it is also important to keep in mind that in Python, arguments are passed to a function [by assignment](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference). This is a bit of a technical detail that we don't need to go into here, but basically, in practice, this means that for mutable objects such as lists, unless you do something special, if a function modifies the (mutable) variable inside it, the original variable outside the function remains unchanged.
+# 
+# Let's look at an example to understand this: 
+
+# In[135]:
+
+
+def modify_list_1(some_list):
+    print('got', some_list)
+    some_list = [1, 2, 3, 4]
+    print('set to', some_list)
+
+
+# In[136]:
+
+
+my_list = [1, 2, 3]
+
+print('before, my_list =', my_list)
+
+
+# In[137]:
+
+
+modify_list_1(my_list)
+
+
+# In[138]:
+
+
+print('after, my_list =', my_list)
+
+
+# The original list remains the same even though it is changed inside the function, as you would expect (what happens in Vegas...)
+# 
+# This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
+
+# In[139]:
+
+
+def modify_list_2(some_list):
+    print('got', some_list)
+    some_list = [1, 2, 3, 4]
+    print('set to', some_list)
+    return some_list
+
+
+# In[140]:
+
+
+my_list = modify_list_2(my_list)
+
+
+# In[141]:
+
+
+print('after, my_list =', my_list)
+
+
+# So now the original `my_list` is changed because *you explicitly replaced it*. This reinforces the fact that explicit `return` statements are important.  
+# 
+# And if we do want to modify the original list *in place*, use `append`:
+
+# In[142]:
+
+
+def modify_list_3(some_list):
+    print('got', some_list)
+    some_list.append(4) # an actual modification of the list
+    print('changed to', some_list)
+
+my_list = [1, 2, 3]
+
+print('before, my_list =', my_list)
+
+
+# In[143]:
+
+
+modify_list_3(my_list)
+
+
+# In[144]:
+
+
+print('after, my_list =', my_list)
+
+
+# That did it. So `append` will actually change the original list object. However, the fact still remains that you should use a `return` statement at the end of the function to be safe and be able to capture the output (and use it to replace an existing variable if needed).
+# 
+# 
+# ```{Note}
+# **`return`ing a `None`:** Even if you do not add a `return` directive at the end of a function, Python does in fact return something: a `None` value, which stands for a NULL value (no value at all;  so that something is a nothing!). You can use an `return None` in a Python function if you want to be explicit, or use just `return` to *completely* end the execution of the code (like `exit` in a shell script). This is different from using the `break` directive, which you were introduced above under control flow tools. 
 # ```
 
 # ## Python Input/Output
@@ -1150,7 +1877,7 @@ next(my_iterator)
 # f.close()
 # 
 # ```
-# Run the two code blocks (that end in `f.close()`) separately in ipython (you will learn about running whole scripts below) and examine the outputs (changes in `test.txt`). Then run the whole code (both blocks) at one go in ipython.
+# Run the two code blocks (that end in `f.close()`) separately in ipython (you will learn about running whole scripts below) and examine the outputs (changes in `test.txt`). Then run the whole code (both blocks) at one go in ipython.  Then also run the whole script file al well.
 # 
 # Note the following:
 # 
@@ -1200,7 +1927,9 @@ next(my_iterator)
 # 
 # ```
 # 
-# Note the `b` flag for reading a file, which stands for "binary". Basically, binary files are machine readable, but not human readable. For example, try opening `testp.p` in a text reader (e.g., your code editor)  and reading it - you will see considerable gibberish (compare with `testout.txt`)!
+# ```{note}
+# The `b` flag for reading the file above stands for "binary". Basically, binary files are machine readable, but not human readable. For example, try opening `testp.p` in a text reader (e.g., your code editor)  and reading it - you will see considerable gibberish (compare with `testout.txt`)!
+# ```
 
 # ### Safely opening files using `with open()`
 # Whilst `open()` and `close()` are useful to remember, it can be *very* problematic if `f.close()` is missed.
@@ -1279,655 +2008,6 @@ next(my_iterator)
 # 
 # $\star$ Run this script from bash, bash with ipython, and from within ipython, like you did above for the `basic_io*.py` scripts. 
 
-# ## Running Python scripts
-# 
-# Now that you have written your first script, you now need to know how to run it (instead of pasting or sending to the command prompt like you did above). 
-# 
-# ### Using bash
-# Open another bash terminal, and `cd ` to the `code` directory. Then, run the `basic_io*.py` scripts one by one (NOT in the python or ipython shell, but the bash shell!) using:
-# 
-# ```bash
-# python3 MyScript.py
-# ```
-# (replace `MyScript.py` with each of the three `basic_io*.py` one by one) 
-# 
-# ### From bash, using ipython 
-# 
-# Alternatively, you can use ipython:
-# 
-# ```bash
-# ipython MyScript.py
-# ```
-# With the same result. 
-# 
-# ### From within the ipython shell
-# 
-# You can also execute python scripts from within the `ipython` shell with 
-# 
-# ```python
-# run MyScript.py
-# ```
-# 
-# That is, enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and then use the `run` command with the name of the script file. 
-# 
-# To run the script from the native python shell, you would use `execfile("MyScript.py")`, but we won't bother doing that (though you can/should try it out for fun!).
-# 
-
-# ## Control flow tools
-# 
-# OK, let's get deeper into python code. A computer script or program's control flow is the order in which the code executes. Upto now, you have written scripts with simple control flows, with the code executing statements from the top to bottom. But very often, you want more flexible flows of commands and statements, for example, where you can switch between alternative commands depending on some condition. This is possible using *control flow tools*. Let's learn python's control flow tools hands-on.   
-# 
-# 
-# ### Functions
-# 
-# In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
-
-# In[193]:
-
-
-def foo(x):
-    x *= x # same as x = x*x
-    print (x)
-    return x
-
-
-# Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
-
-# In[194]:
-
-
-get_ipython().run_line_magic('whos', '')
-
-
-# So, `foo` is a function stored in memory (at address given by the value `0x...` in the `Data/Info` column), and ready to serve you!
-# 
-# Now "call it":
-
-# In[195]:
-
-
-foo(2)
-
-
-# Note that the first,  `print` command only outputs the value of `x` to the terminal, whereas, the second `return` command actually outputs it so that you can "capture" and store it. 
-# 
-# To see this distinction, let's try the following.
-
-# In[196]:
-
-
-def foo(x):
-    x *= x # same as x = x*x
-    print (x)
-    return x
-
-y = foo(2)
-
-
-# In[197]:
-
-
-y
-
-
-# In[198]:
-
-
-type(y)
-
-
-# Thus, the output of `foo` was stored as a new variable `y`. 
-
-# In[199]:
-
-
-def foo(x):
-    x *= x # same as x = x*x
-    print (x)
-    # return x
-
-y = foo(2)
-
-
-# In[200]:
-
-
-y
-
-
-# In[201]:
-
-
-type(y)
-
-
-# So, if we don't explicitly `return` the value of `x`, the output of `foo` cannot be stored.
-
-# ### Conditionals
-# 
-# Now that we know how to define functions in Python, let's look at *conditionals* that allow you fine-grained control over the function's operations.
-# 
-# $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a key binding (typically , `ctrl+enter`). 
-# 
-# 
-# ```python
-# # What does each of foo_x do? 
-# def foo_1(x):
-#     return x ** 0.5
-# 
-# def foo_2(x, y):
-#     if x > y:
-#         return x
-#     return y
-# 
-# def foo_3(x, y, z):
-#     if x > y:
-#         tmp = y
-#         y = x
-#         x = tmp
-#     if y > z:
-#         tmp = z
-#         z = y
-#         y = tmp
-#     return [x, y, z]
-# 
-# def foo_4(x):
-#     result = 1
-#     for i in range(1, x + 1):
-#         result = result * i
-#     return result
-# 
-# def foo_5(x): # a recursive function that calculates the factorial of x
-#     if x == 1:
-#         return 1
-#     return x * foo_5(x - 1)
-#      
-# def foo_6(x): # Calculate the factorial of x in a different way
-#     facto = 1
-#     while x >= 1:
-#         facto = facto * x
-#         x = x - 1
-#     return facto
-# ```
-
-# *Think about what each of the foo_x function does before running it.* Note that `foo_5` is a recursive function, meaning that the function [calls itself](https://en.wikipedia.org/wiki/Recursion_(computer_science)). 
-
-# ### Loops
-# 
-# Write the following, and save them to `loops.py`:
-# 
-# ```python
-# # FOR loops in Python
-# for i in range(5):
-#     print(i)
-# 
-# my_list = [0, 2, "geronimo!", 3.0, True, False]
-# for k in my_list:
-#     print(k)
-# 
-# total = 0
-# summands = [0, 1, 11, 111, 1111]
-# for s in summands:
-#     total = total + s
-#     print(total)
-# 
-# # WHILE loops  in Python
-# z = 0
-# while z < 100:
-#     z = z + 1
-#     print(z)
-# 
-# b = True
-# while b:
-#     print("GERONIMO! infinite loop! ctrl+c to stop!")
-# # ctrl + c to stop!
-# ```
-# 
-# ---
-# 
-# <img src="./graphics/Geronimo.jpg" alt="Geronimo" width="300px">
-# 
-# **In case you were wondering what Geronimo looked like.** <br> (Source: Wikipedia) 
-# 
-# ---
-# 
-
-# ### Loops and conditionals combined
-# 
-# $\star$ Write the following functions and save them to `cfexercises2.py`:
-# 
-# ```python
-# 
-# for j in range(12):
-#     if j % 3 == 0:
-#         print('hello')
-# 
-# for j in range(15):
-#      if j % 5 == 3:
-#         print('hello')
-#      elif j % 4 == 3:
-#         print('hello')
-# 
-# z = 0
-# while z != 15:
-#     print('hello')
-#     z = z + 3
-# 
-# z = 12
-# while z < 100:
-#     if z == 31:
-#         for k in range(7):
-#             print('hello')
-#     elif z == 18:
-#         print('hello')
-#     z = z + 1
-# ```
-# 
-# *Try to predict how many times "hello" will be printed before testing each of these functions*.
-# 
-
-# (Python-Comprehensions)=
-# ## Comprehensions
-# 
-# Python offers a way to combine loops and logical tests / conditionals in a single line of code to transform any *iterable* object (list, set, or dictionary, over which you can iterate) into another object, after performing some operations on the elements in the original object. That is, they are a compact way to create a new list, dictionary or object from an existing one. As you might expect, there are three types of comprehensions, each corresponding to what the target object is (list, set, dictionary). 
-# 
-# Let's look at how list comprehensions work:
-
-# In[202]:
-
-
-x = [i for i in range(10)]
-print(x)
-
-
-# This is the same as writing the following loop:
-
-# In[203]:
-
-
-x = []
-for i in range(10):
-    x.append(i)
-print(x)
-
-
-# Here's another example:  
-
-# In[204]:
-
-
-x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
-print(x)
-
-
-# Which is same as the loop:
-
-# In[205]:
-
-
-x = ["LIST","COMPREHENSIONS","ARE","COOL"]
-for i in range(len(x)): # explicit loop
-    x[i] = x[i].lower()
-print(x)
-
-
-# Or this loop:
-
-# In[206]:
-
-
-x = ["LIST","COMPREHENSIONS","ARE","COOL"]
-x_new = []
-for i in x: # implicit loop
-    x_new.append(i.lower())
-print(x_new)
-
-
-# How about a nested loop? Let's try an example:
-
-# In[207]:
-
-
-matrix = [[1,2,3],[4,5,6],[7,8,9]]
-flattened_matrix = []
-for row in matrix:
-    for n in row:
-        flattened_matrix.append(n)
-print(flattened_matrix)
-
-
-# A list comprehension to do the same:
-
-# In[208]:
-
-
-matrix = [[1,2,3],[4,5,6],[7,8,9]]
-flattened_matrix = [n for row in matrix for n in row]
-print(flattened_matrix)
-
-
-# Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
-
-# In[209]:
-
-
-words = (["These", "are", "some", "words"])
-first_letters = set()
-for w in words:
-    first_letters.add(w[0])
-print(first_letters)
-
-
-# Note that sets are unordered (the first letters don't appear in the order you might expect). 
-# 
-# Now, the same as a set comprehension: 
-
-# In[210]:
-
-
-words = (["These", "are", "some", "words"])
-first_letters = {w[0] for w in words}
-print(first_letters)
-
-
-# Now, type the following in a script file called `oaks.py` and test it:
-# 
-# ```python
-# ## Finds just those taxa that are oak trees from a list of species
-# 
-# taxa = [ 'Quercus robur',
-#          'Fraxinus excelsior',
-#          'Pinus sylvestris',
-#          'Quercus cerris',
-#          'Quercus petraea',
-#        ]
-# 
-# def is_an_oak(name):
-#     return name.lower().startswith('quercus ')
-# 
-# ##Using for loops
-# oaks_loops = set()
-# for species in taxa:
-#     if is_an_oak(species):
-#         oaks_loops.add(species)
-# print(oaks_loops)
-# 
-# ##Using list comprehensions   
-# oaks_lc = set([species for species in taxa if is_an_oak(species)])
-# print(oaks_lc)
-# 
-# ##Get names in UPPER CASE using for loops
-# oaks_loops = set()
-# for species in taxa:
-#     if is_an_oak(species):
-#         oaks_loops.add(species.upper())
-# print(oaks_loops)
-# 
-# ##Get names in UPPER CASE using list comprehensions
-# oaks_lc = set([species.upper() for species in taxa if is_an_oak(species)])
-# print(oaks_lc)
-# ```
-# 
-# Carefully compare the looping vs list comprehension way for the two  tasks (find oak tree species names and get names in upper case) to make sure you understand what's going on.   
-# 
-# ```{note}
-# Don't go mad with list comprehensions — code readability is more important than squeezing lots into a single line! They can also make your code run more slowly or use more memory in some cases (we will learn about this more in the [second Python Chapter](./06-Python_II.ipynb)).
-# ```
-
-# ## Variable scope
-# 
-# One important thing to note about functions, in any programming language, is that variables created inside functions are invisible outside of it, nor do they persist once the function has run unless they are explicitly returned. These are called "local" variables, and are only accessible inside their function. However, "global" variables are visible inside and outside of functions. In Python, you can assign global variables like any other programming language.
-# 
-# To understand this, let's look at an example. 
-# 
-# First try this:
-
-# In[263]:
-
-
-_a_global = 10 # a global variable
-
-if _a_global >= 5:
-    _b_global = _a_global + 5 # also a global variable
-    
-print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
-print("Before calling a_function, outside the function, the value of _b_global is", _b_global)
-
-def a_function():
-    _a_global = 4 # a local variable
-    
-    if _a_global >= 4:
-        _b_global = _a_global + 5 # also a local variable
-    
-    _a_local = 3
-    
-    print("Inside the function, the value of _a_global is", _a_global)
-    print("Inside the function, the value of _b_global is", _b_global)
-    print("Inside the function, the value of _a_local is", _a_local)
-    
-    return None
-
-a_function()
-
-print("After calling a_function, outside the function, the value of _a_global is (still)", _a_global)
-print("After calling a_function, outside the function, the value of _b_global is (still)", _b_global)
-
-print("After calling a_function, outside the function, the value of _a_local is ", _a_local)
-
-
-# The things to note from this example: 
-# 
-# * Although `_a_global` was overwritten inside the function, what happened inside the function remained inside the function (*What happens in Vegas...*)
-# * The variable `_a_local` does not persist outside the function (therefore you get the `NameError` at the end)
-# * Also note that `_a_global` is just a naming convention &ndash; nothing special about this variable as such. 
-# 
-# ```{tip}
-# **`return`ing a `None`:** Why `return None` in the above script? The short answer is, it good practice to do so, much as putting in an explicit `exit` in a shell script is. The **`None`** keyword is used to define a NULL value (no value at all). It is is actually a special dummy value and has a data type of its own called `NoneType` (try `type(None)`). As such, Python functions do have a default return value, which is in fact `None` if no return expression is given, or `return` is given on its own. 
-# ```
-# 
-# Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
-
-# In[265]:
-
-
-_a_global = 10
-
-def a_function():
-    _a_local = 4
-    
-    print("Inside the function, the value _a_local is", _a_local)
-    print("Inside the function, the value of _a_global is", _a_global)
-    
-    return None
-
-a_function()
-
-print("Outside the function, the value of _a_global is", _a_global)
-
-
-# So `_a_global` was available to the function, and you were able to use it in the `print` command.
-# 
-# If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
-
-# In[266]:
-
-
-_a_global = 10
-
-print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
-
-def a_function():
-    global _a_global
-    _a_global = 5
-    _a_local = 4
-    
-    print("Inside the function, the value of _a_global is", _a_global)
-    print("Inside the function, the value _a_local is", _a_local)
-    
-    return None
-
-a_function()
-
-print("After calling a_function, outside the function, the value of _a_global now is", _a_global)
-
-
-# So, using the `global` specification converted `_a_global` to a truly global variable that became available outside that function (overwriting the original `_a_global`). 
-# 
-# The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
-
-# In[267]:
-
-
-def a_function():
-    _a_global = 10
-
-    def _a_function2():
-        global _a_global
-        _a_global = 20
-    
-    print("Before calling a_function, value of _a_global is", _a_global)
-
-    _a_function2()
-    
-    print("After calling _a_function2, value of _a_global is", _a_global)
-    
-    return None
-
-a_function()
-
-print("The value of a_global in main workspace / namespace is", _a_global)
-
-
-# That is, using the `global` keyword inside the inner function `_a_function2` resulted in changing the value of `_a_global` in the main worspace / namespace to 20, but within the scope of `_a_function`, remained 10! 
-# 
-# Compare the above with this: 
-
-# In[262]:
-
-
-_a_global = 10
-
-def a_function():
-
-    def _a_function2():
-        global _a_global
-        _a_global = 20
-    
-    print("Before calling a_function, value of _a_global is", _a_global)
-
-    _a_function2()
-    
-    print("After calling _a_function2, value of _a_global is", _a_global)
-
-a_function()
-
-print("The value of a_global in main workspace / namespace is", _a_global)
-
-
-# Now, because `_a_global` was defined in advance (outside the first function), it get modified when changes in the inner function (it does not exist as a local within the scope of `_a_function`, but is "inherited" from the main scope / workspace / namespace).
-# 
-# $\star$ Collect all blocks of code above illustrating variable scope into one script called `scope.py` and test it (run and check for errors).
-# 
-# ```{warning}
-# In general, avoid assigning globals because you run the risk of "exposing" unwanted variables to all functions within your workspace / namespace. 
-# ```
-# 
-# ```{tip}
-# But in some cases you may find it useful to assign one or more global variables that are shared across multiple modules/functions. You can do this by assigning those variables as global at the start of the script/program, but a better, safer option is to create a separate module (say, called `config.py`) to hold the global variables and then `import` it where needed.
-# ```
-
-# ### Importance of the `return` directive 
-# 
-# In the context of scope of variables, it is also important to keep in mind that in Python, arguments are passed to a function [by assignment](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference). This is a bit of a technical detail that we don't need to go into here, but basically, in practice, this means that for mutable objects such as lists, unless you do something special, if a function modifies the (mutable) variable inside it, the original variable outside the function remains unchanged.
-# 
-# Let's look at an example to understand this: 
-
-# In[268]:
-
-
-def modify_list_1(some_list):
-    print('got', some_list)
-    some_list = [1, 2, 3, 4]
-    print('set to', some_list)
-
-
-# In[269]:
-
-
-my_list = [1, 2, 3]
-
-print('before, my_list =', my_list)
-
-
-# In[270]:
-
-
-modify_list_1(my_list)
-
-
-# In[271]:
-
-
-print('after, my_list =', my_list)
-
-
-# The original list remains the same even though it is changed inside the function, as you would expect (what happens in Vegas...)
-# 
-# This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
-
-# In[220]:
-
-
-def modify_list_2(some_list):
-    print('got', some_list)
-    some_list = [1, 2, 3, 4]
-    print('set to', some_list)
-    return some_list
-
-
-# In[221]:
-
-
-my_list = modify_list_2(my_list)
-
-
-# In[222]:
-
-
-print('after, my_list =', my_list)
-
-
-# So now the original `my_list` is changed because you explicitly replaced it. This reinforces the fact that explicit `return` statements are important.  
-# 
-# And if we do want to modify the original list *in place*, use `append`:
-
-# In[223]:
-
-
-def modify_list_3(some_list):
-    print('got', some_list)
-    some_list.append(4) # an actual modification of the list
-    print('changed to', some_list)
-
-my_list = [1, 2, 3]
-
-print('before, my_list =', my_list)
-
-
-# In[224]:
-
-
-modify_list_3(my_list)
-
-
-# In[225]:
-
-
-print('after, my_list =', my_list)
-
-
-# That did it. So `append` will actually change the original list object. However, the fact still remains that you should use a `return` statement at the end of the function to be safe and be able to capture the output (and use it to replace an existing variable if needed).   
-
 # ## Writing Python programs
 # 
 # Now let's start with proper python programs. 
@@ -1987,13 +2067,13 @@ print('after, my_list =', my_list)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[226]:
+# In[145]:
 
 
 cd "../code"  
 
 
-# In[227]:
+# In[146]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -2016,13 +2096,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[228]:
+# In[147]:
 
 
 import boilerplate
 
 
-# In[229]:
+# In[148]:
 
 
 help(boilerplate)
@@ -2058,7 +2138,7 @@ help(boilerplate)
 # 
 # How do you import? Simply as (in python or ipython shell):
 
-# In[230]:
+# In[149]:
 
 
 import boilerplate
@@ -2066,7 +2146,7 @@ import boilerplate
 
 # Then type
 
-# In[231]:
+# In[150]:
 
 
 boilerplate
@@ -2094,7 +2174,7 @@ boilerplate
 # 
 # Now run it:
 
-# In[232]:
+# In[151]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -2102,7 +2182,7 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[233]:
+# In[152]:
 
 
 import using_name
@@ -2129,19 +2209,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[234]:
+# In[153]:
 
 
 get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[235]:
+# In[154]:
 
 
 run sysargv.py var1 var2
 
 
-# In[236]:
+# In[155]:
 
 
 run sysargv.py 1 2 var3
@@ -2253,7 +2333,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[237]:
+# In[156]:
 
 
 run control_flow.py
@@ -2261,7 +2341,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[238]:
+# In[157]:
 
 
 even_or_odd(11)
@@ -2387,7 +2467,7 @@ even_or_odd(11)
 # 
 # Now run it:
 
-# In[239]:
+# In[158]:
 
 
 run test_control_flow.py -v
@@ -2403,7 +2483,7 @@ run test_control_flow.py -v
 # 
 # For more complex testing, see documentation of `doctest` [here](https://docs.python.org/3.8/library/doctest.html). 
 # 
-# Also check out the packages `pytest`, `unittest`, and `nose` for more comprehensive and flexible unit testing.
+# Also check out the packages `pytest` and `unittest` (and maybe `nose`, though the first two are more widely used and more intuitive) for more comprehensive and flexible unit testing.
 # 
 # Please start testing as early as possible, but don't try to test everything either! Remember, it is easier to test if code is compartmentalized into functions.
 # 
@@ -2429,7 +2509,7 @@ run test_control_flow.py -v
 # ```
 # Now run it:
 
-# In[240]:
+# In[159]:
 
 
 get_ipython().run_line_magic('run', 'debugme.py')
@@ -2549,7 +2629,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # Let's expand our previous `debugme.py` example to understand how this works. 
 
-# In[241]:
+# In[160]:
 
 
 def buggyfunc(x):
@@ -2571,7 +2651,7 @@ buggyfunc(20)
 # 
 # You can also "catch" specific types of errors. For example, modify the code further:
 
-# In[242]:
+# In[161]:
 
 
 def buggyfunc(x):
@@ -2595,7 +2675,7 @@ buggyfunc(20)
 # 
 # Note that we also used `else` (just like in the case of `if`-`else`) here to give feedback on every successful calculation. There is also a `finally` keyword that enables you to execute sections of code that should always run, with or without any previously encountered exceptions.
 
-# ## Functions, Modules, and code compartmentalization
+# ## Modules and code compartmentalization
 # 
 # Ideally you should aim to compartmentalize your code into a bunch of functions, typically written in a single `.py` file: these are Python "modules", which you were introduced to previously. 
 # 
@@ -2618,12 +2698,12 @@ buggyfunc(20)
 # 
 # ### Python packages
 # 
-# A Python package is simply a directory of Python modules (quite like an `R` package). Many packages, such as the following that I find particularly useful, are always available as standard libraries (just require `import` from within python or ipython):
+# A Python package is simply a directory of Python modules (quite like an `R` package). A number of packages, such as the following particularly useful ones, are always available as standard libraries (just require `import` from within python or ipython):
 # 
 # * `io`: file input-output with `.csv`, `.txt`, etc.
 # * `subprocess`: to run other programs, including multiple ones at the same time, including operating system-dependent functionality
-# * `sqlite3`: for manipulating and querying `sqlite` databases
 # * `math`: for mathematical functions
+# * `sqlite3`: for manipulating and querying `sqlite` databases
 # 
 # Scores of other packages are accessible by explicitly installing them using `sudo apt install python-packagename` (as you did previously) or by using `pip`. Some particularly mentionable ones are:
 # 
@@ -2638,9 +2718,7 @@ buggyfunc(20)
 # * `beautifulsoup` can be used for parsing HTML and XML to extract data (can do a lot of what `scrapy` does)
 # * `biopython` for bioinformatics. Check out the [worked examples](http://biopython.org/DIST/docs/tutorial/Tutorial.html) in particular.
 # 
-# Of course, you have already installed some of these (`scipy`, `matplotlib`).
-# 
-# 
+# We will use many of these in the [Advanced Python Chapter](./06-Python_II.ipynb).
 
 # ## Practicals
 # 
@@ -2659,7 +2737,7 @@ buggyfunc(20)
 #     
 # ### Groupwork Practical on Align DNA sequences 
 # 
-# Align all the `.fasta` sequences from the [Unix chapter](01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
+# Align all the `.fasta` sequences from the [Unix chapter](./01-Unix.ipynb). Call the new script `align_seqs_fasta.py`. Unlike `align_seqs.py`, this script should take *any* two fasta sequences (in separate files) to be aligned as input. So this script would typically run by using explicit inputs, for example, when called with something like: 
 # ```bash
 # python3 align_seqs_fasta.py seq1.fasta seq2.fasta
 # ``` 
@@ -2713,11 +2791,14 @@ buggyfunc(20)
 # 
 # 
 # ---
+# :::{figure-md} XKCD-on-Python
 # 
 # <img src="./graphics/python.png" alt="XKCD on Python" width="300px">
 # 
 # **Is python the most common answer to your daily programming needs?** Possibly! <br>
 # (Source: [XKCD](http://xkcd.com))
+# 
+# :::
 # 
 # ---
 

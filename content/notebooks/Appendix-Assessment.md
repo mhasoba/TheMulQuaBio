@@ -74,14 +74,14 @@ feedback:
 
 * Each student group will assign a "scribe" to the group who will create a **new Groupwork repository** where all assigned groupwork practicals will be tackled collaboratively.
 * The group members will collaborate to develop the solution by creating branches of the script. 
-    * Every group member MUST create their own branch and work on each of the groupwork practicals. 
-* Once the group has reached a solution, all branches should be merged and the final script transferred to each student's main coursework repository.
+    * Every group member MUST create their own branch and work on each of the groupwork practicals.
+* Once the group has reached a solution, all branches should be merged and the final script transferred to *each* student's main coursework repository.
 * Please read about git branching/merging, including the resources given at the end of the [Git Chapter](03-Git.ipynb)
-* You are not expected to finish an the groupwork assignments within a week. These will be taken into account only at the final assessment (next section). The specific deadline will be given in class.
+* The groupwork practicals will will only be evaluated in the final assessment (next section). The specific deadline will be given in class.
 
 #### Assessment
 
-* Every "Groupwork" question/script completed will be assessed using the same criteria as above, but in the final run only. 
+* Every "Groupwork" question/script completed will be assessed using the same criteria as above, but in the final evaluation only. 
 * If there are inconsistencies between a groupwork script of a given group, 5 points will be deducted from **each** group member's total.    
 
 ## The final assessment of computing coursework

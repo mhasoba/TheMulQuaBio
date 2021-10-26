@@ -44,7 +44,10 @@ require(tidyverse)
 
 tidyverse_packages(include_self = TRUE) # the include_self = TRUE means list "tidyverse" as well 
 
-tibble::as_tibble(MyWrangledData) 
+MyWrangledData <- tibble::as_tibble(MyWrangledData) 
+MyWrangledData
+
+class(MyWrangledData)
 
 dplyr::glimpse(MyWrangledData) #like str(), but nicer!
 

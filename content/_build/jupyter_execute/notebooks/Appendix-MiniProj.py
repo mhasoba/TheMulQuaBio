@@ -5,14 +5,14 @@
 
 # ## Introduction 
 # 
-# The computing Miniproject gives you an opportunity to try the "whole nine yards" of *asking and answering* a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a **fully reproducible way**. It will in essence give you an opportunity to perform a useful "dry run" of executing your actual Dissertation project. *It is an opportunity to do something concrete with all the computational biology techniques you have been learning.*
+# The computing Miniproject gives you an opportunity to try the "whole nine yards" of *asking and answering* a scientific question in biology (potentially involving multiple sub-questions/hypotheses) in a **fully reproducible way**. It will in essence give you an opportunity to perform a useful "dry run" of executing your actual Dissertation project. *It is an opportunity to do apply the computational methods you have been learning to a biological problem.*
 # 
 # 
 # ## Objectives
 # 
 # **The general question you will address is:** *What mathematical models best fit an empirical dataset?*
 # 
-# You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in the model fitting lectures.
+# You may think of this as testing a set of alternative hypotheses — every alternative hypothesis is nothing but a different model to describe an observed phenomenon, as you will have learned in [the model fitting lectures](https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures).
 # 
 # ## The Project 
 # 
@@ -20,15 +20,15 @@
 # 
 # The Miniproject must satisfy the following criteria (and follow the accompanying guidelines):
 # 
-# 1. **It employs *as many* of the biological computing tools you have learned so far as necessary**: shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.
+# 1. **It employs the biological computing tools you have learned so far *as necessary***: Shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.
 # 
-# 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC (read the Johnson and Omland 2005 paper in the Readings & Resources section below).*
+# 2. **Fits and compares *at least* two alternative mathematical models to the data**. The models should be fitted and selected using an appropriate method. For example you may use a combination of Ordinary Linear and Nonlinear Least Squares (NLLS) methods to fit $\ge 2$ alternative models to data, followed by model selection using AIC and BIC.
 # 
 # 3. **It should be fully reproducible.** You will write a script that "glues" the workflow together and runs it, from data processing, to model fitting, to plotting, to compilation of the written report (*More detailed instructions on report below*). Refer back to the TheMulQuaBio Computing chapters to see how you would run the different components. For example, we have covered how to run R and compile $\LaTeX$ using the `subprocess` module in the [second Python Chapter](./06-Python_II.ipynb). The assessor should be able to run just this script to get everything to work without errors.
 # 
-# *You will be given lectures and practicals on model fitting before you start on your Miniproject.*
+# *You will be given lectures and practicals on model fitting using least squares before you start on your Miniproject.*
 # 
-# *Please read the papers in the **Readings and Resources** section below* — these will help orient you in the right direction for tackling your Miniproject.
+# *Please read the papers in the **Readings & Resources** section below* (and in particular, the Johnson and Omland 2005 paper) — these will help orient you in the right direction for tackling your Miniproject.
 # 
 # 
 # ## The Report
@@ -55,7 +55,7 @@
 # Please read the *general* (*not* word count, formatting etc.) dissertation writing guidelines given in the Silwood Masters Student Guidebook.
 # 
 # ```{tip}
-# **Start writing early**. Its NEVER too early to start writing! Outline the structure of your report and attempt to write a brief introduction even if you don't have any results, or have not finalized your methods, computational work flow, or analyses. Doing this preliminary writing will force you to think about the logic of what you are planning to do, put your planned work in some context, and (in most cases!) motivate you.  
+# **Start writing early**. Its NEVER too early to start writing! Outline the structure of your report and attempt to write a brief introduction even if you don't have any results, or have not finalized your methods, computational work flow, or analyses. Doing this preliminary writing will force you to think about the logic of what you are planning to do, put your planned work in some context, and help motivate you.  
 # ```
 # 
 # Here are some additional suggestions/guidelines:
@@ -69,25 +69,25 @@
 #         * The *Discussion* reminds the reader about what the original goals of the study were, states out key findings succinctly, and then discusses their implications in the wider context and then finished off with some caveats and a conclusion that delivers the final take-away messages.     
 #     * Avoid sub-sectioning (with headers) the *Introduction* and *Discussion* sections as it breaks the flow of your "narrative". On the other hand, you will almost always sub-section the Methods, and often, the Results section.
 #     * Pay attention to detail: 
-#         * Do a spell check on the final draft
+#         * Do a spell check on the final draft.
 #         * Make sure that all graphics are rendered in good quality (use [vector graphic](https://en.wikipedia.org/wiki/Vector_graphics) formats as much as possible). Remember, $\LaTeX$ allows you to embed vector graphics in pdf.
 #         * Make sure that all the display items (Tables + Figures) have a text caption that states what the display item is for, and then a text legend that explains the figure and delivers any take home messages. 
 #     * The display items alone should be able to tell most of the story. Once you have an outline of the manuscript, first, before doing any more writing, put in the display items (generally, 4-6 should be enough) with Captions and Legends, and see if they are indeed telling the story you would like your paper/report to tell.   
-#     * Avoid the words "explore" or "look at" to describe your objectives 
-#     * Use direct speech (as it is YOUR work!)
+#     * Avoid the words "explore" or "look at" to describe your objectives.
+#     * Use direct speech (as it is YOUR work!).
 #         * So, for example, avoid phrases such as "This study investigates"; say "Here I investigate" or something like that instead.
 #         
 # * **The Title**
 #    * The Title should give a summary of what the article is about, and may even convey the main finding(s). Make it as result-focused as possible, and avoid being vague. 
 #    * Keep the number of words to a minimum (upto 10-15 words is reasonable).
 #        * Some succinct title examples:
-#            * "The role of xx in determining yy"
-#            * "The relative success of xx models in providing parameter estimates for yy"
+#            * "The role of xx in determining yy"/
+#            * "The relative success of xx models in providing parameter estimates for yy".
 #            * *Or better still*: "xx models out-perform yy models for quantifying zz data"
-#            * *OR even better still*: "xx [organisms / traits] differ systematically across yy [some grouping variable, such as location or taxonomic categories]" 
+#            * *OR even better still*: "xx [organisms / traits] differ systematically across yy [some grouping variable, such as location or taxonomic categories]". 
 #        * Some not-so-nice title examples:
-#            * "A comparison of models for describing zz using Linear and no-linear model fitting with AIC/BIC"
-#            * "An exploration of xx models for describing yy data using Linear and Non-linear model fitting with model selection"
+#            * "A comparison of models for describing zz using Linear and no-linear model fitting with AIC/BIC".
+#            * "An exploration of xx models for describing yy data using Linear and Non-linear model fitting with model selection".
 # 
 # * **Abstract**: *The report must have an Abstract.*
 #     * It should be a "mini-paper" in itself: So, 1-2 lines on background, 1-2 lines on the paper's objectives, 1-2 lines on the methods, 1-2 lines on the main results, 1-2 lines on the main conclusions + take home messages. Remember the abstract counts towards the total word limit (at least as far as your Mini-project report is concerned), so you will need to be succinct. About 200 words is the suggested maximum.
@@ -141,13 +141,13 @@
 # 
 # * A well-organized project where code, results, data, etc., are easy to locate, inspect, and use. In the project's README also include:
 # 
-#     * Version of each language used
+#     * Version of each language used.
 # 
-#     * Any dependencies or special packages the user/marker should be aware of
+#     * Any dependencies or special packages the user/marker should be aware of.
 # 
-#     * What each package you used is for
+#     * What each package you used is for.
 # 
-# * A project that runs smoothly and efficiently, without any errors once a single script is called. 
+# * A project that runs smoothly and efficiently, without any errors once a single script is called.
 # 
 # 
 # ### Report
@@ -193,7 +193,7 @@
 #  
 # 
 # ```{note}
-# * Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the `try` keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets *after* the Model fitting script has finished running and you are in the Analysis phase.  
+# Some data series (e.g., a single growth rate or functional response curve) may have insufficient data points for fitting a particular model. That is, the number of unique x-axis values is $\le k$, where $k$ is the number of parameters in the model (e.g., a regression line has two parameters). Your model fitting will fail on such datasets, but you can deal with those failures later (e.g., by using the `try` keyword that you have learned in both Python and R chapters). In particular, the model fitting (or estimation of goodness of fit statistics) will fail for datasets with small sample sizes, and you can then filter these datasets *after* the Model fitting script has finished running and you are in the Analysis phase.  
 # ```
 # 
 # ### Final plotting and analysis script  
@@ -226,28 +226,30 @@
 # 
 # Doing all this may seem a bit scary at the start. However, if you approach the problem systematically and methodically, you will soon be on your way. 
 #    
-# ```{tip}
+# ```{Note}
 # The Miniproject is also an exercise in learning to pick the right size of (computational) problem given the amount of time you have to solve it. So even if you might be tempted to take on, at the very start, a very ambitious project (basically, picking both linear and non-linear models) and *then* trying to develop your workflow, you will very likely get stuck in "local optima" in terms of the overall workflow design and implementation. It is important that you first pick a "bite sized" problem (e.g., two linear models), and develop the overall computational work flow, from plotting and fitting to model selection. At the same time, *also start at least outlining  the report* based on the first, simple, tractable problem you pick.     
 # ```
 # 
 # Here are some suggested first steps to get started:
 # 
-# * Explore the data in R or Python (e.g., using Jupyter) (first part of the suggested workflow above). 
+# * **Explore the data** in R or Python (e.g., using Jupyter) (first part of the suggested workflow above). 
 # 
-# * Write a preliminary version of the plotting script without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.
+# * **Write a preliminary version of the plotting script** without the fitted models overlaid. That will also give you a feel for the data and allow you to see (literally) what shapes the curves can take.
 # 
-# * Explore the models you will be fitting. Basically, plot them: Write mathematical functions you want to fit in a Python/R script (you can then re-use these functions in your model fitting script as well), and then evaluate them  numerically to see the shape of the function. 
+# * **Explore the models you will be fitting**: Basically, plot them: Write mathematical functions you want to fit in a Python/R script (you can then re-use these functions in your model fitting script as well), and then evaluate them  numerically to see the shape of the function.
 # 
+# * **Set and achieve you baseline target**: First perform, produce figures for, and interpret model comparisons using LMs only. For example, finish the workflow, right down to a summary figure and/or table showing, which, out of straight line, cubic and quadratic, fit the data better, with some interpretation. As such, this will be sufficient to write up a report. The next step wuld be adding one or more non-linear model(s) to the set of mdoels you are comparing, fitted using NLLS.  
+# 
+# * **For NLLS fitting**: Figure out, using one, "nice-looking" dataset to test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
+#    * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors (and examine them carefully) in case the fitting doesn't converge.
+#    
 # ```{tip}
 # Remember to sandbox and/or gitignore any code and output for exploratory plotting of the functions in the final product.
 # ```
-# 
-# * **For NLLS fitting**, figure out, using one, "nice-looking" functional response, population growth curve/dataset, or thermal response, test how the NLLS fitting package and its commands work. This is your minimal example that will give you confidence that it works!
-#    * Next, write a loop over all unique datasets (data curves) using the `try` to catch errors (and examine them carefully) in case the fitting doesn't converge.
 
 # ## The Dataset and Model Options
 # 
-# You can pick from one of the following three sets of options. 
+# You will pick from one of the following three sets of options. All students will pick the same dataset (there will be a vote in class).  
 # 
 # First, let's load some packages to explore the data sets in Python: 
 

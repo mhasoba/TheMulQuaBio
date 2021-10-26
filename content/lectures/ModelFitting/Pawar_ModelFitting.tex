@@ -316,7 +316,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Models: How to build them?}
+\begin{frame}{Building Models}
 
 \begin{itemize}\itemsep10pt
 
@@ -339,11 +339,9 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Fitting models to data}
+\begin{frame}{Fitting Models (to data)}
 
-Multiple ways to do it:
-
-\begin{itemize}\itemsep10pt
+\begin{itemize}\itemsep16pt
 
 	\item Least Squares methods
 	\begin{itemize}
@@ -355,10 +353,7 @@ Multiple ways to do it:
 	 \item Maximum Likelihood Estimation (MLE) 
 	 \item Bayesian
 	\end{itemize}
-	\item Artificial intelligence and Machine learning
-	\begin{itemize}
-		\item  Focus in on maximizing ability to discover pattern and predict at the cost of mechanistic insights
-	\end{itemize}
+	\item Machine learning and Artifical intelligence
 
 	% One-step forecasting (appropriate for discrete patterns/models), including time series data
 
@@ -367,15 +362,19 @@ Multiple ways to do it:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Methods you can use}
+\begin{frame}{Fitting Models (to data)}
 
 \begin{itemize} \itemsep12pt
 	
-\item Least squares: along with Linear Model fitting, Non-linear Least Squares (NLLS) fitting is a particularly versatile and powerful approach because many mechanisms in biology and inherently non-linear
+\item Linear and non-linear least squares model fitting:  (and mathematically/algorithmically simple) approaches, useful in many scenarios in biology 
+\begin{itemize}
+	\item {\it Non-linear} Least Squares (NLLS) fitting  is often necessary because many mechanisms in biology are inherently non-linear (i.e., r data are better-explained by a non-linear mathematical model)
+\end{itemize} 
 
-\item MLE/Bayesian methods: more robust if you are able to calculate the likelihood function analytically or numerically. 
+\item MLE/Bayesian methods: Versatile and powerful more robust if you are able to calculate the likelihood function analytically or numerically 
 
-\item AI/machine Learning: most versatile for large amounts of noisy data
+\item AI/machine Learning: most versatile and powerful for large amounts of noisy data, but the focus on maximizing ability to discover pattern and predict comes at the cost of mechanistic insights
+
 
 \end{itemize}
 
@@ -388,7 +387,7 @@ Multiple ways to do it:
 \begin{itemize}[<+->]\itemsep12pt
 	\item Ideally, several competing (meaningful, not just null) hypotheses (mathematical models) should be fitted to data and compared using statistical theory 
 	\item This is an advance over the traditional ``null hypothesis'' approach in Biology
-	\item Necessary for developing the advancement of Biology from from an observational and axiomatic discipline to one with general theories.
+	\item Necessary for the advancement of Biology from from an observational and axiomatic discipline to one with general theories
 	\item Necessary for understanding the mechanisms underlying biological patterns/phenomena
 \end{itemize}
  
@@ -422,7 +421,7 @@ Multiple ways to do it:
 	\end{itemize}
 	
 	
-	\item The lower the AIC or BIC, the better. 
+	\item The lower the AIC or BIC, the better
 
 \end{itemize}
 
@@ -450,7 +449,7 @@ Multiple ways to do it:
 			&= n + 2 + n \ln\left(\frac{2 \pi}{n}\right) + n \ln(\text{RSS}) + p \ln(n)
 		\end{align*}
 
-		\item  \it The small sample AIC can also be calculated similarly (see Johnson \& Omland 2004)
+		\item  \it The small-sample AIC can also be calculated similarly (see Johnson \& Omland 2004)
 
 	\end{itemize}
 	
@@ -496,20 +495,22 @@ tss = sum((Observations - mean(Predictions)) ** 2)\\
 \begin{itemize} \itemsep12pt
 	\item You can also calculate Akaike Weights, which is very useful/important
 	when comparing $ > 2$ models. These weights can then be used to perform {\it
-	model averaging}.
+	model averaging}
 
 	\item Model selection using the Likelihood-Ratio test (LRT) is another
-	option when you are comparing 2 models.
+	option when you are comparing 2 models
 	
 	\item Adjusted $R^2$ can be used to get a rigorous ``idea'' about how
-	alternative models are performing. 
+	alternative models are performing
 	
-	\item Very often, you will end up doing  model simplification, especially in
-	{\it for linear least squares model fitting} --- starting with a complex
-	model and then dropping terms till you have found a the most parsimonious
-	version of the original model. There are functions in {\tt R} to do this (of
-	course!).
- 
+	\item Very often, you can do step-wise model simplification, especially in
+	{\it for linear least squares model fitting}: Start with a complex model and
+	drop terms till you have found a the most {\it parsimonious} simpler version
+	of the original model
+	\begin{itemize}
+		\item There are ready-made functions in {\tt R} to do this (of course!)
+	\end{itemize}
+
 \end{itemize}
 
 \end{frame}

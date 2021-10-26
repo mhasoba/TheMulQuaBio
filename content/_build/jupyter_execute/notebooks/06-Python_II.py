@@ -68,12 +68,15 @@ print(type(a[0]))
 # Thus the last two outputs tell you that firstly, that numpy arrays belong to a data structure type (and a class) called `numpy.ndarray`, and secondly, that at position `0` (remember, Python indexing starts at 0) it holds an [64 bit integer](https://en.wikipedia.org/wiki/9,223,372,036,854,775,807). All elements in `a` are of type `int` because that is what `range()` returns (try `?range`).
 # 
 # ---
-# :::{figure} python-arrays
-# <img src="./graphics/numpyarray.png" alt="Python arrays" width="700px">
+# 
+# :::{figure-md} Python-numpy-array 
+# 
+# <img src="./graphics/numpyarray.png" alt="Python numpy array" width="700px">
 # 
 # **A graphical depiction of numpy/numpy arrays.** These can have multiple dimensions (even greater than 3). <br>
 # (Source: [http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html))
-# :::
+# 
+# ::: 
 # 
 # ---
 # 
@@ -780,10 +783,13 @@ f1.savefig('../results/LV_model.pdf') #Save figure
 # 1. Create a self-standing script using the above example and save it as `LV1.py` in your code directory. In addition to generating the above figure, it should also generate the following figure: 
 # 
 # ---
-# :::{figure} LV-practical-1
+# :::{figure-md} LV-phase-plot
+# 
+# 
 # <img src="./graphics/LV_model_CR.png" alt="Lotka-Volterra phase plot" width="400px">
 # 
 # **Generate this figure as part of the `LV1.py` script.** 
+# 
 # :::
 # 
 # ---
@@ -999,7 +1005,7 @@ run_my_funcs(10000000,"My string")
 
 # ### Vectorization revisited
 
-# We have now had fairly extensive practice in iteratively creating solutions to problems using for loops. Thus far all our problems have been mathematically quite straightforward, and not very computationally intensive. As you begin to move on from your taught modules and into current research, you may find yourselves solving larger and more complex problems, at which point you will start to discover that for-loops have a fundamental weakness - speed!
+# We have now had fairly extensive practice in iteratively creating solutions to problems using for loops. Thus far all our problems have been mathematically quite straightforward, and not very computationally intensive. As you begin to move on from your taught modules into project work, you may find yourselves solving larger and more complex problems, at which point you will start to discover that for-loops have a fundamental weakness - speed!
 # 
 # In a nutshell, there are two issues keeping loops slow:
 # 
@@ -1008,7 +1014,7 @@ run_my_funcs(10000000,"My string")
 # 
 # These issues become especially pronounced in the case of nested loops - which often appear in more spatially-explicit problems or time-dependent ones.
 # 
-# Rather than expecting you to simply take my word for it, the following two examples will showcase the difference in runtime between a loop method and a vectorized method using numpy. The first is a relatively simple (if artificial) problem, intended to demonstrate basically at-a-glace the difference between the two approaches. The second is taken from current research on metabolic models of bacterial communities.
+# The following two examples will showcase the difference in runtime between a loop method and a vectorized method using numpy. The first is a relatively simple (if artificial) problem, intended to demonstrate basically at-a-glace the difference between the two approaches. The second is taken from current research on metabolic models of bacterial communities.
 # 
 # #### An example
 # 
@@ -1138,7 +1144,11 @@ p.show()
 # Also, include a script that runs both `LV1.py` and `LV2.py` with appropriate arguments. This script should also profile the two scripts and print the results to screen for each of the scripts using the `%run -p` approach. Look at and compare the speed bottlenecks in `LV1.py` and `LV2.py`. *Think about how you could further speed up the scripts.*
 # 
 # 
-# #### Groupwork practical 1
+# #### Groupwork practical: Compare R and Python Vectorization
+# 
+# Implement the Python versions of `Vectorize1.R`and ` Vectorize2.R` [from the R Chapter](R-Vectorization) (call them `Vectorize1.py` and `Vectorize2.py` respectively). Then write a shell script that compares the computational speed of the four scripts. the script should display meaningful summary of the results in the terminal. In particular, it should print the timings of the equivalent R and Python functions (not just the timing of the R and Python scripts as a whole).
+# 
+# #### Groupwork practical: Discrete time LV Model
 # 
 # *Write every subsequent extra credit script file with a new name such as `LV3.py`,`LV4.py`, etc.* 
 # 
@@ -1151,7 +1161,7 @@ p.show()
 # 
 # Include this script in `run_LV.py`, and profile it as well.
 # 
-# #### Groupwork practical 2
+# #### Groupwork practical: Discrete time LV model with stochasticity
 # 
 # * Write a version of the discrete-time model (which you implemented in `LV3.py`) simulation with a random gaussian fluctuation in resource's growth rate at each time-step:
 # 
@@ -1169,6 +1179,7 @@ p.show()
 # 
 # *As always, test, add, commit and push all your new code and data to your git repository.*
 
+# (Python_II:python-regex)=
 # ## Regular expressions in Python
 # 
 # Let's shift gears now, and look at a very important tool set that you should learn, or at least be aware of — *Regular expressions*. 
@@ -1186,17 +1197,20 @@ p.show()
 # 
 # 
 # ---
-# :::{figure} XKCD-regex
+# 
+# :::{figure-md} XKCD-on-Regex
+# 
 # <img src="./graphics/regex.png" alt="XKCD on Regex" width="400px">
 # 
 # **Regular expressions can really improve your quality of life.**<br> (Source: [XKCD](https://www.xkcd.com/208/)) 
+# 
 # :::
 # 
 # ---
 # 
 # 
 # 
-# Regex packages are available for most programming languages (recall [`grep` in UNIX](01-Unix.ipynb#Using-`grep`); that is how regex first became popular).
+# Regex packages are available for most programming languages (recall [`grep` in UNIX](Using-grep); that is how regex first became popular).
 # 
 # ### Metacharacters vs. regular characters
 # 
@@ -1455,12 +1469,14 @@ re.search(r'[AGTC]+', 'the sequence ATTCGT').group()
 re.search(r'\s+[A-Z]\w+\s*\w+', "The bird-shit frog's name is Theloderma asper.").group()
 
 
-# 
 # ---
-# :::{figure} bird-shit-frog
-# <img src="./graphics/thelodermaasper.JPG" alt="ANOVA example" width="350px">
+# 
+# :::{figure-md} Theloderma-asper
+# 
+# <img src="./graphics/thelodermaasper.JPG" alt="Bird-shit Frog" width="350px">
 # 
 # **In case you were wondering what *Theloderma asper*, the "bird-shit frog", looks like.** Samraat snapped this one in a North-East Indian rainforest ages ago. 
+# 
 # :::
 # 
 # ---
