@@ -10,7 +10,9 @@ However learning C will teach you to be rigourous and defensive in your programm
 Your code in other languages will become cleaner and more structured. 
 This leads to code that is easier to read, easier to re-use, and easier to debug.
 
-This is not meant to be a complete course in C. It is meant to get you up to speed on some elements that will be useful in biological computing. This will extend from simply writing more efficient loops in R or Python up to techniques that will give you a platform for more advanced pieces of software. It will therefore be a mix of advanced and elementary parts of C.
+This is not meant to be a complete course in C. It is meant to get you up to speed on some elements that will be useful in biological computing. 
+Most importantly, we will emphasize safe, portable code. 
+The utility of C for computational biologists will range from simply creating more efficient loops in R or Python up to techniques that will give you a platform for more advanced pieces of software. It will therefore be a mix of advanced and elementary parts of C.
 
 ## Introduction to C
 
