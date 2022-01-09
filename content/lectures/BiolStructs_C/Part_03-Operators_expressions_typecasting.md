@@ -197,6 +197,39 @@ Thus, when involved in an assignment operation, pre- and post-fix operators will
 
 # Exercises
 
+### Operator precedence and type promotion
+
+Examine the following program. What is the expected result of the operation conducted below on a and b? How do the outputs differ from what is expected? What are two ways to modify the program so that it behaves in the expected way?
+
+```C
+#include <stdio.h>
+
+int main (void)
+{
+	int		a = 3;
+	int		b = 2;
+	int		c = 0;
+	float	d = 0.0;
+
+	c = a / b;
+	d = a / b;
+
+	printf("The result of a / b stored in c: %i\n", c);
+	printf("The result of a / b stored in d: %f\n", d);
+
+	return 0;
+}
+```
+<!---
+Answer 1: Change the type of either a or b to a float. This will cause type promotion when the expression a/b is evaluated. However, this doesn't fix the line where a/b is assigned to c (because c is still an int).
+
+Answer 2: Use the typecast operator to promote one variable to float, e.g.:
+
+d = (float)a / b;
+
+-->
+
+
 ### Constants and data type conversions
 Write a small program to explore the interaction of the basic data types and constants. Use `printf()` to show the results. For instance:
 * Add or subtract from an arbitrary character value
