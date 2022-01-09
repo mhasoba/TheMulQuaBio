@@ -317,7 +317,6 @@ To get the `populations_ptr` back to the 'start', you can use the decrement oper
 
 Notice that in order to do this, you need to have a record of how many increments have been made on your pointer, otherwise, you could decrement the pointer past the start of the array! For that reason, I recommend that you have two pointers: one that always points to the start of the memory you are working with and one that can be incremented. 
 
-
 ## Pointers and functions
 
 Pointers and functions work extremely well together. Pointers allow you to update variables declared in one function at a much more highly nested level of program flow. 
@@ -630,3 +629,63 @@ int main (void) {
 	return 0;
 }
 ```
+
+## Pointers and casting
+Consider the following C program:
+```C
+#include <stdio.h>
+
+int main(void)
+{
+    int i, j;
+    int *ip1, *ip2;
+    float y, z;
+    float *fp1, *fp2;
+    
+    i = 42;
+    ip1 = &i;
+    ip2 = &j;
+
+    // We can assign from i to j through their pointers
+    *ip2 = *ip1;
+
+    printf("We expect this number to be %i: %i\n", i, j);
+
+    // We can do a similar thing with floats
+    y = 3.141593;
+    
+    fp1 = &y;
+    fp2 = &z;
+    
+    *fp2 = *fp1;
+
+    printf("We expect this number to be: %f: %f\n", y, z);
+
+    // Now we know that passing from a float to an int will cause truncation
+    i = *fp1;
+    // We expect this result to be 3 (the stuff after the decimal gets truncated without rounding)
+    printf("i is now: %i\n", i);
+    
+    // The same will be true even if we do this:
+    i = (int)*fp1;
+    printf("i is now: %i\n", i);
+
+    // But what happens when we do this?
+    i = * (int *)fp2;
+    printf("i is now: %i\n", i);
+
+    return 0;
+}
+```
+In your own words, explain what is going on before the last printf statement. Was this the result you expected? Why do you think the program behaves this way?
+
+<!---
+This has to do with how C converts the underlying representation in a cast or assignment between types. As we remember, copying from floating point to integral type will result in a truncation of any digits after the decimal.
+
+However, the operation using the dereferenced pointer cast as an pointer-to-int is very different. In the case of * (int *) fp2;, you're first instructing the compiler to read fp2 as though it's a pointer not to float, but to int. You're actually telling the compiler that the data at the 'other end' of that pointer is an integer; the dereferencing operator then reads those bytes as though they belong to an int. 
+
+So the number you get at the end is the actualy bits of y interpreted as an int, rather than as a floating point number demoted to a truncated integer.
+
+This strange pointer hack was brought to my attention in an interesting video explaining how Quake developers created a fast algorithm for computing the inverse square root. See here: https://www.youtube.com/watch?v=p8u_k2LIZyo
+-->
+
