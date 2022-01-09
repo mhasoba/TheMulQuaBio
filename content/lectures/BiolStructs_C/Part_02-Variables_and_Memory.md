@@ -19,23 +19,42 @@ In C, there are two main types of data:
 Integral type data is any data that can be represented as an integer; it is data that is expressed as 'unique counts'. 
 This includes, appropriately enough, integer numbers, but it also includes characters, and another special data type we'll learn about later called a pointer (or memory reference). 
 At the machine level, the binary encoding of integral data is in what's called two's complement binary format. 
-Integral data has a finite range on your machine, depending on the CPU. For instance, the largest integer type on a 32-bit computer is (you guessed it) 32 bits. On a 64-bit machine, unsurprisingly, it's 64 bits. In two's complement, the largest possible integer on a 64-bit computer is 18,446,744,073,709,551,615. That should be big enough for most applications apart from managing Jeff Bezos's bank account.
+We are normally used to counting in base-10, but computers count in base-2.
 
-This means that an integer-type on a 64-bit computer can store all whole numbers between 0 and 18,446,744,073,709,551,615.
+Straightforwardly, if we assume a 4-bit integer, then we count as though we only have two digits 0 and 1:
+```
+Binary  :   Decimal
+0000    :   0
+0001    :   1
+0010    :   2
+0011    :   3
+0100    :   4
+0101    :   5
+
+... and so on
+```
+Integral data has a finite range on your machine, with the limit determined by what's called the word size of your machine's CPU architecture. For instance, the largest integer type on a 32-bit computer is (you guessed it) 32 bits. On a 64-bit machine, unsurprisingly, it's 64 bits. In two's complement, the largest possible integer on a 64-bit computer is 18,446,744,073,709,551,615. That should be big enough for most applications apart from managing Jeff Bezos's bank account.
+
+But because we need to fit these bits into finite bundles (bytes), and bytes require physical space on a computer, there is a limit to how high your computer can actually count. To determine those limits, there are special macros defined in the standard library's `limits.h` header file, which your compiler will automatically have bundled (you just need to include it). 
+These are normall in the form `<TYPE>_MIN` to `<TYPE>_MAX`, where the `<TYPE>` is replaced by an all-caps shorthand for the type. For instance, `INT_MAX` gives the maximum value of a signed integer, `UINT_MAX` gives the maximum value of an unsigned integer. 
+
+
+As we'll see, there are extended integral types: `signed`, `unsigned`, `long`, and `short`, for instance that modify the width. Normally, the type `long int` corresponds to your machine's word size.
 
 ### Floating point data
 Floating point data is used for storing real numbers with a decimal. 
 The encoding of floating point numbers is more complicated than integer data and we won't look at the details.
+However, the key point (no pun intended) is that the underlying representation of floating point and integer data are very different.  While integral types count up from 0 in sequence up to their maximum range.
 
-The largest unsigned floating point number is 1.7976931348623157e+308 and the smallest is 2.2250738585072014e-308. 
+The representation in floating point data is called IEEE 754 and it is more complicated and derives from the conventions of scientific notation. The largest unsigned floating point number is 1.7976931348623157e+308 and the smallest is 2.2250738585072014e-308. 
 What is important to realise is that there are infinitely many numbers between those two values, but only 64 bits to represent them (less than that in reality, but we haven't talked about signing variables yet).
-Because there are infinitely many values but only a finite number of bits to store them, floating point numbers are *approximations* of the real numbers they are meant to represent.
 
-Arithmetic on floating point numbers in a computer is not straightforward and we need to be careful what we are doing.
+Because there are infinitely many values but only a finite number of bits to store them, floating point numbers are *approximations* of the real numbers they are meant to represent.This is because there is a new range problem we encounter when we go from integers to real numbers. Because between any two real numbers there are infinitely many values, then there are limits on their exactness and precision. In real types, the representation is the closest binary approximation that can be achieved. For instance, 1.1 cannot be represented exactly. as a float it is 1.100000023841857910156250000000 (and 1.100000000000000088817841970013 as a double). This creates complications for arithmetic and comparisons involving real values. Real types should rarely (if ever) be compared using the ‘==‘ operator, and instead they should be compared within a tolerance (often called ‘epsilon’), representing an error you are willing to accept. 
+
+Arithmetic on floating point numbers in a computer is not straightforward and we need to be careful what we are doing. Problems of rounding error and underflow are critical to consider because large numbers of calculations can cause accumulation of errors. Underflow is particularly problematic when compounding the multiplication of very small values. For instance, probabilities in likelihood calculations are often very small and need to be multiplied together, often becoming so small they are not representable by the chosen type. You therefore need to be aware of algorithms and techniques that can help you handle or avoid these cases (for instance, multiplying them by a scaling factor that you can eliminate later).
 
 
 ## 2.3 Variables
-
 Variables are used in C to store data that could change during program execution.
 
 Variables in C are stored in four main types that are broadly classified as either integer or floating point.
@@ -62,6 +81,8 @@ You should never write code that makes particular assumptions about the size of 
 
 ## 2.4 Declaring variables
 C only works with very simple data types. But as we will see, you have the power to make the data more complex and structured. Unlike Python and R, C uses **static typing**. A variable, once declared and named does not change type throughout the scope of its use (although, as we'll see, this is not strictly enforced by the compiler). Furthermore, variables are declared to be of a particular type prior to initialisation.
+
+We need to declare variables to have a particular type so that the compiler knows how we want the data to be represented (i.e. as integer data or as floating point data).
 
 Example:
 
