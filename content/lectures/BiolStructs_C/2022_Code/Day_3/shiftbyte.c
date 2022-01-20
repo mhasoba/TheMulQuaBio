@@ -27,8 +27,14 @@ int main (void)
     x = 88172666;
 
     unsigned char* p;
+    void *vp;
 
-    p = (unsigned char*)&x; // The typecast silences the compiler warning
+    vp = &x;
+
+    int i;
+    //i = *vp; // This is not allowed! Compiler error!
+
+    p = vp; // The typecast silences the compiler warning
 
     printbitz(x); 
     p[2] = p[2] >> 3; // Shift the third byte three bits to lefts
