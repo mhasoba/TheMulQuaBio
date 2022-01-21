@@ -20,7 +20,7 @@ intarray_t *create_intarray(int maxsize)
 {
     intarray_t *newarray_ptr = NULL;
     
-    newarray_ptr = (intarray_t*)calloc(sizeof(intarray)); // Allocates memory for an intarray and passes the address back to newarray_ptr
+    newarray_ptr = (intarray_t*)calloc(sizeof(1, intarray_t)); // Allocates memory for an intarray and passes the address back to newarray_ptr
 
     // Now we need to set the variables inside the struct at newarray_ptr
     newarray_ptr->entries = (int*)calloc(maxsize, sizeof(int));
@@ -47,7 +47,7 @@ int destroy_intarray(intarray_t *oldarray)
 }
 ```
 
-Now that you have a function such as this one, you can use it to allocate and destroy integer arrays as you need them.
+Now that you have a pair of functions such as these, you can use them to allocate and destroy integer arrays as you need (or no longer need).
 
 ## Writing to protected arrays
 
@@ -57,7 +57,7 @@ Now we can begin to initalise our array with values. We can do this with functio
 int append_integer(intarray_t *myints, int newval)
 {
     // The first thing we do is check that there's room to append an integer
-    if (myints->numvals < myints->maxvals) {
+    if (myints->numvals < myints->maxvals) { // This condition guards against an overwrite
         myints->entries[numvals] = newval;
         ++myints->numvals;
         return 0;

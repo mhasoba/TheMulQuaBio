@@ -10,7 +10,7 @@ Working in binary is a bit unintuitive. Most of what we will learn about in this
 
 One **bit** refers to one *binary digit*. A binary digit can therefore be one of two states: 0 or 1. 
 
-Bits are packed into units called **bytes**. A byte is typically 8 bits wide on most modern systems. However, I believe it is considered unsafe to assume that a byte will be 8 bits on all systems. In one of the exercises in this section, you will use your knowledge of bitwise operations to test the bit width of a byte on your machine.
+Bits are packed into units called **bytes**. A byte is typically 8 bits wide on most modern systems. However, I believe it is considered unsafe to assume that a byte will be 8 bits on all systems. In one of the exercises in this section, you will use your knowledge of bitwise operations to test the bit width of a byte on your machine. If there's a risk, the C standard library defines a macro `CHAR_BIT` that will expand to the number of bits in a byte on the target system.
 
 The following table shows how the first seven decimal numbers are represented in binary:
 
@@ -24,9 +24,9 @@ The following table shows how the first seven decimal numbers are represented in
 | 5			|	00000101 |
 | 6			|	00000110 |
 
-A bit that is 1 is said to be "set". The bits are set from the right to the left. The bit on the right is said to be the **most significant** bit, whereas the bit farthest to the left is the **least significant** bit.
+A bit that is 1 is said to be "set". The bits are set from the right to the left. The bit on the left is said to be the **most significant** bit, whereas the bit farthest to the right is the **least significant** bit.
 
-In a signed numerical value, the least significant bit is used to determine the sign: 
+In a signed numerical value, the most significant bit is used to determine the sign: 
 
 Thus, if we have an 8-bit `signed int`, then 1 is represented as `00000001` while -1 is represented as `11111111`.
 
