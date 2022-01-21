@@ -92,9 +92,9 @@ int main (void)
     int intres = 0;
     float fres = 0;
     
-    printf("Assign mixed to int:               %i\n", intres = f1/i1);
-    printf("Assign mixed to float:             %f\n", fres = f1/i1);
-    printf("Assign mixed with const to float:  %f\n", fres = f1/2);
+    printf("Assign int operaation result to int:        %i\n", intres = f1/i1);
+    printf("Assign int operaation result to float:      %f\n", fres = f1/i1);
+    printf("Assign mixed with an operand cast to float: %f\n", fres = (float)f1/2);
 
     return 0;
 }
