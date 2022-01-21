@@ -338,7 +338,7 @@ while () {
 
 *The `continue;` statement*
 
-The `continue;` statement allows you to skip all subsequent statements that exist within the body of a loop. That is, if the `continue;` statement is met during program execution, all subsequent statements within the loop are skipped, and the next iteration of the loop begins again.
+The `continue;` statement allows you to skip all subsequent statements that exist within the body of a loop. That is, if the `continue;` statement is met during program execution, all subsequent statements within the loop are skipped, and the next iteration of the loop begins again. A note on the program snipped below: you might want to do the exercises before you copy it out and run it.
 
 ```C
 for (i = 0; i < 10; ++i) {
