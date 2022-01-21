@@ -98,18 +98,22 @@ struct site_data *site_data_ptr;
 
 
 
-Remembering that the `.` has higher precedence than `*`, we can assign an address value to a pointer as follows:
+We can assign an address value to a pointer just as we do with any other variable type:
 
 ```C
 site_data_ptr = &mysite1;
-
-(*mysite1).lat = 24.118;
 ```
+
+To dereference that pointer, it's a bit more complicated because the `.` has higher precedence than `*`,
+```C
+(*site_data_ptr).lat = 24.118;
+```
+The statement above first dereferences the pointer to the strucct and _then_ attempts to access the member. This makes sense, after all. Pointers don't have member data, so the member selection operator is useless on a pointer. You need to get the structure from the address first, then select the member!
 
 This operation is common enough that it has been abbreviated by the `->` operator:
 
 ```C
-mysite->lat;
+site_data_ptr->lat; // is equivalent to (*site_data_ptr).lat
 ```
 
 ### Pointers to structs containing pointers
