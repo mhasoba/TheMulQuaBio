@@ -236,7 +236,7 @@ Beware that every variable has a finite range. So, while there is technically in
 
 ## variable specifiers: `long`, `long long`, `short`, `signed`, `unsigned` etc.
 
-These modifiers can be used to extend or restrict the range of numeric variable types to the maximum allowed by a particular machine architecture. The `signed` and `unsigned` specifiers declare whether a variable can be read as having negative values. The least significant bit in a variable is used to specify the sign. Thus, if a variable type can't or doesn't need negative values, it can be specified of type `unsigned` to exploit the highest order bit to increase its range. This can be important in some computationally intensive applications in biology.
+These modifiers can be used to extend or restrict the range of numeric variable types to the maximum allowed by a particular machine architecture. The `signed` and `unsigned` specifiers declare whether a variable can be read as having negative values. The most significant (i.e. left-most) bit in a variable is used to specify the sign. Thus, if a variable type can't or doesn't need negative values, it can be specified of type `unsigned` to exploit the highest order bit to increase its range. This can be important in some computationally intensive applications in biology.
 
 We won't treat these in detail here, but visit them as we need them during the module. However, keep this in mind as you choose values for arithmetic and refer to resources (or the standard C definition or compiler manuals) when considering calculations requiring very large numbers. 
 
