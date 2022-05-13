@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Models: Multiple variables with interactions &#8212; TheMulQuaBio</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Model simplification" href="18-ModelSimp.html" />
+    <link rel="prev" title="Linear Models: Multiple explanatory variables" href="16-MulExpl.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/17-MulExplInter.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/17-MulExplInter.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/17-MulExplInter.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chapter-aims">
+     Chapter aims
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formulae-with-interactions-in-r">
+     Formulae with interactions in R
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-1-mammalian-genome-size">
+   Model 1: Mammalian genome size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-2-ancova-body-weight-in-odonata">
+   Model 2 (ANCOVA): Body Weight in Odonata
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="linear-models-multiple-variables-with-interactions">
+<h1>Linear Models: Multiple variables with interactions<a class="headerlink" href="#linear-models-multiple-variables-with-interactions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Here you will build on your skills in fitting linear models with multiple explanatory variables to data. You will learn about another commonly used Linear Model fitting technique: ANCOVA.</p>
+<p>We will build two models in this chapter:</p>
+<ul class="simple">
+<li><p><strong>Model 1</strong>: Is mammalian genome size predicted by interactions between trophic level and whether species are ground dwelling?</p></li>
+<li><p><strong>ANCOVA</strong>: Is body size in Odonata predicted by interactions between genome size and taxonomic suborder?</p></li>
+</ul>
+<p>So far, we have only looked at the independent effects of variables. For example, in the trophic level and ground dwelling model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, we only looked for specific differences for being a omnivore <em>or</em> being ground dwelling, not for being
+specifically a <em>ground dwelling omnivore</em>. These independent effects of a variable are known as <em>main effects</em> and the effects of combinations of variables acting together are known as <em>interactions</em> — they describe how the variables <em>interact</em>.</p>
+<div class="section" id="chapter-aims">
+<h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">¶</a></h3>
+<p>The aims of this chapter are<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
+<ul class="simple">
+<li><p>Creating more complex Linear Models with multiple explanatory variables</p></li>
+<li><p>Including the effects of interactions between multiple variables in a linear model</p></li>
+<li><p>Plotting predictions from more complex (multiple explanatory variables) linear models</p></li>
+</ul>
+</div>
+<div class="section" id="formulae-with-interactions-in-r">
+<h3>Formulae with interactions in R<a class="headerlink" href="#formulae-with-interactions-in-r" title="Permalink to this headline">¶</a></h3>
+<p>We’ve already seen a number of different model formulae in R. They all use this syntax:</p>
+<p><code class="docutils literal notranslate"><span class="pre">response</span> <span class="pre">variable</span> <span class="pre">~ explanatory</span> <span class="pre">variable(s)</span></code></p>
+<p>But we are now going to see two extra pieces of syntax:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">a:b</span></code>: The <code class="docutils literal notranslate"><span class="pre">a:b</span></code> means the interaction between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> — do combinations of these variables lead to different outcomes?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code>:  This a shorthand for the model above. The means fit <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> as main effects and their interaction <code class="docutils literal notranslate"><span class="pre">a:b</span></code>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="model-1-mammalian-genome-size">
+<h2>Model 1: Mammalian genome size<a class="headerlink" href="#model-1-mammalian-genome-size" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to <code class="docutils literal notranslate"><span class="pre">Code</span></code> in your stats coursework directory.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called ‘Interactions.R’ and add some introductory comments.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Load the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">&#39;../data/mammals.Rdata&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">mammals.Rdata</span></code> is missing, just import the data again using <code class="docutils literal notranslate"><span class="pre">read.csv</span></code>. You will then have to add the log C Value column to the imported data frame again.</p>
+<p>Let’s refit the model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, but including the interaction between trophic level and ground dwelling. We’ll immediately check the model is appropriate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">*</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17-MulExplInter_5_0.png" src="../_images/17-MulExplInter_5_0.png" />
+</div>
+</div>
+<p>Now, examine the <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> outputs for the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<tbody>
+	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td> 0.8141063  </td><td>0.40705316  </td><td> 8.061439   </td><td>4.036387e-04</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td> 2.7469218  </td><td>2.74692183  </td><td>54.401106   </td><td>2.335706e-12</td></tr>
+	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2         </td><td> 0.4312875  </td><td>0.21564376  </td><td> 4.270693   </td><td>1.499280e-02</td></tr>
+	<tr><th scope=row>Residuals</th><td>253         </td><td>12.7749466  </td><td>0.05049386  </td><td>       NA   </td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Compared to the model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, there is an extra line at the bottom. The top two are the same and show that trophic level and ground dwelling both have independent main effects. The extra line
+shows that there is also an interaction between the two. It doesn’t explain a huge amount of variation, about half as much as trophic level, but it is significant.</p>
+<p>Again, we can calculate the <span class="math notranslate nohighlight">\(r^2\)</span> for the model:</p>
+<p><span class="math notranslate nohighlight">\(\frac{0.81 + 2.75 + 0.43}{0.81+2.75+0.43+12.77} = 0.238\)</span></p>
+<p>The model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a> without the interaction had an <span class="math notranslate nohighlight">\(r^2 = 0.212\)</span> — our new
+model explains 2.6% more of the variation in the data.</p>
+<p>The summary table is as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = logCvalue ~ TrophicLevel * GroundDwelling, data = mammals)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.52294 -0.17069 -0.01003  0.11920  0.83057 
+
+Coefficients:
+                                        Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                              0.95895    0.04407  21.760  &lt; 2e-16
+TrophicLevelHerbivore                    0.05351    0.05535   0.967 0.334605
+TrophicLevelOmnivore                     0.23281    0.05226   4.455 1.26e-05
+GroundDwellingYes                        0.25487    0.06509   3.915 0.000116
+TrophicLevelHerbivore:GroundDwellingYes  0.03033    0.07857   0.386 0.699791
+TrophicLevelOmnivore:GroundDwellingYes  -0.14761    0.07930  -1.861 0.063839
+                                           
+(Intercept)                             ***
+TrophicLevelHerbivore                      
+TrophicLevelOmnivore                    ***
+GroundDwellingYes                       ***
+TrophicLevelHerbivore:GroundDwellingYes    
+TrophicLevelOmnivore:GroundDwellingYes  .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2247 on 253 degrees of freedom
+  (120 observations deleted due to missingness)
+Multiple R-squared:  0.2381,	Adjusted R-squared:  0.223 
+F-statistic: 15.81 on 5 and 253 DF,  p-value: 1.504e-13
+</pre></div>
+</div>
+</div>
+</div>
+<p>The lines in this output are:</p>
+<ol class="simple">
+<li><p>The reference level (intercept) for non ground dwelling carnivores. (The reference level is decided just by the alphabetic order of the levels)</p></li>
+<li><p>Two differences for being in different trophic levels.</p></li>
+<li><p>One difference for being ground dwelling</p></li>
+<li><p>Two new differences that give specific differences for ground dwelling herbivores and omnivores.</p></li>
+</ol>
+<p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, which would allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interactions</em>. That is, this part of the model only includes a single difference ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary
+between levels because of the further effects of interactions.</p>
+<p>The table below show how these combine to give the predictions for each group combination, with those two new lines show in red:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="text-align:left head"><p><strong>Not ground</strong></p></th>
+<th class="text-align:left head"><p><strong>Ground</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>Carnivore</strong></p></td>
+<td class="text-align:left"><p>0.96 = 0.96</p></td>
+<td class="text-align:left"><p>0.96 + 0.25 = 1.21</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>Herbivore</strong></p></td>
+<td class="text-align:left"><p>0.96 + 0.05 = 1.01</p></td>
+<td class="text-align:left"><p>0.96 + 0.05 + 0.25<span style="color:red"> + 0.03</span> = 1.29</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>Omnivore</strong></p></td>
+<td class="text-align:left"><p>0.96 + 0.23 = 1.19</p></td>
+<td class="text-align:left"><p>0.96 + 0.23 + 0.25<span style="color:red"> - 0.15</span> = 1.29</p></td>
+</tr>
+</tbody>
+</table>
+<p>So why are there two new coefficients? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not: 2 levels and trophic level: 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) =2\)</span>. It might be easier to understand why graphically:</p>
+<p><img alt="image" src="../_images/interactionsdiag.png" /></p>
+<p>The prediction for the white boxes above can be found by adding the main effects together but for the grey boxes, we need to find specific differences. So there are <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> interaction coefficients (count the number of grey boxes) to add.</p>
+<p>If we put this together, what is the model telling us?</p>
+<ul class="simple">
+<li><p>Herbivores have the same genome sizes as carnivores, but omnivores have larger genomes.</p></li>
+<li><p>Ground dwelling mammals have larger genomes.</p></li>
+</ul>
+<p>These two findings suggest that ground dwelling omnivores should have extra big genomes. However, the interaction shows they are smaller than expected and are, in fact, similar to ground dwelling herbivores.</p>
+<p>Note that although the interaction term in the <code class="docutils literal notranslate"><span class="pre">anova</span></code> output is significant, neither of the two coefficients in the <code class="docutils literal notranslate"><span class="pre">summary</span></code> has a <span class="math notranslate nohighlight">\(p&lt;0.05\)</span>. There are two weak differences (one
+very weak, one nearly significant) that together explain significant
+variance in the data.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code above into your script and run the model.</p>
+<p>Make sure you understand the output!</p>
+<p>Just to make sure the sums above are correct, we’ll use the same code as
+in <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a> to get R to calculate predictions for us, similar to the way we did <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">before</span></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># a data frame of combinations of variables</span>
+<span class="n">gd</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;Yes&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">),</span> <span class="n">each</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">tl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Carnivore&quot; &quot;Carnivore&quot; &quot;Herbivore&quot; &quot;Herbivore&quot; &quot;Omnivore&quot;  &quot;Omnivore&quot; 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, remember that the <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">=</span> <span class="pre">2</span></code> option repeats each value twice in succession; the <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">3</span></code> options repeats the whole set of values (the whole vector) three times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># New data frame</span>
+<span class="n">predVals</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">GroundDwelling</span> <span class="o">=</span> <span class="n">gd</span><span class="p">,</span> <span class="n">TrophicLevel</span> <span class="o">=</span> <span class="n">tl</span><span class="p">)</span>
+
+<span class="c1"># predict using the new data frame</span>
+<span class="n">predVals</span><span class="o">$</span><span class="n">predict</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">predVals</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">predVals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  GroundDwelling TrophicLevel   predict
+1             No    Carnivore 0.9589465
+2            Yes    Carnivore 1.2138170
+3             No    Herbivore 1.0124594
+4            Yes    Herbivore 1.2976624
+5             No     Omnivore 1.1917603
+6            Yes     Omnivore 1.2990165
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Include and run the code for gererating these predictions in your script.</p>
+<p>If we plot these data points onto the barplot from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, they now lie exactly on the mean values, because we’ve allowed for interactions. The triangle on this plot shows the predictions for ground dwelling omnivores from the main effects (<span class="math notranslate nohighlight">\(0.96 + 0.23  + 0.25 = 1.44\)</span>), the interaction of <span class="math notranslate nohighlight">\(-0.15\)</span> pushes the prediction back down.</p>
+<p><img alt="image" src="../_images/predPlot.svg" /></p>
+</div>
+<div class="section" id="model-2-ancova-body-weight-in-odonata">
+<h2>Model 2 (ANCOVA): Body Weight in Odonata<a class="headerlink" href="#model-2-ancova-body-weight-in-odonata" title="Permalink to this headline">¶</a></h2>
+<p>We’ll go all the way back to the regression analyses from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression chapter</span></a>. Remember that we fitted two separate regression lines to the data for damselflies and dragonflies. We’ll now use an interaction to fit these in a single model. This kind of linear model — with a mixture of continuous variables and factors — is often called an <em>analysis of covariance</em>, or ANCOVA. That is, ANCOVA is a type of linear model that blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable are equal across levels of a categorical independent variable, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates.</p>
+<p><em>Thus, ANCOVA is a linear model with one categorical and one or more continuous predictors</em>.</p>
+<p>We will use the odonates data that we have worked with <a class="reference internal" href="12-ExpDesign.html"><span class="doc std std-doc">before</span></a>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> First load the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">odonata</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now create two new variables in the <code class="docutils literal notranslate"><span class="pre">odonata</span></code> data set called <code class="docutils literal notranslate"><span class="pre">logGS</span></code> and <code class="docutils literal notranslate"><span class="pre">logBW</span></code> containing log genome size and log body weight:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">odonata</span><span class="o">$</span><span class="n">logGS</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">odonata</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<span class="n">odonata</span><span class="o">$</span><span class="n">logBW</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">odonata</span><span class="o">$</span><span class="n">BodyWeight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The models we fitted <a class="reference internal" href="12-ExpDesign.html"><span class="doc std std-doc">before</span></a> looked like this:</p>
+<p><img alt="image" src="../_images/dragonData.svg" /></p>
+<p>We can now fit the model of body weight as a function of both genome size and suborder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">odonModel</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span> <span class="o">*</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">odonata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">odonModel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = logBW ~ logGS * Suborder, data = odonata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.3243 -0.3225  0.0073  0.3962  1.4976 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             -2.39947    0.08475 -28.311  &lt; 2e-16 ***
+logGS                    1.00522    0.22367   4.494 1.99e-05 ***
+SuborderZygoptera       -2.24895    0.13540 -16.610  &lt; 2e-16 ***
+logGS:SuborderZygoptera -2.14919    0.46186  -4.653 1.07e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.6499 on 94 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.7549,	Adjusted R-squared:  0.7471 
+F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we’ll look at the <span>anova</span> table first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">odonModel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<tbody>
+	<tr><th scope=row>logGS</th><td> 1          </td><td>  1.144458  </td><td>  1.1444583 </td><td>  2.710007  </td><td>1.030601e-01</td></tr>
+	<tr><th scope=row>Suborder</th><td> 1          </td><td>111.967748  </td><td>111.9677481 </td><td>265.132794  </td><td>4.154783e-29</td></tr>
+	<tr><th scope=row>logGS:Suborder</th><td> 1          </td><td>  9.144522  </td><td>  9.1445216 </td><td> 21.653669  </td><td>1.068365e-05</td></tr>
+	<tr><th scope=row>Residuals</th><td>94          </td><td> 39.696969  </td><td>  0.4223082 </td><td>        NA  </td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Interpreting this:</p>
+<ul class="simple">
+<li><p>There is no significant main effect of log genome size. The <em>main</em> effect is the important thing here — genome size is hugely important but does very different things for the two different suborders. If we ignored <code class="docutils literal notranslate"><span class="pre">Suborder</span></code>, there isn’t an overall relationship: the average of those two lines is pretty much flat.</p></li>
+<li><p>There is a very strong main effect of Suborder: the mean body weight in the two groups are very different.</p></li>
+<li><p>There is a strong interaction between suborder and genome size. This is an interaction between a factor and a continuous variable and shows that the <em>slopes</em> are different for the different factor levels.</p></li>
+</ul>
+<p>Now for the summary table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">odonModel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = logBW ~ logGS * Suborder, data = odonata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.3243 -0.3225  0.0073  0.3962  1.4976 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             -2.39947    0.08475 -28.311  &lt; 2e-16 ***
+logGS                    1.00522    0.22367   4.494 1.99e-05 ***
+SuborderZygoptera       -2.24895    0.13540 -16.610  &lt; 2e-16 ***
+logGS:SuborderZygoptera -2.14919    0.46186  -4.653 1.07e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.6499 on 94 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.7549,	Adjusted R-squared:  0.7471 
+F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The first thing to note is that the <span class="math notranslate nohighlight">\(r^2\)</span> value is really high. The model explains three quarters (0.752) of the variation in the data.</p></li>
+<li><p>Next, there are four coefficients:</p>
+<ul>
+<li><p>The intercept is for the first level of <code class="docutils literal notranslate"><span class="pre">Suborder</span></code>, which is Anisoptera (dragonflies).</p></li>
+<li><p>The next line, for <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">genome</span> <span class="pre">size</span></code>, is the slope for Anisoptera.</p></li>
+<li><p>We then have a coefficient for the second level of <code class="docutils literal notranslate"><span class="pre">Suborder</span></code>, which is Zygoptera (damselflies). As with the first model, this difference in factor levels is a difference in mean values and shows the difference in the intercept for Zygoptera.</p></li>
+<li><p>The last line is the interaction between <code class="docutils literal notranslate"><span class="pre">Suborder</span></code> and <code class="docutils literal notranslate"><span class="pre">logGS</span></code>. This shows how the slope for Zygoptera differs from the slope for Anisoptera.</p></li>
+</ul>
+</li>
+</ul>
+<p>How do these hang together to give the two lines shown in the model? We can calculate these by hand:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ \textrm{Body Weight} &amp;= -2.40 + 1.01 \times \textrm{logGS} &amp; \textrm{[Anisoptera]}\\
+ \textrm{Body Weight} &amp;= (-2.40 -2.25) + (1.01 - 2.15) \times \textrm{logGS} &amp; \textrm{[Zygoptera]}\\
+        &amp;= -4.65 - 1.14 \times \textrm{logGS}
+\end{align*}\]</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add the above code into your script and check that you understand the outputs.</p>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">predict</span></code> function again to get the predicted values from the model and add lines to the plot above.</p>
+<p>First, we’ll create a set of numbers spanning the range of genome size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#get the range of the data:</span>
+<span class="n">rng</span> <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">odonata</span><span class="o">$</span><span class="n">logGS</span><span class="p">)</span>
+<span class="c1">#get a sequence from the min to the max with 100 equally spaced values:</span>
+<span class="n">LogGSForFitting</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">rng</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">rng</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">length</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Have a look at these numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="n">LogGSForFitting</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  [1] -0.891598119 -0.873918728 -0.856239337 -0.838559945 -0.820880554
+  [6] -0.803201163 -0.785521772 -0.767842380 -0.750162989 -0.732483598
+ [11] -0.714804206 -0.697124815 -0.679445424 -0.661766032 -0.644086641
+ [16] -0.626407250 -0.608727859 -0.591048467 -0.573369076 -0.555689685
+ [21] -0.538010293 -0.520330902 -0.502651511 -0.484972119 -0.467292728
+ [26] -0.449613337 -0.431933946 -0.414254554 -0.396575163 -0.378895772
+ [31] -0.361216380 -0.343536989 -0.325857598 -0.308178207 -0.290498815
+ [36] -0.272819424 -0.255140033 -0.237460641 -0.219781250 -0.202101859
+ [41] -0.184422467 -0.166743076 -0.149063685 -0.131384294 -0.113704902
+ [46] -0.096025511 -0.078346120 -0.060666728 -0.042987337 -0.025307946
+ [51] -0.007628554  0.010050837  0.027730228  0.045409619  0.063089011
+ [56]  0.080768402  0.098447793  0.116127185  0.133806576  0.151485967
+ [61]  0.169165358  0.186844750  0.204524141  0.222203532  0.239882924
+ [66]  0.257562315  0.275241706  0.292921098  0.310600489  0.328279880
+ [71]  0.345959271  0.363638663  0.381318054  0.398997445  0.416676837
+ [76]  0.434356228  0.452035619  0.469715011  0.487394402  0.505073793
+ [81]  0.522753184  0.540432576  0.558111967  0.575791358  0.593470750
+ [86]  0.611150141  0.628829532  0.646508923  0.664188315  0.681867706
+ [91]  0.699547097  0.717226489  0.734905880  0.752585271  0.770264663
+ [96]  0.787944054  0.805623445  0.823302836  0.840982228  0.858661619
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use the model to predict the values of body weight at each of those points for each of the two suborders:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#get a data frame of new data for the order</span>
+<span class="n">ZygoVals</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">logGS</span> <span class="o">=</span> <span class="n">LogGSForFitting</span><span class="p">,</span> <span class="n">Suborder</span> <span class="o">=</span> <span class="s">&quot;Zygoptera&quot;</span><span class="p">)</span>
+
+<span class="c1">#get the predictions and standard error</span>
+<span class="n">ZygoPred</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">odonModel</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">ZygoVals</span><span class="p">,</span> <span class="n">se.fit</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1">#repeat for anisoptera</span>
+<span class="n">AnisoVals</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">logGS</span> <span class="o">=</span> <span class="n">LogGSForFitting</span><span class="p">,</span> <span class="n">Suborder</span> <span class="o">=</span> <span class="s">&quot;Anisoptera&quot;</span><span class="p">)</span>
+<span class="n">AnisoPred</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">odonModel</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">AnisoVals</span><span class="p">,</span> <span class="n">se.fit</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve added <code class="docutils literal notranslate"><span class="pre">se.fit=TRUE</span></code> to the function to get the standard error around the regression lines. Both <code class="docutils literal notranslate"><span class="pre">AnisoPred</span></code> and <code class="docutils literal notranslate"><span class="pre">ZygoPred</span></code> contain predicted values (called <code class="docutils literal notranslate"><span class="pre">fit</span></code>) and standard error values (called <code class="docutils literal notranslate"><span class="pre">se.fit</span></code>) for each of the values in our generated values in <code class="docutils literal notranslate"><span class="pre">LogGSForFitting</span></code> for each of the two suborders.</p>
+<p>We can add the predictions onto a plot like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the scatterplot of the data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">odonata</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">Suborder</span><span class="p">)</span>
+<span class="c1"># add the predicted lines</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">AnisoPred</span><span class="o">$</span><span class="n">fit</span> <span class="o">~</span> <span class="n">LogGSForFitting</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">AnisoPred</span><span class="o">$</span><span class="n">fit</span> <span class="o">+</span> <span class="n">AnisoPred</span><span class="o">$</span><span class="n">se.fit</span> <span class="o">~</span> <span class="n">LogGSForFitting</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">AnisoPred</span><span class="o">$</span><span class="n">fit</span> <span class="o">-</span> <span class="n">AnisoPred</span><span class="o">$</span><span class="n">se.fit</span> <span class="o">~</span> <span class="n">LogGSForFitting</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17-MulExplInter_34_0.png" src="../_images/17-MulExplInter_34_0.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy the prediction code into your script and run the plot above.</p>
+<p>Copy and modify the last three lines to add the lines for the Zygoptera. Your final plot should look like this:</p>
+<p><img alt="image" src="../_images/odonPlot.svg" /></p>
+<hr class="docutils" />
+<p><a id="fn1"></a>
+[1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">MulExplInter.R</span></code></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="16-MulExpl.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Linear Models: Multiple explanatory variables</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="18-ModelSimp.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Model simplification</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

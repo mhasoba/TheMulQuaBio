@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model simplification &#8212; TheMulQuaBio</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Generalised Linear Models" href="19-glm.html" />
+    <link rel="prev" title="Linear Models: Multiple variables with interactions" href="17-MulExplInter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/18-ModelSimp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/18-ModelSimp.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/18-ModelSimp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chapter-aims">
+     Chapter aims
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-process-of-model-simplification">
+     The process of model simplification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   An example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-maximal-model">
+   A Maximal model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-better-maximal-model">
+   A better maximal model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Model simplification
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="model-simplification">
+<h1>Model simplification<a class="headerlink" href="#model-simplification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In biology, we often use statistics to compare competing hypotheses in order to work out the simplest explanation for some data. This often involves collecting several explanatory variables that describe different hypotheses and then fitting them together in a single model, and often including interactions between those variables.</p>
+<p>In all likelihood, not all of these model <em>terms</em> will be important. If we remove unimportant terms, then the explanatory power of the model will get worse, but might not get significantly worse.</p>
+<blockquote class="epigraph">
+<div><p>“It can scarcely be denied that the supreme goal of all theory is to make the irreducible basic elements as simple and as few as possible without having to surrender the adequate representation of a single datum of experience.”</p>
+<p class="attribution">—Albert Einstein</p>
+</div></blockquote>
+<p>Or to paraphrase:</p>
+<blockquote class="epigraph">
+<div><p>“Everything should be made as simple as possible, but no simpler.”</p>
+</div></blockquote>
+<p>The approach we will look at is to start with a <em>maximal model</em> — the model that contains everything that might be important — and simplify it towards the <em>null model</em> — the
+model that says that none of your variables are important. Hopefully, there is a point somewhere in between where you can’t remove any further terms without making the model significantly worse: this is called the <em>minimum adequate model</em>.</p>
+<a class="reference internal image-reference" href="../_images/minmodflow.png"><img alt="../_images/minmodflow.png" src="../_images/minmodflow.png" style="width: 600px;" /></a>
+<div class="section" id="chapter-aims">
+<h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">¶</a></h3>
+<p>The main aim of this chapter<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
+</div>
+<div class="section" id="the-process-of-model-simplification">
+<h3>The process of model simplification<a class="headerlink" href="#the-process-of-model-simplification" title="Permalink to this headline">¶</a></h3>
+<p>Model simplification is an iterative process. The flow diagram below shows how it works: at each stage you try and find an acceptable simplification. If successful, then you start again with the new simpler model and try and find a way to simplify this, until eventually, you can’t find anything more to remove.</p>
+<a class="reference internal image-reference" href="../_images/maxmodflow.png"><img alt="../_images/maxmodflow.png" src="../_images/maxmodflow.png" style="width: 600px;" /></a>
+<p>As always, we can use an <span class="math notranslate nohighlight">\(F\)</span>-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
+</div>
+</div>
+<div class="section" id="an-example">
+<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
+<p>We’ll be using the mammal dataset for this practical, so once again:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to your stats module <code class="docutils literal notranslate"><span class="pre">code</span></code> folder.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MyModelSimp.R</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Load the mammals data into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/MammalData.csv&#39;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In previous chapters, we looked at how the categorical variables <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code> and <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code> predicted genome size in mammals. In this chapter, we will add in two more continuous variables: litter size and body mass. The first thing we will do is to log both variables and reduce the dataset to the rows for which all of these data are available:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#get logs of continuous variables</span>
+<span class="n">mammals</span><span class="o">$</span><span class="n">logLS</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">LitterSize</span><span class="p">)</span>
+<span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">meanCvalue</span><span class="p">)</span>
+<span class="n">mammals</span><span class="o">$</span><span class="n">logBM</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">AdultBodyMass_g</span><span class="p">)</span>
+
+<span class="c1"># reduce dataset to five key variables</span>
+<span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span> <span class="n">select</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">logLS</span><span class="p">,</span> <span class="n">logBM</span><span class="p">,</span> 
+<span class="n">TrophicLevel</span><span class="p">,</span> <span class="n">GroundDwelling</span><span class="p">))</span>
+
+<span class="c1"># remove the row with missing data</span>
+<span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code above into your script and run it</p>
+<p>Check that the data you end up with has this structure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	240 obs. of  5 variables:
+ $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
+ $ logLS         : num  1.1 1.12 0 0 1.52 ...
+ $ logBM         : num  10.83 4.87 11.46 10.86 3.23 ...
+ $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
+ $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
+ - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:139] 2 4 7 9 10 11 14 15 20 21 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:139] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="a-maximal-model">
+<h2>A Maximal model<a class="headerlink" href="#a-maximal-model" title="Permalink to this headline">¶</a></h2>
+<p>First let’s fit a model including all of these variables and all of the interactions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">logCvalue</span> <span class="o">~</span> <span class="n">logLS</span> <span class="o">*</span> <span class="n">logBM</span> <span class="o">*</span> <span class="n">TrophicLevel</span> <span class="o">*</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add this model-fitting step in your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
+<p>Scared? Don’t be! There are a number of points to this exercise:</p>
+<ol class="simple">
+<li><p>These tables show exactly the kind of output you’ve seen before. Sure, there are lots of rows but each row is just asking whether a model term (<code class="docutils literal notranslate"><span class="pre">anova</span></code>) or a model coefficient (<code class="docutils literal notranslate"><span class="pre">summary</span></code>) is significant.</p></li>
+<li><p>Some of the rows are significant, others aren’t: some of the model terms are not explanatory.</p></li>
+<li><p>The two tables show slightly different things - lots of stars for the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table and only a few for the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table.</p></li>
+<li><p>That last line in the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table: <code class="docutils literal notranslate"><span class="pre">logLS:logBM:TrophicLevel:GroundDwelling</span></code>. This is an interaction of four variables capturing how the slope for litter size changes for different body masses for species in different trophic groups and which are arboreal or ground dwelling. Does this seem easy to understand?</p></li>
+</ol>
+<p>The real lesson here is that it is easy to fit complicated models in R.</p>
+<p><em>Understanding and explaining them is a different matter</em>.</p>
+<p>The temptation is always to start with the most complex possible model but this is rarely a good idea.</p>
+</div>
+<div class="section" id="a-better-maximal-model">
+<h2>A better maximal model<a class="headerlink" href="#a-better-maximal-model" title="Permalink to this headline">¶</a></h2>
+<p>Instead of all possible interactions, we’ll consider two-way interactions: how do pairs of variables affect each other?</p>
+<p>There is a shortcut for this: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c)^2</span></code> gets all two way combinations of the variables in the brackets, so is a quicker way of getting this model:</p>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">a:b</span> <span class="pre">+</span> <span class="pre">a:c</span> <span class="pre">+</span> <span class="pre">b:c</span></code></p>
+<p>So let’s use this to fit a simpler maximal model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="p">(</span><span class="n">logLS</span> <span class="o">+</span> <span class="n">logBM</span> <span class="o">+</span> <span class="n">TrophicLevel</span> <span class="o">+</span> <span class="n">GroundDwelling</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">anova</span></code> table for this model looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A anova: 11 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>logLS</th><td>  1</td><td>0.98923090</td><td>0.98923090</td><td>25.7218583</td><td>8.238435e-07</td></tr>
+	<tr><th scope=row>logBM</th><td>  1</td><td>3.03170122</td><td>3.03170122</td><td>78.8299165</td><td>2.175874e-16</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td>0.47787807</td><td>0.23893904</td><td> 6.2128630</td><td>2.364061e-03</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1</td><td>0.11043622</td><td>0.11043622</td><td> 2.8715489</td><td>9.154164e-02</td></tr>
+	<tr><th scope=row>logLS:logBM</th><td>  1</td><td>0.27482000</td><td>0.27482000</td><td> 7.1458354</td><td>8.064321e-03</td></tr>
+	<tr><th scope=row>logLS:TrophicLevel</th><td>  2</td><td>0.19062973</td><td>0.09531487</td><td> 2.4783653</td><td>8.616764e-02</td></tr>
+	<tr><th scope=row>logLS:GroundDwelling</th><td>  1</td><td>0.13645096</td><td>0.13645096</td><td> 3.5479808</td><td>6.090771e-02</td></tr>
+	<tr><th scope=row>logBM:TrophicLevel</th><td>  2</td><td>0.08736291</td><td>0.04368145</td><td> 1.1357997</td><td>3.229995e-01</td></tr>
+	<tr><th scope=row>logBM:GroundDwelling</th><td>  1</td><td>0.88303940</td><td>0.88303940</td><td>22.9606803</td><td>3.002337e-06</td></tr>
+	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2</td><td>0.04461728</td><td>0.02230864</td><td> 0.5800664</td><td>5.606962e-01</td></tr>
+	<tr><th scope=row>Residuals</th><td>225</td><td>8.65322208</td><td>0.03845876</td><td>        NA</td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>The first lines are the <em>main effects</em>, which are all significant or near significant. Then there are the six interactions. One of these is very significant: <code class="docutils literal notranslate"><span class="pre">logBM:GroundDwelling</span></code>,
+which suggests that the slope of log C value with body mass differs between ground dwelling and non-ground dwelling species. The other interactions are non-significant although some are close.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Run this model in your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Generate and inspect the model diagnostic plots.</p>
+</div>
+<div class="section" id="id1">
+<h2>Model simplification<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s simplify the model we fitted above. Model simplification is not as straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
+<p>But how much is “tiny amount”? This is what we will learn now by using the <span class="math notranslate nohighlight">\(F\)</span>-test.   Again, remember: significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
+<p>The first question is: <em>what terms can you remove from a model</em>? Obviously, you only want to remove non-significant terms, but there is another rule – you cannot remove a main effect or an interaction while those main effects or interactions are present in a more complex interaction. For example, in the model <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">a:b</span> <span class="pre">+</span> <span class="pre">a:c</span> <span class="pre">+</span> <span class="pre">b:c</span></code>, you cannot drop <code class="docutils literal notranslate"><span class="pre">c</span></code> without dropping both <code class="docutils literal notranslate"><span class="pre">a:c</span></code> and <code class="docutils literal notranslate"><span class="pre">b:c</span></code>.</p>
+<p>The R function <code class="docutils literal notranslate"><span class="pre">drop.scope</span></code> tells you what you can drop from a model. Some examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">drop.scope</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'logLS:logBM'</li><li>'logLS:TrophicLevel'</li><li>'logLS:GroundDwelling'</li><li>'logBM:TrophicLevel'</li><li>'logBM:GroundDwelling'</li><li>'TrophicLevel:GroundDwelling'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">drop.scope</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'c'</li><li>'a:b'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">drop.scope</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">a</span><span class="o">:</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">:</span><span class="n">c</span> <span class="o">+</span> <span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="o">:</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'a:b:c'</div></div>
+</div>
+<p>The last thing we need to do is work out how to remove a term from a model. We could type out the model again, but there is a shortcut using the function <code class="docutils literal notranslate"><span class="pre">update</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># a simple model</span>
+<span class="n">f</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">~</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">b</span><span class="o">:</span><span class="n">c</span>
+
+<span class="c1"># remove b:c from the current model</span>
+<span class="nf">update</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">.</span> <span class="o">~</span> <span class="n">.</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y ~ a + b + c
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># model g as a response using the same explanatory variables.</span>
+<span class="nf">update</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">~</span> <span class="n">.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g ~ a + b + c + b:c
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yes, the syntax is weird. The function uses a model or a formula and then allows you to alter the current formula. The dots in the code <code class="docutils literal notranslate"><span class="pre">. ~ .</span> </code> mean ‘use whatever is currently in the response or explanatory variables’. It gives a simple way of changing a model.</p>
+<p>Now that you have learned the syntax, let’s try model simplification with the mammals dataset.</p>
+<p>From the above <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">drop.scope</span></code> output, we know that the interaction <code class="docutils literal notranslate"><span class="pre">TrophicLevel:GroundDwelling</span></code> is not significant and a valid term. So, let’s remove this term:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">&lt;-</span> <span class="nf">update</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">.</span> <span class="o">~</span> <span class="n">.</span> <span class="o">-</span> <span class="n">TrophicLevel</span><span class="o">:</span><span class="n">GroundDwelling</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now use ANOVA to compare the two models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A anova: 2 × 6</caption>
+<thead>
+	<tr><th></th><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>225</td><td>8.653222</td><td>NA</td><td>         NA</td><td>       NA</td><td>       NA</td></tr>
+	<tr><th scope=row>2</th><td>227</td><td>8.697839</td><td>-2</td><td>-0.04461728</td><td>0.5800664</td><td>0.5606962</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>This tells us that <code class="docutils literal notranslate"><span class="pre">model2</span></code> is <em>not</em> significantly worse than <code class="docutils literal notranslate"><span class="pre">model</span></code>. That is, dropping that one interaction term did not result in much of a loss of predictability.</p>
+<p>Now let’s look at this simplified model and see what else can be removed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<caption>A anova: 10 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>logLS</th><td>  1</td><td>0.98923090</td><td>0.98923090</td><td>25.817379</td><td>7.832839e-07</td></tr>
+	<tr><th scope=row>logBM</th><td>  1</td><td>3.03170122</td><td>3.03170122</td><td>79.122659</td><td>1.869660e-16</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td>0.47787807</td><td>0.23893904</td><td> 6.235935</td><td>2.309662e-03</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1</td><td>0.11043622</td><td>0.11043622</td><td> 2.882213</td><td>9.093329e-02</td></tr>
+	<tr><th scope=row>logLS:logBM</th><td>  1</td><td>0.27482000</td><td>0.27482000</td><td> 7.172372</td><td>7.944702e-03</td></tr>
+	<tr><th scope=row>logLS:TrophicLevel</th><td>  2</td><td>0.19062973</td><td>0.09531487</td><td> 2.487569</td><td>8.537509e-02</td></tr>
+	<tr><th scope=row>logLS:GroundDwelling</th><td>  1</td><td>0.13645096</td><td>0.13645096</td><td> 3.561157</td><td>6.042258e-02</td></tr>
+	<tr><th scope=row>logBM:TrophicLevel</th><td>  2</td><td>0.08736291</td><td>0.04368145</td><td> 1.140018</td><td>3.216374e-01</td></tr>
+	<tr><th scope=row>logBM:GroundDwelling</th><td>  1</td><td>0.88303940</td><td>0.88303940</td><td>23.045947</td><td>2.869667e-06</td></tr>
+	<tr><th scope=row>Residuals</th><td>227</td><td>8.69783936</td><td>0.03831647</td><td>       NA</td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">drop.scope</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'logLS:logBM'</li><li>'logLS:TrophicLevel'</li><li>'logLS:GroundDwelling'</li><li>'logBM:TrophicLevel'</li><li>'logBM:GroundDwelling'</li></ol>
+</div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Add this first simplification to your script and re-run it.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span>  Look at the output above and decide what is the next possible term to delete</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above as a model, create <code class="docutils literal notranslate"><span class="pre">model3</span></code> as the next simplification. (remember to use <code class="docutils literal notranslate"><span class="pre">model2</span></code> in your <code class="docutils literal notranslate"><span class="pre">update</span></code> call and not <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Now for a more difficult exercise:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where <span class="math notranslate nohighlight">\(N\)</span> is the current step).</p>
+<p>It can be important to consider both <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables. It can be worth trying to remove things that look significant in one table but not the other — some terms can explain significant variation on the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table but the coefficients are not significant.</p>
+<p>Remember to remove <em>terms</em>: with categorical variables, several coefficients in the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table may come from one term in the model and have to be removed together.</p>
+<p>When you have got your final model, save the model as an R data file: <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='myFinalModel.Rda')</span></code>.</p>
+<hr class="docutils" />
+<p><a id="fn1"></a>
+[1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">ModelSimp.R</span></code></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="17-MulExplInter.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Linear Models: Multiple variables with interactions</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="19-glm.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Generalised Linear Models</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

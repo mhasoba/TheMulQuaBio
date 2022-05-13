@@ -1,0 +1,1873 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathematical models in Jupyter &#8212; TheMulQuaBio</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Databases" href="Appendix-Databases.html" />
+    <link rel="prev" title="Data analyses with Python &amp; Jupyter" href="Appendix-Data-Python.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-t_F_tests.html">
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-ModelFitting-MLE.html">
+   Model Fitting using Maximum Likelihood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
+   Model Fitting the Bayesian Way
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Appendix-Maths.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-Maths.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/Appendix-Maths.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-preliminaries">
+   Some preliminaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-variables">
+     Symbolic variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-equations">
+     Symbolic equations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-evaluation">
+     Numerical evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fundamental-mathematical-operations">
+   Fundamental mathematical operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expand-and-factor">
+     Expand and factor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apart-and-together">
+     Apart and together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simplification">
+     Simplification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differentiation">
+     Differentiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration">
+     Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sums-and-products">
+     Sums and products
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limits">
+     Limits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#series">
+     Series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-algebra">
+     Matrix algebra
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-equations">
+     Solving equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-biological-examples">
+   Some biological examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-exponential-growth">
+     One population: Exponential growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-logistic-population-growth">
+     One population: Logistic Population growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model">
+     Two interacting populations: The Lotka-Volterra predator-prey model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources">
+   Readings and Resources
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="mathematical-models-in-jupyter">
+<h1>Mathematical models in Jupyter<a class="headerlink" href="#mathematical-models-in-jupyter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Jupyter is a fully-functional alternative to Mathematica or Maple notebooks for developing and analyzing mathematical models in biology (or any other discipine, for that matter). For this, you will need to use a <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_algebra_system">Computer Algebra System</a> (CAS). A CAS is software that emulates manual (pen-and-paper) manipulations of mathematical expressions. Yes, it can be done, and very effectively, for a vast array of mathematical problems! A CAS combined with a graphing/plotting package like matplotlib gives you a powerful tool for mathematical modelling using a Jupyter notebook.</p>
+<p>We will use Python’s <a class="reference external" href="http://sympy.org/en/index.html">SymPy</a> package, which provides powerful CAS features for most common mathematical modelling problems.</p>
+<p>There is also <a class="reference external" href="http://www.sagemath.org/">Sage</a>, a more capable CAS. We will not use it here because is not a regular Python package, but rather, uses Python as its programming language. So unlike SymPy it cannot just be loaded in a Jupyter nb with a Python kernel. Instead, you will need to <a class="reference external" href="http://doc.sagemath.org/html/en/reference/repl/sage/repl/ipython_kernel/install.html">install its Jupyter kernel</a>. You can <a class="reference external" href="http://www.sagemath.org/download.html">install and try sage</a> outside of Jupyter if you want.</p>
+<p>So let’s use SymPy in Jupyter.</p>
+<p>If you used <a class="reference external" href="http://continuum.io/downloads">Anaconda</a> to install Jupyter, it should already include SymPy, Matplotlib, IPython, NumPy, and other useful packages for scientific computing. If you don’t have SymPy for some other reason, install it in Linux/mac using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt install python3-sympy
+</pre></div>
+</div>
+<p>Otherwise, follow the instructions <a class="reference external" href="http://docs.sympy.org/latest/install.html">here</a>.</p>
+<p>We also need to rum some commands so that the plots appear correctly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And import scipy and sympy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="n">init_printing</span><span class="p">()</span> <span class="c1"># for pretty-printing equations etc</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="some-preliminaries">
+<h2>Some preliminaries<a class="headerlink" href="#some-preliminaries" title="Permalink to this headline">¶</a></h2>
+<p>Before we get started with our mathematical modelling session in Jupyter, some SymPy preliminaries.</p>
+<div class="section" id="symbolic-variables">
+<h3>Symbolic variables<a class="headerlink" href="#symbolic-variables" title="Permalink to this headline">¶</a></h3>
+<p>In CAS’ like SymPy, we need to create symbolic variables for the mathematical variables we want to work with. A new symbolic variable can be created using <code class="docutils literal notranslate"><span class="pre">var</span></code>. Try this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># check it&#39;s class</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sympy.core.symbol.Symbol
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also define multiple symbolic variables at one go:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;a, b, c&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For more info on symbolic variables, <a class="reference external" href="http://docs.sympy.org/latest/gotchas.html#variables">have a look at this</a>.</p>
+<p>It is often important to add assumptions (constraints) to our symbolic vars:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now check:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">is_imaginary</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, check:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_18_0.png" src="../_images/Appendix-Maths_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_19_0.png" src="../_images/Appendix-Maths_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="symbolic-equations">
+<h3>Symbolic equations<a class="headerlink" href="#symbolic-equations" title="Permalink to this headline">¶</a></h3>
+<p>We can define the mathematical equations (functions) that we will be using/manipulating as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span> <span class="n">MyFun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_21_0.png" src="../_images/Appendix-Maths_21_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span> <span class="o">=</span> <span class="n">N_0</span> <span class="o">+</span> <span class="p">(</span><span class="n">N_max</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">(</span><span class="n">r_max</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_lag</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">N_max</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>See the nice <span class="math notranslate nohighlight">\(\LaTeX\)</span> - formatted output: this is where <code class="docutils literal notranslate"><span class="pre">init_printing()</span></code> comes handy.</p>
+<div style="padding:6px;background-color:cornsilk;line-height:1.4;">
+SymPy has predefined expressions for a number of mathematical constants, such as: `pi` ($\pi$), `e` (exponential), `oo` (infinity).
+</div> 
+<p>You can also get your equation in latex syntax! Try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latex</span><span class="p">(</span><span class="n">MyFun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\\left(x + \\pi\\right)^{2}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>That has extra escape slashes for Python to be able to parse it correctly. To display it in its actual form (that you can directly use in a <span class="math notranslate nohighlight">\(\LaTeX\)</span> document), <code class="docutils literal notranslate"><span class="pre">print</span></code> it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">latex</span><span class="p">(</span><span class="n">MyFun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\left(x + \pi\right)^{2}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="numerical-evaluation">
+<h3>Numerical evaluation<a class="headerlink" href="#numerical-evaluation" title="Permalink to this headline">¶</a></h3>
+<p>To evaluate an expression numerically we can use the <code class="docutils literal notranslate"><span class="pre">evalf</span></code> function (or <code class="docutils literal notranslate"><span class="pre">N</span></code>). It takes an argument <code class="docutils literal notranslate"><span class="pre">n</span></code> which specifies the number of significant digits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># pi to a 100 places after decimal!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_30_0.png" src="../_images/Appendix-Maths_30_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">N()</span></code> is shorthand alias for <code class="docutils literal notranslate"><span class="pre">evalf()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_32_0.png" src="../_images/Appendix-Maths_32_0.png" />
+</div>
+</div>
+<p>So let’s try evaluating our function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="p">(</span><span class="n">MyFun</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_34_0.png" src="../_images/Appendix-Maths_34_0.png" />
+</div>
+</div>
+<p>When we numerically evaluate algebraic expressions we often want to substitute a symbol with a numerical value. In SymPy we do that using the <code class="docutils literal notranslate"><span class="pre">subs</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_36_0.png" src="../_images/Appendix-Maths_36_0.png" />
+</div>
+</div>
+<p>Now let’s evaluate it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_38_0.png" src="../_images/Appendix-Maths_38_0.png" />
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">subs</span></code> function can also be used to substitute mathematical variables or expressions. Let’s substitute <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(a+\pi\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_40_0.png" src="../_images/Appendix-Maths_40_0.png" />
+</div>
+</div>
+<p>And assign it as a new symbolic equation for using later:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun_new</span> <span class="o">=</span> <span class="n">MyFun</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">pi</span><span class="p">);</span> <span class="n">MyFun_new</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_42_0.png" src="../_images/Appendix-Maths_42_0.png" />
+</div>
+</div>
+<p>We can also numerically evaluate the function over a range of values using NumPy arrays:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(</span><span class="n">MyFun</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">))</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="n">x_vec</span><span class="p">])</span> <span class="c1">#Note: using a list comprehension!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also evaluate the new function <code class="docutils literal notranslate"><span class="pre">MyFun_new</span></code> we created by substitution above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun_new_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">((</span><span class="n">MyFun_new</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xx</span><span class="p">))</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="n">x_vec</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now plot the two functions that you evaluated (try adding axes and a legend to these basic plots).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vec</span><span class="p">,</span> <span class="n">MyFun_vec</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vec</span><span class="p">,</span> <span class="n">MyFun_new_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbaa6a1ad30&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Appendix-Maths_49_1.png" src="../_images/Appendix-Maths_49_1.png" />
+</div>
+</div>
+<p>However, numerical evaluation using <code class="docutils literal notranslate"><span class="pre">evalf()</span></code> can be very slow. There is a much more efficient way to do it by using <a class="reference external" href="http://docs.sympy.org/latest/modules/utilities/lambdify.html"><code class="docutils literal notranslate"><span class="pre">lambdify()</span></code></a> to “compile” a Sympy expression into a function that is much more efficient to evaluate numerically:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun_lamb</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">MyFun</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first argument is a (python) list of variables that <code class="docutils literal notranslate"><span class="pre">MyFun_lamb</span></code> will be a function of. In this case its only <span class="math notranslate nohighlight">\(x\)</span>. Now we can directly pass a numpy array and MyFun is evaluated more efficiently:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun_vec</span> <span class="o">=</span> <span class="n">MyFun_lamb</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The speedup when using “lambdified” functions instead of direct numerical evaluation can be significant, often several orders of magnitude. Even in this simple example we get a significant speed up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it #remember this?
+
+<span class="n">MyFun_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(((</span><span class="n">x</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">))</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="n">x_vec</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.7 ms ± 7.48 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+
+<span class="n">MyFun_vec</span> <span class="o">=</span> <span class="n">MyFun_lamb</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.64 µs ± 684 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fundamental-mathematical-operations">
+<h2>Fundamental mathematical operations<a class="headerlink" href="#fundamental-mathematical-operations" title="Permalink to this headline">¶</a></h2>
+<p>Let’s look at some fundamental methematical operations in SymPy that you will almost certainly use at some point in biological models. You can find a full list and addtional tutorials and examples at <a class="reference external" href="http://docs.sympy.org/latest/index.html">SymPy documentation</a>.</p>
+<div class="section" id="expand-and-factor">
+<h3>Expand and factor<a class="headerlink" href="#expand-and-factor" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand</span><span class="p">(</span><span class="n">MyFun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_60_0.png" src="../_images/Appendix-Maths_60_0.png" />
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">expand</span></code> function takes a number of keywords arguments which we can tell the functions what kind of expansions to want to perform; use <code class="docutils literal notranslate"><span class="pre">help(expand)</span></code> (or the <a class="reference external" href="http://docs.sympy.org/latest/index.html">SymPy documentation</a>) for more info.</p>
+<p>You can also print the result of an manipulation in its raw python form:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="n">MyFun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x**2 + 2*pi*x + pi**2
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also factor using, well, <code class="docutils literal notranslate"><span class="pre">factor()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">factor</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_65_0.png" src="../_images/Appendix-Maths_65_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="apart-and-together">
+<h3>Apart and together<a class="headerlink" href="#apart-and-together" title="Permalink to this headline">¶</a></h3>
+<p>To manipulate symbolic expressions of fractions, you can use the <code class="docutils literal notranslate"><span class="pre">apart</span></code> and <code class="docutils literal notranslate"><span class="pre">together</span></code> functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="p">));</span> <span class="n">f1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_68_0.png" src="../_images/Appendix-Maths_68_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apart</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_69_0.png" src="../_images/Appendix-Maths_69_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span> <span class="n">f2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_70_0.png" src="../_images/Appendix-Maths_70_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">together</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_71_0.png" src="../_images/Appendix-Maths_71_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="simplification">
+<h3>Simplification<a class="headerlink" href="#simplification" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">simplify</span></code> tries to simplify an expression into a nice looking expression, using various techniques. More specific alternatives to the <code class="docutils literal notranslate"><span class="pre">simplify</span></code> functions also exist: <code class="docutils literal notranslate"><span class="pre">trigsimp</span></code>, <code class="docutils literal notranslate"><span class="pre">powsimp</span></code>, <code class="docutils literal notranslate"><span class="pre">logcombine</span></code>, etc. Applying <code class="docutils literal notranslate"><span class="pre">simplify</span></code> to the above example will give the same result as <code class="docutils literal notranslate"><span class="pre">together</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simplify</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_73_0.png" src="../_images/Appendix-Maths_73_0.png" />
+</div>
+</div>
+<p>Note that simplify usually combines fractions but does not factor.</p>
+<p>In addition to algebraic manipulations, the other main use of CAS is to do calculus, like derivatives and integrals of algebraic expressions.</p>
+</div>
+<div class="section" id="differentiation">
+<h3>Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">¶</a></h3>
+<p>Differentiation is usually simple. Use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> function. The first argument is the expression to take the derivative of, and the second argument is the symbol by which to take the derivative:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">MyFun_new</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_78_0.png" src="../_images/Appendix-Maths_78_0.png" />
+</div>
+</div>
+<p>For higher order derivatives we can do:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">MyFun_new</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_80_0.png" src="../_images/Appendix-Maths_80_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">MyFun_new</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># same as above</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_81_0.png" src="../_images/Appendix-Maths_81_0.png" />
+</div>
+</div>
+<p>You can directly apply another manipulation to the result of a previous operation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">MyFun_new</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_83_0.png" src="../_images/Appendix-Maths_83_0.png" />
+</div>
+</div>
+<p>Calculate the derivative of a multivariate expression:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;x,y,z&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{d^3f}{dxdy^2}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_88_0.png" src="../_images/Appendix-Maths_88_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="integration">
+<h3>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h3>
+<p>Integration is done in a similar fashion:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyFun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_91_0.png" src="../_images/Appendix-Maths_91_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">MyFun</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_92_0.png" src="../_images/Appendix-Maths_92_0.png" />
+</div>
+</div>
+<p>By providing limits for the integration variable we can evaluate definite integrals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">MyFun</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_94_0.png" src="../_images/Appendix-Maths_94_0.png" />
+</div>
+</div>
+<p>and also improper integrals</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_96_0.png" src="../_images/Appendix-Maths_96_0.png" />
+</div>
+</div>
+<p>Remember, <code class="docutils literal notranslate"><span class="pre">oo</span></code> is the SymPy notation for inifinity.</p>
+</div>
+<div class="section" id="sums-and-products">
+<h3>Sums and products<a class="headerlink" href="#sums-and-products" title="Permalink to this headline">¶</a></h3>
+<p>You can evaluate sums and products using <code class="docutils literal notranslate"><span class="pre">Sum</span></code>. Note that this function is named <code class="docutils literal notranslate"><span class="pre">Sum</span></code> and not <code class="docutils literal notranslate"><span class="pre">sum</span></code> to avoid namespace conflict.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sum</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_101_0.png" src="../_images/Appendix-Maths_101_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sum</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_102_0.png" src="../_images/Appendix-Maths_102_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sum</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_103_0.png" src="../_images/Appendix-Maths_103_0.png" />
+</div>
+</div>
+<p>Products work much the same way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Product</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># 10!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_105_0.png" src="../_images/Appendix-Maths_105_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="limits">
+<h3>Limits<a class="headerlink" href="#limits" title="Permalink to this headline">¶</a></h3>
+<p>Limits can be evaluated using the <code class="docutils literal notranslate"><span class="pre">limit</span></code> function. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_108_0.png" src="../_images/Appendix-Maths_108_0.png" />
+</div>
+</div>
+<p>We can use ‘limit’ to check the result of derivation using the <code class="docutils literal notranslate"><span class="pre">diff</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_110_0.png" src="../_images/Appendix-Maths_110_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_111_0.png" src="../_images/Appendix-Maths_111_0.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\mathrm{d}f(x,y)}{\mathrm{d}x} = \frac{f(x+h,y)-f(x,y)}{h}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">((</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span><span class="o">/</span><span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_114_0.png" src="../_images/Appendix-Maths_114_0.png" />
+</div>
+</div>
+<p>OK!</p>
+<p>We can change the direction from which we approach the limiting point using the <code class="docutils literal notranslate"><span class="pre">dir</span></code> keywork argument:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_117_0.png" src="../_images/Appendix-Maths_117_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_118_0.png" src="../_images/Appendix-Maths_118_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="series">
+<h3>Series<a class="headerlink" href="#series" title="Permalink to this headline">¶</a></h3>
+<p>Series expansion is also one of the most useful features of a CAS. In SymPy we can perform a series expansion of an expression using the <code class="docutils literal notranslate"><span class="pre">series</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># this is a classic!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_121_0.png" src="../_images/Appendix-Maths_121_0.png" />
+</div>
+</div>
+<p>By default it expands the expression around <span class="math notranslate nohighlight">\(x=0\)</span>, but we can expand around any value of <span class="math notranslate nohighlight">\(x\)</span> by explicitly include a value in the function call:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_123_0.png" src="../_images/Appendix-Maths_123_0.png" />
+</div>
+</div>
+<p>Or try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># will not work why?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_125_0.png" src="../_images/Appendix-Maths_125_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># this will work, however </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_126_0.png" src="../_images/Appendix-Maths_126_0.png" />
+</div>
+</div>
+<p>And we can explicitly define to which order the series expansion should be carried out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_128_0.png" src="../_images/Appendix-Maths_128_0.png" />
+</div>
+</div>
+<p>Another way to do the same:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_130_0.png" src="../_images/Appendix-Maths_130_0.png" />
+</div>
+</div>
+<p>The series expansion includes the order of the approximation, which is very useful for keeping track of the order of validity when we do calculations with series expansions of different orders:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="n">s1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_132_0.png" src="../_images/Appendix-Maths_132_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s2</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="n">s2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_133_0.png" src="../_images/Appendix-Maths_133_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand</span><span class="p">(</span><span class="n">s1</span> <span class="o">*</span> <span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_134_0.png" src="../_images/Appendix-Maths_134_0.png" />
+</div>
+</div>
+<p>If we want to get rid of the order information we can use the <code class="docutils literal notranslate"><span class="pre">removeO</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">removeO</span><span class="p">()</span> <span class="o">*</span> <span class="n">s2</span><span class="o">.</span><span class="n">removeO</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_136_0.png" src="../_images/Appendix-Maths_136_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="matrix-algebra">
+<h3>Matrix algebra<a class="headerlink" href="#matrix-algebra" title="Permalink to this headline">¶</a></h3>
+<p>Matrices are defined using the <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m11</span><span class="p">,</span> <span class="n">m12</span><span class="p">,</span> <span class="n">m21</span><span class="p">,</span> <span class="n">m22</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;m11, m12, m21, m22&quot;</span><span class="p">)</span>
+<span class="n">b1</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;b1, b2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span> <span class="n">m12</span><span class="p">],[</span><span class="n">m21</span><span class="p">,</span> <span class="n">m22</span><span class="p">]])</span> <span class="c1"># Again, note: capital M for to avoid namespace conflict </span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_140_0.png" src="../_images/Appendix-Maths_140_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">b1</span><span class="p">],</span> <span class="p">[</span><span class="n">b2</span><span class="p">]]);</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_141_0.png" src="../_images/Appendix-Maths_141_0.png" />
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> class instances we can do the usual matrix algebra operations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_143_0.png" src="../_images/Appendix-Maths_143_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_144_0.png" src="../_images/Appendix-Maths_144_0.png" />
+</div>
+</div>
+<p>And calculate determinants and inverses, and the like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_146_0.png" src="../_images/Appendix-Maths_146_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_147_0.png" src="../_images/Appendix-Maths_147_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="solving-equations">
+<h3>Solving equations<a class="headerlink" href="#solving-equations" title="Permalink to this headline">¶</a></h3>
+<p>For solving equations and systems of equations we can use the <code class="docutils literal notranslate"><span class="pre">solve</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_150_0.png" src="../_images/Appendix-Maths_150_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_151_0.png" src="../_images/Appendix-Maths_151_0.png" />
+</div>
+</div>
+<p>System of equations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_153_0.png" src="../_images/Appendix-Maths_153_0.png" />
+</div>
+</div>
+<p>In terms of other symbolic expressions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">c</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_155_0.png" src="../_images/Appendix-Maths_155_0.png" />
+</div>
+</div>
+<p>You can also solve a single, or a system of ordinary differential equations (ODEs) using
+<a class="reference external" href="http://docs.sympy.org/latest/modules/solvers/ode.html">dsolve</a>. WE will use this in a couple of the biological examples below.</p>
+</div>
+</div>
+<div class="section" id="some-biological-examples">
+<h2>Some biological examples<a class="headerlink" href="#some-biological-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here are some examples of development and analysis of some fundamental mathematical models in biology.</p>
+<div class="section" id="one-population-exponential-growth">
+<h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this headline">¶</a></h3>
+<p>Let’s look at how populations grow when there are no environmental constraints. The differential equation model is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ce0c41ac-ee1f-40ba-8838-fb4f60737137">
+<span class="eqno">(11)<a class="headerlink" href="#equation-ce0c41ac-ee1f-40ba-8838-fb4f60737137" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth}
+	\frac{\text{d}N}{\text{d}t} = r_m N
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_m\)</span> is the intrinsic, constant rate of population gowth (units of 1/time), and <span class="math notranslate nohighlight">\(N\)</span> is population size (or biomass abundance). I use the subscript <span class="math notranslate nohighlight">\(m\)</span> in <span class="math notranslate nohighlight">\(r_m\)</span> to denote both <a class="reference external" href="https://en.wikipedia.org/wiki/Malthusianism">Malthusian</a> and maximal population growth rate because, in theory, without any constraints, this growth rate is expected to at its theoretical/biological maximum.</p>
+<p>Let’s solve equation \ref{eq:exp_growth} so that we can calculate population size <span class="math notranslate nohighlight">\(N_t\)</span> at any given time <span class="math notranslate nohighlight">\(t\)</span> given a starting population size  <span class="math notranslate nohighlight">\(N_0\)</span> at time 0.</p>
+<p>First assign the symbolic variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_max</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">t_lag</span><span class="p">,</span> <span class="n">t</span>  <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;r_max N_0 K t_lag t&quot;</span><span class="p">,</span><span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># the real bit is not really necessary here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_0</span> <span class="o">+</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">(</span><span class="n">r_max</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_lag</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">K</span> <span class="o">-</span> <span class="n">N_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_m</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;r_m N t&quot;</span><span class="p">,</span><span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># the real bit is not really necessary here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now tell SymPy that <span class="math notranslate nohighlight">\(N\)</span> is a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define <span class="math notranslate nohighlight">\(N\)</span> is a derivative of <span class="math notranslate nohighlight">\(t\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dN_dt</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">r_m</span><span class="o">*</span><span class="n">N</span><span class="p">(</span><span class="n">t</span><span class="p">);</span> <span class="n">dN_dt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_166_0.png" src="../_images/Appendix-Maths_166_0.png" />
+</div>
+</div>
+<p>Note that we have simply re-written the condition that LHS = RHS in eqn \ref{eq:exp_growth}. Now that we have the differential equation set up, we can solve it using <code class="docutils literal notranslate"><span class="pre">dsolve</span></code>. Since this is a simple ODE, Sympy can do it on its own with no hints or guesses (unlike more complex ODEs; <a class="reference external" href="http://docs.sympy.org/latest/modules/solvers/ode.html">see the documentation</a>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyEq_sol</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">dN_dt</span><span class="p">);</span> <span class="n">MyEq_sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_168_0.png" src="../_images/Appendix-Maths_168_0.png" />
+</div>
+</div>
+<p>If you remember your high-school calculus, you might recall that <span class="math notranslate nohighlight">\(C_1\)</span> here is an arbitrary constant. We now need to re-express it in terms of the initial conditions. We can do so by setting <span class="math notranslate nohighlight">\(t = 0\)</span>, and then setting that equal to <span class="math notranslate nohighlight">\(N(0)\)</span> at time 0:</p>
+<div class="math notranslate nohighlight">
+\[C_1 = N_0\]</div>
+<p>That is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c879f0c9-6455-49df-9964-472017548baa">
+<span class="eqno">(12)<a class="headerlink" href="#equation-c879f0c9-6455-49df-9964-472017548baa" title="Permalink to this equation">¶</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
+N{\left (t \right )} = N_0 e^{r_m t}
+\end{equation}\]</div>
+<p>We could use Sympy for this last step as well (using <code class="docutils literal notranslate"><span class="pre">subs()</span></code> like you learned above), but that would be just plain silly – like using a sledge-hammer to drive in a nail!</p>
+<p>We can now have a go at plotting the model (eqn. \ref{eq:exp_growth}), and also the solution eqn. \ref{eq:exp_growth_sol}. First, let’s get an approximate solution by using numerical integration (which you learnt in the Advanced Python chapter):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span>  <span class="kn">import</span> <span class="n">integrate</span>
+
+<span class="c1"># parameters</span>
+<span class="n">r_m</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="c1"># initial conditions</span>
+<span class="n">N_0</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># The time vector</span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">exp_pop</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r_m</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The right-hand side of the exponential growth ODE&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">r_m</span><span class="o">*</span><span class="n">N</span>
+
+<span class="n">N_vec</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">exp_pop</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">r_m</span><span class="p">,))</span> <span class="c1"># the comma is needed!</span>
+
+<span class="c1"># plot the numerical solution</span>
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">N_vec</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span> <span class="p">;</span> <span class="n">p</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$N$&#39;</span><span class="p">)</span> 
+
+<span class="c1"># plot analytical solution</span>
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">N_0</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_m</span> <span class="o">*</span> <span class="n">t_vec</span><span class="p">),</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;numerical approximation&#39;</span><span class="p">,</span> <span class="s1">&#39;analytical solution&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span> <span class="c1"># draw legend</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa240abe0&gt;
+</pre></div>
+</div>
+<img alt="../_images/Appendix-Maths_170_1.png" src="../_images/Appendix-Maths_170_1.png" />
+</div>
+</div>
+<p>These look practically identical. But they are not:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_vec</span> <span class="o">-</span> <span class="n">N_0</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_m</span> <span class="o">*</span> <span class="n">t_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  0.00000000e+00,  -1.00501671e-03,  -2.02013400e-03, ...,
+         -2.13744854e+03,  -2.15893125e+03,  -2.18062988e+03],
+       [  1.00502283e-03,   6.11819401e-09,  -1.01511118e-03, ...,
+         -2.13744753e+03,  -2.15893025e+03,  -2.18062887e+03],
+       [  2.02014197e-03,   1.01512526e-03,   7.96376975e-09, ...,
+         -2.13744651e+03,  -2.15892923e+03,  -2.18062786e+03],
+       ..., 
+       [  2.13744963e+03,   2.13744863e+03,   2.13744761e+03, ...,
+          1.09563845e-03,  -2.14816243e+01,  -4.31802491e+01],
+       [  2.15893236e+03,   2.15893136e+03,   2.15893034e+03, ...,
+          2.14838268e+01,   1.10688877e-03,  -2.16975180e+01],
+       [  2.18063100e+03,   2.18062999e+03,   2.18062898e+03, ...,
+          4.31824631e+01,   2.16997432e+01,   1.11834951e-03]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="one-population-logistic-population-growth">
+<span id="logistic-population-growth"></span><h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this headline">¶</a></h3>
+<p>Populations eventually run into contraints, even if they can grow exponentially at the start (eqn \ref{eq:exp_growth}). The classical model for logistic growth in population density (<span class="math notranslate nohighlight">\(N\)</span>) captures this dynamic:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logist-growth">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-logist-growth" title="Permalink to this equation">¶</a></span>\[
+	\frac{\text{d}N}{\text{d}t} = r_m N \left(1-\frac{N}{K}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity of the environment, while <span class="math notranslate nohighlight">\(r_m\)</span> is the same parameter same as above. Let’s solve this one as well.</p>
+<p>As in the case of the exponential growth above, let’s find the solution to this equation for any arbitrary time point <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Again, first we define the vars and the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;r_m K N t&quot;</span><span class="p">,</span><span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># the real bit is not really necessary here</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dN_dt</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">r_m</span> <span class="o">*</span> <span class="n">N</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">N</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span><span class="p">);</span> <span class="n">dN_dt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_175_0.png" src="../_images/Appendix-Maths_175_0.png" />
+</div>
+</div>
+<p>Again, as in the exponential growth example, we have simply re-written the condition that LHS = RHS in eqn \ref{eq:logist_growth}. Now we can solve the ODE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyEq_sol</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">dN_dt</span><span class="p">);</span> <span class="n">MyEq_sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_177_0.png" src="../_images/Appendix-Maths_177_0.png" />
+</div>
+</div>
+<p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute <span class="math notranslate nohighlight">\(t = 0\)</span>, and then solve the resulting equation for the initital condition of <span class="math notranslate nohighlight">\(N_0\)</span>, which then gives This the time-dependent solution:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5e19d336-1720-455c-a84e-494b13e6d0c7">
+<span class="eqno">(14)<a class="headerlink" href="#equation-5e19d336-1720-455c-a84e-494b13e6d0c7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
+\end{equation}\]</div>
+<p>You can do the last steps to obtain this solution using Sympy as well (I leave it to you to try it).</p>
+<p>No let’s again compare the analytical solution against the numerical one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span>  <span class="kn">import</span> <span class="n">integrate</span>
+
+<span class="c1"># parameters</span>
+<span class="n">r_m</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="c1"># initial condition</span>
+<span class="n">N_0</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1">#The time vector </span>
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">log_pop</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The right-hand side of the logistic ODE&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">r_m</span><span class="o">*</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">K</span><span class="p">)</span>
+
+<span class="n">N_vec</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">log_pop</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">));</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">N_vec</span><span class="p">)</span> <span class="c1"># plot the solution</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span> <span class="p">;</span> <span class="n">p</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$N$&#39;</span><span class="p">)</span> 
+
+<span class="c1"># plot analytical solution</span>
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">K</span> <span class="o">*</span> <span class="n">N_0</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_m</span> <span class="o">*</span> <span class="n">t_vec</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K</span> <span class="o">+</span> <span class="n">N_0</span> <span class="o">*</span> <span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_m</span> <span class="o">*</span> <span class="n">t_vec</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)),</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;numerical approximation&#39;</span><span class="p">,</span> <span class="s1">&#39;analytical solution&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span> <span class="c1"># draw legend</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa02f1198&gt;
+</pre></div>
+</div>
+<img alt="../_images/Appendix-Maths_180_1.png" src="../_images/Appendix-Maths_180_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="two-interacting-populations-the-lotka-volterra-predator-prey-model">
+<h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this headline">¶</a></h3>
+<p>Now for the classical Lotka-Volterra model that you encountered in the advanced Python week (without logistic growth for the consumer, <span class="math notranslate nohighlight">\(C\)</span>).</p>
+<div class="amsmath math notranslate nohighlight" id="equation-04674981-b25d-4de6-a8d5-641b694e5a69">
+<span class="eqno">(15)<a class="headerlink" href="#equation-04674981-b25d-4de6-a8d5-641b694e5a69" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\\
+\frac{dC}{dt} &amp;= e a N C - z C
+\end{align}\]</div>
+<p>here <span class="math notranslate nohighlight">\(r_m\)</span> and <span class="math notranslate nohighlight">\(K\)</span> is the Resource’s growth rate and carrying capacity respectively as in the Logistic equation, <span class="math notranslate nohighlight">\(a\)</span> is the consumer’s search rate for the resource, <span class="math notranslate nohighlight">\(e\)</span> is consumer’s biomass conversion efficiency, and <span class="math notranslate nohighlight">\(z\)</span> is it’s mortality rate.</p>
+<p>To solve this system of ODEs, we will take a different approach – We will solve for the equilibrum (steady state for the two species’ populations). Again, we start by define the vars:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_m</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s2">&quot;r_m, a, e, z, K, N, C, t&quot;</span><span class="p">,</span><span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now define the sysyem of ODEs for Sympy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dN_dt</span> <span class="o">=</span> <span class="n">r_m</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="n">C</span>
+<span class="n">dC_dt</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="n">z</span> <span class="o">*</span> <span class="n">C</span>
+
+<span class="n">dC_dt</span><span class="p">,</span> <span class="n">dN_dt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_184_0.png" src="../_images/Appendix-Maths_184_0.png" />
+</div>
+</div>
+<p>Now define the equilibrium state:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_eqlb</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dN_dt</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">C_eqlb</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dC_dt</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">N_eqlb</span><span class="p">,</span> <span class="n">C_eqlb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_186_0.png" src="../_images/Appendix-Maths_186_0.png" />
+</div>
+</div>
+<p>Solve it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_eqlb_sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">N_eqlb</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">C_eqlb_sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">C_eqlb</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="n">N_eqlb_sol</span><span class="p">,</span> <span class="n">C_eqlb_sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Appendix-Maths_188_0.png" src="../_images/Appendix-Maths_188_0.png" />
+</div>
+</div>
+<p>So there is one equilibrium  solution where both species maintain their non-zero populations. That was easy! Now you don’t need to guess what parameter values will give you coexistence (both populations remain &gt; 0). Just substitute parameter combinations that satisfy the conditions that</p>
+<div class="math notranslate nohighlight">
+\[ \frac{r_{m} \left(K - N\right)}{K a} &gt; 0, \textrm{ and } \frac{z}{a e} &gt; 0\]</div>
+<p>As an exercise try plotting this exact solution for the steady state along with the one you would obtain (asymptotically) using numerical integration of the system of ODEs. Below is code that does the numerical integration (essentially, same as the <code class="docutils literal notranslate"><span class="pre">LV.py</span></code> script).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+
+<span class="n">t_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># parameters</span>
+<span class="n">r_m</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">z</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">K</span> <span class="o">=</span><span class="mi">10</span>
+
+<span class="c1"># initial condition: this is an array now!</span>
+<span class="n">N0C0</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+
+<span class="c1"># the function still receives only `x`, but it will be an array, not a number</span>
+<span class="k">def</span> <span class="nf">LV</span><span class="p">(</span><span class="n">NC</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="c1"># Unlike the esponental and logistic growth model, we now need to convert </span>
+    <span class="c1"># the output to a numpy array as it has two populations.</span>
+    <span class="k">return</span> <span class="n">sc</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">r_m</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">NC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                   <span class="n">e</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span> <span class="o">*</span> <span class="n">NC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">])</span>
+
+<span class="n">NC_vec</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">LV</span><span class="p">,</span> <span class="n">N0C0</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="p">(</span><span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check NC_vec’s dimensions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">NC_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s plot the solution. But first, just for fun, let’s change the plot style:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;bmh&#39;, &#39;seaborn-darkgrid&#39;, &#39;fast&#39;, &#39;seaborn-dark&#39;, &#39;seaborn-notebook&#39;, &#39;classic&#39;, &#39;seaborn&#39;, &#39;ggplot&#39;, &#39;seaborn-white&#39;, &#39;seaborn-pastel&#39;, &#39;seaborn-deep&#39;, &#39;seaborn-dark-palette&#39;, &#39;dark_background&#39;, &#39;seaborn-paper&#39;, &#39;grayscale&#39;, &#39;seaborn-ticks&#39;, &#39;_classic_test&#39;, &#39;seaborn-whitegrid&#39;, &#39;Solarize_Light2&#39;, &#39;seaborn-talk&#39;, &#39;fivethirtyeight&#39;, &#39;seaborn-poster&#39;, &#39;seaborn-muted&#39;, &#39;seaborn-colorblind&#39;, &#39;seaborn-bright&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-darkgrid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vec</span><span class="p">,</span> <span class="n">NC_vec</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">);</span> <span class="n">p</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population size&#39;</span><span class="p">)</span> <span class="c1"># and of y-axis</span>
+<span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Resource ($N$)&#39;</span><span class="p">,</span> <span class="s1">&#39;Consumer ($C$)&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa0186198&gt;
+</pre></div>
+</div>
+<img alt="../_images/Appendix-Maths_196_1.png" src="../_images/Appendix-Maths_196_1.png" />
+</div>
+</div>
+<p>An useful thing to do here is take a look at the <em>phase space</em>, that is, plot only the dependent variables, without respect to time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">NC_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">NC_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initial condition:&#39;</span><span class="p">,</span> <span class="n">NC_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">NC_vec</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">NC_vec</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">#Another solution with a different initial condition:</span>
+<span class="c1">#NC_vec2 = odeint(LV, [2., 4.], t_vec, (r_m, K, a, e, z))</span>
+<span class="c1">#p.plot(NC_vec2[:,0], NC_vec2[:,1])</span>
+<span class="c1">#p.plot(NC_vec2[0,0], NC_vec2[0,1], &#39;o&#39;)</span>
+<span class="c1">#p.xlabel(&#39;Resource Population size&#39;); p.ylabel(&#39;Consumer Population size&#39;) # and of y-axis</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial condition: [ 1.  1.]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbaa00ecd30&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Appendix-Maths_198_2.png" src="../_images/Appendix-Maths_198_2.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="readings-and-resources">
+<h2>Readings and Resources<a class="headerlink" href="#readings-and-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://sympy.org/en/index.html">The SymPy documentation</a></p></li>
+<li><p><a class="reference external" href="http://live.sympy.org">SymPy online</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Appendix-Data-Python.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Data analyses  with Python &amp; Jupyter</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Appendix-Databases.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Databases <span class="tocSkip"></span></p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Samraat Pawar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
