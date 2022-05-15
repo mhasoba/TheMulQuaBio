@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Multiple explanatory variables" href="16-MulExpl.html" />
@@ -496,7 +498,7 @@
         
               <div>
                 
-  <div class="section" id="linear-models-analysis-of-variance">
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-analysis-of-variance">
 <h1>Linear Models: Analysis of variance<a class="headerlink" href="#linear-models-analysis-of-variance" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -515,7 +517,7 @@
 <hr class="docutils" />
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/ANOVA_is_LM.svg"><img alt="ANOVA example" src="../_images/ANOVA_is_LM.svg" width="300px" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text"><strong>A dataset where an ANOVA is appropriate.</strong> Performing an ANOVA on this dataset is the same as fitting the linear model <span class="math notranslate nohighlight">\(y  = \beta_1  + \beta_2 x_s + \beta_3 x_a\)</span>, where <span class="math notranslate nohighlight">\(x_s\)</span> and <span class="math notranslate nohighlight">\(x_a\)</span> are two levels (“treatments”, representing statistically separate populations) within the factor (games console ownership). Here, the first treatment, the control, is captured by the baseline value <span class="math notranslate nohighlight">\(\beta_1\)</span> (the sample with the lowest value, on the far left).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>A dataset where an ANOVA is appropriate.</strong> Performing an ANOVA on this dataset is the same as fitting the linear model <span class="math notranslate nohighlight">\(y  = \beta_1  + \beta_2 x_s + \beta_3 x_a\)</span>, where <span class="math notranslate nohighlight">\(x_s\)</span> and <span class="math notranslate nohighlight">\(x_a\)</span> are two levels (“treatments”, representing statistically separate populations) within the factor (games console ownership). Here, the first treatment, the control, is captured by the baseline value <span class="math notranslate nohighlight">\(\beta_1\)</span> (the sample with the lowest value, on the far left).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>(One-way) ANOVA tests the null hypothesis that samples from two or more groups (the treatments or factors) are drawn from populations with the <em>same mean value</em>. That is, the null hypothesis is that all the groups are random samples from the <em>same</em> population (no statistical difference in their means). To do this, ANOVA compares the variance in the data explained by fitting the linear model, to the unexplained variance (the null hypothesis.</p>

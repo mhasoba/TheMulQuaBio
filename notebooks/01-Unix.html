@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Shell scripting" href="02-ShellScripting.html" />
@@ -546,7 +548,7 @@
         
               <div>
                 
-  <div class="section" id="unix-and-linux">
+  <div class="tex2jax_ignore mathjax_ignore section" id="unix-and-linux">
 <h1>UNIX and Linux<a class="headerlink" href="#unix-and-linux" title="Permalink to this headline">¶</a></h1>
 <blockquote class="epigraph">
 <div><p>The time has come,’ the Walrus said,
@@ -726,8 +728,8 @@ And whether pigs have wings.’</p>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">;</span></code></p></td>
 <td class="text-align:left"><p>Command separator; commands can be entered sequentially in a single command line separated by this</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
-<td class="text-align:left"><p>Pipe.</p></td>
+<tr class="row-even"><td class="text-align:left"><p>`</p></td>
+<td class="text-align:left"><p>`</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
 <td class="text-align:left"><p>Redirect output to (any valid) target following this</p></td>
@@ -1741,6 +1743,11 @@ File3.txt
 <div class="section" id="installing-or-removing-software-in-ubuntu">
 <h2>Installing or removing software in Ubuntu<a class="headerlink" href="#installing-or-removing-software-in-ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>You can install software in your <code class="docutils literal notranslate"><span class="pre">/home</span></code> directory. In UNIX you originally had to login as <code class="docutils literal notranslate"><span class="pre">root</span></code> (administrator). But in Ubuntu, it is sufficient to add <code class="docutils literal notranslate"><span class="pre">sudo</span></code> (<code class="docutils literal notranslate"><span class="pre">s</span></code>uper <code class="docutils literal notranslate"><span class="pre">u</span></code>ser <code class="docutils literal notranslate"><span class="pre">do</span></code>) in front of a command. To install packages in all Debian (including Ubuntu) distributions you need to use the <code class="docutils literal notranslate"><span class="pre">apt</span></code> group of commands which allow you to deal with various installation (and un-installation) tasks.</p>
+<hr class="docutils" />
+<div class="figure align-default" id="unix-sudo">
+<a class="reference internal image-reference" href="../_images/sudo.png"><img alt="sudo" src="../_images/sudo.png" style="width: 250px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">sudo</span></code> rules.</strong> <small>(Source: <a class="reference external" href="http://xkcd.com/149/">XKCD</a>)</small></span><a class="headerlink" href="#unix-sudo" title="Permalink to this image">¶</a></p>
+</div>
 <hr class="docutils" />
 <div class="section" id="installing-from-the-main-repository">
 <h3>Installing from the main repository<a class="headerlink" href="#installing-from-the-main-repository" title="Permalink to this headline">¶</a></h3>
