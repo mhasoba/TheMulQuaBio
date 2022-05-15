@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Analysis of variance" href="15-anova.html" />
@@ -454,7 +456,7 @@
         
               <div>
                 
-  <div class="section" id="linear-models-regression">
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-regression">
 <h1>Linear Models: Regression<a class="headerlink" href="#linear-models-regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -615,14 +617,14 @@
 <p class="admonition-title">Note</p>
 <p>The Pearson correlation coefficient is a <em>parametric</em> statistic because it requires the <em>mean</em> of each variable, which is an <a class="reference internal" href="12-ExpDesign.html#expdesign-some-statistical-parlance"><span class="std std-ref"><em>estimated parameter</em></span></a>.</p>
 </div>
-<p>The calculation of the Pearson correlation coefficient is illustrated in <a class="reference internal" href="#pearson-c-c"><span class="std std-numref">Fig. 27</span></a>.</p>
+<p>The calculation of the Pearson correlation coefficient is illustrated in <a class="reference internal" href="#pearson-c-c"><span class="std std-numref">Fig. 28</span></a>.</p>
 <hr class="docutils" />
 <div class="figure align-default" id="pearson-c-c">
-<a class="reference internal image-reference" href="../_images/corr.png"><img alt="Pearson's Correlation Coefficient" src="../_images/corr.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Illustration of what the Pearson correlation coefficient means.</strong> It is calculated using the differences from the mean on each axis. The key calculation is —for each point— to get the product of the differences on each axis and add them up. The Pearson correlation coefficient simply scales these sums of <span class="math notranslate nohighlight">\(xy\)</span> to be between -1 (perfectly negatively correlated) and 1 (perfectly positively correlated) via zero (no correlation). If the points are mostly top left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then these products are mostly negative (<span class="math notranslate nohighlight">\(-xy\)</span>); if the points are mostly top right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then the products are mostly positive (<span class="math notranslate nohighlight">\(xy\)</span>).</span><a class="headerlink" href="#pearson-c-c" title="Permalink to this image">¶</a></p>
+<a class="reference internal image-reference" href="../_images/corr.svg"><img alt="Pearson's Correlation Coefficient" src="../_images/corr.svg" width="800px" /></a>
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text"><strong>Illustration of what the Pearson correlation coefficient means.</strong> It is calculated using the differences from the mean on each axis. The key calculation is —for each point— to get the product of the differences on each axis and add them up. The Pearson correlation coefficient simply scales these sums of <span class="math notranslate nohighlight">\(xy\)</span> to be between -1 (perfectly negatively correlated) and 1 (perfectly positively correlated) via zero (no correlation). If the points are mostly top left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then these products are mostly negative (<span class="math notranslate nohighlight">\(-xy\)</span>); if the points are mostly top right (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>) or bottom left (<span class="math notranslate nohighlight">\(-x\)</span>, <span class="math notranslate nohighlight">\(-y\)</span>) then the products are mostly positive (<span class="math notranslate nohighlight">\(xy\)</span>).</span><a class="headerlink" href="#pearson-c-c" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
-<p>The plots in in <a class="reference internal" href="#pearson-c-c"><span class="std std-numref">Fig. 27</span></a> show three clear cases where all the values of <span class="math notranslate nohighlight">\(xy\)</span> are negative or positive or where both are present and sum to zero. Thus the coefficient (<span class="math notranslate nohighlight">\(r_{xy}\)</span>) will be positive (negative) if the <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y_i\)</span>’s tend to move in the same (opposite) direction relative to their respective means (as illustrated here).</p>
+<p>The plots in in <a class="reference internal" href="#pearson-c-c"><span class="std std-numref">Fig. 28</span></a> show three clear cases where all the values of <span class="math notranslate nohighlight">\(xy\)</span> are negative or positive or where both are present and sum to zero. Thus the coefficient (<span class="math notranslate nohighlight">\(r_{xy}\)</span>) will be positive (negative) if the <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y_i\)</span>’s tend to move in the same (opposite) direction relative to their respective means (as illustrated here).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>More technically, the Pearson correlation coefficient is a normalised measure of the <em>covariance</em> (such that it always takes a value between -1 and 1).</p>
@@ -985,7 +987,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <hr class="docutils" />
 <div class="figure align-default" id="regress-null-model">
 <a class="reference internal image-reference" href="../_images/regResid.png"><img alt="ANOVA example" src="../_images/regResid.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text"><strong>Comparison of the null and the regression modelsand the meaning of the sums of squares.</strong> We are interested in how much smaller the residuals are for the genome size model than the null model. Graphically, this means how much shorter are the red residuals than the blue residuals (in the null model).</span><a class="headerlink" href="#regress-null-model" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text"><strong>Comparison of the null and the regression modelsand the meaning of the sums of squares.</strong> We are interested in how much smaller the residuals are for the genome size model than the null model. Graphically, this means how much shorter are the red residuals than the blue residuals (in the null model).</span><a class="headerlink" href="#regress-null-model" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <hr class="docutils" />
@@ -1024,7 +1026,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <hr class="docutils" />
 <div class="figure align-default" id="dragonfly-regression">
 <a class="reference internal image-reference" href="../_images/GenoRegModels.svg"><img alt="ANOVA example" src="../_images/GenoRegModels.svg" width="400px" /></a>
-<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text"><strong>Linear regression models fitted to the body weight vs. genome size to the Dragonfly (red) and Damselfly (blue) subsets of the data.</strong></span><a class="headerlink" href="#dragonfly-regression" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text"><strong>Linear regression models fitted to the body weight vs. genome size to the Dragonfly (red) and Damselfly (blue) subsets of the data.</strong></span><a class="headerlink" href="#dragonfly-regression" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 </div>
@@ -1067,7 +1069,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <hr class="docutils" />
 <div class="figure align-default" id="regress-leverage">
 <a class="reference internal image-reference" href="../_images/Leverage.svg"><img alt="Leverage" src="../_images/Leverage.svg" width="250px" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text"><strong>Leverage of data points on slope of a regression.</strong> The points further away from the centroid in the x-axis direction have more leverage, and can therefore move the regression line up or down (dashed red lines).</span><a class="headerlink" href="#regress-leverage" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text"><strong>Leverage of data points on slope of a regression.</strong> The points further away from the centroid in the x-axis direction have more leverage, and can therefore move the regression line up or down (dashed red lines).</span><a class="headerlink" href="#regress-leverage" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>There are two key things to note about the above plot:</p>

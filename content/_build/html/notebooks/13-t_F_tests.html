@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Regression" href="14-regress.html" />
@@ -478,7 +480,7 @@
         
               <div>
                 
-  <div class="section" id="basic-hypothesis-testing-t-and-f-tests">
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-hypothesis-testing-t-and-f-tests">
 <h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -516,7 +518,7 @@
 <hr class="docutils" />
 <div class="figure align-default" id="multiple-comparisons">
 <a class="reference internal image-reference" href="../_images/multiple_comps.png"><img alt="../_images/multiple_comps.png" src="../_images/multiple_comps.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>A more-than-two-factors example would be if you were, say, comparing the means of more than two types of insect groups – below, we compared means of two groups (dragonflies and damselflies); if we added stoneflies to this comparison, the t-test would not be the way to go as we would be making three pairwise comparisons (n = 3, p = 3).</p>
@@ -528,10 +530,10 @@
 <hr class="docutils" />
 <div class="figure align-default" id="t-distribution">
 <a class="reference internal image-reference" href="../_images/tvals.png"><img alt="../_images/tvals.png" src="../_images/tvals.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
-<p>Some points about the <span class="math notranslate nohighlight">\(t\)</span>-distribution illustrated in <a class="reference internal" href="#t-distribution"><span class="std std-numref">Fig. 22</span></a>:</p>
+<p>Some points about the <span class="math notranslate nohighlight">\(t\)</span>-distribution illustrated in <a class="reference internal" href="#t-distribution"><span class="std std-numref">Fig. 23</span></a>:</p>
 <ul class="simple">
 <li><p>The null hypothesis is that there is no difference between the values but because we only estimate the values from samples, differences will creep in by chance.</p></li>
 <li><p>Mostly these differences will be small — hence the peak in the middle — but sometimes the differences will be large and the errors will be small.</p></li>
@@ -725,10 +727,10 @@ mean of x
 <hr class="docutils" />
 <div class="figure align-default" id="sample-t-test">
 <a class="reference internal image-reference" href="../_images/twosampleIllustration.png"><img alt="../_images/twosampleIllustration.png" src="../_images/twosampleIllustration.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
-<p>A few points to note about <a class="reference internal" href="#sample-t-test"><span class="std std-numref">Fig. 23</span></a>:</p>
+<p>A few points to note about <a class="reference internal" href="#sample-t-test"><span class="std std-numref">Fig. 24</span></a>:</p>
 <ul class="simple">
 <li><p>The <span class="math notranslate nohighlight">\(t\)</span> tests in for these two graphs confirm this:</p></li>
 <li><p>The mean for blue is significantly different from 16.74 (mean=14.98, se=0.38, df=59, <span class="math notranslate nohighlight">\(t\)</span>=-4.65, <span class="math notranslate nohighlight">\(p\)</span>=0.00002).</p></li>
@@ -879,7 +881,7 @@ mean in group Anisoptera  mean in group Zygoptera
 <hr class="docutils" />
 <div class="figure align-default" id="f-distribution">
 <a class="reference internal image-reference" href="../_images/fvals.png"><img alt="../_images/fvals.png" src="../_images/fvals.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>In the above figure, note that:</p>
@@ -894,11 +896,11 @@ mean in group Anisoptera  mean in group Zygoptera
 <p><span class="math notranslate nohighlight">\(\star\)</span> Type <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> into your script, add a comment, and run it.</p>
 <p>Using your (rapidly improving!) R skills, create a boxplot comparing the genome sizes of the two suborders.</p>
 <p>Add another boxplot beside it comparing the body weight of the two suborders.</p>
-<p>It should look like <a class="reference internal" href="#odonata-wt-boxplots"><span class="std std-numref">Fig. 25</span></a>.</p>
+<p>It should look like <a class="reference internal" href="#odonata-wt-boxplots"><span class="std std-numref">Fig. 26</span></a>.</p>
 <hr class="docutils" />
 <div class="figure align-default" id="odonata-wt-boxplots">
 <a class="reference internal image-reference" href="../_images/bxp.png"><img alt="../_images/bxp.png" src="../_images/bxp.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>Now, we can use R to calculate <span class="math notranslate nohighlight">\(F\)</span> for the variance in genome size in each of the two suborders. We calculated the variance for the <span class="math notranslate nohighlight">\(t\)</span> test above, so we can just do this:</p>
@@ -947,11 +949,11 @@ the two samples are drawn from populations with the same variance, an
 sample test). What we actually see are smaller numbers, with the smallest being <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">60.503</span></code> for the two sample test of body weight.</p>
 <p>The explanation is that R is applying a <em>penalty</em> to the degrees of freedom to account for differences in variance. With fewer degrees for freedom, more extreme <span class="math notranslate nohighlight">\(t\)</span> values are more likely and so it is harder to find significant results. This doesn’t mean we can forget about checking the variances or plotting the data!</p>
 <p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we’ll look at it again when we learn about <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA</span></a>.</p>
-<p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution, as shown in <a class="reference internal" href="#log-transformation"><span class="std std-numref">Fig. 26</span></a>.</p>
+<p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution, as shown in <a class="reference internal" href="#log-transformation"><span class="std std-numref">Fig. 27</span></a>.</p>
 <hr class="docutils" />
 <div class="figure align-default" id="log-transformation">
 <a class="reference internal image-reference" href="../_images/transform.png"><img alt="../_images/transform.png" src="../_images/transform.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>We can do a <span class="math notranslate nohighlight">\(\log_e\)</span> (natural log)  transform of our body weight data as follows:</p>

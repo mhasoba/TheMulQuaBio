@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to this section" href="../Stats-Intro.html" />
@@ -766,7 +768,7 @@
         
               <div>
                 
-  <div class="section" id="biological-computing-in-python-ii">
+  <div class="tex2jax_ignore mathjax_ignore section" id="biological-computing-in-python-ii">
 <h1>Biological Computing in Python II<a class="headerlink" href="#biological-computing-in-python-ii" title="Permalink to this headline">¶</a></h1>
 <blockquote class="epigraph">
 <div><p>…some things in life are bad. They can really make you mad. Other things just make you swear and curse. When you’re chewing on life’s gristle, don’t grumble; give a whistle, and this’ll help things turn out for the best. And… always look on the bright side of life…</p>
@@ -845,7 +847,7 @@
 <hr class="docutils" />
 <div class="figure align-default" id="python-numpy-array">
 <a class="reference internal image-reference" href="../_images/numpyarray.png"><img alt="Python numpy array" src="../_images/numpyarray.png" style="width: 700px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>A graphical depiction of numpy/numpy arrays.</strong> These can have multiple dimensions (even greater than 3). <br>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>A graphical depiction of numpy/numpy arrays.</strong> These can have multiple dimensions (even greater than 3). <br>
 (Source: <a class="reference external" href="http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html">http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/python/arrays.html</a>)</span><a class="headerlink" href="#python-numpy-array" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
@@ -1783,8 +1785,8 @@ from the end of an array:</p>
 <div class="section" id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Permalink to this headline">¶</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-98efdb28-7959-4839-97db-b6a699ccaeef">
-<span class="eqno">(2)<a class="headerlink" href="#equation-98efdb28-7959-4839-97db-b6a699ccaeef" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e0804a81-638a-4b8f-91f9-2c681d1ee7d8">
+<span class="eqno">(2)<a class="headerlink" href="#equation-e0804a81-638a-4b8f-91f9-2c681d1ee7d8" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -1983,7 +1985,7 @@ from the end of an array:</p>
 <hr class="docutils" />
 <div class="figure align-default" id="lv-phase-plot">
 <a class="reference internal image-reference" href="../_images/LV_model_CR.png"><img alt="Lotka-Volterra phase plot" src="../_images/LV_model_CR.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>Generate this figure as part of the <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> script.</strong></span><a class="headerlink" href="#lv-phase-plot" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text"><strong>Generate this figure as part of the <code class="docutils literal notranslate"><span class="pre">LV1.py</span></code> script.</strong></span><a class="headerlink" href="#lv-phase-plot" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>It should save both figures in pdf to the <code class="docutils literal notranslate"><span class="pre">results</span></code> directory, <em>without displaying them on screen</em>.</p>
@@ -2346,8 +2348,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>It runs the Lotka-Volterra model with prey density dependence <span class="math notranslate nohighlight">\(r R \left(1 - \frac{R} {K}\right)\)</span>, which changes the coupled ODEs to,</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-5d6f3a50-4c7e-4b8a-a34c-7b41889b36b7">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5d6f3a50-4c7e-4b8a-a34c-7b41889b36b7" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-537a9c5e-e012-48d7-b0b3-fcdbd2c78b3d">
+<span class="eqno">(3)<a class="headerlink" href="#equation-537a9c5e-e012-48d7-b0b3-fcdbd2c78b3d" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2368,8 +2370,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-a2c46b41-19b9-4d76-8e7a-776661219174">
-<span class="eqno">(4)<a class="headerlink" href="#equation-a2c46b41-19b9-4d76-8e7a-776661219174" title="Permalink to this equation">¶</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-8592719a-509c-46c7-9532-fd291a0a49db">
+<span class="eqno">(4)<a class="headerlink" href="#equation-8592719a-509c-46c7-9532-fd291a0a49db" title="Permalink to this equation">¶</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
@@ -2380,14 +2382,14 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-7d846a7b-355a-444b-b9a3-e26807a035fd">
-<span class="eqno">(5)<a class="headerlink" href="#equation-7d846a7b-355a-444b-b9a3-e26807a035fd" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e2765217-8213-4cf8-837a-564527685d09">
+<span class="eqno">(5)<a class="headerlink" href="#equation-e2765217-8213-4cf8-837a-564527685d09" title="Permalink to this equation">¶</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e959286f-76e1-4b08-82dd-68182549e7c1">
-<span class="eqno">(6)<a class="headerlink" href="#equation-e959286f-76e1-4b08-82dd-68182549e7c1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e0111c05-9edf-45f2-99e8-e6ae443c30f6">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e0111c05-9edf-45f2-99e8-e6ae443c30f6" title="Permalink to this equation">¶</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - (z + \epsilon) + e a R_t)
 \end{align}\]</div>
@@ -2410,7 +2412,7 @@ vectorized method took 155 ms on average.
 <hr class="docutils" />
 <div class="figure align-default" id="xkcd-on-regex">
 <a class="reference internal image-reference" href="../_images/regex.png"><img alt="XKCD on Regex" src="../_images/regex.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text"><strong>Regular expressions can really improve your quality of life.</strong><br> (Source: <a class="reference external" href="https://www.xkcd.com/208/">XKCD</a>)</span><a class="headerlink" href="#xkcd-on-regex" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Regular expressions can really improve your quality of life.</strong><br> (Source: <a class="reference external" href="https://www.xkcd.com/208/">XKCD</a>)</span><a class="headerlink" href="#xkcd-on-regex" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>Regex packages are available for most programming languages (recall <a class="reference internal" href="01-Unix.html#using-grep"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">grep</span></code> in UNIX</span></a>; that is how regex first became popular).</p>
@@ -2451,8 +2453,8 @@ vectorized method took 155 ms on average.
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">{</span></code> <code class="docutils literal notranslate"><span class="pre">}</span></code></p></td>
 <td class="text-align:left"><p>Match exactly the specified number of occurrences; e.g., <code class="docutils literal notranslate"><span class="pre">.{2}</span></code> finds the first two instances of any character (except newline)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
-<td class="text-align:left"><p>Match either or</p></td>
+<tr class="row-odd"><td class="text-align:left"><p>`</p></td>
+<td class="text-align:left"><p>`</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">(</span></code> <code class="docutils literal notranslate"><span class="pre">)</span></code></p></td>
 <td class="text-align:left"><p>Capture and group; examples of this appear below</p></td>
@@ -2540,8 +2542,8 @@ vectorized method took 155 ms on average.
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">[atgc]</span></code></p></td>
 <td class="text-align:left"><p>match any character listed: <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">at|gc</span></code></p></td>
-<td class="text-align:left"><p>match <code class="docutils literal notranslate"><span class="pre">at</span></code> or <code class="docutils literal notranslate"><span class="pre">gc</span></code></p></td>
+<tr class="row-odd"><td class="text-align:left"><p>`at</p></td>
+<td class="text-align:left"><p>gc`</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">[^atgc]</span></code></p></td>
 <td class="text-align:left"><p>match any character not listed: any character except <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
@@ -2836,7 +2838,7 @@ vectorized method took 155 ms on average.
 <hr class="docutils" />
 <div class="figure align-default" id="theloderma-asper">
 <a class="reference internal image-reference" href="../_images/thelodermaasper.JPG"><img alt="Bird-shit Frog" src="../_images/thelodermaasper.JPG" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>In case you were wondering what <em>Theloderma asper</em>, the “bird-shit frog”, looks like.</strong> Samraat snapped this one in a North-East Indian rainforest ages ago.</span><a class="headerlink" href="#theloderma-asper" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>In case you were wondering what <em>Theloderma asper</em>, the “bird-shit frog”, looks like.</strong> Samraat snapped this one in a North-East Indian rainforest ages ago.</span><a class="headerlink" href="#theloderma-asper" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>How about looking for email addresses in a string? For example, let’s try matching a string consisting of an academic’s name, email address and research area or interest (no need to type this into any python file):</p>

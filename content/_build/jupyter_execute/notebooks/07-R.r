@@ -341,16 +341,16 @@ write.table(MyData, "../results/MyData.csv", col.names=FALSE) # ignore col names
 source("basic_io.R")
 
 a <- TRUE
-if (a == TRUE){
+if (a == TRUE) {
     print ("a is TRUE")
-    } else {
+} else {
     print ("a is FALSE")
 }
 
 z <- runif(1) ## Generate a uniformly distributed random number
 if (z <= 0.5) {print ("Less than a half")}
 
-for (i in 1:10){
+for (i in 1:10) {
     j <- i * i
     print(paste(i, " squared is", j ))
 }
@@ -359,27 +359,26 @@ for (i in 1:10){
 
 for(species in c('Heliodoxa rubinoides', 
                  'Boissonneaua jardini', 
-                 'Sula nebouxii')){
-  print(paste('The species is', species))
+                 'Sula nebouxii')) {
+      print(paste('The species is', species))
 }
 
 v1 <- c("a","bc","def")
-for (i in v1){
+for (i in v1) {
     print(i)
 }
 
 i <- 0
-while (i < 10){
+while (i < 10) {
     i <- i+1
     print(i^2)
 }
 
 i <- 0 #Initialize i
-    while(i < Inf) {
+    while (i < Inf) {
         if (i == 10) {
             break 
-             } # Break out of the while loop! 
-        else { 
+        } else { # Break out of the while loop!  
             cat("i equals " , i , " \n")
             i <- i + 1 # Update i
     }
@@ -398,40 +397,42 @@ ls(pattern = "MyFun*")
 class(MyFunction)
 
 # Checks if an integer is even
-is.even <- function(n = 2){
-  if (n %% 2 == 0)
-  {
+is.even <- function(n = 2) {
+  if (n %% 2 == 0) {
     return(paste(n,'is even!'))
-  } 
+  } else {
   return(paste(n,'is odd!'))
+  }
 }
 
 is.even(6)
 
 # Checks if a number is a power of 2
-is.power2 <- function(n = 2){
-  if (log2(n) %% 1==0)
-  {
+is.power2 <- function(n = 2) {
+  if (log2(n) %% 1==0) {
     return(paste(n, 'is a power of 2!'))
-  } 
+  } else {
   return(paste(n,'is not a power of 2!'))
+    }
 }
 
 is.power2(4)
 
 # Checks if a number is prime
-is.prime <- function(n){
-  if (n==0){
+is.prime <- function(n) {
+  if (n==0) {
     return(paste(n,'is a zero!'))
-  }
-  if (n==1){
+  } else if (n==1) {
     return(paste(n,'is just a unit!'))
   }
+    
   ints <- 2:(n-1)
-  if (all(n%%ints!=0)){
+  
+  if (all(n%%ints!=0)) {
     return(paste(n,'is a prime!'))
-  } 
+  } else {
   return(paste(n,'is a composite!'))
+    }
 }
 
 is.prime(3)
@@ -441,11 +442,11 @@ class(a)
 
 M <- matrix(runif(1000000),1000,1000)
 
-SumAllElements <- function(M){
+SumAllElements <- function(M) {
   Dimensions <- dim(M)
   Tot <- 0
-  for (i in 1:Dimensions[1]){
-    for (j in 1:Dimensions[2]){
+  for (i in 1:Dimensions[1]) {
+    for (j in 1:Dimensions[2]) {
       Tot <- Tot + M[i,j]
     }
   }
@@ -458,7 +459,7 @@ print(system.time(SumAllElements(M)))
 print("Using the in-built vectorized function, the time taken is:")
 print(system.time(sum(M)))
 
-NoPreallocFun <- function(x){
+NoPreallocFun <- function(x) {
     a <- vector() # empty vector
     for (i in 1:x) {
         a <- c(a, i) # concatenate
@@ -469,7 +470,7 @@ NoPreallocFun <- function(x){
 
 system.time(NoPreallocFun(10))
 
-PreallocFun <- function(x){
+PreallocFun <- function(x) {
     a <- rep(NA, x) # pre-allocated vector
     for (i in 1:x) {
         a[i] <- i # assign
@@ -495,11 +496,12 @@ print (RowVars)
 ColMeans <- apply(M, 2, mean)
 print (ColMeans)
 
-SomeOperation <- function(v){ # (What does this function do?)
-  if (sum(v) > 0){ #note that sum(v) is a single (scalar) value
+SomeOperation <- function(v) { # (What does this function do?)
+  if (sum(v) > 0) { #note that sum(v) is a single (scalar) value
     return (v * 100)
-  }
+  } else { 
   return (v)
+    }
 }
 
 M <- matrix(rnorm(100), 10, 10)
@@ -508,33 +510,33 @@ print (apply(M, 1, SomeOperation))
 ######### Functions ##########
 
 ## A function to take a sample of size n from a population "popn" and return its mean
-myexperiment <- function(popn,n){
+myexperiment <- function(popn,n) {
     pop_sample <- sample(popn, n, replace = FALSE)
     return(mean(pop_sample))
 }
 
 ## Calculate means using a FOR loop on a vector without preallocation:
-loopy_sample1 <- function(popn, n, num){
+loopy_sample1 <- function(popn, n, num) {
     result1 <- vector() #Initialize empty vector of size 1 
-    for(i in 1:num){
+    for(i in 1:num) {
         result1 <- c(result1, myexperiment(popn, n))
     }
     return(result1)
 }
 
 ## To run "num" iterations of the experiment using a FOR loop on a vector with preallocation:
-loopy_sample2 <- function(popn, n, num){
+loopy_sample2 <- function(popn, n, num) {
     result2 <- vector(,num) #Preallocate expected size
-    for(i in 1:num){
+    for(i in 1:num) {
         result2[i] <- myexperiment(popn, n)
     }
     return(result2)
 }
 
 ## To run "num" iterations of the experiment using a FOR loop on a list with preallocation:
-loopy_sample3 <- function(popn, n, num){
+loopy_sample3 <- function(popn, n, num) {
     result3 <- vector("list", num) #Preallocate expected size
-    for(i in 1:num){
+    for(i in 1:num) {
         result3[[i]] <- myexperiment(popn, n)
     }
     return(result3)
@@ -542,13 +544,13 @@ loopy_sample3 <- function(popn, n, num){
 
 
 ## To run "num" iterations of the experiment using vectorization with lapply:
-lapply_sample <- function(popn, n, num){
+lapply_sample <- function(popn, n, num) {
     result4 <- lapply(1:num, function(i) myexperiment(popn, n))
     return(result4)
 }
 
 ## To run "num" iterations of the experiment using vectorization with sapply:
-sapply_sample <- function(popn, n, num){
+sapply_sample <- function(popn, n, num) {
     result5 <- sapply(1:num, function(i) myexperiment(popn, n))
     return(result5)
 }
@@ -609,7 +611,7 @@ Ricker <- function(N0=1, r=1, K=10, generations=50)
 
 plot(Ricker(generations=10), type="l")
 
-doit <- function(x){
+doit <- function(x) {
     temp_x <- sample(x, replace = TRUE)
     if(length(unique(temp_x)) > 30) {#only take mean if sample was sufficient
          print(paste("Mean of this sample was:", as.character(mean(temp_x))))

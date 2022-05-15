@@ -37,20 +37,22 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scientific documents with \(\LaTeX\)" href="04-LaTeX.html" />
@@ -555,7 +557,7 @@
         
               <div>
                 
-  <div class="section" id="version-control-with-git">
+  <div class="tex2jax_ignore mathjax_ignore section" id="version-control-with-git">
 <h1>Version control with Git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -565,7 +567,7 @@
 <hr class="docutils" />
 <div class="figure align-default" id="vc-overview">
 <a class="reference internal image-reference" href="../_images/VC.png"><img alt="Version control" src="../_images/VC.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>An overview of how version control works.</strong> Some of the project mainline’s branches may eventually be merged back into the mainline if they are successful in achieving some objective that is worth integrating into the mainline.</span><a class="headerlink" href="#vc-overview" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>An overview of how version control works.</strong> Some of the project mainline’s branches may eventually be merged back into the mainline if they are successful in achieving some objective that is worth integrating into the mainline.</span><a class="headerlink" href="#vc-overview" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <hr class="docutils" />
@@ -583,7 +585,7 @@
 <hr class="docutils" />
 <div class="figure align-default" id="mess-happens-without-vc">
 <a class="reference internal image-reference" href="../_images/cvs.png"><img alt="Mess without Version Control" src="../_images/cvs.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>This will very likely happen if you don’t use Version Control.</strong> <br> (Source: <a class="reference external" href="http://maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html">maktoons.blogspot.com</a>).</span><a class="headerlink" href="#mess-happens-without-vc" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>This will very likely happen if you don’t use Version Control.</strong> <br> (Source: <a class="reference external" href="http://maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html">maktoons.blogspot.com</a>).</span><a class="headerlink" href="#mess-happens-without-vc" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <hr class="docutils" />
@@ -603,7 +605,7 @@ git config --list
 <hr class="docutils" />
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/git.png"><img alt="Git Workflow" src="../_images/git.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>The git workflow and command structure.</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>The git workflow and command structure.</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>Note that only when you <code class="docutils literal notranslate"><span class="pre">push</span></code> or <code class="docutils literal notranslate"><span class="pre">fetch</span></code> do you need an internet connection, because before that you are only archiving in a local (hidden) repository (that sits in a hidden <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory within your project).</p>
@@ -892,7 +894,7 @@ nothing to commit, working tree clean
 <hr class="docutils" />
 <div class="figure align-default" id="git-commit">
 <a class="reference internal image-reference" href="../_images/git_xkcd.png"><img alt="XKCD committing" src="../_images/git_xkcd.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>Make meaningful comments in your git commit.</strong> Please don’t neglect to make each commit message meaningful. And use this mantra: “commit often, comment always”. The correct meaning of “often” in this context comes with experience.<br> (Source: <a class="reference external" href="https://m.xkcd.com/1296/">XKCD</a>)</span><a class="headerlink" href="#git-commit" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Make meaningful comments in your git commit.</strong> Please don’t neglect to make each commit message meaningful. And use this mantra: “commit often, comment always”. The correct meaning of “often” in this context comes with experience.<br> (Source: <a class="reference external" href="https://m.xkcd.com/1296/">XKCD</a>)</span><a class="headerlink" href="#git-commit" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
 <p>Nothing has been sent to the remote server yet (see below for more on the remote server).</p>
@@ -1184,7 +1186,7 @@ abandon the branch:</p>
 <hr class="docutils" />
 <div class="figure align-default" id="git-xkcd-2">
 <a class="reference internal image-reference" href="../_images/git_xkcd_1.png"><img alt="git desperation" src="../_images/git_xkcd_1.png" style="width: 250px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Try not to do this.</strong> But most of us mortals will have, at some point! <br> (Source: <a class="reference external" href="https://xkcd.com/1597/">XKCD</a>)</span><a class="headerlink" href="#git-xkcd-2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Try not to do this.</strong> But most of us mortals will have, at some point! <br> (Source: <a class="reference external" href="https://xkcd.com/1597/">XKCD</a>)</span><a class="headerlink" href="#git-xkcd-2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <hr class="docutils" />

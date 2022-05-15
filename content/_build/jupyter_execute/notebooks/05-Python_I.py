@@ -95,7 +95,7 @@
 
 # Now type:
 
-# In[1]:
+# In[31]:
 
 
 import this
@@ -111,19 +111,19 @@ import this
 # 
 # Now, try some simple operations:
 
-# In[2]:
+# In[32]:
 
 
 2 + 2 # Summation; note that comments still start with #
 
 
-# In[3]:
+# In[33]:
 
 
 2 * 2 # Multiplication
 
 
-# In[4]:
+# In[34]:
 
 
 2 / 2 # division
@@ -131,19 +131,19 @@ import this
 
 # To specify an integer division, use `//`:
 
-# In[5]:
+# In[35]:
 
 
 2//2
 
 
-# In[6]:
+# In[36]:
 
 
 2 > 3 # logical operation
 
 
-# In[7]:
+# In[37]:
 
 
 2 >= 2 # another one
@@ -181,7 +181,7 @@ import this
 
 # You can try any or all of these now. For example:
 
-# In[8]:
+# In[38]:
 
 
 get_ipython().run_line_magic('who', '')
@@ -189,19 +189,19 @@ get_ipython().run_line_magic('who', '')
 
 # That is, there are no objects in your workspace yet. Let's create one:
 
-# In[9]:
+# In[39]:
 
 
 a = 1
 
 
-# In[10]:
+# In[40]:
 
 
 get_ipython().run_line_magic('who', '')
 
 
-# In[11]:
+# In[41]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -213,7 +213,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # This will give you detailed information about this variable (which is an object, belonging to a particular class, because this is python!). You can also check a variable's type: 
 
-# In[12]:
+# In[42]:
 
 
 type(a)
@@ -236,28 +236,28 @@ type(a)
 # 
 # Now, let's continue our python intro. We will first learn about the python variable types that were mentioned above. The types are:
 
-# In[13]:
+# In[43]:
 
 
 a = 2 #integer
 type(a)
 
 
-# In[14]:
+# In[44]:
 
 
 a = 2. #Float
 type(a)
 
 
-# In[15]:
+# In[45]:
 
 
 a = "Two" #String
 type(a)
 
 
-# In[16]:
+# In[46]:
 
 
 a = True #Boolean
@@ -269,10 +269,9 @@ type(a)
 # Also, try `?a` after defining `a` to be a boolean variable, and note this output in particular:
 # 
 # ```python
-# The builtins True and False are the only two instances of the class bool.
-# The class bool is a subclass of the class int, and cannot be subclassed.
+# The builtins True and False are the only two instances of the class bool. The class bool is a subclass of the class int, but with only two possible values. 
 # ```
-# The idea of what a class is should be a little bit clearer to you now. 
+# The idea of what a class is hopefully be a little bit clearer to you now. 
 # 
 # ```{note}
 # In Python, the type of a variable is determined when the program or command is running (dynamic typing) (like `R`, unlike `C` or `FORTRAN`). This is convenient, but can make programs slow. More on efficient computing [later](./06-Python_II.ipynb).
@@ -304,25 +303,25 @@ type(a)
 # 
 # Try the following:
 
-# In[17]:
+# In[47]:
 
 
 2 == 2
 
 
-# In[18]:
+# In[48]:
 
 
 2 != 2
 
 
-# In[19]:
+# In[49]:
 
 
 3 / 2
 
 
-# In[20]:
+# In[50]:
 
 
 3 // 2
@@ -330,49 +329,49 @@ type(a)
 
 # *What happened here*? This is an integer division, so the decimal part is lost.  
 
-# In[21]:
+# In[51]:
 
 
 'hola, ' + 'mi llamo Samraat' #why not learn two languages at the same time?! 
 
 
-# In[22]:
+# In[52]:
 
 
 x = 5
 
 
-# In[23]:
+# In[53]:
 
 
 x + 3
 
 
-# In[24]:
+# In[54]:
 
 
 y = 2
 
 
-# In[25]:
+# In[55]:
 
 
 x + y
 
 
-# In[26]:
+# In[56]:
 
 
 x = 'My string'
 
 
-# In[27]:
+# In[57]:
 
 
 x + ' now has more stuff'
 
 
-# In[28]:
+# In[58]:
 
 
 x + y
@@ -380,25 +379,25 @@ x + y
 
 # Doesn't work. No problem, we can convert from one type to another:
 
-# In[29]:
+# In[ ]:
 
 
 x + str(y)
 
 
-# In[30]:
+# In[ ]:
 
 
 z = '88'
 
 
-# In[31]:
+# In[ ]:
 
 
 x + z
 
 
-# In[32]:
+# In[59]:
 
 
 y + int(z)
@@ -424,19 +423,19 @@ y + int(z)
 # 
 # These are the most versatile, and can contain compound data. They are "mutable", as will be illustrated below. Try this:
 
-# In[33]:
+# In[ ]:
 
 
 MyList = [3,2.44,'green',True]
 
 
-# In[34]:
+# In[ ]:
 
 
 MyList[1]
 
 
-# In[35]:
+# In[ ]:
 
 
 MyList[0]
@@ -444,7 +443,7 @@ MyList[0]
 
 # *Note that python "indexing" starts at 0, not 1!*
 
-# In[36]:
+# In[ ]:
 
 
 MyList[4]
@@ -452,19 +451,19 @@ MyList[4]
 
 # As expected!
 
-# In[37]:
+# In[ ]:
 
 
 MyList[2] = 'blue'
 
 
-# In[38]:
+# In[ ]:
 
 
 MyList
 
 
-# In[39]:
+# In[ ]:
 
 
 MyList.append('a new item')
@@ -472,19 +471,19 @@ MyList.append('a new item')
 
 # Note `.append`. This is an operation (a "method") that can be applied to any "object" with the "class" list. You can check the type of any object: 
 
-# In[40]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('whos', '')
 
 
-# In[41]:
+# In[ ]:
 
 
 type(MyList)
 
 
-# In[42]:
+# In[ ]:
 
 
 print(type(MyList))
@@ -494,19 +493,19 @@ print(type(MyList))
 # In Python3 there is no difference between "class" and "type". They are in most cases used as synonyms.
 # ```
 
-# In[43]:
+# In[ ]:
 
 
 MyList
 
 
-# In[44]:
+# In[ ]:
 
 
 del MyList[2]
 
 
-# In[45]:
+# In[ ]:
 
 
 MyList
@@ -522,26 +521,26 @@ MyList
 # 
 # Try this:
 
-# In[46]:
+# In[ ]:
 
 
 FoodWeb=[('a','b'),('a','c'),('b','c'),('c','c')]
 FoodWeb
 
 
-# In[47]:
+# In[ ]:
 
 
 FoodWeb[0]
 
 
-# In[48]:
+# In[ ]:
 
 
 FoodWeb[0][0]
 
 
-# In[49]:
+# In[ ]:
 
 
 FoodWeb[0][0] = "bbb"
@@ -551,13 +550,13 @@ FoodWeb[0][0] = "bbb"
 # 
 # However, you can change a whole pairing: 
 
-# In[50]:
+# In[ ]:
 
 
 FoodWeb[0] = ("bbb","ccc") 
 
 
-# In[51]:
+# In[ ]:
 
 
 FoodWeb[0]
@@ -578,28 +577,28 @@ FoodWeb[0]
 # 
 # Tuples may be immutable, but you *can* append to them by first creating an "empty space" for the new item:
 
-# In[52]:
+# In[ ]:
 
 
 a = (1, 2, []) 
 a
 
 
-# In[53]:
+# In[ ]:
 
 
 a[2].append(1000)
 a
 
 
-# In[54]:
+# In[ ]:
 
 
 a[2].append(1000)
 a
 
 
-# In[55]:
+# In[ ]:
 
 
 a[2].append((100,10))
@@ -608,27 +607,27 @@ a
 
 # You can also concatenate, slice and dice them as long as they contain a single sequence or set of items:
 
-# In[56]:
+# In[ ]:
 
 
 a = (1, 2, 3)
 
 
-# In[57]:
+# In[ ]:
 
 
 b = a + (4, 5, 6)
 b
 
 
-# In[58]:
+# In[ ]:
 
 
 c = b[1:]
 c
 
 
-# In[59]:
+# In[ ]:
 
 
 b = b[1:]
@@ -637,7 +636,7 @@ b
 
 # They can be a heterogeneous set as well. 
 
-# In[60]:
+# In[ ]:
 
 
 a = ("1", 2, True)
@@ -648,37 +647,37 @@ a
 # 
 # You can convert a list to an mutable "set" — an unordered collection with no duplicate elements. Once you create a set you can perform set operations on it:
 
-# In[61]:
+# In[ ]:
 
 
 a = [5,6,7,7,7,8,9,9]
 
 
-# In[62]:
+# In[60]:
 
 
 b = set(a)
 
 
-# In[63]:
+# In[ ]:
 
 
 b
 
 
-# In[64]:
+# In[ ]:
 
 
 c = set([3,4,5,6])
 
 
-# In[65]:
+# In[ ]:
 
 
 b & c # intersection
 
 
-# In[66]:
+# In[ ]:
 
 
 b | c # union
@@ -698,43 +697,43 @@ b | c # union
 # 
 # A dictionary is a set of values (any python object) indexed by keys (string or number). So they are a bit like `R` lists.
 
-# In[67]:
+# In[ ]:
 
 
 GenomeSize = {'Homo sapiens': 3200.0, 'Escherichia coli': 4.6, 'Arabidopsis thaliana': 157.0}
 
 
-# In[68]:
+# In[ ]:
 
 
 GenomeSize
 
 
-# In[69]:
+# In[ ]:
 
 
 GenomeSize['Arabidopsis thaliana']
 
 
-# In[70]:
+# In[ ]:
 
 
 GenomeSize['Saccharomyces cerevisiae'] = 12.1
 
 
-# In[71]:
+# In[ ]:
 
 
 GenomeSize
 
 
-# In[72]:
+# In[ ]:
 
 
 GenomeSize['Escherichia coli'] = 4.6 
 
 
-# In[73]:
+# In[ ]:
 
 
 GenomeSize
@@ -742,13 +741,13 @@ GenomeSize
 
 # Because 'Escherichia coli' is already in the dictionary, it is not repeated.
 
-# In[74]:
+# In[ ]:
 
 
 GenomeSize['Homo sapiens'] = 3201.1
 
 
-# In[75]:
+# In[ ]:
 
 
 GenomeSize
@@ -773,7 +772,7 @@ GenomeSize
 # 
 # First, try this:
 
-# In[76]:
+# In[ ]:
 
 
 a = [1, 2, 3]
@@ -782,13 +781,13 @@ b = a
 
 # Here, you have not really copied, but merely created a new "tag" (like a label) for `a`, called `b`.
 
-# In[77]:
+# In[ ]:
 
 
 a.append(4)
 
 
-# In[78]:
+# In[ ]:
 
 
 print(a)
@@ -799,14 +798,14 @@ print(b)
 # 
 # Now, try:
 
-# In[79]:
+# In[ ]:
 
 
 a = [1, 2, 3]
 b = a[:]  # This is a "shallow" copy; one level deep
 
 
-# In[80]:
+# In[ ]:
 
 
 a.append(4)
@@ -816,7 +815,7 @@ print(b)
 
 # That worked! But what about more complex lists? Try this nested list:
 
-# In[81]:
+# In[ ]:
 
 
 a = [[1, 2], [3, 4]]
@@ -827,7 +826,7 @@ print(b)
 
 # Now, modify `a`, and then inspect both `a` and `b`:
 
-# In[82]:
+# In[ ]:
 
 
 a[0][1] = 22 # Note how I accessed this 2D list
@@ -841,7 +840,7 @@ print(b)
 # 
 # The solution is to do a "deep" copy:
 
-# In[83]:
+# In[ ]:
 
 
 import copy
@@ -863,65 +862,65 @@ print(b)
 # 
 # One of the things that makes python so useful and versatile, is that it has a powerful set of inbuilt commands to perform string manipulations. For example, try these:
 
-# In[84]:
+# In[ ]:
 
 
 s = " this is a string "
 len(s) # length of s -> 18
 
 
-# In[85]:
+# In[ ]:
 
 
 s.replace(" ","-") # Substitute spaces " " with dashes
 
 
-# In[86]:
+# In[ ]:
 
 
 s.find("s") # First occurrence of s (remember, indexing starts at 0)
 
 
-# In[87]:
+# In[ ]:
 
 
 s.count("s")# Count the number of "s"
 
 
-# In[88]:
+# In[ ]:
 
 
 t = s.split() # Split the string using spaces and make a list 
 t
 
 
-# In[89]:
+# In[ ]:
 
 
 t = s.split(" is ") # Split the string using " is " and make a list out of it
 t
 
 
-# In[90]:
+# In[ ]:
 
 
 t = s.strip() # remove trailing spaces
 t
 
 
-# In[91]:
+# In[ ]:
 
 
 s.upper()
 
 
-# In[92]:
+# In[ ]:
 
 
 s.upper().strip() # can perform sequential operations
 
 
-# In[93]:
+# In[ ]:
 
 
 'WORD'.lower() # can perform operations directy on a literal string 
@@ -979,7 +978,7 @@ s.upper().strip() # can perform sequential operations
 # ```
 # Now, assign some integer value to a variable `x`:
 
-# In[94]:
+# In[ ]:
 
 
 x = 11
@@ -987,7 +986,7 @@ x = 11
 
 # Then, paste this code at the ipython prompt (`ctrl+shift+v`), and hit enter: 
 
-# In[95]:
+# In[ ]:
 
 
 for i in range(x):
@@ -1006,7 +1005,7 @@ for i in range(x):
 # 
 # First, let's understand the `range()` function. This function generates, as the name suggests, a range of integers depending on the input to it. So, for example, range(10) generates 10 numbers, starting at 0:
 
-# In[96]:
+# In[ ]:
 
 
 for i in range(10):
@@ -1015,7 +1014,7 @@ for i in range(10):
 
 # The start point is 0 because this is Python (it will start at 1 in R, for example). Note that if you try to run`range()` by itself, it will not actually produce a range of numbers. For example:
 
-# In[97]:
+# In[ ]:
 
 
 a = range(10)
@@ -1030,7 +1029,7 @@ a
 
 # You can also use `range()` to generate numbers (and loop over) from a specific range of integers. For example, to generate a range from 1 to 5, do:
 
-# In[98]:
+# In[61]:
 
 
 for i in range(1, 6):
@@ -1041,7 +1040,7 @@ for i in range(1, 6):
 # 
 # You can also generate a set of indices that skips values using `range()` like so:
 
-# In[99]:
+# In[62]:
 
 
 for i in range(2, 10, 2): # skip odd numbers
@@ -1068,7 +1067,7 @@ for i in range(2, 10, 2): # skip odd numbers
 # 
 # To see how what an iterator vs an iterable is, try out the following:
 
-# In[100]:
+# In[63]:
 
 
 my_iterable = [1,2,3]
@@ -1076,7 +1075,7 @@ my_iterable = [1,2,3]
 type(my_iterable)
 
 
-# In[101]:
+# In[64]:
 
 
 my_iterator = iter(my_iterable)
@@ -1084,25 +1083,25 @@ my_iterator = iter(my_iterable)
 type(my_iterator)
 
 
-# In[102]:
+# In[65]:
 
 
 next(my_iterator) # same as my_iterator.__next__()
 
 
-# In[103]:
+# In[66]:
 
 
 next(my_iterator)
 
 
-# In[104]:
+# In[67]:
 
 
 next(my_iterator)
 
 
-# In[105]:
+# In[68]:
 
 
 next(my_iterator)
@@ -1144,7 +1143,7 @@ next(my_iterator)
 # 
 # In python, you delineate a function (recall what a function means from the [table above](#Some-terminology)) by using indentation. For example:
 
-# In[162]:
+# In[ ]:
 
 
 def foo(x):
@@ -1155,7 +1154,7 @@ def foo(x):
 
 # Now you will have a function object called `foo` in your workspace. You can check this using the `%whos` magic command, which lists and describes all the objects in your workspace:  
 
-# In[107]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('whos', '')
@@ -1165,7 +1164,7 @@ get_ipython().run_line_magic('whos', '')
 # 
 # Now "call it":
 
-# In[108]:
+# In[ ]:
 
 
 foo(2)
@@ -1175,7 +1174,7 @@ foo(2)
 # 
 # To see this distinction, let's try the following.
 
-# In[115]:
+# In[ ]:
 
 
 def foo(x):
@@ -1186,13 +1185,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[116]:
+# In[ ]:
 
 
 y
 
 
-# In[117]:
+# In[ ]:
 
 
 type(y)
@@ -1200,7 +1199,7 @@ type(y)
 
 # Thus, the output of `foo` was stored as a new variable `y`. 
 
-# In[118]:
+# In[ ]:
 
 
 def foo(x):
@@ -1211,13 +1210,13 @@ def foo(x):
 y = foo(2)
 
 
-# In[119]:
+# In[ ]:
 
 
 y
 
 
-# In[120]:
+# In[ ]:
 
 
 type(y)
@@ -1273,9 +1272,84 @@ type(y)
 # 
 # OK, let's get deeper into python code. A computer script or program's control flow is the order in which the code executes. Upto now, you have written scripts with simple control flows, with the code executing statements from the top to bottom. But very often, you want more flexible flows of commands and statements, for example, where you can switch between alternative commands depending on some condition. This is possible using *control flow tools*. Let's learn python's control flow tools hands-on.   
 # 
+# (python-conditionals)=
 # ### Conditionals
 # 
 # Now that we know how to define functions in Python, let's look at *conditionals* that allow you fine-grained control over the function's operations.
+# 
+# Let's start with the `if` statement, which allows you to control when to execute a statement. This is the basic syntax:
+# 
+# ```python
+# if <expr>:
+#     <statement>
+# ```
+# 
+# `<expr>` is the (boolean) condition (True / False) that needs to be met for the `<statement>` to be executed. 
+# 
+# Let's look at a basic example.
+
+# In[ ]:
+
+
+x = 0; y = 2
+
+
+# In[ ]:
+
+
+if x < y: # "Truthy"
+    print('yes')
+
+
+# In[ ]:
+
+
+if x: # no output because x is an integer
+    print('yes')
+
+
+# In[ ]:
+
+
+if x==0:
+    print('yes')
+
+
+# In[ ]:
+
+
+if y:
+    print('yes')
+
+
+# In[ ]:
+
+
+if y == 2:
+    print('yes')
+
+
+# In[ ]:
+
+
+x = True # make x boolean
+
+
+# In[ ]:
+
+
+if x: # now it works
+    print('yes')
+
+
+# In[ ]:
+
+
+if x == True:
+    print('yes')
+
+
+# We can now try combining functions and the `if` conditional. 
 # 
 # $\star$ Run the following functions *one by one*, by pasting the block in the ipython command line. First, type all them all in a script and save it as `cfexercises1.py`. Then you can send them block by block easily to the command line assuming you have set your code editor to allow selections of code to be sent to terminal directly using a key binding (typically , `ctrl+enter`). 
 # 
@@ -1312,7 +1386,7 @@ type(y)
 #         return 1
 #     return x * foo_5(x - 1)
 #      
-# def foo_6(x): # Calculate the factorial of x in a different way
+# def foo_6(x): # Calculate the factorial of x in a different way; no if statement involved
 #     facto = 1
 #     while x >= 1:
 #         facto = facto * x
@@ -1403,7 +1477,7 @@ type(y)
 # 
 # Let's look at how list comprehensions work:
 
-# In[121]:
+# In[ ]:
 
 
 x = [i for i in range(10)]
@@ -1412,7 +1486,7 @@ print(x)
 
 # This is the same as writing the following loop:
 
-# In[122]:
+# In[ ]:
 
 
 x = []
@@ -1423,7 +1497,7 @@ print(x)
 
 # Here's another example:  
 
-# In[123]:
+# In[ ]:
 
 
 x = [i.lower() for i in ["LIST","COMPREHENSIONS","ARE","COOL"]]
@@ -1432,7 +1506,7 @@ print(x)
 
 # Which is same as the loop:
 
-# In[124]:
+# In[ ]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1443,7 +1517,7 @@ print(x)
 
 # Or this loop:
 
-# In[125]:
+# In[ ]:
 
 
 x = ["LIST","COMPREHENSIONS","ARE","COOL"]
@@ -1455,7 +1529,7 @@ print(x_new)
 
 # How about a nested loop? Let's try an example:
 
-# In[126]:
+# In[ ]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1468,7 +1542,7 @@ print(flattened_matrix)
 
 # A list comprehension to do the same:
 
-# In[127]:
+# In[ ]:
 
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -1478,7 +1552,7 @@ print(flattened_matrix)
 
 # Set and Dictionary comprehensions work in an analogous way. For example, create a set of all the first letters in a sequence of words using a loop:  
 
-# In[128]:
+# In[ ]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1492,7 +1566,7 @@ print(first_letters)
 # 
 # Now, the same as a set comprehension: 
 
-# In[129]:
+# In[ ]:
 
 
 words = (["These", "are", "some", "words"])
@@ -1550,7 +1624,7 @@ print(first_letters)
 # 
 # Here is an example. First, type and run this block of code:
 
-# In[1]:
+# In[ ]:
 
 
 i = 1
@@ -1563,7 +1637,7 @@ print(i)
 
 # Thus, the operations on `i` and `x` inside the loop were in fact on the variables in the main workspace (they were changed everywhere). Now, let's encapsulate this loop in a function:
 
-# In[10]:
+# In[ ]:
 
 
 i = 1
@@ -1594,7 +1668,7 @@ print(i)
 # 
 # First try this:
 
-# In[130]:
+# In[ ]:
 
 
 _a_global = 10 # a global variable
@@ -1633,7 +1707,7 @@ print("After calling a_function, outside the function, the value of _a_local is 
 # 
 # Of course, if you assign a variable outside a function, it will be available inside it even if you don't assign it inside that function:
 
-# In[131]:
+# In[ ]:
 
 
 _a_global = 10
@@ -1653,7 +1727,7 @@ print("Outside the function, the value of _a_global is", _a_global)
 # 
 # If you really want to modify or assign a global variable from inside a function (that is, and make it available outside the function), you can use the `global` keyword:
 
-# In[132]:
+# In[ ]:
 
 
 _a_global = 10
@@ -1677,7 +1751,7 @@ print("After calling a_function, outside the function, the value of _a_global no
 # 
 # The `global` keyword also works from inside nested functions, but it can be slightly confusing:   
 
-# In[133]:
+# In[69]:
 
 
 def a_function():
@@ -1702,7 +1776,7 @@ print("The value of a_global in main workspace / namespace now is", _a_global)
 # 
 # Compare the above with this: 
 
-# In[134]:
+# In[70]:
 
 
 _a_global = 10
@@ -1746,7 +1820,7 @@ print("The value of a_global in main workspace / namespace is", _a_global)
 # 
 # Let's look at an example to understand this: 
 
-# In[135]:
+# In[71]:
 
 
 def modify_list_1(some_list):
@@ -1755,7 +1829,7 @@ def modify_list_1(some_list):
     print('set to', some_list)
 
 
-# In[136]:
+# In[72]:
 
 
 my_list = [1, 2, 3]
@@ -1763,13 +1837,13 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[137]:
+# In[73]:
 
 
 modify_list_1(my_list)
 
 
-# In[138]:
+# In[74]:
 
 
 print('after, my_list =', my_list)
@@ -1779,7 +1853,7 @@ print('after, my_list =', my_list)
 # 
 # This is where the `return` directive becomes important. Now modify the function to `return` the value of the input list: 
 
-# In[139]:
+# In[75]:
 
 
 def modify_list_2(some_list):
@@ -1789,13 +1863,13 @@ def modify_list_2(some_list):
     return some_list
 
 
-# In[140]:
+# In[76]:
 
 
 my_list = modify_list_2(my_list)
 
 
-# In[141]:
+# In[77]:
 
 
 print('after, my_list =', my_list)
@@ -1805,7 +1879,7 @@ print('after, my_list =', my_list)
 # 
 # And if we do want to modify the original list *in place*, use `append`:
 
-# In[142]:
+# In[78]:
 
 
 def modify_list_3(some_list):
@@ -1818,13 +1892,13 @@ my_list = [1, 2, 3]
 print('before, my_list =', my_list)
 
 
-# In[143]:
+# In[79]:
 
 
 modify_list_3(my_list)
 
 
-# In[144]:
+# In[80]:
 
 
 print('after, my_list =', my_list)
@@ -2067,13 +2141,13 @@ print('after, my_list =', my_list)
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[145]:
+# In[81]:
 
 
 cd "../code"  
 
 
-# In[146]:
+# In[82]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -2096,13 +2170,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[147]:
+# In[83]:
 
 
 import boilerplate
 
 
-# In[148]:
+# In[84]:
 
 
 help(boilerplate)
@@ -2138,7 +2212,7 @@ help(boilerplate)
 # 
 # How do you import? Simply as (in python or ipython shell):
 
-# In[149]:
+# In[85]:
 
 
 import boilerplate
@@ -2146,7 +2220,7 @@ import boilerplate
 
 # Then type
 
-# In[150]:
+# In[86]:
 
 
 boilerplate
@@ -2174,7 +2248,7 @@ boilerplate
 # 
 # Now run it:
 
-# In[151]:
+# In[87]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -2182,7 +2256,7 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[152]:
+# In[88]:
 
 
 import using_name
@@ -2209,19 +2283,19 @@ import using_name
 # 
 # Now run `sysargv.py` with different numbers of arguments:
 
-# In[153]:
+# In[89]:
 
 
 get_ipython().run_line_magic('run', 'sysargv.py')
 
 
-# In[154]:
+# In[90]:
 
 
 run sysargv.py var1 var2
 
 
-# In[155]:
+# In[91]:
 
 
 run sysargv.py 1 2 var3
@@ -2333,7 +2407,7 @@ run sysargv.py 1 2 var3
 # 
 # Now run the code:
 
-# In[156]:
+# In[92]:
 
 
 run control_flow.py
@@ -2341,7 +2415,7 @@ run control_flow.py
 
 # You can also call any of the functions within `control_flow.py`:
 
-# In[157]:
+# In[93]:
 
 
 even_or_odd(11)
@@ -2467,7 +2541,7 @@ even_or_odd(11)
 # 
 # Now run it:
 
-# In[158]:
+# In[94]:
 
 
 run test_control_flow.py -v
@@ -2509,7 +2583,7 @@ run test_control_flow.py -v
 # ```
 # Now run it:
 
-# In[159]:
+# In[95]:
 
 
 get_ipython().run_line_magic('run', 'debugme.py')
@@ -2629,7 +2703,7 @@ get_ipython().run_line_magic('run', 'debugme.py')
 # 
 # Let's expand our previous `debugme.py` example to understand how this works. 
 
-# In[160]:
+# In[96]:
 
 
 def buggyfunc(x):
@@ -2651,7 +2725,7 @@ buggyfunc(20)
 # 
 # You can also "catch" specific types of errors. For example, modify the code further:
 
-# In[161]:
+# In[97]:
 
 
 def buggyfunc(x):
