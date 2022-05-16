@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model fitting in Python &#8212; TheMulQuaBio</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,26 +34,24 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >let toggleHintShow = 'Click to show';</script>
-    <script >let toggleHintHide = 'Click to hide';</script>
-    <script >let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Computing Miniproject" href="Appendix-MiniProj.html" />
@@ -97,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -142,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -207,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
@@ -229,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -458,9 +457,9 @@ const thebe_selector_output = ".output, .cell_output"
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="model-fitting-in-python">
+  <section class="tex2jax_ignore mathjax_ignore" id="model-fitting-in-python">
 <h1>Model fitting in Python<a class="headerlink" href="#model-fitting-in-python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Python offers a wide range of tools for fitting mathematical models to data. Here we will look at using Python to fit non-linear models to data using Least Squares (NLLS).</p>
 <p>You may want to have a look at <span class="xref myst">this Chapter</span>, and in particular, it NLLS section, and the lectures on <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">Model fitting</a> and <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/blob/master/content/lectures/NLLS">NLLS</a> before proceeding.</p>
@@ -517,8 +516,8 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/Appendix-NLLS-Python_8_0.png" src="../_images/Appendix-NLLS-Python_8_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="fitting-a-linear-model-to-the-data">
+</section>
+<section id="fitting-a-linear-model-to-the-data">
 <h2>Fitting a Linear model to the data<a class="headerlink" href="#fitting-a-linear-model-to-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Lets start with the simplest case; a linear model.</p>
 <div class="amsmath math notranslate nohighlight">
@@ -526,7 +525,7 @@ const thebe_selector_output = ".output, .cell_output"
     N_t = at^3 + bt^2 + ct + d
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, are phenomenological parameters.</p>
-<div class="section" id="using-nlls">
+<section id="using-nlls">
 <h3>Using NLLS<a class="headerlink" href="#using-nlls" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,8 +603,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="using-ols">
+</section>
+<section id="using-ols">
 <h3>Using OLS<a class="headerlink" href="#using-ols" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">lmfit</span></code>’s purpose is not to fit linear models, although it is general enough to do so. Recall that a 3rd degree polynomial is a Lienar model, and it can be fitted using <em>Ordinary Least Squares</em>. You can easily do this  with the function <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>.</p>
 <p>Let’s try this for the same data.</p>
@@ -629,8 +628,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="comparing-the-nlls-and-ols-fits">
+</section>
+<section id="comparing-the-nlls-and-ols-fits">
 <h3>Comparing the NLLS and OLS fits<a class="headerlink" href="#comparing-the-nlls-and-ols-fits" title="Permalink to this headline">¶</a></h3>
 <p>Let’s compare the the coefficients obtained using NLLS (using <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>) vs using OLS (with <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>) above.</p>
 <p>First have a another look at the NLLS result:</p>
@@ -664,8 +663,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>There are differences because NLLS is not an exact method. But these differences are <em>tiny</em>, showing that NLLS converges on pretty much the same solution as the (exact) OLS method.</p>
 <p>Next, you can calculate the residuals of the fit:</p>
-</div>
-<div class="section" id="calculating-the-residuals-etc">
+</section>
+<section id="calculating-the-residuals-etc">
 <h3>Calculating the residuals, etc.<a class="headerlink" href="#calculating-the-residuals-etc" title="Permalink to this headline">¶</a></h3>
 <p>Once you have done the model fitting you can calculate the residuals:</p>
 <div class="cell docutils container">
@@ -683,7 +682,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>The residuals can be then used to calculate BIC, AIC, etc, as you <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-r-comparing-models"><span class="std std-ref">learned previously</span></a>.</p>
-<div class="section" id="exercise">
+<section id="exercise">
 <h4>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>We calculated the residuals above using the OLS fit of the cubic model to the data. Calculate the residuals for the NLLS fit of the same model to the data (i.e., using the <code class="docutils literal notranslate"><span class="pre">fit_linear_NLLS</span></code> object).</p>
@@ -692,13 +691,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="fitting-non-linear-models-to-the-data">
+</section>
+</section>
+</section>
+<section id="fitting-non-linear-models-to-the-data">
 <h2>Fitting Non-linear models to the data<a class="headerlink" href="#fitting-non-linear-models-to-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> to do what it was actually designed for: fitting non-linear mathematical models to data. We will fit the same two models that we fitted in the <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-r-population-growth"><span class="std std-ref">Model Fitting Chapter</span></a> (where we used R).</p>
-<div class="section" id="logistic-model-fit">
+<section id="logistic-model-fit">
 <h3>Logistic model fit<a class="headerlink" href="#logistic-model-fit" title="Permalink to this headline">¶</a></h3>
 <p>A classical, somewhat mechanistic model is the logistic growth equation:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -775,8 +774,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>Where function evals, is the number of iterations needed to reach the minimum. The <code class="docutils literal notranslate"><span class="pre">report_fit</span></code> function also offers estimations of goodness of fit such as <span class="math notranslate nohighlight">\(\chi^2\)</span>, BIC and AIC. These are calculated as specified <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#akaike-and-bayesian-information-criteria">here</a>. Finally, uncertainties of each parameter estimate, correlation levels between them are also calculated. Details and caveats about these values can be found <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#uncertainties-in-variable-parameters-and-their-correlations">here</a>.</p>
-</div>
-<div class="section" id="gompertz-model">
+</section>
+<section id="gompertz-model">
 <h3>Gompertz model<a class="headerlink" href="#gompertz-model" title="Permalink to this headline">¶</a></h3>
 <p>Another alternative is the Gompertz model, which has been used frequently in the literature to model bacterial growth</p>
 <div class="amsmath math notranslate nohighlight">
@@ -857,8 +856,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-results">
+</section>
+<section id="plot-the-results">
 <h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -905,9 +904,9 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/Appendix-NLLS-Python_45_0.png" src="../_images/Appendix-NLLS-Python_45_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="id1">
+</section>
+</section>
+<section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>The generalized Logistic model (also known as Richards’ curve) is an extension of the logistic or sigmoid functions, allowing for more flexible S-shaped curves:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1016,8 +1015,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>We can visually tell that the model that best fits the data is the Generalized Logistic model, closely followed by the Gompertz model. Does this mean that the Generalized Logistic model is a better model?
 No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as good as the Generalized Logistic (GL), but has less parameters, and these are more ‘mechanistic’ than the ones in GL, so it is clearly better.</p>
-</div>
-<div class="section" id="readings-resources">
+</section>
+<section id="readings-resources">
 <h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>If you choose Python for the model fitting component of your workflow, you will probably want to use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>.
@@ -1028,8 +1027,8 @@ Look up documentation/help on submodules <code class="docutils literal notransla
 </li>
 <li><p>You will have to install <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">easy_install</span></code>  (use sudo mode). <em>Lots of examples of using lmfit can be found online (for example, by searching for “lmfit examples”!)</em>.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

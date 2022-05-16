@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Shell scripting &#8212; TheMulQuaBio</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,26 +34,24 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >let toggleHintShow = 'Click to show';</script>
-    <script >let toggleHintHide = 'Click to hide';</script>
-    <script >let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Version control with Git" href="03-Git.html" />
@@ -97,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -142,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -207,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
@@ -229,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -499,20 +498,20 @@ const thebe_selector_output = ".output, .cell_output"
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="shell-scripting">
+  <section class="tex2jax_ignore mathjax_ignore" id="shell-scripting">
 <h1>Shell scripting<a class="headerlink" href="#shell-scripting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Instead of typing all the UNIX commands we need to perform one after the other, we can save them all in a file (a “script”) and execute them all at once. Recall from the <a class="reference internal" href="01-Unix.html"><span class="doc std std-doc">UNIX and Linux Chapter</span></a> that the bash shell (or terminal) is a text command processor that interfaces with the Operating System. The bash shell provides a computer language that can be used to build scripts (AKA shell scripts) that can be run through the terminal.</p>
-<div class="section" id="what-shell-scripts-are-good-for">
+<section id="what-shell-scripts-are-good-for">
 <h3>What shell scripts are good for<a class="headerlink" href="#what-shell-scripts-are-good-for" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to write reasonably sophisticated programs with shell scripting, but the bash language is not featured to the extent that it can replace a “proper” language like C, Python, or R. However, you will find that shell scripting is necessary. This is because as such, as you saw in the previous chapter, UNIX has an incredibly powerful set of tools that can be used through the bash terminal. Shell scripts can allow you to automate the usage of these commands and create your own, simple utility tools/scripts/programs for tasks such as backups, converting file formats, handling &amp; manipulating files and directories). This enables you to perform many everyday tasks on your computer without having to invoke another language that might require installation or updating.</p>
-</div>
-</div>
-<div class="section" id="your-first-shell-script">
+</section>
+</section>
+<section id="your-first-shell-script">
 <h2>Your first shell script<a class="headerlink" href="#your-first-shell-script" title="Permalink to this headline">¶</a></h2>
 <p>Let’s write our first shell script.</p>
-<div class="section" id="some-conventions-and-syntax-rules">
+<section id="some-conventions-and-syntax-rules">
 <h3>Some conventions and syntax rules<a class="headerlink" href="#some-conventions-and-syntax-rules" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>By convention, Unix shell variables should be named in UPPERCASE</p></li>
@@ -544,14 +543,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p class="admonition-title">Tip</p>
 <p><code class="docutils literal notranslate"><span class="pre">#!/bin/sh</span></code> is the standard location of the Bourne shell (<code class="docutils literal notranslate"><span class="pre">sh</span></code>) on most Unix systems. If you’re using GNU/Linux (e.g., Ubuntu), <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> is normally a symbolic link to bash (or, sometimes, <code class="docutils literal notranslate"><span class="pre">[dash]</span></code>](<a class="reference external" href="https://blog.cloudware.bg/en/dash-vs-bash-shell/">https://blog.cloudware.bg/en/dash-vs-bash-shell/</a>)).</p>
 </div>
-</div>
-</div>
-<div class="section" id="special-characters">
+</section>
+</section>
+<section id="special-characters">
 <h2>Special characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
 <p>In shell scripts, there are certain, “special” characters that must be properly “escaped” to avoid interpretation by the shell. Some of these you already saw in the UNIX Chapter; for example, in the bash challenge command <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-exec</span> <span class="pre">ls</span> <span class="pre">-s</span> <span class="pre">{}</span> <span class="pre">\;</span> <span class="pre">|</span> <span class="pre">sort</span> <span class="pre">-n</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-10</span></code>, the character <code class="docutils literal notranslate"><span class="pre">;</span></code> had to be escaped with a <code class="docutils literal notranslate"><span class="pre">\</span></code> to avoid being interpreted as a special character. There is a list of these in the UNIX chapter, and additional ones will be introduced here.</p>
 <p>Next, let’s run your first shell script.</p>
-</div>
-<div class="section" id="running-shell-scripts">
+</section>
+<section id="running-shell-scripts">
 <h2>Running shell scripts<a class="headerlink" href="#running-shell-scripts" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to run a shell script:</p>
 <ol class="simple">
@@ -633,8 +632,8 @@ bash boilerplate.sh
 </div>
 </div>
 <p>I have specified the relative path <code class="docutils literal notranslate"><span class="pre">../code</span></code> assuming that you are in some other directory in your current week (<code class="docutils literal notranslate"><span class="pre">sandbox</span></code>, <code class="docutils literal notranslate"><span class="pre">results</span></code> or <code class="docutils literal notranslate"><span class="pre">data</span></code>).</p>
-</div>
-<div class="section" id="variables-in-shell-scripts">
+</section>
+<section id="variables-in-shell-scripts">
 <span id="shellscripting-variables"></span><h2>Variables in shell scripts<a class="headerlink" href="#variables-in-shell-scripts" title="Permalink to this headline">¶</a></h2>
 <p>You will need to handle and manipulate variables (AKA parameters) inside shell scripts to truly exploit the powerful features of the bash (shell) language.</p>
 <div class="admonition note">
@@ -642,7 +641,7 @@ bash boilerplate.sh
 <p>At the most fundamental level, a “variable” in any programming language or environment is a <em>named</em> section (portion, chunk) of the computer’s memory which can be assigned values, read and manipulated.</p>
 </div>
 <p>Shell scripts have two types of variables.</p>
-<div class="section" id="special-variables">
+<section id="special-variables">
 <h3>Special Variables<a class="headerlink" href="#special-variables" title="Permalink to this headline">¶</a></h3>
 <p>These are set by the shell, and typically cannot have values assigned to them (cannot be modified). They contain useful or necessary information needed for the script to run. These include:</p>
 <ul class="simple">
@@ -678,8 +677,8 @@ These exist only in the environment of a particular execution of the shell scrip
 </tbody>
 </table>
 <p>This is not an exhaustive list, but the important ones to remember in basic shell scripting.</p>
-</div>
-<div class="section" id="assigned-variables">
+</section>
+<section id="assigned-variables">
 <h3>Assigned Variables<a class="headerlink" href="#assigned-variables" title="Permalink to this headline">¶</a></h3>
 <p>These are assigned manually by the user. These are present within the current instance of the shell only and are not available any child processes spawned started by the script unless they are explicitly exported.</p>
 <p>In general, assigned variables in the bash language are analogous to those in any other programming language (e.g., <a class="reference internal" href="05-Python_I.html#python-i-python-variables"><span class="std std-ref">Python</span></a>): they can be a number, a character, a string of characters, or boolean (true/false). There are three ways to assign values to such variables (note lack of spaces!):</p>
@@ -692,8 +691,8 @@ These exist only in the environment of a particular execution of the shell scrip
 <p class="admonition-title">Tip</p>
 <p>The command substitution of the type MY_VAR=$(command) is one type of “shell expansion”. There are several types of shell expansions, which you can learn about <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Expansions.html">here</a>. Along with command substitution, <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">shell parameter expansion</a> is particularly important to learn about in shell scripting.</p>
 </div>
-</div>
-<div class="section" id="some-examples-of-variables">
+</section>
+<section id="some-examples-of-variables">
 <h3>Some examples of variables<a class="headerlink" href="#some-examples-of-variables" title="Permalink to this headline">¶</a></h3>
 <p>Here is an example illustrating the different types of shell variables (and assignments):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
@@ -749,9 +748,9 @@ These exist only in the environment of a particular execution of the shell scrip
 </pre></div>
 </div>
 <p>This introduces you to the <code class="docutils literal notranslate"><span class="pre">$USER</span></code> (same as <code class="docutils literal notranslate"><span class="pre">$USERNAME</span></code>) environmental variable.</p>
-</div>
-</div>
-<div class="section" id="a-useful-shell-scripting-example">
+</section>
+</section>
+<section id="a-useful-shell-scripting-example">
 <h2>A useful shell-scripting example<a class="headerlink" href="#a-useful-shell-scripting-example" title="Permalink to this headline">¶</a></h2>
 <p>Let’s write a shell script to transform comma-separated files (csv) to tab-separated files and vice-versa. This can be handy — for example, in certain computer languages, it is much easier to read tab or space
 separated files than csv (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code>)</p>
@@ -848,11 +847,11 @@ Done!
 <li><p>The new file gets saved in the same location as the original (<em>Why is that?</em>)</p></li>
 <li><p>The file got saved with a <code class="docutils literal notranslate"><span class="pre">.txt.csv</span></code> extension. That’s not very nice. Later you will get an opportunity to fix this!</p></li>
 </ul>
-</div>
-<div class="section" id="some-more-examples">
+</section>
+<section id="some-more-examples">
 <h2>Some more examples<a class="headerlink" href="#some-more-examples" title="Permalink to this headline">¶</a></h2>
 <p>Here are a few more illustrative examples (test each one out, save in <code class="docutils literal notranslate"><span class="pre">week1/code/</span></code> with the given name):</p>
-<div class="section" id="count-lines-in-a-file">
+<section id="count-lines-in-a-file">
 <h3>Count lines in a file<a class="headerlink" href="#count-lines-in-a-file" title="Permalink to this headline">¶</a></h3>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">CountLines.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
@@ -863,7 +862,7 @@ Done!
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> redirects the contents of the file to the stdin (<a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams">standard input</a>) of the command <code class="docutils literal notranslate"><span class="pre">wc</span> <span class="pre">-l</span></code>. It is needed here because without it, you would not be able to catch <em>just</em> the numerical output (number of lines). To see this, try deleting <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> from the script and see what the output looks like (it will also print the script name, which you do not want).</p>
-<div class="section" id="concatenate-the-contents-of-two-files">
+<section id="concatenate-the-contents-of-two-files">
 <h4>Concatenate the contents of two files<a class="headerlink" href="#concatenate-the-contents-of-two-files" title="Permalink to this headline">¶</a></h4>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
@@ -874,15 +873,15 @@ cat <span class="nv">$2</span> &gt;&gt; <span class="nv">$3</span>
 cat <span class="nv">$3</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="convert-tiff-to-png">
+</section>
+</section>
+<section id="convert-tiff-to-png">
 <h3>Convert tiff to png<a class="headerlink" href="#convert-tiff-to-png" title="Permalink to this headline">¶</a></h3>
 <p>This assumes you have done <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">imagemagick</span></code> (remember <code class="docutils literal notranslate"><span class="pre">sudo</span></code>!)</p>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">tiff2png.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-<span class="k">for</span> f in *.tif<span class="p">;</span> 
+<span class="k">for</span> f <span class="k">in</span> *.tif<span class="p">;</span> 
     <span class="k">do</span>  
         <span class="nb">echo</span> <span class="s2">&quot;Converting </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span> 
         convert <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>  <span class="s2">&quot;</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span> .tif<span class="k">)</span><span class="s2">.png&quot;</span><span class="p">;</span> 
@@ -890,16 +889,18 @@ cat <span class="nv">$3</span>
 </pre></div>
 </div>
 <hr class="docutils" />
-<div class="figure align-default" id="xkcd-shell-script">
+<figure class="align-default" id="xkcd-shell-script">
 <a class="reference internal image-reference" href="../_images/universal_install_script.png"><img alt="XKCD" src="../_images/universal_install_script.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>This is not a good use of shell scripting!</strong> <br>(Source: <a class="reference external" href="https://xkcd.com/1654/">XKCD</a>)</span><a class="headerlink" href="#xkcd-shell-script" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>This is not a good use of shell scripting!</strong> <br>(Source: <a class="reference external" href="https://xkcd.com/1654/">XKCD</a>)</span><a class="headerlink" href="#xkcd-shell-script" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="practicals">
+<section id="practicals">
 <h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="instructions">
+<section id="instructions">
 <h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Along with the completeness of the practicals/exercises themselves, you will be marked on the basis of how complete and well-organized your directory structure and content is.</p></li>
@@ -909,15 +910,15 @@ cat <span class="nv">$3</span>
 <li><p>Make sure there is a <code class="docutils literal notranslate"><span class="pre">readme</span></code> file in every week’s directory. This file should give an overview of the weekly directory contents, listing all the scripts and what they do. This is different from the <code class="docutils literal notranslate"><span class="pre">readme</span></code> for your overall git repository, of which <code class="docutils literal notranslate"><span class="pre">Week</span> <span class="pre">1</span></code> is a part. You will write a similar <code class="docutils literal notranslate"> <span class="pre">readme</span></code> for each subsequent weekly submission.</p></li>
 <li><p>Don’t put any scripts that are part of the submission in your <code class="docutils literal notranslate"><span class="pre">home/bin</span></code> directory! You can put a copy there, but a working version should be in your repository.</p></li>
 </ul>
-</div>
-<div class="section" id="improving-scripts">
+</section>
+<section id="improving-scripts">
 <h3>Improving scripts<a class="headerlink" href="#improving-scripts" title="Permalink to this headline">¶</a></h3>
 <p>Note that some of the shell scripts that you have created in this chapter above requires input files. For example, <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> needs one input file, and <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code> needs two. When you run any of these scripts without inputs (e.g., just <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">tabtocsv.sh</span></code>), you either get no result, or an error.</p>
 <ul class="simple">
 <li><p>The goal of this exercise is to make each such script robust so that it gives feedback to the user and exits if the right inputs are not provided.</p></li>
 </ul>
-</div>
-<div class="section" id="a-new-shell-script">
+</section>
+<section id="a-new-shell-script">
 <h3>A new shell script<a class="headerlink" href="#a-new-shell-script" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Write a <code class="docutils literal notranslate"><span class="pre">csvtospace.sh</span></code> shell script that takes a <code class="docutils literal notranslate"><span class="pre">c</span></code>omma <code class="docutils literal notranslate"><span class="pre">s</span></code>eparated <code class="docutils literal notranslate"><span class="pre">v</span></code>alues and converts it to a space separated values file. However, it must not change the input file — it should save it as a differently named file.</p></li>
@@ -928,9 +929,9 @@ cat <span class="nv">$3</span>
 <p class="admonition-title">Hint</p>
 <p>In these shell scripting practicals, to strip out and/or change file extensions, you may need to use parameter expansions, and specifically, parameter substitutions, along with pattern matching. Read about these and try out the examples <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">here</a> and <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html">here</a>.</p>
 </div>
-</div>
-</div>
-<div class="section" id="readings-resources">
+</section>
+</section>
+<section id="readings-resources">
 <h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>The bash reference manual: <a class="reference external" href="https://www.gnu.org/software/bash/manual/bash.html">https://www.gnu.org/software/bash/manual/bash.html</a></p></li>
@@ -939,8 +940,8 @@ cat <span class="nv">$3</span>
 <li><p>These is a relatively intuitive set of notes on shell scripting; <a class="reference external" href="https://www.shellscript.sh/">https://www.shellscript.sh/</a></p></li>
 <li><p>Some shell scripting <a class="reference external" href="https://linuxhint.com/30_bash_script_examples">examples</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
