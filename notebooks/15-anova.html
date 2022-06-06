@@ -758,32 +758,78 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 </div>
-<p>Now we have to put these values together on the plot:</p>
+<p>Now we have to put these values together on the plot.</p>
+<p>Let’s first get the upper and lower limits of the error bars:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the upper and lower limits of the error bars</span>
-<span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">+</span> <span class="n">trophSE</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">+</span> <span class="n">trophSE</span>
 <span class="n">lowerSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">-</span> <span class="n">trophSE</span>
-
-<span class="c1"># get a barplot</span>
-<span class="c1"># - this function can report where the middle of the bars are on the x-axis</span>
-<span class="c1"># - set the y axis limits to contain the error bars</span>
-
-<span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">trophMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&#39;log C value (pg)&#39;</span><span class="p">)</span>
-
-<span class="c1"># Now use the function to add error bars</span>
-<span class="c1"># - draws arrows between the points (x0,y0) and (x1,y1)</span>
-<span class="c1"># - arrow heads at each end (code=3) and at 90 degree angles</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">upperSE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>Carnivore</dt><dd>1.12489290666848</dd><dt>Herbivore</dt><dd>1.21898454975239</dd><dt>Omnivore</dt><dd>1.25478376489463</dd></dl>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lowerSE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>Carnivore</dt><dd>1.04524087060908</dd><dt>Herbivore</dt><dd>1.17487195482678</dd><dt>Omnivore</dt><dd>1.21791123320182</dd></dl>
+</div></div>
+</div>
+<p>Next, we draw the barplot, and also the error bars with two sequential commands:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">trophMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&#39;log C value (pg)&#39;</span><span class="p">)</span>
 <span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_17_0.png" src="../_images/15-anova_17_0.png" />
+<img alt="../_images/15-anova_21_0.png" src="../_images/15-anova_21_0.png" />
 </div>
 </div>
-<p>Now we need to draw all these pieces together into a script and get used to using them.</p>
+<p>In the first command, we plotted the bars and also store information on where the midpoints of the bars on the x-axis are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="n">barMids</span><span class="p">)</span> <span class="c1"># see what barMids is</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     [,1]
+[1,]  0.7
+[2,]  1.9
+[3,]  3.1
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is, the <code class="docutils literal notranslate"><span class="pre">barplot</span></code> function no only plots bars, but also returns where the middle of the bars are on the x-axis, which we have stored in <code class="docutils literal notranslate"><span class="pre">barMids</span></code>. These values are numeric even though the x-axis represents a categorical variable because these are <em>locations</em> of the bars’ midpoints in the plot’s x-scale.</p>
+<p>Also, we have set the y-axis limits using <code class="docutils literal notranslate"><span class="pre">c(0,</span> <span class="pre">max(upperSE))</span></code> to make sure that the tops of error bars don’t get cut off.</p>
+<p>Then, we used the <a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/arrows.html"><code class="docutils literal notranslate"><span class="pre">arrows</span></code> function</a> to add error bars. This function draws arrows between any two pairs of points (coordinates) <code class="docutils literal notranslate"><span class="pre">(x0,y0)</span></code> and <code class="docutils literal notranslate"><span class="pre">(x1,y1)</span></code> (in this case, <code class="docutils literal notranslate"><span class="pre">x0</span></code> and <code class="docutils literal notranslate"><span class="pre">x1</span></code> = <code class="docutils literal notranslate"><span class="pre">barMids</span></code>). The <code class="docutils literal notranslate"><span class="pre">ang=90</span></code> directive plots the arrow as a flat line by setting the arrow’s angle (see what happens when you run the same pair of commands, but with <code class="docutils literal notranslate"><span class="pre">ang=50</span></code>, or <code class="docutils literal notranslate"><span class="pre">ang=110</span></code>). The <code class="docutils literal notranslate"><span class="pre">code=3</span></code> directive plots both “arrow” heads, not just start or end ones (try <code class="docutils literal notranslate"><span class="pre">code=1</span></code> or <code class="docutils literal notranslate"><span class="pre">code=2</span></code> instead and see what happens).</p>
+<p>Now,</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add all the lines of code from this section into your script. Run it and check you get the graph above.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use the second two chunks as a model to plot a similar graph for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. You should get something like the plot below.</p>
 <hr class="docutils" />
@@ -808,7 +854,7 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_19_0.png" src="../_images/15-anova_19_0.png" />
+<img alt="../_images/15-anova_26_0.png" src="../_images/15-anova_26_0.png" />
 </div>
 </div>
 </section>
@@ -891,25 +937,18 @@ F-statistic:  7.22 on 2 and 300 DF,  p-value: 0.0008657
 <p><span class="math notranslate nohighlight">\(\star\)</span> Repeat the analysis of variance above to look at the effects of ground dwelling on genome size.</p>
 <section id="model-criticism">
 <h3>Model criticism<a class="headerlink" href="#model-criticism" title="Permalink to this headline">¶</a></h3>
-<p>The next question must be — and actually, we should do this before we go anywhere near the model summaries — is the model appropriate to the data.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Using <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> to guide you, get the four model diagnostic
-plots for the trophic level model on a single figure.</p>
+<p>The next question must be — and actually, we should do this before we go anywhere near the model summaries &amp;mdas ;, <em>is the model appropriate for the data</em>?</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> to guide you, get the four model diagnostic plots for the trophic level model on a single figure.</p>
 <p>The four plots are shown below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/modelDiag.svg"><img alt="../_images/modelDiag.svg" src="../_images/modelDiag.svg" width="600px" /></a>
 <hr class="docutils" />
-<p>Note that in regression, the predicted (or fitted) values from the model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals
-normally distributed? The answer for this model looks to be yes.</p>
+<p>Note that in regression, the predicted (or fitted) values from the model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals normally distributed? The answer for this model looks to be yes.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Check the ground dwelling model in the same way.</p>
 </section>
 <section id="testing-pairwise-differences-between-levels">
 <span id="anova-ci"></span><h3>Testing pairwise differences between levels<a class="headerlink" href="#testing-pairwise-differences-between-levels" title="Permalink to this headline">¶</a></h3>
-<p>The one thing that the trophic level model does not tell us is whether
-there is a difference in genome size between omnivores and herbivores —
-both are compared to carnivores, but not to each other. This is because
-of the multiple pairwise testing problem mentioned in <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>. — if you do lots of tests then you may find small <span class="math notranslate nohighlight">\(p\)</span>
-values by chance and say something important is going on when it is just
-random chance. This is called a false positive or Type I error.</p>
+<p>The one thing that the trophic level model does not tell us is whether there is a difference in genome size between omnivores and herbivores — both are compared to carnivores, but not to each other. This is because of the multiple pairwise testing problem mentioned in <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>: if you do lots of tests then you may find small <span class="math notranslate nohighlight">\(p\)</span> values by chance and say something important is going on when it is just random chance. This is called a false positive or Type I error.</p>
 <p>With a 95% confidence interval, there is a 5% chance of a false positive <em>per test</em> but there are ways of getting a 5% chance across a set (or family) of tests. For linear models, we can use Tukey’s Honest Significant Difference test. We have to convert the <code class="docutils literal notranslate"><span class="pre">lm</span></code> object into an <code class="docutils literal notranslate"><span class="pre">aov</span></code> object first.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -952,7 +991,7 @@ value.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_29_0.png" src="../_images/15-anova_29_0.png" />
+<img alt="../_images/15-anova_36_0.png" src="../_images/15-anova_36_0.png" />
 </div>
 </div>
 <p>In the above plotting code, <code class="docutils literal notranslate"><span class="pre">las=1</span></code> makes the labels horizontal, while
@@ -1018,18 +1057,14 @@ Wilcox test.</p>
 <p><span class="math notranslate nohighlight">\(26+22 \mathrm{~(Total~number~of~carnivore~species)} \times \frac{26+45+64 \mathrm{~(Total~number~in~the~&quot;No&quot;~category)}}{26+22+45+62+64+40 \mathrm{~(Total~number~of~species)}} = 48 \times \frac{135}{259} = 25.02\)</span></p>
 <p>The sum of all six (one for each cell in the table above) such calculations would be the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> value that R gave you through the <code class="docutils literal notranslate"><span class="pre">chisq.test()</span></code> above — try it!</p>
 <p>Now back to the R output from the <code class="docutils literal notranslate"><span class="pre">chisq.test()</span></code> above. Why df = 2? This is calculated as <span class="math notranslate nohighlight">\(DF = (r - 1) * (c - 1)\)</span> where <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are the number of rows and columns in the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> table, respectively. The same principle you learned before applies here; you lose one degree of freedom for each new level of information you need to estimate: there is uncertainity about the information (number of categories) in both rows and columns, so you need to lose one degree of freedom for each.</p>
-<p>Finally, note that the p-value is significant — we can conclude that the
-factors aren’t independent. From the table, carnivores can be either
-ground dwelling or not, but herbivores tend to be ground dwelling and
-omnivores tend not to be. Ah well… it’s OK. We will look at a better
-way to analyze these data using “interactions” <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">later</span></a>.</p>
+<p>Finally, note that the p-value is significant — we can conclude that the factors aren’t independent. From the table, carnivores can be either ground dwelling or not, but herbivores tend to be ground dwelling and
+omnivores tend not to be. Ah well… it’s OK. We will look at a better way to analyze these data using “interactions” <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">later</span></a>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include and run the <span class="math notranslate nohighlight">\(\chi^2\)</span> test in your script.</p>
 </section>
 </section>
 <section id="saving-data">
 <h2>Saving data<a class="headerlink" href="#saving-data" title="Permalink to this headline">¶</a></h2>
-<p>The last thing to do is to save a copy of the mammal data, including our
-new column of log data, for use in later chapters.</p>
+<p>The last thing to do is to save a copy of the mammal data, including our new column of log data, for use in later chapters.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use this code in your script to create the saved data in your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
