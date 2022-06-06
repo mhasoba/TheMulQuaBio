@@ -808,12 +808,7 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in library(gplots): there is no package called ‘gplots’
-Traceback:
-
-1. library(gplots)
-</pre></div>
-</div>
+<img alt="../_images/15-anova_19_0.png" src="../_images/15-anova_19_0.png" />
 </div>
 </div>
 </section>
@@ -821,7 +816,7 @@ Traceback:
 <section id="analysis-of-variance">
 <h2>Analysis of variance<a class="headerlink" href="#analysis-of-variance" title="Permalink to this headline">¶</a></h2>
 <p>Hopefully, those plots should convince you that there are differences in genome size between different trophic groups and between ground dwelling and other mammals. We’ll now use a linear model to test whether those differences are significant.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Using your code from <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> as a guide, create a linear
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using your code from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regression chapter</span></a> as a guide, create a linear
 model called <code class="docutils literal notranslate"><span class="pre">trophicLM</span></code> which models log C value as a function of trophic group.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to look at the analysis of variance table and then the coefficients of the model.</p>
 <p>The ANOVA table for the model should look like the one below: trophic level explains highly significant variation in genome size (<span class="math notranslate nohighlight">\(F= 7.22, \textrm{df}=2 \textrm{ and } 300, p =0.0009\)</span>).</p>
@@ -839,7 +834,7 @@ model called <code class="docutils literal notranslate"><span class="pre">trophi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 2 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -952,8 +947,6 @@ value.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">las</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-<span class="c1"># las= 1 turns labels horizontal</span>
-<span class="c1"># mar makes the left margin wider (bottom, left, top, right)</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">TukeyTroph</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -962,6 +955,8 @@ value.</p></li>
 <img alt="../_images/15-anova_29_0.png" src="../_images/15-anova_29_0.png" />
 </div>
 </div>
+<p>In the above plotting code, <code class="docutils literal notranslate"><span class="pre">las=1</span></code> makes the labels horizontal, while
+<code class="docutils literal notranslate"><span class="pre">mar=c(4,10,3,1)</span></code> makes the left margin wider by specifying <code class="docutils literal notranslate"><span class="pre">(bottom,</span> <span class="pre">left,</span> <span class="pre">top,</span> <span class="pre">right)</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include the Tukey test in your script for both the trophic level and ground
 dwelling models.</p>
 </section>
