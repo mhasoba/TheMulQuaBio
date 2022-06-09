@@ -530,19 +530,19 @@
 <section id="calculating-the-anova-test-statistic">
 <span id="anova-sos"></span><h2>Calculating the ANOVA test statistic<a class="headerlink" href="#calculating-the-anova-test-statistic" title="Permalink to this headline">¶</a></h2>
 <p>ANOVA uses of the <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">F-Statistic</span></a>. To this end, an ANOVA “partitions” variability in your data as follows:</p>
-<p><strong>Total sum of squares (TSS)</strong>: This is the sum of the squared difference between the observed dependent variable (<span class="math notranslate nohighlight">\(y\)</span>) and the mean of the response variable <span class="math notranslate nohighlight">\(y\)</span> (denoted by <span class="math notranslate nohighlight">\(\bar{y}\)</span>), i.e.,</p>
+<p><strong>Total sum of squares (TSS)</strong>: This is the sum of the squared difference between the observed dependent variable values (the <span class="math notranslate nohighlight">\(y\)</span>’s) and the mean of the response variable (denoted by <span class="math notranslate nohighlight">\(\bar{y}\)</span>), i.e.,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{TSS} = \sum_{i=1}^{n}(y_i - \bar{y})^2
 \end{equation*}\]</div>
 <p>TSS tells us how much variation there is in the dependent variable without having any other information (your null model). You might notice that TSS is the numerator of the <em>sample variance</em> (or it’s square-root, the <em>sample standard deviation</em>), which you learned about <a class="reference internal" href="12-ExpDesign.html#expdesign-descriptive-stats"><span class="std std-ref">previously</span></a>.</p>
-<p><strong>Explained sum of squares (ESS)</strong>: Sum of the squared differences between the predicted <span class="math notranslate nohighlight">\(y\)</span>’s (denoted <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s) and <span class="math notranslate nohighlight">\(\bar{y}\)</span>, or,</p>
+<p><strong>Explained sum of squares (ESS)</strong>: Sum of the squared differences between the predicted <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s) and <span class="math notranslate nohighlight">\(\bar{y}\)</span>, or,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{ESS} = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2
 \end{equation*}\]</div>
-<p>ESS tells us how much of the variation in the dependent variable our alternative (linear) model was able to explain. That is, it’s the reduction in uncertainty that occurs when the linear model is used to predict the responses.</p>
-<p><strong>Residual sum of squares (RSS)</strong>: Sum of the squared differences between the observed <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(y_i\)</span>) and the predicted <span class="math notranslate nohighlight">\(\hat{y}\)</span>, or,</p>
+<p>ESS tells us how much of the variation in the dependent variable our alternative (linear) model was able to explain by measuring variation in the <em>modelled</em> <span class="math notranslate nohighlight">\(y\)</span> values (the <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s). In othjer words, it measures the reduction in uncertainty that occurs when the linear model is used to predict the responses.</p>
+<p><strong>Residual sum of squares (RSS)</strong>: Sum of the squared differences between the observed <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(y_i\)</span> for the <span class="math notranslate nohighlight">\(i^{th}\)</span> observation) and the predicted <span class="math notranslate nohighlight">\(\hat{y}\)</span>, or,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{RSS} = \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
@@ -938,12 +938,12 @@ F-statistic:  7.22 on 2 and 300 DF,  p-value: 0.0008657
 <section id="model-criticism">
 <h3>Model criticism<a class="headerlink" href="#model-criticism" title="Permalink to this headline">¶</a></h3>
 <p>The next question must be — and actually, we should do this before we go anywhere near the model summaries &amp;mdas ;, <em>is the model appropriate for the data</em>?</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Using <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> to guide you, get the four model diagnostic plots for the trophic level model on a single figure.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression Chapter</span></a> to guide you, get the four model diagnostic plots for the trophic level model on a single figure.</p>
 <p>The four plots are shown below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/modelDiag.svg"><img alt="../_images/modelDiag.svg" src="../_images/modelDiag.svg" width="600px" /></a>
 <hr class="docutils" />
-<p>Note that in regression, the predicted (or fitted) values from the model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals normally distributed? The answer for this model looks to be yes.</p>
+<p>Note that in a regression analysis, the predicted values from the fitted model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals normally distributed? The answer for this model looks to be yes.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Check the ground dwelling model in the same way.</p>
 </section>
 <section id="testing-pairwise-differences-between-levels">
@@ -1001,7 +1001,7 @@ dwelling models.</p>
 </section>
 <section id="are-the-factors-independent">
 <h3>Are the factors independent?<a class="headerlink" href="#are-the-factors-independent" title="Permalink to this headline">¶</a></h3>
-<p>We’ve looked at two models, using trophic level and ground dwelling. It is worth asking whether these are independent factors. What if, for example, our herbivores are all big, ground dwellers? This is important to know because otherwise, a two-way ANOVA would not be appropriate. We will look at interactions in <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">MulExplInter</span></a>.</p>
+<p>We’ve looked at two models, using trophic level and ground dwelling. It is worth asking whether these are independent factors. What if, for example, our herbivores are all big, ground dwellers? This is important to know because otherwise, a two-way ANOVA would not be appropriate. We will look at interactions in the <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">Multiple Explanatory Variables Chapter</span></a>.</p>
 <p>OK, so we want to know whether the two factors are independent. This is a job for the <span class="math notranslate nohighlight">\(\chi^2\)</span> test!</p>
 </section>
 </section>
