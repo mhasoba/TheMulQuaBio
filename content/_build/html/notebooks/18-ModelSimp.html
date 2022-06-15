@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model simplification &#8212; TheMulQuaBio</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,26 +34,24 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >let toggleHintShow = 'Click to show';</script>
-    <script >let toggleHintHide = 'Click to hide';</script>
-    <script >let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Generalised Linear Models" href="19-glm.html" />
@@ -97,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -142,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -207,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
@@ -229,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -429,9 +428,9 @@ const thebe_selector_output = ".output, .cell_output"
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="model-simplification">
+  <section class="tex2jax_ignore mathjax_ignore" id="model-simplification">
 <h1>Model simplification<a class="headerlink" href="#model-simplification" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In biology, we often use statistics to compare competing hypotheses in order to work out the simplest explanation for some data. This often involves collecting several explanatory variables that describe different hypotheses and then fitting them together in a single model, and often including interactions between those variables.</p>
 <p>In all likelihood, not all of these model <em>terms</em> will be important. If we remove unimportant terms, then the explanatory power of the model will get worse, but might not get significantly worse.</p>
@@ -446,18 +445,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The approach we will look at is to start with a <em>maximal model</em> — the model that contains everything that might be important — and simplify it towards the <em>null model</em> — the
 model that says that none of your variables are important. Hopefully, there is a point somewhere in between where you can’t remove any further terms without making the model significantly worse: this is called the <em>minimum adequate model</em>.</p>
 <a class="reference internal image-reference" href="../_images/minmodflow.png"><img alt="../_images/minmodflow.png" src="../_images/minmodflow.png" style="width: 600px;" /></a>
-<div class="section" id="chapter-aims">
+<section id="chapter-aims">
 <h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">¶</a></h3>
 <p>The main aim of this chapter<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a> is to learn how to build and then simplify complex models by removing non-explanatory terms, to arrive at the <em>Minimum Adequate Model</em>.</p>
-</div>
-<div class="section" id="the-process-of-model-simplification">
+</section>
+<section id="the-process-of-model-simplification">
 <h3>The process of model simplification<a class="headerlink" href="#the-process-of-model-simplification" title="Permalink to this headline">¶</a></h3>
 <p>Model simplification is an iterative process. The flow diagram below shows how it works: at each stage you try and find an acceptable simplification. If successful, then you start again with the new simpler model and try and find a way to simplify this, until eventually, you can’t find anything more to remove.</p>
 <a class="reference internal image-reference" href="../_images/maxmodflow.png"><img alt="../_images/maxmodflow.png" src="../_images/maxmodflow.png" style="width: 600px;" /></a>
 <p>As always, we can use an <span class="math notranslate nohighlight">\(F\)</span>-test to compare two models and see if they have significantly different explanatory power (there are also other ways to do this, such as using the Akaike Information Criterion, but we will not cover this here). In this context, the main thing to remember is that significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes it <em>significantly</em> worse.</p>
-</div>
-</div>
-<div class="section" id="an-example">
+</section>
+</section>
+<section id="an-example">
 <h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
 <p>We’ll be using the mammal dataset for this practical, so once again:</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to your stats module <code class="docutils literal notranslate"><span class="pre">code</span></code> folder.</p>
@@ -509,8 +508,8 @@ model that says that none of your variables are important. Hopefully, there is a
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="a-maximal-model">
+</section>
+<section id="a-maximal-model">
 <h2>A Maximal model<a class="headerlink" href="#a-maximal-model" title="Permalink to this headline">¶</a></h2>
 <p>First let’s fit a model including all of these variables and all of the interactions:</p>
 <div class="cell docutils container">
@@ -532,8 +531,8 @@ model that says that none of your variables are important. Hopefully, there is a
 <p>The real lesson here is that it is easy to fit complicated models in R.</p>
 <p><em>Understanding and explaining them is a different matter</em>.</p>
 <p>The temptation is always to start with the most complex possible model but this is rarely a good idea.</p>
-</div>
-<div class="section" id="a-better-maximal-model">
+</section>
+<section id="a-better-maximal-model">
 <h2>A better maximal model<a class="headerlink" href="#a-better-maximal-model" title="Permalink to this headline">¶</a></h2>
 <p>Instead of all possible interactions, we’ll consider two-way interactions: how do pairs of variables affect each other?</p>
 <p>There is a shortcut for this: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c)^2</span></code> gets all two way combinations of the variables in the brackets, so is a quicker way of getting this model:</p>
@@ -581,8 +580,8 @@ which suggests that the slope of log C value with body mass differs between grou
 <p><span class="math notranslate nohighlight">\(\star\)</span> Run this model in your script.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Look at the output of <code class="docutils literal notranslate"><span class="pre">anova(model)</span></code> and <code class="docutils literal notranslate"><span class="pre">summary(model)</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Generate and inspect the model diagnostic plots.</p>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>Model simplification<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s simplify the model we fitted above. Model simplification is not as straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
 <p>But how much is “tiny amount”? This is what we will learn now by using the <span class="math notranslate nohighlight">\(F\)</span>-test.   Again, remember: significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
@@ -736,8 +735,8 @@ which suggests that the slope of log C value with body mass differs between grou
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add this first simplification to your script and re-run it.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span>  Look at the output above and decide what is the next possible term to delete</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above as a model, create <code class="docutils literal notranslate"><span class="pre">model3</span></code> as the next simplification. (remember to use <code class="docutils literal notranslate"><span class="pre">model2</span></code> in your <code class="docutils literal notranslate"><span class="pre">update</span></code> call and not <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
-</div>
-<div class="section" id="exercise">
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Now for a more difficult exercise:</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where <span class="math notranslate nohighlight">\(N\)</span> is the current step).</p>
@@ -747,8 +746,8 @@ which suggests that the slope of log C value with body mass differs between grou
 <hr class="docutils" />
 <p><a id="fn1"></a>
 [1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">ModelSimp.R</span></code></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

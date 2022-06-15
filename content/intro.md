@@ -9,39 +9,15 @@ Welcome to The Multilingual Quantitative Biologist!
 
 ## About
 
-These notes have emerged from the development of content for modules on
-Biological Computing taught in various past and present courses at the
-Department of Life Sciences, Imperial College London. These courses include Year
-1 & 2 Computational Biostatistics modules at the South Kensington Campus, the
-Computational Methods in Ecology and Evolution [(CMEE) Masters
-program](http://www.imperial.ac.uk/life-sciences/postgraduate/masters-courses/computational-methods-in-ecology-and-evolution/)
-at the Silwood Park Campus, the Quantitative Methods in Ecology and Evolution
-Centre for Doctoral Training ([QMEE CDT](https://www.imperial.ac.uk/qmee-cdt/)),
-and the training workshops of the [VectorBiTE RCN](http://vectorbite.org).
+These notes have emerged from the development of content for modules on Biological Computing taught in various past and present courses at the
+Department of Life Sciences, Imperial College London. These courses include Year 1 & 2 Computational Biostatistics modules at the South Kensington Campus, the Computational Methods in Ecology and Evolution [(CMEE) Masters program](http://www.imperial.ac.uk/life-sciences/postgraduate/masters-courses/computational-methods-in-ecology-and-evolution/) at the Silwood Park Campus, the Quantitative Methods in Ecology and Evolution Centre for Doctoral Training ([QMEE CDT](https://www.imperial.ac.uk/qmee-cdt/)), and the training workshops of the [VectorBiTE RCN](http://vectorbite.org).
 
-Different subsets of these notes will be covered in different courses. Please
-look up your respective course guidebooks/handbooks to determine when the
-modules covered in these notes are scheduled in your course. You will be given
-instructions about which sections are covered in your course.
+Different subsets of these notes will be covered in different courses. Please look up your respective course guidebooks/handbooks to determine when the modules covered in these notes are scheduled in your course. You will be given instructions about which sections are covered in your course.
 
-All the chapters of these notes are written as
-[jupyter](./notebooks/Appendix-JupyIntro.ipynb) notebooks. Each chapter/notebook
-is accompanied by data and code on which you can practice your skills in your
-own time and during practical sessions. These materials are available (and will
-be updated regularly) at a [git
-repository](https://github.com/mhasoba/TheMulQuaBio). We use git for hosting
-this course's materials because we want to version-control this course's
-content, which is constantly evolving to keep up with changing
-programming/computing technologies. That is, we are treating this course as any
-computing project that needs to be regularly updated and improved. Changes to
-the notes and content will also be made based upon student feedback. Blackboard
-is just not set up to handle dynamic updating and version control of this sort! 
+All the chapters of these notes are written as [jupyter](./notebooks/Appendix-JupyIntro.ipynb) notebooks. Each chapter/notebook is accompanied by data and code on which you can practice your skills in your own time and during practical sessions. These materials are available (and will be updated regularly) at a [git repository](https://github.com/mhasoba/TheMulQuaBio). We use git for hosting this course's materials because we want to version-control this course's content, which is constantly evolving to keep up with changing
+programming/computing technologies. That is, we are treating this course as any computing project that needs to be regularly updated and improved. Changes to the notes and content will also be made based upon student feedback. Blackboard is just not set up to handle dynamic updating and version control of this sort! 
 
-If you do not use git, you may download the code, data, these notes, and other
-course materials from the [repository](https://github.com/mhasoba/TheMulQuaBio)
-at one go look for the green "Clone or Download" button and then clicking on the
-"Download repository" link. You can then unzip the downloaded .zip and grab the
-files you need.
+If you do not use git, you may download the code, data, these notes, and other course materials from the [repository](https://github.com/mhasoba/TheMulQuaBio) at one go look for the green "Clone or Download" button and then clicking on the "Download repository" link. You can then unzip the downloaded .zip and grab the files you need.
 
 ---
 

@@ -25,21 +25,17 @@ trophSE <- tapply(mammals$logCvalue, mammals$TrophicLevel, FUN = seMean)
 
 print(trophSE)
 
-# get the upper and lower limits of the error bars
 upperSE <- trophMeans + trophSE
 lowerSE <- trophMeans - trophSE
 
-# get a barplot
-# - this function can report where the middle of the bars are on the x-axis
-# - set the y axis limits to contain the error bars
+upperSE
+
+lowerSE
 
 barMids <- barplot(trophMeans, ylim=c(0, max(upperSE)), ylab = 'log C value (pg)')
-
-# Now use the function to add error bars
-# - draws arrows between the points (x0,y0) and (x1,y1)
-# - arrow heads at each end (code=3) and at 90 degree angles
-
 arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3)
+
+print(barMids) # see what barMids is
 
 #Load the gplots package
 library(gplots)
@@ -61,8 +57,6 @@ print(TukeyTroph)
 library(repr) ; options(repr.plot.res = 100, repr.plot.width = 5, repr.plot.height = 5) # Change plot size
 
 par(las=1, mar=c(4,10,3,1))
-# las= 1 turns labels horizontal
-# mar makes the left margin wider (bottom, left, top, right)
 plot(TukeyTroph)
 
 factorTable <- table(mammals$GroundDwelling, mammals$TrophicLevel)

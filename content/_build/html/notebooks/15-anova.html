@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Linear Models: Analysis of variance &#8212; TheMulQuaBio</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,26 +34,24 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >let toggleHintShow = 'Click to show';</script>
-    <script >let toggleHintHide = 'Click to hide';</script>
-    <script >let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Multiple explanatory variables" href="16-MulExpl.html" />
@@ -97,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -142,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -207,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
@@ -229,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -498,9 +497,9 @@ const thebe_selector_output = ".output, .cell_output"
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-analysis-of-variance">
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-models-analysis-of-variance">
 <h1>Linear Models: Analysis of variance<a class="headerlink" href="#linear-models-analysis-of-variance" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Analysis of Variance, is very often a good choice if your response (dependent) variable is continuous, and your  predictor (independent) variables is categorical.</p>
 <p>In this chapter, you will learn to perform an ANOVA, that is, fit this linear model to the data. Specifically, you will learn to<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
@@ -510,38 +509,40 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Perform diagnostics to determine whether the factors are explanatory, and whether the Linear Model is appropriate for your data</p></li>
 <li><p>Explore and compare how much the different levels of a factor explain the variation in your data</p></li>
 </ul>
-</div>
-<div class="section" id="what-is-anova">
+</section>
+<section id="what-is-anova">
 <h2>What is ANOVA?<a class="headerlink" href="#what-is-anova" title="Permalink to this headline">¶</a></h2>
 <p><u>An</u>alysis  <u>O</u>f  <u>Va</u>riance (ANOVA) is an extremely useful class of Linear models. It is very often appropriate when your response (dependent) variable is continuous, while your predictor (independent) variable is categorical. Specifically, <em>One-way ANOVA</em> is used to compare means of two or more samples representing numerical, continuous data in response to a single categorical variable (factor).</p>
 <hr class="docutils" />
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/ANOVA_is_LM.svg"><img alt="ANOVA example" src="../_images/ANOVA_is_LM.svg" width="300px" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>A dataset where an ANOVA is appropriate.</strong> Performing an ANOVA on this dataset is the same as fitting the linear model <span class="math notranslate nohighlight">\(y  = \beta_1  + \beta_2 x_s + \beta_3 x_a\)</span>, where <span class="math notranslate nohighlight">\(x_s\)</span> and <span class="math notranslate nohighlight">\(x_a\)</span> are two levels (“treatments”, representing statistically separate populations) within the factor (games console ownership). Here, the first treatment, the control, is captured by the baseline value <span class="math notranslate nohighlight">\(\beta_1\)</span> (the sample with the lowest value, on the far left).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>A dataset where an ANOVA is appropriate.</strong> Performing an ANOVA on this dataset is the same as fitting the linear model <span class="math notranslate nohighlight">\(y  = \beta_1  + \beta_2 x_s + \beta_3 x_a\)</span>, where <span class="math notranslate nohighlight">\(x_s\)</span> and <span class="math notranslate nohighlight">\(x_a\)</span> are two levels (“treatments”, representing statistically separate populations) within the factor (games console ownership). Here, the first treatment, the control, is captured by the baseline value <span class="math notranslate nohighlight">\(\beta_1\)</span> (the sample with the lowest value, on the far left).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>(One-way) ANOVA tests the null hypothesis that samples from two or more groups (the treatments or factors) are drawn from populations with the <em>same mean value</em>. That is, the null hypothesis is that all the groups are random samples from the <em>same</em> population (no statistical difference in their means). To do this, ANOVA compares the variance in the data explained by fitting the linear model, to the unexplained variance (the null hypothesis.</p>
 <p>In other words, in effect, ANOVA asks whether a linear model with a predictor (or explanatory variable) with at least two categorical levels (or factors), better accounts for the variance (Explained Sum of Squares, ESS, see below) than a null model of the form <span class="math notranslate nohighlight">\(y  = \beta_1\)</span> (<a class="reference internal" href="#id1"><span class="std std-ref">Figure 1</span></a>). Thus, ANOVA is just a type of linear model.</p>
 <p>By the end of this chapter, it will also make more sense to you how/why fitting a linear regression model to the data that we learned <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">previously</span></a>, of the form <span class="math notranslate nohighlight">\(y = \beta_1  + \beta_2 x\)</span> (where <span class="math notranslate nohighlight">\(x\)</span> is a continuous predictor variable), requires an ANOVA to determine if the model better fits than a null model of the form <span class="math notranslate nohighlight">\(y  = \beta_1\)</span>.</p>
 <p>Typically, one-way ANOVA is used to test for differences among at least three groups, since the two-group (or levels or factors) case can be covered by a <span class="math notranslate nohighlight">\(t\)</span>-test (see <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>). When there are only two means to compare, the <span class="math notranslate nohighlight">\(t\)</span>-test and the F-test are equivalent; the relation between ANOVA and t is given by <span class="math notranslate nohighlight">\(F = t^2\)</span>.</p>
-<p>An extension of one-way ANOVA is two-way analysis of variance that examines the influence of two different categorical independent variables on one dependent variable — we will look at multiple predictor variables in <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">MulExpl</span></a> onwards.</p>
-</div>
-<div class="section" id="calculating-the-anova-test-statistic">
+<p>An extension of one-way ANOVA is two-way analysis of variance that examines the influence of two different categorical independent variables on one dependent variable — we will look at multiple predictor variables in the <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">Multiple Explanatory Variables Chapter</span></a> onwards.</p>
+</section>
+<section id="calculating-the-anova-test-statistic">
 <span id="anova-sos"></span><h2>Calculating the ANOVA test statistic<a class="headerlink" href="#calculating-the-anova-test-statistic" title="Permalink to this headline">¶</a></h2>
 <p>ANOVA uses of the <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">F-Statistic</span></a>. To this end, an ANOVA “partitions” variability in your data as follows:</p>
-<p><strong>Total sum of squares (TSS)</strong>: This is the sum of the squared difference between the observed dependent variable (<span class="math notranslate nohighlight">\(y\)</span>) and the mean of the response variable <span class="math notranslate nohighlight">\(y\)</span> (denoted by <span class="math notranslate nohighlight">\(\bar{y}\)</span>), i.e.,</p>
+<p><strong>Total sum of squares (TSS)</strong>: This is the sum of the squared difference between the observed dependent variable values (the <span class="math notranslate nohighlight">\(y\)</span>’s) and the mean of the response variable (denoted by <span class="math notranslate nohighlight">\(\bar{y}\)</span>), i.e.,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{TSS} = \sum_{i=1}^{n}(y_i - \bar{y})^2
 \end{equation*}\]</div>
 <p>TSS tells us how much variation there is in the dependent variable without having any other information (your null model). You might notice that TSS is the numerator of the <em>sample variance</em> (or it’s square-root, the <em>sample standard deviation</em>), which you learned about <a class="reference internal" href="12-ExpDesign.html#expdesign-descriptive-stats"><span class="std std-ref">previously</span></a>.</p>
-<p><strong>Explained sum of squares (ESS)</strong>: Sum of the squared differences between the predicted <span class="math notranslate nohighlight">\(y\)</span>’s (denoted <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s) and <span class="math notranslate nohighlight">\(\bar{y}\)</span>, or,</p>
+<p><strong>Explained sum of squares (ESS)</strong>: Sum of the squared differences between the predicted <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s) and <span class="math notranslate nohighlight">\(\bar{y}\)</span>, or,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{ESS} = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2
 \end{equation*}\]</div>
-<p>ESS tells us how much of the variation in the dependent variable our alternative (linear) model was able to explain. That is, it’s the reduction in uncertainty that occurs when the linear model is used to predict the responses.</p>
-<p><strong>Residual sum of squares (RSS)</strong>: Sum of the squared differences between the observed <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(y_i\)</span>) and the predicted <span class="math notranslate nohighlight">\(\hat{y}\)</span>, or,</p>
+<p>ESS tells us how much of the variation in the dependent variable our alternative (linear) model was able to explain by measuring variation in the <em>modelled</em> <span class="math notranslate nohighlight">\(y\)</span> values (the <span class="math notranslate nohighlight">\(\hat{y}\)</span>’s). In othjer words, it measures the reduction in uncertainty that occurs when the linear model is used to predict the responses.</p>
+<p><strong>Residual sum of squares (RSS)</strong>: Sum of the squared differences between the observed <span class="math notranslate nohighlight">\(y\)</span>’s (denoted by <span class="math notranslate nohighlight">\(y_i\)</span> for the <span class="math notranslate nohighlight">\(i^{th}\)</span> observation) and the predicted <span class="math notranslate nohighlight">\(\hat{y}\)</span>, or,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     \text{RSS} = \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
@@ -578,7 +579,7 @@ const thebe_selector_output = ".output, .cell_output"
 </tbody>
 </table>
 <p>Let’s try to make sense of these calculations. Firstly, because we are dealing with samples understanding the degrees of freedom is critical.</p>
-<div class="section" id="degrees-of-freedom">
+<section id="degrees-of-freedom">
 <h3>Degrees of freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this headline">¶</a></h3>
 <p>Each sum of squares has a corresponding degrees of freedom (DF) associated with it that gives the Mean Sum of Squares (MSS) — the Sums of Squares divided by the corresponding degrees of freedom.</p>
 <ul class="simple">
@@ -586,8 +587,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>The ESS DF is one less than the number of coefficients (<span class="math notranslate nohighlight">\(n_c\)</span>) (estimated parameters) in the model: <span class="math notranslate nohighlight">\(n_c-1\)</span>. Note that in the case where the linear model is an ANOVA, the number of coefficients equals the number of “treatments” (the categories or levels in the predictor or factor). So for example, in <a class="reference internal" href="#id1"><span class="std std-ref">Figure 1</span></a>, there are three treatments (predictors) and therefore three coefficients (<span class="math notranslate nohighlight">\(\beta_1\)</span>, <span class="math notranslate nohighlight">\(\beta_2\)</span>, <span class="math notranslate nohighlight">\(\beta_3\)</span>), which means that the ESS degrees of freedom there is <span class="math notranslate nohighlight">\(n_c-1 = 2\)</span>.</p></li>
 <li><p>The RSS DF is the sample size <span class="math notranslate nohighlight">\(n\)</span> minus the number of coefficients that you need to estimate (<span class="math notranslate nohighlight">\(n_c\)</span>), that is, <span class="math notranslate nohighlight">\(n - n_c\)</span>, because each estimated coefficient is an unknown parameter.</p></li>
 </ul>
-</div>
-<div class="section" id="the-f-value-or-ratio">
+</section>
+<section id="the-f-value-or-ratio">
 <h3>The F-Value (or Ratio)<a class="headerlink" href="#the-f-value-or-ratio" title="Permalink to this headline">¶</a></h3>
 <p>The F-Value or F-Ratio, the test statistic used to decide whether the linear model fit is statistically significant, is the ratio of the Mean ESS to the Mean RSS:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -597,25 +598,25 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 <p>If the null hypothesis that the group means are drawn from sub-populations with the <em>same</em> mean were indeed true, the between-group variance (numerator in this F-ratio) should be lower than the within-group variance (denominator). The null hypothesis is rejected if this F-Ratio is large — the model explains a significant amount of variance, and we can conclude that the samples were drawn from populations with different mean values.</p>
 <p>The p-value is calculated for the overall model fit using the F-distribution as you learned before, in <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>.</p>
 <p>Also note that the Root Mean Square Error (RMSE), also known as the standard error of the estimate, is the square root of the Mean RSS. It is the standard deviation of the data about the Linear model, rather than about the sample mean.</p>
-</div>
-<div class="section" id="the-r-2">
+</section>
+<section id="the-r-2">
 <h3>The R<span class="math notranslate nohighlight">\(^2\)</span><a class="headerlink" href="#the-r-2" title="Permalink to this headline">¶</a></h3>
 <p>The R<span class="math notranslate nohighlight">\(^2\)</span>, also called the Coefficient of Determination, is the proportion of total error (TSS) explained by the model (ESS), so the ratio ESS/TSS. That is it is the proportion of the variability in the response that is explained by the fitted model. Since TSS = ESS + RSS, R<span class="math notranslate nohighlight">\(^2\)</span> can be rewritten as (TSS-RSS)/TSS = 1 - RSS/TSS. If a model has perfectly fits the data, <span class="math notranslate nohighlight">\(R^{2}=1\)</span>, and if it has no predictive capability <span class="math notranslate nohighlight">\(R^{2}=0\)</span>. In reality, R<span class="math notranslate nohighlight">\(^2\)</span> will never be exactly 0 because even a null model will explain some variance just by chance due to sampling error. Note that <span class="math notranslate nohighlight">\(R\)</span>, the square root of R<span class="math notranslate nohighlight">\(^2\)</span>, is the multiple correlation coefficient: the correlation between the observed values (<span class="math notranslate nohighlight">\(y\)</span>), and the predicted values (<span class="math notranslate nohighlight">\(\hat{y}\)</span>).</p>
-<div class="section" id="adjusted-r-2">
+<section id="adjusted-r-2">
 <h4>Adjusted R<span class="math notranslate nohighlight">\(^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Permalink to this headline">¶</a></h4>
 <p>As additional predictors (and therefore linear model coefficients) are added to a linear model, R<span class="math notranslate nohighlight">\(^2\)</span> increases even when the new predictors add no real predictive capability. The adjusted-R<span class="math notranslate nohighlight">\(^2\)</span> tries to address this problem of over-specification or over-fitting by including the degrees of freedom: Adjusted R<span class="math notranslate nohighlight">\(^2\)</span> = 1 - (RSS/<span class="math notranslate nohighlight">\(n-n_c-2\)</span>)/(TSS/<span class="math notranslate nohighlight">\(n-1\)</span>) <a class="reference external" href="#fn2"><span class="math notranslate nohighlight">\(^{[2]}\)</span></a>.</p>
 <p>Thus, additional predictors with little explanatory capability will increase the ESS (and reduce the RSS), but they will also have lower RSS degrees of freedom (because of the additional number of fitted coefficients, <span class="math notranslate nohighlight">\(n_c\)</span>’s)<a class="reference external" href="#fn3"><span class="math notranslate nohighlight">\(^{[3]}\)</span></a>. Thus if the additional predictors have poor predictive capability, these two reductions will cancel each other out. In other words, the Adjusted R<span class="math notranslate nohighlight">\(^2\)</span> penalizes the addition of new predictors to the linear model, so you should always have a look at the Adjusted R<span class="math notranslate nohighlight">\(^2\)</span> as a corrected measure of R<span class="math notranslate nohighlight">\(^2\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="section" id="an-example-anova">
+</section>
+</section>
+</section>
+<section id="an-example-anova">
 <h2>An example ANOVA<a class="headerlink" href="#an-example-anova" title="Permalink to this headline">¶</a></h2>
 <p>In this Chapter, we will use a new dataset of genome size and life history in mammals to try out a one-way ANOVA.</p>
-<div class="section" id="the-data">
+<section id="the-data">
 <h3>The data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h3>
 <p>These data are taken from an online database of genome sizes and a <a class="reference external" href="http://www.genomesize.com/">published database of mammalian life history</a>.</p>
 <p>Trait data for these species are taken from: <a class="reference external" href="http://esapubs.org/archive/ecol/e090/184/metadata.htm"> Jones, K. E. <em>et al.</em> (2009) PanTHERIA: a species-level database of life history, ecology, and geography of extant and recently extinct mammals. Ecology 90, 2648–2648</a>.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Download the file <code class="docutils literal notranslate"><span class="pre">MammalData.csv</span></code> from bitbucket and save to your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Download the file <a class="reference external" href="https://raw.githubusercontent.com/mhasoba/TheMulQuaBio/master/content/data/MammalData.csv"><code class="docutils literal notranslate"><span class="pre">MammalData.csv</span></code></a> from the github repository and save to your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory (Right-click and “Save as”…).</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">ANOVA_Prac.R</span></code> and add some introductory comments.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> to load the data in the data frame <code class="docutils literal notranslate"><span class="pre">mammals</span></code> and then <code class="docutils literal notranslate"><span class="pre">str</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to examine the data:</p>
 <div class="cell docutils container">
@@ -677,8 +678,8 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <p>You will see from the output of <code class="docutils literal notranslate"><span class="pre">summary</span></code> that there is lots of missing data for the life history traits.</p>
-</div>
-<div class="section" id="exploring-the-data-with-boxplots">
+</section>
+<section id="exploring-the-data-with-boxplots">
 <h3>Exploring the data with boxplots<a class="headerlink" href="#exploring-the-data-with-boxplots" title="Permalink to this headline">¶</a></h3>
 <p>We are interested in finding out whether the mean C value for species varies predictably for different levels of life history traits (a typical one-way ANOVA question). For example:</p>
 <ul class="simple">
@@ -707,8 +708,8 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Repeat the two plot commands to look at differences between ground dwelling and other species.</p>
-</div>
-<div class="section" id="differences-in-means-with-barplots">
+</section>
+<section id="differences-in-means-with-barplots">
 <h3>Differences in means with barplots<a class="headerlink" href="#differences-in-means-with-barplots" title="Permalink to this headline">¶</a></h3>
 <p>Box and whisker plots show the median and spread in the data very clearly, but we want to test whether the means are different. This is <span class="math notranslate nohighlight">\(t\)</span> test territory — how different are the means given the standard error — so it is common to use barplots and standard error bars to show these differences.</p>
 <p>We’re going to use some R code to construct a barplot by hand. We need to calculate the means and standard errors within trophic groups, but before we can do that, we need a new functions to calculate the standard error of a mean:</p>
@@ -757,39 +758,85 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 </div>
-<p>Now we have to put these values together on the plot:</p>
+<p>Now we have to put these values together on the plot.</p>
+<p>Let’s first get the upper and lower limits of the error bars:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the upper and lower limits of the error bars</span>
-<span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">+</span> <span class="n">trophSE</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">+</span> <span class="n">trophSE</span>
 <span class="n">lowerSE</span> <span class="o">&lt;-</span> <span class="n">trophMeans</span> <span class="o">-</span> <span class="n">trophSE</span>
-
-<span class="c1"># get a barplot</span>
-<span class="c1"># - this function can report where the middle of the bars are on the x-axis</span>
-<span class="c1"># - set the y axis limits to contain the error bars</span>
-
-<span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">trophMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&#39;log C value (pg)&#39;</span><span class="p">)</span>
-
-<span class="c1"># Now use the function to add error bars</span>
-<span class="c1"># - draws arrows between the points (x0,y0) and (x1,y1)</span>
-<span class="c1"># - arrow heads at each end (code=3) and at 90 degree angles</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">upperSE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>Carnivore</dt><dd>1.12489290666848</dd><dt>Herbivore</dt><dd>1.21898454975239</dd><dt>Omnivore</dt><dd>1.25478376489463</dd></dl>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lowerSE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>Carnivore</dt><dd>1.04524087060908</dd><dt>Herbivore</dt><dd>1.17487195482678</dd><dt>Omnivore</dt><dd>1.21791123320182</dd></dl>
+</div></div>
+</div>
+<p>Next, we draw the barplot, and also the error bars with two sequential commands:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">trophMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&#39;log C value (pg)&#39;</span><span class="p">)</span>
 <span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_17_0.png" src="../_images/15-anova_17_0.png" />
+<img alt="../_images/15-anova_21_0.png" src="../_images/15-anova_21_0.png" />
 </div>
 </div>
-<p>Now we need to draw all these pieces together into a script and get used to using them.</p>
+<p>In the first command, we plotted the bars and also store information on where the midpoints of the bars on the x-axis are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="n">barMids</span><span class="p">)</span> <span class="c1"># see what barMids is</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     [,1]
+[1,]  0.7
+[2,]  1.9
+[3,]  3.1
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is, the <code class="docutils literal notranslate"><span class="pre">barplot</span></code> function no only plots bars, but also returns where the middle of the bars are on the x-axis, which we have stored in <code class="docutils literal notranslate"><span class="pre">barMids</span></code>. These values are numeric even though the x-axis represents a categorical variable because these are <em>locations</em> of the bars’ midpoints in the plot’s x-scale.</p>
+<p>Also, we have set the y-axis limits using <code class="docutils literal notranslate"><span class="pre">c(0,</span> <span class="pre">max(upperSE))</span></code> to make sure that the tops of error bars don’t get cut off.</p>
+<p>Then, we used the <a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/arrows.html"><code class="docutils literal notranslate"><span class="pre">arrows</span></code> function</a> to add error bars. This function draws arrows between any two pairs of points (coordinates) <code class="docutils literal notranslate"><span class="pre">(x0,y0)</span></code> and <code class="docutils literal notranslate"><span class="pre">(x1,y1)</span></code> (in this case, <code class="docutils literal notranslate"><span class="pre">x0</span></code> and <code class="docutils literal notranslate"><span class="pre">x1</span></code> = <code class="docutils literal notranslate"><span class="pre">barMids</span></code>). The <code class="docutils literal notranslate"><span class="pre">ang=90</span></code> directive plots the arrow as a flat line by setting the arrow’s angle (see what happens when you run the same pair of commands, but with <code class="docutils literal notranslate"><span class="pre">ang=50</span></code>, or <code class="docutils literal notranslate"><span class="pre">ang=110</span></code>). The <code class="docutils literal notranslate"><span class="pre">code=3</span></code> directive plots both “arrow” heads, not just start or end ones (try <code class="docutils literal notranslate"><span class="pre">code=1</span></code> or <code class="docutils literal notranslate"><span class="pre">code=2</span></code> instead and see what happens).</p>
+<p>Now,</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add all the lines of code from this section into your script. Run it and check you get the graph above.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use the second two chunks as a model to plot a similar graph for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. You should get something like the plot below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/GDbarplot.png"><img alt="../_images/GDbarplot.png" src="../_images/GDbarplot.png" style="width: 400px;" /></a>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="an-alternative-to-barplots">
+<section id="an-alternative-to-barplots">
 <h3>An alternative to barplots<a class="headerlink" href="#an-alternative-to-barplots" title="Permalink to this headline">¶</a></h3>
 <p>That is a lot of work to go through for a plot. Doing it the hard way uses some useful tricks, but one strength of R is that there is a huge list of add-on packages that you can use to get new functions that other people have written.</p>
 <p>We will use the <code class="docutils literal notranslate"><span class="pre">gplots</span></code> package to create plots of group means and confidence intervals. Rather than plotting the means <span class="math notranslate nohighlight">\(\pm\)</span> 1 standard error, the option <code class="docutils literal notranslate"><span class="pre">p=0.95</span></code> uses the standard error and the number of data points to get 95% confidence intervals. The default <code class="docutils literal notranslate"><span class="pre">connect=TRUE</span></code> option adds a line connecting the means, which isn’t useful here.</p>
@@ -807,20 +854,15 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in library(gplots): there is no package called ‘gplots’
-Traceback:
-
-1. library(gplots)
-</pre></div>
+<img alt="../_images/15-anova_26_0.png" src="../_images/15-anova_26_0.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="analysis-of-variance">
+</section>
+</section>
+<section id="analysis-of-variance">
 <h2>Analysis of variance<a class="headerlink" href="#analysis-of-variance" title="Permalink to this headline">¶</a></h2>
 <p>Hopefully, those plots should convince you that there are differences in genome size between different trophic groups and between ground dwelling and other mammals. We’ll now use a linear model to test whether those differences are significant.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Using your code from <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> as a guide, create a linear
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using code from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression chapter</span></a> as a guide, create a linear
 model called <code class="docutils literal notranslate"><span class="pre">trophicLM</span></code> which models log C value as a function of trophic group.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to look at the analysis of variance table and then the coefficients of the model.</p>
 <p>The ANOVA table for the model should look like the one below: trophic level explains highly significant variation in genome size (<span class="math notranslate nohighlight">\(F= 7.22, \textrm{df}=2 \textrm{ and } 300, p =0.0009\)</span>).</p>
@@ -838,7 +880,7 @@ model called <code class="docutils literal notranslate"><span class="pre">trophi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 2 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -893,27 +935,20 @@ F-statistic:  7.22 on 2 and 300 DF,  p-value: 0.0008657
 <li><p>The <span class="math notranslate nohighlight">\(F\)</span> statistic, as in the ANOVA table above.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Repeat the analysis of variance above to look at the effects of ground dwelling on genome size.</p>
-<div class="section" id="model-criticism">
+<section id="model-criticism">
 <h3>Model criticism<a class="headerlink" href="#model-criticism" title="Permalink to this headline">¶</a></h3>
-<p>The next question must be — and actually, we should do this before we go anywhere near the model summaries — is the model appropriate to the data.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Using <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">regress</span></a> to guide you, get the four model diagnostic
-plots for the trophic level model on a single figure.</p>
+<p>The next question must be — and actually, we should do this before we go anywhere near the model summaries &amp;mdas ;, <em>is the model appropriate for the data</em>?</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Using the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression Chapter</span></a> to guide you, get the four model diagnostic plots for the trophic level model on a single figure.</p>
 <p>The four plots are shown below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/modelDiag.svg"><img alt="../_images/modelDiag.svg" src="../_images/modelDiag.svg" width="600px" /></a>
 <hr class="docutils" />
-<p>Note that in regression, the predicted (or fitted) values from the model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals
-normally distributed? The answer for this model looks to be yes.</p>
+<p>Note that in a regression analysis, the predicted values from the fitted model take a range along the relationship <span class="math notranslate nohighlight">\(y=a + bx\)</span>. For ANOVA, there are only a few predicted values — one for each group mean. This means that the plots above look different but we are looking for the same things: is there constant variance at each fitted value and are the residuals normally distributed? The answer for this model looks to be yes.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Check the ground dwelling model in the same way.</p>
-</div>
-<div class="section" id="testing-pairwise-differences-between-levels">
+</section>
+<section id="testing-pairwise-differences-between-levels">
 <span id="anova-ci"></span><h3>Testing pairwise differences between levels<a class="headerlink" href="#testing-pairwise-differences-between-levels" title="Permalink to this headline">¶</a></h3>
-<p>The one thing that the trophic level model does not tell us is whether
-there is a difference in genome size between omnivores and herbivores —
-both are compared to carnivores, but not to each other. This is because
-of the multiple pairwise testing problem mentioned in <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>. — if you do lots of tests then you may find small <span class="math notranslate nohighlight">\(p\)</span>
-values by chance and say something important is going on when it is just
-random chance. This is called a false positive or Type I error.</p>
+<p>The one thing that the trophic level model does not tell us is whether there is a difference in genome size between omnivores and herbivores — both are compared to carnivores, but not to each other. This is because of the multiple pairwise testing problem mentioned in <a class="reference internal" href="13-t_F_tests.html"><span class="doc std std-doc">t &amp; F tests</span></a>: if you do lots of tests then you may find small <span class="math notranslate nohighlight">\(p\)</span> values by chance and say something important is going on when it is just random chance. This is called a false positive or Type I error.</p>
 <p>With a 95% confidence interval, there is a 5% chance of a false positive <em>per test</em> but there are ways of getting a 5% chance across a set (or family) of tests. For linear models, we can use Tukey’s Honest Significant Difference test. We have to convert the <code class="docutils literal notranslate"><span class="pre">lm</span></code> object into an <code class="docutils literal notranslate"><span class="pre">aov</span></code> object first.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -951,31 +986,31 @@ value.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">las</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-<span class="c1"># las= 1 turns labels horizontal</span>
-<span class="c1"># mar makes the left margin wider (bottom, left, top, right)</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">TukeyTroph</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15-anova_29_0.png" src="../_images/15-anova_29_0.png" />
+<img alt="../_images/15-anova_36_0.png" src="../_images/15-anova_36_0.png" />
 </div>
 </div>
+<p>In the above plotting code, <code class="docutils literal notranslate"><span class="pre">las=1</span></code> makes the labels horizontal, while
+<code class="docutils literal notranslate"><span class="pre">mar=c(4,10,3,1)</span></code> makes the left margin wider by specifying <code class="docutils literal notranslate"><span class="pre">(bottom,</span> <span class="pre">left,</span> <span class="pre">top,</span> <span class="pre">right)</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include the Tukey test in your script for both the trophic level and ground
 dwelling models.</p>
-</div>
-<div class="section" id="are-the-factors-independent">
+</section>
+<section id="are-the-factors-independent">
 <h3>Are the factors independent?<a class="headerlink" href="#are-the-factors-independent" title="Permalink to this headline">¶</a></h3>
-<p>We’ve looked at two models, using trophic level and ground dwelling. It is worth asking whether these are independent factors. What if, for example, our herbivores are all big, ground dwellers? This is important to know because otherwise, a two-way ANOVA would not be appropriate. We will look at interactions in <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">MulExplInter</span></a>.</p>
+<p>We’ve looked at two models, using trophic level and ground dwelling. It is worth asking whether these are independent factors. What if, for example, our herbivores are all big, ground dwellers? This is important to know because otherwise, a two-way ANOVA would not be appropriate. We will look at interactions in the <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">Multiple Explanatory Variables Chapter</span></a>.</p>
 <p>OK, so we want to know whether the two factors are independent. This is a job for the <span class="math notranslate nohighlight">\(\chi^2\)</span> test!</p>
-</div>
-</div>
-<div class="section" id="the-chi-square-test-and-count-data">
+</section>
+</section>
+<section id="the-chi-square-test-and-count-data">
 <h2>The Chi-square test and count data<a class="headerlink" href="#the-chi-square-test-and-count-data" title="Permalink to this headline">¶</a></h2>
 <p>The Chi-square test, also known as <span class="math notranslate nohighlight">\(\chi^{2}\)</span> test or chi-square test, is designed for scenarios where you want to statistically test how likely it is that an observed distribution of values is due to chance. It is also called a “goodness of fit” statistic, because it measures how well the observed distribution of data fits with the distribution that is expected if the variables of which measurements are made are independent. In our mammals example below, the two variables are trophic level and ground dwelling.</p>
 <p>Note that a <span class="math notranslate nohighlight">\(\chi^{2}\)</span> test is designed to analyze categorical data. That is the data have been counted (count data) and divided into categories. It is not meant for continuous data (such as body weight, genome size, or height). For example, if you want to test whether
 attending class influences how students perform on an exam, using test scores (from 0-100) as data would not be appropriate for a Chi-square test. However, arranging students into the categories “Pass” and “Fail” and counting up how many fall in each categories would be appropriate. Additionally, the data in a Chi-square table (see below) should not be in the form of percentages – only count data are allowed!</p>
-<div class="section" id="the-chi-square-test-with-the-mammals-data">
+<section id="the-chi-square-test-with-the-mammals-data">
 <h3>The Chi-square test with the mammals data<a class="headerlink" href="#the-chi-square-test-with-the-mammals-data" title="Permalink to this headline">¶</a></h3>
 <p>We can easily build a table for a Chi-square test on the mammals data as follows:</p>
 <div class="cell docutils container">
@@ -1022,18 +1057,14 @@ Wilcox test.</p>
 <p><span class="math notranslate nohighlight">\(26+22 \mathrm{~(Total~number~of~carnivore~species)} \times \frac{26+45+64 \mathrm{~(Total~number~in~the~&quot;No&quot;~category)}}{26+22+45+62+64+40 \mathrm{~(Total~number~of~species)}} = 48 \times \frac{135}{259} = 25.02\)</span></p>
 <p>The sum of all six (one for each cell in the table above) such calculations would be the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> value that R gave you through the <code class="docutils literal notranslate"><span class="pre">chisq.test()</span></code> above — try it!</p>
 <p>Now back to the R output from the <code class="docutils literal notranslate"><span class="pre">chisq.test()</span></code> above. Why df = 2? This is calculated as <span class="math notranslate nohighlight">\(DF = (r - 1) * (c - 1)\)</span> where <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are the number of rows and columns in the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> table, respectively. The same principle you learned before applies here; you lose one degree of freedom for each new level of information you need to estimate: there is uncertainity about the information (number of categories) in both rows and columns, so you need to lose one degree of freedom for each.</p>
-<p>Finally, note that the p-value is significant — we can conclude that the
-factors aren’t independent. From the table, carnivores can be either
-ground dwelling or not, but herbivores tend to be ground dwelling and
-omnivores tend not to be. Ah well… it’s OK. We will look at a better
-way to analyze these data using “interactions” <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">later</span></a>.</p>
+<p>Finally, note that the p-value is significant — we can conclude that the factors aren’t independent. From the table, carnivores can be either ground dwelling or not, but herbivores tend to be ground dwelling and
+omnivores tend not to be. Ah well… it’s OK. We will look at a better way to analyze these data using “interactions” <a class="reference internal" href="17-MulExplInter.html"><span class="doc std std-doc">later</span></a>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include and run the <span class="math notranslate nohighlight">\(\chi^2\)</span> test in your script.</p>
-</div>
-</div>
-<div class="section" id="saving-data">
+</section>
+</section>
+<section id="saving-data">
 <h2>Saving data<a class="headerlink" href="#saving-data" title="Permalink to this headline">¶</a></h2>
-<p>The last thing to do is to save a copy of the mammal data, including our
-new column of log data, for use in later chapters.</p>
+<p>The last thing to do is to save a copy of the mammal data, including our new column of log data, for use in later chapters.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use this code in your script to create the saved data in your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1049,8 +1080,8 @@ new column of log data, for use in later chapters.</p>
 [2]: That is, it is 1 minus the ratio of the square of the standard error of the estimate to the sample variance of the response</p>
 <p><a id="fn3"></a>
 [3]: i.e., Standard error of the estimate won’t decrease</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

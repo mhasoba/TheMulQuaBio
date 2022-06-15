@@ -1,4 +1,4 @@
-library(repr) ; options(repr.plot.res = 100, repr.plot.width=4, repr.plot.height= 4) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
+library(repr) ; options(repr.plot.res = 100, repr.plot.width=5.5, repr.plot.height= 5) # Change plot sizes (in cm) - this bit of code is only relevant if you are using a jupyter notebook - ignore otherwise
 
 MySample <- rnorm(10, m=0, sd=1)
 
@@ -20,6 +20,8 @@ MySample20 <- rnorm(20, m=0, sd=1)
 MySample40 <- rnorm(40, m=0, sd=1)
 MySample80 <- rnorm(80, m=0, sd=1)
 MySample160 <- rnorm(160, m=0, sd=1)
+
+
 
 par(mfcol = c(2,3)) #initialize multi-paneled plot
 par(mfg = c(1,1)); hist(MySample5, col = rgb(1,1,0), main = 'n = 5') 

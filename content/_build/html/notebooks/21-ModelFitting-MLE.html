@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model Fitting using Maximum Likelihood &#8212; TheMulQuaBio</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,26 +34,24 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >let toggleHintShow = 'Click to show';</script>
-    <script >let toggleHintHide = 'Click to hide';</script>
-    <script >let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Model Fitting the Bayesian Way" href="22-ModelFitting-Bayesian.html" />
@@ -97,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -142,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -207,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
@@ -229,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -460,9 +459,9 @@ const thebe_selector_output = ".output, .cell_output"
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="model-fitting-using-maximum-likelihood">
+  <section class="tex2jax_ignore mathjax_ignore" id="model-fitting-using-maximum-likelihood">
 <h1>Model Fitting using Maximum Likelihood<a class="headerlink" href="#model-fitting-using-maximum-likelihood" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In this Chapter we will work through various examples of  model fitting  to biological data using Maximum Likelihood. It is recommended that you see the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">lecture</a> on model fitting in Ecology and Evolution.</p>
 <p><a class="reference internal" href="20-ModelFitting-NLLS.html"><span class="doc std std-doc">Previously</span></a>, we learned how to fit a mathematical model/equation to data by using the Least Squares method (linear or nonlinear). That is, we choose the parameters of model being fitted (e.g., straight line) to minimize the sum of the squares of the residuals/errors around the fitted model.</p>
@@ -493,8 +492,8 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="implementing-the-likelihood-in-r">
+</section>
+<section id="implementing-the-likelihood-in-r">
 <h2>Implementing the Likelihood in R<a class="headerlink" href="#implementing-the-likelihood-in-r" title="Permalink to this headline">¶</a></h2>
 <p>First, we need to build an R function that returns the (negative log) likelihood for simple linear regression (it is negative log because the log of likelihood is itself negative):</p>
 <div class="cell docutils container">
@@ -548,7 +547,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 <img alt="../_images/21-ModelFitting-MLE_11_0.png" src="../_images/21-ModelFitting-MLE_11_0.png" />
 </div>
 </div>
-<div class="section" id="likelihood-profile">
+<section id="likelihood-profile">
 <h3>Likelihood profile<a class="headerlink" href="#likelihood-profile" title="Permalink to this headline">¶</a></h3>
 <p>For now, let’s assume that we know what <span class="math notranslate nohighlight">\(\beta_1\)</span> is. Let’s build a likelihood profile for the simulated data:</p>
 <div class="cell docutils container">
@@ -578,8 +577,8 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 </div>
 <p>The true value for b0 (10) is the red line, while the value that minimizes the log-likelihood (i.e., maximizes the negative log-likelihood) is the green line. These are not the same because maximum likelihood is providing an * estimate * of the true value given the measurement errors (that we ourselves generated in tgis synthetic dataset).</p>
-</div>
-<div class="section" id="likelihood-surface">
+</section>
+<section id="likelihood-surface">
 <span id="modelfitting-mle-likelihoodsurface"></span><h3>Likelihood surface<a class="headerlink" href="#likelihood-surface" title="Permalink to this headline">¶</a></h3>
 <p>If we wanted to estimate both <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> (two parameters), we need to deal with a two-dimensional maximum likelihood surface. The simplest approach is to do a <em>grid search</em> to find this likelihood surface.</p>
 <div class="cell docutils container">
@@ -619,8 +618,8 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div>
 <p>There is a lot going on here. Make sure you ask one of us if some of the code does not make sense!</p>
 <p>Again, note that the true parameter combination (asterisk) and the one what maximizes the negative log-likelihood (circle) are different.</p>
-</div>
-<div class="section" id="conditional-likelihood">
+</section>
+<section id="conditional-likelihood">
 <h3>Conditional Likelihood<a class="headerlink" href="#conditional-likelihood" title="Permalink to this headline">¶</a></h3>
 <p>We can also look at the conditional surfaces (i.e., we look at the slice around whatever the best estimate is for the other parameter):</p>
 <div class="cell docutils container">
@@ -635,9 +634,9 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 <img alt="../_images/21-ModelFitting-MLE_22_0.png" src="../_images/21-ModelFitting-MLE_22_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="alternatives-to-grid-search">
+</section>
+</section>
+<section id="alternatives-to-grid-search">
 <h2>Alternatives to Grid Search<a class="headerlink" href="#alternatives-to-grid-search" title="Permalink to this headline">¶</a></h2>
 <p>There are many alternative methods to grid searches. Since we are seeking to minimize an arbitrary function (the negative log likelihood) we typically use a descent method to perform general optimization.</p>
 <p>There are lots of options implemented in the <code class="docutils literal notranslate"><span class="pre">optim</span></code>function in R. We won’t go into the details of these methods, due to time constraints. However, typically one would most commonly use:</p>
@@ -645,8 +644,8 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 <li><p>Brent’s method: for 1-D search within a bounding box, only</p></li>
 <li><p>L-BFGS-B (limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm with bounding box constraints): a quasi-Newton method, used for higher dimensions, when you want to be able to put simple limits on your search area.</p></li>
 </ul>
-</div>
-<div class="section" id="maximum-likelihood-using-optim">
+</section>
+<section id="maximum-likelihood-using-optim">
 <h2>Maximum Likelihood using <code class="docutils literal notranslate"><span class="pre">optim()</span></code><a class="headerlink" href="#maximum-likelihood-using-optim" title="Permalink to this headline">¶</a></h2>
 <p>We can now do the fitting. This involves optimization (to find the appropriate parameter values that achieve the maximum of the likelihood surface above). For this, we will use R’s versatile <code class="docutils literal notranslate"><span class="pre">optim()</span></code> function.</p>
 <p>The first argument for <code class="docutils literal notranslate"><span class="pre">optim()</span></code> is the function that you want to minimize, and the second is a vector of starting values for your parameters (as always, do a<code class="docutils literal notranslate"><span class="pre">?optim</span></code>). After the main arguments, you can add what you need to evaluate your function (e.g. <code class="docutils literal notranslate"><span class="pre">sigma</span></code> ). The addtional argument sigma can be “fed” to <code class="docutils literal notranslate"><span class="pre">nll.slr</span></code> because we use the <code class="docutils literal notranslate"><span class="pre">...</span></code> convention when defining it.</p>
@@ -717,7 +716,7 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 <img alt="../_images/21-ModelFitting-MLE_29_0.png" src="../_images/21-ModelFitting-MLE_29_0.png" />
 </div>
 </div>
-<div class="section" id="confidence-intervals">
+<section id="confidence-intervals">
 <h3>Confidence intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this headline">¶</a></h3>
 <p>The joint distribution of the MLEs are asymptotically Normally distributed. Given this, if you are minimizing the negative log likelihood (NLL) then the covariance matrix of the estimates is (asymptotically) the inverse of the Hessian matrix. The Hessian matrix evalutes the second derivatives of the NLL (numerically here), which gives us information about the curvature the likelihood. Thus we can use the Hessian to estimate confidence intervals:</p>
 <div class="cell docutils container">
@@ -747,8 +746,8 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </table>
 </div></div>
 </div>
-</div>
-<div class="section" id="comparison-to-fitting-with-least-squares">
+</section>
+<section id="comparison-to-fitting-with-least-squares">
 <h3>Comparison to fitting with least squares<a class="headerlink" href="#comparison-to-fitting-with-least-squares" title="Permalink to this headline">¶</a></h3>
 <p>We can, of course, simply fit the model with lest squares using the <code class="docutils literal notranslate"><span class="pre">lm()</span></code> function:</p>
 <div class="cell docutils container">
@@ -773,14 +772,14 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 </div></div>
 </div>
 <p>The estimates we get using <code class="docutils literal notranslate"><span class="pre">optim()</span></code> are almost identical to the estimates that we obtain here, and the standard errors on the intercept and slope are very similar to those we calculated from the Hessian (est_sigma= <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">est_sigma</span></code>).</p>
-</div>
-</div>
-<div class="section" id="model-selection">
+</section>
+</section>
+<section id="model-selection">
 <h2>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">¶</a></h2>
 <p>You can use <a class="reference external" href="#Comparing-models">AIC or BIC as you did in NLLS</a> using the likelihood you have calculated.</p>
 <p>You can also use the Likelihood Ratio Test (LRT).</p>
-</div>
-<div class="section" id="exercises-a-id-mle-exercises-a">
+</section>
+<section id="exercises-a-id-mle-exercises-a">
 <h2>Exercises <a id='MLE_Exercises'></a><a class="headerlink" href="#exercises-a-id-mle-exercises-a" title="Permalink to this headline">¶</a></h2>
 <p>Try MLE fitting for the allometric trait data example <a class="reference external" href="#Allometric-scaling-of-traits">above</a>. You will use the same data + functions that you used to practice fitting curves using non-linear least squares methods. You have two options here. The easier one is to convert the power law model to a straight line model by taking a log (explained the Allometry <a class="reference external" href="#Allom_Exercises">Exercises</a>. Specifically,</p>
 <p>(a) Using the <a class="reference external" href="#Implementing-the-Likelihood-in-R"><code class="docutils literal notranslate"><span class="pre">nll.slr</span></code></a> function as an example, write a function that calculates the negative log likelihood as a function of the parameters describing your trait and any additional parameters you need for an appropriate noise distribution (e.g., <span class="math notranslate nohighlight">\(\sigma\)</span> if you have normally distributed errors).</p>
@@ -788,14 +787,14 @@ f(y_i|\beta_0, \beta_1, x_i) = \frac{1}{\sqrt{2\sigma^2 \pi}} \exp\left(-\frac{(
 <p>(c) Use the <code class="docutils literal notranslate"><span class="pre">optim</span></code> function to find the MLE of the same parameter and indicate this on your likelihood profile.</p>
 <p>(d) Obtain a confidence interval for your estimate.</p>
 <p>A more challenging option is to fit the allometry data directly to the power law equation. You would need to assume a log-normal distribution for the errors instead of normal, in this case.</p>
-</div>
-<div class="section" id="readings-and-resources-a-id-readings-a">
+</section>
+<section id="readings-and-resources-a-id-readings-a">
 <h2>Readings and Resources <a id='Readings'></a><a class="headerlink" href="#readings-and-resources-a-id-readings-a" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Bolker, B. Ecological models and data in R. (Princeton University Press, 2008).</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
