@@ -8,8 +8,9 @@
 
     <title>Model Fitting the Bayesian Way &#8212; TheMulQuaBio</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,48 +20,62 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to Jupyter" href="Appendix-JupyIntro.html" />
-    <link rel="prev" title="Model Fitting using Maximum Likelihood" href="21-ModelFitting-MLE.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -69,9 +84,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -89,14 +105,15 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -141,7 +158,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -206,29 +223,19 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting-NLLS.html">
    Model Fitting using Non-linear Least-squares
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21-ModelFitting-MLE.html">
-   Model Fitting using Maximum Likelihood
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Model Fitting the Bayesian Way
-  </a>
- </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -274,107 +281,209 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/22-ModelFitting-Bayesian.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/22-ModelFitting-Bayesian.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/22-ModelFitting-Bayesian.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/22-ModelFitting-Bayesian.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mhasoba/TheMulQuaBio"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/22-ModelFitting-Bayesian.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/22-ModelFitting-Bayesian.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -570,19 +679,230 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model Fitting the Bayesian Way</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-likelihoods-exercise">
+   A Likelihoods exercise
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-binomial-distribution">
+     The Binomial Distribution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulating-from-the-binomial-using-r">
+       Simulating from the Binomial using R
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-of-moments-mom-estimators">
+     Method of Moments (MoM) Estimators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mle-for-binomial-distribution">
+     MLE for Binomial Distribution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#likelihood-and-log-likelihood">
+       Likelihood and Log Likelihood
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-the-likelihood-and-mle-in-r">
+     Computing the likelihood and MLE in R
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-midge-wing-length">
+   Example: Midge Wing Length
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bayesian-analysis">
+     Non-Bayesian analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-the-bayesian-model">
+     Setting up the Bayesian Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prior-information">
+       Prior Information
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analytic-posterior">
+     Analytic Posterior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-prior-sensitivity">
+     Exercise: Prior sensitivity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-evaluation-of-the-posterior-with-jags">
+     Numerical evaluation of the posterior with JAGS
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#specifying-the-model">
+       Specifying the model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-the-population-variance">
+     Estimating the population variance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-updating-the-bayesian-model">
+     Exercise: Updating the Bayesian model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aedes-data-revisited-using-bayesian-fitting">
+   Aedes data revisited using Bayesian fitting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-data">
+     The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-thermal-performance-curve-models">
+     Two thermal performance curve models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-thermal-response-model-file">
+     The thermal response model file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-diagnostics">
+     Running diagnostics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-fits">
+     Plot the fits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-analyses">
+     Additional analyses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-of-abundance-data">
+   Fitting of abundance data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specifying-the-growth-curve">
+     Specifying the growth curve
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     The thermal response model file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-settings-for-jags">
+     Additional settings for jags
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-the-model">
+     Fitting the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagnostics">
+     Diagnostics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-joint-posterior-of-parameters">
+     Visualizing the joint posterior of parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-posterior-distribution-of-the-mean-function">
+     The posterior distribution of the mean function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources-a-id-readings-a">
+   Readings and Resources
+   <a id="Readings">
+   </a>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-fitting-the-bayesian-way">
-<h1>Model Fitting the Bayesian Way<a class="headerlink" href="#model-fitting-the-bayesian-way" title="Permalink to this headline">¶</a></h1>
+<h1>Model Fitting the Bayesian Way<a class="headerlink" href="#model-fitting-the-bayesian-way" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>In this Chapter we will work through various examples of  model fitting  to biological data using Bayesian Methods. It is recommended that you see the <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">lecture</a> on model fitting in Ecology and Evolution.</p>
 <p>Recall from the <a class="reference external" href="https://github.com/vectorbite/VBiTraining2/tree/master/lectures">lectures</a> that for Bayesian model fitting/inference, we need to:</p>
 <ol class="simple">
@@ -603,9 +923,9 @@
 </div>
 </section>
 <section id="a-likelihoods-exercise">
-<h2>A Likelihoods exercise<a class="headerlink" href="#a-likelihoods-exercise" title="Permalink to this headline">¶</a></h2>
+<h2>A Likelihoods exercise<a class="headerlink" href="#a-likelihoods-exercise" title="Permalink to this headline">#</a></h2>
 <section id="the-binomial-distribution">
-<h3>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<h3>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">#</a></h3>
 <p>The Binomial distribution is used to model the number of “successes” in a set of trials (e.g., number of heads when you flip a coin <span class="math notranslate nohighlight">\(N\)</span> times). The pmf is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -614,7 +934,7 @@
 <p>such that <span class="math notranslate nohighlight">\(\mathrm{E}[x] = Np \)</span>. Throughout this “experiment”, you will assume that your experiment consists of flipping 20 coins, so that <span class="math notranslate nohighlight">\(N = 20\)</span>.</p>
 <p>Let’s use the Binomial distribution to practice two methods of estimating parameters for a probability distribution: method of moments and maximum likelihood.</p>
 <section id="simulating-from-the-binomial-using-r">
-<h4>Simulating from the Binomial using R<a class="headerlink" href="#simulating-from-the-binomial-using-r" title="Permalink to this headline">¶</a></h4>
+<h4>Simulating from the Binomial using R<a class="headerlink" href="#simulating-from-the-binomial-using-r" title="Permalink to this headline">#</a></h4>
 <p>First take 50 draws from a binomial (using <em>rbinom</em>) for each <span class="math notranslate nohighlight">\(p\in\)</span> 0.1, 0.5, 0.8 with <span class="math notranslate nohighlight">\(N=20\)</span>. For this, lets set seed so that we can reproduce this exact sequence of sampling (why?):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -650,7 +970,7 @@
 </section>
 </section>
 <section id="method-of-moments-mom-estimators">
-<h3>Method of Moments (MoM) Estimators<a class="headerlink" href="#method-of-moments-mom-estimators" title="Permalink to this headline">¶</a></h3>
+<h3>Method of Moments (MoM) Estimators<a class="headerlink" href="#method-of-moments-mom-estimators" title="Permalink to this headline">#</a></h3>
 <p>To obtain a method of moments estimator, we equate the theoretical moments (which will be a function of the parameters of the distribution) with the corresponding sample moments, and solve for the parameters in order to obtain an estimate. For the binomial distribution, there is only one parameter, <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p><strong>Q2: Given the analytic expected value, above, and assuming that the sample mean is <span class="math notranslate nohighlight">\(m\)</span> (the mean number of observed heads across replicates), what is the MoM estimator for <span class="math notranslate nohighlight">\(p\)</span>?</strong></p>
 <p>Now calculate the MoM estimator for each of your 3 sets of simulated data sets to get the estimates for each of your values of <span class="math notranslate nohighlight">\(p\)</span>.</p>
@@ -673,15 +993,15 @@
 <p><strong>Q4: Is the MoM successfully estimating <span class="math notranslate nohighlight">\(p\)</span>? Does your histogram for <span class="math notranslate nohighlight">\(p\)</span> look more or less normal? If so, what theorem might explain why this would be the case?</strong></p>
 </section>
 <section id="mle-for-binomial-distribution">
-<h3>MLE for Binomial Distribution<a class="headerlink" href="#mle-for-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<h3>MLE for Binomial Distribution<a class="headerlink" href="#mle-for-binomial-distribution" title="Permalink to this headline">#</a></h3>
 <section id="likelihood-and-log-likelihood">
-<h4>Likelihood and Log Likelihood<a class="headerlink" href="#likelihood-and-log-likelihood" title="Permalink to this headline">¶</a></h4>
+<h4>Likelihood and Log Likelihood<a class="headerlink" href="#likelihood-and-log-likelihood" title="Permalink to this headline">#</a></h4>
 <p>Imagine that you flip a coin <span class="math notranslate nohighlight">\(N\)</span> times, and then repeat the experiment <span class="math notranslate nohighlight">\(n\)</span> times. Thus, you have data <span class="math notranslate nohighlight">\(x=x`1, x`2, \dots x`n\)</span> that are the number of times you observed a head in each trial. <span class="math notranslate nohighlight">\(p\)</span> is the probability of obtaining a head.</p>
 <p><strong>Q5: Write down the likelihood and log-likelihood for the data. Take the derivative of the negative log-likelihood, set this equal to zero, and find the MLE, <span class="math notranslate nohighlight">\(\hat{p}\)</span>.</strong></p>
 </section>
 </section>
 <section id="computing-the-likelihood-and-mle-in-r">
-<h3>Computing the likelihood and MLE in R<a class="headerlink" href="#computing-the-likelihood-and-mle-in-r" title="Permalink to this headline">¶</a></h3>
+<h3>Computing the likelihood and MLE in R<a class="headerlink" href="#computing-the-likelihood-and-mle-in-r" title="Permalink to this headline">#</a></h3>
 <p>Simulate some data with <span class="math notranslate nohighlight">\(p=0.25\)</span>, <span class="math notranslate nohighlight">\(N=10\)</span>, and 10 replicates. Calculate the negative log-likelihood of your simulated data across a range of <span class="math notranslate nohighlight">\(p\)</span> (from 0 to 1), and plot them. You may do this by using the built in functions in R (specifically <code class="docutils literal notranslate"><span class="pre">dbinom</span></code>) or write your own function. This is called a “likelihood profile’’. Plot your likelihood profile with a line indicating the true value of <span class="math notranslate nohighlight">\(p\)</span>. Add lines indicating the MLE <span class="math notranslate nohighlight">\(\hat{p}\)</span> and the MoM estimator for <span class="math notranslate nohighlight">\(p\)</span> to your likelihood profile.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -708,7 +1028,7 @@
 </section>
 </section>
 <section id="example-midge-wing-length">
-<h2>Example: Midge Wing Length<a class="headerlink" href="#example-midge-wing-length" title="Permalink to this headline">¶</a></h2>
+<h2>Example: Midge Wing Length<a class="headerlink" href="#example-midge-wing-length" title="Permalink to this headline">#</a></h2>
 <p>We will use this simple example to go through the steps of assessing a Bayesian model and we’ll see that MCMC can allow us to approximate the posterior distribution.</p>
 <p>Grogan and Wirth (1981) provide data on the wing length (in millimeters) of nine members of a species of midge (small, two-winged flies).</p>
 <p>From these measurements we wish to make inference about the population mean <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
@@ -727,7 +1047,7 @@
 </div>
 </div>
 <section id="non-bayesian-analysis">
-<h3>Non-Bayesian analysis<a class="headerlink" href="#non-bayesian-analysis" title="Permalink to this headline">¶</a></h3>
+<h3>Non-Bayesian analysis<a class="headerlink" href="#non-bayesian-analysis" title="Permalink to this headline">#</a></h3>
 <p>We might expect that these midge data could be draws from a <em>Normal</em> distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>. <a class="reference internal" href="21-ModelFitting-MLE.html"><span class="doc std std-doc">Recall</span></a> that the MLEs for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> here are simply the <em>sample mean</em> and <em>sample variance</em> respectively:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -770,14 +1090,14 @@
 <p>Let’s see how we can do a similar analysis using a Bayesian approach, first analytically, and the with JAGS.</p>
 </section>
 <section id="setting-up-the-bayesian-model">
-<h3>Setting up the Bayesian Model<a class="headerlink" href="#setting-up-the-bayesian-model" title="Permalink to this headline">¶</a></h3>
+<h3>Setting up the Bayesian Model<a class="headerlink" href="#setting-up-the-bayesian-model" title="Permalink to this headline">#</a></h3>
 <p>We need to define the likelihood and the priors for our Bayesian analysis. Given the analysis that we’ve just done, let’s assume that our data come from a normal distribution with unknown mean, <span class="math notranslate nohighlight">\(\mu\)</span> but that we know the variance is <span class="math notranslate nohighlight">\(\sigma^2 = 0.025\)</span>. That is:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{Y} \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(\mu, 0.025^2)
 \]</div>
 <section id="prior-information">
-<h4>Prior Information<a class="headerlink" href="#prior-information" title="Permalink to this headline">¶</a></h4>
+<h4>Prior Information<a class="headerlink" href="#prior-information" title="Permalink to this headline">#</a></h4>
 <p>Studies from other populations suggest that wing lengths are usually around 1.9 mm, so we set <span class="math notranslate nohighlight">\(\mu_0 = 1.9\)</span></p>
 <p>We also know that lengths must be positive (<span class="math notranslate nohighlight">\(\mu &gt;0\)</span>)</p>
 <p>We can approximate this restriction with a normal prior distribution for <span class="math notranslate nohighlight">\(\mu\)</span> as follows:</p>
@@ -798,7 +1118,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 </section>
 <section id="analytic-posterior">
-<h3>Analytic Posterior<a class="headerlink" href="#analytic-posterior" title="Permalink to this headline">¶</a></h3>
+<h3>Analytic Posterior<a class="headerlink" href="#analytic-posterior" title="Permalink to this headline">#</a></h3>
 <p>For this very simple case it is easy to write down the posterior distribution (up to some constant). First, note that the likelihood for the data can be written as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -873,11 +1193,11 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </section>
 <section id="exercise-prior-sensitivity">
-<h3>Exercise: Prior sensitivity<a class="headerlink" href="#exercise-prior-sensitivity" title="Permalink to this headline">¶</a></h3>
+<h3>Exercise: Prior sensitivity<a class="headerlink" href="#exercise-prior-sensitivity" title="Permalink to this headline">#</a></h3>
 <p>Change the values of the mean and the variance that you choose for the prior (“hyperparameters”). What does this do to the posterior distribution. E.g., what happens if the variance you choose is small, and <span class="math notranslate nohighlight">\(\mu_0 =2.5\)</span> or so. Is this what you expect?</p>
 </section>
 <section id="numerical-evaluation-of-the-posterior-with-jags">
-<h3>Numerical evaluation of the posterior with JAGS<a class="headerlink" href="#numerical-evaluation-of-the-posterior-with-jags" title="Permalink to this headline">¶</a></h3>
+<h3>Numerical evaluation of the posterior with JAGS<a class="headerlink" href="#numerical-evaluation-of-the-posterior-with-jags" title="Permalink to this headline">#</a></h3>
 <p>Let’s show that we can get the same thing from JAGS that we were able to get from the analytic results. You’ll need to make sure you have installed JAGS (which must be done outside of R) and then the libraries <code class="docutils literal notranslate"><span class="pre">rjags</span></code> and <code class="docutils literal notranslate"><span class="pre">coda</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -890,7 +1210,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <section id="specifying-the-model">
-<h4>Specifying the model<a class="headerlink" href="#specifying-the-model" title="Permalink to this headline">¶</a></h4>
+<h4>Specifying the model<a class="headerlink" href="#specifying-the-model" title="Permalink to this headline">#</a></h4>
 <p>First we must encode our choices for our data model and priors to pass them to the fitting routines in JAGS. This involves setting up a <span class="math notranslate nohighlight">\({\tt model}\)</span> that includes the likelihood for each data point and a prior for every parameter we want to estimate. Here is an example of how we would do this for the simple model we fit for the midge data (note that JAGS uses the precision instead of the variance or sd for the normal distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1020,7 +1340,7 @@ Sample size per chain = 20000
 </section>
 </section>
 <section id="estimating-the-population-variance">
-<h3>Estimating the population variance<a class="headerlink" href="#estimating-the-population-variance" title="Permalink to this headline">¶</a></h3>
+<h3>Estimating the population variance<a class="headerlink" href="#estimating-the-population-variance" title="Permalink to this headline">#</a></h3>
 <p>One advantage of the numerical approach is that we can choose almost anything we want for the priors on multiple parameters without worrying if they are conjugate, or if we want to include additional information. For example, let’s say that, not, we want to force the mean to be positive (and also the data, perhaps), and concurrently estimate the variance. Here is a possible model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1131,12 +1451,12 @@ s2  0.001188 0.002328 0.003969 0.01011 0.0590
 </div>
 </section>
 <section id="exercise-updating-the-bayesian-model">
-<h3>Exercise: Updating the Bayesian model<a class="headerlink" href="#exercise-updating-the-bayesian-model" title="Permalink to this headline">¶</a></h3>
+<h3>Exercise: Updating the Bayesian model<a class="headerlink" href="#exercise-updating-the-bayesian-model" title="Permalink to this headline">#</a></h3>
 <p>Redo the previous analysis placing a gamma prior on <span class="math notranslate nohighlight">\(\mu\)</span> as well. Set the prior so that the mean and variance are the same as in the normal example from above (use moment matching). Do you get something similar?</p>
 </section>
 </section>
 <section id="aedes-data-revisited-using-bayesian-fitting">
-<h2>Aedes data revisited using Bayesian fitting<a class="headerlink" href="#aedes-data-revisited-using-bayesian-fitting" title="Permalink to this headline">¶</a></h2>
+<h2>Aedes data revisited using Bayesian fitting<a class="headerlink" href="#aedes-data-revisited-using-bayesian-fitting" title="Permalink to this headline">#</a></h2>
 <p>Now let’s do some Bayesian model fitting to * Aedes * thermal performance data. Lets try out the <code class="docutils literal notranslate"><span class="pre">R2jags</span></code> package for this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1175,7 +1495,7 @@ The following object is masked from ‘package:coda’:
 </div>
 </div>
 <section id="the-data">
-<h3>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h3>
+<h3>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h3>
 <p>These data are traits from * Aedes aegypti * mosquitoes measured across temperature in lab experiments. The traits we have data on thermal performance are:</p>
 <ul class="simple">
 <li><p>pEA: proportion surviving from egg to adulthood</p></li>
@@ -1241,14 +1561,14 @@ The following object is masked from ‘package:coda’:
 </div>
 </section>
 <section id="two-thermal-performance-curve-models">
-<h3>Two thermal performance curve models<a class="headerlink" href="#two-thermal-performance-curve-models" title="Permalink to this headline">¶</a></h3>
+<h3>Two thermal performance curve models<a class="headerlink" href="#two-thermal-performance-curve-models" title="Permalink to this headline">#</a></h3>
 <p>Most thermal response curves can be reasonably fit using one of two thermal reponses. Traits that respond unimodally but symmetrically to temperature can be fit with a quadratic function:</p>
 <p><span class="math notranslate nohighlight">\( B = q (T-T_0) (T-T_m)\)</span></p>
 <p>Traits that respond unimodally but asymmetrically can be fitted with a Briere function (see definition <a class="reference internal" href="Appendix-MiniProj.html#miniproj-tpcs-models"><span class="std std-ref">here</span></a>).</p>
 <p>In both models, <span class="math notranslate nohighlight">\(T_0\)</span> is the lower thermal limit, <span class="math notranslate nohighlight">\(T_m\)</span> is the upper thermal limit (i.e., where the trait value goes to zero on either end), and <span class="math notranslate nohighlight">\(q\)</span> scales the elevation of the curve, (and so also the value at the optimum temperature).</p>
 </section>
 <section id="the-thermal-response-model-file">
-<h3>The thermal response model file<a class="headerlink" href="#the-thermal-response-model-file" title="Permalink to this headline">¶</a></h3>
+<h3>The thermal response model file<a class="headerlink" href="#the-thermal-response-model-file" title="Permalink to this headline">#</a></h3>
 <p>Unlike the previous bayesian \example, here we will provide jags with the model written as a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file. THis can be in your working directory, or elsewhere (but then inout the full path to it — ideally a relative path).</p>
 <p>You can either write the text yourself directly to the file, or create it using the sink() function via your R script (see below):</p>
 <div class="cell docutils container">
@@ -1402,7 +1722,7 @@ Warning message in jags.model(model.file, data = data, inits = init.values, n.ch
 </div>
 </section>
 <section id="running-diagnostics">
-<h3>Running diagnostics<a class="headerlink" href="#running-diagnostics" title="Permalink to this headline">¶</a></h3>
+<h3>Running diagnostics<a class="headerlink" href="#running-diagnostics" title="Permalink to this headline">#</a></h3>
 <p>View the parameters (only the first 5 lines, or it will also show you all of your derived quantities):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1435,7 +1755,7 @@ Warning message in jags.model(model.file, data = data, inits = init.values, n.ch
 </div>
 </section>
 <section id="plot-the-fits">
-<h3>Plot the fits<a class="headerlink" href="#plot-the-fits" title="Permalink to this headline">¶</a></h3>
+<h3>Plot the fits<a class="headerlink" href="#plot-the-fits" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="bp">T</span><span class="p">,</span> <span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">42</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">lf.data.comb</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;Lifespan for Ae. aegypti&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Temperature&quot;</span><span class="p">)</span>
@@ -1594,7 +1914,7 @@ Traceback:
 </div>
 </section>
 <section id="additional-analyses">
-<h3>Additional analyses<a class="headerlink" href="#additional-analyses" title="Permalink to this headline">¶</a></h3>
+<h3>Additional analyses<a class="headerlink" href="#additional-analyses" title="Permalink to this headline">#</a></h3>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">which.max()</span></code> function to find the optimal temperature for adult lifespan:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1631,7 +1951,7 @@ Traceback:
 </section>
 </section>
 <section id="fitting-of-abundance-data">
-<h2>Fitting of abundance data<a class="headerlink" href="#fitting-of-abundance-data" title="Permalink to this headline">¶</a></h2>
+<h2>Fitting of abundance data<a class="headerlink" href="#fitting-of-abundance-data" title="Permalink to this headline">#</a></h2>
 <p>We will now perform a bayesian analysis of population growth data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1664,7 +1984,7 @@ The following object is masked from ‘package:coda’:
 </div>
 </div>
 <section id="id1">
-<h3>The Data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>The Data<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>These data are observations of the amphibian fungal pathogen <em>Batrachochytrium dendrobatidis</em> being grown in liquid culture at multiple different temperatures. The experiment is conducted in 96 well plates with a fixed initial innoculation of fungal spores in each well, and the plate placed in a constant temperature incubator. Each day, 8 wells per plate are observed and the optical density (OD) is measured. We will focus on a single temperature trial across mulitple plates with OD as the response.</p>
 <p>We will fit a logistic model to these growth data.</p>
 <p>Let’s have a look at the data first:</p>
@@ -1743,7 +2063,7 @@ The following object is masked from ‘package:coda’:
 </div>
 </section>
 <section id="specifying-the-growth-curve">
-<h3>Specifying the growth curve<a class="headerlink" href="#specifying-the-growth-curve" title="Permalink to this headline">¶</a></h3>
+<h3>Specifying the growth curve<a class="headerlink" href="#specifying-the-growth-curve" title="Permalink to this headline">#</a></h3>
 <p>Although logistic growth is often written as a differential equation, here we will work with the analytic solution of the model:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1752,7 +2072,7 @@ The following object is masked from ‘package:coda’:
 <p>This gives the mean function that we want to fit. We will assume log-normal noise around this response, as the optical density is bounded to be greater than 0 and since we also have increasing variance over time (as the optical density increases).</p>
 </section>
 <section id="id2">
-<h3>The thermal response model file<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>The thermal response model file<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>JAGS needs the model written as a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.bug</span></code> file inside the working directory. You can either make the text file directly, or create it using the <code class="docutils literal notranslate"><span class="pre">sink()</span></code> function in your R script, as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1805,7 +2125,7 @@ The following object is masked from ‘package:coda’:
 <p>In the example below we will build the model function with the log-normal likelihood for the logistic growth function. Priors are a combination of uniform and exponential distributions. As with the normal distribution, jags uses <span class="math notranslate nohighlight">\(\tau\)</span> to parameterize the variance of the normal distribution (<span class="math notranslate nohighlight">\(\tau = 1/(\sigma^2)\)</span>). However it can be easier to specify the prior on sigma directly. In this example we will generate posterior samples of derived quantities outside of JAGS (so you can see what this is actually doing).</p>
 </section>
 <section id="additional-settings-for-jags">
-<h3>Additional settings for jags<a class="headerlink" href="#additional-settings-for-jags" title="Permalink to this headline">¶</a></h3>
+<h3>Additional settings for jags<a class="headerlink" href="#additional-settings-for-jags" title="Permalink to this headline">#</a></h3>
 <p>Now for some additional settings/specifications for jags:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1830,7 +2150,7 @@ The following object is masked from ‘package:coda’:
 </div>
 </section>
 <section id="fitting-the-model">
-<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this headline">¶</a></h3>
+<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this headline">#</a></h3>
 <p>Now we can run jags:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1899,7 +2219,7 @@ Warning message in jags.model(model.file, data = data, inits = init.values, n.ch
 </div>
 </section>
 <section id="diagnostics">
-<h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h3>
+<h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">#</a></h3>
 <p>As you did in the <a class="reference external" href="#Aedes-data-revisited-using-Bayesian-fitting">Traits bayesian fitting example</a>, there are a number of model diagnostics that we need to check. First we want to look at the chains and confirm that they look like “fuzzy caterpillars” – no linear/non-linear patterns across the chains, low auto-correlation, etc.</p>
 <p>First view the fitted parameters:</p>
 <div class="cell docutils container">
@@ -2029,7 +2349,7 @@ Warning message in jags.model(model.file, data = data, inits = init.values, n.ch
 <p>The prior distribution here is very different from the posterior. These data are highly informative for the parameters of interest and are very unlikely to be influenced much by the prior distribution (although you can always change the priors to check this). However, notice that <span class="math notranslate nohighlight">\(Y_0\)</span> (the initial condition) is truncated by the prior. This is a fairly strong prior, because we know something about the initial optical density that is typical for the esperimental set up with the density of innoculum used and with a properly calibrated set-up.</p>
 </section>
 <section id="visualizing-the-joint-posterior-of-parameters">
-<h3>Visualizing the joint posterior of parameters<a class="headerlink" href="#visualizing-the-joint-posterior-of-parameters" title="Permalink to this headline">¶</a></h3>
+<h3>Visualizing the joint posterior of parameters<a class="headerlink" href="#visualizing-the-joint-posterior-of-parameters" title="Permalink to this headline">#</a></h3>
 <p>It’s often useful to also look at the joint distbution of all of your parameters together. Of course, if you have a high dimensional posterior, rendering a 2-D representation can be difficult. Instead, the standard is to examine the pair-wise posterior distribution, for instance as follows (using the <code class="docutils literal notranslate"><span class="pre">s1</span></code> data frame we created above):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2053,7 +2373,7 @@ Warning message in jags.model(model.file, data = data, inits = init.values, n.ch
 <p>As you can see, estimates of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are highly correlated – not surprising given the interplay between them in the logistic growth function. This correlation is an important feature of the system, and we use the full posterior distribution that includes this correlation when we want to build the corresponding posterior distribution of the behavior of the logistic function.</p>
 </section>
 <section id="the-posterior-distribution-of-the-mean-function">
-<h3>The posterior distribution of the mean function<a class="headerlink" href="#the-posterior-distribution-of-the-mean-function" title="Permalink to this headline">¶</a></h3>
+<h3>The posterior distribution of the mean function<a class="headerlink" href="#the-posterior-distribution-of-the-mean-function" title="Permalink to this headline">#</a></h3>
 <p>The final step is to check how well we are fitting the data. To do this we usually examine the posterior distribution of the mean function of our system, in this case the distribution of the logistic solution and compare this to the data. To do this, for each of our posterior samples (or a thinned subset), we plug the parameters for the <span class="math notranslate nohighlight">\(i^{\mathrm th}\)</span> sample <span class="math notranslate nohighlight">\(\theta_i\)</span> into our function of interest, and evaluate the function as a desired set of <span class="math notranslate nohighlight">\(x\)</span>’s. For instance, for logistic growth, we’ll evaluate
 $<span class="math notranslate nohighlight">\(
 \mu(t) = \frac{K_iY_{0,i}}{Y_{0,i}+(K_i-Y_{0,i})\exp{(-r_it)}}
@@ -2186,7 +2506,7 @@ for the \)</span>i^{\mathrm th}<span class="math notranslate nohighlight">\( set
 </section>
 </section>
 <section id="readings-and-resources-a-id-readings-a">
-<h2>Readings and Resources <a id='Readings'></a><a class="headerlink" href="#readings-and-resources-a-id-readings-a" title="Permalink to this headline">¶</a></h2>
+<h2>Readings and Resources <a id='Readings'></a><a class="headerlink" href="#readings-and-resources-a-id-readings-a" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Bolker, B. Ecological models and data in R. (Princeton University Press, 2008).</p></li>
 <li><p><a class="reference external" href="https://cran.r-project.org/web/packages/bayestestR/vignettes/bayestestR.html">https://cran.r-project.org/web/packages/bayestestR/vignettes/bayestestR.html</a></p></li>
@@ -2216,54 +2536,34 @@ for the \)</span>i^{\mathrm th}<span class="math notranslate nohighlight">\( set
 
               </div>
               
-        
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="21-ModelFitting-MLE.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Model Fitting using Maximum Likelihood</p>
-            </div>
-        </a>
-    </div>
-     <div id="next">
-        <a class="right-next" href="Appendix-JupyIntro.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Introduction to Jupyter</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
 </div>
-        
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Samraat Pawar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Samraat Pawar<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>
