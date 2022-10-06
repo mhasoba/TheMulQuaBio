@@ -219,11 +219,6 @@ const thebe_selector_output = ".output, .cell_output"
    Model simplification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -231,6 +226,11 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting-NLLS.html">
    Model Fitting using Non-linear Least-squares
@@ -2296,8 +2296,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Permalink to this headline">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9f97609f-b63b-48a0-bb2e-ab4af33ded81">
-<span class="eqno">(2)<a class="headerlink" href="#equation-9f97609f-b63b-48a0-bb2e-ab4af33ded81" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3e625c36-9afa-4d73-aa15-89d2d74b9e93">
+<span class="eqno">(2)<a class="headerlink" href="#equation-3e625c36-9afa-4d73-aa15-89d2d74b9e93" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2703,11 +2703,11 @@ from the end of an array:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">my_squares_loops</span><span class="p">(</span><span class="n">iters</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_squares_loops takes </span><span class="si">%f</span><span class="s2"> s to run.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;my_squares_loops takes </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="si">}</span><span class="s2"> s to run.&quot;</span><span class="p">)</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">my_squares_lc</span><span class="p">(</span><span class="n">iters</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_squares_lc takes </span><span class="si">%f</span><span class="s2"> s to run.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;my_squares_lc takes </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="si">}</span><span class="s2"> s to run.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>But you’ll notice that if you run it multiple times, the time taken changes each time. So <code class="docutils literal notranslate"><span class="pre">timeit</span></code> takes a sample of runs and returns the average, which is better.</p>
@@ -2758,7 +2758,7 @@ from the end of an array:</p>
 <span class="n">t_vect</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">array_lengths</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Set N=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">N</span>)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Set </span><span class="si">{</span><span class="n">N</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1">#randomly generate our 1D arrays of length N</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
@@ -2766,35 +2766,35 @@ from the end of an array:</p>
     <span class="c1"># time loop_product 3 times and save the mean execution time.</span>
     <span class="n">timer</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;loop_product(a, b)&#39;</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">number</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">t_loop</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">timer</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loop method took </span><span class="si">%d</span><span class="s2"> ms on average.&quot;</span> <span class="o">%</span><span class="k">t_loop</span>[-1])
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loop method took </span><span class="si">{</span><span class="n">t_loop</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> ms on average.&quot;</span><span class="p">)</span>
     
     <span class="c1"># time vect_product 3 times and save the mean execution time.</span>
     <span class="n">timer</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;vect_product(a, b)&#39;</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">number</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">t_vect</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">timer</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vectorized method took </span><span class="si">%d</span><span class="s2"> ms on average.&quot;</span> <span class="o">%</span><span class="k">t_vect</span>[-1])
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;vectorized method took </span><span class="si">{</span><span class="n">t_vect</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> ms on average.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set N=1
-Loop method took 0 ms on average.
-vectorized method took 0 ms on average.
+Loop method took 0.003620050847530365 ms on average.
+vectorized method took 0.003780052065849304 ms on average.
 
 Set N=100
-Loop method took 0 ms on average.
-vectorized method took 0 ms on average.
+Loop method took 0.04071998409926891 ms on average.
+vectorized method took 0.0021600164473056793 ms on average.
 
 Set N=10000
-Loop method took 34 ms on average.
-vectorized method took 0 ms on average.
+Loop method took 4.180800030007958 ms on average.
+vectorized method took 0.01801997423171997 ms on average.
 
 Set N=1000000
-Loop method took 3605 ms on average.
-vectorized method took 7 ms on average.
+Loop method took 420.85887999273837 ms on average.
+vectorized method took 0.9459999855607748 ms on average.
 
 Set N=10000000
-Loop method took 23285 ms on average.
-vectorized method took 155 ms on average.
+Loop method took 4280.039419978857 ms on average.
+vectorized method took 175.6502800155431 ms on average.
 </pre></div>
 </div>
 </div>
@@ -2861,8 +2861,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>It runs the Lotka-Volterra model with prey density dependence <span class="math notranslate nohighlight">\(r R \left(1 - \frac{R} {K}\right)\)</span>, which changes the coupled ODEs to,</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-60a4781a-ce4c-4f86-8868-2429b3e12042">
-<span class="eqno">(3)<a class="headerlink" href="#equation-60a4781a-ce4c-4f86-8868-2429b3e12042" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2f405ca6-bd70-4fdd-ad80-656534bf48c8">
+<span class="eqno">(3)<a class="headerlink" href="#equation-2f405ca6-bd70-4fdd-ad80-656534bf48c8" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2883,8 +2883,8 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-7ee4dabf-6585-45dd-abdd-c9d797acb4d5">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7ee4dabf-6585-45dd-abdd-c9d797acb4d5" title="Permalink to this equation">#</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-790c9dff-ad3a-4ce5-a136-dc0820d521f8">
+<span class="eqno">(4)<a class="headerlink" href="#equation-790c9dff-ad3a-4ce5-a136-dc0820d521f8" title="Permalink to this equation">#</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
@@ -2895,14 +2895,14 @@ vectorized method took 155 ms on average.
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-e6960023-9640-4721-8e9c-cbfef384ba77">
-<span class="eqno">(5)<a class="headerlink" href="#equation-e6960023-9640-4721-8e9c-cbfef384ba77" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-752b8562-4c7c-4b92-9da4-78388660bd72">
+<span class="eqno">(5)<a class="headerlink" href="#equation-752b8562-4c7c-4b92-9da4-78388660bd72" title="Permalink to this equation">#</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42e70a47-1eb6-41df-a93f-a8506c41ec1d">
-<span class="eqno">(6)<a class="headerlink" href="#equation-42e70a47-1eb6-41df-a93f-a8506c41ec1d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-705ae19e-d1b2-48c5-bddb-a6fc3404c2b7">
+<span class="eqno">(6)<a class="headerlink" href="#equation-705ae19e-d1b2-48c5-bddb-a6fc3404c2b7" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - (z + \epsilon) + e a R_t)
 \end{align}\]</div>

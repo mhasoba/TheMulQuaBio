@@ -219,11 +219,6 @@ const thebe_selector_output = ".output, .cell_output"
    Model simplification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -231,6 +226,11 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting-NLLS.html">
    Model Fitting using Non-linear Least-squares
@@ -4251,8 +4251,8 @@ this main function where the printing of the line “This is a boilerplate” ha
 
     <span class="sd">&quot;&quot;&quot;Find whether a number x is even or odd.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#The conditional if</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is Even!&quot;</span> <span class="o">%</span> <span class="n">x</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is Odd!&quot;</span> <span class="o">%</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is Even!&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is Odd!&quot;</span>
 
 <span class="k">def</span> <span class="nf">largest_divisor_five</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find which is the largest divisor of x among 2,3,4,5.&quot;&quot;&quot;</span>
@@ -4266,25 +4266,25 @@ this main function where the printing of the line “This is a boilerplate” ha
     <span class="k">elif</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">largest</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">else</span><span class="p">:</span> <span class="c1"># When all other (if, elif) conditions are not met</span>
-        <span class="k">return</span> <span class="s2">&quot;No divisor found for </span><span class="si">%d</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">x</span> <span class="c1"># Each function can return a value or a variable.</span>
-    <span class="k">return</span> <span class="s2">&quot;The largest divisor of </span><span class="si">%d</span><span class="s2"> is </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">largest</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;No divisor found for </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">!&quot;</span> <span class="c1"># Each function can return a value or a variable.</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;The largest divisor of </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">largest</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find whether an integer is prime.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c1">#  &quot;range&quot; returns a sequence of integers</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is not a prime: </span><span class="si">%d</span><span class="s2"> is a divisor&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> 
-          <span class="k">return</span> <span class="kc">False</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is a prime!&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is not a prime: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> is a divisor&quot;</span><span class="p">)</span> 
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is a prime!&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">True</span> 
 
 <span class="k">def</span> <span class="nf">find_all_primes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find all the primes up to x&quot;&quot;&quot;</span>
     <span class="n">allprimes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-      <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="n">allprimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are </span><span class="si">%d</span><span class="s2"> primes between 2 and </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allprimes</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">allprimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">allprimes</span><span class="p">)</span><span class="si">}</span><span class="s2"> primes between 2 and </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">allprimes</span>
       
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
@@ -4439,9 +4439,11 @@ There are 25 primes between 2 and 100
 <p>This is possible without explicitly importing the modules because you are only running one script. You would have to do an explicit <code class="docutils literal notranslate"><span class="pre">import</span></code> if you needed a module from another python script file.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>Formatting output for printing:</strong> Note the usage of <code class="docutils literal notranslate"><span class="pre">%d</span></code>, <code class="docutils literal notranslate"><span class="pre">%s</span></code>, etc in the script above. This is for formatting the output of a particular operation/method nicely in a string that is printed to screen or a file. The basic formatting types are <code class="docutils literal notranslate"><span class="pre">%d</span></code>, <code class="docutils literal notranslate"><span class="pre">%s</span></code>, <code class="docutils literal notranslate"><span class="pre">%f</span></code>, <code class="docutils literal notranslate"><span class="pre">%e</span></code>, for decimals, strings, floats, and floats with scientific notation, respectively. Try this in ipython:</p>
-<p><code class="docutils literal notranslate"><span class="pre">print(&quot;%d</span> <span class="pre">%s</span> <span class="pre">%f</span> <span class="pre">%e&quot;</span> <span class="pre">%</span> <span class="pre">(20,&quot;30&quot;,0.0003,0.00003))</span></code></p>
-<p>But there are more modern pythonic ways to do this as well. <a class="reference external" href="https://pyformat.info">See this</a>.</p>
+<p>Notice in the above script the use of a normal string but with an f in front, i.e. <code class="docutils literal notranslate"><span class="pre">f&quot;test</span> <span class="pre">string&quot;</span></code>. This is the current best-practice method for incorporating variables into a string.</p>
+<p>You call it by prefixing the string with an <code class="docutils literal notranslate"><span class="pre">f</span></code>, and then including any variable you want to print in curly brackets:<code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<p>e.g. <code class="docutils literal notranslate"><span class="pre">f&quot;The</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">x</span> <span class="pre">is</span> <span class="pre">{x}.&quot;</span></code></p>
+<p>You can get exceptionally in-depth with pretty string formatting, but at the very least you will be expected to use this type of string formatting (or the .format() method) in your scripts going forward.</p>
+<p>For more documentation on the current f-string method as well as the older .format() method, <a class="reference external" href="https://fstring.help/">see this</a> and <a class="reference external" href="https://pyformat.info">this</a> respectively..</p>
 </div>
 </section>
 </section>
@@ -4530,8 +4532,8 @@ There are 25 primes between 2 and 100
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#Define function to be tested</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is Even!&quot;</span> <span class="o">%</span> <span class="n">x</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> is Odd!&quot;</span> <span class="o">%</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is Even!&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> is Odd!&quot;</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span> 
     <span class="nb">print</span><span class="p">(</span><span class="n">even_or_odd</span><span class="p">(</span><span class="mi">22</span><span class="p">))</span>
@@ -4775,7 +4777,7 @@ Automatic pdb calling has been turned OFF
             <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span>
             <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This didn&#39;t work; x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">; y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This didn&#39;t work;</span><span class="si">{</span><span class="n">x</span> <span class="si">= }</span><span class="s2">; </span><span class="si">{</span><span class="n">y</span> <span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">z</span>
 
 <span class="n">buggyfunc</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -4805,9 +4807,9 @@ Automatic pdb calling has been turned OFF
         <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The result of dividing a number by zero is undefined&quot;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This didn&#39;t work; x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">; y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This didn&#39;t work;</span><span class="si">{</span><span class="n">x</span> <span class="si">= }</span><span class="s2">; </span><span class="si">{</span><span class="n">y</span> <span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OK; x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">; y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">, z = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OK; </span><span class="si">{</span><span class="n">x</span> <span class="si">= }</span><span class="s2">; </span><span class="si">{</span><span class="n">y</span> <span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">z</span> <span class="si">= }</span><span class="s2">;&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">z</span>
 
 <span class="n">buggyfunc</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -4844,6 +4846,17 @@ The result of dividing a number by zero is undefined
 </div>
 <p>So here we anticipated a <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> and gave feedback on that. As such, <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> is a pre-defined error type in Python. Another example is <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, which you will get if you try to run the above script with something non-numeric, such as a string.</p>
 <p>Note that we also used <code class="docutils literal notranslate"><span class="pre">else</span></code> (just like in the case of <code class="docutils literal notranslate"><span class="pre">if</span></code>-<code class="docutils literal notranslate"><span class="pre">else</span></code>) here to give feedback on every successful calculation. There is also a <code class="docutils literal notranslate"><span class="pre">finally</span></code> keyword that enables you to execute sections of code that should always run, with or without any previously encountered exceptions.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice again in the above script we create an f string but this time we save ourself even more time by incorporating the variable and an <code class="docutils literal notranslate"><span class="pre">=</span></code> sign:</p>
+<p><code class="docutils literal notranslate"><span class="pre">f&quot;Here</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">string,</span> <span class="pre">{x</span> <span class="pre">=</span> <span class="pre">}&quot;</span></code></p>
+<p>This is the same (but <em>even more concise</em>) as writing:</p>
+<p><code class="docutils literal notranslate"><span class="pre">f&quot;Here</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">string,</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">{x}&quot;</span></code></p>
+<p>This works for expressions as well! Try something like the following to see:
+<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">cos,</span> <span class="pre">radians</span></code>
+<code class="docutils literal notranslate"><span class="pre">theta</span> <span class="pre">=</span> <span class="pre">30</span></code>
+<code class="docutils literal notranslate"><span class="pre">f&quot;{theta=}</span>&#160; <span class="pre">{cos(radians(theta))=:.3f}&quot;</span></code></p>
+</div>
 </section>
 </section>
 <section id="modules-and-code-compartmentalization">
