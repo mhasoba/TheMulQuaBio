@@ -231,7 +231,8 @@ def residuals_logistic(params, t, data):
     #Get an ordered dictionary of parameter values
     v = params.valuesdict()
     #Logistic model
-    model = np.log(v['N_0'] * v['N_max'] * np.exp(v['r']*t) /     (v['N_max'] + v['N_0'] * ( np.exp(v['r']*t) - 1 )))
+    model = np.log(v['N_0'] * v['N_max'] * np.exp(v['r']*t) / \
+    (v['N_max'] + v['N_0'] * ( np.exp(v['r']*t) - 1 )))
     #Return residuals
     return model - data
 
@@ -287,7 +288,9 @@ def residuals_gompertz(params, t, data):
     #Get an ordered dictionary of parameter values
     v = params.valuesdict()
     #Logistic model
-    model = v['N_0'] + (v['N_max'] - v['N_0']) *     np.exp(-np.exp(v['r_max'] * np.exp(1) * (v['t_lag'] - t) /                    ((v['N_max'] - v['N_0']) * np.log(10)) + 1))
+    model = v['N_0'] + (v['N_max'] - v['N_0']) * \
+    np.exp(-np.exp(v['r_max'] * np.exp(1) * (v['t_lag'] - t) / \
+                   ((v['N_max'] - v['N_0']) * np.log(10)) + 1))
     #Return residuals
     return model - data
 
@@ -386,7 +389,8 @@ def residuals_genlogistic(params, t, data):
     #Get an ordered dictionary of parameter values
     v = params.valuesdict()
     #Logistic model
-    model = v['A'] + (v['K'] - v['A']) /     (1 + v['Q'] * np.exp(-v['B']*(t-v['T'])))**(1/v['mu'])
+    model = v['A'] + (v['K'] - v['A']) / \
+    (1 + v['Q'] * np.exp(-v['B']*(t-v['T'])))**(1/v['mu'])
     #Return residuals
     return model - data
 

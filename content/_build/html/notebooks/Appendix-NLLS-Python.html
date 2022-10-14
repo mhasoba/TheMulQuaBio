@@ -8,8 +8,9 @@
 
     <title>Model fitting in Python &#8212; TheMulQuaBio</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,48 +20,64 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Computing Miniproject" href="Appendix-MiniProj.html" />
     <link rel="prev" title="Databases" href="Appendix-Databases.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -69,9 +86,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -89,14 +107,15 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -141,7 +160,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic Data Analyses and Statistics
  </span>
@@ -200,35 +219,25 @@
    Model simplification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Advanced Data Analyses and Statistics
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="20-ModelFitting-NLLS.html">
    Model Fitting using Non-linear Least-squares
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21-ModelFitting-MLE.html">
-   Model Fitting using Maximum Likelihood
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22-ModelFitting-Bayesian.html">
-   Model Fitting the Bayesian Way
-  </a>
- </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendices
  </span>
@@ -274,107 +283,209 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/Appendix-NLLS-Python.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-NLLS-Python.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/Appendix-NLLS-Python.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/Appendix-NLLS-Python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mhasoba/TheMulQuaBio"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-NLLS-Python.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/Appendix-NLLS-Python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -448,19 +559,108 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model fitting in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-linear-model-to-the-data">
+   Fitting a Linear model to the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-nlls">
+     Using NLLS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-ols">
+     Using OLS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-the-nlls-and-ols-fits">
+     Comparing the NLLS and OLS fits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-the-residuals-etc">
+     Calculating the residuals, etc.
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise">
+       Exercise
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-non-linear-models-to-the-data">
+   Fitting Non-linear models to the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-model-fit">
+     Logistic model fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gompertz-model">
+     Gompertz model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Exercise
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-resources">
+   Readings &amp; Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-fitting-in-python">
-<h1>Model fitting in Python<a class="headerlink" href="#model-fitting-in-python" title="Permalink to this headline">¶</a></h1>
+<h1>Model fitting in Python<a class="headerlink" href="#model-fitting-in-python" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Python offers a wide range of tools for fitting mathematical models to data. Here we will look at using Python to fit non-linear models to data using Least Squares (NLLS).</p>
 <p>You may want to have a look at <span class="xref myst">this Chapter</span>, and in particular, it NLLS section, and the lectures on <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/tree/master/content/lectures/ModelFitting">Model fitting</a> and <a class="reference external" href="https://github.com/mhasoba/TheMulQuaBio/blob/master/content/lectures/NLLS">NLLS</a> before proceeding.</p>
 <p>WE will use the <code class="docutils literal notranslate"><span class="pre">Lmfit</span></code> package, which provides a high-level interface to non-linear optimization and curve fitting problems for Python.</p>
@@ -518,7 +718,7 @@
 </div>
 </section>
 <section id="fitting-a-linear-model-to-the-data">
-<h2>Fitting a Linear model to the data<a class="headerlink" href="#fitting-a-linear-model-to-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>Fitting a Linear model to the data<a class="headerlink" href="#fitting-a-linear-model-to-the-data" title="Permalink to this headline">#</a></h2>
 <p>Lets start with the simplest case; a linear model.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}\label{eq:linear_model}
@@ -526,7 +726,7 @@
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, are phenomenological parameters.</p>
 <section id="using-nlls">
-<h3>Using NLLS<a class="headerlink" href="#using-nlls" title="Permalink to this headline">¶</a></h3>
+<h3>Using NLLS<a class="headerlink" href="#using-nlls" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create object for storing parameters</span>
@@ -605,7 +805,7 @@
 </div>
 </section>
 <section id="using-ols">
-<h3>Using OLS<a class="headerlink" href="#using-ols" title="Permalink to this headline">¶</a></h3>
+<h3>Using OLS<a class="headerlink" href="#using-ols" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">lmfit</span></code>’s purpose is not to fit linear models, although it is general enough to do so. Recall that a 3rd degree polynomial is a Lienar model, and it can be fitted using <em>Ordinary Least Squares</em>. You can easily do this  with the function <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>.</p>
 <p>Let’s try this for the same data.</p>
 <div class="cell docutils container">
@@ -630,7 +830,7 @@
 </div>
 </section>
 <section id="comparing-the-nlls-and-ols-fits">
-<h3>Comparing the NLLS and OLS fits<a class="headerlink" href="#comparing-the-nlls-and-ols-fits" title="Permalink to this headline">¶</a></h3>
+<h3>Comparing the NLLS and OLS fits<a class="headerlink" href="#comparing-the-nlls-and-ols-fits" title="Permalink to this headline">#</a></h3>
 <p>Let’s compare the the coefficients obtained using NLLS (using <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>) vs using OLS (with <code class="docutils literal notranslate"><span class="pre">polyfit</span></code>) above.</p>
 <p>First have a another look at the NLLS result:</p>
 <div class="cell docutils container">
@@ -665,7 +865,7 @@
 <p>Next, you can calculate the residuals of the fit:</p>
 </section>
 <section id="calculating-the-residuals-etc">
-<h3>Calculating the residuals, etc.<a class="headerlink" href="#calculating-the-residuals-etc" title="Permalink to this headline">¶</a></h3>
+<h3>Calculating the residuals, etc.<a class="headerlink" href="#calculating-the-residuals-etc" title="Permalink to this headline">#</a></h3>
 <p>Once you have done the model fitting you can calculate the residuals:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -683,7 +883,7 @@
 </div>
 <p>The residuals can be then used to calculate BIC, AIC, etc, as you <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-r-comparing-models"><span class="std std-ref">learned previously</span></a>.</p>
 <section id="exercise">
-<h4>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h4>
+<h4>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>We calculated the residuals above using the OLS fit of the cubic model to the data. Calculate the residuals for the NLLS fit of the same model to the data (i.e., using the <code class="docutils literal notranslate"><span class="pre">fit_linear_NLLS</span></code> object).</p>
 <ul>
@@ -695,10 +895,10 @@
 </section>
 </section>
 <section id="fitting-non-linear-models-to-the-data">
-<h2>Fitting Non-linear models to the data<a class="headerlink" href="#fitting-non-linear-models-to-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>Fitting Non-linear models to the data<a class="headerlink" href="#fitting-non-linear-models-to-the-data" title="Permalink to this headline">#</a></h2>
 <p>Now let’s use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> to do what it was actually designed for: fitting non-linear mathematical models to data. We will fit the same two models that we fitted in the <a class="reference internal" href="20-ModelFitting-NLLS.html#model-fitting-r-population-growth"><span class="std std-ref">Model Fitting Chapter</span></a> (where we used R).</p>
 <section id="logistic-model-fit">
-<h3>Logistic model fit<a class="headerlink" href="#logistic-model-fit" title="Permalink to this headline">¶</a></h3>
+<h3>Logistic model fit<a class="headerlink" href="#logistic-model-fit" title="Permalink to this headline">#</a></h3>
 <p>A classical, somewhat mechanistic model is the logistic growth equation:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -776,7 +976,7 @@
 <p>Where function evals, is the number of iterations needed to reach the minimum. The <code class="docutils literal notranslate"><span class="pre">report_fit</span></code> function also offers estimations of goodness of fit such as <span class="math notranslate nohighlight">\(\chi^2\)</span>, BIC and AIC. These are calculated as specified <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#akaike-and-bayesian-information-criteria">here</a>. Finally, uncertainties of each parameter estimate, correlation levels between them are also calculated. Details and caveats about these values can be found <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#uncertainties-in-variable-parameters-and-their-correlations">here</a>.</p>
 </section>
 <section id="gompertz-model">
-<h3>Gompertz model<a class="headerlink" href="#gompertz-model" title="Permalink to this headline">¶</a></h3>
+<h3>Gompertz model<a class="headerlink" href="#gompertz-model" title="Permalink to this headline">#</a></h3>
 <p>Another alternative is the Gompertz model, which has been used frequently in the literature to model bacterial growth</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}\label{eq:Gompertzlog}
@@ -858,7 +1058,7 @@
 </div>
 </section>
 <section id="plot-the-results">
-<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h3>
+<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
@@ -907,7 +1107,7 @@
 </section>
 </section>
 <section id="id1">
-<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <p>The generalized Logistic model (also known as Richards’ curve) is an extension of the logistic or sigmoid functions, allowing for more flexible S-shaped curves:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}\label{eq:Hill}
@@ -1017,7 +1217,7 @@
 No. Generally, better models will be those that fit the data well, have less parameters, and these can be interpreted mechanistically. In these case, the Gomperz model fits the data almost as good as the Generalized Logistic (GL), but has less parameters, and these are more ‘mechanistic’ than the ones in GL, so it is clearly better.</p>
 </section>
 <section id="readings-resources">
-<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
+<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>If you choose Python for the model fitting component of your workflow, you will probably want to use <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>.
 Look up documentation/help on submodules <code class="docutils literal notranslate"><span class="pre">minimize</span></code>, <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>, and <code class="docutils literal notranslate"><span class="pre">report_fit</span></code> in particular.</p>
@@ -1052,54 +1252,48 @@ Look up documentation/help on submodules <code class="docutils literal notransla
 
               </div>
               
-        
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="Appendix-Databases.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Databases <span class="tocSkip"></span></p>
-            </div>
-        </a>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Appendix-Databases.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Databases <span class="tocSkip"></span></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Appendix-MiniProj.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Computing Miniproject</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="Appendix-MiniProj.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">The Computing Miniproject</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Samraat Pawar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Samraat Pawar<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>

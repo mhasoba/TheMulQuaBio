@@ -254,13 +254,13 @@ MyFun_vec = MyFun_lamb(x_vec)
 # In[26]:
 
 
-get_ipython().run_cell_magic('timeit', '#remember this?', '\nMyFun_vec = sc.array([N(((x + pi)**2).subs(x, xx)) for xx in x_vec])')
+get_ipython().run_cell_magic('timeit', '#remember this?', '\nMyFun_vec = sc.array([N(((x + pi)**2).subs(x, xx)) for xx in x_vec])\n')
 
 
 # In[27]:
 
 
-get_ipython().run_cell_magic('timeit', '', '\nMyFun_vec = MyFun_lamb(x_vec)')
+get_ipython().run_cell_magic('timeit', '', '\nMyFun_vec = MyFun_lamb(x_vec)\n')
 
 
 # ## Fundamental mathematical operations 

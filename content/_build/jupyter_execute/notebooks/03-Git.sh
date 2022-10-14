@@ -16,7 +16,7 @@ git commit -m "Added README file."
 
 git status
 
-git add -A
+git add *.txt
 
 git status
 

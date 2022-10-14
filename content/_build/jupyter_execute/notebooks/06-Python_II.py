@@ -40,7 +40,7 @@
 # 
 # Let's start by importing numpy:
 
-# In[140]:
+# In[2]:
 
 
 import numpy as np
@@ -993,11 +993,11 @@ run_my_funcs(10000000,"My string")
 # import time
 # start = time.time()
 # my_squares_loops(iters)
-# print("my_squares_loops takes %f s to run." % (time.time() - start))
+# print(f"my_squares_loops takes {time.time() - start} s to run.")
 # 
 # start = time.time()
 # my_squares_lc(iters)
-# print("my_squares_lc takes %f s to run." % (time.time() - start))
+# print(f"my_squares_lc takes {time.time() - start} s to run.")
 # ```
 # But you'll notice that if you run it multiple times, the time taken changes each time. So `timeit` takes a sample of runs and returns the average, which is better.
 # 
@@ -1026,7 +1026,7 @@ run_my_funcs(10000000,"My string")
 # 
 # Below are a loop-based function and a vectorized function to calculate the entrywise product of two 1D arrays of the same length. We will test them both on larger and larger 1D arrays to see how the vectorized approach is faster.
 
-# In[223]:
+# In[4]:
 
 
 def loop_product(a, b):
@@ -1045,7 +1045,7 @@ def vect_product(a, b):
 # 
 # Let's try comparing the runtimes of `loop_product` and `vect_product` on increasingly large randomly-generated 1D arrays:
 
-# In[224]:
+# In[5]:
 
 
 import timeit
@@ -1055,7 +1055,7 @@ t_loop = []
 t_vect = []
 
 for N in array_lengths:
-    print("\nSet N=%d" %N)
+    print(f"\nSet {N=}")
     #randomly generate our 1D arrays of length N
     a = np.random.rand(N)
     b = np.random.rand(N)
@@ -1063,12 +1063,12 @@ for N in array_lengths:
     # time loop_product 3 times and save the mean execution time.
     timer = timeit.repeat('loop_product(a, b)', globals=globals().copy(), number=3)
     t_loop.append(1000 * np.mean(timer))
-    print("Loop method took %d ms on average." %t_loop[-1])
+    print(f"Loop method took {t_loop[-1]} ms on average.")
     
     # time vect_product 3 times and save the mean execution time.
     timer = timeit.repeat('vect_product(a, b)', globals=globals().copy(), number=3)
     t_vect.append(1000 * np.mean(timer))
-    print("vectorized method took %d ms on average." %t_vect[-1])
+    print(f"vectorized method took {t_vect[-1]} ms on average.")
 
 
 # Phew! That last one just exploded in terms of the time it took!
