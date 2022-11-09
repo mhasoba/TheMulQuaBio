@@ -1,7 +1,7 @@
 """
-	Code to provide automated feedback on TheMulQuaBio computing practical work.  
+	Provides automated feedback on TheMulQuaBio computing practical work.  
 
-	USAGE 
+	USAGE: 
 	
 	`python3 feedback.py StudentsFile RepoPath Week`
 
@@ -13,16 +13,22 @@
 
 	ARGUMENTS: 
 
-	StudentsFile : FULL path to input file containing student data, including 					git repo address
+	StudentsFile : FULL path to input file containing student data, 
+				   including git repo address
 
-	RepoPath 	 : FULL path to location for students' local git repositories 					(without an ending "/")
+	RepoPath 	 : FULL path to location for students' local git       
+	               repositories (without an ending "/")
 
-	Week		 : Name of week to give feedback on (Week1, Week2, etc.)						(case insensitive)
+	Week		 : Name of week to give feedback on (Week1, Week2, 
+				   etc.) (case insensitive)
 
-    --gitpull 	 : Optional flag indicating whether to pull students' git 					    repositories only, without feedback (default is False). 					Only works if the student's repo already exists.
+    --gitpull 	 : Optional flag indicating whether to pull students' 
+				   git repositories only, without feedback (default is False). Only works if the student's repo already exists
 
-	--gitpush	 : Optional flag indicating whether to push the feedback to 					students' git repositories (default is False). If used 						contents of feedback directory pushed, nothing else.
+	--gitpush	 : Optional flag indicating whether to push the feedback 
+				   to students' git repositories (default is False). If used contents of feedback directory are pushed, nothing else
 """
+
 ################ Imports #####################
 
 import subprocess, os, csv, argparse, re, time, expected_files
@@ -69,8 +75,6 @@ parser.add_argument("--gitpush", action="store_true",
 
 args = parser.parse_args() 
 
-# import ipdb; ipdb.set_trace()
-
 # expectedFiles = expected_files(args)  # Import list of expected files, on a per-week basis; not currently used 
 
 with open(args.StudentsFile,'r') as f: # Read in and store the student data
@@ -92,12 +96,14 @@ for Stdnt in Stdnts:
 	
 	if args.gitpush:
 		
+		# import ipdb; ipdb.set_trace()
+
 		print("...\n\n" + "Git pushing feedback for " + Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")
 
 		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])  # Add only feedback/log files
 
 		subprocess.check_output(["git","-C", RepoPath, "commit","-m","Pushed feedback"])
-						
+				
 		subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
 		
 		subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # discard everything else among the tracked content that was changed
@@ -139,19 +145,6 @@ for Stdnt in Stdnts:
 		Keys = list([row.split(': ')[0] for row in output.splitlines()])
 		Vals = list([row.split(': ')[1] for row in output.splitlines()])
 		RepoStats = dict(zip(Keys, Vals))
-
-		########## block for accessing git log - to be finished ########### 
-		## Store gits codes, along with the corresponding field names in two lists:
-		# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
-		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
-		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
-		# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
-		# p, log, err, time_used = run_popen('git log --format="%s"', timeout)
-		# (log, _) = p.communicate()
-		# log = log.strip('\n\x1e').split("\x1e")
-		# log = [row.strip().split("\x1f") for row in log]
-		# log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
-		###################################################################
 
 	#~ Now open feedback directory inside repository:	
 
@@ -308,8 +301,8 @@ for Stdnt in Stdnts:
 			for file in files:
 				
 				if file.lower().endswith(('.sh','.py','.ipynb','.r','.txt','.bib','.tex')) and not file.startswith(".") :
-					 Scripts.append(os.path.join(root, file))
-					 ScriptNames.append(file) 
+					Scripts.append(os.path.join(root, file))
+					ScriptNames.append(file) 
 
 		azz.write('Found ' + str(len(Scripts)) + ' code files: ' + ', '.join(ScriptNames) + '\n\n')
 
@@ -401,6 +394,7 @@ for Stdnt in Stdnts:
 			else:
 				errors += 1
 				azz.write('\nEncountered error (or warning):\n')
+				azz.write('\n***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***\n\n')
 				azz.write(err)
 				azz.write('\n')
 			
@@ -419,14 +413,3 @@ for Stdnt in Stdnts:
 	azz.write('NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!')
 	
 	azz.close()
-			
-	# if args.gitpush:
-	# 	print("Git pushing...\n")
-		
-	# 	subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"]) # Add only feedback/log files
-		
-	# 	subprocess.check_output(["git","-C", RepoPath, "commit", "-m", 'Pushed ' + args.Week + ' feedback'])
-				
-	# 	subprocess.check_output(["git","-C", RepoPath,"push", "origin", "HEAD"])
-		
-	# 	subprocess.check_output(["git","-C", RepoPath, "reset","--hard"]) # Discard everything else that was changed

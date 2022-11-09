@@ -16,11 +16,7 @@ def even_or_odd(x=0):
     
     >>> even_or_odd(5)
     '5 is Odd!'
-    
-    whenever a float is provided, then the closest integer is used:    
-    >>> even_or_odd(3.2)
-    '3 is Odd!'
-    
+        
     in case of negative numbers, the positive is taken:    
     >>> even_or_odd(-2)
     '-2 is Even!'

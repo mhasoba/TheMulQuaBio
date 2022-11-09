@@ -15,8 +15,9 @@ taxa = [ ('Myotis lucifugus','Chiroptera'),
 # 
 # An example output is:
 #  
-# 'Chiroptera' : set(['Myotis lucifugus']) ... etc. OR, 'Chiroptera': {'Myotis
-#  lucifugus'} ... etc
+# 'Chiroptera' : set(['Myotis lucifugus']) ... etc. 
+# OR, 
+# 'Chiroptera': {'Myotis  lucifugus'} ... etc
 
 #### Your solution here #### 
 

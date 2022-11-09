@@ -2291,13 +2291,13 @@ $\star$ Type the code below and save as `boilerplate.py` in `week2/code`:
 # 
 # And again, like before, you can also execute this program file from within the `ipython` shell with `run MyScript.py`. Enter `ipython` from bash (or switch to a terminal where you are already in the ipython shell), and do:
 
-# In[214]:
+# In[13]:
 
 
 cd "../code"
 
 
-# In[215]:
+# In[14]:
 
 
 get_ipython().run_line_magic('run', 'boilerplate.py')
@@ -2320,13 +2320,13 @@ get_ipython().run_line_magic('run', 'boilerplate.py')
 # 
 # You can access the docstring(s) in a script (both for the overall script and the ones in each of its functions), by importing the function (say, `my_func`), and then typing `help(my_func)` or `?my_func` in the python or ipython shell. For example, try ` import boilerplate` and then `help(boilerplate)` (but you have to be in the python or ipython shell).
 
-# In[216]:
+# In[15]:
 
 
 import boilerplate
 
 
-# In[217]:
+# In[16]:
 
 
 help(boilerplate)
@@ -2363,7 +2363,7 @@ help(boilerplate)
 # 
 # How do you import? Simply as (in python or ipython shell):
 
-# In[218]:
+# In[17]:
 
 
 import boilerplate
@@ -2371,7 +2371,7 @@ import boilerplate
 
 # Then type
 
-# In[219]:
+# In[18]:
 
 
 boilerplate
@@ -2390,16 +2390,16 @@ boilerplate
 # # Filename: using_name.py
 # 
 # if __name__ == '__main__':
-#     print('This program is being run by itself')
+#     print('This program is being run by itself!')
 # else:
-#     print('I am being imported from another module')
+#     print('I am being imported from another script/program/module!')
 # 
 # print("This module's name is: " + __name__)
 # ```
 # 
 # Now run it:
 
-# In[220]:
+# In[20]:
 
 
 get_ipython().run_line_magic('run', 'using_name.py')
@@ -2407,7 +2407,7 @@ get_ipython().run_line_magic('run', 'using_name.py')
 
 # Now, try:
 
-# In[221]:
+# In[21]:
 
 
 import using_name
@@ -2666,11 +2666,7 @@ even_or_odd(11)
 #     
 #     >>> even_or_odd(5)
 #     '5 is Odd!'
-#     
-#     whenever a float is provided, then the closest integer is used:    
-#     >>> even_or_odd(3.2)
-#     '3 is Odd!'
-#     
+#         
 #     in case of negative numbers, the positive is taken:    
 #     >>> even_or_odd(-2)
 #     '-2 is Even!'
@@ -2905,18 +2901,22 @@ buggyfunc(20)
 # Note that we also used `else` (just like in the case of `if`-`else`) here to give feedback on every successful calculation. There is also a `finally` keyword that enables you to execute sections of code that should always run, with or without any previously encountered exceptions.
 
 # ```{tip}
-# Notice again in the above script we create an f string but this time we save ourself even more time by incorporating the variable and an `=` sign:
+# Notice again in the above script we create an f string but this time we save ourselves even more time by incorporating the variable and an `=` sign:
 # 
 # `f"Here is a string, {x = }"`
 # 
-# This is the same (but _even more concise_) as writing:
+# This is the same (but *even more concise*) as writing:
 # 
 # `f"Here is a string, x = {x}"`
 # 
 # This works for expressions as well! Try something like the following to see:
+# 
 # `from math import cos, radians`
+# 
 # `theta = 30`
-# `f"{theta=}  {cos(radians(theta))=:.3f}"`
+# 
+# print(f"{theta = } {cos(radians(theta)) = :.3f}")
+# 
 # ```
 
 # ## Modules and code compartmentalization
@@ -2959,7 +2959,7 @@ buggyfunc(20)
 # * `ipython` is an enhanced python terminal (which you are currently using)
 # * `jupyter` is an interactive notebook environment for data analysis, visualization, and creation of documents that can be shared. This course is written entirely as Jupyter notebooks.
 # * `scrapy` allows you to write efficient programs that [crawl](https://en.wikipedia.org/wiki/Web_crawler) through web sites and extract data from them
-# * `beautifulsoup` can be used for parsing HTML and XML to extract data (can do a lot of what `scrapy` does)
+# * `beautifulsoup4` can be used for parsing HTML and XML to extract data (can do a lot of what `scrapy` does)
 # * `biopython` for bioinformatics. Check out the [worked examples](http://biopython.org/DIST/docs/tutorial/Tutorial.html) in particular.
 # 
 # We will use many of these in the [Advanced Python Chapter](./06-Python_II.ipynb).

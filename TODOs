@@ -169,3 +169,16 @@ Some questions that are arising:
 criteria accordingly; Total baseline points are weighted average of these
 two, from   which additional points are deleted for poor project
 organization, readme,  etc.
+* 		########## block for accessing git log - to be finished ########### 
+		## Store gits codes, along with the corresponding field names in two lists:
+		# GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
+		# GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
+		##join the format fields together with "\x1f" (ASCII field separator) and delimit the records by "\x1e" (ASCII record separator)
+		# GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e' 
+		# p, log, err, time_used = run_popen('git log --format="%s"', timeout)
+		# (log, _) = p.communicate()
+		# log = log.strip('\n\x1e').split("\x1e")
+		# log = [row.strip().split("\x1f") for row in log]
+		# log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
+		###################################################################
+

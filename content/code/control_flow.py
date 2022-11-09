@@ -47,7 +47,7 @@ def find_all_primes(x=22):
         allprimes.append(i)
     print("There are %d primes between 2 and %d" % (len(allprimes), x))
     return allprimes
-      
+
 def main(argv):
     # sys.exit("don't want to do this right now!")
     print(even_or_odd(22))

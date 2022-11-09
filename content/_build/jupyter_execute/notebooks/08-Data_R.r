@@ -44,16 +44,24 @@ require(tidyverse)
 
 tidyverse_packages(include_self = TRUE) # the include_self = TRUE means list "tidyverse" as well 
 
-MyWrangledData <- tibble::as_tibble(MyWrangledData) 
+MyWrangledData <- dplyr::as_tibble(MyWrangledData) 
 MyWrangledData
+
+MyWrangledData <- as_tibble(MyWrangledData) 
 
 class(MyWrangledData)
 
-dplyr::glimpse(MyWrangledData) #like str(), but nicer!
+glimpse(MyWrangledData) #like str(), but nicer!
 
-dplyr::filter(MyWrangledData, Count>100) #like subset(), but nicer!
+filter(MyWrangledData, Count>100) #like subset(), but nicer!
 
-dplyr::slice(MyWrangledData, 10:15) # Look at an arbitrary set of data rows
+slice(MyWrangledData, 10:15) # Look at a particular range of data rows
+
+MyWrangledData %>%
+    group_by(Species) %>%
+        summarise(avg = mean(Count))
+
+aggregate(MyWrangledData$Count, list(MyWrangledData$Species), FUN=mean) 
 
 MyDF <- read.csv("../data/EcolArchives-E089-51-D1.csv")
 dim(MyDF) #check the size of the data frame you loaded
@@ -63,7 +71,7 @@ str(MyDF)
 head(MyDF)
 
 require(tidyverse)
-dplyr::glimpse(MyDF)
+glimpse(MyDF)
 
 MyDF$Type.of.feeding.interaction <- as.factor(MyDF$Type.of.feeding.interaction)
 MyDF$Location <- as.factor(MyDF$Location)
