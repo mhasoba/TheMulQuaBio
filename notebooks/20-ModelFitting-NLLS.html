@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,8 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to Jupyter" href="Appendix-JupyIntro.html" />
@@ -1088,7 +1088,7 @@ V = \frac{V_{\max} S}{K_M + S}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">1456</span><span class="p">)</span> <span class="c1"># To get the same random fluctuations in the &quot;data&quot; every time</span>
-<span class="n">V_data</span> <span class="o">&lt;-</span> <span class="n">V_data</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Add 10 random fluctuations  with standard deviation of 0.5 to emulate error</span>
+<span class="n">V_data</span> <span class="o">&lt;-</span> <span class="n">V_data</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Add 10 random fluctuations  with standard deviation of 1 to emulate error</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">S_data</span><span class="p">,</span> <span class="n">V_data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1156,7 +1156,7 @@ Consider specifying &#39;start&#39; or using a selfStart model”
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636890787612</dd><dt>K_M</dt><dd>10.6072252168762</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636891133139</dd><dt>K_M</dt><dd>10.6072253230542</dd></dl>
 </div></div>
 </div>
 <div class="cell docutils container">
@@ -1208,7 +1208,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 0.8818 on 8 degrees of freedom
 
 Number of iterations to convergence: 5 
-Achieved convergence tolerance: 9.507e-06
+Achieved convergence tolerance: 9.503e-06
 </pre></div>
 </div>
 </div>
@@ -1232,8 +1232,39 @@ Achieved convergence tolerance: 9.507e-06
 <p>So what do we do with the results of an NLLS fit? What statistical inferences can be made? We will address this issue here at a basic level, and then revisit it using model selection further below (in the Allometric growth example).</p>
 <section id="goodness-of-fit">
 <h3>Goodness of fit<a class="headerlink" href="#goodness-of-fit" title="Permalink to this headline">#</a></h3>
-<p>Statistical inference based on the results obtained from NLLS fitting cannot be done using Analysis of Variance (ANOVA), because the model being fitted is not a Linear Model. Try <code class="docutils literal notranslate"><span class="pre">anova(MM_model)</span></code>, and see what happens. Thus, you do not have something like an <span class="math notranslate nohighlight">\(F\)</span>-value for the model fitting to assess the overall significance of the fit as you did in Linear Models. The best way to assess the quality of a NLLS model fit is to compare it to another, alternative model’s fit. In this context, recall that running an ANOVA, using the <a class="reference internal" href="14-regress.html#regress-perform"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">anova()</span></code> function on a linear model fit</span></a> basically compares the fitted model to a null model.</p>
-<p>Other than that, the best thing to assess the quality of fit is to examine whether the fitted coefficients are reliable, ie.e., are significant, based on their (low) standard errors, (high) t-values, and (low) p-values (see the example model’s summary above).</p>
+<p>Assessing whether an NLLS-fitted model is “significant” based on an F-value, by performing an Analysis of Variance (ANOVA) on the regression results as one can do for a Linear Model using the <a class="reference internal" href="14-regress.html#regress-perform"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">anova()</span></code> function on a linear model fit</span></a> is not advisable. Try <code class="docutils literal notranslate"><span class="pre">anova(MM_model)</span></code>, and see what happens:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">MM_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">anova</span><span class="o">.</span><span class="n">nls</span><span class="p">(</span><span class="n">MM_model</span><span class="p">):</span> <span class="n">anova</span> <span class="ow">is</span> <span class="n">only</span> <span class="n">defined</span> <span class="k">for</span> <span class="n">sequences</span> <span class="n">of</span> <span class="s2">&quot;nls&quot;</span> <span class="n">objects</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">anova</span><span class="p">(</span><span class="n">MM_model</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">anova</span><span class="o">.</span><span class="n">nls</span><span class="p">(</span><span class="n">MM_model</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">.</span> <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;anova is only defined for sequences of </span><span class="se">\&quot;</span><span class="s2">nls</span><span class="se">\&quot;</span><span class="s2"> objects&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So a ANOVA calculation is not implemented for a NLLS fit. The third item in the error message / traceback above says that you can however use <code class="docutils literal notranslate"><span class="pre">anova()</span></code> to compare two <em>nested</em> models. That is, you can do something like <code class="docutils literal notranslate"><span class="pre">anova(model1,model2)</span></code>, where model 1 is nested within model 1, as we did <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">previously</span></a> to ask if a simpler model explains significantly more variation in the data than a more complicated one (with one or more addtional terms in the equation).</p>
+<p>To understand why you cannot use an ANOVA to assess the significance of a NLLS model fit, recall that the objective of an <a class="reference internal" href="14-regress.html#regress-perform"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">anova()</span></code> function applied to  a linear model fit</span></a> is o compare the fitted model to a <em>null</em> model, asking whether you can reject that null model (hypothesis). The problem with doing so for a nonlinear model is that unfortunately it is not clear what the null hypothesis should be when the model is not a linear combination of terms (the definition of a linear model). For an F-statistic to be meaningful, the null hypothesis model must be nested <em>within</em> the alternative model (in which case you can indeed use the <code class="docutils literal notranslate"><span class="pre">anova()</span></code> function using <code class="docutils literal notranslate"><span class="pre">anova(Model1,Model2)</span></code>).</p>
+<p>To make this clear, let’s recall the equation for a simple linear regression:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1 x\]</div>
+<p>The null model for this is</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0\]</div>
+<p>This then allows the TSS, RSS and ESS to be calculated in a meaninglful way, as we <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">did before</span></a>, leading to an ANOVA based assessment of significance of the regrssion moel fit to the data.</p>
+<p>Now consider a nonlinear model like the Michaelis-Menten eqn <a class="reference internal" href="#equation-eq-m-m">(7)</a>. <em>What would be an appropriate null model for this equation?</em></p>
+<p>Thus, the best ways to assess a NLLS model’s fit are:</p>
+<ul class="simple">
+<li><p>Compare it’s likelihood to those of other alternative models’ fits (which may include your best guess for a null model).</p></li>
+<li><p>Examine whether the fitted coefficients are reliable, i.e., are significant, based on their (low) standard errors, (high) t-values, and (low) p-values (see the example model’s summary above).</p></li>
+</ul>
 <section id="r-squared-values">
 <h4>R-squared values<a class="headerlink" href="#r-squared-values" title="Permalink to this headline">#</a></h4>
 <p>To put it simply, unlike an R<span class="math notranslate nohighlight">\(^2\)</span> value obtained by fitting a linear model, that obtained from NLLS fitting is not reliable, and should not be used. The reason for this is somewhat technical (e.g., see this <a class="reference external" href="https://dx.doi.org/10.1186%2F1471-2210-10-6">paper</a>) and we won’t go into it here. But basically, NLLS R<span class="math notranslate nohighlight">\(^2\)</span> values do not always accurately reflect the quality of fit, and definitely cannot be used to select between competing models (Model selection, as you learned <a class="reference internal" href="18-ModelSimp.html"><span class="doc std std-doc">previously</span></a>). Indeed R<span class="math notranslate nohighlight">\(^2\)</span> values obtained from NLLS fitting even be negative when the model fits very poorly! We will learn more about model selection with non-linear models later below.</p>
@@ -1252,7 +1283,7 @@ Achieved convergence tolerance: 9.507e-06
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Waiting for profiling to be done...
 </pre></div>
 </div>
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A matrix: 2 × 2 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>2.5%</th><th scope=col>97.5%</th></tr>
@@ -1309,7 +1340,7 @@ Achieved convergence tolerance: 9.507e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636890787612</dd><dt>K_M</dt><dd>10.6072252168762</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636891133139</dd><dt>K_M</dt><dd>10.6072253230542</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
@@ -1343,7 +1374,7 @@ Achieved convergence tolerance: 9.507e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636890787612</dd><dt>K_M</dt><dd>10.6072252168762</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636891133139</dd><dt>K_M</dt><dd>10.6072253230542</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
@@ -1355,7 +1386,7 @@ Achieved convergence tolerance: 9.507e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>0.816129927593736</dd><dt>K_M</dt><dd>-19.49936559059</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>0.816129930954726</dd><dt>K_M</dt><dd>-19.4993655809431</dd></dl>
 </div></div>
 </div>
 <p>The estimates in our latest model fit are completely different (in fact, <code class="docutils literal notranslate"><span class="pre">K_M</span></code> is negative)! Let’s plot this model’s and the first model’s fit together:</p>
@@ -1368,7 +1399,7 @@ Achieved convergence tolerance: 9.507e-06
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_41_0.png" src="../_images/20-ModelFitting-NLLS_41_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_45_0.png" src="../_images/20-ModelFitting-NLLS_45_0.png" />
 </div>
 </div>
 <p>As you would have guessed from the really funky coefficient estimates that were obtained in <code class="docutils literal notranslate"><span class="pre">MM_model3</span></code>, this is a pretty poor model fit to the data, with the negative value of <code class="docutils literal notranslate"><span class="pre">K_M</span></code> causing the fitted version of the Michaelis-Menten model to behave strangely.</p>
@@ -1381,12 +1412,12 @@ Achieved convergence tolerance: 9.507e-06
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">nlsModel</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">wts</span><span class="p">):</span> <span class="n">singular</span> <span class="n">gradient</span> <span class="n">matrix</span> <span class="n">at</span> <span class="n">initial</span> <span class="n">parameter</span> <span class="n">estimates</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">nlsModel</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">wts</span><span class="p">,</span> <span class="n">scaleOffset</span> <span class="o">=</span> <span class="n">scOff</span><span class="p">,</span> <span class="n">nDcentral</span> <span class="o">=</span> <span class="n">nDcntr</span><span class="p">):</span> <span class="n">singular</span> <span class="n">gradient</span> <span class="n">matrix</span> <span class="n">at</span> <span class="n">initial</span> <span class="n">parameter</span> <span class="n">estimates</span>
 <span class="ne">Traceback</span>:
 
 <span class="mi">1</span><span class="o">.</span> <span class="n">nls</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
  <span class="o">.</span>     <span class="n">K_M</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">))</span>
-<span class="mi">2</span><span class="o">.</span> <span class="n">nlsModel</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">wts</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">nlsModel</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">wts</span><span class="p">,</span> <span class="n">scaleOffset</span> <span class="o">=</span> <span class="n">scOff</span><span class="p">,</span> <span class="n">nDcentral</span> <span class="o">=</span> <span class="n">nDcntr</span><span class="p">)</span>
 <span class="mi">3</span><span class="o">.</span> <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;singular gradient matrix at initial parameter estimates&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1436,13 +1467,13 @@ Achieved convergence tolerance: 9.507e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636890787612</dd><dt>K_M</dt><dd>10.6072252168762</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636891133139</dd><dt>K_M</dt><dd>10.6072253230542</dd></dl>
 </div><div class="output text_html"><style>
 .dl-inline {width: auto; margin:0; padding: 0}
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636623821246</dd><dt>K_M</dt><dd>10.6071488812911</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636623970243</dd><dt>K_M</dt><dd>10.6071489188677</dd></dl>
 </div></div>
 </div>
 <p>The results of the first model fit and this last one are still not exactly the same! This drives home the point that NLLS is not an “exact” procedure. However, the differences between these two solutions are minuscule, so the main thing to take away is that if the starting values are reasonable, NLLS is <em>exact enough</em>.</p>
@@ -1465,16 +1496,11 @@ Achieved convergence tolerance: 9.507e-06
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: minpack.lm
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now let’s try it (using the same starting values as <code class="docutils literal notranslate"><span class="pre">MM_model2</span></code> above):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model5</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">2</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MM_model5</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">V_data</span> <span class="o">~</span> <span class="n">V_max</span> <span class="o">*</span> <span class="n">S_data</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_M</span> <span class="o">+</span> <span class="n">S_data</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">V_max</span> <span class="o">=</span> <span class="m">12</span><span class="p">,</span> <span class="n">K_M</span> <span class="o">=</span> <span class="m">7</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1499,7 +1525,7 @@ Achieved convergence tolerance: 9.507e-06
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>V_max</dt><dd>12.963651950733</dd><dt>K_M</dt><dd>10.6071190268378</dd></dl>
+</style><dl class=dl-inline><dt>V_max</dt><dd>12.9636298178077</dd><dt>K_M</dt><dd>10.6070557350073</dd></dl>
 </div></div>
 </div>
 <p>Close enough.</p>
@@ -1574,7 +1600,7 @@ Achieved convergence tolerance: 9.507e-06
 </div>
 </div>
 </div>
-<p>NLLS fails  because these starting values are just too far from the best solution.</p>
+<p>Here again, NLLS fitting fails because these starting values are just too far from the best solution.</p>
 </section>
 <section id="bounding-parameter-values">
 <span id="modelfitting-nlls-bounding"></span><h2>Bounding parameter values<a class="headerlink" href="#bounding-parameter-values" title="Permalink to this headline">#</a></h2>
@@ -1665,11 +1691,11 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_75_0.png" src="../_images/20-ModelFitting-NLLS_75_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_79_0.png" src="../_images/20-ModelFitting-NLLS_79_0.png" />
 </div>
 </div>
 <p>The residuals look OK. But this should not come as a surprise because we generated these “data” ourselves using normally-distributed errors!</p>
-<p>You may also want to look at further diagnostics, as we did <a class="reference internal" href="14-regress.html#regress-diagnostics"><span class="std std-ref">previously</span></a> in the case of Linear models. The most convenient way to do this is to use the <code class="docutils literal notranslate"><span class="pre">nlstools</span></code> package. We will not go into it here, but you can have a look at its <a class="reference external" href="https://rdrr.io/rforge/nlstools/">documentation</a>. Note that you will need to install this package as it is not one of the core (base) R packages.</p>
+<p>You may also want to look at further diagnostics, as we did <a class="reference internal" href="14-regress.html#regress-diagnostics"><span class="std std-ref">previously</span></a> in the case of Linear models. The most convenient way to do this is to use the <code class="docutils literal notranslate"><span class="pre">nlstools</span></code> package. We will not go into it here, but you can have a look at its <a class="reference external" href="https://rdrr.io/rforge/nlstools/">documentation</a>. Note that you will need to install this package as it is not one of the core (base) R packages. <code class="docutils literal notranslate"><span class="pre">nlstools</span></code> has some other handy utilities as well; for example, its <code class="docutils literal notranslate"><span class="pre">preview</span></code> command allows you to visualise how good the starting values are (by evaluating your non-linear function at those values) in advance of the actual fitting.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For the remaining examples, we will switch to using <code class="docutils literal notranslate"><span class="pre">nlsLM</span></code> instead of <code class="docutils literal notranslate"><span class="pre">nls</span></code>.</p>
@@ -1697,7 +1723,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 16</caption>
 <thead>
 	<tr><th></th><th scope=col>Suborder</th><th scope=col>Family</th><th scope=col>Species</th><th scope=col>GenomeSize</th><th scope=col>GenomeSE</th><th scope=col>GenomeN</th><th scope=col>BodyWeight</th><th scope=col>TotalLength</th><th scope=col>HeadLength</th><th scope=col>ThoraxLength</th><th scope=col>AdbdomenLength</th><th scope=col>ForewingLength</th><th scope=col>HindwingLength</th><th scope=col>ForewingArea</th><th scope=col>HindwingArea</th><th scope=col>MorphologyN</th></tr>
@@ -1733,7 +1759,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_87_0.png" src="../_images/20-ModelFitting-NLLS_87_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_91_0.png" src="../_images/20-ModelFitting-NLLS_91_0.png" />
 </div>
 </div>
 <p>Or, using <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>:</p>
@@ -1748,7 +1774,7 @@ y = a x^b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_89_0.png" src="../_images/20-ModelFitting-NLLS_89_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_93_0.png" src="../_images/20-ModelFitting-NLLS_93_0.png" />
 </div>
 </div>
 <p>You can see these body weights of dragonflies does not increase proportionally with body length – they curve upwards w.r.t. wing length (so the allometric constant <span class="math notranslate nohighlight">\(b\)</span> in eqn <a class="reference internal" href="#equation-eq-allom">(8)</a> mustbe greater than 1), instead of increasing as a straight line (in which case <span class="math notranslate nohighlight">\(b = 1\)</span> (isometry, instead of allometry).</p>
@@ -1785,19 +1811,6 @@ y = a x^b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">PowFit</span> <span class="o">&lt;-</span> <span class="nf">nlsLM</span><span class="p">(</span><span class="n">BodyWeight</span> <span class="o">~</span> <span class="nf">powMod</span><span class="p">(</span><span class="n">TotalLength</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Data2Fit</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">.</span><span class="m">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">.</span><span class="m">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nonlinear regression model
-  model: BodyWeight ~ powMod(TotalLength, a, b)
-   data: Data2Fit
-        a         b 
-3.941e-06 2.585e+00 
- residual sum-of-squares: 0.04569
-
-Number of iterations to convergence: 39 
-Achieved convergence tolerance: 1.49e-08
 </pre></div>
 </div>
 </div>
@@ -1841,7 +1854,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_105_0.png" src="../_images/20-ModelFitting-NLLS_105_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_109_0.png" src="../_images/20-ModelFitting-NLLS_109_0.png" />
 </div>
 </div>
 </section>
@@ -1900,7 +1913,7 @@ b 2.318292e+00 2.872287e+00
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_110_0.png" src="../_images/20-ModelFitting-NLLS_110_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_114_0.png" src="../_images/20-ModelFitting-NLLS_114_0.png" />
 </div>
 </div>
 <p>The residuals look OK.</p>
@@ -1961,7 +1974,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_119_0.png" src="../_images/20-ModelFitting-NLLS_119_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_123_0.png" src="../_images/20-ModelFitting-NLLS_123_0.png" />
 </div>
 </div>
 <p>Very similar fits, except that the quadratic model seems to deviate a bit from the data at the lower end of the data range. Let’s do a proper, formal model comparison now to check which model better-fits the data.</p>
@@ -2035,7 +2048,7 @@ y = a + b x + c x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_129_0.png" src="../_images/20-ModelFitting-NLLS_129_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_133_0.png" src="../_images/20-ModelFitting-NLLS_133_0.png" />
 </div>
 </div>
 <section id="fitting-the-three-models-using-nlls">
@@ -2120,7 +2133,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_138_0.png" src="../_images/20-ModelFitting-NLLS_138_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_142_0.png" src="../_images/20-ModelFitting-NLLS_142_0.png" />
 </div>
 </div>
 <p>Next examine the residuals between the 3 models:</p>
@@ -2134,7 +2147,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_140_0.png" src="../_images/20-ModelFitting-NLLS_140_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_144_0.png" src="../_images/20-ModelFitting-NLLS_144_0.png" />
 </div>
 </div>
 <p>The residuals for all 3 models still exhibit some patterns. In particular, the data seems to go down near the end of the observation period, but none of these models can capture that behavior.</p>
@@ -2181,7 +2194,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_146_0.png" src="../_images/20-ModelFitting-NLLS_146_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_150_0.png" src="../_images/20-ModelFitting-NLLS_150_0.png" />
 </div>
 </div>
 <section id="the-thermal-performance-curve-models">
@@ -2254,7 +2267,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 2</caption>
 <thead>
 	<tr><th></th><th scope=col>Time</th><th scope=col>N</th></tr>
@@ -2283,7 +2296,7 @@ N_t = \frac{N_0 K e^{r t}}{K + N_0 (e^{r t} - 1)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_158_0.png" src="../_images/20-ModelFitting-NLLS_158_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_162_0.png" src="../_images/20-ModelFitting-NLLS_162_0.png" />
 </div>
 </div>
 <section id="basic-approach">
@@ -2309,7 +2322,7 @@ r = \frac{\log(N(t)) - \log(N_0)}{t} ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_160_0.png" src="../_images/20-ModelFitting-NLLS_160_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_164_0.png" src="../_images/20-ModelFitting-NLLS_164_0.png" />
 </div>
 </div>
 <p>By eye the logged data looks fairly linear (beyond the initial “lag phase” of growth; see below) between hours 5 and 10, so we’ll use that time-period to calculate the growth rate.</p>
@@ -2466,7 +2479,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_176_0.png" src="../_images/20-ModelFitting-NLLS_176_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_180_0.png" src="../_images/20-ModelFitting-NLLS_180_0.png" />
 </div>
 </div>
 <p>That looks nice, and the <span class="math notranslate nohighlight">\(r_{max}\)</span> estimate we get (0.64) is fairly close to what we got above with OLS fitting.</p>
@@ -2482,7 +2495,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_178_0.png" src="../_images/20-ModelFitting-NLLS_178_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_182_0.png" src="../_images/20-ModelFitting-NLLS_182_0.png" />
 </div>
 </div>
 <p>The model actually diverges from the data at the lower end! This was not visible in the previous plot where you examined the model in linear scale (without taking a log) because the deviation of the model is small, and only becomes clear in the log scale. This is because of the way logarithms work. Let’s have a look at this in our Cell counts “data”:</p>
@@ -2496,7 +2509,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_180_0.png" src="../_images/20-ModelFitting-NLLS_180_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_184_0.png" src="../_images/20-ModelFitting-NLLS_184_0.png" />
 </div>
 </div>
 <p>As you can see the logarithm is a strongly nonlinear transformation of any sequence of real numbers, with small numbers close to zero yielding disproportionately large deviations.</p>
@@ -2666,7 +2679,7 @@ Achieved convergence tolerance: 1.49e-08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20-ModelFitting-NLLS_199_0.png" src="../_images/20-ModelFitting-NLLS_199_0.png" />
+<img alt="../_images/20-ModelFitting-NLLS_203_0.png" src="../_images/20-ModelFitting-NLLS_203_0.png" />
 </div>
 </div>
 <p>Clearly, the Gompertz model fits way better than the logistic growth equation in this case! Note also that there is a big difference in the fitted value of <span class="math notranslate nohighlight">\(r_{max}\)</span> from the two models; the value is much lower from the Logistic model because it ignores the lag phase, including it into the exponential growth phase.</p>
