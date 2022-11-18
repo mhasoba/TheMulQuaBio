@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,8 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to this section" href="../Stats-Intro.html" />
@@ -773,11 +773,6 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-directory-and-file-paths">
-     Handling directory and file paths
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#running-r">
      Running
      <code class="docutils literal notranslate">
@@ -788,30 +783,35 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-directory-and-file-paths">
+     Handling directory and file paths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
      Practicals
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-os-problem-1">
+      <a class="reference internal nav-link" href="#using-subprocess-to-run-a-r-script">
        Using
        <code class="docutils literal notranslate">
         <span class="pre">
-         os
+         subprocess
         </span>
        </code>
-       problem 1
+       to run a R script
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-os-problem-2">
+      <a class="reference internal nav-link" href="#using-os-to-crawl-directories">
        Using
        <code class="docutils literal notranslate">
         <span class="pre">
          os
         </span>
        </code>
-       problem 2
+       to crawl directories
       </a>
      </li>
     </ul>
@@ -1175,11 +1175,6 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-directory-and-file-paths">
-     Handling directory and file paths
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#running-r">
      Running
      <code class="docutils literal notranslate">
@@ -1190,30 +1185,35 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-directory-and-file-paths">
+     Handling directory and file paths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
      Practicals
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-os-problem-1">
+      <a class="reference internal nav-link" href="#using-subprocess-to-run-a-r-script">
        Using
        <code class="docutils literal notranslate">
         <span class="pre">
-         os
+         subprocess
         </span>
        </code>
-       problem 1
+       to run a R script
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-os-problem-2">
+      <a class="reference internal nav-link" href="#using-os-to-crawl-directories">
        Using
        <code class="docutils literal notranslate">
         <span class="pre">
          os
         </span>
        </code>
-       problem 2
+       to crawl directories
       </a>
      </li>
     </ul>
@@ -2304,8 +2304,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Permalink to this headline">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-042ddd9b-b3d7-4c35-9e3d-8ad4bbfdf1bb">
-<span class="eqno">(2)<a class="headerlink" href="#equation-042ddd9b-b3d7-4c35-9e3d-8ad4bbfdf1bb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ff8e1fcf-b82b-4716-898b-c83a1c9f3a48">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ff8e1fcf-b82b-4716-898b-c83a1c9f3a48" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2862,8 +2862,8 @@ vectorized method took 175.6502800155431 ms on average.
 <h3>The Lotka-Volterra model revisited<a class="headerlink" href="#the-lotka-volterra-model-revisited" title="Permalink to this headline">#</a></h3>
 <p><em>What happens when the Consumer population <span class="math notranslate nohighlight">\(C\)</span> goes extinct in the Lotka-Volterra that you encountered above</em>?</p>
 <p>If the consumer population goes extinct, the resources grow to infinity! This is not biologically realistic, of course. To address this, we can introduce density dependence to the resource population <span class="math notranslate nohighlight">\(\left(1 - \frac{R} {K}\right)\)</span>, which changes the ODE system to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-950bbc61-1f16-45fa-92dc-555084a432ac">
-<span class="eqno">(3)<a class="headerlink" href="#equation-950bbc61-1f16-45fa-92dc-555084a432ac" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-273d608d-7419-4b70-a30e-4d9ea8560dd9">
+<span class="eqno">(3)<a class="headerlink" href="#equation-273d608d-7419-4b70-a30e-4d9ea8560dd9" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -2893,8 +2893,8 @@ vectorized method took 175.6502800155431 ms on average.
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-bb133841-07bf-4f88-a429-0330a7137c2c">
-<span class="eqno">(4)<a class="headerlink" href="#equation-bb133841-07bf-4f88-a429-0330a7137c2c" title="Permalink to this equation">#</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-55d88f75-5306-4df2-87ed-41459f25044a">
+<span class="eqno">(4)<a class="headerlink" href="#equation-55d88f75-5306-4df2-87ed-41459f25044a" title="Permalink to this equation">#</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
@@ -2905,14 +2905,14 @@ vectorized method took 175.6502800155431 ms on average.
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-91f9cb77-78e1-41e4-828e-0f4bbd458521">
-<span class="eqno">(5)<a class="headerlink" href="#equation-91f9cb77-78e1-41e4-828e-0f4bbd458521" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-85ecb6c0-373b-4ea0-881d-289234ed0863">
+<span class="eqno">(5)<a class="headerlink" href="#equation-85ecb6c0-373b-4ea0-881d-289234ed0863" title="Permalink to this equation">#</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a3968285-de87-4df0-95aa-51018600d2e5">
-<span class="eqno">(6)<a class="headerlink" href="#equation-a3968285-de87-4df0-95aa-51018600d2e5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6bffa99c-1a66-4c41-bc2b-e21e619acb0e">
+<span class="eqno">(6)<a class="headerlink" href="#equation-6bffa99c-1a66-4c41-bc2b-e21e619acb0e" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - (z + \epsilon) + e a R_t)
 \end{align}\]</div>
@@ -3864,6 +3864,73 @@ Dr Aurelio Malo
 </div>
 </section>
 </section>
+<section id="running-r">
+<h3>Running <code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#running-r" title="Permalink to this headline">#</a></h3>
+<p>R is likely an important part of your project’s analysis and data visualization components in particular — for example for statistical analyses and plotting. You can run <code class="docutils literal notranslate"><span class="pre">R</span></code> from Python easily:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create an R script file called <code class="docutils literal notranslate"><span class="pre">TestR.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory with the following content:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Hello, this is R!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try running it from your bash terminal (<em>not</em> from the Python terminal) (e.g., using <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">TestR.R</span></code>). This should return in your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="s2">&quot;Hello, this is R!&quot;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<p>Then the try <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">--verbose</span> <span class="pre">TestR.R</span></code>. Thhis should return something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>  <span class="s1">&#39;/usr/lib/R/bin/R --no-echo --no-restore --file=TestR.R&#39;</span>
+
+<span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="s2">&quot;Hello, this is R!&quot;</span>
+</pre></div>
+</div>
+<p>Thus the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> flag to <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> prints out addtional information about the R script’s execution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible that the location of <code class="docutils literal notranslate"><span class="pre">RScript</span></code> is different in your Unix/Linux system. To locate it, try <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">/usr</span> <span class="pre">-name</span> <span class="pre">'Rscript'</span></code> in the bash terminal (not in Python!). For example, you might need to specify the path to it using <code class="docutils literal notranslate"><span class="pre">/usr/lib/R/bin/Rscript</span></code>.</p>
+</div>
+<p>Now try:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rscript --verbose TestR.R &gt; ../results/TestR.Rout <span class="m">2</span>&gt; ../results/TestR_errFile.Rout
+</pre></div>
+</div>
+<p>Then check the contents of <code class="docutils literal notranslate"><span class="pre">TestR.Rout</span></code> and <code class="docutils literal notranslate"><span class="pre">TestR_errFile.Rout</span></code>. The former should contain the output of the R script, and the latter the additonal information produced due to the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> flag.</p>
+<p>Now try running this using subprocess instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;Rscript --verbose TestR.R &gt; ../results/TestR.Rout 2&gt; ../results/TestR_errFile.Rout&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are two three new things here compared to what we did above when running a bash instead of a R command. Firtly, we are using <code class="docutils literal notranslate"><span class="pre">shell</span> <span class="pre">=</span> <span class="pre">True</span></code>. This is because we want subprocess to execute a non-standard bash command (RScript is not a stadard bash command) in the standard unix/linux shell. Secondly, we added <code class="docutils literal notranslate"><span class="pre">.wait()</span></code> to allow the RScript to terminate (this allows us to set timeout id necessary). Thirdly, we removed the  <code class="docutils literal notranslate"><span class="pre">stdout=subprocess.PIPE,</span> <span class="pre">stderr=subprocess.PIPE</span></code> bits, because they will not work when using <code class="docutils literal notranslate"><span class="pre">wait()</span></code>. Read <a class="reference external" href="https://docs.python.org/3/library/subprocess.html">the documentation</a> tolearn more.</p>
+<p>Now, create a script <code class="docutils literal notranslate"><span class="pre">TestR.py</span></code> with the following content :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;Rscript --verbose TestR.R &gt; ../results/TestR.Rout 2&gt; ../results/TestR_errFile.Rout&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now run <code class="docutils literal notranslate"><span class="pre">TestR.py</span></code> (or <code class="docutils literal notranslate"><span class="pre">%cpaste</span></code>) and check<code class="docutils literal notranslate"><span class="pre">TestR.Rout</span></code> and <code class="docutils literal notranslate"><span class="pre">TestR_errorFile.Rout</span></code>.</p>
+<p>Also check what happens if you run (type directly in <code class="docutils literal notranslate"><span class="pre">ipython</span></code> or <code class="docutils literal notranslate"><span class="pre">python</span></code> console):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;Rscript --verbose NonExistScript.R &gt; ../results/outputFile.Rout 2&gt; ../results/errorFile.Rout&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>What do you see on the screen?</p>
+<p>Now open and check <code class="docutils literal notranslate"><span class="pre">outputFile.Rout</span></code>and `errorFile.Rout.</p>
+</section>
 <section id="handling-directory-and-file-paths">
 <h3>Handling directory and file paths<a class="headerlink" href="#handling-directory-and-file-paths" title="Permalink to this headline">#</a></h3>
 <p>You can also use <code class="docutils literal notranslate"><span class="pre">subprocess.os</span></code> to make your code OS (Linux, Windows, Mac) independent. For example to assign paths:</p>
@@ -3895,69 +3962,22 @@ python script. A simple example, where the output is a platform-dependent direct
 </div>
 </div>
 </div>
-<p>Explore what <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> can do by tabbing
-<code class="docutils literal notranslate"><span class="pre">subprocess.</span></code>, and also for submodules, e.g., type
-<code class="docutils literal notranslate"><span class="pre">subprocess.os.</span></code> and then tab.</p>
-</section>
-<section id="running-r">
-<h3>Running <code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#running-r" title="Permalink to this headline">#</a></h3>
-<p>R is likely an important part of your project’s analysis and data visualization components in particular — for example for statistical analyses and pretty plotting (<code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>!).</p>
-<p>You can run <code class="docutils literal notranslate"><span class="pre">R</span></code> from Python easily. Try the following:</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create an R script file called <code class="docutils literal notranslate"><span class="pre">TestR.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory with the following content:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Hello, this is R!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now, create a script <code class="docutils literal notranslate"><span class="pre">TestR.py</span></code> with the following content :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;Rscript --verbose TestR.R &gt; ../Results/TestR.Rout 2&gt; ../Results/TestR_errFile.Rout&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now run <code class="docutils literal notranslate"><span class="pre">TestR.py</span></code> (or <code class="docutils literal notranslate"><span class="pre">%cpaste</span></code>) and check<code class="docutils literal notranslate"><span class="pre">TestR.Rout</span></code> and <code class="docutils literal notranslate"><span class="pre">TestR_errorFile.Rout</span></code>.</p>
-<p>Also check what happens if you run (type directly in <code class="docutils literal notranslate"><span class="pre">ipython</span></code> or <code class="docutils literal notranslate"><span class="pre">python</span></code> console):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;Rscript --verbose NonExistScript.R &gt; ../Results/outputFile.Rout 2&gt; ../Results/errorFile.Rout&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-</div>
-</div>
-<p>What do you see on the screen?</p>
-<p>Now open and check <code class="docutils literal notranslate"><span class="pre">outputFile.Rout</span></code>and `errorFile.Rout.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>It is possible that the location of <code class="docutils literal notranslate"><span class="pre">RScript</span></code> is different in your Unix/Linux system. To locate it, try <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">/usr</span> <span class="pre">-name</span> <span class="pre">'Rscript'</span></code> in the bash terminal (not in Python!). For example, you might need to specify the path to it using <code class="docutils literal notranslate"><span class="pre">/usr/lib/R/bin/Rscript</span></code>.</p>
+<p>Explore the various commands within <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> by hitting the tap key after typing <code class="docutils literal notranslate"><span class="pre">subprocess.</span></code>. Do the same for submodules, e.g., type <code class="docutils literal notranslate"><span class="pre">subprocess.os.</span></code> and then hit  the tab key.</p>
 </div>
 </section>
 <section id="id3">
 <h3>Practicals<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>As always, test, add, commit and push all your new code and data to your git repository.</p>
-<section id="using-os-problem-1">
-<h4>Using <code class="docutils literal notranslate"><span class="pre">os</span></code> problem 1<a class="headerlink" href="#using-os-problem-1" title="Permalink to this headline">#</a></h4>
-<p>Open <code class="docutils literal notranslate"><span class="pre">using_os.py</span></code> and complete the tasks assigned (hint: you might want to look at <code class="docutils literal notranslate"><span class="pre">subprocess.os.walk()</span></code>)</p>
-</section>
-<section id="using-os-problem-2">
-<h4>Using <code class="docutils literal notranslate"><span class="pre">os</span></code> problem 2<a class="headerlink" href="#using-os-problem-2" title="Permalink to this headline">#</a></h4>
-<p>Open <code class="docutils literal notranslate"><span class="pre">fmr.R</span></code> and work out what it does; check that you have <code class="docutils literal notranslate"><span class="pre">NagyEtAl1999.csv</span></code>. Now write python code called
-<code class="docutils literal notranslate"><span class="pre">run_fmr_R.py</span></code> that:</p>
+<section id="using-subprocess-to-run-a-r-script">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> to run a R script<a class="headerlink" href="#using-subprocess-to-run-a-r-script" title="Permalink to this headline">#</a></h4>
+<p>Open <code class="docutils literal notranslate"><span class="pre">fmr.R</span></code> and work out what it does; check that you have <code class="docutils literal notranslate"><span class="pre">NagyEtAl1999.csv</span></code>. Now write python code called <code class="docutils literal notranslate"><span class="pre">run_fmr_R.py</span></code> that:</p>
 <p>Runs <code class="docutils literal notranslate"><span class="pre">fmr.R</span></code> to generate the desired result</p>
 <p><code class="docutils literal notranslate"><span class="pre">run_fmr_R.py</span></code> should also print to the python screen whether the run was successful, and the contents of the R console output</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code> all your week’s code by the given deadline.</p></li>
-</ul>
+</section>
+<section id="using-os-to-crawl-directories">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">os</span></code> to crawl directories<a class="headerlink" href="#using-os-to-crawl-directories" title="Permalink to this headline">#</a></h4>
+<p>Open <code class="docutils literal notranslate"><span class="pre">using_os.py</span></code> and complete the tasks assigned (hint: you might want to look at <code class="docutils literal notranslate"><span class="pre">subprocess.os.walk()</span></code>)</p>
 </section>
 </section>
 </section>
@@ -4096,7 +4116,7 @@ python script. A simple example, where the output is a platform-dependent direct
  &lt;a list of 10 Patch objects&gt;)
 </pre></div>
 </div>
-<img alt="../_images/06-Python_II_272_1.png" src="../_images/06-Python_II_272_1.png" />
+<img alt="../_images/06-Python_II_275_1.png" src="../_images/06-Python_II_275_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -4113,7 +4133,7 @@ python script. A simple example, where the output is a platform-dependent direct
  &lt;a list of 10 Patch objects&gt;)
 </pre></div>
 </div>
-<img alt="../_images/06-Python_II_273_1.png" src="../_images/06-Python_II_273_1.png" />
+<img alt="../_images/06-Python_II_276_1.png" src="../_images/06-Python_II_276_1.png" />
 </div>
 </div>
 <p>Now let’s plot the network, with node sizes proportional to (log) body size:</p>
@@ -4167,7 +4187,7 @@ python script. A simple example, where the output is a platform-dependent direct
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06-Python_II_286_0.png" src="../_images/06-Python_II_286_0.png" />
+<img alt="../_images/06-Python_II_289_0.png" src="../_images/06-Python_II_289_0.png" />
 </div>
 </div>
 <p>You might get a warning. In that case, try upgrading the networkx package.</p>
