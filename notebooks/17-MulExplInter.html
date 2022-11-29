@@ -619,7 +619,7 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">*</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
 <span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>   
+<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -635,13 +635,17 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
-<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 4 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
 <tbody>
-	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td> 0.8141063  </td><td>0.40705316  </td><td> 8.061439   </td><td>4.036387e-04</td></tr>
-	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td> 2.7469218  </td><td>2.74692183  </td><td>54.401106   </td><td>2.335706e-12</td></tr>
-	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2         </td><td> 0.4312875  </td><td>0.21564376  </td><td> 4.270693   </td><td>1.499280e-02</td></tr>
-	<tr><th scope=row>Residuals</th><td>253         </td><td>12.7749466  </td><td>0.05049386  </td><td>       NA   </td><td>          NA</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2</td><td> 0.8141063</td><td>0.40705316</td><td> 8.061439</td><td>4.036387e-04</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1</td><td> 2.7469218</td><td>2.74692183</td><td>54.401106</td><td>2.335706e-12</td></tr>
+	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2</td><td> 0.4312875</td><td>0.21564376</td><td> 4.270693</td><td>1.499280e-02</td></tr>
+	<tr><th scope=row>Residuals</th><td>253</td><td>12.7749466</td><td>0.05049386</td><td>       NA</td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -695,14 +699,13 @@ F-statistic: 15.81 on 5 and 253 DF,  p-value: 1.504e-13
 </div>
 <p>The lines in this output are:</p>
 <ol class="simple">
-<li><p>The reference level (intercept) for non ground dwelling carnivores. (The reference level is decided just by the alphabetic order of the levels)</p></li>
+<li><p>The reference level (intercept) for non ground dwelling carnivores. The reference level is decided just by the alphabetic order of the levels. This also includes the <code class="docutils literal notranslate"><span class="pre">TrophicLevelCarnivore:GroundDwellingNo</span></code> interaction effect (more on this below).</p></li>
 <li><p>Two differences for being in different trophic levels.</p></li>
 <li><p>One difference for being ground dwelling</p></li>
-<li><p>Two new differences that give specific differences for ground dwelling herbivores and omnivores.</p></li>
+<li><p>Two new differences that give specific differences for ground dwelling herbivores and omnivores (the interaction effects).</p></li>
 </ol>
-<p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, which would allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interactions</em>. That is, this part of the model only includes a single difference ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary
-between levels because of the further effects of interactions.</p>
-<p>The table below show how these combine to give the predictions for each group combination, with those two new lines show in red:</p>
+<p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interaction effects</em>. That is, this part of the model only includes a single difference, between ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground-dwelling identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary between levels because of the further effects of interactions.</p>
+<p>The table below show how the fitted coefficients in the summary output above combine to give the predictions for each group combination, with those two new lines show in red:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p></p></th>
@@ -725,7 +728,7 @@ between levels because of the further effects of interactions.</p>
 </tr>
 </tbody>
 </table>
-<p>So why are there two new coefficients? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not: 2 levels and trophic level: 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) =2\)</span>. It might be easier to understand why graphically:</p>
+<p>So why are there only two new coefficients? What about the coefficient corresponding to the <code class="docutils literal notranslate"><span class="pre">TrophicLevelCarnivore:GroundDwellingNo</span></code> interaction effect? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not has 2 levels and trophic level has 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) = 2\)</span>. It might be easier to understand why graphically:</p>
 <p><img alt="image" src="../_images/interactionsdiag.png" /></p>
 <p>The prediction for the white boxes above can be found by adding the main effects together but for the grey boxes, we need to find specific differences. So there are <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> interaction coefficients (count the number of grey boxes) to add.</p>
 <p>If we put this together, what is the model telling us?</p>
