@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,8 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Multiple variables with interactions" href="17-MulExplInter.html" />
@@ -679,6 +679,8 @@ title="Print to PDF"
  $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
  $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
  $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
+ - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
 </pre></div>
 </div>
 </div>
@@ -689,12 +691,6 @@ title="Print to PDF"
 <p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we used the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to fit a model just to dragonflies. You can use <code class="docutils literal notranslate"><span class="pre">subset</span></code> with plots too.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> to your script to split the graphics into two panels.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy over and modify the code from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to create a boxplot of genome size by trophic level into your script.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command).</p>
-<hr class="docutils" />
-<img src="./graphics/boxplots.svg" width="600px">
-<small><br> <center> Boxplots of log c value by trophic level, sub-divided by habitat preference.
-</center> </small>
-<hr class="docutils" />
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function’s option <code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">=</span> </code> to add titles to a plot.</p>
@@ -716,10 +712,9 @@ title="Print to PDF"
 <img alt="../_images/16-MulExpl_9_0.png" src="../_images/16-MulExpl_9_0.png" />
 </div>
 </div>
-<p>The code <code class="docutils literal notranslate"><span class="pre">logCvalue</span> <span class="pre">~</span> <span class="pre">TrophicLevel</span> <span class="pre">|</span> <span class="pre">GroundDwelling</span></code> means plot the relationship between genome size and trophic level, but group within levels of ground dwelling. We are using the function <code class="docutils literal notranslate"><span class="pre">bwplot</span></code>, which is provided by <code class="docutils literal notranslate"><span class="pre">lattice</span></code> to create box and whisker plots.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create the lattice plots above from within your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create the ggplot plots above from within your script.</p>
 <p>Rearrange this code to have three plots, showing the box and whisker plots for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>, grouped within the levels of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code>.</p>
-<p>Try reshaping the R plot window and running the command again. Lattice tries to make good use of the available space when creating lattice plots.</p>
+<p>Try reshaping the R plot window and running the command again.</p>
 </section>
 <section id="barplots-again">
 <h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this headline">#</a></h3>
@@ -872,7 +867,7 @@ before we rush into interpretation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 3 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
