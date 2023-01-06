@@ -18,7 +18,7 @@ On your computer, create a text file called ```hello.c```. Open it in a text edi
 Now save the file and exit to the console.
 
 ## The compiler:
-As mentioned, C is a compiled programming language. That means, your text code is used to generate machine instructions only once prior to run time. The commonly used C compilers for Unix-like systems are the GNU C compiler gcc or cc. The use of the gcc compiler is pretty simple. At the command line, from within the directory containing your source file, enter `gcc` followed by the the name of your source file, like so:
+As mentioned, C is a compiled programming language. That means, your text code is used to generate machine code only once prior to run time. The result is a file called a 'binary' meaning it has been translated from human-readable source code to computer readable binary instructions. The commonly used C compilers for Unix-like systems are the GNU C compiler gcc or cc and Clang. The use of these C compilers is pretty simple. At the command line, from within the directory containing your source file, enter `gcc` followed by the the name of your source file, like so:
 
 ``` $ gcc hello.c```
 
@@ -44,31 +44,37 @@ Naturally, you run this executable simply by entering the command:
 
 ```$ ./myprogram```
 
-Compiling is specific to your particular operating system and system architecture. This limits portability, as you need to compile your code for different machines. However, it improves run-time execution speeds. The practices we learn in this module will focus on writing C code that maximizes portability, allowing it to be compiled on different systems with minimal pain.
+Compiling is specific to your particular operating system and system architecture. This means that the binary executable you produce on your computer might not be able to run on another. In fact, it might not even compile on another system or with a different compiler. We refer the the ability of code to compiled and/or executed on different systems as its **portability**. C (and other compiled languages) give us increased execution speed at the cost of binary code that is not always portable (we have all run into cases of software only compatible with one operating system! This is usually compiled software). 
+
+All that said, it doesn't mean we can't write highly (or even completely) portable code in C. The wide popularity and long history of C means there's a compiler for probably every modern operating system and architecture. The practices we learn in this module will focus on writing C code that maximizes portability, allowing it to be compiled on different systems with minimal pain.
 
 **The compiler vs. run-time:**
 
-There is remarkably little run-time magic that happens in C. Languages like Python and R run in an interpreter, while Java runs on a virtual machine which is basically a virtual computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job). Welcome to Square-1.
+There is remarkably little run-time magic that happens in C. Languages like Python and R run in an interpreter, while Java runs on a virtual machine which is basically a program pretending to be another computer (the language is written to be understood by that virtual computer which, in turn, can translate and transmit signals to your system). Because of this, interpreted languages have lots of little 'tricks' that can be applied during run time. As you will see, many of these will not be possible in C (not without writing a bit of your own code to do the job).
 
 
 ## Expressions and statements:
 
-C code, like any other high-level programming language, employs expressions and statements. A statement is basically an executable line of code, compose of anywhere from 0 to an arbitrary number of expressions (yes, you can have a 'null statement' in C). 
+C code, like any other high-level programming language, employs expressions and statements. Modern high-level programming languages use an algebra-like grammar (which is why famed computer scientist Donald Knuth refers to them as 'algebraic programming languages'). An expression in C will be some combination of operands (i.e. variables or constants) and operators. These are the 'particles' of C statements. A statement is basically an executable line of code, compose of anywhere from 0 to an arbitrary number of expressions (yes, you can have a 'null statement' in C). 
+
+All statements of executable code in C end with a semicolon `;`. 
 
 ### `#include` statements
 The first statement in the program is
 ```#include <stdio.h>```
-This is a kind of statement called a *preprocessor directive*. These are marked by an opening `#` symbol. The preprocessor sets up information for the compiler, such as instructing it to inlcude the library called `stdio.h`. The `.h` refers to a header file meaning it is included at the top of the program and makes functions and other definitions available to later subroutines in the program. We will look at headers in more detail later.
+This is a kind of statement called a *preprocessor directive*. Because these statements do not generate any run-time code they are an exception to the semicolon rule. Preprocessor directives are marked by an opening `#` symbol. Instead of generating machine code, these lines can be customised in a number of ways (which we'll see in a later chapter) to tell the preprocessor to substitude some text into the code. The preprocessor reads your source code and creates a copy of it and sets up information for the compiler, such as instructing it to inlcude the library called `stdio.h`. The `.h` refers to a header file meaning it is included at the top of the program and makes functions and other definitions available to later subroutines in the program. We will look at headers and preprocessor directives in more detail later. For now, you can understand this line of code to be saying to the preprocessor: "copy all of the contents of the file `stdio.h` into this place in the source file before compiling it.
 
 ### The `main` function
 The next line is
 ```int main (void)```
 
-This is a standard C function. We will discuss functions in more detail later. However, all executable C programs have a `main` function. Thus, if writing any executable, you would start by writing this function in the body of the source code after including any other headers and standard definitions. You don't need a `main()` function if you are writing a code library. We will examine that later.
+This is a C function signature. We will discuss functions in more detail later. However, all executable C programs have a `main` function. Thus, if writing any executable, you would start by writing this function in the body of the source code after including any other headers and standard definitions. You don't need a `main()` function if you are writing a code library. We will examine that later.
 
 The `int` expression declares the type of return value (an integer) that the `main` function will give when it completes operation. Following `main` is the expression `void` in parentheses. Just as in other languages, functions take their parameters in a field in parentheses following the declaration of the function name. In this case, we are passing nothing into main, so we can leave this blank or simply write `void`. As we will see later, `main` can take some special parameter values, but we will explore that after we have looked at functions in more detail.
 
-The main function precedes a set of matched braces `{ ... }`. This contains the body of the main function and where we will insert code that makes the program do what it does.
+Note: you will also see code with the main function declared as `int main (int argc, char **argv)`. This more complicated-looking definition of main allows users to input command line arguments. For now, we can avoid this declaration and use the `void` argument variant.
+
+The main function precedes a set of matched braces `{ ... }`. This contains the body of the main function and where we will insert code that makes the program do what it does. The braces define an area of scope, where all of the statements and variables can have influence.
 
 ### Comments
 Comments in C source code take two forms:
@@ -128,7 +134,7 @@ If you want to see how flexible whitespacing is in C, you need to look no furthe
 
 ## The `printf()` function revisited
 
-We will return to the `printf()` function because it is useful for our initial foray into C as it allows us to receive feedback from programs that we write. The `printf()` function is a somewhat unusual type of function in C that can take a variable number of arguments. `printf()` allows us to include and format variables within the body of the string using special formatting characters. However, the general structure of print if is as follows:
+We will see the `printf()` function often because it is useful for our initial foray into C as it allows us to display feedback from programs that we write. The `printf()` function is a somewhat unusual type of function in C that can take a variable number of arguments. `printf()` allows us to include and format variables within the body of the string using special formatting characters. However, the general structure of print if is as follows:
 
 `printf(<string>, <variable1>, <variable2>, ...)`
 
@@ -168,12 +174,12 @@ We won't go into the details of `printf()` here, because we haven't yet looked a
 The compiler is really at least three different programs: the **preprocessor**, the **compiler**, and the **linker**. 
 While these details aren't needed to compile very simple programs, understanding these details becomes useful later when you want to write C modules that are used by R and Python.
 Therefore, we'll learn a bit about it now, but don't worry if this seems a bit complicated or opaque.
-We'll revisit it later when we learn about building from multiple files.
 
 ### The preprocessor
 The preprocessor's main job is textual: it reads through the source code and performs symbolic subsitutions into the base C language.
 For instance, it reads the `#include` directive and looks for the appropriate header file (in this case `stdio.h` somewhere on the system.
 After this, it performs textual substituions that the compiler reads. 
+As noted above, the our `#include` directive resulted in the preprocessor copying all of the contents of `stdio.h` into our source file.
 As we will see later in this module, this becomes important when we want to work with multiple files, use other libraries, call functions out of order, or create special data types.
 
 ### The compiler
