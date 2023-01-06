@@ -16,7 +16,7 @@ The utility of C for computational biologists will range from simply creating mo
 
 ## Introduction to C
 
-C is a compiled general-purpose programming language designed by Dennis Ritchie for Bell Labs in 1972. However, the modern standard of C (ANSI-C) was developed and published in the 1980s. The current C standard is C11, published in 2011. It is today still used as the core language for many operating systems including all Unix-like operating systems. 
+C is a compiled general-purpose programming language designed by Dennis Ritchie for Bell Labs in 1972. However, the modern standard of C (ANSI-C) was developed and published in the 1980s. The current C standard is C17, published in 2018. It is today still used as the core language for many operating systems including all Unix-like operating systems. 
 
 C is a procedural programming language which means its major units of program design are functions while the data objects are comparatively simple. This contrasts with object-oriented programming where the major units of program design are the data objects which have key functions associated with and 'built into' them. These are often 'hidden' from the user in object-oriented languages. 
 
@@ -47,6 +47,6 @@ C is a general-purpose programming language and, as such, you can do almost anyt
 5. You enjoy a challenge.
 6. You want to understand the machine level a bit better
 
-C might have an ancient legacy, but by design, laziness, or incompetence, it remains one of the most popular programming languages today. It is useful to know C even if you are never going to write any new code in C yourself: countless programs from R modules to standalone software like MrBayes are written in ANSI-C. You may either need to read or debug such programs for your own benefit. The age and maturity of the language means the Internet is *full* of excellent high-quality tutorials, manuals, and Stack Overflow feedback. Google will be more useful than ever! Use it and abuse it!
+C might have an ancient legacy, but by design, laziness, or incompetence, it remains one of the most popular programming languages today. It is useful to know C even if you are never going to write any new code in C yourself: countless programs from R modules to standalone software like MrBayes are written in C. You may either need to read or debug such programs for your own benefit. The age and maturity of the language means the Internet is *full* of excellent high-quality tutorials, manuals, and Stack Overflow feedback. Google will be more useful than ever! Use it and abuse it!
 
 So, let's get started using C.
