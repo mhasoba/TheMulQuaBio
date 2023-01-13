@@ -2,10 +2,41 @@
 
 While R is useful for a wide variety of statistcal programming applications, one of R's major shortcomings is in performance, especially in loops, and loops containing conditional statements.
 For that reason, many people working with R actually embed C modules and libraries within their R packages. 
-You may wish to do the same with your own R modules in order to gain performance.
+You may wish to do the same with your own R modules in order to improve performance.
 However, what might end up being as or more useful is debugging some of the C code within R packages (I've seen some pretty terrifying and unsafe code in some of these modules).
 
-There are a number of ways of calling C functions from R. The method we will look at in this chapter is the `.Call` library.
+There are a number of ways of calling C functions from R. In this chapter we will look at the `.Call` function in `R`. Before that, we'll look at the `.C` function.
+
+## Simple function example: `doubler.c`
+
+Create a C source file with the following code:
+
+```C
+void double_me(int *x)
+{
+    *x *= 2; // Double (squares) the value pointed to by x
+}
+```
+
+R comes with its own version of the `gcc` C/C++ compiler bundled with it. 
+This is useful because it takes care of a lot of the issues of cross-platform compatibility. 
+As long as R's C compiler is willing to compile it, the code should be portable.
+
+**shell:**
+
+```sh
+R CMD SHLIB doubler.c 
+```
+
+This will create a shared object library file called `doubler.so` which can now be called from `R` by using the `.C` interface:
+
+```{r}
+## Load the compiled function
+dyn.load("doubler.so")
+
+## Bench marking the speed of this function
+result <- .C("double_me", x = as.integer(20))
+```
 
 ## Comparing performance
 First, let's look at the differences in performance in R and C.
@@ -55,9 +86,9 @@ time_R <- system.time(results_R <- count.primes.R(10000))
 
 On my machine, this took 1.276 seconds.
 Not that slow you might say but try adding an order of magnitude there, it'll now take 2 and half minutes!
-And add another order of magnitude ($1 \times 10^6$), it will take literally forever: I killed it after 2 hours of running and it was still not done!
+And add another order of magnitude ($1 \times 10^6$), it will take what feels like forever: I killed it after 2 hours of running and it was still not done!
 
-### in `C`
+### in `C` using the `.C` function in R
 
 Now, let's write the exact same example in `C` and check if that improves the time: save the following `C` function as `prime.c`.
 
@@ -98,8 +129,9 @@ void count_primes_C(int* limit, int* n_primes)
 }
 ```
 
-Note that similarly to the `double_me` function, this one has a `void` return and will just modify pointers.
-Don't forget to compile it:
+Note that function has a `void` return needs to take arguments as pointers.
+
+Don't forget to compile it. 
 
 **shell:**
 
@@ -129,13 +161,13 @@ $n_primes
 [1] 1230
 ```
 
-But more than that, did you noticed the speed difference? That took 0.007 seconds on my machine!
+But more than that, you should an enormous speed difference. That took 0.007 seconds on my machine!
 Let's actually compare all that:
 
 **R:**
 
 ```{r}
-## Did both functions returned the same values?
+## Did both functions returne the same values?
 results_C$n_primes == results_R ## I want a TRUE!
 
 ## What was the actual time difference?
@@ -148,7 +180,7 @@ There are 78499 prime numbers there  , who would have guessed!
 
 ## Using .Call!
 
-As we've seen, this methods simply change the value of an `int` that lives somewhere in your R session and that get modified by the C function.
+As we've seen, this methods simply changes the value of an `int` that lives somewhere in your R session and that gets modified by the C function.
 R simply keeps track of the pointer and retrieves the `int` that it points to at the end of the program.
 The problem here can be that R will not be able to do other parallel operation (the execution takes place at the main level of your environment) and is not optimised for complex structures or series of functions.
 We can solve that using the slightly trickier `.Call` function.
@@ -175,7 +207,8 @@ SEXP double_me(SEXP x)
 
 Okay, that looks way more different than the previous version and looks very little as C we have been seen so far.
 This is partly because the authors of the `.Call` interface have made extensive use of macros (in capital letters here - a C feature we won't examine in details).
-Basically, all these macro are used to communicate between R and C in the most safe way as possible (no memory leaks, no bad access, no wrong variables attributions, etc...).
+Basically, all these macro are used to communicate between R and C by coercing the data types appropriately. The `PROTECT` and `UNPROTECT` statements ensure that R's run-time memory manager (garbage collector) doesn't sweep up any memory needed by the C environment.
+
 If we dissect the code line by line, it'll make actually sense:
   
 ```C
@@ -193,7 +226,8 @@ SEXP double_me(SEXP x)
 ```
 
 This states that we will pass in an argument of type `SEXP` and return a value of the same type.
-The `SEXP` structure (S expression) is an actually fairly complex structure that allows to safely declare primitive C structures or more complex ones safely and communicate with R.
+The type `SEXP` comes from R's historical legacy as a descendant of the language S. This name stands for `S expression`, indicating it is a type of data in the 'memory space' of the S language, not the C language.
+The `SEXP` structure a fairly complex structure that allows us to safely declare primitive C structures or more complex ones safely and communicate with R.
 Basically if in R you pass x as an integer (like in our previous example), the `SEXP` structure will make sure that it is defined as a proper `int` structure that C can interpret.
 
 
@@ -228,9 +262,17 @@ return result;
 
 This simply cancel the effect of the previous `PROTECT` macro (similar to a `free()` function) and then returns the `SEXP` structure `result` to be properly interpreted by R through.
 
+### `PROTECT` and `UNPROTECT`
+What are these expressions and what do they do? They are required for any data that you reserve in a C function that needs either to:
+
+1. Perist in memory when control returns from C to R
+2. Be declared in C but returned to R.
+
+`PROTECT` prevents R's runtime 'garbage collector' from freeing memory allocated on the C side until you are ready to be done with it. When we no longer need to protect the data object, we can call `UNPROTECT(n)`. This call removes the last `n` elements that were protected. So we can see that `PROTECT` actually governs a stack-type data structure.
+
 ### In R
 
-Now once we've dissected the syntax of this chuck-full-of-macro program, we can compile it for R the exact same way as before (`SHLIB` it!), and then call it in R the same way as well with a dynamic loading.
+Now once we've dissected the syntax of this chock-full-of-macros program, we can compile it for R the exact same way as before (`SHLIB` it!), and then call it in R the same way as well with a dynamic loading.
 
 **R:**
 
