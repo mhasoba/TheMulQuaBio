@@ -172,7 +172,7 @@ x--
 However, we can also assign the result of this expression to a variable. Whether we use the prefix or postfix form determines the order in which the assignment and increment/deincrement are performed.
 
 ### Postfix
-The postfix operator is placed after the variable name and means the variable is evaluated *after* either increment or de-increment.
+The postfix operator is placed after the variable name and means the variable is evaluated before the operation.
 
 ```C
 int a = 3;
@@ -180,10 +180,10 @@ int b = 0;
 
 b = a++;
 ```
-After the last line executes, `a` will be 4 and `b` will be 4.
+After the last line executes, `a` will be 4 and `b` will be 3.
 
 ### Prefix
-The prefix operator is placed before the variable name and indicates that the variable is evaluated *first*, then incremented.
+The prefix operator is placed before the variable name and indicates that the variable is evaluated after the operation.
 
 ```C
 int a = 3;
@@ -191,9 +191,15 @@ int b = 0;
 
 b = ++a;
 ```
-After the last line executes, `a` will be 4 and `b` will be 3.
+After the last line executes, `a` will be 4 and `b` will be 4.
 
-Thus, when involved in an assignment operation, pre- and post-fix operators will assign values differently.
+Thus, when involved in an assignment operation, pre- and post-fix operators will assign values differently. 
+A useful way to remember these behaviours is to pay attention to the relationship between the assignment operator and the pre/postfix operator.
+If the pre/postfix operator stands between the variable and the assignment operator, then the operation is applied before assigning to a new variable.
+By contrast, if the variable name stands between the assignment operator and the pre/postfix operator, then the evaluation and assignment will happen first.
+
+Note that the behaviour inside the arguments of a function call are not defined behaviour. 
+Thus, it is not safe to include a pre- or postfix operation within the arguments of a function.
 
 # Exercises
 
