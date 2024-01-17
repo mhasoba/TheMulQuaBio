@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Linear Models: Multiple variables with interactions &#8212; TheMulQuaBio</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,21 +39,21 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Model simplification" href="18-ModelSimp.html" />
@@ -63,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,10 +74,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,15 +94,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Welcome to The Multilingual Quantitative Biologist!
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -157,6 +143,68 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="06-Python_II.html">
    Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Maths for Biologists
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+   01 - Making mathematical statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+   02   - Describing shapes and patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+   03   - Analysing change, one step at a time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+   04 - From table arrangements to powerful tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+   05 - From table arrangements to powerful tools - part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+   06 - Analysing change, continuously
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+   07 - Analysing change, continuously (Part 2)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+   08 - Calculating accumulated change
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+   Tutorial 01
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+   Tutorial 05
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+   Tutorial 06
   </a>
  </li>
 </ul>
@@ -283,17 +331,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -301,191 +344,94 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/17-MulExplInter.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/17-MulExplInter.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/17-MulExplInter.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/17-MulExplInter.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/17-MulExplInter.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/17-MulExplInter.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -515,11 +461,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Linear Models: Multiple variables with interactions</h1>
@@ -565,14 +512,13 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-models-multiple-variables-with-interactions">
-<h1>Linear Models: Multiple variables with interactions<a class="headerlink" href="#linear-models-multiple-variables-with-interactions" title="Permalink to this headline">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-multiple-variables-with-interactions">
+<h1>Linear Models: Multiple variables with interactions<a class="headerlink" href="#linear-models-multiple-variables-with-interactions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Here you will build on your skills in fitting linear models with multiple explanatory variables to data. You will learn about another commonly used Linear Model fitting technique: ANCOVA.</p>
 <p>We will build two models in this chapter:</p>
 <ul class="simple">
@@ -581,17 +527,17 @@ title="Print to PDF"
 </ul>
 <p>So far, we have only looked at the independent effects of variables. For example, in the trophic level and ground dwelling model from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, we only looked for specific differences for being a omnivore <em>or</em> being ground dwelling, not for being
 specifically a <em>ground dwelling omnivore</em>. These independent effects of a variable are known as <em>main effects</em> and the effects of combinations of variables acting together are known as <em>interactions</em> — they describe how the variables <em>interact</em>.</p>
-<section id="chapter-aims">
-<h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">#</a></h3>
+<div class="section" id="chapter-aims">
+<h3>Chapter aims<a class="headerlink" href="#chapter-aims" title="Permalink to this headline">¶</a></h3>
 <p>The aims of this chapter are<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
 <ul class="simple">
 <li><p>Creating more complex Linear Models with multiple explanatory variables</p></li>
 <li><p>Including the effects of interactions between multiple variables in a linear model</p></li>
 <li><p>Plotting predictions from more complex (multiple explanatory variables) linear models</p></li>
 </ul>
-</section>
-<section id="formulae-with-interactions-in-r">
-<h3>Formulae with interactions in R<a class="headerlink" href="#formulae-with-interactions-in-r" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="formulae-with-interactions-in-r">
+<h3>Formulae with interactions in R<a class="headerlink" href="#formulae-with-interactions-in-r" title="Permalink to this headline">¶</a></h3>
 <p>We’ve already seen a number of different model formulae in R. They all use this syntax:</p>
 <p><code class="docutils literal notranslate"><span class="pre">response</span> <span class="pre">variable</span> <span class="pre">~ explanatory</span> <span class="pre">variable(s)</span></code></p>
 <p>But we are now going to see two extra pieces of syntax:</p>
@@ -599,10 +545,10 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 <li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">a:b</span></code>: The <code class="docutils literal notranslate"><span class="pre">a:b</span></code> means the interaction between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> — do combinations of these variables lead to different outcomes?</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code>:  This a shorthand for the model above. The means fit <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> as main effects and their interaction <code class="docutils literal notranslate"><span class="pre">a:b</span></code>.</p></li>
 </ul>
-</section>
-</section>
-<section id="model-1-mammalian-genome-size">
-<h2>Model 1: Mammalian genome size<a class="headerlink" href="#model-1-mammalian-genome-size" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="model-1-mammalian-genome-size">
+<h2>Model 1: Mammalian genome size<a class="headerlink" href="#model-1-mammalian-genome-size" title="Permalink to this headline">¶</a></h2>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to <code class="docutils literal notranslate"><span class="pre">Code</span></code> in your stats coursework directory.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called ‘Interactions.R’ and add some introductory comments.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Load the data:</p>
@@ -619,7 +565,7 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">*</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>
 <span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>   
 </pre></div>
 </div>
 </div>
@@ -635,17 +581,13 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="dataframe">
-<caption>A anova: 4 × 5</caption>
-<thead>
-	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<div class="output text_html"><table>
+<thead><tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr></thead>
 <tbody>
-	<tr><th scope=row>TrophicLevel</th><td>  2</td><td> 0.8141063</td><td>0.40705316</td><td> 8.061439</td><td>4.036387e-04</td></tr>
-	<tr><th scope=row>GroundDwelling</th><td>  1</td><td> 2.7469218</td><td>2.74692183</td><td>54.401106</td><td>2.335706e-12</td></tr>
-	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2</td><td> 0.4312875</td><td>0.21564376</td><td> 4.270693</td><td>1.499280e-02</td></tr>
-	<tr><th scope=row>Residuals</th><td>253</td><td>12.7749466</td><td>0.05049386</td><td>       NA</td><td>          NA</td></tr>
+	<tr><th scope=row>TrophicLevel</th><td>  2         </td><td> 0.8141063  </td><td>0.40705316  </td><td> 8.061439   </td><td>4.036387e-04</td></tr>
+	<tr><th scope=row>GroundDwelling</th><td>  1         </td><td> 2.7469218  </td><td>2.74692183  </td><td>54.401106   </td><td>2.335706e-12</td></tr>
+	<tr><th scope=row>TrophicLevel:GroundDwelling</th><td>  2         </td><td> 0.4312875  </td><td>0.21564376  </td><td> 4.270693   </td><td>1.499280e-02</td></tr>
+	<tr><th scope=row>Residuals</th><td>253         </td><td>12.7749466  </td><td>0.05049386  </td><td>       NA   </td><td>          NA</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -699,13 +641,14 @@ F-statistic: 15.81 on 5 and 253 DF,  p-value: 1.504e-13
 </div>
 <p>The lines in this output are:</p>
 <ol class="simple">
-<li><p>The reference level (intercept) for non ground dwelling carnivores. The reference level is decided just by the alphabetic order of the levels. This also includes the <code class="docutils literal notranslate"><span class="pre">TrophicLevelCarnivore:GroundDwellingNo</span></code> interaction effect (more on this below).</p></li>
+<li><p>The reference level (intercept) for non ground dwelling carnivores. (The reference level is decided just by the alphabetic order of the levels)</p></li>
 <li><p>Two differences for being in different trophic levels.</p></li>
 <li><p>One difference for being ground dwelling</p></li>
-<li><p>Two new differences that give specific differences for ground dwelling herbivores and omnivores (the interaction effects).</p></li>
+<li><p>Two new differences that give specific differences for ground dwelling herbivores and omnivores.</p></li>
 </ol>
-<p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interaction effects</em>. That is, this part of the model only includes a single difference, between ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground-dwelling identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary between levels because of the further effects of interactions.</p>
-<p>The table below show how the fitted coefficients in the summary output above combine to give the predictions for each group combination, with those two new lines show in red:</p>
+<p>The first four lines, as in the model from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>, which would allow us to find the predicted values for each group <em>if the size of the differences did not vary between levels because of the interactions</em>. That is, this part of the model only includes a single difference ground and non-ground species, which has to be the same for each trophic group because it ignores interactions between trophic level and ground / non-ground identity of each species. The last two lines then give the estimated coefficients associated with the interaction terms, and allow cause the size of differences to vary
+between levels because of the further effects of interactions.</p>
+<p>The table below show how these combine to give the predictions for each group combination, with those two new lines show in red:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p></p></th>
@@ -728,7 +671,7 @@ F-statistic: 15.81 on 5 and 253 DF,  p-value: 1.504e-13
 </tr>
 </tbody>
 </table>
-<p>So why are there only two new coefficients? What about the coefficient corresponding to the <code class="docutils literal notranslate"><span class="pre">TrophicLevelCarnivore:GroundDwellingNo</span></code> interaction effect? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not has 2 levels and trophic level has 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) = 2\)</span>. It might be easier to understand why graphically:</p>
+<p>So why are there two new coefficients? For interactions between two factors, there are always <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> new coefficients, where <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are the number of levels in the two factors (Ground dwelling or not: 2 levels and trophic level: 3 levels, in our current example). So in this model, <span class="math notranslate nohighlight">\((3-1) \times (2-1) =2\)</span>. It might be easier to understand why graphically:</p>
 <p><img alt="image" src="../_images/interactionsdiag.png" /></p>
 <p>The prediction for the white boxes above can be found by adding the main effects together but for the grey boxes, we need to find specific differences. So there are <span class="math notranslate nohighlight">\((n-1)\times(m-1)\)</span> interaction coefficients (count the number of grey boxes) to add.</p>
 <p>If we put this together, what is the model telling us?</p>
@@ -798,9 +741,9 @@ in <a class="reference internal" href="16-MulExpl.html"><span class="doc std std
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include and run the code for gererating these predictions in your script.</p>
 <p>If we plot these data points onto the barplot from <a class="reference internal" href="16-MulExpl.html"><span class="doc std std-doc">the first multiple explanatory variables chapter</span></a>, they now lie exactly on the mean values, because we’ve allowed for interactions. The triangle on this plot shows the predictions for ground dwelling omnivores from the main effects (<span class="math notranslate nohighlight">\(0.96 + 0.23  + 0.25 = 1.44\)</span>), the interaction of <span class="math notranslate nohighlight">\(-0.15\)</span> pushes the prediction back down.</p>
 <p><img alt="image" src="../_images/predPlot.svg" /></p>
-</section>
-<section id="model-2-ancova-body-weight-in-odonata">
-<h2>Model 2 (ANCOVA): Body Weight in Odonata<a class="headerlink" href="#model-2-ancova-body-weight-in-odonata" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="model-2-ancova-body-weight-in-odonata">
+<h2>Model 2 (ANCOVA): Body Weight in Odonata<a class="headerlink" href="#model-2-ancova-body-weight-in-odonata" title="Permalink to this headline">¶</a></h2>
 <p>We’ll go all the way back to the regression analyses from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression chapter</span></a>. Remember that we fitted two separate regression lines to the data for damselflies and dragonflies. We’ll now use an interaction to fit these in a single model. This kind of linear model — with a mixture of continuous variables and factors — is often called an <em>analysis of covariance</em>, or ANCOVA. That is, ANCOVA is a type of linear model that blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable are equal across levels of a categorical independent variable, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates.</p>
 <p><em>Thus, ANCOVA is a linear model with one categorical and one or more continuous predictors</em>.</p>
 <p>We will use the odonates data that we have worked with <a class="reference internal" href="12-ExpDesign.html"><span class="doc std std-doc">before</span></a>.</p>
@@ -1021,8 +964,8 @@ F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
 <hr class="docutils" />
 <p><a id="fn1"></a>
 [1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">MulExplInter.R</span></code></p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1046,11 +989,9 @@ F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="16-MulExpl.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1066,28 +1007,24 @@ F-statistic:  96.5 on 3 and 94 DF,  p-value: &lt; 2.2e-16
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Samraat Pawar<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Samraat Pawar<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shell scripting &#8212; TheMulQuaBio</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,21 +39,21 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Version control with Git" href="03-Git.html" />
@@ -63,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,10 +74,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,15 +94,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Welcome to The Multilingual Quantitative Biologist!
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -157,6 +143,68 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="06-Python_II.html">
    Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Maths for Biologists
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+   01 - Making mathematical statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+   02   - Describing shapes and patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+   03   - Analysing change, one step at a time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+   04 - From table arrangements to powerful tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+   05 - From table arrangements to powerful tools - part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+   06 - Analysing change, continuously
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+   07 - Analysing change, continuously (Part 2)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+   08 - Calculating accumulated change
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+   Tutorial 01
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+   Tutorial 05
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+   Tutorial 06
   </a>
  </li>
 </ul>
@@ -283,17 +331,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -301,191 +344,94 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/02-ShellScripting.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-ShellScripting.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/02-ShellScripting.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/02-ShellScripting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-ShellScripting.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/02-ShellScripting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -600,11 +546,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Shell scripting</h1>
@@ -735,25 +682,24 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="shell-scripting">
-<h1>Shell scripting<a class="headerlink" href="#shell-scripting" title="Permalink to this headline">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="shell-scripting">
+<h1>Shell scripting<a class="headerlink" href="#shell-scripting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Instead of typing all the UNIX commands we need to perform one after the other, we can save them all in a file (a “script”) and execute them all at once. Recall from the <a class="reference internal" href="01-Unix.html"><span class="doc std std-doc">UNIX and Linux Chapter</span></a> that the bash shell (or terminal) is a text command processor that interfaces with the Operating System. The bash shell provides a computer language that can be used to build scripts (AKA shell scripts) that can be run through the terminal.</p>
-<section id="what-shell-scripts-are-good-for">
-<h3>What shell scripts are good for<a class="headerlink" href="#what-shell-scripts-are-good-for" title="Permalink to this headline">#</a></h3>
+<div class="section" id="what-shell-scripts-are-good-for">
+<h3>What shell scripts are good for<a class="headerlink" href="#what-shell-scripts-are-good-for" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to write reasonably sophisticated programs with shell scripting, but the bash language is not featured to the extent that it can replace a “proper” language like C, Python, or R. However, you will find that shell scripting is necessary. This is because as such, as you saw in the previous chapter, UNIX has an incredibly powerful set of tools that can be used through the bash terminal. Shell scripts can allow you to automate the usage of these commands and create your own, simple utility tools/scripts/programs for tasks such as backups, converting file formats, handling &amp; manipulating files and directories). This enables you to perform many everyday tasks on your computer without having to invoke another language that might require installation or updating.</p>
-</section>
-</section>
-<section id="your-first-shell-script">
-<h2>Your first shell script<a class="headerlink" href="#your-first-shell-script" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="your-first-shell-script">
+<h2>Your first shell script<a class="headerlink" href="#your-first-shell-script" title="Permalink to this headline">¶</a></h2>
 <p>Let’s write our first shell script.</p>
-<section id="some-conventions-and-syntax-rules">
-<h3>Some conventions and syntax rules<a class="headerlink" href="#some-conventions-and-syntax-rules" title="Permalink to this headline">#</a></h3>
+<div class="section" id="some-conventions-and-syntax-rules">
+<h3>Some conventions and syntax rules<a class="headerlink" href="#some-conventions-and-syntax-rules" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>By convention, Unix shell variables should be named in UPPERCASE</p></li>
 <li><p>Also, to create more complex variable names, use <a class="reference external" href="https://en.wikipedia.org/wiki/Snake_case">snake case</a> (for example “VAR_NAME”)</p></li>
@@ -784,15 +730,15 @@ title="Print to PDF"
 <p class="admonition-title">Tip</p>
 <p><code class="docutils literal notranslate"><span class="pre">#!/bin/sh</span></code> is the standard location of the Bourne shell (<code class="docutils literal notranslate"><span class="pre">sh</span></code>) on most Unix systems. If you’re using GNU/Linux (e.g., Ubuntu), <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> is normally a symbolic link to bash (or, sometimes, <code class="docutils literal notranslate"><span class="pre">[dash]</span></code>](<a class="reference external" href="https://blog.cloudware.bg/en/dash-vs-bash-shell/">https://blog.cloudware.bg/en/dash-vs-bash-shell/</a>)).</p>
 </div>
-</section>
-</section>
-<section id="special-characters">
-<h2>Special characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="special-characters">
+<h2>Special characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
 <p>In shell scripts, there are certain, “special” characters that must be properly “escaped” to avoid interpretation by the shell. Some of these you already saw in the UNIX Chapter; for example, in the bash challenge command <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-exec</span> <span class="pre">ls</span> <span class="pre">-s</span> <span class="pre">{}</span> <span class="pre">\;</span> <span class="pre">|</span> <span class="pre">sort</span> <span class="pre">-n</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-10</span></code>, the character <code class="docutils literal notranslate"><span class="pre">;</span></code> had to be escaped with a <code class="docutils literal notranslate"><span class="pre">\</span></code> to avoid being interpreted as a special character. There is a list of these in the UNIX chapter, and additional ones will be introduced here.</p>
 <p>Next, let’s run your first shell script.</p>
-</section>
-<section id="running-shell-scripts">
-<h2>Running shell scripts<a class="headerlink" href="#running-shell-scripts" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="running-shell-scripts">
+<h2>Running shell scripts<a class="headerlink" href="#running-shell-scripts" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to run a shell script:</p>
 <ol class="simple">
 <li><p>Call the bash interpreter to run the file:</p></li>
@@ -873,17 +819,17 @@ bash boilerplate.sh
 </div>
 </div>
 <p>I have specified the relative path <code class="docutils literal notranslate"><span class="pre">../code</span></code> assuming that you are in some other directory in your current week (<code class="docutils literal notranslate"><span class="pre">sandbox</span></code>, <code class="docutils literal notranslate"><span class="pre">results</span></code> or <code class="docutils literal notranslate"><span class="pre">data</span></code>).</p>
-</section>
-<section id="variables-in-shell-scripts">
-<span id="shellscripting-variables"></span><h2>Variables in shell scripts<a class="headerlink" href="#variables-in-shell-scripts" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="variables-in-shell-scripts">
+<span id="shellscripting-variables"></span><h2>Variables in shell scripts<a class="headerlink" href="#variables-in-shell-scripts" title="Permalink to this headline">¶</a></h2>
 <p>You will need to handle and manipulate variables (AKA parameters) inside shell scripts to truly exploit the powerful features of the bash (shell) language.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At the most fundamental level, a “variable” in any programming language or environment is a <em>named</em> section (portion, chunk) of the computer’s memory which can be assigned values, read and manipulated.</p>
 </div>
 <p>Shell scripts have two types of variables.</p>
-<section id="special-variables">
-<h3>Special Variables<a class="headerlink" href="#special-variables" title="Permalink to this headline">#</a></h3>
+<div class="section" id="special-variables">
+<h3>Special Variables<a class="headerlink" href="#special-variables" title="Permalink to this headline">¶</a></h3>
 <p>These are set by the shell, and typically cannot have values assigned to them (cannot be modified). They contain useful or necessary information needed for the script to run. These include:</p>
 <ul class="simple">
 <li><p><strong>Environmental variables</strong>:
@@ -918,9 +864,9 @@ These exist only in the environment of a particular execution of the shell scrip
 </tbody>
 </table>
 <p>This is not an exhaustive list, but the important ones to remember in basic shell scripting.</p>
-</section>
-<section id="assigned-variables">
-<h3>Assigned Variables<a class="headerlink" href="#assigned-variables" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="assigned-variables">
+<h3>Assigned Variables<a class="headerlink" href="#assigned-variables" title="Permalink to this headline">¶</a></h3>
 <p>These are assigned manually by the user. These are present within the current instance of the shell only and are not available any child processes spawned started by the script unless they are explicitly exported.</p>
 <p>In general, assigned variables in the bash language are analogous to those in any other programming language (e.g., <a class="reference internal" href="05-Python_I.html#python-i-python-variables"><span class="std std-ref">Python</span></a>): they can be a number, a character, a string of characters, or boolean (true/false). There are three ways to assign values to such variables (note lack of spaces!):</p>
 <ol class="simple">
@@ -932,9 +878,9 @@ These exist only in the environment of a particular execution of the shell scrip
 <p class="admonition-title">Tip</p>
 <p>The command substitution of the type MY_VAR=$(command) is one type of “shell expansion”. There are several types of shell expansions, which you can learn about <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Expansions.html">here</a>. Along with command substitution, <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">shell parameter expansion</a> is particularly important to learn about in shell scripting.</p>
 </div>
-</section>
-<section id="some-examples-of-variables">
-<h3>Some examples of variables<a class="headerlink" href="#some-examples-of-variables" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="some-examples-of-variables">
+<h3>Some examples of variables<a class="headerlink" href="#some-examples-of-variables" title="Permalink to this headline">¶</a></h3>
 <p>Here is an example illustrating the different types of shell variables (and assignments):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
@@ -989,10 +935,10 @@ These exist only in the environment of a particular execution of the shell scrip
 </pre></div>
 </div>
 <p>This introduces you to the <code class="docutils literal notranslate"><span class="pre">$USER</span></code> (same as <code class="docutils literal notranslate"><span class="pre">$USERNAME</span></code>) environmental variable.</p>
-</section>
-</section>
-<section id="a-useful-shell-scripting-example">
-<h2>A useful shell-scripting example<a class="headerlink" href="#a-useful-shell-scripting-example" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="a-useful-shell-scripting-example">
+<h2>A useful shell-scripting example<a class="headerlink" href="#a-useful-shell-scripting-example" title="Permalink to this headline">¶</a></h2>
 <p>Let’s write a shell script to transform comma-separated files (csv) to tab-separated files and vice-versa. This can be handy — for example, in certain computer languages, it is much easier to read tab or space
 separated files than csv (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code>)</p>
 <p>To do this, in the bash we can use <code class="docutils literal notranslate"><span class="pre">tr</span></code> (abbreviation of <code class="docutils literal notranslate"><span class="pre">tr</span></code>anslate or <code class="docutils literal notranslate"><span class="pre">tr</span></code>ansliterate), which deletes or substitute characters. Here are some examples.</p>
@@ -1088,12 +1034,12 @@ Done!
 <li><p>The new file gets saved in the same location as the original (<em>Why is that?</em>)</p></li>
 <li><p>The file got saved with a <code class="docutils literal notranslate"><span class="pre">.txt.csv</span></code> extension. That’s not very nice. Later you will get an opportunity to fix this!</p></li>
 </ul>
-</section>
-<section id="some-more-examples">
-<h2>Some more examples<a class="headerlink" href="#some-more-examples" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="some-more-examples">
+<h2>Some more examples<a class="headerlink" href="#some-more-examples" title="Permalink to this headline">¶</a></h2>
 <p>Here are a few more illustrative examples (test each one out, save in <code class="docutils literal notranslate"><span class="pre">week1/code/</span></code> with the given name):</p>
-<section id="count-lines-in-a-file">
-<h3>Count lines in a file<a class="headerlink" href="#count-lines-in-a-file" title="Permalink to this headline">#</a></h3>
+<div class="section" id="count-lines-in-a-file">
+<h3>Count lines in a file<a class="headerlink" href="#count-lines-in-a-file" title="Permalink to this headline">¶</a></h3>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">CountLines.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
@@ -1103,8 +1049,8 @@ Done!
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> redirects the contents of the file to the stdin (<a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams">standard input</a>) of the command <code class="docutils literal notranslate"><span class="pre">wc</span> <span class="pre">-l</span></code>. It is needed here because without it, you would not be able to catch <em>just</em> the numerical output (number of lines). To see this, try deleting <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> from the script and see what the output looks like (it will also print the script name, which you do not want).</p>
-<section id="concatenate-the-contents-of-two-files">
-<h4>Concatenate the contents of two files<a class="headerlink" href="#concatenate-the-contents-of-two-files" title="Permalink to this headline">#</a></h4>
+<div class="section" id="concatenate-the-contents-of-two-files">
+<h4>Concatenate the contents of two files<a class="headerlink" href="#concatenate-the-contents-of-two-files" title="Permalink to this headline">¶</a></h4>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
@@ -1114,10 +1060,10 @@ cat <span class="nv">$2</span> &gt;&gt; <span class="nv">$3</span>
 cat <span class="nv">$3</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="convert-tiff-to-png">
-<h3>Convert tiff to png<a class="headerlink" href="#convert-tiff-to-png" title="Permalink to this headline">#</a></h3>
+</div>
+</div>
+<div class="section" id="convert-tiff-to-png">
+<h3>Convert tiff to png<a class="headerlink" href="#convert-tiff-to-png" title="Permalink to this headline">¶</a></h3>
 <p>This assumes you have done <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">imagemagick</span></code> (remember <code class="docutils literal notranslate"><span class="pre">sudo</span></code>!)</p>
 <p>Save this as <code class="docutils literal notranslate"><span class="pre">tiff2png.sh</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
@@ -1130,19 +1076,17 @@ cat <span class="nv">$3</span>
 </pre></div>
 </div>
 <hr class="docutils" />
-<figure class="align-default" id="xkcd-shell-script">
+<div class="figure align-default" id="xkcd-shell-script">
 <a class="reference internal image-reference" href="../_images/universal_install_script.png"><img alt="XKCD" src="../_images/universal_install_script.png" style="width: 300px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>This is not a good use of shell scripting!</strong> <br>(Source: <a class="reference external" href="https://xkcd.com/1654/">XKCD</a>)</span><a class="headerlink" href="#xkcd-shell-script" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-</section>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>This is not a good use of shell scripting!</strong> <br>(Source: <a class="reference external" href="https://xkcd.com/1654/">XKCD</a>)</span><a class="headerlink" href="#xkcd-shell-script" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
 <hr class="docutils" />
-<section id="practicals">
-<h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this headline">#</a></h2>
-<section id="instructions">
-<h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h3>
+<div class="section" id="practicals">
+<h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="instructions">
+<h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Along with the completeness of the practicals/exercises themselves, you will be marked on the basis of how complete and well-organized your directory structure and content is.</p></li>
 <li><p>Review (especially if you got lost along the way) and make sure all the shell scripts you created in this chapter are functional.</p></li>
@@ -1151,16 +1095,16 @@ cat <span class="nv">$3</span>
 <li><p>Make sure there is a <code class="docutils literal notranslate"><span class="pre">readme</span></code> file in every week’s directory. This file should give an overview of the weekly directory contents, listing all the scripts and what they do. This is different from the <code class="docutils literal notranslate"><span class="pre">readme</span></code> for your overall git repository, of which <code class="docutils literal notranslate"><span class="pre">Week</span> <span class="pre">1</span></code> is a part. You will write a similar <code class="docutils literal notranslate"> <span class="pre">readme</span></code> for each subsequent weekly submission.</p></li>
 <li><p>Don’t put any scripts that are part of the submission in your <code class="docutils literal notranslate"><span class="pre">home/bin</span></code> directory! You can put a copy there, but a working version should be in your repository.</p></li>
 </ul>
-</section>
-<section id="improving-scripts">
-<h3>Improving scripts<a class="headerlink" href="#improving-scripts" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="improving-scripts">
+<h3>Improving scripts<a class="headerlink" href="#improving-scripts" title="Permalink to this headline">¶</a></h3>
 <p>Note that some of the shell scripts that you have created in this chapter above requires input files. For example, <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> needs one input file, and <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code> needs two. When you run any of these scripts without inputs (e.g., just <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">tabtocsv.sh</span></code>), you either get no result, or an error.</p>
 <ul class="simple">
 <li><p>The goal of this exercise is to make each such script robust so that it gives feedback to the user and exits if the right inputs are not provided.</p></li>
 </ul>
-</section>
-<section id="a-new-shell-script">
-<h3>A new shell script<a class="headerlink" href="#a-new-shell-script" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="a-new-shell-script">
+<h3>A new shell script<a class="headerlink" href="#a-new-shell-script" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Write a <code class="docutils literal notranslate"><span class="pre">csvtospace.sh</span></code> shell script that takes a <code class="docutils literal notranslate"><span class="pre">c</span></code>omma <code class="docutils literal notranslate"><span class="pre">s</span></code>eparated <code class="docutils literal notranslate"><span class="pre">v</span></code>alues and converts it to a space separated values file. However, it must not change the input file — it should save it as a differently named file.</p></li>
 <li><p>This script should be able to handle wrong or missing inputs (similar to the previous exercise).</p></li>
@@ -1170,10 +1114,10 @@ cat <span class="nv">$3</span>
 <p class="admonition-title">Hint</p>
 <p>In these shell scripting practicals, to strip out and/or change file extensions, you may need to use parameter expansions, and specifically, parameter substitutions, along with pattern matching. Read about these and try out the examples <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">here</a> and <a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html">here</a>.</p>
 </div>
-</section>
-</section>
-<section id="readings-resources">
-<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="readings-resources">
+<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>The bash reference manual: <a class="reference external" href="https://www.gnu.org/software/bash/manual/bash.html">https://www.gnu.org/software/bash/manual/bash.html</a></p></li>
 <li><p>Plenty of shell scripting resources and tutorials out there; in particular, look up
@@ -1181,8 +1125,8 @@ cat <span class="nv">$3</span>
 <li><p>These is a relatively intuitive set of notes on shell scripting; <a class="reference external" href="https://www.shellscript.sh/">https://www.shellscript.sh/</a></p></li>
 <li><p>Some shell scripting <a class="reference external" href="https://linuxhint.com/30_bash_script_examples">examples</a></p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1206,11 +1150,9 @@ cat <span class="nv">$3</span>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="01-Unix.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1226,28 +1168,24 @@ cat <span class="nv">$3</span>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Samraat Pawar<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Samraat Pawar<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

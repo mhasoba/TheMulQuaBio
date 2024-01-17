@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Linear Models: Multiple explanatory variables &#8212; TheMulQuaBio</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,21 +39,21 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Multiple variables with interactions" href="17-MulExplInter.html" />
@@ -63,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,10 +74,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,15 +94,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Welcome to The Multilingual Quantitative Biologist!
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Computing
  </span>
@@ -157,6 +143,68 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="06-Python_II.html">
    Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Maths for Biologists
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+   01 - Making mathematical statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+   02   - Describing shapes and patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+   03   - Analysing change, one step at a time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+   04 - From table arrangements to powerful tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+   05 - From table arrangements to powerful tools - part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+   06 - Analysing change, continuously
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+   07 - Analysing change, continuously (Part 2)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+   08 - Calculating accumulated change
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+   Tutorial 01
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+   Tutorial 05
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+   Tutorial 06
   </a>
  </li>
 </ul>
@@ -283,17 +331,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -301,191 +344,94 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/16-MulExpl.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16-MulExpl.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/16-MulExpl.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/16-MulExpl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16-MulExpl.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/16-MulExpl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -537,11 +483,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Linear Models: Multiple explanatory variables</h1>
@@ -609,27 +556,26 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-models-multiple-explanatory-variables">
-<h1>Linear Models: Multiple explanatory variables<a class="headerlink" href="#linear-models-multiple-explanatory-variables" title="Permalink to this headline">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-multiple-explanatory-variables">
+<h1>Linear Models: Multiple explanatory variables<a class="headerlink" href="#linear-models-multiple-explanatory-variables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In this chapter we will explore fitting a linear model to data when you have multiple explanatory (predictor) variables.</p>
 <p>The aims of this chapter are<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
 <ul class="simple">
 <li><p>Learning to build and fit a linear model that includes several explanatory variables</p></li>
 <li><p>Learning to interpret the summary tables and diagnostics after fitting a linear model with multiple explanatory variables</p></li>
 </ul>
-</section>
-<section id="an-example">
-<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="an-example">
+<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
 <p>The models we looked at in the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> explored whether the log genome size (C value, in picograms) of terrestrial mammals varied with trophic level and whether or not the species is ground dwelling. We will now look at a single model that includes both explanatory variables.</p>
 <p>The first thing to do is look at the data again.</p>
-<section id="exploring-the-data">
-<h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">#</a></h3>
+<div class="section" id="exploring-the-data">
+<h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory and add some introductory comments.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Load the data saved at the end of the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>:</p>
 <div class="cell docutils container">
@@ -679,25 +625,29 @@ title="Print to PDF"
  $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
  $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
  $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
- - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="boxplots-within-groups">
-<h3>Boxplots within groups<a class="headerlink" href="#boxplots-within-groups" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="boxplots-within-groups">
+<h3>Boxplots within groups<a class="headerlink" href="#boxplots-within-groups" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we used the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to fit a model just to dragonflies. You can use <code class="docutils literal notranslate"><span class="pre">subset</span></code> with plots too.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> to your script to split the graphics into two panels.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy over and modify the code from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to create a boxplot of genome size by trophic level into your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command).</p>
+<hr class="docutils" />
+<img src="./graphics/boxplots.svg" width="600px">
+<small><br> <center> Boxplots of log c value by trophic level, sub-divided by habitat preference.
+</center> </small>
+<hr class="docutils" />
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function’s option <code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">=</span> </code> to add titles to a plot.</p>
 </div>
-</section>
-<section id="boxplots-by-groups">
-<h3>Boxplots by groups<a class="headerlink" href="#boxplots-by-groups" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="boxplots-by-groups">
+<h3>Boxplots by groups<a class="headerlink" href="#boxplots-by-groups" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> package provides a very neat way to plot data in groups with the <code class="docutils literal notranslate"><span class="pre">facet</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -712,12 +662,13 @@ title="Print to PDF"
 <img alt="../_images/16-MulExpl_9_0.png" src="../_images/16-MulExpl_9_0.png" />
 </div>
 </div>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create the ggplot plots above from within your script.</p>
+<p>The code <code class="docutils literal notranslate"><span class="pre">logCvalue</span> <span class="pre">~</span> <span class="pre">TrophicLevel</span> <span class="pre">|</span> <span class="pre">GroundDwelling</span></code> means plot the relationship between genome size and trophic level, but group within levels of ground dwelling. We are using the function <code class="docutils literal notranslate"><span class="pre">bwplot</span></code>, which is provided by <code class="docutils literal notranslate"><span class="pre">lattice</span></code> to create box and whisker plots.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create the lattice plots above from within your script.</p>
 <p>Rearrange this code to have three plots, showing the box and whisker plots for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>, grouped within the levels of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code>.</p>
-<p>Try reshaping the R plot window and running the command again.</p>
-</section>
-<section id="barplots-again">
-<h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this headline">#</a></h3>
+<p>Try reshaping the R plot window and running the command again. Lattice tries to make good use of the available space when creating lattice plots.</p>
+</div>
+<div class="section" id="barplots-again">
+<h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this headline">¶</a></h3>
 <p>We’re going to make the barplot code from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression chapter</span></a> even more complicated! This time we want to know the mean log genome size within combinations of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code> and <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. We can still use <code class="docutils literal notranslate"><span class="pre">tapply</span></code>, providing more than one grouping factor. We create a set of grouping factors like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -807,9 +758,9 @@ the bars and the length of error bar caps.</p>
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Generate the barplot above and then edit your script to change the colours and error bar lengths to your taste.</p>
-</section>
-<section id="plotting-means-and-confidence-intervals">
-<h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="plotting-means-and-confidence-intervals">
+<h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this headline">¶</a></h3>
 <p>We’ll use the <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> function again as an exercise to change graph settings and to prepare figures for reports and write ups. This is the figure you should be able to reproduce the figure below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/plotmeans.svg"><img alt="../_images/plotmeans.svg" src="../_images/plotmeans.svg" width="600px" /></a>
@@ -826,10 +777,10 @@ set the <code class="docutils literal notranslate"><span class="pre">ylim</span>
 <li><p><strong>Figure legends</strong>: A figure caption and legend should give a clear stand-alone description of the whole figure.</p></li>
 <li><p><strong>Referring to figures</strong>: You <em>must</em> link from your text to your figures — a reader has to know which figures refer to which results. So: “There are clear differences in mean genome size between species at different trophic levels and between ground dwelling and other species, Figure xx”.</p></li>
 </ul>
-</section>
-</section>
-<section id="fitting-the-linear-model">
-<h2>Fitting the linear model<a class="headerlink" href="#fitting-the-linear-model" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="fitting-the-linear-model">
+<h2>Fitting the linear model<a class="headerlink" href="#fitting-the-linear-model" title="Permalink to this headline">¶</a></h2>
 <p>All those exploratory visualizations suggest:</p>
 <ul class="simple">
 <li><p>Carnivores have smaller genome size; omnivores have larger genome size.</p></li>
@@ -867,7 +818,7 @@ before we rush into interpretation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="dataframe">
+<div class="output text_html"><table>
 <caption>A anova: 3 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -944,8 +895,8 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 </tr>
 </tbody>
 </table>
-<section id="predicted-values">
-<span id="mulexp-predicted-values"></span><h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">#</a></h3>
+<div class="section" id="predicted-values">
+<span id="mulexp-predicted-values"></span><h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">¶</a></h3>
 <p>Getting the model predictions by hand in this way is tedious and error prone. There is a handy function called <code class="docutils literal notranslate"><span class="pre">predict</span></code> which uses the model directly to calculate values. The default is to give you the prediction for each point in the original data, but you can also ask for specific predictions.</p>
 <p>The first thing to do is to set up a small data frame containing the explanatory values we want to use. The variable names and the level name have to match <em>exactly</em>, so we’ll use the <code class="docutils literal notranslate"><span class="pre">levels</span></code> function to get the names. We want to look at all six combinations, so we’ll use the <code class="docutils literal notranslate"><span class="pre">rep</span></code> function to set this up. The <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">=</span> <span class="pre">2</span></code> option repeats each value twice in succession; the <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">3</span></code> options repeats the whole set of values three times.</p>
 <p>Let’s do it:</p>
@@ -1024,9 +975,9 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 <hr class="docutils" />
 <p><a id="fn1"></a>
 [1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code></p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1050,11 +1001,9 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="15-anova.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1070,28 +1019,24 @@ omnivory and both of these have large effects sizes, each introducing about a 20
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Samraat Pawar<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Samraat Pawar<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

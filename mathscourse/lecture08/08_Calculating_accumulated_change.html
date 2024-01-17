@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>08 - Calculating accumulated change &#8212; TheMulQuaBio</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tutorial 01" href="../tutorials/lecture01/Tutorial_01.html" />
+    <link rel="prev" title="07 - Analysing change, continuously (Part 2)" href="../lecture07/07_Analysing_change_continuously_part2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to The Multilingual Quantitative Biologist!
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Computing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/01-Unix.html">
+   UNIX and Linux
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/02-ShellScripting.html">
+   Shell scripting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/03-Git.html">
+   Version control with Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/04-LaTeX.html">
+   Scientific documents with
+   <span class="math notranslate nohighlight">
+    \(\LaTeX\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/05-Python_I.html">
+   Biological Computing in Python I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/07-R.html">
+   Biological Computing in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/06-Python_II.html">
+   Biological Computing in Python II
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Maths for Biologists
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture01/01_Making_mathematical_statements.html">
+   01 - Making mathematical statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture02/02_Describing_shapes_and_patterns.html">
+   02   - Describing shapes and patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+   03   - Analysing change, one step at a time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">
+   04 - From table arrangements to powerful tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+   05 - From table arrangements to powerful tools - part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture06/06_Analysing_change_continuously.html">
+   06 - Analysing change, continuously
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lecture07/07_Analysing_change_continuously_part2.html">
+   07 - Analysing change, continuously (Part 2)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   08 - Calculating accumulated change
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorials/lecture01/Tutorial_01.html">
+   Tutorial 01
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorials/lecture05/Tutorial_05.html">
+   Tutorial 05
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorials/lecture06/Tutorial_06.html">
+   Tutorial 06
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Basic Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Stats-Intro.html">
+   Introduction to this section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/08-Data_R.html">
+   Data Management and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/12-ExpDesign.html">
+   Experimental design and Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/13-t_F_tests.html">
+   Basic hypothesis testing:
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(F\)
+   </span>
+   tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/14-regress.html">
+   Linear Models: Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/15-anova.html">
+   Linear Models: Analysis of variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/16-MulExpl.html">
+   Linear Models: Multiple explanatory variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/17-MulExplInter.html">
+   Linear Models: Multiple variables with interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/18-ModelSimp.html">
+   Model simplification
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced Data Analyses and Statistics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/19-glm.html">
+   Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/20-ModelFitting-NLLS.html">
+   Model Fitting using Non-linear Least-squares
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-JupyIntro.html">
+   Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-Data-Python.html">
+   Data analyses  with Python &amp; Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-Maths.html">
+   Mathematical models in Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-Databases.html">
+   Databases
+   <span class="tocSkip">
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-NLLS-Python.html">
+   Model fitting in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-MiniProj.html">
+   The Computing Miniproject
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/Appendix-Assessment.html">
+   Coursework Assessment
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/mathscourse/lecture08/08_Calculating_accumulated_change.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fmathscourse/lecture08/08_Calculating_accumulated_change.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/mathscourse/lecture08/08_Calculating_accumulated_change.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#series">
+   Series
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-areas">
+   Calculating areas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fundamental-theorem-of-calculus">
+   Fundamental theorem of Calculus
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-integrals">
+   Calculating integrals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-substitution">
+     Integration by substitution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-parts">
+     Integration by parts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-partial-fractions">
+     Integration by partial fractions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>08 - Calculating accumulated change</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#series">
+   Series
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-areas">
+   Calculating areas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fundamental-theorem-of-calculus">
+   Fundamental theorem of Calculus
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-integrals">
+   Calculating integrals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-substitution">
+     Integration by substitution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-parts">
+     Integration by parts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-by-partial-fractions">
+     Integration by partial fractions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="calculating-accumulated-change">
+<h1>08 - Calculating accumulated change<a class="headerlink" href="#calculating-accumulated-change" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="series">
+<h2>Series<a class="headerlink" href="#series" title="Permalink to this headline">¶</a></h2>
+<p>For every sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span> of real numbers, it is possible to define another sequence <span class="math notranslate nohighlight">\(\{S_n\}\)</span> for which the elements are given by the sum of the first <span class="math notranslate nohighlight">\(n\)</span> terms of the sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+S_0 &amp;= a_0 \\
+S_1 &amp;= a_0 + a_1 \\
+S_2 &amp;= a_0 + a_1 + a_2 \\
+&amp;\vdots \\
+S_n &amp;= a_0 + a_1 + \cdots + a_{n-1} + a_n \\
+S_n &amp;= \sum_{i = 0}^n a_i \end{align}\end{split}\]</div>
+<p>The sequence <span class="math notranslate nohighlight">\(\{S_n\}\)</span> is called a <em>series</em> (or an infinite series, to emphasize the sum over increasing number of terms <span class="math notranslate nohighlight">\(\{a_n\}\)</span>).</p>
+<p>The same way as we asked about <span class="math notranslate nohighlight">\(\lim a_n\)</span>, we can ask if <span class="math notranslate nohighlight">\(\lim S_n\)</span> exists. If it exists, or, in other words, if the sum of infinite terms <span class="math notranslate nohighlight">\(\{a_n\}\)</span> is equal to a finite number, we say that the series <span class="math notranslate nohighlight">\(S_n\)</span> is convergent.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>The following expressions are example of convergent series:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}&amp;\sum_{n=0}^\infty \frac{x^n}{n!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{R} \\
+&amp;\sum_{n=0}^\infty x^n \hspace{0.1cm}, \hspace{0.5cm} -1&lt;x&lt;1 \\
+&amp;\sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{R}\end{align}\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="calculating-areas">
+<h2>Calculating areas<a class="headerlink" href="#calculating-areas" title="Permalink to this headline">¶</a></h2>
+<p>The idea of summing infinite quantities can be used to solve the problem of determining the area below a given curve. Let <span class="math notranslate nohighlight">\(f(x)\)</span> be a function defined on the interval <span class="math notranslate nohighlight">\(a \le x \le b\)</span> as:</p>
+<img alt="../../_images/sum_areas.png" src="../../_images/sum_areas.png" />
+<p>The area below the curve of <span class="math notranslate nohighlight">\(f(x)\)</span> can be found dividing the interval <span class="math notranslate nohighlight">\(a \le x \le b\)</span> into <span class="math notranslate nohighlight">\(n\)</span> subintervals:</p>
+<div class="math notranslate nohighlight">
+\[a=x_0&lt;x_1&lt;x_2&lt;\cdots&lt;x_{n-1}&lt;x_n=b\]</div>
+<p>where each interval defines a rectangle of height <span class="math notranslate nohighlight">\(f(x_i)\)</span> and width <span class="math notranslate nohighlight">\((x_{i+1}-x_i) = \Delta x_i = \displaystyle\frac{(b-a)}{n}\)</span>. The area below the curve will then be approximately the sum of the areas of the rectangles</p>
+<div class="math notranslate nohighlight">
+\[A \approx \sum_{i=0}^n f(x_i)\Delta x_i.\]</div>
+<p>As we increasethe number of intervals <span class="math notranslate nohighlight">\(n\)</span>, while decreasing the widths of each rectangle, the sum of the areas of the rectangles gives a better approximation of the area below the curve. The exact result is given by the limit <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>. In this limit, the sum is represented by the following symbol:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} \sum_{i=0}^n f(x_i) \Delta x_i = \int_a^b f(x)dx\]</div>
+<p>If this limit exists, we say that the function <span class="math notranslate nohighlight">\(f\)</span> is <strong>integrable</strong> on the interval <span class="math notranslate nohighlight">\(a \lt x \lt b\)</span> and denote the limit by the <strong>definite integral</strong> <span class="math notranslate nohighlight">\(\int_a^b f(x)dx\)</span>.</p>
+<p>The interpretation of the integral as area can be generalized for when <span class="math notranslate nohighlight">\(f(x)\)</span> assumes negative values</p>
+<img alt="../../_images/defin_int.png" src="../../_images/defin_int.png" />
+<p>In the case of the previous figure, we will have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} \int_a^b f(x)dx 
+&amp;= A_1 - A_2 + A_3 \hspace{0.1cm}, \hspace{0.5cm} (A_i \geq 0) \\
+&amp;= [\text{area above x-axis}] - [\text{area below x-axis}] \end{align}\end{split}\]</div>
+<p>Other intuitive results related to the calculation of the area are:</p>
+<div class="math notranslate nohighlight">
+\[\int_a^a f(x)dx = 0\quad \mbox{(size of the interval equal to zero)}\]</div>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)dx = -\int_b^a f(x)dx\quad  \mbox{(orientation of the integral)}\]</div>
+<p>Furthermore, some of the properties of the integral follows directly from the properties of limits:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\int_a^b kf(x)dx &amp;= k \int_a^b f(x)dx \\
+\int_a^b [f(x) + g(x)]dx &amp;= \int_a^b f(x)dx + \int_a^b g(x)dx \\
+\int_a^b f(x)dx &amp;= \int_a^c f(x)dx + \int_c^b f(x)dx ,\ \  (a \le c \le b) \end{align}\end{split}\]</div>
+</div>
+<div class="section" id="fundamental-theorem-of-calculus">
+<h2>Fundamental theorem of Calculus<a class="headerlink" href="#fundamental-theorem-of-calculus" title="Permalink to this headline">¶</a></h2>
+<p>The problem of calculating integrals as limits of sums requires specific methods for each function and becomes quite impractical. Fortunately, this problem can be solved with the very important result that the area problem is intrinsically related to the tangent problem.</p>
+<p>Suppose we define a function <span class="math notranslate nohighlight">\(F(x)\)</span> that gives the area below the curve <span class="math notranslate nohighlight">\(f(u)\)</span> from <span class="math notranslate nohighlight">\(a\)</span> until a variable value <span class="math notranslate nohighlight">\(x\)</span>. By definition:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \int_a^x f(u)du\]</div>
+<img alt="../../_images/fund_calc.png" src="../../_images/fund_calc.png" />
+<p>If we consider a small increment <span class="math notranslate nohighlight">\(h\)</span> to <span class="math notranslate nohighlight">\(x\)</span>, the new area below the curve shall be given by:</p>
+<div class="math notranslate nohighlight">
+\[F(x+h) = \int_a^{x+h} f(u)du\]</div>
+<p>The difference between these two areas shall be approximately given by the area of the retangle with width <span class="math notranslate nohighlight">\(h\)</span> and height <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[F(x+h) - F(x) \approx hf(x) \implies \displaystyle\frac{F(x+h) - F(x)}{h} \approx f(x)\]</div>
+<p>But see that in the limit where the increment <span class="math notranslate nohighlight">\(h\)</span> gets very small, the approximation gets exactly equal to the increment in area, and we obtain the definition of the derivative of <span class="math notranslate nohighlight">\(F(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{h\rightarrow 0} \displaystyle\frac{F(x+h) - F(x)}{h} = \displaystyle\frac{dF}{dx} = f(x).\]</div>
+<p>This results is known as the <em>Fundamental theorem of Calculus</em>, and it say that the instantaneous rate of change of the area below a given curve <span class="math notranslate nohighlight">\(f\)</span> at a point <span class="math notranslate nohighlight">\(x\)</span> is given by the value of the function at that point. In other words, the area <span class="math notranslate nohighlight">\(F(x)\)</span> is a function that, if differentiated, gives the function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p>The function <span class="math notranslate nohighlight">\(F(x)\)</span> is then called an <strong>antiderivative</strong> of <span class="math notranslate nohighlight">\(f(x)\)</span>. In general, there is a <em>family</em> of antiderivates of <span class="math notranslate nohighlight">\(f(x)\)</span>, since <span class="math notranslate nohighlight">\(\displaystyle\frac{d(F(x) + C)}{dx}=\displaystyle\frac{dF}{dx}=f(x)\)</span>, independent of the value of the constant <span class="math notranslate nohighlight">\(C\)</span>. We therefore call <strong>indefinite integral</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\int f(x)dx = F(x) + C\]</div>
+<p>It also directly follows that</p>
+<div class="math notranslate nohighlight">
+\[\int_b^c f(x)dx = F(c) - F(b)\]</div>
+<p>Thus the problem of calculating the area below the curve <span class="math notranslate nohighlight">\(f(x)\)</span> from <span class="math notranslate nohighlight">\(b\)</span> to <span class="math notranslate nohighlight">\(c\)</span>, which, by definition, is given by the infinite sum of terms <span class="math notranslate nohighlight">\(f(x_i)\Delta x_i\)</span> (with <span class="math notranslate nohighlight">\(\Delta x_i \rightarrow 0\)</span>), can be reduced to obtaining the antiderivative of <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(F(x)\)</span>, and subtracting the values of this function at points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. The main problem then becomes how to calculate the antiderivates of a given function <span class="math notranslate nohighlight">\(f(x)\)</span>, for which different methods can be used.</p>
+</div>
+<div class="section" id="calculating-integrals">
+<h2>Calculating integrals<a class="headerlink" href="#calculating-integrals" title="Permalink to this headline">¶</a></h2>
+<p>The simplest integrals can be calculated by inverting the differentiation of fundamental functions, as</p>
+<div class="math notranslate nohighlight">
+\[\int x^n \,dx = \frac{x^{n+1}}{n+1} + C\]</div>
+<div class="math notranslate nohighlight">
+\[\int e^x \,dx = e^x + C\]</div>
+<div class="math notranslate nohighlight">
+\[\int \frac{1}{x}\,dx = \ln |x| + C\]</div>
+<div class="math notranslate nohighlight">
+\[\int \mbox{cos}(x)\, dx = \mbox{sin}(x) + C\]</div>
+<div class="math notranslate nohighlight">
+\[\int \mbox{sin}(x)\, dx = -\mbox{cos}(x) + C\]</div>
+<p>This are obtained simply because we know that the derivative of the functions on the righ-hand sides of the equations give exactly the function that is being integrated. When the integrals are not so simple, we must apply other methods to turn them into integrals we know.</p>
+<div class="section" id="integration-by-substitution">
+<h3>Integration by substitution<a class="headerlink" href="#integration-by-substitution" title="Permalink to this headline">¶</a></h3>
+<p>This method consists in finding an appropriate substitution of the variable of integration so that we end up with a simpler integral to calculate.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\int\frac{1}{\sqrt{x+4}}dx\)</span></p>
+<p>Note that if <span class="math notranslate nohighlight">\(u=x+4 \implies \displaystyle\frac{du}{dx}=1 \implies du=dx\)</span>. Thus, the integral can be given by:</p>
+<div class="math notranslate nohighlight">
+\[\int u^{-\frac{1}{2}}du = \frac{1}{\left(-\frac{1}{2}+1\right)} \cdot u^{\frac{1}{2}} + C = 2\sqrt{x+4} + C.\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that three mathematicians die everytime we operate with <span class="math notranslate nohighlight">\(du\)</span> and <span class="math notranslate nohighlight">\(dx\)</span> as if they were numbers on a fraction. Formally, the correct substitution on the integral would be given by a function <span class="math notranslate nohighlight">\(u=u(x)\)</span>, so that <span class="math notranslate nohighlight">\( \int f(u(x)) u'(x)dx = \int f(u)du\)</span>. But we can procede with the heresy above as long as we have this in mind.</p>
+</div>
+  <br />
+</li>
+<li><p><span class="math notranslate nohighlight">\(\int xe^{(x^2-1)}dx\)</span></p>
+<p>See that <span class="math notranslate nohighlight">\(u=x^2-1 \implies \displaystyle\frac{du}{dx}=2x \implies  dx=\displaystyle\frac{du}{2x}\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[\int \frac{1}{2}e^{u}du = \frac{1}{2}e^u + C = \frac{e^{(x^2-1)}}{2} + C \]</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="integration-by-parts">
+<h3>Integration by parts<a class="headerlink" href="#integration-by-parts" title="Permalink to this headline">¶</a></h3>
+<p>When integrating by parts, we have to find an appropriate association <span class="math notranslate nohighlight">\((u=u(x), v=v(x))\)</span>, so that:</p>
+<div class="math notranslate nohighlight">
+\[\int uv'dx=uv-\int u'vdx\]</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\int x\ln x\, dx \)</span></p>
+<p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    u=\ln x \implies u' = \displaystyle\frac{1}{x} \\
+    v'=x \implies v=\displaystyle\frac{x^2}{2} \end{align}\end{split}\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}\int x\ln x\, dx 
+&amp;= \frac{x^2}{2}\ln x - \int \frac{x^2}{2} \cdot \frac{1}{x}dx \\
+&amp;= \frac{x^2 \ln x}{2} - \frac{1}{2}\int xdx \\
+&amp;= \frac{x^2 \ln x}{2} - \frac{1}{4}x^2 + C \\
+&amp;= \frac{1}{4} x^2 (2\ln x - 1) + C \end{align}\end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\int xe^x \,dx\)</span></p>
+<p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    u=x \implies u'=1 \\
+    v'=e^x \implies v=e^x \end{align}\end{split}\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}\int xe^xdx  
+    &amp;= xe^x - \int e^x dx \hspace{0.1cm} \\
+    &amp;= xe^x-e^x + C \\
+    &amp;= e^x (x-1) + C \end{align}\end{split}\]</div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For complicated integrals, computer algebra programs like Mathematica or Sympy can be helpful. An especially user-friendly option is the website WolframAlpha.</p>
+</div>
+</div>
+<div class="section" id="integration-by-partial-fractions">
+<h3>Integration by partial fractions<a class="headerlink" href="#integration-by-partial-fractions" title="Permalink to this headline">¶</a></h3>
+<p>If the integral has the form</p>
+<div class="math notranslate nohighlight">
+\[\int \frac{P(x)}{Q(x)}dx\]</div>
+<p>where the degree of <span class="math notranslate nohighlight">\(P(x)\)</span> is smaller than the degree of <span class="math notranslate nohighlight">\(Q(x)\)</span>, and <span class="math notranslate nohighlight">\(Q(x)=a(x-x_1)(x-x_2)\cdots(x-x_n)\)</span>, we can write</p>
+<div class="math notranslate nohighlight">
+\[\frac{P(x)}{Q(x)} = \frac{1}{a}\left[\frac{A_1}{x-x_1}+\frac{A_2}{x-x_2}+\cdots+\frac{A_n}{x-x_n}\right]\]</div>
+<p>with <span class="math notranslate nohighlight">\(\{A_n\}\)</span> to be determined.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\int \frac{1}{x(x-1)}\, dx\)</span></p>
+<p>First, note that <span class="math notranslate nohighlight">\(\displaystyle\frac{1}{x(x-1)} =  \displaystyle\frac{A}{x} + \displaystyle\frac{B}{(x-1)} \implies 1 = A(x-1) + Bx \implies 1 = x(A+B) - A\)</span>. By comparing the coeffients of the terms in <span class="math notranslate nohighlight">\(x\)</span> and the terms independent of <span class="math notranslate nohighlight">\(x\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    A + B &amp;= 0\\
+       -A &amp;= 1
+    \end{cases} \implies  
+    \begin{cases}
+    A &amp;= -1 \\
+    B &amp;= 1\end{cases}\end{split}\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{x(x-1)} = -\frac{1}{x} + \frac{1}{x-1}\]</div>
+<p>Then we will have for the integral:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} \int\frac{1}{x(x-1)}dx  
+    &amp;= \int\left(-\frac{1}{x}+\frac{1}{x-1}\right)dx \\
+    &amp;= -\int \frac{1}{x}dx + \int\frac{1}{x-1}dx \\
+    &amp;= - \ln|x| + \ln|x-1| + C \\
+    &amp;= \ln \left|\frac{x-1}{x}\right| + C\end{align}\end{split}\]</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mathscourse/lecture08"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../lecture07/07_Analysing_change_continuously_part2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">07 - Analysing change, continuously (Part 2)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../tutorials/lecture01/Tutorial_01.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tutorial 01</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Samraat Pawar<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
