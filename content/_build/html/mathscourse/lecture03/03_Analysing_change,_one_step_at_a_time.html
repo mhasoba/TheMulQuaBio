@@ -1,0 +1,1477 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>03 - Analysing change, one step at a time &#8212; TheMulQuaBio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mathscourse/lecture03/03_Analysing_change,_one_step_at_a_time';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="04 - From table arrangements to powerful tools" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html" />
+    <link rel="prev" title="02 - Describing shapes and patterns" href="../lecture02/02_Describing_shapes_and_patterns.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/06-Python_II.html">Biological Computing in Python II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/18-ModelSimp.html">Model simplification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Assessment.html">Coursework Assessment</a></li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
+    </div>
+    <div class="header-article__right">
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+  </ul>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="dropdown dropdown-repository-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">repository</span>
+</a>
+</a>
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fmathscourse/lecture03/03_Analysing_change,_one_step_at_a_time.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">open issue</span>
+</a>
+</a>
+      
+  </ul>
+</div>
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="../../_sources/mathscourse/lecture03/03_Analysing_change,_one_step_at_a_time.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</a>
+      
+      <li>
+<button onclick="printPdf(this)"
+  class="btn btn-sm dropdown-item"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</a>
+      
+  </ul>
+</div>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
+    </div>
+</div>
+            </div>
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>03   - Analysing change, one step at a time</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequences">
+   Sequences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limits">
+   Limits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-time-population-models">
+   Discrete-time population models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#density-dependent-population-growth">
+     Density-dependent population growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annual-plants">
+     Annual plants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fibonacci-sequence">
+     Fibonacci sequence
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
+  <section class="tex2jax_ignore mathjax_ignore" id="analysing-change-one-step-at-a-time">
+<h1>03   - Analysing change, one step at a time<a class="headerlink" href="#analysing-change-one-step-at-a-time" title="Permalink to this heading">#</a></h1>
+<p>Imagine a colony of wasps is founded by a queen with the following pattern of eggs laid:</p>
+<br />  
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Days</p></th>
+<th class="head text-center"><p>Eggs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(100\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(135\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(170\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(205\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(240\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Since there is an additive pattern for the increase in the total number of eggs laid, with the number of eggs in any given day, we can determine the number of eggs the colony will have in the following day. If we index the days by a sequence of natural numbers <em>n</em>, we have for the above colony:</p>
+<div class="math notranslate nohighlight">
+\[a_{n+1} = a_{n} + 35,\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_n\)</span> represents the total amount of eggs in a given day <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(a_{n+1}\)</span> the same variable on the day following day <span class="math notranslate nohighlight">\(n\)</span>. The constant <span class="math notranslate nohighlight">\(35\)</span> represents the daily increment (or decrement) on this total number. A sequence of number built with constant additive increments receives the name of <em>arithmetic progression</em>.</p>
+<p>The above expression defines an iterative process (also known as a <em>recursion</em>) with which we can construct the whole sequence starting from a single initial value. If we want to know how many eggs will have been laid on a given day <span class="math notranslate nohighlight">\(n\)</span>, this shall be given by the expression:</p>
+<div class="math notranslate nohighlight">
+\[a_n = 100 + 35n.\]</div>
+<p>Thus, the total amount of eggs laid on day <span class="math notranslate nohighlight">\(n=100\)</span> is <span class="math notranslate nohighlight">\(a_{100} = 100 + 35 \cdot 100 = 3600\)</span>.</p>
+<br />
+<br />
+Now imagine a single *Escherichia coli* cell put on a Petri dish with a favorable growth medium. If given the right conditions, *E. coli* cells divide, generating two other cells, in a time of approximately $30$ minutes. For our experiment, we would have:  
+<br />  
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Minutes</p></th>
+<th class="head text-center"><p># cells</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(30\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(60\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(4\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(90\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(8\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(120\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(16\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>If <span class="math notranslate nohighlight">\(t\)</span> represents the number of reproduction intervals since the start of the experiment (assuming values <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots\)</span>), then we can construct the recursion:</p>
+<div class="math notranslate nohighlight">
+\[N_{t+1} = 2N_t,\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_t\)</span> represents the number of <em>E. coli</em> cells after <span class="math notranslate nohighlight">\(t\)</span> intervals of reproduction (each interval corresponding to <span class="math notranslate nohighlight">\(30\)</span> minutes) and <span class="math notranslate nohighlight">\(N_{t+1}\)</span> represents the number of cells on the interval following <span class="math notranslate nohighlight">\(t\)</span>. See that this time the constant <span class="math notranslate nohighlight">\(2\)</span> provides a multiplicative increment, so that the sequence formed by this multiplicative iteration is called <em>geometric progression</em>.</p>
+<p>If we want <span class="math notranslate nohighlight">\(N_t\)</span> for a given interval <span class="math notranslate nohighlight">\(t\)</span>, we then have:</p>
+<div class="math notranslate nohighlight">
+\[N_t = 2^t,\]</div>
+<p>leading to an exponential growth in discrete steps.</p>
+<p>In general, if we have a population growth described by a geometric progression, starting with a number of individuals <span class="math notranslate nohighlight">\(N_0\)</span>, the number of individuals on the subsequent generations can be described by the recursion:</p>
+<div class="math notranslate nohighlight">
+\[N_{t+1} = RN_t,\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> indicates the number of generations and <span class="math notranslate nohighlight">\(R\)</span> is a positive constant (<span class="math notranslate nohighlight">\(R&gt;0\)</span>).</p>
+<p>With this recursion, starting from <span class="math notranslate nohighlight">\(N_0\)</span>, we can obtain the full sequence by construction:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}  
+N_1 &amp;= RN_0 \\
+N_2 &amp;= RN_1 = R(RN_0) = R^2N_0 \\
+N_3 &amp;= RN_2 = R(RN_1) = R[R(RN_0)] = R^3N_0 \\
+    &amp;\vdots \end{align}\end{split}\]</div>
+<p>From this process of construction, we can obtain what we call the <em>solution</em> of the above recursion, given by:</p>
+<div class="math notranslate nohighlight">
+\[N_t = N_0R^t.\]</div>
+<p>In problems of population dynamics, <span class="math notranslate nohighlight">\(R\)</span> is called <strong>growth constant</strong> and its value determines the long-term behaviour of the function:</p>
+<img alt="../../_images/expgrowth.png" src="../../_images/expgrowth.png" />
+<section id="sequences">
+<h2>Sequences<a class="headerlink" href="#sequences" title="Permalink to this heading">#</a></h2>
+<p>The two last problems are examples of <em>sequences</em> for which a formal definition is given as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    f\!:\ &amp;{\rm I\!N} \rightarrow {\rm I\!R} \\
+       &amp; n \rightarrow f(n),\end{align}\end{split}\]</div>
+<p>in other words, a sequence is a function <span class="math notranslate nohighlight">\(f\)</span> from the set of natural numbers to the set of real numbers. For each value of the independent variable <span class="math notranslate nohighlight">\(n\)</span> (a natural number), the sequence determines its image <span class="math notranslate nohighlight">\(f(n)\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>The sequence defined by the rule <span class="math notranslate nohighlight">\(f(n) = \displaystyle\frac{1}{n+1}\)</span> defines the sequence of numbers (starting from <span class="math notranslate nohighlight">\(n=0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\frac{1}{5},\ldots,\]</div>
+<p>corresponding to the set of values <span class="math notranslate nohighlight">\(n=0,1,2,3,4,\ldots\)</span>.</p>
+</div>
+<p>Sequences are usually written as ordered lists of numbers <span class="math notranslate nohighlight">\(a_0, a_1, a_2, a_3, \ldots\)</span> where <span class="math notranslate nohighlight">\(a_n=f(n)\)</span> and referred to with the notation <span class="math notranslate nohighlight">\(\{a_n\}\)</span> (which is short for <span class="math notranslate nohighlight">\(\{a_n: n \in {\rm I\!N}\}\)</span>, making it explicit that <span class="math notranslate nohighlight">\(n\)</span> is a natural number).</p>
+<p>As we have seen before, two forms of representation are possible:</p>
+</section>
+<section id="limits">
+<h2>Limits<a class="headerlink" href="#limits" title="Permalink to this heading">#</a></h2>
+<p>In many applications, we are interested to know what is the <em>long-term behaviour</em> of a given sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span>. For example, is a given population tending towards a stable number of individuals as time passes? In other words, we want to know if there is a number <span class="math notranslate nohighlight">\(L\)</span> for which the sequence tends to as <span class="math notranslate nohighlight">\(n\)</span> increases. To represent this we use the following notation:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n\rightarrow \infty} a_n = L\ \ (\mbox{or simply}\ \lim a_n =L)\]</div>
+<p>If such a number exists, we say that the sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span> is <strong>convergent</strong>.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\(a_n = \displaystyle\frac{1}{n+1}: \ \ \ \left\{1,\displaystyle\frac{1}{2},\displaystyle\frac{1}{3},\displaystyle\frac{1}{4},\displaystyle\frac{1}{5},\ldots\right\}\)</span><br />
+<br />
+Note that each term is smaller than the previous and they are all positive. We can conclude that:</p>
+<div class="math notranslate nohighlight">
+\[\lim a_n = 0.\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(b_n = (-1)^n: \ \ \ \left\{1,-1,1,-1,1,-1,\ldots\right\}\)</span><br />
+<br />
+The terms in this sequence are alternating between <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(-1\)</span>, never convergeing for a specific value. Thus, the limit of sequence <span class="math notranslate nohighlight">\(\{b_n\}\)</span> does not exist.<br />
+<br /></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_n = 2^n: \ \ \ \left\{1,2,4,8,16,32,\ldots\right\}\)</span><br />
+<br />
+For this sequence, the terms are ever increasing. We frequently say that the sequence tends to infinity (or tends to <span class="math notranslate nohighlight">\(\infty\)</span>). However, <span class="math notranslate nohighlight">\(\infty\)</span> represents an abstraction (“ever increasing”), not a specific number. Therefore, the limit for this sequence also does not exist.<br />
+<br /></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_n = \displaystyle\frac{n+2}{n+1}: \ \ \ \left\{2,\displaystyle\frac{3}{2},\displaystyle\frac{4}{3},\displaystyle\frac{5}{4},\displaystyle\frac{6}{5},\ldots\right\}\)</span><br />
+<br />
+For this sequence, each term is smaller than the previous (look at the decimal forms of the fractions: <span class="math notranslate nohighlight">\(2, 1.5, 1.333\cdots, 1.25, 1.2 \ldots\)</span>) and they are greater than <span class="math notranslate nohighlight">\(1\)</span>. We can conclude that:</p>
+<div class="math notranslate nohighlight">
+\[\lim a_n = 1.\]</div>
+</li>
+</ol>
+</div>
+<p>Although there is a formal way to <em>prove</em> that a sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span> converges to a certain limit, in practice we use a set of rules to apply limits to sequences and composition of sequences.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Consider two sequences <span class="math notranslate nohighlight">\(\{a_n\}\)</span> and <span class="math notranslate nohighlight">\(\{b_n\}\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> as a real constant. If these two sequences are convergent with  <span class="math notranslate nohighlight">\(\lim a_n = L\)</span> and <span class="math notranslate nohighlight">\(\lim b_n = M\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\lim (a_n + b_n) = \lim a_n + \lim b_n = L + M\]</div>
+<div class="math notranslate nohighlight">
+\[\lim (Ca_n) = C\lim a_n = CL\]</div>
+<div class="math notranslate nohighlight">
+\[\lim (a_nb_n) = (\lim a_n)(\lim b_n) = LM\]</div>
+<div class="math notranslate nohighlight">
+\[\lim \left(\frac{a_n}{b_n}\right) = \frac{\lim a_n}{\lim b_n} = \frac{L}{M},\ \ (\mbox{if}\ M \ne 0)\]</div>
+<p>In other other words, if you can decompose a given sequence into the sum, product or division of two other convergent sequences, the limit of this sequence will be the composition of the limits of the two others.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>If <span class="math notranslate nohighlight">\(a_n = \displaystyle\frac{4n^2-1}{n^2}:\)</span></p>
+<div class="math notranslate nohighlight">
+\[\lim\left(\displaystyle\frac{4n^2-1}{n^2}\right) = \lim\left(4-\displaystyle\frac{1}{n^2}\right) = \lim 4 - \left(\lim\displaystyle\frac{1}{n}\right)\left(\lim\displaystyle\frac{1}{n}\right) = 4,\]</div>
+<p>since as we know: <span class="math notranslate nohighlight">\(\ \lim 4 = 4\ \)</span> and <span class="math notranslate nohighlight">\(\ \lim \displaystyle\frac{1}{n} = 0\)</span>.</p>
+</div>
+<p>For recursions, one way to find the limit is to find the solution (corresponding explicit description) and then calculate the limit of the sequence with the limit rules. However, finding the explicit form of a given sequence is not always possible.</p>
+<p>There is a procedure to find <em>candidates</em> for the long-term behaviour of a given sequence. We do this by calculating <strong>fixed points</strong>.</p>
+<p>Fixed points are specific values on a given sequence for which all subsequent values equal the first. That is, if <span class="math notranslate nohighlight">\(a\)</span> is a fixed point of the sequence <span class="math notranslate nohighlight">\(\{a_n\}\)</span>, and if <span class="math notranslate nohighlight">\(a_0 = a\)</span>, then <span class="math notranslate nohighlight">\(a_1 = a\)</span>, <span class="math notranslate nohighlight">\(a_2 = a\)</span>, and all the other values will be <span class="math notranslate nohighlight">\(a\)</span>. Thus, given the recursion <span class="math notranslate nohighlight">\(a_{n+1} = g(a_n)\)</span>, if <span class="math notranslate nohighlight">\(a\)</span> is a fixed point we will have:</p>
+<div class="math notranslate nohighlight">
+\[a = g(a)\]</div>
+<p>and the last equation provides a way of find possible values of <span class="math notranslate nohighlight">\(a\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the following recursion</p>
+<div class="math notranslate nohighlight">
+\[a_{n+1} = \sqrt{3a_n},\ \ \ a_0 = 2.\]</div>
+<p>To obtain the fixed points we calculate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  a &amp;= \sqrt{3a} \\
+  a^2 &amp;= 3a \ \ \longrightarrow a = 0\ \mbox{ or }\ a = 3 \end{align}\end{split}\]</div>
+<p>Starting with <span class="math notranslate nohighlight">\(a_0 = 2\)</span>, we can use the recursion to construct the sequence as:</p>
+<div class="math notranslate nohighlight">
+\[\left\{\sqrt{6},\sqrt{3\sqrt{6}},\sqrt{3\sqrt{3\sqrt{6}}},\sqrt{3\sqrt{3\sqrt{3\sqrt{6}}}},\ldots \right\}\]</div>
+<p>or also: <span class="math notranslate nohighlight">\(\{2.449\cdots,2.711\cdots,2.852\cdots,2.925\cdots, \ldots\}\)</span>. We see that starting with <span class="math notranslate nohighlight">\(a_0=2\)</span>, we have <span class="math notranslate nohighlight">\(a_n&gt;2\)</span> for all <span class="math notranslate nohighlight">\(n\)</span>, with increasing values. Since <span class="math notranslate nohighlight">\(a=3\)</span> is a fixed point, we conclude that <span class="math notranslate nohighlight">\(\lim a_n = 3\)</span>.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Whenever we are asking questions like ‘where does this process stabilise’ or ‘how high/much will it be in the end,’ we are interested in the limit of some series. This could be a variety of things, like population size, ground water levels, global mean temperature, number of trees, etc.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Remember that fixed points are only <strong>candidates</strong> for long-term behaviour. See for example the recursion:</p>
+<div class="math notranslate nohighlight">
+\[a_{n+1} = \displaystyle\frac{3}{a_n}\]</div>
+<p>For the fixed points, we calculate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  a &amp;= \displaystyle\frac{3}{a} \\
+  a^2 &amp;= 3 \\
+  &amp;\longrightarrow a = -\sqrt{3}\ \mbox{ or }\ a = \sqrt{3}. \end{align}\end{split}\]</div>
+<p>Indeed, if we construct the sequence from the recursion starting with any of these two values, all the subsequent elements of the sequence will have the same value. However:</p>
+<div class="math notranslate nohighlight">
+\[\mbox{if } a_0 = 2 \ \mbox{the sequence will be given by: }\ \left\{2,\displaystyle\frac{3}{2},2,\displaystyle\frac{3}{2},\ldots \right\}\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[\mbox{If } a_0 = -3 \ \mbox{the sequence will be given by: }\ \left\{-3,-1,-3,-1,\ldots \right\}\]</div>
+<p>showing that for any initial value chosen (different from the fixed points), the sequence will oscillate between two values, without a clear tendency to any limit.</p>
+</div>
+</section>
+<section id="discrete-time-population-models">
+<h2>Discrete-time population models<a class="headerlink" href="#discrete-time-population-models" title="Permalink to this heading">#</a></h2>
+<p>Sequences are generally used in many applications in Biology. Important examples are models for <strong>seasonally breeding</strong> populations.</p>
+<section id="density-dependent-population-growth">
+<h3>Density-dependent population growth<a class="headerlink" href="#density-dependent-population-growth" title="Permalink to this heading">#</a></h3>
+<p>As we have seen before, the recursion relation for the exponential growth model is given by <span class="math notranslate nohighlight">\(N_{t+1} = RN_t\)</span>. Rearranging the terms of this equation we have:</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\frac{N_t}{N_{t+1}}=\frac{1}{R}.\]</div>
+<p>The left-hand term of the last equation is known as <em>parent-offspring ratio</em> as it denotes the ratio between the population size at time <span class="math notranslate nohighlight">\(t\)</span> (parents) and the population size at the following time <span class="math notranslate nohighlight">\(t+1\)</span> (offspring). Here we are considering a population that breeds without overlapping generations. Each generation breeds, dies, and is replaced by their offspring on the following generation.</p>
+<p>On the equation we also see that the parent-offspring ratio is equal to <span class="math notranslate nohighlight">\(\displaystyle\frac{1}{R}\)</span>, which is a constant. Therefore, we say that this growth is <em>density-independent</em> as the parent-offspring ratio does not depend on the density of individuals at any time step. Relating the parent-offspring ratio to the value of <span class="math notranslate nohighlight">\(R\)</span> allows us to predict the behaviour of this population in terms of growth or decline:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+R&gt;1 \ &amp;- \ \mbox{there will be more offspring than parents (population grows)} \\
+R&lt;1 \ &amp;- \ \mbox{there will be more parents than offspring (population declines)} \\
+R=1 \ &amp;- \ \mbox{there will be no change in population size} \end{align}\end{split}\]</div>
+<p>We know, however, than in real scenarios, that the growth factor of a given population should depend on the current size of that population, due to space or resources limitation. These are called <em>density-dependent</em> effects. One of the simplest methods to include density-dependent effects in this population model is to consider the parent-offspring ratio as a linear function of <span class="math notranslate nohighlight">\(N_t\)</span>, instead of a constant. Let us assume that the parent-offspring ratio show the following linear behaviour:</p>
+<img alt="../../_images/parent-offspring.png" src="../../_images/parent-offspring.png" />
+<p>This means that the parent-offspring ratio is smaller than <span class="math notranslate nohighlight">\(1\)</span> (population growth) for values of <span class="math notranslate nohighlight">\(N_t\)</span> smaller than a given population threshold <span class="math notranslate nohighlight">\(K\)</span>, and greater than <span class="math notranslate nohighlight">\(1\)</span> (population decline) if the population size is greater than this threshold. The graph above leads to the following expression:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\displaystyle\frac{N_t}{N_{t+1}} = \frac{1}{R} + \frac{1-\frac{1}{R}}{K}N_t \\
+N_{t+1} = \frac{N_t}{\frac{1}{R} + \frac{1-\frac{1}{R}}{K}N_t}, \end{align}\end{split}\]</div>
+<p>which leads, after rearranging the terms, to:</p>
+<div class="math notranslate nohighlight">
+\[N_{t+1} = \frac{RN_t}{1 + \frac{(R-1)}{K}N_t}.\]</div>
+<p>The previous expression is known as <strong>Beverton-Holt recruitment curve</strong> (or Beverton-Holt model) and it describes a type of population growth called <em>logistic growth</em>.</p>
+<p>The fixed points <span class="math notranslate nohighlight">\(\bar{N}\)</span> for this recursion can be calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\bar{N} = \frac{R\bar{N}}{1 + \frac{(R-1)}{K}\bar{N}}\ \longrightarrow \ \bar{N}\left(1 + \frac{(R-1)}{K}\bar{N}\right) = R\bar{N}\]</div>
+<p>From the last term we can show (try it as an exercise) that <span class="math notranslate nohighlight">\(\bar{N}=0\)</span> and <span class="math notranslate nohighlight">\(\bar{N}=K\)</span> are the two fixed points. Starting from different values for the initial population size <span class="math notranslate nohighlight">\(N_0\)</span> it can be shown that the population tends to <span class="math notranslate nohighlight">\(K\)</span> as time increases as:</p>
+<img alt="../../_images/logistic.png" src="../../_images/logistic.png" />
+<p>The constant <span class="math notranslate nohighlight">\(K\)</span> is know as <em>carrying capacity</em> and represents the maximum population size a given population can reach at a given place, due to intra-specific competition for resources or space.</p>
+<p>Watch this <a class="reference external" href="https://www.youtube.com/watch?v=Kas0tIxDvrg">video</a> about application of growth models to epidemics.</p>
+</section>
+<section id="annual-plants">
+<h3>Annual plants<a class="headerlink" href="#annual-plants" title="Permalink to this heading">#</a></h3>
+<p>Suppose a given population of plants produces, on average <span class="math notranslate nohighlight">\(f\)</span> seeds per individual in the reproductive period. Seeds survive winter with a probability <span class="math notranslate nohighlight">\(\sigma\)</span> and germinate on the next season with probability <span class="math notranslate nohighlight">\(\alpha\)</span> (these seeds reach reproductive maturity on the same season). If <span class="math notranslate nohighlight">\(p_n\)</span> is the plant population size on season <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p_{n+1}\)</span> the population size on the season following <span class="math notranslate nohighlight">\(n\)</span>, we shall have:</p>
+<div class="math notranslate nohighlight">
+\[p_{n+1} = (\alpha\sigma f)p_n\]</div>
+<p>which correspond to the density-independent model since <span class="math notranslate nohighlight">\(R=\alpha\sigma f\)</span> is a constant.</p>
+<p>Now suppose that some of the seeds that were produced on the previous season and survived the previous winter, but did not germinate on the current season, might have a second chance of germinating. They might do so on the following season, provided they survive the winter and germinate on the following season. From the average number of seeds produced last season <span class="math notranslate nohighlight">\(fp_{n-1}\)</span>, a number <span class="math notranslate nohighlight">\(\sigma fp_{n-1}\)</span> of them survived last winter. From this number, a fraction <span class="math notranslate nohighlight">\((1-\alpha)\)</span> did not germinate this season (1 minus the probability of germinating). These seeds will have a second chance provided they survive next winter (with probability <span class="math notranslate nohighlight">\(\sigma\)</span>) and germinate on the next season (with probability <span class="math notranslate nohighlight">\(\alpha\)</span>). Thus, the number plant population size on the season following <span class="math notranslate nohighlight">\(n\)</span> will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{n+1} = \alpha\sigma fp_n + \alpha\sigma(1-\alpha)\sigma fp_{n-1} \\  
+p_{n+1} = (\alpha\sigma f)p_n + [\alpha(1-\alpha)\sigma^2 f]p_{n-1} \\  
+p_{n+1} = \beta p_n + \gamma p_{n-1}\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta=\alpha\sigma f\)</span> and <span class="math notranslate nohighlight">\(\gamma = \alpha(1-\alpha)\sigma^2 f\)</span>.</p>
+<p>The previous model is an example of a discrete population model with overlapping populations. Since the term <span class="math notranslate nohighlight">\(n+1\)</span> depends not only on the term <span class="math notranslate nohighlight">\(n\)</span> but also on <span class="math notranslate nohighlight">\(n-1\)</span> this is called a <em>second-order difference equation</em> or <em>delay (or lagged) difference equation</em>.</p>
+</section>
+<section id="fibonacci-sequence">
+<h3>Fibonacci sequence<a class="headerlink" href="#fibonacci-sequence" title="Permalink to this heading">#</a></h3>
+<p>The Fibonacci sequence is a sequence defined by the following rule: each number is equal to the sum of the previous two numbers (starting with <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>). Thus the following sequence might be formed:</p>
+<div class="math notranslate nohighlight">
+\[\left\{ 0,1,1,2,3,5,8,13,21,\ldots \right\}. \]</div>
+<p>It can also be defined by the second-order difference equation:</p>
+<div class="math notranslate nohighlight">
+\[F_{n+1} = F_{n} + F_{n-1}.\]</div>
+<p>Although this is clearly not a convergent sequence (with sustained growth for each element), if we define a new sequence given by the ratio between successive elements of the Fibonacci sequence as <span class="math notranslate nohighlight">\(b_n = \displaystyle\frac{F_{n+1}}{F_n}\)</span>, it can be show that this sequence is convergent.</p>
+<p>Assuming that <span class="math notranslate nohighlight">\(\lim \displaystyle\frac{F_{n+1}}{F_n} = \lambda\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+F_{n+1} &amp;= F_{n} + F_{n-1}\quad \mbox{(Fibonacci seq.)} \\  
+\displaystyle\frac{F_{n+1}}{F_{n}} &amp;= 1 + \frac{F_{n-1}}{F_{n}}\quad \mbox{(divide both sides by}\ F_{n}\mbox{)} \\
+\lim \left(\displaystyle\frac{F_{n+1}}{F_{n}}\right) &amp;= \lim\left(1 + \frac{F_{n-1}}{F_{n}}\right) \\
+\lambda &amp;= 1 + \frac{1}{\lambda} \\
+\lambda^2 &amp;- \lambda -1 = 0 \end{align}\end{split}\]</div>
+<p>The previous equation is solved finding the roots of the second-degree polynomial, which gives <span class="math notranslate nohighlight">\(\lambda = \displaystyle\frac{1+\sqrt{5}}{2}\)</span> or <span class="math notranslate nohighlight">\(\lambda = \displaystyle\frac{1-\sqrt{5}}{2}\)</span>. Since the solution <span class="math notranslate nohighlight">\(\displaystyle\frac{1-\sqrt{5}}{2}\)</span> is negative, it can be the limit of the ratio of Fibonacci terms (all of them positive). Hence we conclude:</p>
+<div class="math notranslate nohighlight">
+\[\lim \left(\displaystyle\frac{F_{n+1}}{F_{n}}\right) = \displaystyle\frac{1+\sqrt{5}}{2} \approx 1.618.\]</div>
+<p>The previous number is known as the <em>Golden ratio</em> and it has fascinated mathematicians, phylosophers, and artists since ancient times. Fibonacci numbers and the Golden ratio can be found in several interesting natural patterns, as you can see in this <a class="reference external" href="https://www.youtube.com/watch?v=ahXIMUkSXX0">video</a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./mathscourse/lecture03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../lecture02/02_Describing_shapes_and_patterns.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">02   - Describing shapes and patterns</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">04 - From table arrangements to powerful tools</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequences">
+   Sequences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limits">
+   Limits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-time-population-models">
+   Discrete-time population models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#density-dependent-population-growth">
+     Density-dependent population growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annual-plants">
+     Annual plants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fibonacci-sequence">
+     Fibonacci sequence
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2024.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  </body>
+</html>

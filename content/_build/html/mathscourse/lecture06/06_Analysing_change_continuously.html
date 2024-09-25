@@ -1,0 +1,1440 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>06 - Analysing change, continuously &#8212; TheMulQuaBio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mathscourse/lecture06/06_Analysing_change_continuously';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="07 - Analysing change, continuously (Part 2)" href="../lecture07/07_Analysing_change_continuously_part2.html" />
+    <link rel="prev" title="05 - From table arrangements to powerful tools - part 2" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../notebooks/Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/06-Python_II.html">Biological Computing in Python II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/18-ModelSimp.html">Model simplification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Appendix-Assessment.html">Coursework Assessment</a></li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
+    </div>
+    <div class="header-article__right">
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+  </ul>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="dropdown dropdown-repository-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">repository</span>
+</a>
+</a>
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fmathscourse/lecture06/06_Analysing_change_continuously.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">open issue</span>
+</a>
+</a>
+      
+  </ul>
+</div>
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="../../_sources/mathscourse/lecture06/06_Analysing_change_continuously.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</a>
+      
+      <li>
+<button onclick="printPdf(this)"
+  class="btn btn-sm dropdown-item"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</a>
+      
+  </ul>
+</div>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
+    </div>
+</div>
+            </div>
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>06 - Analysing change, continuously</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#average-rate-of-change">
+   Average rate of change
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instantaneous-rate-of-change">
+   Instantaneous rate of change
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-derivatives">
+   Calculating derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-rule">
+   Chain rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#higher-order-derivatives">
+   Higher order derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-of-several-variables">
+   Functions of several variables
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
+  <section class="tex2jax_ignore mathjax_ignore" id="analysing-change-continuously">
+<h1>06 - Analysing change, continuously<a class="headerlink" href="#analysing-change-continuously" title="Permalink to this heading">#</a></h1>
+<section id="average-rate-of-change">
+<h2>Average rate of change<a class="headerlink" href="#average-rate-of-change" title="Permalink to this heading">#</a></h2>
+<p>Watch this <a class="reference external" href="https://web.microsoftstream.com/video/2953e661-e1c1-43ff-ba78-ca52099ed1ec">video</a>
+for a short introduction to this lecture.</p>
+</section>
+<section id="instantaneous-rate-of-change">
+<h2>Instantaneous rate of change<a class="headerlink" href="#instantaneous-rate-of-change" title="Permalink to this heading">#</a></h2>
+<p>If we have a continuous function <span class="math notranslate nohighlight">\(f(x)\)</span>, for each two points <span class="math notranslate nohighlight">\(x_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{1}\)</span>, we can define the average rate of change between these points by the ratio between how much <span class="math notranslate nohighlight">\(f\)</span> has changed and how much <span class="math notranslate nohighlight">\(x\)</span> has changed:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\Delta f(x)}{\Delta x} = \frac{f(x_{1}) - f(x_{0})}{x_{1} - x_{0}}\]</div>
+<p>For points <span class="math notranslate nohighlight">\(x_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{1}\)</span> this can be graphically represented by:</p>
+<img alt="../../_images/sec_tan.png" src="../../_images/sec_tan.png" />
+<p>The line that passes through the points <span class="math notranslate nohighlight">\((x_0, f(x_0))\)</span> and <span class="math notranslate nohighlight">\((x_1, f(x_1))\)</span> (yellow line) is named <em>secant line</em>. As we have seen before in our treatment of linear functions, the slope of the secant line will be given by the average rate of change between this points (remember that the slope for linear functions is defined as <span class="math notranslate nohighlight">\(m=\displaystyle\frac{\Delta y}{\Delta x})\)</span>.</p>
+<p>Now consider that we change the value of <span class="math notranslate nohighlight">\(x_1\)</span> so that it slowly approaches <span class="math notranslate nohighlight">\(x_0\)</span> from the right. In this case, the secant lines also change (from yellow to red), as we change the image of <span class="math notranslate nohighlight">\(x_1\)</span> the function, <span class="math notranslate nohighlight">\(f(x_1)\)</span>. In the limit where <span class="math notranslate nohighlight">\(x_1\)</span> is very close to <span class="math notranslate nohighlight">\(x_0\)</span>, the secant line approaches the <em>tangent</em> (sark red line) of the function <span class="math notranslate nohighlight">\(f(x)\)</span> at the point <span class="math notranslate nohighlight">\(x_0\)</span> (the tangent is the straight line that “just touches” the curve at that point).</p>
+<p>If we represent the slope of the tangent line at the point <span class="math notranslate nohighlight">\(x_0\)</span> by the term <span class="math notranslate nohighlight">\(f'(x_0)\)</span>, we will have:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x_{1} \to x_{0}} \frac{\Delta f(x)}{\Delta x} = \frac{f(x_{1}) - f(x_{0})}{x_{1} - x_{0}} = f'(x_{0})\]</div>
+<p>Since we can do the same process as we change the value <span class="math notranslate nohighlight">\(x_0\)</span>, we define a new function <span class="math notranslate nohighlight">\(f'(x_{0})\)</span> which we call the <strong>derivative</strong> of the function <span class="math notranslate nohighlight">\(f\)</span> at the point <span class="math notranslate nohighlight">\(x_0\)</span>, and its value tells us about the <em>instantaneous</em> rate of change of <span class="math notranslate nohighlight">\(f\)</span> at the point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>If we look instead at the interval between <span class="math notranslate nohighlight">\(x_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{1}\)</span> and define <span class="math notranslate nohighlight">\(h = x_1 - x_0\)</span>, if <span class="math notranslate nohighlight">\(x_1\)</span> approaches <span class="math notranslate nohighlight">\(x_0\)</span>, then <span class="math notranslate nohighlight">\(h\)</span> approaches <span class="math notranslate nohighlight">\(0\)</span>. and we would have for the derivative of <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{h \to 0} \frac{f(x + h) - f(x)}{h} = f'(x)\]</div>
+<p>Visit this <a class="reference external" href="https://www.demonstrations.wolfram.com/SecantAndTangentLines/">link</a> for an interactive demonstration of the limit of the tangent curve.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that in the previous expression the index <span class="math notranslate nohighlight">\(0\)</span> was omitted from <span class="math notranslate nohighlight">\(x_0\)</span>. We will assume that the derivative is defined for all the points in the domain of the function <span class="math notranslate nohighlight">\(f(x)\)</span> for which the limit in the expression exists.</p>
+<p>It is good to have a graphical intuition for when the derivative is not well defined. Some cases are shown below.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>By the definition of the derivative of <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f'(x)=\lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\]</div>
+<p>Thus, if <span class="math notranslate nohighlight">\(f(x)=x^2\)</span>, we will have:</p>
+<div class="math notranslate nohighlight">
+\[f'(x)=\lim_{h \to 0} \frac{(x + h)^{2} - x^{2}}{h} = \lim_{h \to 0} \frac{x^{2} + 2xh + h^{2} - x^{2}}{h} = \lim_{h \to 0} (h + 2x) = 2x\]</div>
+<p>So that the derivative of <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> is the function <span class="math notranslate nohighlight">\(f'(x)=2x\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although limits of functions can be defined in a more rigorous way, in this course we will treat them more intuitively, and use, if required, the known rules for limits. Thus, if <span class="math notranslate nohighlight">\(C\)</span> is a constant, <span class="math notranslate nohighlight">\(\lim_{x \rightarrow a} f(x) = L\)</span>, and <span class="math notranslate nohighlight">\(\lim_{x \rightarrow a} g(x) = M\)</span>, it is generally valid that:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow a} [f(x) + g(x)] = \lim_{x \rightarrow a} f(x) + \lim_{x \rightarrow a} g(x) = L + M\]</div>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow a} [Cf(x)] = C\lim_{x \rightarrow a} f(x) = CL\]</div>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow a} [f(x)g(x)] = [\lim_{x \rightarrow a} f(x)][\lim_{x \rightarrow a} g(x)] = LM\]</div>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow a} \left[\frac{f(x)}{g(x)}\right] = \frac{\lim_{x \rightarrow a} f(x)}{\lim_{x \rightarrow a} g(x)} = \frac{L}{M},\ \ (\mbox{if}\ M \ne 0)\]</div>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow a} [C^{f(x)}] = C^{\lim_{x \rightarrow a} f(x)} = C^L\]</div>
+</div>
+</div>
+<p>Other common notations for the derivative are given by:</p>
+<div class="math notranslate nohighlight">
+\[f'(x) = \frac{df}{dx} = \frac{d}{dx}f(x) = \dot{f}(x)\]</div>
+<p>Visit this <a class="reference external" href="https://the-learning-machine.com/article/calculus/derivatives">link</a> for examples that provide demonstrations of the intuitive interpretation of the derivative.</p>
+</section>
+<section id="calculating-derivatives">
+<h2>Calculating derivatives<a class="headerlink" href="#calculating-derivatives" title="Permalink to this heading">#</a></h2>
+<p>It is possible to generalise the previous example for <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> and obtain the derivative for any power function <span class="math notranslate nohighlight">\(f(x)=x^n\)</span> (<span class="math notranslate nohighlight">\(n \ne 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[f(x) = x^{n} \implies f'(x) = nx^{n-1}\]</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="math notranslate nohighlight">
+\[x^{2} \implies 2x^{2-1} = 2x\]</div>
+<div class="math notranslate nohighlight">
+\[\ x^{3} \implies 3x^{3-1} = 3x^{2}\]</div>
+<div class="math notranslate nohighlight">
+\[\ x^{4.2} \implies 4.2x^{4.2-1} = 4.2x^{3.2}\]</div>
+</div>
+<p>It is possible to show, from the definition of derivative and the rules for limits, that there are simple rules for derivatives when calculating them for a sum of functions or a product by a constant. If <span class="math notranslate nohighlight">\(C\)</span> is a constant, we generally have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}\frac{d}{dx}[f(x)+g(x)] &amp;= \frac{df}{dx} + \frac{dg}{dx} \\
+   \frac{d}{dx}[Cf(x)] &amp;= C\frac{df}{dx}\end{align}\end{split}\]</div>
+<p>Thus, differentiating a given polynomial p(x) stands for differentiating each term separately and summing the result.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="math notranslate nohighlight">
+\[f(x) = 3x^{2} - 4x + 6 \implies f'(x) = 3(2x) - 4(x^{0}) + 0 = 6x - 4\]</div>
+<div class="math notranslate nohighlight">
+\[f(x) = x^{60} - 3x^{20} - 4x \implies f'(x) = 60x^{59} - 60x^{19} - 4\]</div>
+</div>
+<p>For products and quotients of functions, however, we have different rules:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dx}[f(x)g(x)] = \left(\frac{df}{dx}\right) g(x) + f(x)\left(\frac{dg}{dx}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{\left(\displaystyle\frac{df}{dx}\right)g(x) - f(x)\left(\displaystyle\frac{dg}{dx}\right)}{[g(x)]^{2}}\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you do not want to remember the quotients rule, you can use the product rule on <span class="math notranslate nohighlight">\(f(x)j(x)\)</span>, with <span class="math notranslate nohighlight">\(j(x)=g(x)^{-1}\)</span> and use the chain rule to evaluate <span class="math notranslate nohighlight">\(\frac{d}{dx} j(x)\)</span>.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="math notranslate nohighlight">
+\[f(x) = (x + 2)(x - 4) \implies f'(x) = (1)(x-4) + (x+2)(1) = x - 4 + x + 2 = 2x - 2\]</div>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{\alpha x}{1 + \beta x} \implies f'(x) =  \frac{(\alpha)(1 + \beta x) - (\alpha x)(\beta)}{(1 + \beta x)^{2}} = \frac{\alpha + \alpha\beta x - \alpha \beta x}{(1 + \beta x)^{2}} =\frac{\alpha}{(1 + \beta x)^{2}}\]</div>
+</div>
+<p>Moreover, expressions for the derivatives of the other elementary functions can also be found:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = a^{x} \implies f'(x) = a^{x} \cdot (\ln a) ,\ (a &gt; 0, a \neq 1)\)</span><br />
+<span class="math notranslate nohighlight">\(\left(\mbox{in particular: }\ (e^{x})' = e^{x}\right)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \log_{a}x \implies f'(x) = \displaystyle\frac{1}{(\ln a)x}\)</span><br />
+<span class="math notranslate nohighlight">\(\left(\mbox{in particular: }\ (\ln x)' = \displaystyle\frac{1}{x}\right)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \mbox{sin}(x) \implies f'(x) = \mbox{cos}(x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \mbox{cos}(x) \implies f'(x) = -\mbox{sin}(x)\)</span></p></li>
+</ul>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>If <span class="math notranslate nohighlight">\(f(x) = \mbox{tan}(x) = \displaystyle\frac{\mbox{sin}(x)}{\mbox{cos}(x)}\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[f'(x) = \frac{(\mbox{cos}(x))\mbox{cos}(x) - \mbox{sin}(x)(-\mbox{sin}(x))}{(\mbox{cos}(x))^{2}} = \frac{\mbox{sin}^{2}(x) + \mbox{cos}^{2}(x)}{\mbox{cos}^{2}(x)} = \frac{1}{\mbox{cos}^{2}(x)} = \mbox{sec}^{2}(x)\]</div>
+</div>
+</section>
+<section id="chain-rule">
+<h2>Chain rule<a class="headerlink" href="#chain-rule" title="Permalink to this heading">#</a></h2>
+<p>The calculation of derivatives for more complicated functions can generally be made easier by breaking the function into components, for example:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = (3x^{2} - 2x + 1)^{3} = (g(x))^{3}\)</span>, where <span class="math notranslate nohighlight">\(g(x) = 3x^{2} - 2x + 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \displaystyle\frac{\sqrt{2x - 1}}{1 + \sqrt{2x - 1}} = \displaystyle\frac{g(x)}{1 + g(x)}\)</span>, where <span class="math notranslate nohighlight">\(g(x) = \sqrt{h(x)}\)</span>, and <span class="math notranslate nohighlight">\(h(x) = 2x - 1\)</span></p></li>
+</ul>
+<p>We have seen this before when discussing transformation of graphs.  When one function is nested within the other, we have a composite function, or as for the last example above:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = f(g(h(x)))\]</div>
+<p>The derivative of composite functions in relation to the dependent variable is then given by the <em>chain rule</em>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\frac{d}{dx}f(x) = \displaystyle\frac{d}{dx}f(g(x)) = \left(\displaystyle\frac{df}{dg}\right)\left(\displaystyle\frac{dg}{dx}\right)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\frac{d}{dx}f(x) = \displaystyle\frac{d}{dx}f(g(h(x))) = \left(\displaystyle\frac{df}{dg}\right) \left(\displaystyle\frac{dg}{dh}\right) \left(\displaystyle\frac{dh}{dx}\right)\)</span></p></li>
+</ul>
+<p>The strategy then consists in identifying the nested functions, calculating their derivatives and multiplying the results.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<ul>
+<li><p>If <span class="math notranslate nohighlight">\(f(x) = (3x^{2} - 2x + 1)^{3}\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[f(g) = g^{3} \implies \displaystyle\frac{df}{dg} = 3g^2\]</div>
+<div class="math notranslate nohighlight">
+\[g(x) = 3x^{2} - 2x + 1 \implies \displaystyle\frac{dg}{dx} = 6x - 2\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\frac{df}{dx} = \left(\displaystyle\frac{df}{dg}\right)\left(\displaystyle\frac{dg}{dx}\right) = 3g^{2} \cdot g' = 3(3x^{2} - 2x + 1)^2(6x - 2)\]</div>
+  <br />  
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(f(x) = \displaystyle\frac{\sqrt{2x - 1}}{1 + \sqrt{2x - 1}}\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[f(g) = \displaystyle\frac{g}{1+g} \implies \displaystyle\frac{df}{dg} = \frac{(1+g) - g}{(1+g)^2} = \frac{1}{(1+g)^2}\]</div>
+<div class="math notranslate nohighlight">
+\[g(h) = \sqrt{h} \implies \displaystyle\frac{dg}{dh} = \frac{1}{2}h^{-1/2}\]</div>
+<div class="math notranslate nohighlight">
+\[h(x) = 2x-1 \implies \displaystyle\frac{dh}{dx} = 2\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\frac{df}{dx} =  \left(\displaystyle\frac{df}{dg}\right) \left(\displaystyle\frac{dg}{dh}\right) \left(\displaystyle\frac{dh}{dx}\right) = \frac{1}{(1+\sqrt{2x - 1})^2}\cdot \frac{1}{2(\sqrt{2x - 1})}\cdot 2 = \frac{1}{(\sqrt{2x - 1})(1+\sqrt{2x - 1})^2}\]</div>
+  <br />
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(f(t) = 5 + 5\mbox{cos}\left[\displaystyle\frac{\pi}{12}(t - 3)\right]\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[f(g) = 5 + 5g \implies \displaystyle\frac{df}{dg} = 5\]</div>
+<div class="math notranslate nohighlight">
+\[g(h) = \mbox{cos}(h) \implies \displaystyle\frac{dg}{dh} = -\mbox{sin}(h)\]</div>
+<div class="math notranslate nohighlight">
+\[h(t) = \frac{\pi}{12}(t - 3) \implies \displaystyle\frac{dh}{dt} = \frac{\pi}{12}\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\frac{df}{dx} =  \left(\displaystyle\frac{df}{dg}\right) \left(\displaystyle\frac{dg}{dh}\right) \left(\displaystyle\frac{dh}{dx}\right) = 5 \cdot \left(-\mbox{sin}(h)\right) \cdot \frac{\pi}{12} = -\frac{5\pi}{12}\mbox{sin}\left[\displaystyle\frac{\pi}{12}(t - 3)\right]\]</div>
+<p>For this last example if we plot the function <span class="math notranslate nohighlight">\(f(t)=5 + 5\mbox{cos}\left[\displaystyle\frac{\pi}{12}(t - 3)\right]\)</span> together with its derivative <span class="math notranslate nohighlight">\(f'(t)=-\displaystyle\frac{5\pi}{12}\mbox{sin}\left[\displaystyle\frac{\pi}{12}(t - 3)\right]\)</span> we will have:</p>
+<img alt="../../_images/func_diff.png" src="../../_images/func_diff.png" />
+<p>Try to compare the two graphs. What happens with the function <span class="math notranslate nohighlight">\(f(t)\)</span> on the intervals where the derivative <span class="math notranslate nohighlight">\(f'(t)\)</span> is positive or negative? What happens at the points where the derivative is zero?</p>
+</li>
+</ul>
+</div>
+</section>
+<section id="higher-order-derivatives">
+<h2>Higher order derivatives<a class="headerlink" href="#higher-order-derivatives" title="Permalink to this heading">#</a></h2>
+<p>If the derivative of a given function is also a “well-behaved” function (without kinks or discontinuities), then we can also calculate the derivative of the derivative. Thus:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dx}\left(\frac{df}{dx}\right) = \frac{d^{2}f}{dx^{2}} = f''(x)\]</div>
+<p>The function <span class="math notranslate nohighlight">\(f''(x)\)</span> is called the <em>second derivative</em> with respect to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>We can continue this process and get higher-order derivatives:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^{n}f}{dx^{n}} = f^{(n)}(x),\]</div>
+<p>assuming again that these functions are also well-behaved. Function <span class="math notranslate nohighlight">\(f^{(n)}(x)\)</span> is called the <span class="math notranslate nohighlight">\(n\)</span>-th derivative of <span class="math notranslate nohighlight">\(f\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span> (note the parenthesis on <span class="math notranslate nohighlight">\((n)\)</span> to distinguish from powers of <span class="math notranslate nohighlight">\(f\)</span>).</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>The velocity is the derivative of the position, and the acceleration is the derivative of the velocity. Therefore, acceleration is the second-order derivative of the position</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(f(x) = 3x^{2} - 6x + 2\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[f'(x) = 6x - 6\]</div>
+<div class="math notranslate nohighlight">
+\[f''(x) = 6\]</div>
+<p>Polynomials are always well-behaved and they are infinitely differentiable. However, if <span class="math notranslate nohighlight">\(n\)</span> is the degree of the polynomial (<em>i.e.</em> the largest exponent in the polynomial), we will have: <span class="math notranslate nohighlight">\(p^{(k)}(x) = 0,\ \mbox{for}\ k \ge n+1\)</span>.</p>
+  <br />
+</li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = e^{-x^{2}}\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[f'(x) = e^{-x^{2}} \cdot (-2x) = -2xe^{-x^{2}}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}f''(x)
+&amp;= -2[e^{-x^{2}} + x(-2x)(e^{-x^{2}})] \\
+&amp;= -2e^{-x^{2}} + 4x^{2}e^{-x^{2}} \\
+&amp;= -2e^{-x^{2}}(1 - 2x^{2})\end{align}\end{split}\]</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="functions-of-several-variables">
+<h2>Functions of several variables<a class="headerlink" href="#functions-of-several-variables" title="Permalink to this heading">#</a></h2>
+<p>A function <span class="math notranslate nohighlight">\(z = f(x,y)\)</span> of two dependent variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> defines a surface on the three dimensional <span class="math notranslate nohighlight">\(xyz\)</span>-space. If this function is well-behave it will be smooth, like if we applied different deformations on a rubber sheet. For smooth functions, we can calculate derivatives with respect to each of the dependent variables. This is written as:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial x} \text{ or } \frac{\partial f}{\partial x}(x, y) \text{ or } \frac{\partial}{\partial x}f(x,y)\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f}{\partial y}, \frac{\partial f}{\partial{y}}(x,y), \frac{\partial}{\partial y}f(x,y)\]</div>
+<p>The partial derivative informs us how the function <span class="math notranslate nohighlight">\(f\)</span> varies along the <span class="math notranslate nohighlight">\(x\)</span> (or the <span class="math notranslate nohighlight">\(y\)</span>) direction at a specific point.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider <span class="math notranslate nohighlight">\(f(x,y) = 4x^2y-2xy^3\)</span>. To compute the partial derivative with respect to <span class="math notranslate nohighlight">\(x\)</span> we consider all terms in <span class="math notranslate nohighlight">\(y\)</span> constants, and calculate the derivative as usual. For the partial derivative with respect to <span class="math notranslate nohighlight">\(y\)</span>, we consider the <span class="math notranslate nohighlight">\(x\)</span> terms constant. We have:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f}{\partial x} = (4y) \cdot (2x) - 2y^{3} \cdot (1) = 8xy - 2y^{3}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f}{\partial y} = 4x^{2} - 2x(3y^{2}) = 4x^{2} - 6xy^{2}\]</div>
+</div>
+<p>Higher order partial derivatives can also be defined, and represented with the common notations:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right) = \frac{\partial^{2}f}{\partial x^{2}} = \partial_{xx} f = f_{xx}(x,y)\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right) = \frac{\partial^{2}f}{\partial y^{2}} = 
+\partial_{yy} f = f_{yy}(x,y)\]</div>
+<p>with subscripts representing the variable and the order of differentiation.</p>
+<p>For well-behaved functions, the order of the variables chosen to differentiate does not matter (a special case of what is called Schwarz’s theorem):</p>
+<div class="math notranslate nohighlight">
+\[f_{yx}(x,y) = \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right) = \frac{\partial^{2}f}{\partial y \partial x} = \frac{\partial^{2} f}{\partial x \partial y}= \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right) = f_{xy}(x,y)\]</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Often, a quantity of interest does not depend only on one variable but on many. The population size of a species depends on various aspects, including the availability of food, the number of predators, and other environmental factors.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./mathscourse/lecture06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../lecture05/05_From_table_arrangements_to_powerful_tools_part2.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">05 - From table arrangements to powerful tools - part 2</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../lecture07/07_Analysing_change_continuously_part2.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">07 - Analysing change, continuously (Part 2)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#average-rate-of-change">
+   Average rate of change
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instantaneous-rate-of-change">
+   Instantaneous rate of change
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-derivatives">
+   Calculating derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-rule">
+   Chain rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#higher-order-derivatives">
+   Higher order derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-of-several-variables">
+   Functions of several variables
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2024.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  </body>
+</html>
