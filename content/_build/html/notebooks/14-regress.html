@@ -1,48 +1,57 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Linear Models: Regression &#8212; TheMulQuaBio</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +61,732 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/14-regress';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Analysis of variance" href="15-anova.html" />
     <link rel="prev" title="Basic hypothesis testing: \(t\) and \(F\) tests" href="13-t_F_tests.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
         
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
-      <img src="../_static/logo.png" class="logo" alt="logo">
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Maths.html">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,548 +795,301 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/14-regress.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
+  <ul class="dropdown-menu">
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<div class="dropdown dropdown-repository-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Source repository"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-<span class="headerbtn__text-container">repository</span>
+<span class="btn__text-container">repository</span>
 </a>
-
-      </li>
+</a>
       
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/14-regress.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/14-regress.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Open an issue"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-lightbulb"></i>
   </span>
-<span class="headerbtn__text-container">open issue</span>
+<span class="btn__text-container">open issue</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/14-regress.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/notebooks/14-regress.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exploring-the-data">
-   Exploring the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#correlations">
-   Correlations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#correlations-in-r">
-     Correlations in R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformations-and-allometric-scaling">
-   Transformations and allometric scaling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#performing-the-regression-analysis">
-   Performing the Regression analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-the-model">
-     Fitting the model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-an-anova-on-the-fitted-model">
-     Running an ANOVA on the fitted model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-sums-of-squares">
-     The Sums of Squares
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise">
-     Exercise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-the-fitted-regression-model">
-     Plotting the fitted Regression model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-diagnostics">
-   Model diagnostics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reporting-the-model">
-   Reporting the model
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Linear Models: Regression</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exploring-the-data">
-   Exploring the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#correlations">
-   Correlations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#correlations-in-r">
-     Correlations in R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformations-and-allometric-scaling">
-   Transformations and allometric scaling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#performing-the-regression-analysis">
-   Performing the Regression analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-the-model">
-     Fitting the model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-an-anova-on-the-fitted-model">
-     Running an ANOVA on the fitted model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-sums-of-squares">
-     The Sums of Squares
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise">
-     Exercise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-the-fitted-regression-model">
-     Plotting the fitted Regression model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-diagnostics">
-   Model diagnostics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reporting-the-model">
-   Reporting the model
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Models: Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-the-data">
+   Exploring the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlations">
+   Correlations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlations-in-r">
+     Correlations in R
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformations-and-allometric-scaling">
+   Transformations and allometric scaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performing-the-regression-analysis">
+   Performing the Regression analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-the-model">
+     Fitting the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-an-anova-on-the-fitted-model">
+     Running an ANOVA on the fitted model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-sums-of-squares">
+     The Sums of Squares
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-fitted-regression-model">
+     Plotting the fitted Regression model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-diagnostics">
+   Model diagnostics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reporting-the-model">
+   Reporting the model
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="linear-models-regression">
-<h1>Linear Models: Regression<a class="headerlink" href="#linear-models-regression" title="Permalink to this headline">#</a></h1>
+<h1>Linear Models: Regression<a class="headerlink" href="#linear-models-regression" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Linear Regression is a class of <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_model">Linear Models</a> that is frequently a good choice if both, your response (dependent) and your predictor (independent) variables are continuous. In this Chapter you will learn:</p>
 <ul class="simple">
 <li><p>To <em>explore</em> your data in order to determine whether a Linear Model is a good choice by</p>
@@ -682,7 +1115,7 @@ title="Print to PDF"
 <p>★ Add code to your script to load the genome size data into R and check it (again, using the relative path prefix <code class="docutils literal notranslate"><span class="pre">../</span></code>, assuming that you working directory is <code class="docutils literal notranslate"><span class="pre">code</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">,</span><span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">,</span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span><span class="w"> </span>
 
 <span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
@@ -708,7 +1141,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="exploring-the-data">
-<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">#</a></h2>
+<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this heading">#</a></h2>
 <p>In previous chapters we used <code class="docutils literal notranslate"><span class="pre">plot</span></code> to create a scatterplot between two variables. If you have a set of variables to explore, writing code for each plot is tiresome, so R provides a function <code class="docutils literal notranslate"><span class="pre">pairs</span></code>, which creates a grid of scatter plots between each pair of variables. All it needs is a dataset.</p>
 <p>First, plot all pairs:</p>
 <div class="cell docutils container">
@@ -718,29 +1151,29 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_6_0.png" src="../_images/14-regress_6_0.png" />
+<img alt="../_images/c57eae539bca022d586ade6798087ccb5c228ad2fbcb363456f849dc3c96fbc3.png" src="../_images/c57eae539bca022d586ade6798087ccb5c228ad2fbcb363456f849dc3c96fbc3.png" />
 </div>
 </div>
 <p>That’s messy! There are too many columns that we are plotting against each other, so its hard to get a meaningful picture (literally). So let’s try color-coding the scatterplot markers by suborder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_8_0.png" src="../_images/14-regress_8_0.png" />
+<img alt="../_images/a04d0a091e047ceb696260434bd166261a29cbe0e41ec27e1da135c692b8e4e3.png" src="../_images/a04d0a091e047ceb696260434bd166261a29cbe0e41ec27e1da135c692b8e4e3.png" />
 </div>
 </div>
 <p>The result is still too messy! There are far too many variables in <code class="docutils literal notranslate"><span class="pre">genome</span></code> for this to be useful. Before we proceed further,</p>
 <p>★ Add <code class="docutils literal notranslate"><span class="pre">pairs(genome,</span> <span class="pre">col=genome$Suborder)</span></code> into your script and run the code:</p>
-<p>So, we need to cut down the data to fewer variables. <a class="reference external" href="12-ExpDesign.ipynb#Explore-further-by-scatter-plotting-two-variables">Previously</a> we used <a class="reference internal" href="07-R.html#r-indices"><span class="std std-ref">indices</span></a> to select colours; here, we can use indices to select columns from the data frame. This again uses square brackets (<code class="docutils literal notranslate"><span class="pre">x[]</span></code>), but a data frame has two dimensions, rows and columns, so you need to provide an index for each dimension, separated by commas. If an index is left blank, then all of that dimension (i.e. all rows or columns) are selected.</p>
+<p>So, we need to cut down the data to fewer variables. <span class="xref myst">Previously</span> we used <a class="reference internal" href="07-R.html#r-indices"><span class="std std-ref">indices</span></a> to select colours; here, we can use indices to select columns from the data frame. This again uses square brackets (<code class="docutils literal notranslate"><span class="pre">x[]</span></code>), but a data frame has two dimensions, rows and columns, so you need to provide an index for each dimension, separated by commas. If an index is left blank, then all of that dimension (i.e. all rows or columns) are selected.</p>
 <p>Try the following to re-acquaint yourself to access data frame content using indices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a small data frame:</span>
-<span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">A</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="s">&quot;d&quot;</span><span class="p">,</span> <span class="s">&quot;e&quot;</span><span class="p">),</span> <span class="n">B</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">))</span>
-<span class="n">dat</span><span class="p">[</span><span class="m">1</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># select row 1 (all columns selected)</span>
+<span class="n">dat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;e&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">))</span>
+<span class="n">dat</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="c1"># select row 1 (all columns selected)</span>
 </pre></div>
 </div>
 </div>
@@ -759,7 +1192,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span><span class="p">[,</span> <span class="m">2</span><span class="p">]</span> <span class="c1"># select column 2 (all rows selected)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1"># select column 2 (all rows selected)</span>
 </pre></div>
 </div>
 </div>
@@ -774,7 +1207,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span><span class="p">[</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">]</span> <span class="c1"># select row 2, column 1</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="c1"># select row 2, column 1</span>
 </pre></div>
 </div>
 </div>
@@ -784,20 +1217,20 @@ title="Print to PDF"
 <p>Now let’s get resume the actual analysis. We will look at five key variables: genome size, body weight, total length, forewing length and forewing area. If you look at the output of <code class="docutils literal notranslate"><span class="pre">str(genome)</span></code>, you’ll see that these are in columns 4, 7, 8, 12 and 14. We can record the indices of these columns and use this to select the data in the pairs plot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">morpho_vars</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">14</span><span class="p">)</span> <span class="c1"># store the indices</span>
-<span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span> <span class="n">morpho_vars</span><span class="p">],</span> <span class="n">col</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">morpho_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="m">14</span><span class="p">)</span><span class="w"> </span><span class="c1"># store the indices</span>
+<span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span><span class="w"> </span><span class="n">morpho_vars</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_15_0.png" src="../_images/14-regress_15_0.png" />
+<img alt="../_images/7abe7d78afc1acef9092a20e812c2b42554aeaf6381c3f673ff6063e4fde95d3.png" src="../_images/7abe7d78afc1acef9092a20e812c2b42554aeaf6381c3f673ff6063e4fde95d3.png" />
 </div>
 </div>
 <p>★ Add the code above to your script and run it.</p>
 <p>In the figure above, each scatterplot is shown twice, with the variables swapping between the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes. You can see immediately that the relationships between the four morphological measurements and genome size are fairly scattered but that the plots comparing morphology show much clearer relationships.</p>
 </section>
 <section id="correlations">
-<span id="regress-correlations"></span><h2>Correlations<a class="headerlink" href="#correlations" title="Permalink to this headline">#</a></h2>
+<span id="regress-correlations"></span><h2>Correlations<a class="headerlink" href="#correlations" title="Permalink to this heading">#</a></h2>
 <p>One way of summarising how strong the pair-wise relationship between any two variables is to calculate a <em>correlation coefficient</em> between them.</p>
 <p>The Pearson correlation coefficient is the most commonly-used measure. It quantifies the <em>linear</em> correlation between two variables as the average of the product of the standardized values of the two variables (let’s call them <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>):</p>
 <div class="math notranslate nohighlight">
@@ -830,12 +1263,12 @@ title="Print to PDF"
 <p>More technically, the Pearson correlation coefficient is a normalised measure of the <em>covariance</em> (such that it always takes a value between -1 and 1).</p>
 </div>
 <section id="correlations-in-r">
-<h3>Correlations in R<a class="headerlink" href="#correlations-in-r" title="Permalink to this headline">#</a></h3>
+<h3>Correlations in R<a class="headerlink" href="#correlations-in-r" title="Permalink to this heading">#</a></h3>
 <p>In R, we will use two functions to look at correlations. The first is <code class="docutils literal notranslate"><span class="pre">cor</span></code>, which can calculate correlations between pairs of variables, so is a good partner for <code class="docutils literal notranslate"><span class="pre">pairs</span></code> plots. The second is <code class="docutils literal notranslate"><span class="pre">cor.test</span></code>, which can only compare a single pair of variables, but uses a <span class="math notranslate nohighlight">\(t\)</span> test to assess whether the correlation is significant.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Try the following (and include it in your R script file):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span> <span class="n">morpho_vars</span><span class="p">],</span> <span class="n">use</span> <span class="o">=</span> <span class="s">&quot;pairwise&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span><span class="w"> </span><span class="n">morpho_vars</span><span class="p">],</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pairwise&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -858,7 +1291,7 @@ title="Print to PDF"
 <p>This is the correlation matrix. Then:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">genome</span><span class="o">$</span><span class="n">TotalLength</span><span class="p">,</span> <span class="n">use</span> <span class="o">=</span> <span class="s">&quot;pairwise&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">TotalLength</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pairwise&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -884,15 +1317,15 @@ sample estimates:
 </section>
 </section>
 <section id="transformations-and-allometric-scaling">
-<h2>Transformations and allometric scaling<a class="headerlink" href="#transformations-and-allometric-scaling" title="Permalink to this headline">#</a></h2>
+<h2>Transformations and allometric scaling<a class="headerlink" href="#transformations-and-allometric-scaling" title="Permalink to this heading">#</a></h2>
 <p>There is one problem with the correlations above: <em>the correlation coefficient calculation assumes a straight line relationship</em> (a linear correlation). Some of the scatterplots above are fairly straight but there are some strongly curved relationships. This is due to <a class="reference external" href="https://en.wikipedia.org/wiki/Allometry">allometric scaling</a>, where one body measure changes (or grows) disproportionately with respect to another. Here, two of the variables are in linear units (total and forewing length), one is in squared units (forewing area) and one in cubic units (body weight, which is approximately volume). That these measures are in different units itself guarantees that they will scale allometrically with respect to each other.</p>
 <p>The relationships between these variables can be described using a power law:</p>
 <div class="math notranslate nohighlight">
 \[y = ax^b\]</div>
-<p>Fortunately, if we log transform this equation, we get <span class="math notranslate nohighlight">\(\log(y) = \log(a) + b \log(x)\)</span>. This is the equation of a straight line (<span class="math notranslate nohighlight">\(y=a+bx\)</span>), so we should be able to make these plots straighter by logging both axes. We saw <a class="reference external" href="13-t_F_tests.ipynb#%24t%24-tests-revisited">previously</a> that we can create a new logged variable in the data frame like this:</p>
+<p>Fortunately, if we log transform this equation, we get <span class="math notranslate nohighlight">\(\log(y) = \log(a) + b \log(x)\)</span>. This is the equation of a straight line (<span class="math notranslate nohighlight">\(y=a+bx\)</span>), so we should be able to make these plots straighter by logging both axes. We saw <span class="xref myst">previously</span> that we can create a new logged variable in the data frame like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logGS</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logGS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -901,11 +1334,11 @@ sample estimates:
 variables listed above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logGS</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
-<span class="n">genome</span><span class="o">$</span><span class="n">logBW</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">BodyWeight</span><span class="p">)</span>
-<span class="n">genome</span><span class="o">$</span><span class="n">logTL</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">TotalLength</span><span class="p">)</span>
-<span class="n">genome</span><span class="o">$</span><span class="n">logFL</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">ForewingLength</span><span class="p">)</span>
-<span class="n">genome</span><span class="o">$</span><span class="n">logFA</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">ForewingArea</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logGS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<span class="n">genome</span><span class="o">$</span><span class="n">logBW</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">BodyWeight</span><span class="p">)</span>
+<span class="n">genome</span><span class="o">$</span><span class="n">logTL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">TotalLength</span><span class="p">)</span>
+<span class="n">genome</span><span class="o">$</span><span class="n">logFL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">ForewingLength</span><span class="p">)</span>
+<span class="n">genome</span><span class="o">$</span><span class="n">logFA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">ForewingArea</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -946,7 +1379,7 @@ variables listed above:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">logmorpho</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">17</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">19</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">21</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">logmorpho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">17</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">19</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">21</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -954,17 +1387,17 @@ variables listed above:</p>
 <p>We can now use the <code class="docutils literal notranslate"><span class="pre">pairs</span></code> and <code class="docutils literal notranslate"><span class="pre">cor</span></code> test as before for the columns in <code class="docutils literal notranslate"><span class="pre">logmorpho</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span> <span class="n">logmorpho</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pairs</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span><span class="w"> </span><span class="n">logmorpho</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_28_0.png" src="../_images/14-regress_28_0.png" />
+<img alt="../_images/a35cb24dc8cc9c6e32684fb3feca2573dc5880f3b9418343d7dec08e8c7f3f1f.png" src="../_images/a35cb24dc8cc9c6e32684fb3feca2573dc5880f3b9418343d7dec08e8c7f3f1f.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span> <span class="n">logmorpho</span><span class="p">],</span> <span class="n">use</span><span class="o">=</span><span class="s">&#39;pairwise&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span><span class="w"> </span><span class="n">logmorpho</span><span class="p">],</span><span class="w"> </span><span class="n">use</span><span class="o">=</span><span class="s">&#39;pairwise&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -987,12 +1420,12 @@ variables listed above:</p>
 <p>The scatterplots show that logging the data has very successfully addressed curvature (non-linearity) due to allometric scaling between variables in the data.</p>
 </section>
 <section id="performing-the-regression-analysis">
-<span id="regress-perform"></span><h2>Performing the Regression analysis<a class="headerlink" href="#performing-the-regression-analysis" title="Permalink to this headline">#</a></h2>
-<p>We’ll now look at fitting the first linear model of this course, to explore whether log genome size explains log body weight. The first thing to do is to plot the data (as you did <a class="reference external" href="12-ExpDesign.ipynb#Explore-further-by-scatter-plotting-two-variables">previously</a>):</p>
+<span id="regress-perform"></span><h2>Performing the Regression analysis<a class="headerlink" href="#performing-the-regression-analysis" title="Permalink to this heading">#</a></h2>
+<p>We’ll now look at fitting the first linear model of this course, to explore whether log genome size explains log body weight. The first thing to do is to plot the data (as you did <span class="xref myst">previously</span>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myColours</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="c1"># Choose two colours</span>
-<span class="n">mySymbols</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span> <span class="c1"># And two different markers</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myColours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;blue&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Choose two colours</span>
+<span class="n">mySymbols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1"># And two different markers</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1008,29 +1441,29 @@ variables listed above:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">GenomeSize</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="c1">#Now plot again</span>
-<span class="n">col</span> <span class="o">=</span> <span class="n">myColours</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span>
-<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log(Body weight) (mg)&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">GenomeSize</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="c1">#Now plot again</span>
+<span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myColours</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mySymbols</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span>
+<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log(Body weight) (mg)&#39;</span><span class="p">)</span>
 
-<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span> <span class="c1">#Add legend at top left corner</span>
-       <span class="n">col</span><span class="o">=</span> <span class="n">myColours</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span><span class="w"> </span><span class="c1">#Add legend at top left corner</span>
+<span class="w">       </span><span class="n">col</span><span class="o">=</span><span class="w"> </span><span class="n">myColours</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mySymbols</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_33_0.png" src="../_images/14-regress_33_0.png" />
+<img alt="../_images/59fc6920f7047d6735fcda453b1734fc4c91dd1d42161dc80a05f6c34ab2f315.png" src="../_images/59fc6920f7047d6735fcda453b1734fc4c91dd1d42161dc80a05f6c34ab2f315.png" />
 </div>
 </div>
 <p>It is clear that the two suborders have very different relationships: to begin with we will look at dragonflies (Anisoptera).</p>
 <section id="fitting-the-model">
-<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this headline">#</a></h3>
+<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Permalink to this heading">#</a></h3>
 <p>We will fit the <strong>the linear (Regression) model</strong></p>
 <p><span class="math notranslate nohighlight">\(y= \beta_1 + \beta_{2}x\)</span>,</p>
 <p>i.e., a straight line relationship between the response variable and a continuous explanatory variable.</p>
 <p>The code below fits this model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genomeSizeModelDragon</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span>  <span class="n">Suborder</span> <span class="o">==</span> <span class="s">&quot;Anisoptera&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genomeSizeModelDragon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">logGS</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">Suborder</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Anisoptera&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1043,7 +1476,7 @@ variables listed above:</p>
 <p>Now we want to look at the output of the model. Remember from the lecture that a model has <em>coefficients</em> (the <span class="math notranslate nohighlight">\(\beta\)</span> values in the equation of the model) and <em>terms</em> which are the explanatory variables in the model. We’ll look at the <em>coefficients</em> first:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">coef</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">coef</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
@@ -1059,7 +1492,7 @@ variables listed above:</p>
 <p>But we need more information to assess the <em>goodness-of-fit</em> of this model. So let’s this info by using the <code class="docutils literal notranslate"><span class="pre">summary()</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
@@ -1092,7 +1525,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <ul class="simple">
 <li><p>There are two rows in the coefficient table, one for each coefficient in <span class="math notranslate nohighlight">\(y=\beta_1 + \beta_2x\)</span> — these are the intercept and the slope of the line. The rest the details on each row are a <span class="math notranslate nohighlight">\(t\)</span>-test of whether the slope and intercept are significantly different from zero.</p>
 <ul>
-<li><p>The (least-squares) estimate of the slope coefficient (<code class="docutils literal notranslate"><span class="pre">logGS</span></code>) is equal to the correlation coefficient between the dependent variable (<span class="math notranslate nohighlight">\(y\)</span>, here <code class="docutils literal notranslate"><span class="pre">logBW</span></code>) and the independent variable (<span class="math notranslate nohighlight">\(x\)</span>, here <code class="docutils literal notranslate"><span class="pre">logGS</span></code>) times the ratio of the (sample) standard deviations of the two (see <a class="reference external" href="#Correlations">above</a> for the definitions of these):</p></li>
+<li><p>The (least-squares) estimate of the slope coefficient (<code class="docutils literal notranslate"><span class="pre">logGS</span></code>) is equal to the correlation coefficient between the dependent variable (<span class="math notranslate nohighlight">\(y\)</span>, here <code class="docutils literal notranslate"><span class="pre">logBW</span></code>) and the independent variable (<span class="math notranslate nohighlight">\(x\)</span>, here <code class="docutils literal notranslate"><span class="pre">logGS</span></code>) times the ratio of the (sample) standard deviations of the two (see <span class="xref myst">above</span> for the definitions of these):</p></li>
 </ul>
 </li>
 </ul>
@@ -1114,7 +1547,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <p>The main take-away from all this is that the standard errors of the coefficients are directly proportional to the standard error of the regression and inversely proportional to the square root of the sample size (<span class="math notranslate nohighlight">\(n\)</span>). Thus, that “noise” in the data (measured by the residual standard error) affects the errors in the coefficient estimates in exactly the same way. Thus, 4 times as much data will tend to reduce the standard errors of the all coefficients by approximately a factor of 2.</p>
 </section>
 <section id="running-an-anova-on-the-fitted-model">
-<h3>Running an ANOVA on the fitted model<a class="headerlink" href="#running-an-anova-on-the-fitted-model" title="Permalink to this headline">#</a></h3>
+<h3>Running an ANOVA on the fitted model<a class="headerlink" href="#running-an-anova-on-the-fitted-model" title="Permalink to this heading">#</a></h3>
 <p>Now we will look at the <em>terms</em> of the model using the <code class="docutils literal notranslate"><span class="pre">anova</span></code> function.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1153,13 +1586,13 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <p>★ Include the <code class="docutils literal notranslate"><span class="pre">summary</span></code> and <code class="docutils literal notranslate"><span class="pre">anova</span></code> commands for <code class="docutils literal notranslate"><span class="pre">genomeSizeModelDragon</span></code> in your script, run them and check you are happy with the output.</p>
 </section>
 <section id="the-sums-of-squares">
-<h3>The Sums of Squares<a class="headerlink" href="#the-sums-of-squares" title="Permalink to this headline">#</a></h3>
+<h3>The Sums of Squares<a class="headerlink" href="#the-sums-of-squares" title="Permalink to this heading">#</a></h3>
 <p>It is important that we fully understand the meaning of the <em>sums of squares</em> in the ANOVA table.</p>
 <p>For this, we will fit an additional linear model, the <strong>The Null Model</strong>: <span class="math notranslate nohighlight">\(y = \beta_1\)</span>. This is the simplest linear model appropriate for these data, and says that nothing is going on; the response variable is just has variation around the mean, which cannot be explained by the predictor variable.</p>
 <p>The null model is written as an R formula as <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">1</span></code>. The code below fits this null model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">nullModelDragon</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="m">1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">Suborder</span> <span class="o">==</span>  <span class="s">&quot;Anisoptera&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">nullModelDragon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Suborder</span><span class="w"> </span><span class="o">==</span><span class="w">  </span><span class="s">&quot;Anisoptera&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1167,7 +1600,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 <p>Now we can get the sums of the squares of these residuals from the two models using the function <code class="docutils literal notranslate"><span class="pre">resid</span></code>, and then square them and add them up:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">nullModelDragon</span><span class="p">)</span> <span class="o">^</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">nullModelDragon</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1176,7 +1609,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span> <span class="o">^</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1194,34 +1627,34 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </section>
 <hr class="docutils" />
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
 <p>Using the above code as a template, create a new model called <code class="docutils literal notranslate"><span class="pre">genomeSizeModelDamsel</span></code> that fits log body weight as a function of log genome size for damselflies. Write and run code to get the <code class="docutils literal notranslate"><span class="pre">summary</span></code> and <code class="docutils literal notranslate"><span class="pre">anova</span></code> tables for this new model. For example, the first step would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genomeSizeModelDamsel</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">,</span><span class="n">subset</span><span class="o">=</span><span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Zygoptera&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genomeSizeModelDamsel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">logGS</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">,</span><span class="n">subset</span><span class="o">=</span><span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Zygoptera&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="plotting-the-fitted-regression-model">
-<h3>Plotting the fitted Regression model<a class="headerlink" href="#plotting-the-fitted-regression-model" title="Permalink to this headline">#</a></h3>
+<h3>Plotting the fitted Regression model<a class="headerlink" href="#plotting-the-fitted-regression-model" title="Permalink to this heading">#</a></h3>
 <p>Now we can plot the data and add lines to show the models. For simple regression models, we can use the function <code class="docutils literal notranslate"><span class="pre">abline(modelName)</span></code> to add a line based on the model.</p>
 <p>★ You already know how to create and customise scatterplots from previous chapters. Create a plot of log body weight as a function of log genome size, picking your favourite colours for the points.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">abline</span></code> to add a line for each model and use the <code class="docutils literal notranslate"> <span class="pre">col</span></code> option in the function to colour each line to match the points.</p>
 <p>For example: <code class="docutils literal notranslate"><span class="pre">abline(genomeSizeModelDragon,</span> <span class="pre">col='red')</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myCol</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">);</span> <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.res</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">repr.plot.width</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">repr.plot.height</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span> <span class="c1"># change plot size</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span> <span class="o">~</span> <span class="n">logGS</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">myCol</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&#39;log Genome Size (pg)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log Body Weight (g)&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myCol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">);</span><span class="w"> </span><span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="c1"># change plot size</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">logGS</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">myCol</span><span class="p">[</span><span class="n">Suborder</span><span class="p">],</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&#39;log Genome Size (pg)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log Body Weight (g)&#39;</span><span class="p">)</span>
 
-<span class="nf">abline</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_54_0.png" src="../_images/14-regress_54_0.png" />
+<img alt="../_images/7ce76ab5bc707947c5c2c38e94b454442c77357e9360853e362efb587df68021.png" src="../_images/7ce76ab5bc707947c5c2c38e94b454442c77357e9360853e362efb587df68021.png" />
 </div>
 </div>
 <p>Your final figure should look something like this:</p>
@@ -1236,31 +1669,31 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </section>
 </section>
 <section id="model-diagnostics">
-<span id="regress-diagnostics"></span><h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Permalink to this headline">#</a></h2>
+<span id="regress-diagnostics"></span><h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Permalink to this heading">#</a></h2>
 <p>Now that we have our models, we need to check that they are appropriate for the data. For this, we will inspect “diagnostic plots”. Producing diagnostic plots is easy in R — if you <code class="docutils literal notranslate"><span class="pre">plot</span></code> the model object, then R produces a set of diagnostic plots!</p>
 <p>★ Try the following code (and include in the R script file):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">genomeSizeModelDragon</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_56_0.png" src="../_images/14-regress_56_0.png" />
+<img alt="../_images/8515f7593cbf06ad2a03f4aaf4eb7646bdb980f5adaf4a984f2e076d91dd7ec6.png" src="../_images/8515f7593cbf06ad2a03f4aaf4eb7646bdb980f5adaf4a984f2e076d91dd7ec6.png" />
 </div>
 </div>
 <p>These are the diagnostics for the <code class="docutils literal notranslate"><span class="pre">lm</span></code> fit to the Dragonfly data subset.</p>
 <p>Let’s also plot the diagnostic pots for the model fitted to the Damselfly subset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">genomeSizeModelDamsel</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14-regress_58_0.png" src="../_images/14-regress_58_0.png" />
+<img alt="../_images/761b8ca25a2e3f4628b0935e32549b1fdb831a870828dbec963ac113106632fa.png" src="../_images/761b8ca25a2e3f4628b0935e32549b1fdb831a870828dbec963ac113106632fa.png" />
 </div>
 </div>
 <p>The diagnostic plots are:</p>
@@ -1279,7 +1712,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </figure>
 <hr class="docutils" />
 <p>There are two key things to note about the above plot:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The standardized residuals (y-axis) are centered around zero and reach 2-3 standard deviations away from zero. They should also lie symmetrically about zero, as would be expected for a normal distribution. This is the case for the Damselfly plot , but not so much for the Dragonfly plot.</p></li>
 <li><p>The contours values show <em>Cook’s distance</em> (only visible in the Damsefly plot), which measures how much the regression would change if a point was deleted. Cook’s distance is increased by leverage and by large residuals: a point far from the centroid with a large residual can severely distort the coefficient estimates from the regression. On this plot, you want to see that the red smoothed line stays close to the horizontal gray dashed line and that no points have a large Cook’s distance (i.e, &gt;0.5). Both are true here.</p></li>
 </ol>
@@ -1290,7 +1723,7 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 record of the code and run it.</p>
 </section>
 <section id="reporting-the-model">
-<h2>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this headline">#</a></h2>
+<h2>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this heading">#</a></h2>
 <p>Now we know that the models are appropriate and we have a plot, the last thing is to report the statistics. For the damselfly model, here is one summary that would do: log genome size explains significant variation in log body weight in dameselflies (F=10.5, df=1,36, p=0.0025) and shows that body weight decreases with genome size (intercept: -4.65, se=0.09;
 slope: -1.14, se=0.35).</p>
 </section>
@@ -1308,7 +1741,7 @@ slope: -1.14, se=0.35).</p>
             mode: "r"
         },
         kernelOptions: {
-            kernelName: "ir",
+            name: "ir",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1316,50 +1749,169 @@ slope: -1.14, se=0.35).</p>
     </script>
     <script>kernelName = 'ir'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="13-t_F_tests.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="15-anova.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Linear Models: Analysis of variance</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="13-t_F_tests.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="15-anova.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Linear Models: Analysis of variance</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Samraat Pawar<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-the-data">
+   Exploring the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlations">
+   Correlations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlations-in-r">
+     Correlations in R
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformations-and-allometric-scaling">
+   Transformations and allometric scaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performing-the-regression-analysis">
+   Performing the Regression analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-the-model">
+     Fitting the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-an-anova-on-the-fitted-model">
+     Running an ANOVA on the fitted model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-sums-of-squares">
+     The Sums of Squares
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-fitted-regression-model">
+     Plotting the fitted Regression model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-diagnostics">
+   Model diagnostics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reporting-the-model">
+   Reporting the model
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2024.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>

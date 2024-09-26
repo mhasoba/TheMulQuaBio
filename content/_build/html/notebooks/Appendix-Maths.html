@@ -1,48 +1,57 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Mathematical models in Jupyter &#8212; TheMulQuaBio</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +61,732 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Appendix-Maths';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Databases" href="Appendix-Databases.html" />
     <link rel="prev" title="Data analyses with Python &amp; Jupyter" href="Appendix-Data-Python.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
         
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
-      <img src="../_static/logo.png" class="logo" alt="logo">
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01-Unix.html">
+                        UNIX and Linux
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02-ShellScripting.html">
+                        Shell scripting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03-Git.html">
+                        Version control with Git
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04-LaTeX.html">
+                        Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05-Python_I.html">
+                        Biological Computing in Python I
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07-R.html">
+                        Biological Computing in R
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06-Python_II.html">
+                        Biological Computing in Python II
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
+                        01 - Making mathematical statements
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
+                        02   - Describing shapes and patterns
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
+                        03   - Analysing change, one step at a time
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
+                        04 - From table arrangements to powerful tools
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
+                        05 - From table arrangements to powerful tools - part 2
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
+                        06 - Analysing change, continuously
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
+                        07 - Analysing change, continuously (Part 2)
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
+                        08 - Calculating accumulated change
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
+                        Tutorial 01
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
+                        Tutorial 05
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
+                        Tutorial 06
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../Stats-Intro.html">
+                        Introduction to this section
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08-Data_R.html">
+                        Data Management and Visualization
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12-ExpDesign.html">
+                        Experimental design and Data exploration
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="13-t_F_tests.html">
+                        Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="14-regress.html">
+                        Linear Models: Regression
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="15-anova.html">
+                        Linear Models: Analysis of variance
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="16-MulExpl.html">
+                        Linear Models: Multiple explanatory variables
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="17-MulExplInter.html">
+                        Linear Models: Multiple variables with interactions
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="18-ModelSimp.html">
+                        Model simplification
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="19-glm.html">
+                        Generalised Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="20-ModelFitting-NLLS.html">
+                        Model Fitting using Non-linear Least-squares
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-JupyIntro.html">
+                        Introduction to Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Data-Python.html">
+                        Data analyses  with Python & Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Mathematical models in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Databases.html">
+                        Databases <span class="tocSkip"></span>
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-NLLS-Python.html">
+                        Model fitting in Python
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-MiniProj.html">
+                        The Computing Miniproject
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Appendix-Assessment.html">
+                        Coursework Assessment
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../intro.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,638 +795,349 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/Appendix-Maths.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
+  <ul class="dropdown-menu">
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<div class="dropdown dropdown-repository-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Source repository"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-<span class="headerbtn__text-container">repository</span>
+<span class="btn__text-container">repository</span>
 </a>
-
-      </li>
+</a>
       
-      <li>
-        <a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-Maths.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Appendix-Maths.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Open an issue"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-lightbulb"></i>
   </span>
-<span class="headerbtn__text-container">open issue</span>
+<span class="btn__text-container">open issue</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/Appendix-Maths.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/notebooks/Appendix-Maths.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-preliminaries">
-   Some preliminaries
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-variables">
-     Symbolic variables
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-equations">
-     Symbolic equations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numerical-evaluation">
-     Numerical evaluation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fundamental-mathematical-operations">
-   Fundamental mathematical operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expand-and-factor">
-     Expand and factor
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#apart-and-together">
-     Apart and together
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#simplification">
-     Simplification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#differentiation">
-     Differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#integration">
-     Integration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sums-and-products">
-     Sums and products
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limits">
-     Limits
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#series">
-     Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrix-algebra">
-     Matrix algebra
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equations">
-     Solving equations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-biological-examples">
-   Some biological examples
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-population-exponential-growth">
-     One population: Exponential growth
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-population-logistic-population-growth">
-     One population: Logistic Population growth
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model">
-     Two interacting populations: The Lotka-Volterra predator-prey model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#readings-and-resources">
-   Readings and Resources
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Mathematical models in Jupyter</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-preliminaries">
-   Some preliminaries
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-variables">
-     Symbolic variables
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-equations">
-     Symbolic equations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numerical-evaluation">
-     Numerical evaluation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fundamental-mathematical-operations">
-   Fundamental mathematical operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expand-and-factor">
-     Expand and factor
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#apart-and-together">
-     Apart and together
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#simplification">
-     Simplification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#differentiation">
-     Differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#integration">
-     Integration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sums-and-products">
-     Sums and products
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limits">
-     Limits
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#series">
-     Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrix-algebra">
-     Matrix algebra
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equations">
-     Solving equations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-biological-examples">
-   Some biological examples
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-population-exponential-growth">
-     One population: Exponential growth
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-population-logistic-population-growth">
-     One population: Logistic Population growth
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model">
-     Two interacting populations: The Lotka-Volterra predator-prey model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#readings-and-resources">
-   Readings and Resources
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mathematical models in Jupyter</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-preliminaries">
+   Some preliminaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-variables">
+     Symbolic variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-equations">
+     Symbolic equations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-evaluation">
+     Numerical evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fundamental-mathematical-operations">
+   Fundamental mathematical operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expand-and-factor">
+     Expand and factor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apart-and-together">
+     Apart and together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simplification">
+     Simplification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differentiation">
+     Differentiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration">
+     Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sums-and-products">
+     Sums and products
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limits">
+     Limits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#series">
+     Series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-algebra">
+     Matrix algebra
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-equations">
+     Solving equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-biological-examples">
+   Some biological examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-exponential-growth">
+     One population: Exponential growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-logistic-population-growth">
+     One population: Logistic Population growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model">
+     Two interacting populations: The Lotka-Volterra predator-prey model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources">
+   Readings and Resources
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="mathematical-models-in-jupyter">
-<h1>Mathematical models in Jupyter<a class="headerlink" href="#mathematical-models-in-jupyter" title="Permalink to this headline">#</a></h1>
+<h1>Mathematical models in Jupyter<a class="headerlink" href="#mathematical-models-in-jupyter" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Jupyter is a fully-functional alternative to Mathematica or Maple notebooks for developing and analyzing mathematical models in biology (or any other discipine, for that matter). For this, you will need to use a <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_algebra_system">Computer Algebra System</a> (CAS). A CAS is software that emulates manual (pen-and-paper) manipulations of mathematical expressions. Yes, it can be done, and very effectively, for a vast array of mathematical problems! A CAS combined with a graphing/plotting package like matplotlib gives you a powerful tool for mathematical modelling using a Jupyter notebook.</p>
 <p>We will use Python’s <a class="reference external" href="http://sympy.org/en/index.html">SymPy</a> package, which provides powerful CAS features for most common mathematical modelling problems.</p>
 <p>There is also <a class="reference external" href="http://www.sagemath.org/">Sage</a>, a more capable CAS. We will not use it here because is not a regular Python package, but rather, uses Python as its programming language. So unlike SymPy it cannot just be loaded in a Jupyter nb with a Python kernel. Instead, you will need to <a class="reference external" href="http://doc.sagemath.org/html/en/reference/repl/sage/repl/ipython_kernel/install.html">install its Jupyter kernel</a>. You can <a class="reference external" href="http://www.sagemath.org/download.html">install and try sage</a> outside of Jupyter if you want.</p>
 <p>So let’s use SymPy in Jupyter.</p>
 <p>If you used <a class="reference external" href="http://continuum.io/downloads">Anaconda</a> to install Jupyter, it should already include SymPy, Matplotlib, IPython, NumPy, and other useful packages for scientific computing. If you don’t have SymPy for some other reason, install it in Linux/mac using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt install python3-sympy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-sympy
 </pre></div>
 </div>
 <p>Otherwise, follow the instructions <a class="reference external" href="http://docs.sympy.org/latest/install.html">here</a>.</p>
@@ -771,10 +1162,10 @@ title="Print to PDF"
 </div>
 </section>
 <section id="some-preliminaries">
-<h2>Some preliminaries<a class="headerlink" href="#some-preliminaries" title="Permalink to this headline">#</a></h2>
+<h2>Some preliminaries<a class="headerlink" href="#some-preliminaries" title="Permalink to this heading">#</a></h2>
 <p>Before we get started with our mathematical modelling session in Jupyter, some SymPy preliminaries.</p>
 <section id="symbolic-variables">
-<h3>Symbolic variables<a class="headerlink" href="#symbolic-variables" title="Permalink to this headline">#</a></h3>
+<h3>Symbolic variables<a class="headerlink" href="#symbolic-variables" title="Permalink to this heading">#</a></h3>
 <p>In CAS’ like SymPy, we need to create symbolic variables for the mathematical variables we want to work with. A new symbolic variable can be created using <code class="docutils literal notranslate"><span class="pre">var</span></code>. Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -834,7 +1225,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_18_0.png" src="../_images/Appendix-Maths_18_0.png" />
+<img alt="../_images/f677f37bdc590b156b5c9dd85a95f73bd21e7446bccdf453afe075ec59b890f3.png" src="../_images/f677f37bdc590b156b5c9dd85a95f73bd21e7446bccdf453afe075ec59b890f3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -844,12 +1235,12 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_19_0.png" src="../_images/Appendix-Maths_19_0.png" />
+<img alt="../_images/a4b87ae9ce29e9322cd2af02cf93396365c72b16b75aa3996c739f857d9fa8e3.png" src="../_images/a4b87ae9ce29e9322cd2af02cf93396365c72b16b75aa3996c739f857d9fa8e3.png" />
 </div>
 </div>
 </section>
 <section id="symbolic-equations">
-<h3>Symbolic equations<a class="headerlink" href="#symbolic-equations" title="Permalink to this headline">#</a></h3>
+<h3>Symbolic equations<a class="headerlink" href="#symbolic-equations" title="Permalink to this heading">#</a></h3>
 <p>We can define the mathematical equations (functions) that we will be using/manipulating as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -858,7 +1249,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_21_0.png" src="../_images/Appendix-Maths_21_0.png" />
+<img alt="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" src="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -900,7 +1291,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </section>
 <section id="numerical-evaluation">
-<h3>Numerical evaluation<a class="headerlink" href="#numerical-evaluation" title="Permalink to this headline">#</a></h3>
+<h3>Numerical evaluation<a class="headerlink" href="#numerical-evaluation" title="Permalink to this heading">#</a></h3>
 <p>To evaluate an expression numerically we can use the <code class="docutils literal notranslate"><span class="pre">evalf</span></code> function (or <code class="docutils literal notranslate"><span class="pre">N</span></code>). It takes an argument <code class="docutils literal notranslate"><span class="pre">n</span></code> which specifies the number of significant digits.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -909,7 +1300,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_30_0.png" src="../_images/Appendix-Maths_30_0.png" />
+<img alt="../_images/046873bd444d6a44903ba11253c8a9a441eb15b70cf4e0d00848b1b3c7ab6d6a.png" src="../_images/046873bd444d6a44903ba11253c8a9a441eb15b70cf4e0d00848b1b3c7ab6d6a.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">N()</span></code> is shorthand alias for <code class="docutils literal notranslate"><span class="pre">evalf()</span></code>:</p>
@@ -920,7 +1311,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_32_0.png" src="../_images/Appendix-Maths_32_0.png" />
+<img alt="../_images/dd2b2a820ad4defce4782ad0633b160b3149494a51495c754c6d96d5fdd1fa1c.png" src="../_images/dd2b2a820ad4defce4782ad0633b160b3149494a51495c754c6d96d5fdd1fa1c.png" />
 </div>
 </div>
 <p>So let’s try evaluating our function:</p>
@@ -931,7 +1322,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_34_0.png" src="../_images/Appendix-Maths_34_0.png" />
+<img alt="../_images/90eb415934fb4da54cdd92a35b5e32fa6dcea82c71869bb4afdc4da59487d371.png" src="../_images/90eb415934fb4da54cdd92a35b5e32fa6dcea82c71869bb4afdc4da59487d371.png" />
 </div>
 </div>
 <p>When we numerically evaluate algebraic expressions we often want to substitute a symbol with a numerical value. In SymPy we do that using the <code class="docutils literal notranslate"><span class="pre">subs</span></code> function:</p>
@@ -942,7 +1333,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_36_0.png" src="../_images/Appendix-Maths_36_0.png" />
+<img alt="../_images/2d53264491097c1f61a38ab9b1654da254867e755bc48104c075df31c370de5e.png" src="../_images/2d53264491097c1f61a38ab9b1654da254867e755bc48104c075df31c370de5e.png" />
 </div>
 </div>
 <p>Now let’s evaluate it:</p>
@@ -953,7 +1344,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_38_0.png" src="../_images/Appendix-Maths_38_0.png" />
+<img alt="../_images/2d53264491097c1f61a38ab9b1654da254867e755bc48104c075df31c370de5e.png" src="../_images/2d53264491097c1f61a38ab9b1654da254867e755bc48104c075df31c370de5e.png" />
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">subs</span></code> function can also be used to substitute mathematical variables or expressions. Let’s substitute <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(a+\pi\)</span>:</p>
@@ -964,7 +1355,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_40_0.png" src="../_images/Appendix-Maths_40_0.png" />
+<img alt="../_images/68f83150f259530bc12f2116aac62125f502e8a425dc9750dccd8675e814a88a.png" src="../_images/68f83150f259530bc12f2116aac62125f502e8a425dc9750dccd8675e814a88a.png" />
 </div>
 </div>
 <p>And assign it as a new symbolic equation for using later:</p>
@@ -975,7 +1366,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_42_0.png" src="../_images/Appendix-Maths_42_0.png" />
+<img alt="../_images/68f83150f259530bc12f2116aac62125f502e8a425dc9750dccd8675e814a88a.png" src="../_images/68f83150f259530bc12f2116aac62125f502e8a425dc9750dccd8675e814a88a.png" />
 </div>
 </div>
 <p>We can also numerically evaluate the function over a range of values using NumPy arrays:</p>
@@ -1014,7 +1405,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbaa6a1ad30&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Appendix-Maths_49_1.png" src="../_images/Appendix-Maths_49_1.png" />
+<img alt="../_images/84eacc73375b2abaced339db86c955992093ea63a85a11dc35afaae33173ec76.png" src="../_images/84eacc73375b2abaced339db86c955992093ea63a85a11dc35afaae33173ec76.png" />
 </div>
 </div>
 <p>However, numerical evaluation using <code class="docutils literal notranslate"><span class="pre">evalf()</span></code> can be very slow. There is a much more efficient way to do it by using <a class="reference external" href="http://docs.sympy.org/latest/modules/utilities/lambdify.html"><code class="docutils literal notranslate"><span class="pre">lambdify()</span></code></a> to “compile” a Sympy expression into a function that is much more efficient to evaluate numerically:</p>
@@ -1065,10 +1456,10 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </section>
 </section>
 <section id="fundamental-mathematical-operations">
-<h2>Fundamental mathematical operations<a class="headerlink" href="#fundamental-mathematical-operations" title="Permalink to this headline">#</a></h2>
+<h2>Fundamental mathematical operations<a class="headerlink" href="#fundamental-mathematical-operations" title="Permalink to this heading">#</a></h2>
 <p>Let’s look at some fundamental methematical operations in SymPy that you will almost certainly use at some point in biological models. You can find a full list and addtional tutorials and examples at <a class="reference external" href="http://docs.sympy.org/latest/index.html">SymPy documentation</a>.</p>
 <section id="expand-and-factor">
-<h3>Expand and factor<a class="headerlink" href="#expand-and-factor" title="Permalink to this headline">#</a></h3>
+<h3>Expand and factor<a class="headerlink" href="#expand-and-factor" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand</span><span class="p">(</span><span class="n">MyFun</span><span class="p">)</span>
@@ -1076,7 +1467,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_60_0.png" src="../_images/Appendix-Maths_60_0.png" />
+<img alt="../_images/b9eacfb0ddcadebf80af025ee0197522c2d5e45ba98f035e8e0ee49c5c0d7c55.png" src="../_images/b9eacfb0ddcadebf80af025ee0197522c2d5e45ba98f035e8e0ee49c5c0d7c55.png" />
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">expand</span></code> function takes a number of keywords arguments which we can tell the functions what kind of expansions to want to perform; use <code class="docutils literal notranslate"><span class="pre">help(expand)</span></code> (or the <a class="reference external" href="http://docs.sympy.org/latest/index.html">SymPy documentation</a>) for more info.</p>
@@ -1101,12 +1492,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_65_0.png" src="../_images/Appendix-Maths_65_0.png" />
+<img alt="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" src="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" />
 </div>
 </div>
 </section>
 <section id="apart-and-together">
-<h3>Apart and together<a class="headerlink" href="#apart-and-together" title="Permalink to this headline">#</a></h3>
+<h3>Apart and together<a class="headerlink" href="#apart-and-together" title="Permalink to this heading">#</a></h3>
 <p>To manipulate symbolic expressions of fractions, you can use the <code class="docutils literal notranslate"><span class="pre">apart</span></code> and <code class="docutils literal notranslate"><span class="pre">together</span></code> functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1115,7 +1506,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_68_0.png" src="../_images/Appendix-Maths_68_0.png" />
+<img alt="../_images/ac3563d066d73d9b96f0479948e7f87a62f1f8f04a032a90a3f3d6606fc273b1.png" src="../_images/ac3563d066d73d9b96f0479948e7f87a62f1f8f04a032a90a3f3d6606fc273b1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1125,7 +1516,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_69_0.png" src="../_images/Appendix-Maths_69_0.png" />
+<img alt="../_images/e865227327e86939da87990042de91f25cf1840809fce0ad991272860ee99a14.png" src="../_images/e865227327e86939da87990042de91f25cf1840809fce0ad991272860ee99a14.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1135,7 +1526,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_70_0.png" src="../_images/Appendix-Maths_70_0.png" />
+<img alt="../_images/09ff25e4e6352aed9e11ea5b9d5e7385e531ed0adafb04b4bb44918f549a86f1.png" src="../_images/09ff25e4e6352aed9e11ea5b9d5e7385e531ed0adafb04b4bb44918f549a86f1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1145,12 +1536,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_71_0.png" src="../_images/Appendix-Maths_71_0.png" />
+<img alt="../_images/4baa53fa6496837451714ecbcd0853aa072d5d2562dc0b158147cf8e6a9afb91.png" src="../_images/4baa53fa6496837451714ecbcd0853aa072d5d2562dc0b158147cf8e6a9afb91.png" />
 </div>
 </div>
 </section>
 <section id="simplification">
-<h3>Simplification<a class="headerlink" href="#simplification" title="Permalink to this headline">#</a></h3>
+<h3>Simplification<a class="headerlink" href="#simplification" title="Permalink to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">simplify</span></code> tries to simplify an expression into a nice looking expression, using various techniques. More specific alternatives to the <code class="docutils literal notranslate"><span class="pre">simplify</span></code> functions also exist: <code class="docutils literal notranslate"><span class="pre">trigsimp</span></code>, <code class="docutils literal notranslate"><span class="pre">powsimp</span></code>, <code class="docutils literal notranslate"><span class="pre">logcombine</span></code>, etc. Applying <code class="docutils literal notranslate"><span class="pre">simplify</span></code> to the above example will give the same result as <code class="docutils literal notranslate"><span class="pre">together</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1159,14 +1550,14 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_73_0.png" src="../_images/Appendix-Maths_73_0.png" />
+<img alt="../_images/4baa53fa6496837451714ecbcd0853aa072d5d2562dc0b158147cf8e6a9afb91.png" src="../_images/4baa53fa6496837451714ecbcd0853aa072d5d2562dc0b158147cf8e6a9afb91.png" />
 </div>
 </div>
 <p>Note that simplify usually combines fractions but does not factor.</p>
 <p>In addition to algebraic manipulations, the other main use of CAS is to do calculus, like derivatives and integrals of algebraic expressions.</p>
 </section>
 <section id="differentiation">
-<h3>Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">#</a></h3>
+<h3>Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this heading">#</a></h3>
 <p>Differentiation is usually simple. Use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> function. The first argument is the expression to take the derivative of, and the second argument is the symbol by which to take the derivative:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1175,7 +1566,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_78_0.png" src="../_images/Appendix-Maths_78_0.png" />
+<img alt="../_images/61d400fa552c67ca74e5c5c962bba4edcb79602ea02d69f3735363471a3a3679.png" src="../_images/61d400fa552c67ca74e5c5c962bba4edcb79602ea02d69f3735363471a3a3679.png" />
 </div>
 </div>
 <p>For higher order derivatives we can do:</p>
@@ -1186,7 +1577,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_80_0.png" src="../_images/Appendix-Maths_80_0.png" />
+<img alt="../_images/dc59bf8d060544ecc00cdaa6c17aa81258f898ffc57b860d04f00467344aabd3.png" src="../_images/dc59bf8d060544ecc00cdaa6c17aa81258f898ffc57b860d04f00467344aabd3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1196,7 +1587,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_81_0.png" src="../_images/Appendix-Maths_81_0.png" />
+<img alt="../_images/5c8e3635799550be6237645975676ba74fcb98cbe47b508d4d6ff8d864990a24.png" src="../_images/5c8e3635799550be6237645975676ba74fcb98cbe47b508d4d6ff8d864990a24.png" />
 </div>
 </div>
 <p>You can directly apply another manipulation to the result of a previous operation:</p>
@@ -1207,7 +1598,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_83_0.png" src="../_images/Appendix-Maths_83_0.png" />
+<img alt="../_images/c695b8ea0cdb94d8a4a2aa71f0d5dd30c036b5f9b65624ab292daac63e3fca0b.png" src="../_images/c695b8ea0cdb94d8a4a2aa71f0d5dd30c036b5f9b65624ab292daac63e3fca0b.png" />
 </div>
 </div>
 <p>Calculate the derivative of a multivariate expression:</p>
@@ -1233,12 +1624,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_88_0.png" src="../_images/Appendix-Maths_88_0.png" />
+<img alt="../_images/52ce7317f6a0862f1b2c646df2dcc8321640bb60611ad8bf21d9925ad1054874.png" src="../_images/52ce7317f6a0862f1b2c646df2dcc8321640bb60611ad8bf21d9925ad1054874.png" />
 </div>
 </div>
 </section>
 <section id="integration">
-<h3>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">#</a></h3>
+<h3>Integration<a class="headerlink" href="#integration" title="Permalink to this heading">#</a></h3>
 <p>Integration is done in a similar fashion:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1247,7 +1638,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_91_0.png" src="../_images/Appendix-Maths_91_0.png" />
+<img alt="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" src="../_images/bb811bfa0fcd09d65c40fbd0e2117b0d13f73906a9a355053ee885bee136a2a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1257,7 +1648,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_92_0.png" src="../_images/Appendix-Maths_92_0.png" />
+<img alt="../_images/b412db07aa333eb957c021de948bb59d5654ce2687e6de521853b8092fc1f426.png" src="../_images/b412db07aa333eb957c021de948bb59d5654ce2687e6de521853b8092fc1f426.png" />
 </div>
 </div>
 <p>By providing limits for the integration variable we can evaluate definite integrals:</p>
@@ -1268,7 +1659,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_94_0.png" src="../_images/Appendix-Maths_94_0.png" />
+<img alt="../_images/359955521f8b70afa5ac09e22faa95da8cc84d6a1ceb223f9ac88c31c69d22a1.png" src="../_images/359955521f8b70afa5ac09e22faa95da8cc84d6a1ceb223f9ac88c31c69d22a1.png" />
 </div>
 </div>
 <p>and also improper integrals</p>
@@ -1279,13 +1670,13 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_96_0.png" src="../_images/Appendix-Maths_96_0.png" />
+<img alt="../_images/94d6b1803132d143fc9a0fbfa0d2754a94224b788753d8578975bc1939e4993d.png" src="../_images/94d6b1803132d143fc9a0fbfa0d2754a94224b788753d8578975bc1939e4993d.png" />
 </div>
 </div>
 <p>Remember, <code class="docutils literal notranslate"><span class="pre">oo</span></code> is the SymPy notation for inifinity.</p>
 </section>
 <section id="sums-and-products">
-<h3>Sums and products<a class="headerlink" href="#sums-and-products" title="Permalink to this headline">#</a></h3>
+<h3>Sums and products<a class="headerlink" href="#sums-and-products" title="Permalink to this heading">#</a></h3>
 <p>You can evaluate sums and products using <code class="docutils literal notranslate"><span class="pre">Sum</span></code>. Note that this function is named <code class="docutils literal notranslate"><span class="pre">Sum</span></code> and not <code class="docutils literal notranslate"><span class="pre">sum</span></code> to avoid namespace conflict.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1301,7 +1692,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_101_0.png" src="../_images/Appendix-Maths_101_0.png" />
+<img alt="../_images/63826235758e61041b400b998201e7e18d05b7039d831c9df48f7f3e81f4a4eb.png" src="../_images/63826235758e61041b400b998201e7e18d05b7039d831c9df48f7f3e81f4a4eb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1311,7 +1702,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_102_0.png" src="../_images/Appendix-Maths_102_0.png" />
+<img alt="../_images/16230a96b45c35fdb5c47916bcbc1ad5b02053b713666a478c76dcba1e308dea.png" src="../_images/16230a96b45c35fdb5c47916bcbc1ad5b02053b713666a478c76dcba1e308dea.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1321,7 +1712,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_103_0.png" src="../_images/Appendix-Maths_103_0.png" />
+<img alt="../_images/71f3078e8b4db5dd0b500a41a9ad9953cc9e250c37c059ed805ef0ad3ebc0e7e.png" src="../_images/71f3078e8b4db5dd0b500a41a9ad9953cc9e250c37c059ed805ef0ad3ebc0e7e.png" />
 </div>
 </div>
 <p>Products work much the same way:</p>
@@ -1332,12 +1723,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_105_0.png" src="../_images/Appendix-Maths_105_0.png" />
+<img alt="../_images/4631a83e8dca47111a5d639847c3968b30af8b6b977236fc668e7c21d1d6a9b7.png" src="../_images/4631a83e8dca47111a5d639847c3968b30af8b6b977236fc668e7c21d1d6a9b7.png" />
 </div>
 </div>
 </section>
 <section id="limits">
-<h3>Limits<a class="headerlink" href="#limits" title="Permalink to this headline">#</a></h3>
+<h3>Limits<a class="headerlink" href="#limits" title="Permalink to this heading">#</a></h3>
 <p>Limits can be evaluated using the <code class="docutils literal notranslate"><span class="pre">limit</span></code> function. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1346,7 +1737,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_108_0.png" src="../_images/Appendix-Maths_108_0.png" />
+<img alt="../_images/211db032cb5eb7f0e2e80b65f62b950d5040072ce8843ff5428c9b282b31387e.png" src="../_images/211db032cb5eb7f0e2e80b65f62b950d5040072ce8843ff5428c9b282b31387e.png" />
 </div>
 </div>
 <p>We can use ‘limit’ to check the result of derivation using the <code class="docutils literal notranslate"><span class="pre">diff</span></code> function:</p>
@@ -1357,7 +1748,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_110_0.png" src="../_images/Appendix-Maths_110_0.png" />
+<img alt="../_images/ea645c56fb6e8faef52ba17a96a9fd2fdd094d269422cfd8393420148c58c63c.png" src="../_images/ea645c56fb6e8faef52ba17a96a9fd2fdd094d269422cfd8393420148c58c63c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1367,7 +1758,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_111_0.png" src="../_images/Appendix-Maths_111_0.png" />
+<img alt="../_images/e10be8783089a283b363cba72457f549018ba232761b8567945dccd5f6659d1d.png" src="../_images/e10be8783089a283b363cba72457f549018ba232761b8567945dccd5f6659d1d.png" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\displaystyle \frac{\mathrm{d}f(x,y)}{\mathrm{d}x} = \frac{f(x+h,y)-f(x,y)}{h}\)</span></p>
@@ -1385,7 +1776,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_114_0.png" src="../_images/Appendix-Maths_114_0.png" />
+<img alt="../_images/e10be8783089a283b363cba72457f549018ba232761b8567945dccd5f6659d1d.png" src="../_images/e10be8783089a283b363cba72457f549018ba232761b8567945dccd5f6659d1d.png" />
 </div>
 </div>
 <p>OK!</p>
@@ -1397,7 +1788,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_117_0.png" src="../_images/Appendix-Maths_117_0.png" />
+<img alt="../_images/554fa104cc1d90b50793efba856aa9588f0bc0b1c9642d19a00a5ec0a3ba7466.png" src="../_images/554fa104cc1d90b50793efba856aa9588f0bc0b1c9642d19a00a5ec0a3ba7466.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1407,12 +1798,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_118_0.png" src="../_images/Appendix-Maths_118_0.png" />
+<img alt="../_images/582d92b79b0d1ea13cb5f4c937158f2661eb4d4da8709f89341baacef27d501e.png" src="../_images/582d92b79b0d1ea13cb5f4c937158f2661eb4d4da8709f89341baacef27d501e.png" />
 </div>
 </div>
 </section>
 <section id="series">
-<h3>Series<a class="headerlink" href="#series" title="Permalink to this headline">#</a></h3>
+<h3>Series<a class="headerlink" href="#series" title="Permalink to this heading">#</a></h3>
 <p>Series expansion is also one of the most useful features of a CAS. In SymPy we can perform a series expansion of an expression using the <code class="docutils literal notranslate"><span class="pre">series</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1421,7 +1812,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_121_0.png" src="../_images/Appendix-Maths_121_0.png" />
+<img alt="../_images/fd070adde57136276e1da4da742089b6606d532ef9a1941a8e29e3b4700af3d2.png" src="../_images/fd070adde57136276e1da4da742089b6606d532ef9a1941a8e29e3b4700af3d2.png" />
 </div>
 </div>
 <p>By default it expands the expression around <span class="math notranslate nohighlight">\(x=0\)</span>, but we can expand around any value of <span class="math notranslate nohighlight">\(x\)</span> by explicitly include a value in the function call:</p>
@@ -1432,7 +1823,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_123_0.png" src="../_images/Appendix-Maths_123_0.png" />
+<img alt="../_images/874dde75abdf7ad2cf6eadaa856ccfbf9986dac49c014300ba597d9ea76de262.png" src="../_images/874dde75abdf7ad2cf6eadaa856ccfbf9986dac49c014300ba597d9ea76de262.png" />
 </div>
 </div>
 <p>Or try:</p>
@@ -1443,7 +1834,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_125_0.png" src="../_images/Appendix-Maths_125_0.png" />
+<img alt="../_images/3d58ef1e005592cc35c0effb2e61f60081845ac315bd0558bea7b7156aaf0959.png" src="../_images/3d58ef1e005592cc35c0effb2e61f60081845ac315bd0558bea7b7156aaf0959.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1453,7 +1844,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_126_0.png" src="../_images/Appendix-Maths_126_0.png" />
+<img alt="../_images/91236917f4e70f9f38cc3e2218c51b77e1eb4b34ec99ad85ffb2b7e737ec8e43.png" src="../_images/91236917f4e70f9f38cc3e2218c51b77e1eb4b34ec99ad85ffb2b7e737ec8e43.png" />
 </div>
 </div>
 <p>And we can explicitly define to which order the series expansion should be carried out:</p>
@@ -1464,7 +1855,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_128_0.png" src="../_images/Appendix-Maths_128_0.png" />
+<img alt="../_images/73a4118aa9bdfe48139d4c3c738b0421cbf730068240c46ca054c99d414cc861.png" src="../_images/73a4118aa9bdfe48139d4c3c738b0421cbf730068240c46ca054c99d414cc861.png" />
 </div>
 </div>
 <p>Another way to do the same:</p>
@@ -1475,7 +1866,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_130_0.png" src="../_images/Appendix-Maths_130_0.png" />
+<img alt="../_images/73a4118aa9bdfe48139d4c3c738b0421cbf730068240c46ca054c99d414cc861.png" src="../_images/73a4118aa9bdfe48139d4c3c738b0421cbf730068240c46ca054c99d414cc861.png" />
 </div>
 </div>
 <p>The series expansion includes the order of the approximation, which is very useful for keeping track of the order of validity when we do calculations with series expansions of different orders:</p>
@@ -1486,7 +1877,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_132_0.png" src="../_images/Appendix-Maths_132_0.png" />
+<img alt="../_images/5f85e67b2019c3636fd7114e15ff6a423ec3e1ccb131ac2139fd3b853e41e184.png" src="../_images/5f85e67b2019c3636fd7114e15ff6a423ec3e1ccb131ac2139fd3b853e41e184.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1496,7 +1887,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_133_0.png" src="../_images/Appendix-Maths_133_0.png" />
+<img alt="../_images/8beecd7af52f8243200020a1ccafa652a17225f3466e67e2f422ae53634d6a9e.png" src="../_images/8beecd7af52f8243200020a1ccafa652a17225f3466e67e2f422ae53634d6a9e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1506,7 +1897,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_134_0.png" src="../_images/Appendix-Maths_134_0.png" />
+<img alt="../_images/8beecd7af52f8243200020a1ccafa652a17225f3466e67e2f422ae53634d6a9e.png" src="../_images/8beecd7af52f8243200020a1ccafa652a17225f3466e67e2f422ae53634d6a9e.png" />
 </div>
 </div>
 <p>If we want to get rid of the order information we can use the <code class="docutils literal notranslate"><span class="pre">removeO</span></code> method:</p>
@@ -1517,12 +1908,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_136_0.png" src="../_images/Appendix-Maths_136_0.png" />
+<img alt="../_images/7ebabf59637cf488af84511726eeafd85145184faee000f4c54dd280c4c999cb.png" src="../_images/7ebabf59637cf488af84511726eeafd85145184faee000f4c54dd280c4c999cb.png" />
 </div>
 </div>
 </section>
 <section id="matrix-algebra">
-<h3>Matrix algebra<a class="headerlink" href="#matrix-algebra" title="Permalink to this headline">#</a></h3>
+<h3>Matrix algebra<a class="headerlink" href="#matrix-algebra" title="Permalink to this heading">#</a></h3>
 <p>Matrices are defined using the <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1540,7 +1931,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_140_0.png" src="../_images/Appendix-Maths_140_0.png" />
+<img alt="../_images/c789a02113f799fb67efd99fb1555e8e0193f3c6957ec2c04b470a8f23c8545e.png" src="../_images/c789a02113f799fb67efd99fb1555e8e0193f3c6957ec2c04b470a8f23c8545e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1550,7 +1941,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_141_0.png" src="../_images/Appendix-Maths_141_0.png" />
+<img alt="../_images/fcb83071c9ab6f64ec80c0ffed2430e9254022f7b76a9fcf82e1a72b74179ef7.png" src="../_images/fcb83071c9ab6f64ec80c0ffed2430e9254022f7b76a9fcf82e1a72b74179ef7.png" />
 </div>
 </div>
 <p>With <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> class instances we can do the usual matrix algebra operations:</p>
@@ -1561,7 +1952,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_143_0.png" src="../_images/Appendix-Maths_143_0.png" />
+<img alt="../_images/edc2e765b0906af4edeaadaeb42a91bd507a5268fd8aaee1ddc3d31539a18662.png" src="../_images/edc2e765b0906af4edeaadaeb42a91bd507a5268fd8aaee1ddc3d31539a18662.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1571,7 +1962,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_144_0.png" src="../_images/Appendix-Maths_144_0.png" />
+<img alt="../_images/9fcb6a6ee95dfba662f6d8ee2f670d103fa12adc5485fb5e7740cbba29989297.png" src="../_images/9fcb6a6ee95dfba662f6d8ee2f670d103fa12adc5485fb5e7740cbba29989297.png" />
 </div>
 </div>
 <p>And calculate determinants and inverses, and the like:</p>
@@ -1582,7 +1973,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_146_0.png" src="../_images/Appendix-Maths_146_0.png" />
+<img alt="../_images/b356f88e405d44bd3ccabedf9b1a754c745648cbb4318d896c37e50103e84cb7.png" src="../_images/b356f88e405d44bd3ccabedf9b1a754c745648cbb4318d896c37e50103e84cb7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1592,12 +1983,12 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_147_0.png" src="../_images/Appendix-Maths_147_0.png" />
+<img alt="../_images/ea3788210d90a21f601632d93606383d475b56676f211a9be1e2a743bedcc6f4.png" src="../_images/ea3788210d90a21f601632d93606383d475b56676f211a9be1e2a743bedcc6f4.png" />
 </div>
 </div>
 </section>
 <section id="solving-equations">
-<h3>Solving equations<a class="headerlink" href="#solving-equations" title="Permalink to this headline">#</a></h3>
+<h3>Solving equations<a class="headerlink" href="#solving-equations" title="Permalink to this heading">#</a></h3>
 <p>For solving equations and systems of equations we can use the <code class="docutils literal notranslate"><span class="pre">solve</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1606,7 +1997,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_150_0.png" src="../_images/Appendix-Maths_150_0.png" />
+<img alt="../_images/774841399c92200322ccbe1ada1ffc23e2ed0280d99184d9d649df6368477742.png" src="../_images/774841399c92200322ccbe1ada1ffc23e2ed0280d99184d9d649df6368477742.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1616,7 +2007,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_151_0.png" src="../_images/Appendix-Maths_151_0.png" />
+<img alt="../_images/38dbbeea6fbbe4f90ffef1e6f7fce39452f3d7368b09c6b04b6f588a0b13d5c3.png" src="../_images/38dbbeea6fbbe4f90ffef1e6f7fce39452f3d7368b09c6b04b6f588a0b13d5c3.png" />
 </div>
 </div>
 <p>System of equations:</p>
@@ -1627,7 +2018,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_153_0.png" src="../_images/Appendix-Maths_153_0.png" />
+<img alt="../_images/65668222efdc6f9d25fb206ac139f29f013e4c9dbf23eda150c214af5c9e6ad7.png" src="../_images/65668222efdc6f9d25fb206ac139f29f013e4c9dbf23eda150c214af5c9e6ad7.png" />
 </div>
 </div>
 <p>In terms of other symbolic expressions:</p>
@@ -1638,7 +2029,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_155_0.png" src="../_images/Appendix-Maths_155_0.png" />
+<img alt="../_images/6addd7395b14eef1d50c543ab260cfcb6e83f092d9e2f90e74e7bf73b4d09d42.png" src="../_images/6addd7395b14eef1d50c543ab260cfcb6e83f092d9e2f90e74e7bf73b4d09d42.png" />
 </div>
 </div>
 <p>You can also solve a single, or a system of ordinary differential equations (ODEs) using
@@ -1646,13 +2037,13 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </section>
 </section>
 <section id="some-biological-examples">
-<h2>Some biological examples<a class="headerlink" href="#some-biological-examples" title="Permalink to this headline">#</a></h2>
+<h2>Some biological examples<a class="headerlink" href="#some-biological-examples" title="Permalink to this heading">#</a></h2>
 <p>Here are some examples of development and analysis of some fundamental mathematical models in biology.</p>
 <section id="one-population-exponential-growth">
-<h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this headline">#</a></h3>
+<h3>One population: Exponential growth<a class="headerlink" href="#one-population-exponential-growth" title="Permalink to this heading">#</a></h3>
 <p>Let’s look at how populations grow when there are no environmental constraints. The differential equation model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-99a14d78-ec1b-4c22-8c7a-f8a00bece2ca">
-<span class="eqno">(11)<a class="headerlink" href="#equation-99a14d78-ec1b-4c22-8c7a-f8a00bece2ca" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:exp_growth}
+<div class="amsmath math notranslate nohighlight" id="equation-113eff9f-0df4-41ed-872a-b963ef85861e">
+<span class="eqno">(11)<a class="headerlink" href="#equation-113eff9f-0df4-41ed-872a-b963ef85861e" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:exp_growth}
 	\frac{\text{d}N}{\text{d}t} = r_m N
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r_m\)</span> is the intrinsic, constant rate of population gowth (units of 1/time), and <span class="math notranslate nohighlight">\(N\)</span> is population size (or biomass abundance). I use the subscript <span class="math notranslate nohighlight">\(m\)</span> in <span class="math notranslate nohighlight">\(r_m\)</span> to denote both <a class="reference external" href="https://en.wikipedia.org/wiki/Malthusianism">Malthusian</a> and maximal population growth rate because, in theory, without any constraints, this growth rate is expected to at its theoretical/biological maximum.</p>
@@ -1695,7 +2086,7 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_166_0.png" src="../_images/Appendix-Maths_166_0.png" />
+<img alt="../_images/95185795fbc018ac4ab21b614e83eca1bad333ad8b117e18c7df7f0b7963b8c9.png" src="../_images/95185795fbc018ac4ab21b614e83eca1bad333ad8b117e18c7df7f0b7963b8c9.png" />
 </div>
 </div>
 <p>Note that we have simply re-written the condition that LHS = RHS in eqn \ref{eq:exp_growth}. Now that we have the differential equation set up, we can solve it using <code class="docutils literal notranslate"><span class="pre">dsolve</span></code>. Since this is a simple ODE, Sympy can do it on its own with no hints or guesses (unlike more complex ODEs; <a class="reference external" href="http://docs.sympy.org/latest/modules/solvers/ode.html">see the documentation</a>):</p>
@@ -1706,15 +2097,15 @@ SymPy has predefined expressions for a number of mathematical constants, such as
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_168_0.png" src="../_images/Appendix-Maths_168_0.png" />
+<img alt="../_images/7d5cf2a3c8b3642cc706515c02c53ba976dd7dd856096d2865fabb7f47ab3008.png" src="../_images/7d5cf2a3c8b3642cc706515c02c53ba976dd7dd856096d2865fabb7f47ab3008.png" />
 </div>
 </div>
 <p>If you remember your high-school calculus, you might recall that <span class="math notranslate nohighlight">\(C_1\)</span> here is an arbitrary constant. We now need to re-express it in terms of the initial conditions. We can do so by setting <span class="math notranslate nohighlight">\(t = 0\)</span>, and then setting that equal to <span class="math notranslate nohighlight">\(N(0)\)</span> at time 0:</p>
 <div class="math notranslate nohighlight">
 \[C_1 = N_0\]</div>
 <p>That is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-22bc50b8-ae4c-4c52-8d23-d71462849297">
-<span class="eqno">(12)<a class="headerlink" href="#equation-22bc50b8-ae4c-4c52-8d23-d71462849297" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
+<div class="amsmath math notranslate nohighlight" id="equation-ab4d597b-585a-4ef4-a191-761e1efe01a9">
+<span class="eqno">(12)<a class="headerlink" href="#equation-ab4d597b-585a-4ef4-a191-761e1efe01a9" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:exp_growth_sol}
 N{\left (t \right )} = N_0 e^{r_m t}
 \end{equation}\]</div>
 <p>We could use Sympy for this last step as well (using <code class="docutils literal notranslate"><span class="pre">subs()</span></code> like you learned above), but that would be just plain silly – like using a sledge-hammer to drive in a nail!</p>
@@ -1733,7 +2124,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <span class="n">t_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">exp_pop</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r_m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The right-hand side of the exponential growth ODE&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The right-hand side of the exponential growth ODE&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">r_m</span><span class="o">*</span><span class="n">N</span>
 
 <span class="n">N_vec</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">exp_pop</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">r_m</span><span class="p">,))</span> <span class="c1"># the comma is needed!</span>
@@ -1752,7 +2143,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa240abe0&gt;
 </pre></div>
 </div>
-<img alt="../_images/Appendix-Maths_170_1.png" src="../_images/Appendix-Maths_170_1.png" />
+<img alt="../_images/ebb34480becf8a89ef2951f391c3eab1142e6e745875ee42c85eadea16f1f6eb.png" src="../_images/ebb34480becf8a89ef2951f391c3eab1142e6e745875ee42c85eadea16f1f6eb.png" />
 </div>
 </div>
 <p>These look practically identical. But they are not:</p>
@@ -1782,7 +2173,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </section>
 <section id="one-population-logistic-population-growth">
-<span id="logistic-population-growth"></span><h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this headline">#</a></h3>
+<span id="logistic-population-growth"></span><h3>One population: Logistic Population growth<a class="headerlink" href="#one-population-logistic-population-growth" title="Permalink to this heading">#</a></h3>
 <p>Populations eventually run into contraints, even if they can grow exponentially at the start (eqn \ref{eq:exp_growth}). The classical model for logistic growth in population density (<span class="math notranslate nohighlight">\(N\)</span>) captures this dynamic:</p>
 <div class="math notranslate nohighlight" id="equation-eq-logist-growth">
 <span class="eqno">(13)<a class="headerlink" href="#equation-eq-logist-growth" title="Permalink to this equation">#</a></span>\[
@@ -1807,7 +2198,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_175_0.png" src="../_images/Appendix-Maths_175_0.png" />
+<img alt="../_images/27ed5a9c21bbc6f537fa78c7d45d95cb22fcb16ef7d453e6be5feb55a25f1205.png" src="../_images/27ed5a9c21bbc6f537fa78c7d45d95cb22fcb16ef7d453e6be5feb55a25f1205.png" />
 </div>
 </div>
 <p>Again, as in the exponential growth example, we have simply re-written the condition that LHS = RHS in eqn \ref{eq:logist_growth}. Now we can solve the ODE:</p>
@@ -1818,12 +2209,12 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_177_0.png" src="../_images/Appendix-Maths_177_0.png" />
+<img alt="../_images/13d5bf9fa81fafe4065272327b3f1312e39abb6dd178470ac415eae15671f3e5.png" src="../_images/13d5bf9fa81fafe4065272327b3f1312e39abb6dd178470ac415eae15671f3e5.png" />
 </div>
 </div>
 <p>This is a bit more complicated than the solution for exponential growth above. But we can solve it the same way. First substitute <span class="math notranslate nohighlight">\(t = 0\)</span>, and then solve the resulting equation for the initital condition of <span class="math notranslate nohighlight">\(N_0\)</span>, which then gives This the time-dependent solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58103bc9-8490-45da-926b-44a83decac1f">
-<span class="eqno">(14)<a class="headerlink" href="#equation-58103bc9-8490-45da-926b-44a83decac1f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dda72668-fbf4-4a24-bff5-b09da6146bb8">
+<span class="eqno">(14)<a class="headerlink" href="#equation-dda72668-fbf4-4a24-bff5-b09da6146bb8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     N_t = \frac{N_0 K\mathrm{e}^{r_m t}}{K + N_0(\mathrm{e}^{r_m t}-1)}
 \end{equation}\]</div>
 <p>You can do the last steps to obtain this solution using Sympy as well (I leave it to you to try it).</p>
@@ -1842,7 +2233,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <span class="n">t_vec</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">log_pop</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The right-hand side of the logistic ODE&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The right-hand side of the logistic ODE&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">r_m</span><span class="o">*</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">K</span><span class="p">)</span>
 
 <span class="n">N_vec</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">log_pop</span><span class="p">,</span> <span class="n">N_0</span><span class="p">,</span> <span class="n">t_vec</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">r_m</span><span class="p">,</span> <span class="n">K</span><span class="p">));</span>
@@ -1860,15 +2251,15 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa02f1198&gt;
 </pre></div>
 </div>
-<img alt="../_images/Appendix-Maths_180_1.png" src="../_images/Appendix-Maths_180_1.png" />
+<img alt="../_images/066b7027366b4d2842b9dd8114d694a9888b1b14bf8a90c68e0185cff653a7f2.png" src="../_images/066b7027366b4d2842b9dd8114d694a9888b1b14bf8a90c68e0185cff653a7f2.png" />
 </div>
 </div>
 </section>
 <section id="two-interacting-populations-the-lotka-volterra-predator-prey-model">
-<h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this headline">#</a></h3>
+<h3>Two interacting populations: The Lotka-Volterra predator-prey model<a class="headerlink" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model" title="Permalink to this heading">#</a></h3>
 <p>Now for the classical Lotka-Volterra model that you encountered in the advanced Python week (without logistic growth for the consumer, <span class="math notranslate nohighlight">\(C\)</span>).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f02ccfb-e3b2-4b86-9862-48aa0dd78d53">
-<span class="eqno">(15)<a class="headerlink" href="#equation-3f02ccfb-e3b2-4b86-9862-48aa0dd78d53" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8cbb1ef1-eb2e-48f0-9567-d047426d0abd">
+<span class="eqno">(15)<a class="headerlink" href="#equation-8cbb1ef1-eb2e-48f0-9567-d047426d0abd" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{dN}{dt} &amp;= r_m N \left(1-\frac{N}{K}\right) - a N C\\
 \frac{dC}{dt} &amp;= e a N C - z C
 \end{align}\]</div>
@@ -1892,7 +2283,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_184_0.png" src="../_images/Appendix-Maths_184_0.png" />
+<img alt="../_images/1d2ea5ccd187bbbf0bd014160f53cef89b5fa6e2a235ec4530d2ea856e50ed9b.png" src="../_images/1d2ea5ccd187bbbf0bd014160f53cef89b5fa6e2a235ec4530d2ea856e50ed9b.png" />
 </div>
 </div>
 <p>Now define the equilibrium state:</p>
@@ -1905,7 +2296,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_186_0.png" src="../_images/Appendix-Maths_186_0.png" />
+<img alt="../_images/a1a18403a01b911166de665f385197042c93cf6475061cb32d66795076f8326c.png" src="../_images/a1a18403a01b911166de665f385197042c93cf6475061cb32d66795076f8326c.png" />
 </div>
 </div>
 <p>Solve it:</p>
@@ -1919,7 +2310,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Appendix-Maths_188_0.png" src="../_images/Appendix-Maths_188_0.png" />
+<img alt="../_images/26801464586e7390c1baf25ebf979506b948d353e5f17a7e8e88261076915797.png" src="../_images/26801464586e7390c1baf25ebf979506b948d353e5f17a7e8e88261076915797.png" />
 </div>
 </div>
 <p>So there is one equilibrium  solution where both species maintain their non-zero populations. That was easy! Now you don’t need to guess what parameter values will give you coexistence (both populations remain &gt; 0). Just substitute parameter combinations that satisfy the conditions that</p>
@@ -1999,7 +2390,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbaa0186198&gt;
 </pre></div>
 </div>
-<img alt="../_images/Appendix-Maths_196_1.png" src="../_images/Appendix-Maths_196_1.png" />
+<img alt="../_images/2e3e13c7cf607eae71a19f300038f7dc8bf690b5a02c644d3012ae3b1acfdf5b.png" src="../_images/2e3e13c7cf607eae71a19f300038f7dc8bf690b5a02c644d3012ae3b1acfdf5b.png" />
 </div>
 </div>
 <p>An useful thing to do here is take a look at the <em>phase space</em>, that is, plot only the dependent variables, without respect to time:</p>
@@ -2025,13 +2416,13 @@ N{\left (t \right )} = N_0 e^{r_m t}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbaa00ecd30&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Appendix-Maths_198_2.png" src="../_images/Appendix-Maths_198_2.png" />
+<img alt="../_images/89e16b69835d60afd3e96000ad56bd653bd16fcb6023e0f5ed287ad7782801d1.png" src="../_images/89e16b69835d60afd3e96000ad56bd653bd16fcb6023e0f5ed287ad7782801d1.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="readings-and-resources">
-<h2>Readings and Resources<a class="headerlink" href="#readings-and-resources" title="Permalink to this headline">#</a></h2>
+<h2>Readings and Resources<a class="headerlink" href="#readings-and-resources" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://sympy.org/en/index.html">The SymPy documentation</a></p></li>
 <li><p><a class="reference external" href="http://live.sympy.org">SymPy online</a></p></li>
@@ -2051,7 +2442,7 @@ N{\left (t \right )} = N_0 e^{r_m t}
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -2059,50 +2450,211 @@ N{\left (t \right )} = N_0 e^{r_m t}
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Appendix-Data-Python.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Data analyses  with Python &amp; Jupyter</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="Appendix-Databases.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Databases <span class="tocSkip"></span></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="Appendix-Data-Python.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Data analyses  with Python &amp; Jupyter</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="Appendix-Databases.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Databases <span class="tocSkip"></span></p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Samraat Pawar<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-preliminaries">
+   Some preliminaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-variables">
+     Symbolic variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symbolic-equations">
+     Symbolic equations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-evaluation">
+     Numerical evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fundamental-mathematical-operations">
+   Fundamental mathematical operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expand-and-factor">
+     Expand and factor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apart-and-together">
+     Apart and together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simplification">
+     Simplification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differentiation">
+     Differentiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration">
+     Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sums-and-products">
+     Sums and products
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limits">
+     Limits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#series">
+     Series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-algebra">
+     Matrix algebra
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-equations">
+     Solving equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-biological-examples">
+   Some biological examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-exponential-growth">
+     One population: Exponential growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-population-logistic-population-growth">
+     One population: Logistic Population growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-interacting-populations-the-lotka-volterra-predator-prey-model">
+     Two interacting populations: The Lotka-Volterra predator-prey model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readings-and-resources">
+   Readings and Resources
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2024.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>
