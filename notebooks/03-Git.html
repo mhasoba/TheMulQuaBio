@@ -1,960 +1,607 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Version control with Git &#8212; TheMulQuaBio</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/03-Git';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scientific documents with \(\LaTeX\)" href="04-LaTeX.html" />
     <link rel="prev" title="Shell scripting" href="02-ShellScripting.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="TheMulQuaBio - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="TheMulQuaBio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Maths for Biologists
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
-   01 - Making mathematical statements
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
-   02   - Describing shapes and patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
-   03   - Analysing change, one step at a time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
-   04 - From table arrangements to powerful tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
-   05 - From table arrangements to powerful tools - part 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
-   06 - Analysing change, continuously
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
-   07 - Analysing change, continuously (Part 2)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
-   08 - Calculating accumulated change
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
-   Tutorial 01
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
-   Tutorial 05
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
-   Tutorial 06
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/03-Git.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/03-Git.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/03-Git.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/03-Git.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/03-Git.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Version control with Git</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-version-control">
-   Why Version Control?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#git">
-   git
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#git-workflow">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       git
-      </span>
-     </code>
-     workflow
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-git-commands">
-     Basic git commands
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#your-first-repository">
-   Your first repository
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-readme-file">
-   The README file
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ignoring-files">
-   Ignoring Files
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#directory-and-file-patterns-for-gitignoring">
-     Directory and file patterns for gitignoring
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gitignore-ng-after-commit-ing">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .gitignore
-      </span>
-     </code>
-     -ng after
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       commit
-      </span>
-     </code>
-     -ing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#general-good-practice-for-gitignoring">
-   General good practice for gitignoring
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#whitelist-principle">
-     Whitelist principle
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealing-with-binary-files">
-   Dealing with binary files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealing-with-large-files">
-   Dealing with large files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#removing-files">
-   Removing files
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#un-tracking-files">
-     Un-tracking files
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#accessing-history-of-the-repository">
-   Accessing history of the repository
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reverting-to-a-previous-version">
-     Reverting to a previous version
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#branching">
-   Branching
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-git-commands-on-a-different-directory">
-   Running git commands on a different directory
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-git-commands-on-multiple-repositories-at-once">
-     Running git commands on multiple repositories at once
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-git-through-a-gui">
-   Using git through a GUI
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-friendly-concluding-note-on-git">
-   A friendly concluding note on git
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#practicals">
-   Practicals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instructions">
-     Instructions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#readings-resources">
-   Readings &amp; Resources
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general">
-     General
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#markdown">
-     Markdown
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#committing-practices">
-     Committing practices
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gitignore">
-     .gitignore
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Branching
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-version-control">Why Version Control?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">git</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-workflow"><code class="docutils literal notranslate"><span class="pre">git</span></code> workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-git-commands">Basic git commands</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-repository">Your first repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-readme-file">The README file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignoring-files">Ignoring Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directory-and-file-patterns-for-gitignoring">Directory and file patterns for gitignoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore-ng-after-commit-ing"><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>-ng after <code class="docutils literal notranslate"><span class="pre">commit</span></code>-ing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-good-practice-for-gitignoring">General good practice for gitignoring</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitelist-principle">Whitelist principle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-binary-files">Dealing with binary files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-large-files">Dealing with large files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-files">Removing files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-tracking-files">Un-tracking files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-history-of-the-repository">Accessing history of the repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverting-to-a-previous-version">Reverting to a previous version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branching">Branching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-git-commands-on-a-different-directory">Running git commands on a different directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-git-commands-on-multiple-repositories-at-once">Running git commands on multiple repositories at once</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-through-a-gui">Using git through a GUI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-friendly-concluding-note-on-git">A friendly concluding note on git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicals">Practicals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#readings-resources">Readings &amp; Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-practices">Committing practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore">.gitignore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Branching</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Version control with Git</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-version-control">
-   Why Version Control?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#git">
-   git
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#git-workflow">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       git
-      </span>
-     </code>
-     workflow
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-git-commands">
-     Basic git commands
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#your-first-repository">
-   Your first repository
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-readme-file">
-   The README file
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ignoring-files">
-   Ignoring Files
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#directory-and-file-patterns-for-gitignoring">
-     Directory and file patterns for gitignoring
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gitignore-ng-after-commit-ing">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .gitignore
-      </span>
-     </code>
-     -ng after
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       commit
-      </span>
-     </code>
-     -ing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#general-good-practice-for-gitignoring">
-   General good practice for gitignoring
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#whitelist-principle">
-     Whitelist principle
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealing-with-binary-files">
-   Dealing with binary files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealing-with-large-files">
-   Dealing with large files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#removing-files">
-   Removing files
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#un-tracking-files">
-     Un-tracking files
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#accessing-history-of-the-repository">
-   Accessing history of the repository
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reverting-to-a-previous-version">
-     Reverting to a previous version
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#branching">
-   Branching
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-git-commands-on-a-different-directory">
-   Running git commands on a different directory
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-git-commands-on-multiple-repositories-at-once">
-     Running git commands on multiple repositories at once
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-git-through-a-gui">
-   Using git through a GUI
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-friendly-concluding-note-on-git">
-   A friendly concluding note on git
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#practicals">
-   Practicals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instructions">
-     Instructions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#readings-resources">
-   Readings &amp; Resources
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general">
-     General
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#markdown">
-     Markdown
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#committing-practices">
-     Committing practices
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gitignore">
-     .gitignore
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Branching
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="version-control-with-git">
-<h1>Version control with Git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="version-control-with-git">
+<h1>Version control with Git<a class="headerlink" href="#version-control-with-git" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Version control, also known as revision control or source control, is the management and tracking of changes to computer code and other certain other types of data in an automated way.</p>
 <p>Any project (collections of files in directories) under version control has changes and additions/deletions to its files and directories recorded and archived over time so that you can recall specific versions later.</p>
 <p>Version control is in fact the technology embedded in the versioning of various word processor and spreadsheet applications (e.g., Google Docs, Overleaf).</p>
 <hr class="docutils" />
-<div class="figure align-default" id="vc-overview">
+<figure class="align-default" id="vc-overview">
 <a class="reference internal image-reference" href="../_images/VC.png"><img alt="Version control" src="../_images/VC.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>An overview of how version control works.</strong> Some of the project mainline’s branches may eventually be merged back into the mainline if they are successful in achieving some objective that is worth integrating into the mainline.</span><a class="headerlink" href="#vc-overview" title="Permalink to this image">¶</a></p>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>An overview of how version control works.</strong> Some of the project mainline’s branches may eventually be merged back into the mainline if they are successful in achieving some objective that is worth integrating into the mainline.</span><a class="headerlink" href="#vc-overview" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 <hr class="docutils" />
-<div class="section" id="why-version-control">
-<h2>Why Version Control?<a class="headerlink" href="#why-version-control" title="Permalink to this headline">¶</a></h2>
+<section id="why-version-control">
+<h2>Why Version Control?<a class="headerlink" href="#why-version-control" title="Permalink to this heading">#</a></h2>
 <p>With version control of biological computing projects, you can:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>record all changes made to a set of files and directories, including text (usually ASCII) data files, so that you can access any previous version of the files</p></li>
 </ol>
 <ul class="simple">
-<li><p>“roll back” data, code, documents that are in plain text format (other file formats can also be versioned; see <a class="reference external" href="#Dealing-with-binary-files">section on binary files</a> below).</p></li>
+<li><p>“roll back” data, code, documents that are in plain text format (other file formats can also be versioned; see <span class="xref myst">section on binary files</span> below).</p></li>
 <li><p>collaborate more easily with others on developing new code or writing documents – branch (and merge) projects</p></li>
-<li><p>back up your project (but git is not a backup software - see <a class="reference external" href="#Dealing-with-binary-files">sections on binary and large files</a> below).</p></li>
+<li><p>back up your project (but git is not a backup software - see <span class="xref myst">sections on binary and large files</span> below).</p></li>
 </ul>
 <hr class="docutils" />
-<div class="figure align-default" id="mess-happens-without-vc">
+<figure class="align-default" id="mess-happens-without-vc">
 <a class="reference internal image-reference" href="../_images/cvs.png"><img alt="Mess without Version Control" src="../_images/cvs.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>This will very likely happen if you don’t use Version Control.</strong> <br> (Source: <a class="reference external" href="http://maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html">maktoons.blogspot.com</a>).</span><a class="headerlink" href="#mess-happens-without-vc" title="Permalink to this image">¶</a></p>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>This will very likely happen if you don’t use Version Control.</strong> <br> (Source: <a class="reference external" href="http://maktoons.blogspot.com/2009/06/if-dont-use-version-control-system.html">maktoons.blogspot.com</a>).</span><a class="headerlink" href="#mess-happens-without-vc" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 <hr class="docutils" />
-<div class="section" id="git">
-<h2>git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
+<section id="git">
+<h2>git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h2>
 <p>We will use git, developed by Linus Torvalds, the “Linu” in Linux. This is currently the most popular tool for version control.</p>
 <p>In git, each user stores a complete local copy of the project, including the history and all versions. So you do not rely as much on a centralized (remote) server. First, install and configure <code class="docutils literal notranslate"><span class="pre">git</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install git
-git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
-git config --global user.email <span class="s2">&quot;your.login@imperial.ac.uk&quot;</span>
-git config --list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your.login@imperial.ac.uk&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--list
 </pre></div>
 </div>
-<div class="section" id="git-workflow">
-<h3><code class="docutils literal notranslate"><span class="pre">git</span></code> workflow<a class="headerlink" href="#git-workflow" title="Permalink to this headline">¶</a></h3>
+<section id="git-workflow">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span></code> workflow<a class="headerlink" href="#git-workflow" title="Permalink to this heading">#</a></h3>
 <p>Here is a graphical outline of the git workflow and command structure:</p>
 <hr class="docutils" />
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/git.png"><img alt="Git Workflow" src="../_images/git.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>The git workflow and command structure.</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>The git workflow and command structure.</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>Note that only when you <code class="docutils literal notranslate"><span class="pre">push</span></code> or <code class="docutils literal notranslate"><span class="pre">fetch</span></code> do you need an internet connection, because before that you are only archiving in a local (hidden) repository (that sits in a hidden <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory within your project).</p>
-</div>
-<div class="section" id="basic-git-commands">
-<h3>Basic git commands<a class="headerlink" href="#basic-git-commands" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="basic-git-commands">
+<h3>Basic git commands<a class="headerlink" href="#basic-git-commands" title="Permalink to this heading">#</a></h3>
 <p>Here are some fundamentally important git commands (please make sure you read more about them):</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
-<th class="text-align:left head"><p>What it does</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Command</p></th>
+<th class="head text-left"><p>What it does</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></td>
-<td class="text-align:left"><p>Initialize a new repository</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></td>
+<td class="text-left"><p>Initialize a new repository</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code></p></td>
-<td class="text-align:left"><p>Download a repository from a remote server</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code></p></td>
+<td class="text-left"><p>Download a repository from a remote server</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></p></td>
-<td class="text-align:left"><p>Show the current status</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></p></td>
+<td class="text-left"><p>Show the current status</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></p></td>
-<td class="text-align:left"><p>Show differences between commits</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></p></td>
+<td class="text-left"><p>Show differences between commits</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">blame</span></code></p></td>
-<td class="text-align:left"><p>Blame somebody for the changes!</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">blame</span></code></p></td>
+<td class="text-left"><p>Blame somebody for the changes!</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></p></td>
-<td class="text-align:left"><p>Show commit history</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></p></td>
+<td class="text-left"><p>Show commit history</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></td>
-<td class="text-align:left"><p>Commit changes to current branch</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></td>
+<td class="text-left"><p>Commit changes to current branch</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code></p></td>
-<td class="text-align:left"><p>Show branches</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code></p></td>
+<td class="text-left"><p>Show branches</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">name</span></code></p></td>
-<td class="text-align:left"><p>Create new branch</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">name</span></code></p></td>
+<td class="text-left"><p>Create new branch</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">name</span></code></p></td>
-<td class="text-align:left"><p>Switch to a different commit/branch called <code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">name</span></code></p></td>
+<td class="text-left"><p>Switch to a different commit/branch called <code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code></p></td>
-<td class="text-align:left"><p>Gather commits info from a remote branch to your current local branch without merging them</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code></p></td>
+<td class="text-left"><p>Gather commits info from a remote branch to your current local branch without merging them</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code></p></td>
-<td class="text-align:left"><p>Merge two or more versions of one or more files</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code></p></td>
+<td class="text-left"><p>Merge two or more versions of one or more files</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
-<td class="text-align:left"><p>Upload from remote repository (this is effectively the same as <code class="docutils literal notranslate"><span class="pre">fetch</span></code> followed by <code class="docutils literal notranslate"><span class="pre">merge</span></code>)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
+<td class="text-left"><p>Upload from remote repository (this is effectively the same as <code class="docutils literal notranslate"><span class="pre">fetch</span></code> followed by <code class="docutils literal notranslate"><span class="pre">merge</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></td>
-<td class="text-align:left"><p>Send changes to remote repository</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></td>
+<td class="text-left"><p>Send changes to remote repository</p></td>
 </tr>
 </tbody>
 </table>
 <p>There are more git commands which you will also learn, but it is important that you familiarize yourself with these ones in particular first.</p>
-</div>
-</div>
-<div class="section" id="your-first-repository">
-<h2>Your first repository<a class="headerlink" href="#your-first-repository" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="your-first-repository">
+<h2>Your first repository<a class="headerlink" href="#your-first-repository" title="Permalink to this heading">#</a></h2>
 <p>Time to bring your computing coursework directory under version control. For example on Linux,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Documents/CMEECourseWork
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Documents/CMEECourseWork
 </pre></div>
 </div>
 <p>Then initialize your local git repository:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init
 </pre></div>
 </div>
 </div>
@@ -967,7 +614,7 @@ git config --list
 <p>Create your README file (as a <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> document, so with the <code class="docutils literal notranslate"><span class="pre">.md</span></code> extension):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;My CMEE Coursework Repository&quot;</span> &gt; README.md
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;My CMEE Coursework Repository&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
 </pre></div>
 </div>
 </div>
@@ -975,7 +622,7 @@ git config --list
 <p>Check your git configuration:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--list
 </pre></div>
 </div>
 </div>
@@ -994,7 +641,7 @@ core.logallrefupdates=true
 <p>Check the files and directories that have been created; note the hidden <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -al
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-al
 </pre></div>
 </div>
 </div>
@@ -1012,7 +659,7 @@ drwxrwxr-x  6 mhasoba mhasoba 4096 Oct 13 14:37 <span class=" -Color -Color-Bold
 <p>Add the README (AKA “stage” it for for a git commit):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add README.md
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>README.md
 </pre></div>
 </div>
 </div>
@@ -1020,7 +667,7 @@ drwxrwxr-x  6 mhasoba mhasoba 4096 Oct 13 14:37 <span class=" -Color -Color-Bold
 <p>Check the current status of your repository:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
 </div>
@@ -1043,7 +690,7 @@ Untracked files:
 <p>This tells you that there are local changes that need to be committed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Added README file.&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Added README file.&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1059,7 +706,7 @@ Untracked files:
 <p>Check status again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
 </div>
@@ -1078,14 +725,14 @@ nothing added to commit but untracked files present (use &quot;git add&quot; to 
 <p>You can also add changes matching a particular pattern: for example</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add *.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>*.txt
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
 </div>
@@ -1116,7 +763,7 @@ Changes to be committed:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Full first commit of new project&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Full first commit of new project&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1149,7 +796,7 @@ Changes to be committed:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
 </div>
@@ -1161,10 +808,12 @@ nothing to commit, working tree clean
 </div>
 </div>
 <hr class="docutils" />
-<div class="figure align-default" id="git-commit">
+<figure class="align-default" id="git-commit">
 <a class="reference internal image-reference" href="../_images/git_xkcd.png"><img alt="XKCD committing" src="../_images/git_xkcd.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Make meaningful comments in your git commit.</strong> Please don’t neglect to make each commit message meaningful. And use this mantra: “commit often, comment always”. The correct meaning of “often” in this context comes with experience.<br> (Source: <a class="reference external" href="https://m.xkcd.com/1296/">XKCD</a>)</span><a class="headerlink" href="#git-commit" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Make meaningful comments in your git commit.</strong> Please don’t neglect to make each commit message meaningful. And use this mantra: “commit often, comment always”. The correct meaning of “often” in this context comes with experience.<br> (Source: <a class="reference external" href="https://m.xkcd.com/1296/">XKCD</a>)</span><a class="headerlink" href="#git-commit" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>Nothing has been sent to the remote server yet (see below for more on the remote server).</p>
 <p>So let’s go to your online git service (e.g., github or  bitbucket) and set up. Note that github and bitbucket both give you unlimited free private repositories if you register with an academic email. Not a big deal if you will not be writing private code, handy if you are (<em>can you think of examples when you would need to write private code?</em>).</p>
@@ -1187,22 +836,22 @@ nothing to commit, working tree clean
 <p><em>Note that you have already done the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> step, so no need to repeat those bits.</em></p>
 <p>You are done. Now you can really start to use git!</p>
 <p>The first step after having created your remote repository and added your ssh key to it, is to link the remote to your local repo (as the instructions in web pages linked above will already have told you):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add origin git@github.com:mhasoba/CMEECourseWork.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:mhasoba/CMEECourseWork.git
 </pre></div>
 </div>
 <p>And then,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote -v
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
 </pre></div>
 </div>
 <p>No you can <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> all your local commits:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin master
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>master
 </pre></div>
 </div>
 <p>This pushes the (committed) changes in your local repository up to the remote repository you specified as the <code class="docutils literal notranslate"><span class="pre">origin</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">master</span></code> refers to the branch (you currently only have one). More on branching below.</p>
 <p>You can rename your remote <code class="docutils literal notranslate"><span class="pre">origin</span></code> to a more meaningful name, (e.g., <code class="docutils literal notranslate"><span class="pre">github_CMEECourseWork</span></code>) using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">rename</span></code> command. <a class="reference external" href="https://help.github.com/articles/renaming-a-remote">See this</a>.</p>
-</div>
-<div class="section" id="the-readme-file">
-<h2>The README file<a class="headerlink" href="#the-readme-file" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-readme-file">
+<h2>The README file<a class="headerlink" href="#the-readme-file" title="Permalink to this heading">#</a></h2>
 <p>A README (like the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> that you created in your git repo above) is a text file that introduces and explains a project. It contains information that is required to understand what the project is about and how to use or run it.</p>
 <p>While READMEs can be written in any text file format, Markdown (saved as an <code class="docutils literal notranslate"><span class="pre">.md</span></code> file) is most commonly used, as it allows you to add simple text formatting easily. Two other formats that you might most often see are plain text and <a class="reference external" href="https://en.wikipedia.org/wiki/ReStructuredText">reStructuredText</a> (saved as an <code class="docutils literal notranslate"><span class="pre">.rst</span></code> file, common in Python projects).</p>
 <p>You can find many README file suggestions (and templates) online. Essentially, it should ideally have the following features/content:</p>
@@ -1216,21 +865,21 @@ nothing to commit, working tree clean
 <li><p><strong>Author name and contact</strong></p></li>
 </ul>
 <p>In addition, you may want to include(but not necessary for your current coursework), <a class="reference external" href="https://en.wikipedia.org/wiki/Software_license">License</a>, Acknowledgments, and instructions for Contributing.</p>
-</div>
-<div class="section" id="ignoring-files">
-<h2>Ignoring Files<a class="headerlink" href="#ignoring-files" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="ignoring-files">
+<h2>Ignoring Files<a class="headerlink" href="#ignoring-files" title="Permalink to this heading">#</a></h2>
 <p>You will have some files you don’t want to track (log files, temporary files, executables, etc). You can ignore entire classes of files with <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Let’s try it (make sure you are in your coursework directory (e.g., <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code>)):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -e <span class="s2">&quot;*~ \n*.tmp&quot;</span> &gt; .gitignore
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;*~ \n*.tmp&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.gitignore
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat .gitignore
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>.gitignore
 </pre></div>
 </div>
 </div>
@@ -1243,14 +892,14 @@ nothing to commit, working tree clean
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add .gitignore
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.gitignore
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch temporary.tmp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>temporary.tmp
 </pre></div>
 </div>
 </div>
@@ -1262,58 +911,58 @@ nothing to commit, working tree clean
 <p class="admonition-title">Tip</p>
 <p><strong>Templates for .gitignore</strong>: You can find standard <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> templates online. For example, search for “.gitignore templates”.</p>
 </div>
-<div class="section" id="directory-and-file-patterns-for-gitignoring">
-<h3>Directory and file patterns for gitignoring<a class="headerlink" href="#directory-and-file-patterns-for-gitignoring" title="Permalink to this headline">¶</a></h3>
+<section id="directory-and-file-patterns-for-gitignoring">
+<h3>Directory and file patterns for gitignoring<a class="headerlink" href="#directory-and-file-patterns-for-gitignoring" title="Permalink to this heading">#</a></h3>
 <p>It’s important that you use the correct <em>patterns</em> for what to ignore in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, to make sure that all the correct directories and files are being excluded. Note that you can put additonal <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files in sub-directories if you need more fine-grained control over what is to be ignored, bt it is not necessary, because git-ignoring works recursively (including thorugh sub-directories) as long as you include the correct pattern.</p>
 <p>Here are the basic patterns (rules) :</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Pattern</p></th>
-<th class="text-align:left head"><p>gitignore result</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Pattern</p></th>
+<th class="head text-left"><p>gitignore result</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">#comment</span></code></p></td>
-<td class="text-align:left"><p>This is a comment - this gitignore entry will be ignored (avoid having any file or directory with <code class="docutils literal notranslate"><span class="pre">#</span></code> in its name!)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">#comment</span></code></p></td>
+<td class="text-left"><p>This is a comment - this gitignore entry will be ignored (avoid having any file or directory with <code class="docutils literal notranslate"><span class="pre">#</span></code> in its name!)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">target</span></code></p></td>
-<td class="text-align:left"><p>Every file OR directory (because lack of trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">target</span></code></p></td>
+<td class="text-left"><p>Every file OR directory (because lack of trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">target/</span></code></p></td>
-<td class="text-align:left"><p>Every directory (due to the trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">target/</span></code></p></td>
+<td class="text-left"><p>Every directory (due to the trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) named <code class="docutils literal notranslate"><span class="pre">target</span></code> is ignored, recursively</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">/target</span></code></p></td>
-<td class="text-align:left"><p>Every file OR directory named <code class="docutils literal notranslate"><span class="pre">target</span></code> in the top-most directory (due to the leading <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/target</span></code></p></td>
+<td class="text-left"><p>Every file OR directory named <code class="docutils literal notranslate"><span class="pre">target</span></code> in the top-most directory (due to the leading <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">/target/</span></code></p></td>
-<td class="text-align:left"><p>Every directory named target in the top-most directory (because of the leading and trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/target/</span></code></p></td>
+<td class="text-left"><p>Every directory named target in the top-most directory (because of the leading and trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>) is ignored only there (not recursively)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">*.extension</span></code></p></td>
-<td class="text-align:left"><p>Every file or directory ending with the extension <code class="docutils literal notranslate"><span class="pre">.extension</span></code> is ignored, recursively</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">*.extension</span></code></p></td>
+<td class="text-left"><p>Every file or directory ending with the extension <code class="docutils literal notranslate"><span class="pre">.extension</span></code> is ignored, recursively</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">*.py[co]</span></code></p></td>
-<td class="text-align:left"><p>Every file or directory ending in <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyo</span></code> is ignored (but not <code class="docutils literal notranslate"><span class="pre">.py</span></code>)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">*.py[co]</span></code></p></td>
+<td class="text-left"><p>Every file or directory ending in <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyo</span></code> is ignored (but not <code class="docutils literal notranslate"><span class="pre">.py</span></code>)</p></td>
 </tr>
 </tbody>
 </table>
 <p>There are additonal patterns - please see the Readings and Resources section.</p>
-</div>
-<div class="section" id="gitignore-ng-after-commit-ing">
-<h3><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>-ng after <code class="docutils literal notranslate"><span class="pre">commit</span></code>-ing<a class="headerlink" href="#gitignore-ng-after-commit-ing" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="gitignore-ng-after-commit-ing">
+<h3><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>-ng after <code class="docutils literal notranslate"><span class="pre">commit</span></code>-ing<a class="headerlink" href="#gitignore-ng-after-commit-ing" title="Permalink to this heading">#</a></h3>
 <p>If you find that a file or directory belonging to a pattern that you incuded in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> fails to be ignored (still comes under version control), it most likely means that you gitignored it AFTER committing and pushing it. In this scenario, you need to use</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm --cached &lt;file&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>rm<span class="w"> </span>--cached<span class="w"> </span>&lt;file&gt;
 </pre></div>
 </div>
 <p>for a file, and</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm -r --cached &lt;folder&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>--cached<span class="w"> </span>&lt;folder&gt;
 </pre></div>
 </div>
 <p>for a directory.</p>
 <p>While these commands will not remove the physical file from your local repository, it will remove the files from other locals on their next <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
-</div>
-</div>
-<div class="section" id="general-good-practice-for-gitignoring">
-<h2>General good practice for gitignoring<a class="headerlink" href="#general-good-practice-for-gitignoring" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="general-good-practice-for-gitignoring">
+<h2>General good practice for gitignoring<a class="headerlink" href="#general-good-practice-for-gitignoring" title="Permalink to this heading">#</a></h2>
 <p>When writing a gitignore it is best to ignore any file that does not contain plaintext code. This type of file is what git was designed for!</p>
 <p>If you do need to include a <strong>small</strong> csv file, image, or output (such as when creating reports or including test data) it is a good idea to do this using exceptions (aka the ! symbol)</p>
 <p>For example the following gitignore file would ignore ALL csv files except for pushabledata.csv</p>
@@ -1322,8 +971,8 @@ nothing to commit, working tree clean
 </pre></div>
 </div>
 <p>As git reads gitignore files top-to-bottom and can overwrite contradicticting rules with others, it is important to make sure that these are in the correct order.</p>
-<div class="section" id="whitelist-principle">
-<h3>Whitelist principle<a class="headerlink" href="#whitelist-principle" title="Permalink to this headline">¶</a></h3>
+<section id="whitelist-principle">
+<h3>Whitelist principle<a class="headerlink" href="#whitelist-principle" title="Permalink to this heading">#</a></h3>
 <p>Gitignore files are usually used as a blacklist: where anything you add to your git repository is allowed unless you specifically outlaw it in the gitignore.</p>
 <p>An alternative, safer technique (though one which is definitely more work to maintain) is a whitelist-based approach.</p>
 <p>To do this, you firstly ignore every file with the pattern <code class="docutils literal notranslate"><span class="pre">*.*</span></code> and then explicitly allow files and file types that you <em>know</em> you want. For example:</p>
@@ -1338,17 +987,17 @@ nothing to commit, working tree clean
 </pre></div>
 </div>
 <p>This is not necessarily a better or worse way to do things, you are in the end trading your time and effort for increased safety and cleanliness of your repository.</p>
-</div>
-</div>
-<div class="section" id="dealing-with-binary-files">
-<h2>Dealing with binary files<a class="headerlink" href="#dealing-with-binary-files" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="dealing-with-binary-files">
+<h2>Dealing with binary files<a class="headerlink" href="#dealing-with-binary-files" title="Permalink to this heading">#</a></h2>
 <p>A binary file is computer-readable but not human-readable, that is, it cannot be read by opening them in a text viewer. Examples of binary files include compiled executables, zip files, images, word documents and videos. In contrast, text files are stored in a form (usually ASCII) that is human-readable by opening in a text reader (e.g., gedit). Without some git extensions and configurations (coming up next), binary files cannot be properly version-controlled because each version of the entire file is saved <em>as is</em> in a hidden directory in the repository (<code class="docutils literal notranslate"><span class="pre">.git</span></code>).</p>
-<p>However, with some more effort, git can be made to work for binary formats like <code class="docutils literal notranslate"><span class="pre">*.docx</span></code> or image formats such as <code class="docutils literal notranslate"><span class="pre">*.jpeg</span></code>, but it is harder to compare versions; have a look at <a class="reference external" href="https://git-scm.com/docs/gitattributes">this</a> and <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes">this</a><sup><a class="reference external" href="#git:word">1</a></sup>, and also, <a class="reference external" href="https://opensource.com/life/16/8/how-manage-binary-blobs-git-part-7">this</a></p>
-</div>
-<div class="section" id="dealing-with-large-files">
-<h2>Dealing with large files<a class="headerlink" href="#dealing-with-large-files" title="Permalink to this headline">¶</a></h2>
+<p>However, with some more effort, git can be made to work for binary formats like <code class="docutils literal notranslate"><span class="pre">*.docx</span></code> or image formats such as <code class="docutils literal notranslate"><span class="pre">*.jpeg</span></code>, but it is harder to compare versions; have a look at <a class="reference external" href="https://git-scm.com/docs/gitattributes">this</a> and <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes">this</a><sup><span class="xref myst">1</span></sup>, and also, <a class="reference external" href="https://opensource.com/life/16/8/how-manage-binary-blobs-git-part-7">this</a></p>
+</section>
+<section id="dealing-with-large-files">
+<h2>Dealing with large files<a class="headerlink" href="#dealing-with-large-files" title="Permalink to this heading">#</a></h2>
 <p>As such, git was designed for version control of workflows and software projects, <em>not</em> large files (say, &gt;100mb) (which may be plain-text or binary). Binary files are particularly problematic because each version of the file is saved <em>as is</em> in <code class="docutils literal notranslate"><span class="pre">.git</span></code>, when you have a large number of versions it means that there are the same number of binary files in the hidden directory (for example 100 <span class="math notranslate nohighlight">\(\times\)</span> &gt;100mb files!).</p>
-<p><em>So please do not keep large files (especially binary files) under version control</em><sup><a class="reference external" href="#git:largefiles">2</a></sup>. For example, if you are doing GIS work, you may have to handle large raster image files.  Do not bring such files under version control. We suggest that you include files larger than some size in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>. For example, you can use the following bash command:</p>
+<p><em>So please do not keep large files (especially binary files) under version control</em><sup><span class="xref myst">2</span></sup>. For example, if you are doing GIS work, you may have to handle large raster image files.  Do not bring such files under version control. We suggest that you include files larger than some size in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>. For example, you can use the following bash command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-size</span> <span class="pre">+100M</span> <span class="pre">|</span> <span class="pre">cat</span> <span class="pre">&gt;&gt;</span> <span class="pre">.gitignore</span></code></p>
 <p>The 100M means 100 mb – you can reset it to whatever you want.</p>
 <p><em>Then what about code that needs large files?</em> For this, the best approach is write code that scales up with data size. If it works on a 1 mb file, it should also work on a 1000 mb file! If you have written such code, then you can include a smaller file as a MWE (minimum working example).</p>
@@ -1358,27 +1007,27 @@ nothing to commit, working tree clean
 <p class="admonition-title">Tip</p>
 <p><strong>Checking size of your git repo</strong>: You have two options in Linux/UNIX to check the size of your git repo. You can use (<code class="docutils literal notranslate"><span class="pre">cd</span></code> to your repo first) <code class="docutils literal notranslate"><span class="pre">du</span> <span class="pre">-sh</span> <span class="pre">.git</span></code>, or for more detailed information about what’s using the space, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">count-objects</span> <span class="pre">-vH</span></code> (this will work across platforms as this is a git command).</p>
 </div>
-</div>
-<div class="section" id="removing-files">
-<h2>Removing files<a class="headerlink" href="#removing-files" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="removing-files">
+<h2>Removing files<a class="headerlink" href="#removing-files" title="Permalink to this heading">#</a></h2>
 <p>To remove a file (i.e. stop version controlling it) use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Text in a file to remove&quot;</span> &gt; FileToRem.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Text in a file to remove&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>FileToRem.txt
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add FileToRem.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>FileToRem.txt
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;added a new file that we&#39;ll remove later&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;added a new file that we&#39;ll remove later&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1393,7 +1042,7 @@ nothing to commit, working tree clean
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm FileToRem.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>rm<span class="w"> </span>FileToRem.txt
 </pre></div>
 </div>
 </div>
@@ -1405,7 +1054,7 @@ nothing to commit, working tree clean
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;removed the file&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;removed the file&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1418,51 +1067,51 @@ nothing to commit, working tree clean
 </div>
 </div>
 <p>I typically just make all my changes and then just use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> for the whole directory (and it’s subdirectories; <code class="docutils literal notranslate"><span class="pre">-A</span></code> is recursive).</p>
-<div class="section" id="un-tracking-files">
-<h3>Un-tracking files<a class="headerlink" href="#un-tracking-files" title="Permalink to this headline">¶</a></h3>
+<section id="un-tracking-files">
+<h3>Un-tracking files<a class="headerlink" href="#un-tracking-files" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> will prevent untracked files from being added to the set of files tracked by git. However, git will continue to track any files that are already being tracked. To stop tracking a file you need to remove it from the index. This can be achieved with this command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rm --cached &lt;file&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>rm<span class="w"> </span>--cached<span class="w"> </span>&lt;file&gt;
 </pre></div>
 </div>
 <p>The removal of the file from the head revision will happen on the next commit.</p>
-</div>
-</div>
-<div class="section" id="accessing-history-of-the-repository">
-<h2>Accessing history of the repository<a class="headerlink" href="#accessing-history-of-the-repository" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="accessing-history-of-the-repository">
+<h2>Accessing history of the repository<a class="headerlink" href="#accessing-history-of-the-repository" title="Permalink to this heading">#</a></h2>
 <p>To see particular changes introduced, read the repo’s log :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
 </pre></div>
 </div>
 <p>For a more detailed version, add <code class="docutils literal notranslate"><span class="pre">-p</span></code> at the end.</p>
-<div class="section" id="reverting-to-a-previous-version">
-<h3>Reverting to a previous version<a class="headerlink" href="#reverting-to-a-previous-version" title="Permalink to this headline">¶</a></h3>
+<section id="reverting-to-a-previous-version">
+<h3>Reverting to a previous version<a class="headerlink" href="#reverting-to-a-previous-version" title="Permalink to this heading">#</a></h3>
 <p>If things go horribly wrong with new changes, you can revert to the previous, “pristine” state:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reset --hard
-git commit -am <span class="s2">&quot;returned to previous state&quot;</span> <span class="c1">#Note I used -am here</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>reset<span class="w"> </span>--hard
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;returned to previous state&quot;</span><span class="w"> </span><span class="c1">#Note I used -am here</span>
 </pre></div>
 </div>
 <p>If instead you want to move back in time (temporarily), first find the
 “hash” for the commit you want to revert to, and then check-out:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
 <p>And then,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
 </pre></div>
 </div>
 <p>Then, you can</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout *version number*
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>*version<span class="w"> </span>number*
 </pre></div>
 </div>
 <p>e.g, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">95f7d0</span></code></p>
 <p>Now you can play around. However, if you do want to commit changes, you create a “branch” (see below). To go back to the future, type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>master
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="branching">
-<h2>Branching<a class="headerlink" href="#branching" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="branching">
+<h2>Branching<a class="headerlink" href="#branching" title="Permalink to this heading">#</a></h2>
 <p>Imagine you want to try something out, but you are not sure it will work well. For example, say you want to rewrite the Introduction of your paper, using a different angle, or you want to see whether switching to a library for a piece of code improves speed. What you then need is branching, which creates a project copy in which you can experiment:</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">anexperiment</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code></p>
@@ -1481,24 +1130,26 @@ abandon the branch:</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">anexperiment</span></code></p>
 <p>When you want to test something out, always branch! Reverting changes, especially in code, is typically painful. Merging can be tricky, especially if multiple people have simultaneously worked on a particular document. In the worst-case scenario, you may want to delete the local copy and re-clone the remote repository.</p>
 <hr class="docutils" />
-<div class="figure align-default" id="git-xkcd-2">
+<figure class="align-default" id="git-xkcd-2">
 <a class="reference internal image-reference" href="../_images/git_xkcd_1.png"><img alt="git desperation" src="../_images/git_xkcd_1.png" style="width: 250px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Try not to do this.</strong> But most of us mortals will have, at some point! <br> (Source: <a class="reference external" href="https://xkcd.com/1597/">XKCD</a>)</span><a class="headerlink" href="#git-xkcd-2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Try not to do this.</strong> But most of us mortals will have, at some point! <br> (Source: <a class="reference external" href="https://xkcd.com/1597/">XKCD</a>)</span><a class="headerlink" href="#git-xkcd-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 <hr class="docutils" />
-<div class="section" id="running-git-commands-on-a-different-directory">
-<h2>Running git commands on a different directory<a class="headerlink" href="#running-git-commands-on-a-different-directory" title="Permalink to this headline">¶</a></h2>
+<section id="running-git-commands-on-a-different-directory">
+<h2>Running git commands on a different directory<a class="headerlink" href="#running-git-commands-on-a-different-directory" title="Permalink to this heading">#</a></h2>
 <p>Since <code class="docutils literal notranslate"><span class="pre">git</span></code> version 1.8.5, you can run git directly on a different directory than the current one using absolute or relative paths. For example, using a relative path, you can do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git -C ../SomeDir/ status
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>-C<span class="w"> </span>../SomeDir/<span class="w"> </span>status
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong>Cloning the MulQuaBio repository</strong>: You can clone the master repository of this book on your computer and regularly git pull it to keep it updated. That way the these notes and the associated code and data files are easily and locally available on your computer. <strong>DO NOT</strong> clone the repository into your own coursework repository though!</p>
 </div>
-<div class="section" id="running-git-commands-on-multiple-repositories-at-once">
-<h3>Running git commands on multiple repositories at once<a class="headerlink" href="#running-git-commands-on-multiple-repositories-at-once" title="Permalink to this headline">¶</a></h3>
+<section id="running-git-commands-on-multiple-repositories-at-once">
+<h3>Running git commands on multiple repositories at once<a class="headerlink" href="#running-git-commands-on-multiple-repositories-at-once" title="Permalink to this heading">#</a></h3>
 <p>For git pulling in multiple subdirectories (each a separate repository), here is an example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-mindepth</span> <span class="pre">1</span> <span class="pre">-maxdepth</span> <span class="pre">1</span> <span class="pre">-type</span> <span class="pre">d</span> <span class="pre">-print</span> <span class="pre">-exec</span> <span class="pre">git</span> <span class="pre">-C</span> <span class="pre">{}</span> <span class="pre">pull</span> <span class="pre">\;</span></code></p>
 <p>Breaking down these commands one by one,</p>
@@ -1507,18 +1158,18 @@ abandon the branch:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-mindepth</span> <span class="pre">1</span></code> sets min search depth to one sub-directory</p>
 <p><code class="docutils literal notranslate"><span class="pre">-maxdepth</span> <span class="pre">1</span></code> sets max search depth to one sub-directory</p>
 <p><code class="docutils literal notranslate"><span class="pre">-exec</span> <span class="pre">git</span> <span class="pre">-C</span> <span class="pre">{}</span> <span class="pre">pull</span> <span class="pre">\</span> </code> runs a custom git command one on every git repo found</p>
-</div>
-</div>
-<div class="section" id="using-git-through-a-gui">
-<h2>Using git through a GUI<a class="headerlink" href="#using-git-through-a-gui" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="using-git-through-a-gui">
+<h2>Using git through a GUI<a class="headerlink" href="#using-git-through-a-gui" title="Permalink to this heading">#</a></h2>
 <p>There are many nice git GUI’s (Graphical User Interfaces) out there, such as <a class="reference external" href="https://www.gitkraken.com/">gitKraken</a>. Or if you are using a code editor like Visual Studio Code, there are nice extensions that will give you considerable GUI functionality.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong>Checking git status</strong>: Always run the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>command on a repository before pulling/fetching from, or pushing to a remote repository!</p>
 </div>
-</div>
-<div class="section" id="a-friendly-concluding-note-on-git">
-<h2>A friendly concluding note on git<a class="headerlink" href="#a-friendly-concluding-note-on-git" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="a-friendly-concluding-note-on-git">
+<h2>A friendly concluding note on git<a class="headerlink" href="#a-friendly-concluding-note-on-git" title="Permalink to this heading">#</a></h2>
 <p>Git can feel hard and unintuitive. It is likely that at some point you will make a mistake and lose some work as a consequence.</p>
 <p><em>THIS IS NORMAL</em></p>
 <p>Don’t worry about it, this has happened to pretty much everyone who has ever used git.</p>
@@ -1531,50 +1182,50 @@ abandon the branch:</p>
 <li><p>Did I make sure to gitignore the things I needed to?</p></li>
 </ul>
 <p>When you get used to working with git, it becomes as natural as juggling chainsaws: i.e. it will always feel a bit odd and strange but it won’t be as scary as it once was.</p>
-</div>
-<div class="section" id="practicals">
-<h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="instructions">
-<h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="practicals">
+<h2>Practicals<a class="headerlink" href="#practicals" title="Permalink to this heading">#</a></h2>
+<section id="instructions">
+<h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h3>
 <p><em>Don’t modify anything (or refer to any files) in your local copy of the git repository of these notes (on Github). Copy whatever you need from the master repository to your own repository.</em></p>
 <p><em>Git commit and push every time you do some significant amount of coding work (after testing it), and then again before the given deadline (this will be announced in class).</em> This includes <code class="docutils literal notranslate"><span class="pre">UnixPrac1.txt</span></code> from the <a class="reference internal" href="01-Unix.html"><span class="doc std std-doc">Unix Chapter</span></a>.</p>
 <p><strong>Push your git repository</strong></p>
 <ul class="simple">
-<li><p>The only practical submission for git is pushing your coursework git repository, <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> and <code class="docutils literal notranslate"><span class="pre">readme</span></code> files included. Make sure your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> has meaningful exclusions, and your <code class="docutils literal notranslate"><span class="pre">readme</span></code> has useful information (as explained in the <a class="reference external" href="#The-README-file">section above</a>). Also search online “readme good practices” or something like that to find additional tips/info.</p></li>
+<li><p>The only practical submission for git is pushing your coursework git repository, <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> and <code class="docutils literal notranslate"><span class="pre">readme</span></code> files included. Make sure your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> has meaningful exclusions, and your <code class="docutils literal notranslate"><span class="pre">readme</span></code> has useful information (as explained in the <span class="xref myst">section above</span>). Also search online “readme good practices” or something like that to find additional tips/info.</p></li>
 <li><p>Also, invite your assessor to your coursework repository (e.g, <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code>) repository with <em>write privileges</em> (AKA <em>push</em> privilege in GitHub). The current assessor is <a class="reference external" href="mailto:s&#46;pawar&#37;&#52;&#48;imperial&#46;ac&#46;uk">s<span>&#46;</span>pawar<span>&#64;</span>imperial<span>&#46;</span>ac<span>&#46;</span>uk</a> (or “mhasoba” on both bitbucket and github).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="readings-resources">
-<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="general">
-<h3>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="readings-resources">
+<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Permalink to this heading">#</a></h2>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Excellent book on Git: <a class="reference external" href="http://git-scm.com/book">http://git-scm.com/book</a></p></li>
 <li><p>Look up the <a class="reference external" href="https://www.atlassian.com/git">Bitbucket Git resources</a></p></li>
 <li><p>Really great git tutorials: <a class="reference external" href="https://try.github.io">https://try.github.io</a></p></li>
 </ul>
-</div>
-<div class="section" id="markdown">
-<h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="markdown">
+<h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A cheatsheet for github-flavored Markdown: <a class="reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p></li>
+<li><p>A cheatsheet for github-flavored Markdown: <a class="github reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">adam-p/markdown-here</a></p></li>
 </ul>
-</div>
-<div class="section" id="committing-practices">
-<h3>Committing practices<a class="headerlink" href="#committing-practices" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="committing-practices">
+<h3>Committing practices<a class="headerlink" href="#committing-practices" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Some tips for good commit practices: <a class="reference external" href="https://chris.beams.io/posts/git-commit/">https://chris.beams.io/posts/git-commit/</a></p></li>
 </ul>
-</div>
-<div class="section" id="gitignore">
-<h3>.gitignore<a class="headerlink" href="#gitignore" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="gitignore">
+<h3>.gitignore<a class="headerlink" href="#gitignore" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Guidelines for the <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file: <a class="reference external" href="https://labs.consol.de/development/git/2017/02/22/gitignore.html">https://labs.consol.de/development/git/2017/02/22/gitignore.html</a>, <a class="reference external" href="https://docs.github.com/en/free-pro-team&#64;latest/github/using-git/ignoring-files">https://docs.github.com/en/free-pro-team&#64;latest/github/using-git/ignoring-files</a></p></li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h3>Branching<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id2">
+<h3>Branching<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Guidelines for brancing: <a class="reference external" href="https://gist.github.com/digitaljhelms/4287848">https://gist.github.com/digitaljhelms/4287848</a></p></li>
 </ul>
@@ -1582,9 +1233,9 @@ abandon the branch:</p>
 <p><strong>Footnotes</strong></p>
 <p><a name="git:word">1</a>: There you will find the following phrase: “…one of the most annoying problems known to humanity: version-controlling Microsoft Word documents.”. LOL!</p>
 <p><a name="git:largefiles">2</a>: None of the computing weeks assessments will require you to use such large files anyway</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1598,7 +1249,7 @@ abandon the branch:</p>
             mode: "bash"
         },
         kernelOptions: {
-            kernelName: "bash",
+            name: "bash",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1606,44 +1257,149 @@ abandon the branch:</p>
     </script>
     <script>kernelName = 'bash'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="02-ShellScripting.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Shell scripting</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-ShellScripting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Shell scripting</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="04-LaTeX.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="04-LaTeX.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Samraat Pawar<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-version-control">Why Version Control?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">git</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-workflow"><code class="docutils literal notranslate"><span class="pre">git</span></code> workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-git-commands">Basic git commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-repository">Your first repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-readme-file">The README file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignoring-files">Ignoring Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directory-and-file-patterns-for-gitignoring">Directory and file patterns for gitignoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore-ng-after-commit-ing"><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>-ng after <code class="docutils literal notranslate"><span class="pre">commit</span></code>-ing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-good-practice-for-gitignoring">General good practice for gitignoring</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitelist-principle">Whitelist principle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-binary-files">Dealing with binary files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-large-files">Dealing with large files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-files">Removing files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-tracking-files">Un-tracking files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-history-of-the-repository">Accessing history of the repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverting-to-a-previous-version">Reverting to a previous version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branching">Branching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-git-commands-on-a-different-directory">Running git commands on a different directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-git-commands-on-multiple-repositories-at-once">Running git commands on multiple repositories at once</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-through-a-gui">Using git through a GUI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-friendly-concluding-note-on-git">A friendly concluding note on git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicals">Practicals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#readings-resources">Readings &amp; Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-practices">Committing practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore">.gitignore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Branching</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

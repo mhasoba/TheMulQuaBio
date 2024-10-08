@@ -1,665 +1,470 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Basic hypothesis testing: \(t\) and \(F\) tests &#8212; TheMulQuaBio</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/13-t_F_tests';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Regression" href="14-regress.html" />
     <link rel="prev" title="Experimental design and Data exploration" href="12-ExpDesign.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="TheMulQuaBio - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="TheMulQuaBio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Maths for Biologists
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
-   01 - Making mathematical statements
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
-   02   - Describing shapes and patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
-   03   - Analysing change, one step at a time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
-   04 - From table arrangements to powerful tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
-   05 - From table arrangements to powerful tools - part 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
-   06 - Analysing change, continuously
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
-   07 - Analysing change, continuously (Part 2)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
-   08 - Calculating accumulated change
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
-   Tutorial 01
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
-   Tutorial 05
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
-   Tutorial 06
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/13-t_F_tests.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-t_F_tests.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-t_F_tests.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/13-t_F_tests.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/13-t_F_tests.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic hypothesis testing: t and F tests</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t-tests">
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   tests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sample-t-tests">
-     One-sample
-     <span class="math notranslate nohighlight">
-      \(t\)
-     </span>
-     tests
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#confidence-intervals">
-       Confidence Intervals
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise">
-     Exercise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-sample-t-tests">
-     Two-sample
-     <span class="math notranslate nohighlight">
-      \(t\)
-     </span>
-     tests
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#confidence-intervals-again">
-       Confidence Intervals again
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-f-test">
-   The
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   test
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t-tests-revisited">
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   tests revisited
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#non-parametric-tests">
-   Non-parametric tests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests"><span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-tests">One-sample <span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-tests">Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-again">Confidence Intervals again</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The <span class="math notranslate nohighlight">\(F\)</span> test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests-revisited"><span class="math notranslate nohighlight">\(t\)</span> tests revisited</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-tests">Non-parametric tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Basic hypothesis testing: t and F tests</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t-tests">
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   tests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sample-t-tests">
-     One-sample
-     <span class="math notranslate nohighlight">
-      \(t\)
-     </span>
-     tests
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#confidence-intervals">
-       Confidence Intervals
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise">
-     Exercise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-sample-t-tests">
-     Two-sample
-     <span class="math notranslate nohighlight">
-      \(t\)
-     </span>
-     tests
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#confidence-intervals-again">
-       Confidence Intervals again
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-f-test">
-   The
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   test
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t-tests-revisited">
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   tests revisited
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#non-parametric-tests">
-   Non-parametric tests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Exercise
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="basic-hypothesis-testing-t-and-f-tests">
-<h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-hypothesis-testing-t-and-f-tests">
+<h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Aims of this chapter:</p>
 <ul class="simple">
 <li><p>Using <span class="math notranslate nohighlight">\(t\)</span> tests to look at differences between means</p></li>
 <li><p>Using <span class="math notranslate nohighlight">\(F\)</span> tests to compare the variance of two samples</p></li>
 <li><p>Using non-parametric tests for differences</p></li>
 </ul>
-</div>
-<div class="section" id="t-tests">
-<h2><span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#t-tests" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="t-tests">
+<h2><span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#t-tests" title="Permalink to this heading">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(t\)</span> test is used to compare the mean of a sample to another value, which can be:</p>
 <ul class="simple">
 <li><p>Some reference point (Is the mean different from 5?)</p></li>
@@ -683,10 +488,12 @@
 </div>
 <p>Making these many comparisons using something like a t-test is a problem because we neglect the covariance among measures and inflate the chance of falsely rejecting at least one null hypothesis (false positive, or <a class="reference internal" href="12-ExpDesign.html#expdesign-some-statistical-parlance"><span class="std std-ref">Type I error</span></a>).</p>
 <hr class="docutils" />
-<div class="figure align-default" id="multiple-comparisons">
+<figure class="align-default" id="multiple-comparisons">
 <a class="reference internal image-reference" href="../_images/multiple_comps.png"><img alt="../_images/multiple_comps.png" src="../_images/multiple_comps.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>A more-than-two-factors example would be if you were, say, comparing the means of more than two types of insect groups – below, we compared means of two groups (dragonflies and damselflies); if we added stoneflies to this comparison, the t-test would not be the way to go as we would be making three pairwise comparisons (n = 3, p = 3).</p>
 <p><em>OK, assuming you are interested in making just one paiwise comparison, let’s learn about <span class="math notranslate nohighlight">\(t\)</span> tests.</em></p>
@@ -695,10 +502,12 @@
 \[t=\frac{\textrm{difference between values}}{\textrm{standard error}}\]</div>
 <p>When there is no difference between the values <span class="math notranslate nohighlight">\(t\)</span> will be zero, but with big differences and/or small errors, will be larger. The <span class="math notranslate nohighlight">\(t\)</span> distribution below shows how commonly different values of <span class="math notranslate nohighlight">\(t\)</span> are found under the null hypothesis:</p>
 <hr class="docutils" />
-<div class="figure align-default" id="t-distribution">
+<figure class="align-default" id="t-distribution">
 <a class="reference internal image-reference" href="../_images/tvals.png"><img alt="../_images/tvals.png" src="../_images/tvals.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>Some points about the <span class="math notranslate nohighlight">\(t\)</span>-distribution illustrated in <a class="reference internal" href="#t-distribution"><span class="std std-numref">Fig. 23</span></a>:</p>
 <ul class="simple">
@@ -707,8 +516,8 @@
 <li><p>95% of the area under the curves are between these two sets of vertical lines. Values of <span class="math notranslate nohighlight">\(t\)</span> more extreme than this will only occur 1 in 20 times or with a probability (<span class="math notranslate nohighlight">\(p\)</span>) of 0.05.</p></li>
 <li><p>The means of small samples are more easily influenced by extreme values and so produce extreme <span class="math notranslate nohighlight">\(t\)</span> values more frequently. This is why the red curve above for smaller samples is more flattened out and why the 95% limits are more spread out.</p></li>
 </ul>
-<div class="section" id="one-sample-t-tests">
-<h3>One-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#one-sample-t-tests" title="Permalink to this headline">¶</a></h3>
+<section id="one-sample-t-tests">
+<h3>One-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#one-sample-t-tests" title="Permalink to this heading">#</a></h3>
 <p>In the simplest example, a <span class="math notranslate nohighlight">\(t\)</span> test can be used to test whether the mean of a sample is different from a specific value. For example:</p>
 <ul class="simple">
 <li><p>Is the ozone in a set of air samples above the legal limit?</p></li>
@@ -716,7 +525,7 @@
 <li><p>Is the mean genome size for Odonata smaller than 1.25 pg, which is the average for insects <a class="reference external" href="http://www.genomesize.com/statistics.php?stats=insects">see here</a>?</p></li>
 </ul>
 <p>Oh look! We can test that last one…</p>
-<p><a class="reference external" href="12-ExpDesign.ipynb#Data-exploration">Previously</a>, we looked at the genome size and morphology of species of dragonflies and damselflies (Odonates: Anisoptera and Zygoptera). Box and whisker plots and density plots both show that the two groups have rather different genome size and morphology. We can use <span class="math notranslate nohighlight">\(t\)</span> tests to test whether the means of the variables of the two groups are different and we can use the <span class="math notranslate nohighlight">\(F\)</span> test to check whether they have the same variance.</p>
+<p><span class="xref myst">Previously</span>, we looked at the genome size and morphology of species of dragonflies and damselflies (Odonates: Anisoptera and Zygoptera). Box and whisker plots and density plots both show that the two groups have rather different genome size and morphology. We can use <span class="math notranslate nohighlight">\(t\)</span> tests to test whether the means of the variables of the two groups are different and we can use the <span class="math notranslate nohighlight">\(F\)</span> test to check whether they have the same variance.</p>
 <p>In this chapter, we will continue to practise building scripts and creating your own R code, so we will start from an empty script file (you can refer to <code class="docutils literal notranslate"><span class="pre">t_F_tests.R</span></code> from TheMulQuaBio). Use this script to store the code you run in this practical session and add notes to keep a record of what each bit is doing:</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open R and change (<code class="docutils literal notranslate"><span class="pre">setwd</span></code>) to the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. If you have misplaced the data, download it again from TheMulQuaBio.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">ttests.R</span></code> and save it to the working directory.</p>
@@ -725,7 +534,7 @@
 <p>Add code to your <code class="docutils literal notranslate"><span class="pre">ttests.R</span></code> script to load the genome size data into R, assigning the object name <code class="docutils literal notranslate"><span class="pre">genome</span></code> and use <code class="docutils literal notranslate"><span class="pre">str(genome)</span></code> to check it has loaded correctly:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -738,7 +547,7 @@
 <p>First calculate the three values from the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">mean.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -751,8 +560,8 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">var.gs</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">var.gs</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">var.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">print</span><span class="p">(</span><span class="n">var.gs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -764,7 +573,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n.gs</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">n.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -778,7 +587,7 @@
 <p>Now get the difference in means:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="o">&lt;-</span> <span class="n">mean.gs</span> <span class="o">-</span> <span class="m">1.25</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean.gs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1.25</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -792,7 +601,7 @@
 <p>Get the standard error:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">se.gs</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">var.gs</span><span class="o">/</span><span class="n">n.gs</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">se.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">var.gs</span><span class="o">/</span><span class="n">n.gs</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">se.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -806,7 +615,7 @@
 <p>Finally, get the t value</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">t.gs</span> <span class="o">&lt;-</span> <span class="n">diff</span><span class="o">/</span><span class="n">se.gs</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">t.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">diff</span><span class="o">/</span><span class="n">se.gs</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">t.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -822,7 +631,7 @@
 <p>We can do the above more easily and get some more information using R’s <code class="docutils literal notranslate"><span class="pre">t.test</span></code> function. The null hypothesis can be set using the option (sometimes called a function <em>argument</em>) <code class="docutils literal notranslate"><span class="pre">mu</span></code> — the Greek letter <span class="math notranslate nohighlight">\(\mu\)</span> is typically used to refer to a (true, not sample) mean:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">t.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="m">1.25</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">t.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -842,14 +651,14 @@ mean of x
 </div>
 </div>
 <p>This confirms the values we calculated by hand and adds a <span class="math notranslate nohighlight">\(p\)</span> value. The output also gives the degrees of freedom. This is something we will come back to later, but the degrees of freedom are basically the number of data points minus the number of estimated parameters, which in this case is one mean.</p>
-<div class="section" id="confidence-intervals">
-<span id="t-f-tests-ci"></span><h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this headline">¶</a></h4>
+<section id="confidence-intervals">
+<span id="t-f-tests-ci"></span><h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h4>
 <p>The output also gives a confidence interval for the observed mean. The mean is the best estimate of the population mean given our sample of species of Odonata, but the actual mean for the order could be bigger or smaller. The confidence interval tells us the region in which we are 95% confident that this actual mean lies.</p>
 <p>It is calculated using the <span class="math notranslate nohighlight">\(t\)</span> distribution. Remember that <span class="math notranslate nohighlight">\(t\)</span> is a difference divided by a standard error; if we multiply <span class="math notranslate nohighlight">\(t\)</span> by a standard error, we get back to a difference. If we pick a pair of <span class="math notranslate nohighlight">\(t\)</span> values that contain the middle 95% of the <span class="math notranslate nohighlight">\(t\)</span> distribution, as in the plot on page 2, then we can multiply that by the standard error from the data to get a range above and below the mean. If we sampled lots of sets of 100 species of Odonata, we expect 95% of the observed means to lie inside this range. The code below shows the calculation of the confidence interval for the test above.</p>
 <p>First, find the edges of the middle 95% of a <span class="math notranslate nohighlight">\(t\)</span> distribution with 99 df:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tlim</span> <span class="o">&lt;-</span> <span class="nf">qt</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.025</span><span class="p">,</span><span class="m">0.975</span><span class="p">),</span> <span class="n">df</span> <span class="o">=</span> <span class="m">99</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qt</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.025</span><span class="p">,</span><span class="m">0.975</span><span class="p">),</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">99</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">tlim</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -864,7 +673,7 @@ mean of x
 <p>Now use the mean and standard error from above to get a confidence intervals:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span> <span class="o">+</span> <span class="n">tlim</span> <span class="o">*</span> <span class="n">se.gs</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tlim</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">se.gs</span>
 </pre></div>
 </div>
 </div>
@@ -875,15 +684,15 @@ mean of x
 </ol>
 </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> code above as a template, test whether the body weight (in grams) of Odonata is different from the average for arthropods of 0.045 grams. Note that this slightly dodgy estimate comes from an estimated average volume for arthropods of 45.21 mm<span class="math notranslate nohighlight">\(^3\)</span>, and assuming a density of 1 gm per cm<span class="math notranslate nohighlight">\(^3\)</span>; see:</p>
 <p>Orme, C. D. L., Quicke, D. L. J., Cook, J. M. and Purvis, A. (2002), Body size does not predict species richness among the metazoan phyla. Journal of Evolutionary Biology, 15: 235–247.</p>
-</div>
-<div class="section" id="two-sample-t-tests">
-<h3>Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#two-sample-t-tests" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="two-sample-t-tests">
+<h3>Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#two-sample-t-tests" title="Permalink to this heading">#</a></h3>
 <p>It is more common to use a <span class="math notranslate nohighlight">\(t\)</span> test to compare the means of two samples. This includes questions like:</p>
 <ul class="simple">
 <li><p>Do two rivers have the same concentration of a pollutant?</p></li>
@@ -892,10 +701,12 @@ mean of x
 </ul>
 <p>The main difference here is that with a one sample <span class="math notranslate nohighlight">\(t\)</span> test, we assume that one of the means is known exactly: the only error is in the single sample. With a two sample test, we are comparing two means estimated from samples and both contain error. The graph below illustrates this:</p>
 <hr class="docutils" />
-<div class="figure align-default" id="sample-t-test">
+<figure class="align-default" id="sample-t-test">
 <a class="reference internal image-reference" href="../_images/twosampleIllustration.png"><img alt="../_images/twosampleIllustration.png" src="../_images/twosampleIllustration.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>A few points to note about <a class="reference internal" href="#sample-t-test"><span class="std std-numref">Fig. 24</span></a>:</p>
 <ul class="simple">
@@ -916,7 +727,7 @@ mean of x
 <p>So let’s first calculate the three values from the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">INDEX</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="n">mean</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mean.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">INDEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">mean.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -930,7 +741,7 @@ mean of x
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">var.gs</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">INDEX</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="n">var</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">var.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">INDEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">var.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -944,7 +755,7 @@ mean of x
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n.gs</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">INDEX</span> <span class="o">=</span> <span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="n">length</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">INDEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">n.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -959,7 +770,7 @@ mean of x
 <p>Now get the difference in means:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="o">&lt;-</span> <span class="n">mean.gs</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean.gs</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mean.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -974,7 +785,7 @@ mean of x
 <p>Now get the standard error of the difference:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">se.gs</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">((</span><span class="n">var.gs</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">/</span><span class="n">n.gs</span><span class="p">[</span><span class="m">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">var.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="n">n.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">se.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">((</span><span class="n">var.gs</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">/</span><span class="n">n.gs</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">var.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="n">n.gs</span><span class="p">[</span><span class="m">2</span><span class="p">]))</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">se.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -989,7 +800,7 @@ mean of x
 <p>And finally, the t-value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">t.gs</span> <span class="o">&lt;-</span> <span class="n">diff</span><span class="o">/</span><span class="n">se.gs</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">t.gs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">diff</span><span class="o">/</span><span class="n">se.gs</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">t.gs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1002,10 +813,10 @@ mean of x
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Type the above code into your growing R script and run it in R. Again, read through the code and make sure you understand the steps.</p>
-<p>And as before, the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> function can be used to automate this all for us. We can use a formula as we have seen <a class="reference external" href="12-ExpDesign.ipynb#Take-a-quick-look-at-effects-of-certain-factors">before</a> to get a test between the two suborders:</p>
+<p>And as before, the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> function can be used to automate this all for us. We can use a formula as we have seen <span class="xref myst">before</span> to get a test between the two suborders:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">t.test</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">t.test</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1025,19 +836,19 @@ mean in group Anisoptera  mean in group Zygoptera
 </div>
 </div>
 <p>The output looks very similar to the one-sample t-test, except that the output now gives two estimated means, rather than one and it reports the <span class="math notranslate nohighlight">\(p\)</span> value for the calculated <span class="math notranslate nohighlight">\(t\)</span> value.</p>
-<div class="section" id="confidence-intervals-again">
-<span id="t-f-tests-ci2"></span><h4>Confidence Intervals again<a class="headerlink" href="#confidence-intervals-again" title="Permalink to this headline">¶</a></h4>
+<section id="confidence-intervals-again">
+<span id="t-f-tests-ci2"></span><h4>Confidence Intervals again<a class="headerlink" href="#confidence-intervals-again" title="Permalink to this heading">#</a></h4>
 <p>Also, in the output above unlike the 95% interval of a 1 sample t-test, which provides the confidence intervals around the estimated mean of the single population, this output of the 2-sample test provides the confidence intervals around the observed difference in the means of the two samples. That is, the 95% confidence interval (-0.1442041,  0.1309104) above is around the observed difference in the sample means: <span class="math notranslate nohighlight">\(1.011774 - 1.018421 = - 0.006647\)</span>. This is essentially not distinguishable from zero as the intervals include the value 0 (and therefore, the p-value is also insignificant).</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add this last step to your script and run it.</p>
-</div>
-</div>
-<div class="section" id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\star\)</span>  Expand your t-test code to test whether the body weight of the two suborders are different and add it to in the script file.</p>
-</div>
-</div>
-<div class="section" id="the-f-test">
-<h2>The <span class="math notranslate nohighlight">\(F\)</span> test<a class="headerlink" href="#the-f-test" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="the-f-test">
+<h2>The <span class="math notranslate nohighlight">\(F\)</span> test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(F\)</span> test is used to compare the variances of two samples or populations. You will also see them featured in analysis of variance (ANOVA), to test the hypothesis that the means of a given set of normally distributed populations all have the same variance.</p>
 <p>The distribution of the test statistic <span class="math notranslate nohighlight">\(F\)</span> (the <span class="math notranslate nohighlight">\(F\)</span> distribution) is simply the ratio of the variances for sample <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>: <span class="math notranslate nohighlight">\(\frac{\textrm{var}(a)}{\textrm{var}(b)}\)</span>:</p>
 <ul class="simple">
@@ -1046,10 +857,12 @@ mean in group Anisoptera  mean in group Zygoptera
 <li><p>and if <span class="math notranslate nohighlight">\(\textrm{var}(a) &lt;  \textrm{var}(b)\)</span> then <span class="math notranslate nohighlight">\(F &lt; 1\)</span></p></li>
 </ul>
 <hr class="docutils" />
-<div class="figure align-default" id="f-distribution">
+<figure class="align-default" id="f-distribution">
 <a class="reference internal image-reference" href="../_images/fvals.png"><img alt="../_images/fvals.png" src="../_images/fvals.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>In the above figure, note that:</p>
 <ul class="simple">
@@ -1065,10 +878,12 @@ mean in group Anisoptera  mean in group Zygoptera
 <p>Add another boxplot beside it comparing the body weight of the two suborders.</p>
 <p>It should look like <a class="reference internal" href="#odonata-wt-boxplots"><span class="std std-numref">Fig. 26</span></a>.</p>
 <hr class="docutils" />
-<div class="figure align-default" id="odonata-wt-boxplots">
+<figure class="align-default" id="odonata-wt-boxplots">
 <a class="reference internal image-reference" href="../_images/bxp.png"><img alt="../_images/bxp.png" src="../_images/bxp.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>Now, we can use R to calculate <span class="math notranslate nohighlight">\(F\)</span> for the variance in genome size in each of the two suborders. We calculated the variance for the <span class="math notranslate nohighlight">\(t\)</span> test above, so we can just do this:</p>
 <div class="cell docutils container">
@@ -1083,7 +898,7 @@ mean in group Anisoptera  mean in group Zygoptera
 <p>That’s quite a big <span class="math notranslate nohighlight">\(F\)</span> value and we can use the function <code class="docutils literal notranslate"><span class="pre">var.test</span></code> to do all the calculations for us and give us the actual <span class="math notranslate nohighlight">\(p\)</span> value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">var.test</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">var.test</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
@@ -1109,43 +924,45 @@ the two samples are drawn from populations with the same variance, an
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open a new empty script called <code class="docutils literal notranslate"><span class="pre">FTests.R</span></code>.</p>
 <p>In this write your script to test whether the variances in the body weight of the two suborders from the <code class="docutils literal notranslate"><span class="pre">GenomSize</span></code> dataset are different.</p>
 <p>There are clearly problems with the variance in both examples. The next two sections present ways to address these kinds of problems.</p>
-</div>
-<div class="section" id="t-tests-revisited">
-<h2><span class="math notranslate nohighlight">\(t\)</span> tests revisited<a class="headerlink" href="#t-tests-revisited" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="t-tests-revisited">
+<h2><span class="math notranslate nohighlight">\(t\)</span> tests revisited<a class="headerlink" href="#t-tests-revisited" title="Permalink to this heading">#</a></h2>
 <p>The first thing to say is that R is aware of the problem with the variance. If you look back at the output from the previous <span class="math notranslate nohighlight">\(t\)</span> tests, you will see that the degrees of freedom vary a lot. We have 100 observations and – after subtracting one for each mean we calculate — our degrees of freedom should be either 99 (one sample test) or 98 (two
 sample test). What we actually see are smaller numbers, with the smallest being <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">60.503</span></code> for the two sample test of body weight.</p>
 <p>The explanation is that R is applying a <em>penalty</em> to the degrees of freedom to account for differences in variance. With fewer degrees for freedom, more extreme <span class="math notranslate nohighlight">\(t\)</span> values are more likely and so it is harder to find significant results. This doesn’t mean we can forget about checking the variances or plotting the data!</p>
 <p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we’ll look at it again when we learn about <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA</span></a>.</p>
 <p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution, as shown in <a class="reference internal" href="#log-transformation"><span class="std std-numref">Fig. 27</span></a>.</p>
 <hr class="docutils" />
-<div class="figure align-default" id="log-transformation">
+<figure class="align-default" id="log-transformation">
 <a class="reference internal image-reference" href="../_images/transform.png"><img alt="../_images/transform.png" src="../_images/transform.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>We can do a <span class="math notranslate nohighlight">\(\log_e\)</span> (natural log)  transform of our body weight data as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logBodyWeight</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">BodyWeight</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="o">$</span><span class="n">logBodyWeight</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">BodyWeight</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>That is, you took a natural log of the whole Body weight column and saved it as a new column called <code class="docutils literal notranslate"><span class="pre">logBodyWeight</span></code></p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy the line into your <code class="docutils literal notranslate"><span class="pre">FTests.R</span></code> script and run it.</p>
-<div class="section" id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<section id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p>Now write three lines of code to get a boxplot of <span class="math notranslate nohighlight">\(\log_e\)</span> body weight and then run a variance test and <span class="math notranslate nohighlight">\(t\)</span> test on the differences in <span class="math notranslate nohighlight">\(\log_e\)</span> body weight between suborders. This gives a much clearer result — the variances are almost identical and the differences between the suborders are much more cleanly tested.</p>
-</div>
-</div>
-<div class="section" id="non-parametric-tests">
-<h2>Non-parametric tests<a class="headerlink" href="#non-parametric-tests" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="non-parametric-tests">
+<h2>Non-parametric tests<a class="headerlink" href="#non-parametric-tests" title="Permalink to this heading">#</a></h2>
 <p>What happens if there isn’t a convenient transformation for the variable that gives roughly constant variation and equal variance? In a parametric test, like the <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> test above, we use parameters (mean and variance) to describe the data, assume these describe the data well and then just use these parameters to run the test. If these assumptions don’t seem very sound, the non-parametric tests provide a way of using the ranks of the data to test for differences. They aren’t as powerful — they are less likely to reveal significant differences — but they are more robust. The most commonly used alternative is the Wilcoxon test, which uses the function <code class="docutils literal notranslate"><span class="pre">wilcox.test</span></code> in R.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using <code class="docutils literal notranslate"><span class="pre">wilcox.test</span></code> as a replacement for <code class="docutils literal notranslate"><span class="pre">t.test</span></code>, repeat the one and two sample <span class="math notranslate nohighlight">\(t\)</span> test for genome size and body weight.</p>
 <p>For example to carry out a wilcox test equivalent to the one-sample t test you performed above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">wilcox.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="m">1.25</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">wilcox.test</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="o">=</span><span class="m">1.25</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1160,12 +977,12 @@ alternative hypothesis: true location is not equal to 1.25
 </div>
 </div>
 <p>Compare the two (t vs wilcox test) results.</p>
-<div class="section" id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<section id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>Repeat the above analyses with the predator and prey body mass data that you were introduced to <a class="reference internal" href="08-Data_R.html"><span class="doc std std-doc">previously</span></a>. Again check how different the results are when using <span class="math notranslate nohighlight">\(t\)</span> vs. Wilcoxon tests.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1179,7 +996,7 @@ alternative hypothesis: true location is not equal to 1.25
             mode: "r"
         },
         kernelOptions: {
-            kernelName: "ir",
+            name: "ir",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1187,44 +1004,125 @@ alternative hypothesis: true location is not equal to 1.25
     </script>
     <script>kernelName = 'ir'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="12-ExpDesign.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Experimental design and Data exploration</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12-ExpDesign.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Experimental design and Data exploration</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="14-regress.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="14-regress.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Linear Models: Regression</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Samraat Pawar<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests"><span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-tests">One-sample <span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-tests">Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-again">Confidence Intervals again</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The <span class="math notranslate nohighlight">\(F\)</span> test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests-revisited"><span class="math notranslate nohighlight">\(t\)</span> tests revisited</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-tests">Non-parametric tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,681 +1,490 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Generalised Linear Models &#8212; TheMulQuaBio</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/19-glm';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Model Fitting using Non-linear Least-squares" href="20-ModelFitting-NLLS.html" />
     <link rel="prev" title="Model simplification" href="18-ModelSimp.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="TheMulQuaBio - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="TheMulQuaBio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Maths for Biologists
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
-   01 - Making mathematical statements
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
-   02   - Describing shapes and patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
-   03   - Analysing change, one step at a time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
-   04 - From table arrangements to powerful tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
-   05 - From table arrangements to powerful tools - part 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
-   06 - Analysing change, continuously
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
-   07 - Analysing change, continuously (Part 2)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
-   08 - Calculating accumulated change
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
-   Tutorial 01
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
-   Tutorial 05
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
-   Tutorial 06
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/19-glm.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/19-glm.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/19-glm.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/19-glm.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/19-glm.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generalised Linear Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-a-glm">
-   What is a GLM?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-statistical-distributions">
-   Some (statistical) distributions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-poisson-distribution">
-     The Poisson distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-binomial-distribution">
-     The Binomial distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gamma-distribution">
-     The Gamma distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-distributions">
-     Other distributions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-glm-example">
-   A GLM example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-exploration">
-     Data exploration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#looking-at-strains-too">
-     Looking at strains too
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-linear-model">
-     A linear model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-glm">
-   Fitting a GLM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overdispersion">
-     Overdispersion
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">
-     Fitting a GLM using a quasi-poisson distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-predictions">
-     Model predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reporting-the-model">
-     Reporting the model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#halos-and-lawns">
-   Halos and lawns
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-glm">What is a GLM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistical-distributions">Some (statistical) distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gamma-distribution">The Gamma distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-distributions">Other distributions</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glm-example">A GLM example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-strains-too">Looking at strains too</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-model">A linear model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-glm">Fitting a GLM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overdispersion">Overdispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">Fitting a GLM using a quasi-poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">Model predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-the-model">Reporting the model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#halos-and-lawns">Halos and lawns</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Generalised Linear Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-a-glm">
-   What is a GLM?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-statistical-distributions">
-   Some (statistical) distributions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-poisson-distribution">
-     The Poisson distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-binomial-distribution">
-     The Binomial distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gamma-distribution">
-     The Gamma distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-distributions">
-     Other distributions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-glm-example">
-   A GLM example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-exploration">
-     Data exploration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#looking-at-strains-too">
-     Looking at strains too
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-linear-model">
-     A linear model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-glm">
-   Fitting a GLM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overdispersion">
-     Overdispersion
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">
-     Fitting a GLM using a quasi-poisson distribution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-predictions">
-     Model predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reporting-the-model">
-     Reporting the model
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#halos-and-lawns">
-   Halos and lawns
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="generalised-linear-models">
-<h1>Generalised Linear Models<a class="headerlink" href="#generalised-linear-models" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Aims of this chapter<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generalised-linear-models">
+<h1>Generalised Linear Models<a class="headerlink" href="#generalised-linear-models" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Aims of this chapter<span class="xref myst"><span class="math notranslate nohighlight">\(^{[1]}\)</span></span>:</p>
 <ul class="simple">
 <li><p>Develop an intuitive understanding of generalized linear models</p></li>
 <li><p>Learn to fit generalized linear models to count data</p></li>
 </ul>
 <p>This chapter will step through the analysis carefully. These are not simple analyses so you should concentrate on understanding the process and the biology and think about how to present your results.</p>
-</div>
-<div class="section" id="what-is-a-glm">
-<h2>What is a GLM?<a class="headerlink" href="#what-is-a-glm" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-is-a-glm">
+<h2>What is a GLM?<a class="headerlink" href="#what-is-a-glm" title="Permalink to this heading">#</a></h2>
 <p>Till now, we have adhered faithfully to the assumption of a normal (Gaussian) distribution for the response variable, at times transforming the response variable (e.g., by taking a log) to make it (approximately) normal. However, there are many scenarios where assuming a normal distribution for the response variable is just not appropriate, whether you transform it or not. The generalized linear model (GLM) analysis is (as the name suggests) a generalization of the ordinary linear regression model analysis to accommodate response variables that have non-normal error distributions. These types of (non-normal) response variables can arise quite commonly in the form of count (as in the practical example below) and binary response (present/absent, 0/1, etc.) data, but beyond that, many measures of interest in biology are just not normally distributed.</p>
 <p>The GLM generalization of the ordinary Linear Models is made possible by using an (arbitrary) function of the dependent variable (the link function) that makes it vary <em>linearly</em> with the predicted values, thus making the problem relatively tractable statistically. We will not try to understand the mathematical underpinnings of this approach here, but instead learn through an example.</p>
-</div>
-<div class="section" id="some-statistical-distributions">
-<h2>Some (statistical) distributions<a class="headerlink" href="#some-statistical-distributions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="some-statistical-distributions">
+<h2>Some (statistical) distributions<a class="headerlink" href="#some-statistical-distributions" title="Permalink to this heading">#</a></h2>
 <p>First, it’s time to revisit the idea of <em>statistical distributions</em>, which you were introduced to <a class="reference internal" href="12-ExpDesign.html#expdesign-data-types-and-distributions"><span class="std std-ref">previously</span></a>. This is because while analyzing data using GLMs, one needs to decide what particular statistical distribution best represents (or captures, or “model’s”) that particular dataset. For example, continuous numeric data are <em>often</em> normally distributed (e.g., weights of lecturers!). On the other hand, count data are likely to be distributed according to the Poisson distribution (e.g., numbers of plant species found in a sampling plot). And all statistical distribution are actually a <em>family</em> of distributions of different shapes (e.g., can range from right-skewed to bell-shaped) and/or scales (spread) depending upon the value of their <em>parameters</em>. For example, the Gaussian distribution can have different scales depending on the variance parameter. More on distribution parameters below.</p>
 <p>There are actually a large number of statistical distributions <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_probability_distributions">out there</a> to choose from. But we will look at a few that GLMs support. Specifically, the <code class="docutils literal notranslate"><span class="pre">glm</span></code> procedure in R supports the following distribution “families”: Binomial, Gaussian, Gamma, Inverse Gaussian, Poisson, Quasi, Quasi-Binomial, and Quasi-Poisson. You may want to look these up online (google it). You have already seen, <a class="reference internal" href="12-ExpDesign.html#expdesign-sampling-from-distributions-in-r"><span class="std std-ref">sampled from</span></a>, and used the Gaussian distribution, so we won’t go into it here. But let’s look at three other distributions that are particularly useful in R.</p>
-<div class="section" id="the-poisson-distribution">
-<h3>The Poisson distribution<a class="headerlink" href="#the-poisson-distribution" title="Permalink to this headline">¶</a></h3>
+<section id="the-poisson-distribution">
+<h3>The Poisson distribution<a class="headerlink" href="#the-poisson-distribution" title="Permalink to this heading">#</a></h3>
 <p>The Poisson distribution family is appropriate for discrete, integer valued data. You can generate “data” that are poisson-distributed by using the function <code class="docutils literal notranslate"><span class="pre">rpois(n,</span> <span class="pre">lambda)</span></code> in R:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span> 
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">lambda</span> <span class="o">=</span> <span class="m">1</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">lambda</span> <span class="o">=</span> <span class="m">100</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w"> </span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_3_0.png" src="../_images/19-glm_3_0.png" />
+<img alt="../_images/6d9403fe736000f5511d6571ebce0cfb5dea0b4088d4a5860f1ef8298e2106f7.png" src="../_images/6d9403fe736000f5511d6571ebce0cfb5dea0b4088d4a5860f1ef8298e2106f7.png" />
 </div>
 </div>
 <p>The main things to note about these plots (and poisson-distributed data):</p>
@@ -685,20 +494,20 @@
 <li><p>Thus, this distribution can represent a variety of shapes that count data can take, from right skewed (left plot) to bell-shaped (right plot)  – these variants of shapes and scales make up the Poisson distribution “family”.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate different shapes (and inevitably, scales) of poisson-distributed data.</p>
-</div>
-<div class="section" id="the-binomial-distribution">
-<h3>The Binomial distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-binomial-distribution">
+<h3>The Binomial distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this heading">#</a></h3>
 <p>The binomial distribution is appropriate for continuous-valued data that arise from repeated trials of binary (yes/no, 0/1, head/tail, suceptible/resistant) outcomes. This distribution is also the basis for the <a class="reference external" href="https://en.wikipedia.org/wiki/Binomial_test">binomial statistical test</a>. You can generate  binomial-distributed “data” by using the function <code class="docutils literal notranslate"><span class="pre">rbinom(n,</span> <span class="pre">size,</span> <span class="pre">prob)</span></code> in R:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span> 
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.5</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="m">0.5</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w"> </span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_5_0.png" src="../_images/19-glm_5_0.png" />
+<img alt="../_images/b03bb7bd192f4582cc3a62aeefc6591097468230a4a78f9a9ea333fe8db46298.png" src="../_images/b03bb7bd192f4582cc3a62aeefc6591097468230a4a78f9a9ea333fe8db46298.png" />
 </div>
 </div>
 <p>The main things to note about these plots (and Binomial-distributed data):</p>
@@ -712,21 +521,21 @@
 <li><p>Thus, the binomial distribution family is appropriate for binomial <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>, which is a GLM analysis where your sample of binary (yes/no, 0/1, etc) outcomes is fitted as a function of one or more continuous or categorical predictors.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate variants of binomial-distributed data distributions. They will all be bell-shaped, but can take different mean and spread values.</p>
-</div>
-<div class="section" id="the-gamma-distribution">
-<h3>The Gamma distribution<a class="headerlink" href="#the-gamma-distribution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-gamma-distribution">
+<h3>The Gamma distribution<a class="headerlink" href="#the-gamma-distribution" title="Permalink to this heading">#</a></h3>
 <p>The Gamma family is suitable for data that are continuous and can only take values greater than zero (positive values). Another key feature of this distribution family is that the ratio of its variance and mean is constant, so it is appropriate to model data where increasing a mean value also increases the variance as a fixed (constant) factor.  Because of this property, the Gamma family is often used to fit a GLM to response variables that are times, such as waiting time, time between failure, or inverse of the rate of any event, such as an accident.</p>
 <p>You can generate  Gamma-distributed “data” by using the function <code class="docutils literal notranslate"><span class="pre">rgamma(n,</span> <span class="pre">shape,</span> <span class="pre">rate)</span></code> in R:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span> 
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rgamma</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="nf">hist</span><span class="p">(</span><span class="nf">rgamma</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Value&quot;</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w"> </span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rgamma</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">rgamma</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_8_0.png" src="../_images/19-glm_8_0.png" />
+<img alt="../_images/a4eb31780d12ed72e05e318af919ea51dd76e8a7cc025c17ba1a4badb8b4bc2a.png" src="../_images/a4eb31780d12ed72e05e318af919ea51dd76e8a7cc025c17ba1a4badb8b4bc2a.png" />
 </div>
 </div>
 <p>The main things to note about these plots (and Gamma-distributed data):</p>
@@ -735,15 +544,15 @@
 <li><p>This distribution can be right-skewed or bell-shaped, depending on choice of the <code class="docutils literal notranslate"><span class="pre">shape</span></code> parameter.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Play with the above code and generate variants in the gamma-distributed data family.</p>
-</div>
-<div class="section" id="other-distributions">
-<h3>Other distributions<a class="headerlink" href="#other-distributions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="other-distributions">
+<h3>Other distributions<a class="headerlink" href="#other-distributions" title="Permalink to this heading">#</a></h3>
 <p>There are also the Quasi-binomial and Quasi-poisson families within R’s <code class="docutils literal notranslate"><span class="pre">glm</span></code> procedure, which differ from the Binomial and Poisson families in that the dispersion parameter (variance to mean ratio) is not fixed at one, so that over-dispersion in your data (greater variability than would be expected based on the given statistical model) can be modeled. You will see an example of this below.</p>
 <p>Thus, the first and key step while using GLMs is to determine what type of distribution best describes your response variable. We will now try put this and subsequent steps of fitting GLMs.</p>
-</div>
-</div>
-<div class="section" id="a-glm-example">
-<h2>A GLM example<a class="headerlink" href="#a-glm-example" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="a-glm-example">
+<h2>A GLM example<a class="headerlink" href="#a-glm-example" title="Permalink to this heading">#</a></h2>
 <p>We will use mutation data collected in the Genetics Practical by a previous year’s batch.</p>
 <p>The students were basically counting colonies looking for mutations. There were a number of bacterial strains which were different mutants of <em>Salmonella</em>. Each group applied a mutagen Nitroguanisine (NG) as well as histidine and streptomycine. A control plate was also tested.</p>
 <p>The data file is called <code class="docutils literal notranslate"><span class="pre">PracData.csv</span></code> (so it’s a comma-separated values file), and is available from TheMulQuaBio’s  <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
@@ -752,7 +561,7 @@
 <p><span class="math notranslate nohighlight">\(\star\)</span> Start R and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/PracData.csv&quot;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/PracData.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 </pre></div>
@@ -767,7 +576,7 @@
  $ HaloLawn   : Factor w/ 2 levels &quot;N&quot;,&quot;Y&quot;: NA NA NA NA NA NA NA NA NA NA ...
 </pre></div>
 </div>
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A data.frame: 6 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Student.ID</th><th scope=col>Strain</th><th scope=col>Treatment</th><th scope=col>ColonyCount</th><th scope=col>HaloLawn</th></tr>
@@ -785,38 +594,38 @@
 </div></div>
 </div>
 <p>Now let’s explore the data first.</p>
-<div class="section" id="data-exploration">
-<h3>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h3>
+<section id="data-exploration">
+<h3>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this heading">#</a></h3>
 <p>We have a continuous response variable (<code class="docutils literal notranslate"><span class="pre">ColonyCount</span></code>) and two categorical explanatory variables (<code class="docutils literal notranslate"><span class="pre">Strain</span></code> and <code class="docutils literal notranslate"><span class="pre">Treatment</span></code>). We also have observations of halos and bacterial lawns around the treated areas (<code class="docutils literal notranslate"><span class="pre">HaloLawn</span></code>), which we will come back to at the end of this chapter.</p>
 <p>So, with two factors as the explanatory variables, we will use box and whisker plots and boxplots to explore the data. First, we’ll look at the effects of the four treatments.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">boxplot</span><span class="p">(</span><span class="n">ColonyCount</span> <span class="o">~</span> <span class="n">Treatment</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">colonies</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">boxplot</span><span class="p">(</span><span class="n">ColonyCount</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">colonies</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_13_0.png" src="../_images/19-glm_13_0.png" />
+<img alt="../_images/8a08de77fc8fcf0298457d41d2030824b88424a0c3054a6a7657f3e233052d47.png" src="../_images/8a08de77fc8fcf0298457d41d2030824b88424a0c3054a6a7657f3e233052d47.png" />
 </div>
 </div>
 <p>There are two immediate things to note.</p>
 <p>(1) The distributions of colony counts are very <em>skewed</em> — many small counts and a few large counts. We’ve already seen that taking a log of data sometimes works in these cases. However, as the tables above show, we have zero counts for all treatments and <span class="math notranslate nohighlight">\(\log(0)\)</span> is undefined. A common trick is therefore to use <span class="math notranslate nohighlight">\(\log(n+1)\)</span> (add 1 and take a log) when dealing with count data like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="o">$</span><span class="n">logCC</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span>
-<span class="nf">boxplot</span><span class="p">(</span><span class="n">logCC</span> <span class="o">~</span> <span class="n">Treatment</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">colonies</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="o">$</span><span class="n">logCC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="nf">boxplot</span><span class="p">(</span><span class="n">logCC</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">colonies</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_15_0.png" src="../_images/19-glm_15_0.png" />
+<img alt="../_images/d1328ac2fa6384a62a079080e5f85d11ede3ad0febc200fca0be9c5a20fafd72.png" src="../_images/d1328ac2fa6384a62a079080e5f85d11ede3ad0febc200fca0be9c5a20fafd72.png" />
 </div>
 </div>
 <p>I hope you’ll agree that this still doesn’t look very convincingly like normal data, but we’ll come back to this point.</p>
 <p>(2)  The colony counts are vastly different between the different treatments. It is hard to say for sure from the two plots, but it looks like colonies never grow under the histidine and streptomycine treatments. We can check that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tapply</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span> <span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tapply</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span><span class="w"> </span><span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -831,7 +640,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tapply</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span> <span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tapply</span><span class="p">(</span><span class="n">colonies</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span><span class="w"> </span><span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -850,7 +659,7 @@
 <p>This is new syntax, so let’s make sure we understand it. For example, try the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="s">&quot;NG&quot;</span><span class="p">,</span> <span class="s">&quot;NG&quot;</span><span class="p">),</span> <span class="m">4</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
 <span class="n">MyData1</span>
 </pre></div>
 </div>
@@ -866,7 +675,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="s">&quot;NG&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -882,7 +691,7 @@
 <p>This is the same as doing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span> <span class="n">MyData1</span> <span class="o">==</span> <span class="s">&quot;Control&quot;</span> <span class="o">|</span>  <span class="n">MyData1</span> <span class="o">==</span> <span class="s">&quot;NG&quot;</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">MyData1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Control&quot;</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">MyData1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NG&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -898,7 +707,7 @@
 <p>Note that this is NOT the same as doing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span> <span class="o">==</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="s">&quot;NG&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -915,13 +724,13 @@
 <p>Now, let’s do the subsetting using <code class="docutils literal notranslate"><span class="pre">%in%</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">colonies</span><span class="p">,</span> <span class="n">Treatment</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="s">&quot;NG&quot;</span><span class="p">))</span>
-<span class="nf">str</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">colonies</span><span class="p">,</span><span class="w"> </span><span class="n">Treatment</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">))</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	680 obs. of  6 variables:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	340 obs. of  6 variables:
  $ Student.ID : Factor w/ 34 levels &quot;A1&quot;,&quot;A10&quot;,&quot;A11&quot;,..: 1 1 1 2 2 2 4 4 4 4 ...
  $ Strain     : Factor w/ 5 levels &quot;421&quot;,&quot;712&quot;,&quot;881&quot;,..: 4 3 5 1 2 3 4 2 3 5 ...
  $ Treatment  : Factor w/ 4 levels &quot;Control&quot;,&quot;His&quot;,..: 1 1 1 3 3 1 1 3 3 1 ...
@@ -935,7 +744,7 @@
 <p>Note that this is the same as doing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">colonies</span><span class="p">,</span> <span class="n">Treatment</span> <span class="o">==</span> <span class="s">&quot;Control&quot;</span> <span class="o">|</span> <span class="n">Treatment</span> <span class="o">==</span> <span class="s">&quot;NG&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">colonies</span><span class="p">,</span><span class="w"> </span><span class="n">Treatment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Control&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Treatment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NG&quot;</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -956,7 +765,7 @@
 we’ll use the <code class="docutils literal notranslate"><span class="pre">droplevels</span></code> function to strip them out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span> <span class="o">&lt;-</span> <span class="nf">droplevels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coloniesCN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">droplevels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -974,15 +783,15 @@ we’ll use the <code class="docutils literal notranslate"><span class="pre">dro
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add these commands for sub-setting your data to your script file.</p>
-</div>
-<div class="section" id="looking-at-strains-too">
-<h3>Looking at strains too<a class="headerlink" href="#looking-at-strains-too" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="looking-at-strains-too">
+<h3>Looking at strains too<a class="headerlink" href="#looking-at-strains-too" title="Permalink to this heading">#</a></h3>
 <p>Now we’ll look to see how counts differ between the strains. A quick and elegant way to visualise this is to use the <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> package to get plots grouped by treatment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">ggplot</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Strain</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">logCC</span><span class="p">))</span> <span class="o">+</span> 
-    <span class="nf">geom_boxplot</span><span class="p">()</span> <span class="o">+</span> <span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span> <span class="o">~</span> <span class="n">Treatment</span><span class="p">)</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">coloniesCN</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Strain</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">logCC</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Treatment</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -991,11 +800,11 @@ we’ll use the <code class="docutils literal notranslate"><span class="pre">dro
 “Removed 46 rows containing non-finite values (stat_boxplot).”
 </pre></div>
 </div>
-<img alt="../_images/19-glm_35_1.png" src="../_images/19-glm_35_1.png" />
+<img alt="../_images/5926349c09adf19ec8b4845619b70aedf5057b70e1ce5a4c399a24c443ceb823.png" src="../_images/5926349c09adf19ec8b4845619b70aedf5057b70e1ce5a4c399a24c443ceb823.png" />
 </div>
 </div>
 <p>First impressions from this figure:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The strains are doing <em>very</em> different things under the two treatments. Hopefully this now leaps out at you as suggesting that the two variables (Strain and Treatment) are <em>interacting</em>.</p></li>
 <li><p>The distributions are still pretty ugly — the variances differ hugely between combinations and four combinations have a median of zero.</p></li>
 </ol>
@@ -1003,7 +812,7 @@ we’ll use the <code class="docutils literal notranslate"><span class="pre">dro
 <p>Let’s do it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tab</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span> <span class="n">coloniesCN</span><span class="o">$</span><span class="n">Strain</span><span class="p">),</span> <span class="n">mean</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">ColonyCount</span><span class="p">,</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Strain</span><span class="p">),</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
 </pre></div>
@@ -1020,46 +829,46 @@ NG       61.28571   5.517241 292.71429 593.000 523.9000
 <p>And then,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">barplot</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span> <span class="s">&#39;y&#39;</span> <span class="p">)</span>    
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">barplot</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span><span class="w"> </span><span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="o">=</span><span class="w"> </span><span class="s">&#39;y&#39;</span><span class="w"> </span><span class="p">)</span><span class="w">    </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_39_0.png" src="../_images/19-glm_39_0.png" />
+<img alt="../_images/4af2c5e36875a9145b7aebe3c08d0f6d266006f364e0af18b686ba67cead3371.png" src="../_images/4af2c5e36875a9145b7aebe3c08d0f6d266006f364e0af18b686ba67cead3371.png" />
 </div>
 </div>
 <p>Let’s have a go at fitting an ordinary Linear model.</p>
-</div>
-<div class="section" id="a-linear-model">
-<h3>A linear model<a class="headerlink" href="#a-linear-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="a-linear-model">
+<h3>A linear model<a class="headerlink" href="#a-linear-model" title="Permalink to this heading">#</a></h3>
 <p>We’ll fit a model of colony count as the interaction between strain and treatment and then look at the diagnostic plots. We’d do this anyway, but we’re already suspicious about the variance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modLM</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCC</span> <span class="o">~</span> <span class="n">Strain</span> <span class="o">*</span> <span class="n">Treatment</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">coloniesCN</span><span class="p">)</span>
-<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.8</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modLM</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logCC</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Strain</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">coloniesCN</span><span class="p">)</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.8</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">modLM</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_42_0.png" src="../_images/19-glm_42_0.png" />
+<img alt="../_images/b613e403529bdbacd114005a5a30dcdd3464bef7e5b7c5b4e34a09d79feac67d.png" src="../_images/b613e403529bdbacd114005a5a30dcdd3464bef7e5b7c5b4e34a09d79feac67d.png" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include Run this code and have a close look at the plots.</p>
 <p>That normal Q-Q plot is not good. Our suspicions were justified and it doesn’t look like we can use a simple log transformation. We’re not even going to look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables — if the diagnostic plots are bad enough, then the model outputs are not
 to be trusted.</p>
-</div>
-</div>
-<div class="section" id="fitting-a-glm">
-<h2>Fitting a GLM<a class="headerlink" href="#fitting-a-glm" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="fitting-a-glm">
+<h2>Fitting a GLM<a class="headerlink" href="#fitting-a-glm" title="Permalink to this heading">#</a></h2>
 <p>In the linear models lecture, we looked at the expectation of <em>constant normal variance</em> in linear models. Whatever the combination of explanatory variables for a particular prediction, the residuals around that prediction have similar variance and are roughly normally distributed. The panel on the left in the figure below illustrates this basic idea.</p>
 <hr class="docutils" />
-<img src="./graphics/GLMexample.svg" width="700px">
-<small> <br><center> Illustration of continuous data that follow a normal distribution (left) versus discrete, count data (right). </center></small>
+<a class="reference internal image-reference" href="../_images/GLMexample.svg"><img alt="../_images/GLMexample.svg" src="../_images/GLMexample.svg" width="700px" /></a>
+<p><small> <br><center> Illustration of continuous data that follow a normal distribution (left) versus discrete, count data (right). </center></small></p>
 <hr class="docutils" />
 <p>As we have seen, count data do not have this distribution, even when logged. The panel on the right in the above figure shows the expected distribution of count data as the mean count increases with an explanatory variable.</p>
 <p>There are three key differences between the two panels of the figure:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Counts can <em>never</em> be negative but can be zero.</p></li>
 <li><p>Counts are always <em>integers</em> — whole numbers — rather than being continuous.</p></li>
 <li><p>The variance of count data is <em>not constant</em>. As the average predicted count gets larger, so does the variance. Unlike the normal distribution, where variance can take any value, for count data the variance is expected to be equal to the mean.</p></li>
@@ -1069,39 +878,39 @@ to be trusted.</p>
 <p>So let’s fit a GLM to the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modPois</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">ColonyCount</span> <span class="o">~</span> <span class="n">Strain</span> <span class="o">*</span> <span class="n">Treatment</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">coloniesCN</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span> <span class="s">&#39;poisson&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modPois</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">ColonyCount</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Strain</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">coloniesCN</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="w"> </span><span class="s">&#39;poisson&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>First, we’ll look at the summary table for this model. We have 5 levels of strain and 2 levels of factor in the subset so we get an intercept (<span class="math notranslate nohighlight">\(i\)</span>), 4 differences for strains(<span class="math notranslate nohighlight">\(s_{2-5}\)</span>), one difference for treatment (<span class="math notranslate nohighlight">\(t_2\)</span>) and then four differences for the interaction (<span class="math notranslate nohighlight">\(s_{2-5}t_2\)</span>). These combine like this:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p></p></th>
-<th class="text-align:left head"><p>Control</p></th>
-<th class="text-align:left head"><p>Nitroguanisine</p></th>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Control</p></th>
+<th class="head text-left"><p>Nitroguanisine</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>421</p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i\)</span></p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i+t_2\)</span></p></td>
+<tr class="row-even"><td class="text-left"><p>421</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i+t_2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>712</p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_2\)</span></p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_2 + t_2 + s_2 t_2\)</span></p></td>
+<tr class="row-odd"><td class="text-left"><p>712</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i + s_2\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i + s_2 + t_2 + s_2 t_2\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>881</p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_3\)</span></p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i+s_3 + t_2 + s_3 t_2\)</span></p></td>
+<tr class="row-even"><td class="text-left"><p>881</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i + s_3\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i+s_3 + t_2 + s_3 t_2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>889</p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\( + s_4\)</span></p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_4 + t_2 + s_4 t_2\)</span></p></td>
+<tr class="row-odd"><td class="text-left"><p>889</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( + s_4\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i + s_4 + t_2 + s_4 t_2\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>TA102</p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\(i + s_5\)</span></p></td>
-<td class="text-align:left"><p><span class="math notranslate nohighlight">\( + s_5 + t_2  + s_5 t_2\)</span></p></td>
+<tr class="row-even"><td class="text-left"><p>TA102</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(i + s_5\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( + s_5 + t_2  + s_5 t_2\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -1157,18 +966,18 @@ negative.</p></li>
 <li><p>Two types of deviance are in the model output. Deviance is a measure of goodness of fit of a GLM. The null deviance shows how well the response variable is predicted by a model that includes only the intercept (overall mean). In our example, we have a value of 134445 on 293 degrees of freedom. Including the independent variables (strain and treatment) decreased the deviance to 61579 points on 284 degrees of freedom (remember, lust like linear models, the df are decreased by the number of parameters minus 1). This is a significant reduction in deviance, so the model fit is significant.</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy the code in this section into your script and explore the model a bit more.</p>
-<div class="section" id="overdispersion">
-<h3>Overdispersion<a class="headerlink" href="#overdispersion" title="Permalink to this headline">¶</a></h3>
+<section id="overdispersion">
+<h3>Overdispersion<a class="headerlink" href="#overdispersion" title="Permalink to this heading">#</a></h3>
 <p>There’s a problem. You may have already spotted it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">modPois</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_48_0.png" src="../_images/19-glm_48_0.png" />
+<img alt="../_images/b77bbfc446866fcca558aec31b506cd2410bd1757c4b33c6493b5f14b0a1f78e.png" src="../_images/b77bbfc446866fcca558aec31b506cd2410bd1757c4b33c6493b5f14b0a1f78e.png" />
 </div>
 </div>
 <p>Actually, there are two problems. First, that Q-Q plot is still a bit dubious. More of the points are close to the line than in the linear model but there are some extreme positive residuals. Second, the magnitude of the residuals is enormous, and this is really clear in the plot in the bottom right hand corner. This plot identifies outliers and any points outside of the red dotted line are possible problems.</p>
@@ -1176,13 +985,13 @@ negative.</p></li>
 <p>There is a simple way to check the dispersion of count data using the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table: the ratio of the residual deviance to the residual degrees of freedom should be approximately 1. This expectation is actually given in the table:</p>
 <p><code class="docutils literal notranslate"><span class="pre">(Dispersion</span> <span class="pre">parameter</span> <span class="pre">for</span> <span class="pre">poisson</span> <span class="pre">family</span> <span class="pre">taken</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">1)</span></code></p>
 <p>In this case, the ratio is <span class="math notranslate nohighlight">\(61579/284=216.8\)</span>. That’s very strongly overdispersed. Fortunately, we can allow for this by using a different model.</p>
-</div>
-<div class="section" id="fitting-a-glm-using-a-quasi-poisson-distribution">
-<h3>Fitting a GLM using a quasi-poisson distribution<a class="headerlink" href="#fitting-a-glm-using-a-quasi-poisson-distribution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fitting-a-glm-using-a-quasi-poisson-distribution">
+<h3>Fitting a GLM using a quasi-poisson distribution<a class="headerlink" href="#fitting-a-glm-using-a-quasi-poisson-distribution" title="Permalink to this heading">#</a></h3>
 <p>The quasi-poisson distribution family uses the data to estimate the dispersion of the model, but is otherwise very similar to using the Poisson family. Let’s re-fit the GLM using this distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modQPois</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">ColonyCount</span> <span class="o">~</span> <span class="n">Strain</span> <span class="o">*</span> <span class="n">Treatment</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">coloniesCN</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="s">&#39;quasipoisson&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modQPois</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">ColonyCount</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Strain</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Treatment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coloniesCN</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;quasipoisson&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1234,13 +1043,13 @@ Number of Fisher Scoring iterations: 7
 <p>Let’s look at the model diagnostic plots next:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">modQPois</span><span class="p">)</span>    
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">modQPois</span><span class="p">)</span><span class="w">    </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19-glm_54_0.png" src="../_images/19-glm_54_0.png" />
+<img alt="../_images/32ce8b61da0da122b55e779e659cd68e2f2bb87d50c5325fb5cc4df802f4025a.png" src="../_images/32ce8b61da0da122b55e779e659cd68e2f2bb87d50c5325fb5cc4df802f4025a.png" />
 </div>
 </div>
 <p>The residuals and leverage plot is now ok. The Q-Q plot is not better, but is still an improvement over the original linear model. We can’t improve the model fit any more — it isn’t perfect but we’ll accept those imperfections. It is worth thinking about the imperfections though — what might give rise to occasional larger than expected counts of
@@ -1248,12 +1057,12 @@ colonies?</p>
 <p>We’ll look at the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table next. Technically, this is now analysis of deviance not analysis of variance but the concept is the same. Different tests are appropriate for different families of distribution, but we can use <span class="math notranslate nohighlight">\(F\)</span> here:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="s">&quot;F&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 4 × 6</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Deviance</th><th scope=col>Resid. Df</th><th scope=col>Resid. Dev</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -1280,13 +1089,13 @@ colonies?</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modQPois2</span> <span class="o">&lt;-</span> <span class="nf">update</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span> <span class="n">.</span> <span class="o">~</span> <span class="n">.</span> <span class="o">-</span> <span class="n">Strain</span><span class="o">:</span><span class="n">Treatment</span><span class="p">)</span>
-<span class="nf">anova</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span> <span class="n">modQPois2</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="s">&quot;F&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">modQPois2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Strain</span><span class="o">:</span><span class="n">Treatment</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span><span class="w"> </span><span class="n">modQPois2</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 2 × 6</caption>
 <thead>
 	<tr><th></th><th scope=col>Resid. Df</th><th scope=col>Resid. Dev</th><th scope=col>Df</th><th scope=col>Deviance</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -1301,16 +1110,16 @@ colonies?</p>
 </div>
 <p>No, that makes the model much worse, so we now have our final model.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include this new model fitting in your script and check you’ve got the same results.</p>
-</div>
-<div class="section" id="model-predictions">
-<h3>Model predictions<a class="headerlink" href="#model-predictions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="model-predictions">
+<h3>Model predictions<a class="headerlink" href="#model-predictions" title="Permalink to this heading">#</a></h3>
 <p>We can get model predictions and standard errors using the <code class="docutils literal notranslate"><span class="pre">predict</span></code> function. There is a difference though. GLMs use an internal transformation to model the data using a <em>link function</em> and the coefficients in the summary above are on the scale of the link transformation. The link function defines the relationship between the linear predictor and the mean of the distribution function, so that an otherwise non-linear (non-normal) response can be accommodated. For quasipoisson, the default is a <em>log link</em>, which you can see in the output of <code class="docutils literal notranslate"><span class="pre">anova</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">predict</span></code> to get predictions on the scale of the original <em>response</em>. You can use different link functions than the “canonical” one encoded for each distribution <code class="docutils literal notranslate"><span class="pre">family</span></code>, but covering this is outside the scope of this chapter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># use expand.grid to get all combinations of factors</span>
-<span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">expand.grid</span><span class="p">(</span><span class="n">Strain</span> <span class="o">=</span> <span class="nf">levels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Strain</span><span class="p">),</span> <span class="n">Treatment</span> <span class="o">=</span> <span class="nf">levels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Treatment</span><span class="p">))</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span><span class="n">Strain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">levels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Strain</span><span class="p">),</span><span class="w"> </span><span class="n">Treatment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">levels</span><span class="p">(</span><span class="n">coloniesCN</span><span class="o">$</span><span class="n">Treatment</span><span class="p">))</span>
 
-<span class="nf">predict</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;response&quot;</span><span class="p">)</span>
+<span class="nf">predict</span><span class="p">(</span><span class="n">modQPois</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;response&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1320,13 +1129,13 @@ colonies?</p>
 .dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
 .dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
 .dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>1</dt><dd>538.200000000001</dd><dt>2</dt><dd>138.866666666667</dd><dt>3</dt><dd>12.7307782005724</dd><dt>4</dt><dd>0.375000000000006</dd><dt>5</dt><dd>126.687499999999</dd><dt>6</dt><dd>61.285714285714</dd><dt>7</dt><dd>5.51724142694226</dd><dt>8</dt><dd>292.714285714285</dd><dt>9</dt><dd>592.999999999998</dd><dt>10</dt><dd>523.899999999999</dd></dl>
+</style><dl class=dl-inline><dt>1</dt><dd>538.2</dd><dt>2</dt><dd>138.866666666667</dd><dt>3</dt><dd>12.7307782005727</dd><dt>4</dt><dd>0.375000000000003</dd><dt>5</dt><dd>126.6875</dd><dt>6</dt><dd>61.2857142857142</dd><dt>7</dt><dd>5.51724142694236</dd><dt>8</dt><dd>292.714285714286</dd><dt>9</dt><dd>592.999999999999</dd><dt>10</dt><dd>523.9</dd></dl>
 </div></div>
 </div>
 <p>Those are the same values as the means we calculated for the barplot. Adding standard errors to barplots is more difficult for GLMs and we won’t go into it here.</p>
-</div>
-<div class="section" id="reporting-the-model">
-<h3>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reporting-the-model">
+<h3>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Permalink to this heading">#</a></h3>
 <p>Reporting complicated statistics is a difficult business. There is a lot of detail involved and you want the reader to understand what you have done well enough to repeat the analysis if needed. You also have to summarise and explain the results without pages of R output.</p>
 <p>Here are some pointers:</p>
 <ul class="simple">
@@ -1347,75 +1156,75 @@ colonies?</p>
 <li><p>Most importantly, you need to convey what the interpretation of the model is. What is it telling you about the data?</p></li>
 </ul>
 <p><em>Table 1</em>: Coefficients from a GLM of treatment and strain as predictors of colony count.</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:right head"><p>Estimate</p></th>
-<th class="text-align:left head"><p>Std. Error</p></th>
-<th class="text-align:left head"><p>t value</p></th>
-<th class="text-align:left head"><p>p</p></th>
+<tr class="row-odd"><th class="head text-right"><p>Estimate</p></th>
+<th class="head text-left"><p>Std. Error</p></th>
+<th class="head text-left"><p>t value</p></th>
+<th class="head text-left"><p>p</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:right"><p>(Intercept)</p></td>
-<td class="text-align:left"><p>6.29</p></td>
-<td class="text-align:left"><p>0.16</p></td>
-<td class="text-align:left"><p>39.78</p></td>
+<tr class="row-even"><td class="text-right"><p>(Intercept)</p></td>
+<td class="text-left"><p>6.29</p></td>
+<td class="text-left"><p>0.16</p></td>
+<td class="text-left"><p>39.78</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p>Strain712</p></td>
-<td class="text-align:left"><p>-1.35</p></td>
-<td class="text-align:left"><p>0.35</p></td>
-<td class="text-align:left"><p>-3.88</p></td>
+<tr class="row-odd"><td class="text-right"><p>Strain712</p></td>
+<td class="text-left"><p>-1.35</p></td>
+<td class="text-left"><p>0.35</p></td>
+<td class="text-left"><p>-3.88</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:right"><p>Strain881</p></td>
-<td class="text-align:left"><p>-3.74</p></td>
-<td class="text-align:left"><p>1.11</p></td>
-<td class="text-align:left"><p>-3.36</p></td>
+<tr class="row-even"><td class="text-right"><p>Strain881</p></td>
+<td class="text-left"><p>-3.74</p></td>
+<td class="text-left"><p>1.11</p></td>
+<td class="text-left"><p>-3.36</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p>Strain899</p></td>
-<td class="text-align:left"><p>-7.27</p></td>
-<td class="text-align:left"><p>5.80</p></td>
-<td class="text-align:left"><p>-1.25</p></td>
+<tr class="row-odd"><td class="text-right"><p>Strain899</p></td>
+<td class="text-left"><p>-7.27</p></td>
+<td class="text-left"><p>5.80</p></td>
+<td class="text-left"><p>-1.25</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:right"><p>StrainTA102</p></td>
-<td class="text-align:left"><p>-1.45</p></td>
-<td class="text-align:left"><p>0.35</p></td>
-<td class="text-align:left"><p>-4.10</p></td>
+<tr class="row-even"><td class="text-right"><p>StrainTA102</p></td>
+<td class="text-left"><p>-1.45</p></td>
+<td class="text-left"><p>0.35</p></td>
+<td class="text-left"><p>-4.10</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p>TreatmentNG</p></td>
-<td class="text-align:left"><p>-2.17</p></td>
-<td class="text-align:left"><p>0.51</p></td>
-<td class="text-align:left"><p>-4.26</p></td>
+<tr class="row-odd"><td class="text-right"><p>TreatmentNG</p></td>
+<td class="text-left"><p>-2.17</p></td>
+<td class="text-left"><p>0.51</p></td>
+<td class="text-left"><p>-4.26</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:right"><p>Strain712:TreatmentNG</p></td>
-<td class="text-align:left"><p>-1.05</p></td>
-<td class="text-align:left"><p>1.70</p></td>
-<td class="text-align:left"><p>-0.62</p></td>
+<tr class="row-even"><td class="text-right"><p>Strain712:TreatmentNG</p></td>
+<td class="text-left"><p>-1.05</p></td>
+<td class="text-left"><p>1.70</p></td>
+<td class="text-left"><p>-0.62</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p>Strain881:TreatmentNG</p></td>
-<td class="text-align:left"><p>5.31</p></td>
-<td class="text-align:left"><p>1.24</p></td>
-<td class="text-align:left"><p>4.30</p></td>
+<tr class="row-odd"><td class="text-right"><p>Strain881:TreatmentNG</p></td>
+<td class="text-left"><p>5.31</p></td>
+<td class="text-left"><p>1.24</p></td>
+<td class="text-left"><p>4.30</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:right"><p>Strain899:TreatmentNG</p></td>
-<td class="text-align:left"><p>9.54</p></td>
-<td class="text-align:left"><p>5.82</p></td>
-<td class="text-align:left"><p>1.64</p></td>
+<tr class="row-even"><td class="text-right"><p>Strain899:TreatmentNG</p></td>
+<td class="text-left"><p>9.54</p></td>
+<td class="text-left"><p>5.82</p></td>
+<td class="text-left"><p>1.64</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p>StrainTA102:TreatmentNG</p></td>
-<td class="text-align:left"><p>3.59</p></td>
-<td class="text-align:left"><p>0.62</p></td>
-<td class="text-align:left"><p>5.79</p></td>
+<tr class="row-odd"><td class="text-right"><p>StrainTA102:TreatmentNG</p></td>
+<td class="text-left"><p>3.59</p></td>
+<td class="text-left"><p>0.62</p></td>
+<td class="text-left"><p>5.79</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="halos-and-lawns">
-<h2>Halos and lawns<a class="headerlink" href="#halos-and-lawns" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="halos-and-lawns">
+<h2>Halos and lawns<a class="headerlink" href="#halos-and-lawns" title="Permalink to this heading">#</a></h2>
 <p>We’ll keep this one simple since it is harder to analyse. The response variable (<code class="docutils literal notranslate"><span class="pre">HaloLawn</span></code>) is binary — the plates either have a lawn or not. We’ll just look at a contingency table of how many plates have halos or lawns under each combination of treatment and strain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">table</span><span class="p">(</span><span class="n">Halo</span> <span class="o">=</span> <span class="n">colonies</span><span class="o">$</span><span class="n">HaloLawn</span><span class="p">,</span> <span class="n">Strain</span> <span class="o">=</span> <span class="n">colonies</span><span class="o">$</span><span class="n">Strain</span><span class="p">,</span> <span class="n">Treatment</span> <span class="o">=</span>  <span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">table</span><span class="p">(</span><span class="n">Halo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colonies</span><span class="o">$</span><span class="n">HaloLawn</span><span class="p">,</span><span class="w"> </span><span class="n">Strain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colonies</span><span class="o">$</span><span class="n">Strain</span><span class="p">,</span><span class="w"> </span><span class="n">Treatment</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">colonies</span><span class="o">$</span><span class="n">Treatment</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1456,8 +1265,8 @@ Halo 421 712 881 899 TA102
 <hr class="docutils" />
 <p><a id="fn1"></a>
 [1]: Here you will work with the script file <code class="docutils literal notranslate"><span class="pre">glm.R</span></code></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1471,7 +1280,7 @@ Halo 421 712 881 899 TA102
             mode: "r"
         },
         kernelOptions: {
-            kernelName: "ir",
+            name: "ir",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1479,44 +1288,125 @@ Halo 421 712 881 899 TA102
     </script>
     <script>kernelName = 'ir'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="18-ModelSimp.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Model simplification</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="18-ModelSimp.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Model simplification</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="20-ModelFitting-NLLS.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="20-ModelFitting-NLLS.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Model Fitting using Non-linear Least-squares</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Samraat Pawar<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-glm">What is a GLM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistical-distributions">Some (statistical) distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gamma-distribution">The Gamma distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-distributions">Other distributions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glm-example">A GLM example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-strains-too">Looking at strains too</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-model">A linear model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-glm">Fitting a GLM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overdispersion">Overdispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-glm-using-a-quasi-poisson-distribution">Fitting a GLM using a quasi-poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">Model predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-the-model">Reporting the model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#halos-and-lawns">Halos and lawns</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

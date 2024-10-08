@@ -1,581 +1,464 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Linear Models: Multiple explanatory variables &#8212; TheMulQuaBio</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/16-MulExpl';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Models: Multiple variables with interactions" href="17-MulExplInter.html" />
     <link rel="prev" title="Linear Models: Analysis of variance" href="15-anova.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="TheMulQuaBio - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="TheMulQuaBio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Maths for Biologists
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
-   01 - Making mathematical statements
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
-   02   - Describing shapes and patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
-   03   - Analysing change, one step at a time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
-   04 - From table arrangements to powerful tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
-   05 - From table arrangements to powerful tools - part 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
-   06 - Analysing change, continuously
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
-   07 - Analysing change, continuously (Part 2)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
-   08 - Calculating accumulated change
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
-   Tutorial 01
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
-   Tutorial 05
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
-   Tutorial 06
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-ExpDesign.html">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-ExpDesign.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/16-MulExpl.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16-MulExpl.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16-MulExpl.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/16-MulExpl.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/16-MulExpl.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Models: Multiple explanatory variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-example">
-   An example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exploring-the-data">
-     Exploring the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boxplots-within-groups">
-     Boxplots within groups
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boxplots-by-groups">
-     Boxplots by groups
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#barplots-again">
-     Barplots again
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-means-and-confidence-intervals">
-     Plotting means and confidence intervals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-the-linear-model">
-   Fitting the linear model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicted-values">
-     Predicted values
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-data">Exploring the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots-within-groups">Boxplots within groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots-by-groups">Boxplots by groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplots-again">Barplots again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-means-and-confidence-intervals">Plotting means and confidence intervals</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-linear-model">Fitting the linear model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-values">Predicted values</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Linear Models: Multiple explanatory variables</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-example">
-   An example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exploring-the-data">
-     Exploring the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boxplots-within-groups">
-     Boxplots within groups
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boxplots-by-groups">
-     Boxplots by groups
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#barplots-again">
-     Barplots again
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-means-and-confidence-intervals">
-     Plotting means and confidence intervals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-the-linear-model">
-   Fitting the linear model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicted-values">
-     Predicted values
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-models-multiple-explanatory-variables">
-<h1>Linear Models: Multiple explanatory variables<a class="headerlink" href="#linear-models-multiple-explanatory-variables" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-models-multiple-explanatory-variables">
+<h1>Linear Models: Multiple explanatory variables<a class="headerlink" href="#linear-models-multiple-explanatory-variables" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>In this chapter we will explore fitting a linear model to data when you have multiple explanatory (predictor) variables.</p>
-<p>The aims of this chapter are<a class="reference external" href="#fn1"><span class="math notranslate nohighlight">\(^{[1]}\)</span></a>:</p>
+<p>The aims of this chapter are<span class="xref myst"><span class="math notranslate nohighlight">\(^{[1]}\)</span></span>:</p>
 <ul class="simple">
 <li><p>Learning to build and fit a linear model that includes several explanatory variables</p></li>
 <li><p>Learning to interpret the summary tables and diagnostics after fitting a linear model with multiple explanatory variables</p></li>
 </ul>
-</div>
-<div class="section" id="an-example">
-<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="an-example">
+<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this heading">#</a></h2>
 <p>The models we looked at in the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> explored whether the log genome size (C value, in picograms) of terrestrial mammals varied with trophic level and whether or not the species is ground dwelling. We will now look at a single model that includes both explanatory variables.</p>
 <p>The first thing to do is look at the data again.</p>
-<div class="section" id="exploring-the-data">
-<h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">¶</a></h3>
+<section id="exploring-the-data">
+<h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory and add some introductory comments.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Load the data saved at the end of the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a>:</p>
 <div class="cell docutils container">
@@ -613,9 +496,9 @@
 <p>Before we do that, there is a lot of missing data in the data frame and we should make sure that we are using the same data for our plots and models. We will subset the data down to the complete data for the three variables:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span> <span class="n">select</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">TrophicLevel</span><span class="p">,</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">GroundDwelling</span><span class="p">,</span><span class="w"> </span><span class="n">TrophicLevel</span><span class="p">,</span><span class="w"> </span>
 <span class="n">logCvalue</span><span class="p">))</span>
-<span class="n">mammals</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
+<span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">na.omit</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -625,55 +508,50 @@
  $ GroundDwelling: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...
  $ TrophicLevel  : Factor w/ 3 levels &quot;Carnivore&quot;,&quot;Herbivore&quot;,..: 1 2 2 2 3 3 3 2 2 3 ...
  $ logCvalue     : num  0.94 1.322 1.381 1.545 0.888 ...
+ - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:120] 2 4 7 9 10 11 14 15 20 21 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:120] &quot;2&quot; &quot;4&quot; &quot;7&quot; &quot;9&quot; ...
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="boxplots-within-groups">
-<h3>Boxplots within groups<a class="headerlink" href="#boxplots-within-groups" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="boxplots-within-groups">
+<h3>Boxplots within groups<a class="headerlink" href="#boxplots-within-groups" title="Permalink to this heading">#</a></h3>
 <p><a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Previously</span></a>, we used the <code class="docutils literal notranslate"><span class="pre">subset</span></code> option to fit a model just to dragonflies. You can use <code class="docutils literal notranslate"><span class="pre">subset</span></code> with plots too.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code> to your script to split the graphics into two panels.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy over and modify the code from the <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA chapter</span></a> to create a boxplot of genome size by trophic level into your script.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Now further modify the code to generate the plots shown in the figure below (you will have to <code class="docutils literal notranslate"><span class="pre">subset</span></code> your data for this, and also use the subset option of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command).</p>
-<hr class="docutils" />
-<img src="./graphics/boxplots.svg" width="600px">
-<small><br> <center> Boxplots of log c value by trophic level, sub-divided by habitat preference.
-</center> </small>
-<hr class="docutils" />
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function’s option <code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">=</span> </code> to add titles to a plot.</p>
 </div>
-</div>
-<div class="section" id="boxplots-by-groups">
-<h3>Boxplots by groups<a class="headerlink" href="#boxplots-by-groups" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="boxplots-by-groups">
+<h3>Boxplots by groups<a class="headerlink" href="#boxplots-by-groups" title="Permalink to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> package provides a very neat way to plot data in groups with the <code class="docutils literal notranslate"><span class="pre">facet</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 
-<span class="nf">ggplot</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">TrophicLevel</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">logCvalue</span><span class="p">))</span> <span class="o">+</span> 
-    <span class="nf">geom_boxplot</span><span class="p">()</span> <span class="o">+</span> <span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span> <span class="o">~</span> <span class="n">GroundDwelling</span><span class="p">)</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrophicLevel</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">logCvalue</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">GroundDwelling</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_9_0.png" src="../_images/16-MulExpl_9_0.png" />
+<img alt="../_images/8b8d61dfa9e7169cb0e2246877532e804b4457e34fc67a193b15184dd1533373.png" src="../_images/8b8d61dfa9e7169cb0e2246877532e804b4457e34fc67a193b15184dd1533373.png" />
 </div>
 </div>
-<p>The code <code class="docutils literal notranslate"><span class="pre">logCvalue</span> <span class="pre">~</span> <span class="pre">TrophicLevel</span> <span class="pre">|</span> <span class="pre">GroundDwelling</span></code> means plot the relationship between genome size and trophic level, but group within levels of ground dwelling. We are using the function <code class="docutils literal notranslate"><span class="pre">bwplot</span></code>, which is provided by <code class="docutils literal notranslate"><span class="pre">lattice</span></code> to create box and whisker plots.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create the lattice plots above from within your script.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create the ggplot plots above from within your script.</p>
 <p>Rearrange this code to have three plots, showing the box and whisker plots for <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>, grouped within the levels of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code>.</p>
-<p>Try reshaping the R plot window and running the command again. Lattice tries to make good use of the available space when creating lattice plots.</p>
-</div>
-<div class="section" id="barplots-again">
-<h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this headline">¶</a></h3>
+<p>Try reshaping the R plot window and running the command again.</p>
+</section>
+<section id="barplots-again">
+<h3>Barplots again<a class="headerlink" href="#barplots-again" title="Permalink to this heading">#</a></h3>
 <p>We’re going to make the barplot code from the <a class="reference internal" href="14-regress.html"><span class="doc std std-doc">Regression chapter</span></a> even more complicated! This time we want to know the mean log genome size within combinations of <code class="docutils literal notranslate"><span class="pre">TrophicLevel</span></code> and <code class="docutils literal notranslate"><span class="pre">GroundDwelling</span></code>. We can still use <code class="docutils literal notranslate"><span class="pre">tapply</span></code>, providing more than one grouping factor. We create a set of grouping factors like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
-<span class="n">groupMeans</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="n">mean</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span><span class="w"> </span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
+<span class="n">groupMeans</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span><span class="w"> </span><span class="n">groups</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -691,13 +569,13 @@ Yes 1.2138170  1.297662 1.299017
 standard errors for the groups <code class="docutils literal notranslate"><span class="pre">groupSE</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">seMean</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
-	<span class="c1"># get rid of missing values</span>
-	<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-	<span class="c1"># calculate the standard error</span>
-	<span class="n">se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-	<span class="c1"># tell the function to report the standard error</span>
-	<span class="nf">return</span><span class="p">(</span><span class="n">se</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">seMean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+<span class="w">	</span><span class="c1"># get rid of missing values</span>
+<span class="w">	</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">na.omit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">	</span><span class="c1"># calculate the standard error</span>
+<span class="w">	</span><span class="n">se</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">	</span><span class="c1"># tell the function to report the standard error</span>
+<span class="w">	</span><span class="nf">return</span><span class="p">(</span><span class="n">se</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -705,9 +583,9 @@ standard errors for the groups <code class="docutils literal notranslate"><span 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">,</span><span class="w"> </span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">)</span>
 
-<span class="n">groupMeans</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span><span class="o">=</span><span class="n">mean</span><span class="p">)</span>
+<span class="n">groupMeans</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span><span class="w"> </span><span class="n">groups</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="o">=</span><span class="n">mean</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -722,7 +600,7 @@ Yes 1.2138170  1.297662 1.299017
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groupSE</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">FUN</span><span class="o">=</span><span class="n">seMean</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">groupSE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tapply</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="p">,</span><span class="w"> </span><span class="n">groups</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="o">=</span><span class="n">seMean</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">groupSE</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -745,22 +623,22 @@ the bars and the length of error bar caps.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># get upper and lower standard error height</span>
-<span class="n">upperSE</span> <span class="o">&lt;-</span> <span class="n">groupMeans</span> <span class="o">+</span> <span class="n">groupSE</span>
-<span class="n">lowerSE</span> <span class="o">&lt;-</span> <span class="n">groupMeans</span> <span class="o">-</span> <span class="n">groupSE</span>
+<span class="n">upperSE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">groupMeans</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">groupSE</span>
+<span class="n">lowerSE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">groupMeans</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">groupSE</span>
 <span class="c1"># create barplot</span>
-<span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span> <span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span> <span class="s">&#39; log C value (pg) &#39;</span> <span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span> <span class="s">&#39; white &#39;</span> <span class="p">,</span> <span class="s">&#39; grey70 &#39;</span><span class="p">))</span>
-<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">len</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+<span class="n">barMids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">upperSE</span><span class="p">)),</span><span class="w"> </span><span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="w"> </span><span class="s">&#39; log C value (pg) &#39;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="s">&#39; white &#39;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&#39; grey70 &#39;</span><span class="p">))</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span><span class="w"> </span><span class="n">upperSE</span><span class="p">,</span><span class="w"> </span><span class="n">barMids</span><span class="p">,</span><span class="w"> </span><span class="n">lowerSE</span><span class="p">,</span><span class="w"> </span><span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_17_0.png" src="../_images/16-MulExpl_17_0.png" />
+<img alt="../_images/74a4fa4fcc86b2c3de7d26a6cf21254e55ad902aa7419a08c55bd37d3aeef4bf.png" src="../_images/74a4fa4fcc86b2c3de7d26a6cf21254e55ad902aa7419a08c55bd37d3aeef4bf.png" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Generate the barplot above and then edit your script to change the colours and error bar lengths to your taste.</p>
-</div>
-<div class="section" id="plotting-means-and-confidence-intervals">
-<h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="plotting-means-and-confidence-intervals">
+<h3>Plotting means and confidence intervals<a class="headerlink" href="#plotting-means-and-confidence-intervals" title="Permalink to this heading">#</a></h3>
 <p>We’ll use the <code class="docutils literal notranslate"><span class="pre">plotmeans</span></code> function again as an exercise to change graph settings and to prepare figures for reports and write ups. This is the figure you should be able to reproduce the figure below.</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/plotmeans.svg"><img alt="../_images/plotmeans.svg" src="../_images/plotmeans.svg" width="600px" /></a>
@@ -777,10 +655,10 @@ set the <code class="docutils literal notranslate"><span class="pre">ylim</span>
 <li><p><strong>Figure legends</strong>: A figure caption and legend should give a clear stand-alone description of the whole figure.</p></li>
 <li><p><strong>Referring to figures</strong>: You <em>must</em> link from your text to your figures — a reader has to know which figures refer to which results. So: “There are clear differences in mean genome size between species at different trophic levels and between ground dwelling and other species, Figure xx”.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="fitting-the-linear-model">
-<h2>Fitting the linear model<a class="headerlink" href="#fitting-the-linear-model" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="fitting-the-linear-model">
+<h2>Fitting the linear model<a class="headerlink" href="#fitting-the-linear-model" title="Permalink to this heading">#</a></h2>
 <p>All those exploratory visualizations suggest:</p>
 <ul class="simple">
 <li><p>Carnivores have smaller genome size; omnivores have larger genome size.</p></li>
@@ -792,7 +670,7 @@ set the <code class="docutils literal notranslate"><span class="pre">ylim</span>
 <p><span class="math notranslate nohighlight">\(\star\)</span> First, fit the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span> <span class="o">~</span> <span class="n">TrophicLevel</span> <span class="o">+</span> <span class="n">GroundDwelling</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mammals</span><span class="p">)</span>    
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logCvalue</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">TrophicLevel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GroundDwelling</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mammals</span><span class="p">)</span><span class="w">    </span>
 </pre></div>
 </div>
 </div>
@@ -807,7 +685,7 @@ before we rush into interpretation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_22_0.png" src="../_images/16-MulExpl_22_0.png" />
+<img alt="../_images/922cb0c13cc9b14636d3d9c6b05b68bc94994f639a2174cb078c8c4d8aad7068.png" src="../_images/922cb0c13cc9b14636d3d9c6b05b68bc94994f639a2174cb078c8c4d8aad7068.png" />
 </div>
 </div>
 <p>Examine these diagnostic plots. There are six predicted values now - three trophic levels for each of the two levels of ground dwelling. Those plots look ok so now we can look at the analysis of variance table:</p>
@@ -818,7 +696,7 @@ before we rush into interpretation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table>
+<div class="output text_html"><table class="dataframe">
 <caption>A anova: 3 × 5</caption>
 <thead>
 	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
@@ -841,7 +719,7 @@ before we rush into interpretation.</p>
 <p>Now we can look at the summary table to see the coefficients:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
@@ -874,36 +752,36 @@ F-statistic: 22.92 on 3 and 255 DF,  p-value: 3.602e-13
 omnivory and both of these have large effects sizes, each introducing about a 20% difference in genome size from the non-ground dwelling carnivores. In contrast, herbivory makes a small difference — about 8%.</p>
 <p>Because the difference is small and the standard error is large, the <span class="math notranslate nohighlight">\(t\)</span> value suggests that this difference might arise just by chance. Put another way, it isn’t significant.</p>
 <p>The table below shows how these four coefficients combine to give the predicted values for each of the group means.</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p></p></th>
-<th class="text-align:left head"><p>Carnivore</p></th>
-<th class="text-align:left head"><p>Herbivore</p></th>
-<th class="text-align:left head"><p>Omnivore</p></th>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Carnivore</p></th>
+<th class="head text-left"><p>Herbivore</p></th>
+<th class="head text-left"><p>Omnivore</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><strong>Not ground</strong></p></td>
-<td class="text-align:left"><p><em>0.98</em> = 0.98</p></td>
-<td class="text-align:left"><p><em>0.98 + 0.08</em> = 1.06</p></td>
-<td class="text-align:left"><p><em>0.98 + 0.17</em> = 1.15</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>Not ground</strong></p></td>
+<td class="text-left"><p><em>0.98</em> = 0.98</p></td>
+<td class="text-left"><p><em>0.98 + 0.08</em> = 1.06</p></td>
+<td class="text-left"><p><em>0.98 + 0.17</em> = 1.15</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><strong>Ground</strong></p></td>
-<td class="text-align:left"><p><em>0.98 + 0.21</em> = 1.19</p></td>
-<td class="text-align:left"><p><em>0.98  + 0.08 + 0.21</em> =1.27</p></td>
-<td class="text-align:left"><p><em>0.98 + 0.17 + 0.21</em> = 1.36</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>Ground</strong></p></td>
+<td class="text-left"><p><em>0.98 + 0.21</em> = 1.19</p></td>
+<td class="text-left"><p><em>0.98  + 0.08 + 0.21</em> =1.27</p></td>
+<td class="text-left"><p><em>0.98 + 0.17 + 0.21</em> = 1.36</p></td>
 </tr>
 </tbody>
 </table>
-<div class="section" id="predicted-values">
-<span id="mulexp-predicted-values"></span><h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this headline">¶</a></h3>
+<section id="predicted-values">
+<span id="mulexp-predicted-values"></span><h3>Predicted values<a class="headerlink" href="#predicted-values" title="Permalink to this heading">#</a></h3>
 <p>Getting the model predictions by hand in this way is tedious and error prone. There is a handy function called <code class="docutils literal notranslate"><span class="pre">predict</span></code> which uses the model directly to calculate values. The default is to give you the prediction for each point in the original data, but you can also ask for specific predictions.</p>
 <p>The first thing to do is to set up a small data frame containing the explanatory values we want to use. The variable names and the level name have to match <em>exactly</em>, so we’ll use the <code class="docutils literal notranslate"><span class="pre">levels</span></code> function to get the names. We want to look at all six combinations, so we’ll use the <code class="docutils literal notranslate"><span class="pre">rep</span></code> function to set this up. The <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">=</span> <span class="pre">2</span></code> option repeats each value twice in succession; the <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">3</span></code> options repeats the whole set of values three times.</p>
 <p>Let’s do it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># data frame of combinations of variables</span>
-<span class="n">gd</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<span class="n">gd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">GroundDwelling</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">gd</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -916,7 +794,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">),</span> <span class="n">each</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">TrophicLevel</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">tl</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -929,7 +807,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">GroundDwelling</span> <span class="o">=</span> <span class="n">gd</span><span class="p">,</span> <span class="n">TrophicLevel</span> <span class="o">=</span> <span class="n">tl</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">GroundDwelling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gd</span><span class="p">,</span><span class="w"> </span><span class="n">TrophicLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tl</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -937,7 +815,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 <p>Now we have the data frame of values we want, we can use <code class="docutils literal notranslate"><span class="pre">predict</span></code>. Just as when we created log values, we can save the output back into a new column in the data frame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span><span class="o">$</span><span class="n">predict</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">predVals</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">predVals</span><span class="o">$</span><span class="n">predict</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predVals</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">predVals</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -958,15 +836,15 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 <p><span class="math notranslate nohighlight">\(\star\)</span> Make a copy of the barplot and arrows code from above and modify it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">barMids</span> <span class="o">&lt;-</span> <span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1.4</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log C value (pg)&#39;</span><span class="p">,</span> <span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;grey70&#39;</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">barMids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">barplot</span><span class="p">(</span><span class="n">groupMeans</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1.4</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&#39;log C value (pg)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">beside</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;white&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;grey70&#39;</span><span class="p">))</span>
 
-<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">upperSE</span><span class="p">,</span> <span class="n">barMids</span><span class="p">,</span> <span class="n">lowerSE</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">len</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
-<span class="nf">points</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span> <span class="n">predVals</span><span class="o">$</span><span class="n">predict</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">12</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span><span class="w"> </span><span class="n">upperSE</span><span class="p">,</span><span class="w"> </span><span class="n">barMids</span><span class="p">,</span><span class="w"> </span><span class="n">lowerSE</span><span class="p">,</span><span class="w"> </span><span class="n">ang</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="n">barMids</span><span class="p">,</span><span class="w"> </span><span class="n">predVals</span><span class="o">$</span><span class="n">predict</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16-MulExpl_35_0.png" src="../_images/16-MulExpl_35_0.png" />
+<img alt="../_images/a5cfcc0235087ec61bbad12978db43c2ad26e8739de5a8b56d0096a7ea7c1e31.png" src="../_images/a5cfcc0235087ec61bbad12978db43c2ad26e8739de5a8b56d0096a7ea7c1e31.png" />
 </div>
 </div>
 <p>The red markers do not match to the calculated means. This is because the model only includes a single difference between ground and non-ground species, which has to be the same for each trophic group. That is, there is no interaction between trophic level and ground / non-ground identity of each species in the current model.</p>
@@ -975,9 +853,9 @@ omnivory and both of these have large effects sizes, each introducing about a 20
 <hr class="docutils" />
 <p><a id="fn1"></a>
 [1]: Here you work with the script file <code class="docutils literal notranslate"><span class="pre">MulExpl.R</span></code></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -991,7 +869,7 @@ omnivory and both of these have large effects sizes, each introducing about a 20
             mode: "r"
         },
         kernelOptions: {
-            kernelName: "ir",
+            name: "ir",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -999,44 +877,115 @@ omnivory and both of these have large effects sizes, each introducing about a 20
     </script>
     <script>kernelName = 'ir'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="15-anova.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Linear Models: Analysis of variance</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="15-anova.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear Models: Analysis of variance</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="17-MulExplInter.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="17-MulExplInter.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Linear Models: Multiple variables with interactions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Samraat Pawar<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-data">Exploring the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots-within-groups">Boxplots within groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots-by-groups">Boxplots by groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplots-again">Barplots again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-means-and-confidence-intervals">Plotting means and confidence intervals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-linear-model">Fitting the linear model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-values">Predicted values</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

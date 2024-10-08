@@ -1,656 +1,463 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Experimental design and Data exploration &#8212; TheMulQuaBio</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/12-ExpDesign';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic hypothesis testing: \(t\) and \(F\) tests" href="13-t_F_tests.html" />
     <link rel="prev" title="Data Management and Visualization" href="08-Data_R.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">TheMulQuaBio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome to The Multilingual Quantitative Biologist!
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Computing
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="TheMulQuaBio - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="TheMulQuaBio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Unix.html">
-   UNIX and Linux
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-ShellScripting.html">
-   Shell scripting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Git.html">
-   Version control with Git
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-LaTeX.html">
-   Scientific documents with
-   <span class="math notranslate nohighlight">
-    \(\LaTeX\)
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Python_I.html">
-   Biological Computing in Python I
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-R.html">
-   Biological Computing in R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Python_II.html">
-   Biological Computing in Python II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-ShellScripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-LaTeX.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Python_I.html">Biological Computing in Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-R.html">Biological Computing in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Python_II.html">Biological Computing in Python II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Maths for Biologists
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maths for Biologists</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">
-   01 - Making mathematical statements
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">
-   02   - Describing shapes and patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">
-   03   - Analysing change, one step at a time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">
-   04 - From table arrangements to powerful tools
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">
-   05 - From table arrangements to powerful tools - part 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">
-   06 - Analysing change, continuously
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">
-   07 - Analysing change, continuously (Part 2)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">
-   08 - Calculating accumulated change
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">
-   Tutorial 01
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">
-   Tutorial 05
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">
-   Tutorial 06
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture01/01_Making_mathematical_statements.html">01 - Making mathematical statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture02/02_Describing_shapes_and_patterns.html">02   - Describing shapes and patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture03/03_Analysing_change%2C_one_step_at_a_time.html">03   - Analysing change, one step at a time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture04/04_From_table_arrangements_to_powerful_tools.html">04 - From table arrangements to powerful tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture05/05_From_table_arrangements_to_powerful_tools_part2.html">05 - From table arrangements to powerful tools - part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture06/06_Analysing_change_continuously.html">06 - Analysing change, continuously</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture07/07_Analysing_change_continuously_part2.html">07 - Analysing change, continuously (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/lecture08/08_Calculating_accumulated_change.html">08 - Calculating accumulated change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture01/Tutorial_01.html">Tutorial 01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture05/Tutorial_05.html">Tutorial 05</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathscourse/tutorials/lecture06/Tutorial_06.html">Tutorial 06</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Basic Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Stats-Intro.html">
-   Introduction to this section
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Data_R.html">
-   Data Management and Visualization
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Experimental design and Data exploration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-t_F_tests.html">
-   Basic hypothesis testing:
-   <span class="math notranslate nohighlight">
-    \(t\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(F\)
-   </span>
-   tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-regress.html">
-   Linear Models: Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-anova.html">
-   Linear Models: Analysis of variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-MulExpl.html">
-   Linear Models: Multiple explanatory variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-MulExplInter.html">
-   Linear Models: Multiple variables with interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-ModelSimp.html">
-   Model simplification
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Stats-Intro.html">Introduction to this section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Data_R.html">Data Management and Visualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13-t_F_tests.html">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-regress.html">Linear Models: Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-MulExpl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17-MulExplInter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-ModelSimp.html">Model simplification</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced Data Analyses and Statistics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="19-glm.html">
-   Generalised Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20-ModelFitting-NLLS.html">
-   Model Fitting using Non-linear Least-squares
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="19-glm.html">Generalised Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20-ModelFitting-NLLS.html">Model Fitting using Non-linear Least-squares</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendices
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-JupyIntro.html">
-   Introduction to Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Data-Python.html">
-   Data analyses  with Python &amp; Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Maths.html">
-   Mathematical models in Jupyter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Databases.html">
-   Databases
-   <span class="tocSkip">
-   </span>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-NLLS-Python.html">
-   Model fitting in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-MiniProj.html">
-   The Computing Miniproject
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Appendix-Assessment.html">
-   Coursework Assessment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-JupyIntro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Data-Python.html">Data analyses  with Python &amp; Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Databases.html">Databases <span class="tocSkip"></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-NLLS-Python.html">Model fitting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-MiniProj.html">The Computing Miniproject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix-Assessment.html">Coursework Assessment</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/12-ExpDesign.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mhasoba/TheMulQuaBio"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/12-ExpDesign.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mhasoba/TheMulQuaBio/issues/new?title=Issue%20on%20page%20%2Fnotebooks/12-ExpDesign.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mhasoba/TheMulQuaBio/master?urlpath=tree/notebooks/12-ExpDesign.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/12-ExpDesign.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Experimental design and Data exploration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-statistical-parlance">
-     Some statistical parlance
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#descriptive-statistics">
-   Descriptive Statistics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#descriptive-statistics-in-r">
-     Descriptive statistics in R
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-types-and-statistical-distributions">
-     Data types and (statistical) distributions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampling-from-distributions-in-r">
-     Sampling from distributions in R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">
-   Two basic rules of experimental design and sampling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-exploration">
-   Data exploration
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-general-tips">
-     Some general tips
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-case-study">
-     A case study
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">
-     Visualise distributions of the variables
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">
-     Take a quick look at effects of certain factors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">
-     Explore further by scatter-plotting two variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#saving-your-results">
-   Saving your results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#saving-the-exploratory-graphics">
-     Saving the exploratory graphics
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#saving-other-results">
-     Saving other results
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#from-data-exploration-to-statistical-analysis">
-   From data exploration to statistical analysis
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistical-parlance">Some statistical parlance</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics-in-r">Descriptive statistics in R</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-and-statistical-distributions">Data types and (statistical) distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-distributions-in-r">Sampling from distributions in R</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">Two basic rules of experimental design and sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data exploration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-general-tips">Some general tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-case-study">A case study</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">Visualise distributions of the variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">Take a quick look at effects of certain factors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">Explore further by scatter-plotting two variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-results">Saving your results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-exploratory-graphics">Saving the exploratory graphics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-other-results">Saving other results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-data-exploration-to-statistical-analysis">From data exploration to statistical analysis</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Experimental design and Data exploration</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-statistical-parlance">
-     Some statistical parlance
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#descriptive-statistics">
-   Descriptive Statistics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#descriptive-statistics-in-r">
-     Descriptive statistics in R
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-types-and-statistical-distributions">
-     Data types and (statistical) distributions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampling-from-distributions-in-r">
-     Sampling from distributions in R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">
-   Two basic rules of experimental design and sampling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-exploration">
-   Data exploration
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-general-tips">
-     Some general tips
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-case-study">
-     A case study
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">
-     Visualise distributions of the variables
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">
-     Take a quick look at effects of certain factors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">
-     Explore further by scatter-plotting two variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#saving-your-results">
-   Saving your results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#saving-the-exploratory-graphics">
-     Saving the exploratory graphics
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#saving-other-results">
-     Saving other results
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#from-data-exploration-to-statistical-analysis">
-   From data exploration to statistical analysis
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="experimental-design-and-data-exploration">
-<h1>Experimental design and Data exploration<a class="headerlink" href="#experimental-design-and-data-exploration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="experimental-design-and-data-exploration">
+<h1>Experimental design and Data exploration<a class="headerlink" href="#experimental-design-and-data-exploration" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
 <p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
 <p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
@@ -663,17 +470,19 @@
 </ul>
 <p>We are going to start off with the simplest of scenarios for statistical testing — that you want to determine whether a sample, or a pair of samples meet some expectation (hypothesis) or not.</p>
 <p>First, some let’s revisit some key concepts and terminology.</p>
-<div class="section" id="some-statistical-parlance">
-<span id="expdesign-some-statistical-parlance"></span><h3>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Permalink to this headline">¶</a></h3>
+<section id="some-statistical-parlance">
+<span id="expdesign-some-statistical-parlance"></span><h3>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Permalink to this heading">#</a></h3>
 <p>The following terms are important for you to get familiar with:</p>
 <ul class="simple">
 <li><p><strong>(Statistical) Population</strong>: A <em>complete set</em> of items that share at least one <em>attribute</em> of interest. This attribute of interest is the target of your statistical analysis. For example, if we are interested in studying the weight of year-old cod in the Oceans, the population consists of <em>all</em> year-old cod, but more specifically, the weight measurements of all the individuals of the cod population is what we want to analyse.</p></li>
 </ul>
 <hr class="docutils" />
-<div class="figure align-default" id="cod-collapse">
+<figure class="align-default" id="cod-collapse">
 <a class="reference internal image-reference" href="../_images/Cod.jpg"><img alt="Cod fisheries collapse" src="../_images/Cod.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</strong> <br>(Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)</span><a class="headerlink" href="#cod-collapse" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Collapse of Atlantic cod stocks off the East Coast of Newfoundland in 1992.</strong> <br>(Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Collapse_of_the_Atlantic_northwest_cod_fishery">Wikipedia</a>)</span><a class="headerlink" href="#cod-collapse" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <ul class="simple">
 <li><p><strong>(Statistical) Distribution</strong>: A mathematical description (expressed as a mathematical equation) of the properties of a population of interest. Theoreticians have come up with a bunch of distributions (e.g., Gaussian or Normal, Poisson, Binomial, etc.) that are appropriate for different kinds of data. Figuring out which distribution best describes a population of interest is one of the first steps in a statistical analysis. The primary goal of experimental design is to collect and measure sufficient individuals of a population to adequately characterize the statistical properties of an attribute (e.g., body weight of yearling cod) of interest. That is, the <em>statistical distribution</em> that best characterizes the attribute.</p></li>
@@ -682,10 +491,10 @@
 <li><p><strong>Statistic</strong> (singular):  An <em>estimate</em> of a statistical parameter of the population of interest, obtained by calculating the measure for a <em>sample</em>. An example would be the average or mean weight of individuals in a sample of one-year old cod in the Atlantic Ocean. This is also known as a <em>descriptive statistic</em>. Therefore, a <em>Statistic</em> is to a <em>Statistical Parameter</em> what a  <em>Sample</em> is to the (Statistical) <em>Population</em>. For example, the average of a sample of cod weights is a statistic that  <em>estimates</em> the “real” average of the weights of the entire one-year Cod population (which is its statistical parameter). This real average is also the mean value of the theoretical distribution (e.g., Gaussian) that the population is expected to follow.</p></li>
 <li><p><strong>Hypothesis</strong>: An informed  <em>postulate</em> about an attribute of your population of interest. For example, you may hypothesize that the one-year old cod population’s mean weight has declined over the last two decades because of preferential fishing of larger individuals. You will typically confront your main hypothesis with a <em>Null Hypothesis</em>, to minimize the risk of making a significant <em>Type I error</em>. This is the probability of wrongly accepting an <em>alternative (or main) hypothesis</em> even is not really true, and rejecting the null hypothesis (e.g., the yearling cods have in reality not declined in weight, but you wrongly infer that they have). This is a big NO NO from a scientific and philosophical standpoint. The rate or probability of the Type I error is denoted by the Greek letter <span class="math notranslate nohighlight">\(\alpha\)</span>, and equals the <em>significance level</em> of a statistical test. Wrongly rejecting a true alternative (main) hypothesis is also  a <em>Type II</em> error</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="descriptive-statistics">
-<span id="expdesign-descriptive-stats"></span><h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="descriptive-statistics">
+<span id="expdesign-descriptive-stats"></span><h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this heading">#</a></h2>
 <p>The key statistical measures that describe a sample (or a population) are:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic_mean"><strong>Mean</strong>  (or average, or more precisely, the arithmetic mean)</a>:  This is a measure of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_tendency"><em>central tendency</em></a> of the sample and population (what values most of the data tend to have). Given a sample <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_n\)</span> of size <span class="math notranslate nohighlight">\(n\)</span>, the mean is typically denoted by a <span class="math notranslate nohighlight">\(\bar{x}\)</span>:</p></li>
@@ -704,54 +513,54 @@
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Median"><strong>Median</strong></a>: The above two statistics (mean and sd) are particularly meaningful when the sample and population have a symmetric distribution (e.g., normal or gaussian). When the distribution is not symmetric (that is, it is <a class="reference external" href="https://en.wikipedia.org/wiki/Skewness"><em>skewed</em></a>), the <em>median</em>  is a better measure of central tendency. This is the middle value in the ordered set of data. That is, exactly 50% of the data lie below and 50% lie above the median.</p></li>
 <li><p>Other descriptive statistics you should keep in mind is the <a class="reference external" href="https://en.wikipedia.org/wiki/Range_(statistics)">range</a> (difference between the largest and smallest values), and the <a class="reference external" href="https://en.wikipedia.org/wiki/Quartile">quartiles</a> (values lying in the data divided into the intervals <span class="math notranslate nohighlight">\([{1\over4}, {1\over 2},{3\over 4}, 1]\)</span> or at 1% intervals (percentiles). Box-plots, which you have seen, represent a number of these statistics in one figure, as you will soon learn in practice below.</p></li>
 </ul>
-<div class="section" id="descriptive-statistics-in-r">
-<span id="expdesign-descriptive-statistics-in-r"></span><h3>Descriptive statistics in R<a class="headerlink" href="#descriptive-statistics-in-r" title="Permalink to this headline">¶</a></h3>
+<section id="descriptive-statistics-in-r">
+<span id="expdesign-descriptive-statistics-in-r"></span><h3>Descriptive statistics in R<a class="headerlink" href="#descriptive-statistics-in-r" title="Permalink to this heading">#</a></h3>
 <p>Here are the R commands for the key descriptive statistics:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
-<th class="text-align:left head"><p>Functionality</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Command</p></th>
+<th class="head text-left"><p>Functionality</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">mean(x)</span></code></p></td>
-<td class="text-align:left"><p>Compute mean (of a vector or matrix)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">mean(x)</span></code></p></td>
+<td class="text-left"><p>Compute mean (of a vector or matrix)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">sd(x)</span></code></p></td>
-<td class="text-align:left"><p>Standard deviation</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sd(x)</span></code></p></td>
+<td class="text-left"><p>Standard deviation</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">var(x)</span></code></p></td>
-<td class="text-align:left"><p>Variance</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">var(x)</span></code></p></td>
+<td class="text-left"><p>Variance</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">median(x)</span></code></p></td>
-<td class="text-align:left"><p>Median</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">median(x)</span></code></p></td>
+<td class="text-left"><p>Median</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">quantile(x,0.05)</span></code></p></td>
-<td class="text-align:left"><p>Compute the 0.05 quantile</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">quantile(x,0.05)</span></code></p></td>
+<td class="text-left"><p>Compute the 0.05 quantile</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">range(x)</span></code></p></td>
-<td class="text-align:left"><p>Range of the data</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">range(x)</span></code></p></td>
+<td class="text-left"><p>Range of the data</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"> <span class="pre">min(x)</span></code></p></td>
-<td class="text-align:left"><p>Minimum</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"> <span class="pre">min(x)</span></code></p></td>
+<td class="text-left"><p>Minimum</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">max(x)</span></code></p></td>
-<td class="text-align:left"><p>Maximum</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">max(x)</span></code></p></td>
+<td class="text-left"><p>Maximum</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">sum(x)</span></code></p></td>
-<td class="text-align:left"><p>Sum all elements</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sum(x)</span></code></p></td>
+<td class="text-left"><p>Sum all elements</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="data-types-and-statistical-distributions">
-<span id="expdesign-data-types-and-distributions"></span><h3>Data types and (statistical) distributions<a class="headerlink" href="#data-types-and-statistical-distributions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-types-and-statistical-distributions">
+<span id="expdesign-data-types-and-distributions"></span><h3>Data types and (statistical) distributions<a class="headerlink" href="#data-types-and-statistical-distributions" title="Permalink to this heading">#</a></h3>
 <p>You will typically encounter or sample the following main types of data:</p>
 <ul class="simple">
 <li><p><strong>Continuous numeric</strong>: Data that can take decimal values (real numbers) such as human height or weight. These may be unbounded (any value between negative infinity to positive infinity), or bounded (e.g., between or zero and some upper positive number) like human weight. This is the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
 <li><p><strong>Discrete numeric</strong>: Integer (whole) numbers such as counts of individuals in a population, e.g., The number of bacteria in a ml of pond water. This is the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type in R.</p></li>
 <li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
-<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference external" href="08-Data_R.ipynb#Basic-plotting-commands">used previously</a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
+<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <span class="xref myst">used previously</span> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
 <li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
 </ul>
 <p>While designing experiments or exploring data, you need to keep in mind that each data type will often be best-represented by a particular <em>statistical distribution</em>. For example, continuous numeric data are <em>often</em> normally distributed. On the other hand, count data are likely to be distributed according to the Poisson distribution.</p>
@@ -768,38 +577,38 @@
 <li><p>Ground-cover of grass in a quadrat</p></li>
 <li><p>Winning side in chess</p></li>
 </ul>
-</div>
-<div class="section" id="sampling-from-distributions-in-r">
-<span id="expdesign-sampling-from-distributions-in-r"></span><h3>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sampling-from-distributions-in-r">
+<span id="expdesign-sampling-from-distributions-in-r"></span><h3>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Permalink to this heading">#</a></h3>
 <p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling “experiment” . In particular, the following R commands are important:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Command</p></th>
-<th class="text-align:left head"><p>Functionality</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Command</p></th>
+<th class="head text-left"><p>Functionality</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rnorm(n,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
-<td class="text-align:left"><p>Draw <code class="docutils literal notranslate"><span class="pre">n</span></code> <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normally-distributed</a> random numbers with mean = 0 and sd = 1</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">rnorm(n,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-left"><p>Draw <code class="docutils literal notranslate"><span class="pre">n</span></code> <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normally-distributed</a> random numbers with mean = 0 and sd = 1</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
-<td class="text-align:left"><p>Density function of the normal distribution, which can be used to calculate the probability of a particular event or a set of independent events</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">dnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-left"><p>Density function of the normal distribution, which can be used to calculate the probability of a particular event or a set of independent events</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">qnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
-<td class="text-align:left"><p>Cumulative density function</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">qnorm(x,</span> <span class="pre">m=0,</span> <span class="pre">sd=1)</span></code></p></td>
+<td class="text-left"><p>Cumulative density function</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">runif(n,</span> <span class="pre">min=0,</span> <span class="pre">max=2)</span></code></p></td>
-<td class="text-align:left"><p>Twenty random numbers from uniform distribution with bounds <span class="math notranslate nohighlight">\([0, 2]\)</span></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">runif(n,</span> <span class="pre">min=0,</span> <span class="pre">max=2)</span></code></p></td>
+<td class="text-left"><p>Twenty random numbers from uniform distribution with bounds <span class="math notranslate nohighlight">\([0, 2]\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rpois(n,</span> <span class="pre">lambda=10)</span></code></p></td>
-<td class="text-align:left"><p>Twenty random numbers from the Poisson(<span class="math notranslate nohighlight">\(\lambda\)</span>) distribution</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">rpois(n,</span> <span class="pre">lambda=10)</span></code></p></td>
+<td class="text-left"><p>Twenty random numbers from the Poisson(<span class="math notranslate nohighlight">\(\lambda\)</span>) distribution</p></td>
 </tr>
 </tbody>
 </table>
 <p>Let’s try some of these. Generate a random sample of 10:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -826,13 +635,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_5_0.png" src="../_images/12-ExpDesign_5_0.png" />
+<img alt="../_images/e8acdaefd7508b17685ef2f4865a52d4d280e6d3434ae35f1ae255459f110b3a.png" src="../_images/e8acdaefd7508b17685ef2f4865a52d4d280e6d3434ae35f1ae255459f110b3a.png" />
 </div>
 </div>
 <p>Probability of getting a value of 1 or -1 from a normally distributed random number with mean = 0 and sd = 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -841,7 +650,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -851,7 +660,7 @@
 <p>Probability of getting large values given the same distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -861,7 +670,7 @@
 <p>Very small!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -870,24 +679,24 @@
 </div>
 <p>Zero!</p>
 <p>Look up the documentation and examples for the other commands/functions listed above and many others that are available.</p>
-</div>
-</div>
-<div class="section" id="two-basic-rules-of-experimental-design-and-sampling">
-<h2>Two basic rules of experimental design and sampling<a class="headerlink" href="#two-basic-rules-of-experimental-design-and-sampling" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="two-basic-rules-of-experimental-design-and-sampling">
+<h2>Two basic rules of experimental design and sampling<a class="headerlink" href="#two-basic-rules-of-experimental-design-and-sampling" title="Permalink to this heading">#</a></h2>
 <p>In general, while designing experiments, and sampling from a  <em>population</em>, there are two key (and simple) rules:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>The more you sample, the more your sample’s distribution will look like the population distribution</strong> (obviously!)</p></li>
 <li><p><strong>The more you sample, the closer will your sample statistic be to the population’s statistical parameter</strong> (the central limit theorem; when the statistical parameter is the mean, this is the “law of large numbers”)</p></li>
 </ol>
 <p>Let’s test rule 1 using R. We will perform a “experiment” by generating random samples of increasing size from the normal distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample5</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="c1"># Draw 5 normal random nos w/ mean 0 and s.d. 1:</span>
-<span class="n">MySample10</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> 
-<span class="n">MySample20</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> 
-<span class="n">MySample40</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">MySample80</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">80</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">MySample160</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">160</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MySample5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># Draw 5 normal random nos w/ mean 0 and s.d. 1:</span>
+<span class="n">MySample10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span>
+<span class="n">MySample20</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span>
+<span class="n">MySample40</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">MySample80</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">MySample160</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">160</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -895,29 +704,29 @@
 <p>Now let’s visualize these “samples”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfcol</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span> <span class="c1">#initialize multi-paneled plot</span>
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample5</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 5&#39;</span><span class="p">)</span> 
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample10</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 10&#39;</span><span class="p">)</span> 
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample20</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 20&#39;</span><span class="p">)</span> 
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample40</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 40&#39;</span><span class="p">)</span> 
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample80</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 80&#39;</span><span class="p">)</span> 
-<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">));</span> <span class="nf">hist</span><span class="p">(</span><span class="n">MySample160</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&#39;n = 160&#39;</span><span class="p">)</span> 
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfcol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span><span class="w"> </span><span class="c1">#initialize multi-paneled plot</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample5</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 5&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample10</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 10&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample20</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 20&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample40</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 40&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample80</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 80&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">));</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">MySample160</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;n = 160&#39;</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_19_0.png" src="../_images/12-ExpDesign_19_0.png" />
+<img alt="../_images/75e122efc809620712c037f982e2e04f8187e79762c482a62c1819ffb4f499a3.png" src="../_images/75e122efc809620712c037f982e2e04f8187e79762c482a62c1819ffb4f499a3.png" />
 </div>
 </div>
 <p>Rule 2 above states that if I was to repeat even <span class="math notranslate nohighlight">\(n = 5\)</span> sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
 <p>If you give due regard to the two rules of experimental design above, and consider the type of distribution your population of interest follows, you will have taken some basic, important steps towards designing an effective study.</p>
 <p>A more rigorous method for designing experiments is to perform a <a class="reference external" href="https://en.wikipedia.org/wiki/Power_(statistics)">power analysis</a>. Power analyses allow you to estimate the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size. Covering this is outside the scope of the current course, but you might want to have a look at <a class="reference external" href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
 <p>OK, so you have performed your experiments or field sampling, or some data have fallen into your lap. Let’s move on to data exploration.</p>
-</div>
-<div class="section" id="data-exploration">
-<h2>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="some-general-tips">
-<h3>Some general tips<a class="headerlink" href="#some-general-tips" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-exploration">
+<h2>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this heading">#</a></h2>
+<section id="some-general-tips">
+<h3>Some general tips<a class="headerlink" href="#some-general-tips" title="Permalink to this heading">#</a></h3>
 <p>Statistics is a bit of an art.</p>
 <p>That is why <em>a priori</em> visualization is important, and directly cutting to the (statistical) chase can often leave one floundering with confusing coefficient estimates and model fits (or over-fits) and overall uncertainty about whether you have picked the right statistical test.</p>
 <ul class="simple">
@@ -932,9 +741,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="a-case-study">
-<h3>A case study<a class="headerlink" href="#a-case-study" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="a-case-study">
+<h3>A case study<a class="headerlink" href="#a-case-study" title="Permalink to this heading">#</a></h3>
 <p>As a case study, we will use data from a paper looking at the relationship between genome size and body size across species of dragonflies and damselflies (<a class="reference external" href="http://en.wikipedia.org/wiki/Odonata">Odonata</a>):</p>
 <blockquote>
 <div><p>Ardila-Garcia, AM &amp; Gregory, TR (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
@@ -946,7 +755,7 @@
 <p>Use the shift and arrow keys to select the code in block (2), including the comments. Now use the keyboard short cut (look back at the R Chapters if you don’t know how!) to run the highlighted block of code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/GenomeSize.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -956,7 +765,7 @@
 <p><span class="math notranslate nohighlight">\(\star\)</span> Now run the code in block (2) line by line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="c1"># this won&#39;t look so nice on your computer!</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span><span class="w"> </span><span class="c1"># this won&#39;t look so nice on your computer!</span>
 </pre></div>
 </div>
 </div>
@@ -980,7 +789,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="c1"># Check what the data columns contain</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span><span class="w"> </span><span class="c1"># Check what the data columns contain</span>
 </pre></div>
 </div>
 </div>
@@ -1054,9 +863,9 @@ binomial for each species in the table. The remaining columns are measurements o
 </div>
 </div>
 <p>Note that each column gets a separate summary! Look carefully at the output. There is a column for each variable: for factors, it provides a short table of the number of observations in each level and for continuous variables, it provides some simple summary statistics about the distribution (range, quartiles, mean and median), and the number of missing values.</p>
-</div>
-<div class="section" id="visualise-distributions-of-the-variables">
-<h3>Visualise distributions of the variables<a class="headerlink" href="#visualise-distributions-of-the-variables" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="visualise-distributions-of-the-variables">
+<h3>Visualise distributions of the variables<a class="headerlink" href="#visualise-distributions-of-the-variables" title="Permalink to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">summary</span></code> function shows us the basic distribution (range, quartiles, mean and median) of a continuous variable, but this is easier to interpret if we visualise it. We’ll look at two ways:</p>
 <ul class="simple">
 <li><p><strong>Histogram</strong>: In the simplest form, this shows the number of observations of the variable falling into a set of bins spanning the range of the variable. The option <code class="docutils literal notranslate"><span class="pre">breaks</span></code> allows you to change the number of bins.</p></li>
@@ -1065,22 +874,22 @@ binomial for each species in the table. The remaining columns are measurements o
 <p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (4) of the script and run each line separately, looking at the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">hist</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">hist</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_29_0.png" src="../_images/12-ExpDesign_29_0.png" />
+<img alt="../_images/65cbc44fd8c9937c482d8616e6b22f4ce65469da5d450b8ef0617a127564af4e.png" src="../_images/65cbc44fd8c9937c482d8616e6b22f4ce65469da5d450b8ef0617a127564af4e.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">,</span><span class="w"> </span><span class="n">bw</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_30_0.png" src="../_images/12-ExpDesign_30_0.png" />
+<img alt="../_images/7b2dbc42b13499bbcc82304b7aa7470d54a3b83b6a164f5d4697555d9cff0881.png" src="../_images/7b2dbc42b13499bbcc82304b7aa7470d54a3b83b6a164f5d4697555d9cff0881.png" />
 </div>
 </div>
 <p>In your code editor, change the values of <code class="docutils literal notranslate"><span class="pre">breaks</span></code> and <code class="docutils literal notranslate"><span class="pre">bw</span></code> (for example <code class="docutils literal notranslate"><span class="pre">breaks=5</span></code> and <code class="docutils literal notranslate"><span class="pre">bw=0.05</span></code>), and re-run these lines to see how this affects the graph. Basically, with both types of graph you can look at the data too coarsely or too finely.</p>
@@ -1088,10 +897,10 @@ binomial for each species in the table. The remaining columns are measurements o
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/histTL1.png"><img alt="../_images/histTL1.png" src="../_images/histTL1.png" style="width: 300px;" /></a>
 <a class="reference internal image-reference" href="../_images/histTL2.png"><img alt="../_images/histTL2.png" src="../_images/histTL2.png" style="width: 300px;" /></a>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="take-a-quick-look-at-effects-of-certain-factors">
-<h3>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Permalink to this headline">¶</a></h3>
+<section id="take-a-quick-look-at-effects-of-certain-factors">
+<h3>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Permalink to this heading">#</a></h3>
 <p>R has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the <span class="math notranslate nohighlight">\(y\)</span> axis and the explanatory variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Genome</span> <span class="pre">Size</span> <span class="pre">~</span> <span class="pre">Suborder</span></code></p>
 <p>This formula tells R to model genome size ‘as a function of’ (<code class="docutils literal notranslate"><span class="pre">~</span></code>) the suborders of Odonata. When using this syntax in a <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> function, the result will be to plot genome size as a function of the suborders.</p>
@@ -1100,12 +909,12 @@ binomial for each species in the table. The remaining columns are measurements o
 <p><span class="math notranslate nohighlight">\(\star\)</span> Go to block 5 of the script and run the first line, looking at genome size between the two suborders:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">Suborder</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_32_0.png" src="../_images/12-ExpDesign_32_0.png" />
+<img alt="../_images/0efd7aa5ab62b77fad6797cf024f028c2b73f611a81187b808e84cc4b49c6aa8.png" src="../_images/0efd7aa5ab62b77fad6797cf024f028c2b73f611a81187b808e84cc4b49c6aa8.png" />
 </div>
 </div>
 <p>Duplicate and alter this line to look at the same plot for total length. You should get a plot like this:</p>
@@ -1116,8 +925,8 @@ binomial for each species in the table. The remaining columns are measurements o
 <p><span class="math notranslate nohighlight">\(\star\)</span> Block 6 of the script uses the <code class="docutils literal notranslate"><span class="pre">subset</span></code> function to create two new data frames separating the data for dragonflies and damselflies. Run the first two lines of this block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Anisoptera</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Anisoptera&#39;</span><span class="p">)</span> <span class="c1">#The dragonflies</span>
-<span class="n">Zygoptera</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span> <span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Zygoptera&#39;</span><span class="p">)</span> <span class="c1">#The damselflies</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Anisoptera</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Anisoptera&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">#The dragonflies</span>
+<span class="n">Zygoptera</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">Suborder</span><span class="o">==</span><span class="s">&#39;Zygoptera&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">#The damselflies</span>
 </pre></div>
 </div>
 </div>
@@ -1153,39 +962,39 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <p><span class="math notranslate nohighlight">\(\star\)</span> Run the next two lines of code in block 6. The first draws the plot for damselflies and the second adds a line for the dragonflies:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Zygoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">2.7</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1.7</span><span class="p">))</span>
-<span class="nf">lines</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Anisoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Zygoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">2.7</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1.7</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">Anisoptera</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_38_0.png" src="../_images/12-ExpDesign_38_0.png" />
+<img alt="../_images/32a82ec5d11ed546d9bf1a5de61e1ccf9b1cf6d8a1d288a61a1a74bc38bbb4ce.png" src="../_images/32a82ec5d11ed546d9bf1a5de61e1ccf9b1cf6d8a1d288a61a1a74bc38bbb4ce.png" />
 </div>
 </div>
 <p>Duplicate these last two lines of code and edit them to generate a similar plot for total body length. You will need to edit the code to change the range of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes (<code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>) to get both curves to fit neatly on to the graph. It should look like this:</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/densTL.png"><img alt="../_images/densTL.png" src="../_images/densTL.png" style="width: 300px;" /></a>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="explore-further-by-scatter-plotting-two-variables">
-<h3>Explore further by scatter-plotting two variables<a class="headerlink" href="#explore-further-by-scatter-plotting-two-variables" title="Permalink to this headline">¶</a></h3>
+<section id="explore-further-by-scatter-plotting-two-variables">
+<h3>Explore further by scatter-plotting two variables<a class="headerlink" href="#explore-further-by-scatter-plotting-two-variables" title="Permalink to this heading">#</a></h3>
 <p>Once we’ve looked at the distribution of variables, the next thing is to look at the relationships between continuous variables using scatterplots. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a scatterplot when the explanatory variable is continuous, so we can use the same syntax and structure as for the boxplot above.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Go to block (7) of the script and run the plot commands. The third one plots genome size as a function of body weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">BodyWeight</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">BodyWeight</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_41_0.png" src="../_images/12-ExpDesign_41_0.png" />
+<img alt="../_images/3102efe0036a1f45d6c1e8907325adeada667ff58baf9644def215ac02fb4c4e.png" src="../_images/3102efe0036a1f45d6c1e8907325adeada667ff58baf9644def215ac02fb4c4e.png" />
 </div>
 </div>
 <p>The scatterplot seems to show a weak relationship between genome size and morphology. But maybe dragonflies and damselflies show different relationships, and we can’t distinguish between them! To explore this possibility, we need to plot the two orders using different colours or plot characters. In the next code block, we will customize the plots to show different types of points for each suborder. It is done by using <a class="reference internal" href="07-R.html#r-indices"><span class="std std-ref">indices</span></a>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Run the first three lines of code in block 8. There are two levels of suborder and these two lines set up a colour and a plot symbol that will be used for each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span> <span class="c1">#Confirm that there are two levels under suborders </span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">)</span><span class="w"> </span><span class="c1">#Confirm that there are two levels under suborders </span>
 </pre></div>
 </div>
 </div>
@@ -1198,8 +1007,8 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <p>You can see that there are two levels, with Anisoptera first and then Zygoptera. You can also see that these are stored as numeric values: 1 refers to the first level and 2 the second. We can use these as <a class="reference internal" href="07-R.html#r-indices"><span class="std std-ref">indices</span></a> to pair the colours and plot symbols to each suborder. These are set in the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function using the options <code class="docutils literal notranslate"><span class="pre">col=</span></code> and <code class="docutils literal notranslate"><span class="pre">pch=</span></code>, which stands for ” <code class="docutils literal notranslate"><span class="pre">p</span></code>lot <code class="docutils literal notranslate"><span class="pre">ch</span></code>aracter”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myColours</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="c1"># So choose two colours</span>
-<span class="n">mySymbols</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span> <span class="c1"># And two different markers</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">myColours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;blue&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1"># So choose two colours</span>
+<span class="n">mySymbols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1"># And two different markers</span>
 </pre></div>
 </div>
 </div>
@@ -1207,17 +1016,17 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <p>Run the next plot command to see the resulting plot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span> <span class="o">~</span> <span class="n">TotalLength</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genome</span><span class="p">,</span> <span class="c1">#Now plot again</span>
-<span class="n">col</span> <span class="o">=</span> <span class="n">myColours</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">,</span>
-<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Total length (mm)&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">TotalLength</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="c1">#Now plot again</span>
+<span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myColours</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mySymbols</span><span class="p">,</span>
+<span class="n">xlab</span><span class="o">=</span><span class="s">&#39;Total length (mm)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&#39;Genome size (pg)&#39;</span><span class="p">)</span>
 
-<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span> <span class="c1">#Add legend at top left corner</span>
-       <span class="n">col</span><span class="o">=</span> <span class="n">myColours</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="n">mySymbols</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">levels</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">Suborder</span><span class="p">),</span><span class="w"> </span><span class="c1">#Add legend at top left corner</span>
+<span class="w">       </span><span class="n">col</span><span class="o">=</span><span class="w"> </span><span class="n">myColours</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mySymbols</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12-ExpDesign_47_0.png" src="../_images/12-ExpDesign_47_0.png" />
+<img alt="../_images/6153e0fb75b41815537f67c994e2a817638f6645ee3d51772ad7c7441703d82f.png" src="../_images/6153e0fb75b41815537f67c994e2a817638f6645ee3d51772ad7c7441703d82f.png" />
 </div>
 </div>
 <p>Thus each point gets the appropriate colour and symbol for its group. This is the magic of indexing: <code class="docutils literal notranslate"><span class="pre">myColours[Suborder]</span></code> and <code class="docutils literal notranslate"><span class="pre">mySymbols[Suborder]</span></code> automatically assign the two colors and two symbols to the two suborders, and R figuresd out that the grouping variable to use is <code class="docutils literal notranslate"><span class="pre">Suborder</span></code> because its the only one with two levels (index values).</p>
@@ -1229,33 +1038,33 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 <a class="reference internal image-reference" href="../_images/pch.png"><img alt="../_images/pch.png" src="../_images/pch.png" style="width: 400px;" /></a>
 <hr class="docutils" />
 <p>Rerun the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function and see what you get!</p>
-</div>
-</div>
-<div class="section" id="saving-your-results">
-<h2>Saving your results<a class="headerlink" href="#saving-your-results" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="saving-the-exploratory-graphics">
-<h3>Saving the exploratory graphics<a class="headerlink" href="#saving-the-exploratory-graphics" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="saving-your-results">
+<h2>Saving your results<a class="headerlink" href="#saving-your-results" title="Permalink to this heading">#</a></h2>
+<section id="saving-the-exploratory-graphics">
+<h3>Saving the exploratory graphics<a class="headerlink" href="#saving-the-exploratory-graphics" title="Permalink to this heading">#</a></h3>
 <p>The file ‘GenomeSize.pdf’ in the practical folder was created using the next block of code using the approach you <a class="reference internal" href="08-Data_R.html"><span class="doc std std-doc">learned previously</span></a>. The function <code class="docutils literal notranslate"><span class="pre">pdf</span></code> opens a new empty pdf file which can then be used to plot graphs. You can set the width and the height of the page size in the pdf but note that this is set in <em>inches</em>. When you have finished creating a plot, the function <code class="docutils literal notranslate"><span class="pre">dev.off</span></code> closes the pdf file and makes it readable.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open ‘GenomeSize.pdf’ in a PDF reader. It uses the original colours and
 plot symbols. Close the file and then delete it from the folder.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Now go back to the script in R and select and run all the code in block (9)</p>
 <p>Go back to the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder. The pdf file should have been recreated — open it and it should now use your choice of colours and symbols.</p>
-</div>
-<div class="section" id="saving-other-results">
-<h3>Saving other results<a class="headerlink" href="#saving-other-results" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="saving-other-results">
+<h3>Saving other results<a class="headerlink" href="#saving-other-results" title="Permalink to this heading">#</a></h3>
 <p>You can also save the data and variables in R format — the original data, two subsets of the data and the two sets of colours and symbols. This will make it easy to restart where you left off. However, We can recreate the data subsets easily, so we’ll just save the data and your colour sets.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Go to the script window and run the final line in block (10)</p>
 <p>Still in the script window, choose ‘File <span class="math notranslate nohighlight">\(\triangleright\)</span> Save’ to save your changes to the script file.</p>
 <p>Quit from R by typing <code class="docutils literal notranslate"><span class="pre">q()</span></code> at the R command prompt. You can also use ctrl+D in Unix).</p>
-</div>
-</div>
-<div class="section" id="from-data-exploration-to-statistical-analysis">
-<h2>From data exploration to statistical analysis<a class="headerlink" href="#from-data-exploration-to-statistical-analysis" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="from-data-exploration-to-statistical-analysis">
+<h2>From data exploration to statistical analysis<a class="headerlink" href="#from-data-exploration-to-statistical-analysis" title="Permalink to this heading">#</a></h2>
 <p>After you have performed your data exploration, you are in a position to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
 <hr class="docutils" />
 <a class="bg-primary reference internal image-reference" href="../_images/yr1_2_flowchart.svg"><img alt="../_images/yr1_2_flowchart.svg" class="bg-primary" src="../_images/yr1_2_flowchart.svg" width="900px" /></a>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1269,7 +1078,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
             mode: "r"
         },
         kernelOptions: {
-            kernelName: "ir",
+            name: "ir",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1277,44 +1086,127 @@ plot symbols. Close the file and then delete it from the folder.</p>
     </script>
     <script>kernelName = 'ir'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="08-Data_R.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Data Management and Visualization</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08-Data_R.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Management and Visualization</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="13-t_F_tests.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="13-t_F_tests.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Samraat Pawar<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistical-parlance">Some statistical parlance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics-in-r">Descriptive statistics in R</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-and-statistical-distributions">Data types and (statistical) distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-distributions-in-r">Sampling from distributions in R</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-basic-rules-of-experimental-design-and-sampling">Two basic rules of experimental design and sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data exploration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-general-tips">Some general tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-case-study">A case study</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-distributions-of-the-variables">Visualise distributions of the variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#take-a-quick-look-at-effects-of-certain-factors">Take a quick look at effects of certain factors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-further-by-scatter-plotting-two-variables">Explore further by scatter-plotting two variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-results">Saving your results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-exploratory-graphics">Saving the exploratory graphics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-other-results">Saving other results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-data-exploration-to-statistical-analysis">From data exploration to statistical analysis</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Samraat Pawar
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
