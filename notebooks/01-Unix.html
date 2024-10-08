@@ -1809,11 +1809,47 @@ File3.txt
 </section>
 <section id="bash-command-challenge">
 <h3>Bash command challenge<a class="headerlink" href="#bash-command-challenge" title="Permalink to this heading">#</a></h3>
-<p>Here is a somewhat complicated bash command using two pipes (<em>you are not expected to include the answer to this one as part of your weekly submission</em>):</p>
+<p>Here is a somewhat complicated bash command using two pipes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-s<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
 </pre></div>
 </div>
-<p>What does this command do? (Hint: try it on the test directories and files we created in <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>)</p>
+<p>Try it on the test directories and files we created in <code class="docutils literal notranslate"><span class="pre">sandbox</span></code>.</p>
+<p>Here’s what this command does:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span></code>:</p>
+<ul>
+<li><p>This searches recursively from the current directory (<code class="docutils literal notranslate"><span class="pre">.</span></code>) for all regular files (denoted by <code class="docutils literal notranslate"><span class="pre">-type</span> <span class="pre">f</span></code>).</p></li>
+<li><p>It doesn’t include directories or other file types in the result, just files.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">find</span></code> command is terminated by <code class="docutils literal notranslate"><span class="pre">;</span></code> (escaped here with <code class="docutils literal notranslate"><span class="pre">\</span></code> to prevent the shell from interpreting it)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-exec</span> <span class="pre">ls</span> <span class="pre">-s</span> <span class="pre">{}</span> <span class="pre">\;</span></code>:</p>
+<ul>
+<li><p>For each file found, it executes the command <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-s</span> <span class="pre">{}</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">{}</span></code> is a placeholder for the current file found by <code class="docutils literal notranslate"><span class="pre">find</span></code> - basically <code class="docutils literal notranslate"><span class="pre">{}</span></code> is replaced with the name of each file found.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-s</span></code> command lists the size of the file (in blocks, typically 512-byte blocks, but this can vary by system) followed by the file name on each of the files found in the current directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\;</span></code> signifies the end of the <code class="docutils literal notranslate"><span class="pre">-exec</span></code> command; ensures that the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command is run for each file found individually.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">sort</span> <span class="pre">-n</span></code>:</p>
+<ul>
+<li><p>The output of the <code class="docutils literal notranslate"><span class="pre">find</span></code> command (which is a list of file sizes and names) is piped to the <code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">-n</span></code> command.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-n</span></code> option sorts the lines numerically based on the file sizes (the first column of the output of <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-s</span></code>).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">head</span> <span class="pre">-10</span></code>:</p>
+<ul>
+<li><p>After sorting the file sizes in ascending order, the <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">-10</span></code> command takes the first 10 lines.</p></li>
+<li><p>This effectively shows the 10 smallest files (by size, in blocks) found by the command.</p></li>
+</ul>
+</li>
+</ul>
+<p>Now do the following (and explain each of your answers in words):</p>
+<ol class="arabic simple">
+<li><p>Modify the command so that it prints file sizes in human-readable format (kb, mb, etc.) (Hint: in what format does <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-s</span></code> print file sizes?).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\;</span></code> ensures that the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command is run for each file found individually; this can be slow since a new process is created for each file. Modify the command so that it runs faster. Basically so that <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-s</span></code> is run as many files as possible (not one at a time) (Hint: note that <code class="docutils literal notranslate"><span class="pre">ls</span></code> can take multiple file names as input, much like many other UNIX commands; look up  <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">find</span></code>, especially the part about the <code class="docutils literal notranslate"><span class="pre">-exec</span></code> option; for example, what does <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-exec</span> <span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">{}</span> <span class="pre">+</span></code> do instead of <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-exec</span> <span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">{}</span> <span class="pre">\;</span></code>?</p></li>
+<li><p>Can you find another, faster solution for doing this task (which also avoids calling <code class="docutils literal notranslate"><span class="pre">ls</span></code> repeatedly)? (Hint: look up <code class="docutils literal notranslate"><span class="pre">xargs</span></code>; you might need another pipe!)</p></li>
+</ol>
 </section>
 <section id="fasta-exercise">
 <h3>FASTA exercise<a class="headerlink" href="#fasta-exercise" title="Permalink to this heading">#</a></h3>
