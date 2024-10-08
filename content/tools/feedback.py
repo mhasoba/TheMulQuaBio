@@ -89,15 +89,13 @@ timeout = 10 #set time out for each script's run (integer seconds)
 charLim = 500 #set limit to output of each script's run to be printed
 
 for Stdnt in Stdnts:
-	
+	# import ipdb; ipdb.set_trace()
 	Name = (Stdnt[Hdrs.index('First_name')] + Stdnt[Hdrs.index('Second_name')]+ '_' + Stdnt[Hdrs.index('Username')]).replace(" ","").replace("'","") #Remove any spaces from name
 	RepoPath = args.RepoPath + '/' + Name
 	AzzPath = RepoPath + '/Feedback'
 	
 	if args.gitpush:
 		
-		# import ipdb; ipdb.set_trace()
-
 		print("...\n\n" + "Git pushing feedback for " + Stdnt[Hdrs.index('First_name')] + " "+ Stdnt[Hdrs.index('Second_name')] + "...\n\n")
 
 		subprocess.check_output(["git","-C", RepoPath, "add", os.path.basename(AzzPath) + "/*"])  # Add only feedback/log files

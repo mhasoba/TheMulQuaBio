@@ -1,13 +1,16 @@
-# The Multilingual Quantitative Biologist
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://github.com/mhasoba/TheMulQuaBio)
+
+# The Multilingual Quantitative Biologist - Source
 
 This repository contains the source code for the **The Multilingual Quantitative Biologist** online book.
 
 All code in this project was written in and tested with R 3.xx and Python 3.xx, though older language versions (including R 2.xx and Python 2.7) should work in most cases.
+
 ## Usage
 
 ### Building the book
 
-If you'd like to develop and and build the Multilingual Quantitative Biologist book, you should:
+If you'd like to develop and and build your own version of Multilingual Quantitative Biologist book, you should:
 
 - Clone this repository
 - `cd` to it and run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
@@ -20,7 +23,7 @@ A fully-rendered HTML version of the book will be built in `_build/html/`.
 
 The html version of the book is hosted on the `gh-pages` branch of this repo, which is then rendered on [https://mhasoba.github.io/TheMulQuaBio/](https://mhasoba.github.io/TheMulQuaBio). 
 
-To deal with non-standard kernel dependencies (bash, R) we will not use an GitHub actions workflow to automatically build and push the book to this branch on a push or pull request to master (something to look into in the future).
+To deal with non-standard kernel dependencies (bash, R) we do not currently use a GitHub actions workflow to automatically build and push the book to this branch, on a push or pull request to master. This is something to look into in the future.
 
 However, the workflow for building the book manually is not too onerous:
 
@@ -74,7 +77,5 @@ This project is created using the excellent open source [Jupyter Book project](h
 
 Some chapter-specific credits:
 
-* The computing sections were originally inspired by, and many of the materials are based on Stefano Allesina's excellent 
-* 
-Most of the sections on Data Analysis and Basic Statistics were originally written by David Orme (<d.orme@imperial.ac.uk>).
-
+* The computing sections were originally inspired by, and many of the materials are based on Stefano Allesina's excellent notes back when Samraat was a Postdoc in the Allesina Lab. Check out [the book](https://computingskillsforbiologists.com/)! 
+*  Most of the sections on Data Analysis and Basic Statistics were originally written by David Orme (<d.orme@imperial.ac.uk>).
