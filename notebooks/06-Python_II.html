@@ -1358,8 +1358,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Link to this heading">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd10b01b-0c44-4dde-90f1-dae40f4008d2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-dd10b01b-0c44-4dde-90f1-dae40f4008d2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6a5250ad-7d2b-43a7-ac75-a1493838fe33">
+<span class="eqno">(2)<a class="headerlink" href="#equation-6a5250ad-7d2b-43a7-ac75-a1493838fe33" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -1836,8 +1836,8 @@ from the end of an array:</p>
 <h3>The Lotka-Volterra model revisited<a class="headerlink" href="#the-lotka-volterra-model-revisited" title="Link to this heading">#</a></h3>
 <p><em>What happens when the Consumer population <span class="math notranslate nohighlight">\(C\)</span> goes extinct in the Lotka-Volterra that you encountered above</em>?</p>
 <p>If the consumer population goes extinct, the resources grow to infinity! This is not biologically realistic, of course. To address this, we can introduce density dependence to the resource population <span class="math notranslate nohighlight">\(\left(1 - \frac{R} {K}\right)\)</span>, which changes the ODE system to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7561394e-d8ce-4469-8995-89dd79b83129">
-<span class="eqno">(3)<a class="headerlink" href="#equation-7561394e-d8ce-4469-8995-89dd79b83129" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-df2b6c42-828a-4f49-8845-562dd7088cf0">
+<span class="eqno">(3)<a class="headerlink" href="#equation-df2b6c42-828a-4f49-8845-562dd7088cf0" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R \left(1 - \frac{R} {K}\right) - a C R\\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -1867,8 +1867,8 @@ from the end of an array:</p>
 <ul class="simple">
 <li><p>Write a discrete-time version of the LV model called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>. The discrete-time model is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-a0e06e3a-5c84-42bd-885b-de76d700d7d5">
-<span class="eqno">(4)<a class="headerlink" href="#equation-a0e06e3a-5c84-42bd-885b-de76d700d7d5" title="Permalink to this equation">#</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-1417f8be-f25a-42c8-894f-0cbda0f77c70">
+<span class="eqno">(4)<a class="headerlink" href="#equation-1417f8be-f25a-42c8-894f-0cbda0f77c70" title="Permalink to this equation">#</a></span>\[\begin{align} 
     R_{t+1} &amp;= R_t (1 + r \left(1 - \frac{R_t}{K}\right) - a C_t)\\ 
     C_{t+1} &amp;= C_t (1 - z + e a R_t) 
 \end{align}\]</div>
@@ -1879,14 +1879,14 @@ from the end of an array:</p>
 <ul class="simple">
 <li><p>Write a version of the discrete-time model (which you implemented in <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>) simulation with a random gaussian fluctuation in resource’s growth rate at each time-step:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-989a7f5f-00c7-4a3c-a050-662e86936530">
-<span class="eqno">(5)<a class="headerlink" href="#equation-989a7f5f-00c7-4a3c-a050-662e86936530" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3727cbe1-364d-43c7-a0bd-9f3e5065f083">
+<span class="eqno">(5)<a class="headerlink" href="#equation-3727cbe1-364d-43c7-a0bd-9f3e5065f083" title="Permalink to this equation">#</a></span>\[\begin{align}
         R_{t+1} &amp;= R_t (1 + (r + \epsilon) \left(1 - \frac{R_t}{K}\right)- a C_t)\\
         C_{t+1} &amp;= C_t (1 - z + e a R_t)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random fluctuation drawn from a gaussian distribution (use <code class="docutils literal notranslate"><span class="pre">sc.stats</span></code> or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>). Include this script in <code class="docutils literal notranslate"> <span class="pre">run_LV.py</span></code>, and profile it as well. You can also add fluctuations to both populations simultaneously this way:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-866285e7-9d91-4545-903c-39093d0e7eb6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-866285e7-9d91-4545-903c-39093d0e7eb6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fc1a61d0-4baf-443f-9a08-475e6088428d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-fc1a61d0-4baf-443f-9a08-475e6088428d" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t (1 + (r + \epsilon)  \left(1 - \frac{R_t}{K}\right) - a C_t)\\
     C_{t+1} &amp;= C_t (1 - (z + \epsilon) + e a R_t)
 \end{align}\]</div>
