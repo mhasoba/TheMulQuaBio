@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>07 - Analysing change, continuously (Part 2) &#8212; TheMulQuaBio</title>
   
@@ -15,54 +14,50 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=01a0bdc2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mathscourse/lecture07/07_Analysing_change_continuously_part2';</script>
@@ -79,27 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,8 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -146,6 +142,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -163,7 +161,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -238,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -247,14 +256,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -379,10 +388,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -390,14 +399,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -435,14 +444,14 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analysing-change-continuously-part-2">
-<h1>07 - Analysing change, continuously (Part 2)<a class="headerlink" href="#analysing-change-continuously-part-2" title="Permalink to this heading">#</a></h1>
+<h1>07 - Analysing change, continuously (Part 2)<a class="headerlink" href="#analysing-change-continuously-part-2" title="Link to this heading">#</a></h1>
 <p>In many different contexts we may be interested in finding the maximum or minimum values a given function may assume. This process is referred to as <em>optimization</em>.</p>
 <p>In Ecology, some of the most common uses for optimization methods are:</p>
 <p>1 - <em>Statistical estimation and inference</em>: optimizing the likelihood of a model and its parameters being true, for a given set of observations.</p>
 <p>2 - <em>Resources management</em>: finding a balance between different wildlife and economic priorities (market, legal, natural constraints)</p>
 <p>3 - <em>Optimality theory</em>: how can the behavioural or life-history trade-offs result in optimal strategies for different organisms</p>
 <section id="extreme-values-of-functions">
-<h2>Extreme values of functions<a class="headerlink" href="#extreme-values-of-functions" title="Permalink to this heading">#</a></h2>
+<h2>Extreme values of functions<a class="headerlink" href="#extreme-values-of-functions" title="Link to this heading">#</a></h2>
 <p>For a given function <span class="math notranslate nohighlight">\(f(x)\)</span> that is <strong>continuous</strong> in an interval <span class="math notranslate nohighlight">\(a \le x \le b\)</span>, there will always be a global maximum and a global minimum, points at which the function assumes its maximum and minimum values in the interval.</p>
 <img alt="../../_images/extrema.png" src="../../_images/extrema.png" />
 <p>A function <span class="math notranslate nohighlight">\(f(x)\)</span> presents a <em>local maximum</em> value if for a given vicinity of the point <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(f(x_0)\)</span> is greater than all the other <span class="math notranslate nohighlight">\(f(x)\)</span> for <span class="math notranslate nohighlight">\(x\)</span> in this vicinity. The analogous definition can be made for a <em>local minimum</em> value when <span class="math notranslate nohighlight">\(f(x_0)\)</span> is smaller than all the other <span class="math notranslate nohighlight">\(f(x)\)</span> in the vicinity. Local minima and local maxima constitue the <em>local extrema</em> for <span class="math notranslate nohighlight">\(f(x)\)</span>, and with the set of all extrema we can find the global maximum and the global minimum.</p>
@@ -464,7 +473,7 @@ document.write(`
 </div>
 </section>
 <section id="monotonicity-and-concavity">
-<h2>Monotonicity and concavity<a class="headerlink" href="#monotonicity-and-concavity" title="Permalink to this heading">#</a></h2>
+<h2>Monotonicity and concavity<a class="headerlink" href="#monotonicity-and-concavity" title="Link to this heading">#</a></h2>
 <p>Imagine a function <span class="math notranslate nohighlight">\(f(x)\)</span> defined in a given interval <span class="math notranslate nohighlight">\(a \le x \le b\)</span>. For every <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> in this interval, if <span class="math notranslate nohighlight">\(x_{2} &gt; x_{1}\)</span> implies that <span class="math notranslate nohighlight">\(f(x_{2}) &gt; f(x_{1})\)</span> then the function is <strong>increasing</strong> in this interval. If on the other hand, <span class="math notranslate nohighlight">\(x_{2} &gt; x_{1}\)</span> implies that <span class="math notranslate nohighlight">\(f(x_{2}) &lt; f(x_{1})\)</span> then the function is <strong>decreasing</strong> in this interval.  This can be graphically shown as:</p>
 <img alt="../../_images/incr_decr.png" src="../../_images/incr_decr.png" />
 <div class="admonition note">
@@ -525,7 +534,7 @@ f''(x) = 6x -3 \end{align}\end{split}\]</div>
 </div>
 </section>
 <section id="finding-extrema">
-<h2>Finding extrema<a class="headerlink" href="#finding-extrema" title="Permalink to this heading">#</a></h2>
+<h2>Finding extrema<a class="headerlink" href="#finding-extrema" title="Link to this heading">#</a></h2>
 <p>Back to our strategy for finding maxima or minima of functions, we first determine the set:</p>
 <ul class="simple">
 <li><p>find all points <span class="math notranslate nohighlight">\(c\)</span> for which <span class="math notranslate nohighlight">\(f'(c) = 0\)</span> or all point <span class="math notranslate nohighlight">\(c\)</span> where <span class="math notranslate nohighlight">\(f'(c)\)</span> does not exist. These are called <strong>critical points</strong>.</p></li>
@@ -554,7 +563,7 @@ f''(x)&amp;=18x^{2}-12x-12=6(3x^{2}-2x-2)\end{align}\end{split}\]</div>
 </div>
 </section>
 <section id="inflection-points">
-<h2>Inflection points<a class="headerlink" href="#inflection-points" title="Permalink to this heading">#</a></h2>
+<h2>Inflection points<a class="headerlink" href="#inflection-points" title="Link to this heading">#</a></h2>
 <p>As we saw before, given a function <span class="math notranslate nohighlight">\(f(x)\)</span>, for some values of <span class="math notranslate nohighlight">\(x\)</span>, there might be a change in the concavity of the function:</p>
 <img alt="../../_images/inflection.png" src="../../_images/inflection.png" />
 <p>The points <span class="math notranslate nohighlight">\(x\)</span> for where the function changes its concavity are called <strong>inflection points</strong>. If <span class="math notranslate nohighlight">\(f\)</span> is twice differentiable and <span class="math notranslate nohighlight">\(c\)</span> is an inflection point, then <span class="math notranslate nohighlight">\(f''(c)=0\)</span>.</p>
@@ -594,7 +603,7 @@ f''(x)&amp;=18x^{2}-12x-12=6(3x^{2}-2x-2)\end{align}\end{split}\]</div>
 </div>
 </section>
 <section id="series-expansions">
-<h2>Series expansions<a class="headerlink" href="#series-expansions" title="Permalink to this heading">#</a></h2>
+<h2>Series expansions<a class="headerlink" href="#series-expansions" title="Link to this heading">#</a></h2>
 <p>From the formal definition of a derivative</p>
 <div class="math notranslate nohighlight">
 \[f'(a)= \lim_{x \to a} \frac{f(x)-f(a)}{(x-a)} \xrightarrow{\text{$x$ very close to $a$}} f'(a) \approx \frac{f(x)-f(a)}{(x-a)},\]</div>
@@ -703,7 +712,7 @@ f^{(n)}(x)=\frac{n!}{(1-x)^{n+1}} \implies f^{(n)}(0)= n!\end{split}\]</div>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -759,7 +768,7 @@ f^{(n)}(x)=\frac{n!}{(1-x)^{n+1}} \implies f^{(n)}(0)= n!\end{split}\]</div>
   <div class="footer-item">
     
 <p class="component-author">
-By Samraat Pawar
+By TheMulQuaBio collective!
 </p>
 
   </div>
@@ -793,8 +802,8 @@ By Samraat Pawar
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

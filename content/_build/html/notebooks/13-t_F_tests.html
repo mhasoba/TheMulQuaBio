@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Basic hypothesis testing: \(t\) and \(F\) tests &#8212; TheMulQuaBio</title>
   
@@ -15,54 +14,50 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=01a0bdc2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/13-t_F_tests';</script>
@@ -79,27 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,8 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -146,6 +142,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../intro.html">
   
@@ -163,7 +161,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -238,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -247,14 +256,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -379,10 +388,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -390,14 +399,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -453,9 +462,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="basic-hypothesis-testing-t-and-f-tests">
-<h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Permalink to this heading">#</a></h1>
+<h1>Basic hypothesis testing: <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> tests<a class="headerlink" href="#basic-hypothesis-testing-t-and-f-tests" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Aims of this chapter:</p>
 <ul class="simple">
 <li><p>Using <span class="math notranslate nohighlight">\(t\)</span> tests to look at differences between means</p></li>
@@ -464,7 +473,7 @@ document.write(`
 </ul>
 </section>
 <section id="t-tests">
-<h2><span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#t-tests" title="Permalink to this heading">#</a></h2>
+<h2><span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#t-tests" title="Link to this heading">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(t\)</span> test is used to compare the mean of a sample to another value, which can be:</p>
 <ul class="simple">
 <li><p>Some reference point (Is the mean different from 5?)</p></li>
@@ -491,7 +500,7 @@ document.write(`
 <figure class="align-default" id="multiple-comparisons">
 <a class="reference internal image-reference" href="../_images/multiple_comps.png"><img alt="../_images/multiple_comps.png" src="../_images/multiple_comps.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Your Type I error rate increases with the number of pairwise comparisons (<span class="math notranslate nohighlight">\(p\)</span>) you make using a single dataset.</strong> Say, you make multiple comparisons using an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> significance level. Then you have that much chance of making a Type I error on each comparison. Thus, assuming each pairwise comparison is made independently, the type I error rate just adds up with every new comparison you make. Thus, the chance of committing at least one Type I error for a set of <span class="math notranslate nohighlight">\(n\)</span> comparisons is <span class="math notranslate nohighlight">\(n \times 0.05\)</span>; so for 6 pairwise comparisons, your chance of making at least one Type I (false positive) error would be <span class="math notranslate nohighlight">\(6 \times 0.05 = 0.3\)</span>, or <span class="math notranslate nohighlight">\(30\%\)</span>!</span><a class="headerlink" href="#multiple-comparisons" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -505,7 +514,7 @@ document.write(`
 <figure class="align-default" id="t-distribution">
 <a class="reference internal image-reference" href="../_images/tvals.png"><img alt="../_images/tvals.png" src="../_images/tvals.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>The <span class="math notranslate nohighlight">\(t\)</span> distribution.</strong></span><a class="headerlink" href="#t-distribution" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -517,7 +526,7 @@ document.write(`
 <li><p>The means of small samples are more easily influenced by extreme values and so produce extreme <span class="math notranslate nohighlight">\(t\)</span> values more frequently. This is why the red curve above for smaller samples is more flattened out and why the 95% limits are more spread out.</p></li>
 </ul>
 <section id="one-sample-t-tests">
-<h3>One-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#one-sample-t-tests" title="Permalink to this heading">#</a></h3>
+<h3>One-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#one-sample-t-tests" title="Link to this heading">#</a></h3>
 <p>In the simplest example, a <span class="math notranslate nohighlight">\(t\)</span> test can be used to test whether the mean of a sample is different from a specific value. For example:</p>
 <ul class="simple">
 <li><p>Is the ozone in a set of air samples above the legal limit?</p></li>
@@ -525,7 +534,7 @@ document.write(`
 <li><p>Is the mean genome size for Odonata smaller than 1.25 pg, which is the average for insects <a class="reference external" href="http://www.genomesize.com/statistics.php?stats=insects">see here</a>?</p></li>
 </ul>
 <p>Oh look! We can test that last one…</p>
-<p><span class="xref myst">Previously</span>, we looked at the genome size and morphology of species of dragonflies and damselflies (Odonates: Anisoptera and Zygoptera). Box and whisker plots and density plots both show that the two groups have rather different genome size and morphology. We can use <span class="math notranslate nohighlight">\(t\)</span> tests to test whether the means of the variables of the two groups are different and we can use the <span class="math notranslate nohighlight">\(F\)</span> test to check whether they have the same variance.</p>
+<p><a class="reference internal" href="12-ExpDesign.html#Data-exploration"><span class="std std-ref">Previously</span></a>, we looked at the genome size and morphology of species of dragonflies and damselflies (Odonates: Anisoptera and Zygoptera). Box and whisker plots and density plots both show that the two groups have rather different genome size and morphology. We can use <span class="math notranslate nohighlight">\(t\)</span> tests to test whether the means of the variables of the two groups are different and we can use the <span class="math notranslate nohighlight">\(F\)</span> test to check whether they have the same variance.</p>
 <p>In this chapter, we will continue to practise building scripts and creating your own R code, so we will start from an empty script file (you can refer to <code class="docutils literal notranslate"><span class="pre">t_F_tests.R</span></code> from TheMulQuaBio). Use this script to store the code you run in this practical session and add notes to keep a record of what each bit is doing:</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open R and change (<code class="docutils literal notranslate"><span class="pre">setwd</span></code>) to the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. If you have misplaced the data, download it again from TheMulQuaBio.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">ttests.R</span></code> and save it to the working directory.</p>
@@ -652,7 +661,7 @@ mean of x
 </div>
 <p>This confirms the values we calculated by hand and adds a <span class="math notranslate nohighlight">\(p\)</span> value. The output also gives the degrees of freedom. This is something we will come back to later, but the degrees of freedom are basically the number of data points minus the number of estimated parameters, which in this case is one mean.</p>
 <section id="confidence-intervals">
-<span id="t-f-tests-ci"></span><h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h4>
+<span id="t-f-tests-ci"></span><h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h4>
 <p>The output also gives a confidence interval for the observed mean. The mean is the best estimate of the population mean given our sample of species of Odonata, but the actual mean for the order could be bigger or smaller. The confidence interval tells us the region in which we are 95% confident that this actual mean lies.</p>
 <p>It is calculated using the <span class="math notranslate nohighlight">\(t\)</span> distribution. Remember that <span class="math notranslate nohighlight">\(t\)</span> is a difference divided by a standard error; if we multiply <span class="math notranslate nohighlight">\(t\)</span> by a standard error, we get back to a difference. If we pick a pair of <span class="math notranslate nohighlight">\(t\)</span> values that contain the middle 95% of the <span class="math notranslate nohighlight">\(t\)</span> distribution, as in the plot on page 2, then we can multiply that by the standard error from the data to get a range above and below the mean. If we sampled lots of sets of 100 species of Odonata, we expect 95% of the observed means to lie inside this range. The code below shows the calculation of the confidence interval for the test above.</p>
 <p>First, find the edges of the middle 95% of a <span class="math notranslate nohighlight">\(t\)</span> distribution with 99 df:</p>
@@ -687,12 +696,12 @@ mean of x
 </section>
 </section>
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> code above as a template, test whether the body weight (in grams) of Odonata is different from the average for arthropods of 0.045 grams. Note that this slightly dodgy estimate comes from an estimated average volume for arthropods of 45.21 mm<span class="math notranslate nohighlight">\(^3\)</span>, and assuming a density of 1 gm per cm<span class="math notranslate nohighlight">\(^3\)</span>; see:</p>
 <p>Orme, C. D. L., Quicke, D. L. J., Cook, J. M. and Purvis, A. (2002), Body size does not predict species richness among the metazoan phyla. Journal of Evolutionary Biology, 15: 235–247.</p>
 </section>
 <section id="two-sample-t-tests">
-<h3>Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#two-sample-t-tests" title="Permalink to this heading">#</a></h3>
+<h3>Two-sample <span class="math notranslate nohighlight">\(t\)</span> tests<a class="headerlink" href="#two-sample-t-tests" title="Link to this heading">#</a></h3>
 <p>It is more common to use a <span class="math notranslate nohighlight">\(t\)</span> test to compare the means of two samples. This includes questions like:</p>
 <ul class="simple">
 <li><p>Do two rivers have the same concentration of a pollutant?</p></li>
@@ -704,7 +713,7 @@ mean of x
 <figure class="align-default" id="sample-t-test">
 <a class="reference internal image-reference" href="../_images/twosampleIllustration.png"><img alt="../_images/twosampleIllustration.png" src="../_images/twosampleIllustration.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Illustration of one-sample (left) vs. two-sample (right) <span class="math notranslate nohighlight">\(t\)</span> tests</strong>. The vertical lines show the mean (solid lines) and one standard error to each side (dashed lines). The red mean is the same in both cases, but the second graph shows that this is also estimated from a sample with error: the difference in the means looks less convincing and we’d expect a smaller <span class="math notranslate nohighlight">\(t\)</span> value.</span><a class="headerlink" href="#sample-t-test" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -813,7 +822,7 @@ mean of x
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Type the above code into your growing R script and run it in R. Again, read through the code and make sure you understand the steps.</p>
-<p>And as before, the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> function can be used to automate this all for us. We can use a formula as we have seen <span class="xref myst">before</span> to get a test between the two suborders:</p>
+<p>And as before, the <code class="docutils literal notranslate"><span class="pre">t.test</span></code> function can be used to automate this all for us. We can use a formula as we have seen <a class="reference internal" href="12-ExpDesign.html#Take-a-quick-look-at-effects-of-certain-factors"><span class="std std-ref">before</span></a> to get a test between the two suborders:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">t.test</span><span class="p">(</span><span class="n">GenomeSize</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Suborder</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">)</span>
@@ -837,18 +846,18 @@ mean in group Anisoptera  mean in group Zygoptera
 </div>
 <p>The output looks very similar to the one-sample t-test, except that the output now gives two estimated means, rather than one and it reports the <span class="math notranslate nohighlight">\(p\)</span> value for the calculated <span class="math notranslate nohighlight">\(t\)</span> value.</p>
 <section id="confidence-intervals-again">
-<span id="t-f-tests-ci2"></span><h4>Confidence Intervals again<a class="headerlink" href="#confidence-intervals-again" title="Permalink to this heading">#</a></h4>
+<span id="t-f-tests-ci2"></span><h4>Confidence Intervals again<a class="headerlink" href="#confidence-intervals-again" title="Link to this heading">#</a></h4>
 <p>Also, in the output above unlike the 95% interval of a 1 sample t-test, which provides the confidence intervals around the estimated mean of the single population, this output of the 2-sample test provides the confidence intervals around the observed difference in the means of the two samples. That is, the 95% confidence interval (-0.1442041,  0.1309104) above is around the observed difference in the sample means: <span class="math notranslate nohighlight">\(1.011774 - 1.018421 = - 0.006647\)</span>. This is essentially not distinguishable from zero as the intervals include the value 0 (and therefore, the p-value is also insignificant).</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Add this last step to your script and run it.</p>
 </section>
 </section>
 <section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\star\)</span>  Expand your t-test code to test whether the body weight of the two suborders are different and add it to in the script file.</p>
 </section>
 </section>
 <section id="the-f-test">
-<h2>The <span class="math notranslate nohighlight">\(F\)</span> test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h2>
+<h2>The <span class="math notranslate nohighlight">\(F\)</span> test<a class="headerlink" href="#the-f-test" title="Link to this heading">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(F\)</span> test is used to compare the variances of two samples or populations. You will also see them featured in analysis of variance (ANOVA), to test the hypothesis that the means of a given set of normally distributed populations all have the same variance.</p>
 <p>The distribution of the test statistic <span class="math notranslate nohighlight">\(F\)</span> (the <span class="math notranslate nohighlight">\(F\)</span> distribution) is simply the ratio of the variances for sample <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>: <span class="math notranslate nohighlight">\(\frac{\textrm{var}(a)}{\textrm{var}(b)}\)</span>:</p>
 <ul class="simple">
@@ -860,7 +869,7 @@ mean in group Anisoptera  mean in group Zygoptera
 <figure class="align-default" id="f-distribution">
 <a class="reference internal image-reference" href="../_images/fvals.png"><img alt="../_images/fvals.png" src="../_images/fvals.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The F distribution.</strong> The two vertical blue lines show the edges of the central 95% of the area of the curve.</span><a class="headerlink" href="#f-distribution" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -881,7 +890,7 @@ mean in group Anisoptera  mean in group Zygoptera
 <figure class="align-default" id="odonata-wt-boxplots">
 <a class="reference internal image-reference" href="../_images/bxp.png"><img alt="../_images/bxp.png" src="../_images/bxp.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Reproduce this figure.</strong></span><a class="headerlink" href="#odonata-wt-boxplots" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -926,17 +935,17 @@ the two samples are drawn from populations with the same variance, an
 <p>There are clearly problems with the variance in both examples. The next two sections present ways to address these kinds of problems.</p>
 </section>
 <section id="t-tests-revisited">
-<h2><span class="math notranslate nohighlight">\(t\)</span> tests revisited<a class="headerlink" href="#t-tests-revisited" title="Permalink to this heading">#</a></h2>
+<h2><span class="math notranslate nohighlight">\(t\)</span> tests revisited<a class="headerlink" href="#t-tests-revisited" title="Link to this heading">#</a></h2>
 <p>The first thing to say is that R is aware of the problem with the variance. If you look back at the output from the previous <span class="math notranslate nohighlight">\(t\)</span> tests, you will see that the degrees of freedom vary a lot. We have 100 observations and – after subtracting one for each mean we calculate — our degrees of freedom should be either 99 (one sample test) or 98 (two
 sample test). What we actually see are smaller numbers, with the smallest being <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">60.503</span></code> for the two sample test of body weight.</p>
 <p>The explanation is that R is applying a <em>penalty</em> to the degrees of freedom to account for differences in variance. With fewer degrees for freedom, more extreme <span class="math notranslate nohighlight">\(t\)</span> values are more likely and so it is harder to find significant results. This doesn’t mean we can forget about checking the variances or plotting the data!</p>
-<p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we’ll look at it again when we learn about <a class="reference internal" href="15-anova.html"><span class="doc std std-doc">ANOVA</span></a>.</p>
+<p>In this case, we can also apply a transformation to the data in order to make the variances more equal. Forgetting the wings and assuming Odonata are shaped like a box, the model in the graph below shows how volume changes with length: equal changes in length do not lead to equal changes in volume and longer species will have a disproportionately large volume. This is a classic feature of morphological data known as allometric scaling and we’ll look at it again when we learn about <a class="reference internal" href="15-anova.html"><span class="std std-doc">ANOVA</span></a>.</p>
 <p>In the meantime, a log transformation will turn body weight from a skewed distribution to a more normal distribution, as shown in <a class="reference internal" href="#log-transformation"><span class="std std-numref">Fig. 27</span></a>.</p>
 <hr class="docutils" />
 <figure class="align-default" id="log-transformation">
 <a class="reference internal image-reference" href="../_images/transform.png"><img alt="../_images/transform.png" src="../_images/transform.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Log transformation of body weights.</strong></span><a class="headerlink" href="#log-transformation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -951,12 +960,12 @@ sample test). What we actually see are smaller numbers, with the smallest being 
 <p>That is, you took a natural log of the whole Body weight column and saved it as a new column called <code class="docutils literal notranslate"><span class="pre">logBodyWeight</span></code></p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy the line into your <code class="docutils literal notranslate"><span class="pre">FTests.R</span></code> script and run it.</p>
 <section id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>Now write three lines of code to get a boxplot of <span class="math notranslate nohighlight">\(\log_e\)</span> body weight and then run a variance test and <span class="math notranslate nohighlight">\(t\)</span> test on the differences in <span class="math notranslate nohighlight">\(\log_e\)</span> body weight between suborders. This gives a much clearer result — the variances are almost identical and the differences between the suborders are much more cleanly tested.</p>
 </section>
 </section>
 <section id="non-parametric-tests">
-<h2>Non-parametric tests<a class="headerlink" href="#non-parametric-tests" title="Permalink to this heading">#</a></h2>
+<h2>Non-parametric tests<a class="headerlink" href="#non-parametric-tests" title="Link to this heading">#</a></h2>
 <p>What happens if there isn’t a convenient transformation for the variable that gives roughly constant variation and equal variance? In a parametric test, like the <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(F\)</span> test above, we use parameters (mean and variance) to describe the data, assume these describe the data well and then just use these parameters to run the test. If these assumptions don’t seem very sound, the non-parametric tests provide a way of using the ranks of the data to test for differences. They aren’t as powerful — they are less likely to reveal significant differences — but they are more robust. The most commonly used alternative is the Wilcoxon test, which uses the function <code class="docutils literal notranslate"><span class="pre">wilcox.test</span></code> in R.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using <code class="docutils literal notranslate"><span class="pre">wilcox.test</span></code> as a replacement for <code class="docutils literal notranslate"><span class="pre">t.test</span></code>, repeat the one and two sample <span class="math notranslate nohighlight">\(t\)</span> test for genome size and body weight.</p>
 <p>For example to carry out a wilcox test equivalent to the one-sample t test you performed above:</p>
@@ -978,8 +987,8 @@ alternative hypothesis: true location is not equal to 1.25
 </div>
 <p>Compare the two (t vs wilcox test) results.</p>
 <section id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p>Repeat the above analyses with the predator and prey body mass data that you were introduced to <a class="reference internal" href="08-Data_R.html"><span class="doc std std-doc">previously</span></a>. Again check how different the results are when using <span class="math notranslate nohighlight">\(t\)</span> vs. Wilcoxon tests.</p>
+<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Repeat the above analyses with the predator and prey body mass data that you were introduced to <a class="reference internal" href="08-Data_R.html"><span class="std std-doc">previously</span></a>. Again check how different the results are when using <span class="math notranslate nohighlight">\(t\)</span> vs. Wilcoxon tests.</p>
 </section>
 </section>
 </section>
@@ -1011,7 +1020,7 @@ alternative hypothesis: true location is not equal to 1.25
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1085,7 +1094,7 @@ alternative hypothesis: true location is not equal to 1.25
   <div class="footer-item">
     
 <p class="component-author">
-By Samraat Pawar
+By TheMulQuaBio collective!
 </p>
 
   </div>
@@ -1119,8 +1128,8 @@ By Samraat Pawar
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
