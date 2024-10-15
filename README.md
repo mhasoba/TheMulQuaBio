@@ -1,4 +1,4 @@
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://github.com/mhasoba/TheMulQuaBio)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://github.com/TheMulQuaBio/TMQB)
 
 # The Multilingual Quantitative Biologist - Source
 
@@ -21,7 +21,9 @@ A fully-rendered HTML version of the book will be built in `_build/html/`.
 
 ### Hosting/Deploying the book online
 
-The html version of the book is hosted on the `gh-pages` branch of this repo, which is then rendered on [https://mhasoba.github.io/TheMulQuaBio/](https://mhasoba.github.io/TheMulQuaBio). 
+
+
+The html version of the book is hosted on the `gh-pages` branch of this repo, which is then rendered on [https://themulquabio.github.io/TMQB/intro.html](https://themulquabio.github.io/TMQB/intro.html). 
 
 To deal with non-standard kernel dependencies (bash, R) we do not currently use a GitHub actions workflow to automatically build and push the book to this branch, on a push or pull request to master. This is something to look into in the future.
 
