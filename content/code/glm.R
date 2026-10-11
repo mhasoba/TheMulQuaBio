@@ -1,8 +1,13 @@
 # GENERALISED LINEAR MODELS
+# Run from the coursework project root with:
+# Rscript code/glm.R
 
 # 1) Load the data
-colonies <- read.csv("../data/prac_data.csv")
+colonies <- read.csv("data/prac_data.csv", stringsAsFactors = TRUE)
 str(colonies)
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/glm.pdf', 11, 8.5)
 
 # 2) Look at all the data
 boxplot(ColonyCount ~ Treatment, data=colonies)
@@ -62,5 +67,7 @@ predict(modQPois, newdata=df, type='response')
 # 10) halo
 
 table(Halo=colonies$HaloLawn, Strain=colonies$Strain, Treatment=colonies$Treatment)
+
+dev.off()
 
 

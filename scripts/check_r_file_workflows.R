@@ -9,6 +9,8 @@ required_files <- c(
   "content/code/data_wrang.R",
   "content/code/exp_design.R",
   "content/code/fmr.R",
+  "content/code/glm.R",
+  "content/code/model_simp.R",
   "content/code/mul_expl.R",
   "content/code/mul_expl_inter.R",
   "content/code/regress.R",
@@ -17,6 +19,7 @@ required_files <- c(
   "content/code/t_f_tests.R",
   "content/data/genome_size.csv",
   "content/data/mammal_data.csv",
+  "content/data/prac_data.csv",
   "content/data/trees.csv",
   "content/data/nagy_et_al_1999.csv",
   "content/data/pound_hill_data.csv",
@@ -50,6 +53,8 @@ stopifnot(
         "data_wrang.R",
         "exp_design.R",
         "fmr.R",
+        "glm.R",
+        "model_simp.R",
         "mul_expl.R",
         "mul_expl_inter.R",
         "regress.R",
@@ -68,6 +73,7 @@ stopifnot(
       c(
         "genome_size.csv",
         "mammal_data.csv",
+        "prac_data.csv",
         "trees.csv",
         "nagy_et_al_1999.csv",
         "pound_hill_data.csv",
@@ -174,6 +180,33 @@ stopifnot(file.exists(multiple_output), file.info(multiple_output)$size > 0)
 run_script("code/mul_expl_inter.R")
 interaction_output <- file.path("results", "multiple_variables_interactions.pdf")
 stopifnot(file.exists(interaction_output), file.info(interaction_output)$size > 0)
+
+run_script("code/model_simp.R")
+model_simplification_pdf <- file.path("results", "model_simplification.pdf")
+minimum_model_path <- file.path("results", "minimum_adequate_model.rda")
+stopifnot(
+  file.exists(model_simplification_pdf),
+  file.info(model_simplification_pdf)$size > 0,
+  file.exists(minimum_model_path),
+  file.info(minimum_model_path)$size > 0
+)
+minimum_model_environment <- new.env(parent = emptyenv())
+minimum_model_objects <- load(minimum_model_path, envir = minimum_model_environment)
+stopifnot(
+  identical(minimum_model_objects, "model6"),
+  inherits(minimum_model_environment$model6, "lm")
+)
+
+colony_input <- read.csv(file.path("data", "prac_data.csv"))
+stopifnot(
+  nrow(colony_input) == 680L,
+  ncol(colony_input) == 5L,
+  all(c("Strain", "Treatment", "ColonyCount", "HaloLawn") %in% names(colony_input))
+)
+
+run_script("code/glm.R")
+glm_output <- file.path("results", "glm.pdf")
+stopifnot(file.exists(glm_output), file.info(glm_output)$size > 0)
 
 python_output <- system2(
   Sys.which("python3"),

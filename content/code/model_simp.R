@@ -1,6 +1,11 @@
 ## Model simplification
+# Run from the coursework project root with:
+# Rscript code/model_simp.R
 
-mammals <- read.csv('../data/mammal_data.csv')
+mammals <- read.csv('data/mammal_data.csv', stringsAsFactors = TRUE)
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/model_simplification.pdf', 11, 8.5)
 
 # get logs of continuous variables
 mammals$logLS <- log(mammals$LitterSize)
@@ -70,3 +75,6 @@ anova(model, model7)
 
 # so model 6 is the minimum adequate model. Just check the diagnostics
 plot(model6)
+
+dev.off()
+save(model6, file='results/minimum_adequate_model.rda')
