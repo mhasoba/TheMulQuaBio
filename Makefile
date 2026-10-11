@@ -14,5 +14,6 @@ test: check-content
 	. .venv/bin/activate && PYTHONPATH="$(PYTHONPATH)" jupyter-book build content $(BOOK_BUILD_ARGS) --config "$(BOOK_CONFIG)"
 
 check-content:
-	.venv/bin/python -m unittest discover -s scripts -p 'test_check_content.py'
+	.venv/bin/python -m unittest discover -s scripts -p 'test_check*.py'
 	.venv/bin/python scripts/check_content.py
+	.venv/bin/python scripts/check_runtime_paths.py

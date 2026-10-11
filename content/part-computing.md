@@ -2,6 +2,8 @@
 
 This part gets you comfortable with the command line, version control, and the core tools used throughout MQB.
 
+Unless an exercise explicitly says otherwise, start commands at the coursework project root: the directory containing `README.md`, `code/`, `data/` and `results/`. From there, run a script as `python code/script.py`, `Rscript code/script.R` or `bash code/script.sh`. Paths such as `data/input.csv` and `results/output.csv` are relative to that root. Exercises about directory navigation, notebooks and HPC jobs may name a different starting directory; follow the stated exception rather than guessing.
+
 ## You will learn
 
 - Navigate files/directories efficiently (terminal basics)

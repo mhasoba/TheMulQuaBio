@@ -5,7 +5,7 @@ Visual Studio Code (VS Code) is a multilingual editor that can work with Python 
 
 ## Before you start
 
-Keep each piece of coursework or project in its own folder, containing its code, data and results. Do not open the MQB book source or a `code` subfolder when you mean to work on a whole project: opening the [project root](terms.md#project-root) makes relative paths and the integrated terminal easier to understand.
+Keep each piece of coursework or project in its own folder, containing its code, data and results. Do not open the MQB book source or a `code` subfolder when you mean to work on a whole project: opening the [project root](terms.md#project-root) makes relative paths and the integrated terminal easier to understand. Unless an exercise explicitly says otherwise, run scripts from that root and use paths such as `data/input.csv` and `results/output.csv`.
 
 These are separate things:
 
@@ -88,6 +88,8 @@ print(sys.prefix)
 Compare the result with the project interpreter selected for scripts. If it is wrong, use **Notebook: Select Notebook Kernel** and choose again. A Python environment can be offered as a notebook kernel without installing a separate browser Jupyter server into that environment; use {ref}`python-jupyter-install` only when you need the browser Notebook or JupyterLab interface.
 
 Save notebooks before switching kernels or closing VS Code. A kernel may continue to hold variables until it is restarted or stopped, so rerun the notebook from a clean kernel before treating an analysis as reproducible. See {ref}`jupyter-kernels` for named Python kernels and R notebook kernels.
+
+An open project folder, integrated terminal and notebook kernel can report different current directories. Run `Path.cwd()` in Python or `getwd()` in R and follow the notebook's stated starting-directory instructions. Do not assume that selecting a kernel has moved it to the project root.
 
 ## Using R in VS Code
 
