@@ -14,6 +14,7 @@ required_files <- c(
   "content/code/mul_expl.R",
   "content/code/mul_expl_inter.R",
   "content/code/regress.R",
+  "content/code/sql_in_r.R",
   "content/code/test_r.R",
   "content/code/test_r.py",
   "content/code/t_f_tests.R",
@@ -22,6 +23,7 @@ required_files <- c(
   "content/data/albatross_grow.csv",
   "content/data/mammal_data.csv",
   "content/data/prac_data.csv",
+  "content/data/resource.csv",
   "content/data/trees.csv",
   "content/data/nagy_et_al_1999.csv",
   "content/data/pound_hill_data.csv",
@@ -60,6 +62,7 @@ stopifnot(
         "mul_expl.R",
         "mul_expl_inter.R",
         "regress.R",
+        "sql_in_r.R",
         "test_r.R",
         "test_r.py",
         "t_f_tests.R"
@@ -78,6 +81,7 @@ stopifnot(
         "genome_size.csv",
         "mammal_data.csv",
         "prac_data.csv",
+        "resource.csv",
         "trees.csv",
         "nagy_et_al_1999.csv",
         "pound_hill_data.csv",
@@ -222,6 +226,18 @@ stopifnot(
 run_script("code/glm.R")
 glm_output <- file.path("results", "glm.pdf")
 stopifnot(file.exists(glm_output), file.info(glm_output)$size > 0)
+
+run_script("code/sql_in_r.R")
+run_script("code/sql_in_r.R")
+database_output <- file.path("results", "sql_in_r.sqlite")
+stopifnot(file.exists(database_output), file.info(database_output)$size > 0)
+database_connection <- DBI::dbConnect(RSQLite::SQLite(), database_output)
+stopifnot(
+  setequal(DBI::dbListTables(database_connection), c("consumer", "resource")),
+  DBI::dbGetQuery(database_connection, "SELECT COUNT(*) AS n FROM consumer")$n == 3L,
+  DBI::dbGetQuery(database_connection, "SELECT COUNT(*) AS n FROM resource")$n == 2336L
+)
+DBI::dbDisconnect(database_connection)
 
 python_output <- system2(
   Sys.which("python3"),

@@ -1,63 +1,73 @@
-#install the sqlite package
-install.packages('sqldf')
+#!/usr/bin/env Rscript
 
-# To load the packages
-library(sqldf)
+# Build and query a small SQLite database from the project root.
 
-# The command below opens a connection to the database.
-# If the database does not yet exist, one is created in R's working directory.
-db <- dbConnect(SQLite(), dbname='Test.sqlite')
+required_packages <- c("DBI", "RSQLite")
+missing_packages <- required_packages[
+  !vapply(required_packages, requireNamespace, quietly = TRUE, FUN.VALUE = logical(1))
+]
+if (length(missing_packages) > 0L) {
+  stop(
+    "Install the missing R package(s) before running this script: ",
+    paste(missing_packages, collapse = ", ")
+  )
+}
 
-# Now let's enter some data to the table
-# Using the db connection to our database, the data are entered using SQL queries
-# The next command just create the table
-dbSendQuery(conn = db,
-            "CREATE TABLE consumer
-       (OriginalID TEXT,
-        ConKingdom TEXT,
-        ConPhylum TEXT,
-        ConSpecies TEXT)")
+input_path <- file.path("data", "resource.csv")
+output_path <- file.path("results", "sql_in_r.sqlite")
 
-# Once the table is created, we can enter the data.
-#INSERT specifies where the data is entered (here the School table).
-#VALUES contains the data
+if (!file.exists(input_path)) {
+  stop("Missing input file: ", input_path, ". Start this script at the project root.")
+}
 
- dbSendQuery(conn = db,
-         "INSERT INTO consumer
-         VALUES (1, 'Animalia', 'Arthropoda', 'Chaoborus trivittatus')")
- dbSendQuery(conn = db,
-         "INSERT INTO consumer
-         VALUES (2, 'Animalia', 'Arthropoda', 'Chaoborus americanus')")
- dbSendQuery(conn = db,
-         "INSERT INTO consumer
-         VALUES (3, 'Animalia', 'Chordata', 'Stizostedion vitreum')")
+dir.create("results", showWarnings = FALSE)
+db <- DBI::dbConnect(RSQLite::SQLite(), dbname = output_path)
+on.exit(DBI::dbDisconnect(db), add = TRUE)
 
+# Recreate the example tables so that rerunning the script gives the same result.
+invisible(DBI::dbExecute(db, "DROP TABLE IF EXISTS consumer"))
+invisible(DBI::dbExecute(
+  db,
+  paste(
+    "CREATE TABLE consumer (",
+    "OriginalID INTEGER,",
+    "ConKingdom TEXT,",
+    "ConPhylum TEXT,",
+    "ConSpecies TEXT)"
+  )
+))
 
-# Once we have our table, we can query the results using:
+consumers <- data.frame(
+  OriginalID = 1:3,
+  ConKingdom = rep("Animalia", 3),
+  ConPhylum = c("Arthropoda", "Arthropoda", "Chordata"),
+  ConSpecies = c(
+    "Chaoborus trivittatus",
+    "Chaoborus americanus",
+    "Stizostedion vitreum"
+  )
+)
+invisible(DBI::dbAppendTable(db, "consumer", consumers))
 
-dbGetQuery(db, "SELECT * FROM consumer")
-dbGetQuery(db, "SELECT * FROM consumer WHERE ConPhylum='Chordata'")
+print(DBI::dbGetQuery(db, "SELECT * FROM consumer"))
+print(DBI::dbGetQuery(db, "SELECT * FROM consumer WHERE ConPhylum = 'Chordata'"))
 
+resources <- read.csv(input_path)
+invisible(DBI::dbWriteTable(
+  db,
+  "resource",
+  resources,
+  overwrite = TRUE,
+  row.names = FALSE
+))
 
-# Tables can be also imported from csv files.
-# As example, let's use the biotraits dataset.
-# The easiest way is to read the csv files into R as data frames.
-# Then the data frames are imported into the database.
+print(DBI::dbListTables(db))
+print(DBI::dbListFields(db, "resource"))
+print(utils::head(DBI::dbReadTable(db, "resource")))
 
-resource <- read.csv("../data/resource.csv")  # read csv files into R
+stopifnot(
+  DBI::dbGetQuery(db, "SELECT COUNT(*) AS n FROM consumer")$n == 3L,
+  DBI::dbGetQuery(db, "SELECT COUNT(*) AS n FROM resource")$n == nrow(resources)
+)
 
-# Import data frames into database
- dbWriteTable(conn = db, name = "resource", value = resource, row.names = FALSE)
-
-# Check that the data have been correctly imported into the School table.
- dbListTables(db)                 # The tables in the database
- dbListFields(db,"resource")       # The columns in a table
- dbreadTable(db, "resource")    # The data in a table
-
-# Before leaving rSQLite, there is a bit of tidying-up to do.
-# The connection to the database is closed, and as precaution
-# the three data frames are removed from R’s environment.
- dbDisconnect(db)            # Close connection
- rm(list = c("resource"))   # remove data frames
-
-
+message("Database written to ", output_path)
