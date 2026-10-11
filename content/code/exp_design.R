@@ -1,11 +1,17 @@
 # Practical
+# Run from the coursework project root with:
+# Rscript code/exp_design.R
 
 # This script uses genome size and morphology data to learn some data 
 # exploration techniques
 
 ######################## (1) ##########################
 # LOAD THE DATA FROM THE CSV TEXT FILE INTO A DATA FRAME:
-genome <- read.csv('../data/genome_size.csv', stringsAsFactors = TRUE) #assumes that you are working from your Code directory
+genome <- read.csv('data/genome_size.csv', stringsAsFactors = TRUE)
+genome$genome_size <- as.numeric(as.character(genome$GenomeSize))
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/genome_size.pdf', height=5, width=6)
 
 ######################## (2) ##########################
 # LOOK AT AND MANIPULATE THE DATA:
@@ -74,9 +80,7 @@ legend(40,2, legend=levels(genome$Suborder), #Add legend at coordinate 40,2
 	col= myColours, pch = mySymbols)
 
 ######################## (9) ##########################
-# SAVE FILE AS A PDF:
-
-pdf('../results/genome_size.pdf', height=5, width=6) #Open the pdf file
+# ADD THE FINAL FIGURE TO THE PDF:
 
 plot(genome_size ~ TotalLength , data = genome, 
 	col=myColours[Suborder], pch=mySymbols[Suborder],
@@ -88,4 +92,4 @@ dev.off() #Close the pdf file
 
 ######################## (10) ##########################
 # SAVE THE DATA AND YOUR NEW VARIABLES IN RDATA FORMAT:
-save(genome, myColours, mySymbols, file='../results/genome_size.rda')
+save(genome, myColours, mySymbols, file='results/genome_size.rda')

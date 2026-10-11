@@ -7,6 +7,7 @@ required_files <- c(
   "content/code/basic_io.R",
   "content/code/anova.R",
   "content/code/data_wrang.R",
+  "content/code/exp_design.R",
   "content/code/fmr.R",
   "content/code/mul_expl.R",
   "content/code/mul_expl_inter.R",
@@ -47,6 +48,7 @@ stopifnot(
         "anova.R",
         "basic_io.R",
         "data_wrang.R",
+        "exp_design.R",
         "fmr.R",
         "mul_expl.R",
         "mul_expl_inter.R",
@@ -107,6 +109,30 @@ stopifnot(
   nrow(genome_input) == 100L,
   ncol(genome_input) == 16L,
   all(c("GenomeSize", "BodyWeight", "Suborder") %in% names(genome_input))
+)
+
+run_script("code/exp_design.R")
+experimental_design_pdf <- file.path("results", "genome_size.pdf")
+experimental_design_data <- file.path("results", "genome_size.rda")
+stopifnot(
+  file.exists(experimental_design_pdf),
+  file.info(experimental_design_pdf)$size > 0,
+  file.exists(experimental_design_data),
+  file.info(experimental_design_data)$size > 0,
+  !file.exists("Rplots.pdf")
+)
+experimental_design_environment <- new.env(parent = emptyenv())
+experimental_design_objects <- load(
+  experimental_design_data,
+  envir = experimental_design_environment
+)
+stopifnot(
+  setequal(experimental_design_objects, c("genome", "myColours", "mySymbols")),
+  "genome_size" %in% names(experimental_design_environment$genome),
+  identical(
+    experimental_design_environment$genome$genome_size,
+    genome_input$GenomeSize
+  )
 )
 
 run_script("code/t_f_tests.R")
