@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -659,17 +659,18 @@ specifically a <em>ground dwelling omnivore</em>. These independent effects of a
 </section>
 <section id="model-1-mammalian-genome-size">
 <h2>Model 1: Mammalian genome size<a class="headerlink" href="#model-1-mammalian-genome-size" title="Link to this heading">#</a></h2>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to <code class="docutils literal notranslate"><span class="pre">Code</span></code> in your stats coursework directory.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called ‘interactions.R’ and add some introductory comments.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Load the data:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start in your coursework project root.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">code/mul_expl_inter.R</span></code> and add some introductory comments.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Read the supplied mammal data and recreate the logged C-value column. This makes the analysis independent of files generated in earlier chapters.</p>
+<p>When the script is complete, run it from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/mul_expl_inter.R</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">'../data/mammals.rdata'</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">meanCvalue</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>If <code class="docutils literal notranslate"><span class="pre">mammals.rdata</span></code> is missing, just import the data again using <code class="docutils literal notranslate"><span class="pre">read.csv</span></code>. You will then have to add the log C Value column to the imported data frame again.</p>
 <p>Let’s refit the model from <a class="reference internal" href="mul-expl.html"><span class="std std-doc">the first multiple explanatory variables chapter</span></a>, but including the interaction between trophic level and ground dwelling. We’ll immediately check the model is appropriate:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,7 +866,7 @@ in <a class="reference internal" href="mul-expl.html"><span class="std std-doc">
 <p><span class="math notranslate nohighlight">\(\star\)</span> First load the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">odonata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/genome_size.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">odonata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'data/genome_size.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">odonata</span><span class="o">$</span><span class="n">genome_size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">odonata</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">))</span>
 </pre></div>
 </div>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -751,12 +751,12 @@
 <p>We will use mutation data collected in the Genetics Practical by a previous year’s batch.</p>
 <p>The students were basically counting colonies looking for mutations. There were a number of bacterial strains which were different mutants of <em>Salmonella</em>. Each group applied a mutagen Nitroguanisine (NG) as well as histidine and streptomycine. A control plate was also tested.</p>
 <p>The data file is called <code class="docutils literal notranslate"><span class="pre">prac_data.csv</span></code> (so it’s a comma-separated values file), and is available from MQB’s  <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Save the <code class="docutils literal notranslate"><span class="pre">prac_data.csv</span></code> dataset into your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new script called MyGLM.R in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Use the code below to load and check your data.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Start R and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start in your coursework <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a> and download <a class="reference download internal" download="" href="../_downloads/df722b7267700121bfa2a96be112a29d/prac_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">prac_data.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new script called <code class="docutils literal notranslate"><span class="pre">code/MyGLM.R</span></code>. Use the code below to load and check your data. You can use <a class="reference download internal" download="" href="../_downloads/4d998ee087be3488c0dfd0e1614a9e28/glm.R"><code class="xref download docutils literal notranslate"><span class="pre">the</span> <span class="pre">supplied</span> <span class="pre">glm.R</span></code></a> to compare or recover the complete example.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Read in the data from the project root. Run selected lines from your editor while developing the analysis; when it is complete, run <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/MyGLM.R</span></code>. The supplied example runs as <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/glm.R</span></code> and writes its figures to <code class="docutils literal notranslate"><span class="pre">results/glm.pdf</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/prac_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/prac_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 </pre></div>
@@ -1459,6 +1459,7 @@ Halo 421 712 881 899 TA102
 </div>
 <p>So, lawns and halos are never recorded from nitroguanisine or the control. They’re nearly always found with histidine and different strains have different response to streptomysin. Again, treatment and strain interact. Although you can use a <span class="math notranslate nohighlight">\(\chi^2\)</span> test with two-dimensional contingency tables to look for independence between factors, you can’t with a three-way table without using more specialized tests.</p>
 <p>We will not go any further into this, but be aware that such gnarly statistical challenges may arise at times!</p>
+<p>Before finishing, run the complete script from the project root and open <code class="docutils literal notranslate"><span class="pre">results/glm.pdf</span></code> to check that all figures were created.</p>
 </section>
 <section id="mixed-effects-models">
 <h2>Mixed-effects models<a class="headerlink" href="#mixed-effects-models" title="Link to this heading">#</a></h2>

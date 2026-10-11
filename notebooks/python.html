@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -706,8 +706,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#align-dna-sequences">Align DNA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-oaks-problem">Missing oaks problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-make-the-oak-data-program-robust">Extension: make the oak-data program robust</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capstone-completion-checklist">Capstone completion checklist</a></li>
 </ul>
 </li>
@@ -4667,30 +4666,18 @@ OUTPUT: known-count total (or unavailable) and missing-count number per site
 <li><p>Modify the script so that all equally best alignments are recorded. Save them with their shared score in a human-readable CSV or TSV file in <code class="docutils literal notranslate"><span class="pre">results/</span></code>; do not use <code class="docutils literal notranslate"><span class="pre">pickle</span></code> for portable results. Call the new script <code class="docutils literal notranslate"><span class="pre">align_seqs_better.py</span></code>. Add a small input with a known tie and verify that every tied alignment is retained.</p></li>
 </ul>
 </section>
-<section id="missing-oaks-problem">
-<h3>Missing oaks problem<a class="headerlink" href="#missing-oaks-problem" title="Link to this heading">#</a></h3>
+<section id="practical-validating-tree-survey-records">
+<span id="python-assignment-2-practical"></span><h3>Practical: validating tree-survey records<a class="headerlink" href="#practical-validating-tree-survey-records" title="Link to this heading">#</a></h3>
+<p>This practical connects the chapter’s functions, data structures, control flow, CSV handling and testing to a tree-record cleaning workflow. The supplied tree-survey data are synthetic. It replaces the earlier standalone “Missing oaks problem” and its oak-data robustness extension; do not treat those legacy tasks as additional work.</p>
+<p>If you are using these materials for coursework, follow the relevant brief in Teams for assessed requirements, submission instructions and deadline. This chapter provides learning context and downloadable support files; it does not replace or extend the brief.</p>
+<p>Download the files into the existing coursework project’s root-level directories:</p>
 <ul class="simple">
-<li><p>Download <a class="reference download internal" download="" href="../_downloads/8e55827b96cf37cbe14788cb5d1378c3/oaks_debugme.py"><code class="xref download docutils literal notranslate"><span class="pre">oaks_debugme.py</span></code></a> into <code class="docutils literal notranslate"><span class="pre">code/</span></code> and <a class="reference download internal" download="" href="../_downloads/dd0864465a59f873ac49f697bfc10b30/test_oaks_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">test_oaks_data.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>. From the project root, run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">code/oaks_debugme.py</span></code>. There is a bug, because no oaks are being found.</p></li>
-<li><p>Fix the bug, using the built-in <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> if you need to inspect execution.</p></li>
-<li><p>Now, write doctests to make sure that, bug or no bug, your <code class="docutils literal notranslate"><span class="pre">is_an_oak</span></code> function is working as expected (hint: <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">is_an_oak('Fagus</span> <span class="pre">sylvatica')</span></code> should return <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/26380975385a2d5b132c78dc5181b451/silwood_trees_raw.csv"><code class="xref download docutils literal notranslate"><span class="pre">Tree-survey</span> <span class="pre">data</span></code></a> to <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/73cc7f279a62a82404a13a666a7f1acf/silwood_trees_metadata.md"><code class="xref download docutils literal notranslate"><span class="pre">Data</span> <span class="pre">metadata</span> <span class="pre">and</span> <span class="pre">validation</span> <span class="pre">contract</span></code></a> to <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/f57be2b5adbb240b1d5be1f92d116551/clean_silwood_trees.py"><code class="xref download docutils literal notranslate"><span class="pre">Python</span> <span class="pre">starter</span> <span class="pre">scaffold</span></code></a> to <code class="docutils literal notranslate"><span class="pre">code/</span></code>.</p></li>
 </ul>
-<p>If you wrote good doctests, you will find another bug that you might not have by just debugging (hint: what happens if you try the doctest with “Quercuss” instead of “Quercus”? Should this pass or fail?).</p>
-<ul class="simple">
-<li><p>Make the intended behaviour clear in the doctests: accept <code class="docutils literal notranslate"><span class="pre">Quercus</span></code> regardless of letter case or surrounding whitespace, but reject misspellings such as <code class="docutils literal notranslate"><span class="pre">Quercuss</span></code> and other genera. Modify the function until all doctests pass.</p></li>
-</ul>
-</section>
-<section id="extension-make-the-oak-data-program-robust">
-<h3>Extension: make the oak-data program robust<a class="headerlink" href="#extension-make-the-oak-data-program-robust" title="Link to this heading">#</a></h3>
-<p>You might have noticed that the headers in the data column are being included in the program as if they were a genus and species. That is, the first block of the program’s output is:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="s1">'Genus'</span>,<span class="w"> </span><span class="s1">' species'</span><span class="o">]</span>
-The<span class="w"> </span>genus<span class="w"> </span>is:
-Genus
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Modify the script so that it excludes the header row (if it exists) in its search for oaks in a given dataset.</p></li>
-<li><p>You might also have noticed that the output of the program writes a new file containing just the names of oaks. However, it does not include the column headers (“Genus”, “species”). Fix this.</p></li>
-</ul>
+<p>The starter provides CSV loading and writing. Complete only the marked implementation sections, following the relevant coursework brief and metadata for the task contract. The metadata defines the exact rules; do not infer corrections or requirements from the earlier oak example or from other chapter exercises.</p>
+<p>Before starting, revisit <a class="reference internal" href="#from-a-task-to-an-algorithm">From a task to an algorithm</a>, <a class="reference internal" href="#structuring-python-programs">Structuring Python programs</a>, <a class="reference internal" href="#handling-csv-files">Handling CSV files</a>, and <a class="reference internal" href="#python-separate-test-script"><span class="std std-ref">the separate test-script example</span></a>. When this practical supports coursework, the brief specifies any additional evidence such as an algorithm plan in the root README. Testing was covered in class; the chapter’s debugging and expected-error sections are optional references, not assumed prior knowledge.</p>
 </section>
 <section id="capstone-completion-checklist">
 <h3>Capstone completion checklist<a class="headerlink" href="#capstone-completion-checklist" title="Link to this heading">#</a></h3>
@@ -5355,8 +5342,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Link to this heading">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac4f1a98-83c8-4566-a6e3-a2e05afe1511">
-<span class="eqno">(2)<a class="headerlink" href="#equation-ac4f1a98-83c8-4566-a6e3-a2e05afe1511" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0733b79a-d5ee-483c-a8ca-a624f1ecf343">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0733b79a-d5ee-483c-a8ca-a624f1ecf343" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -5833,8 +5820,8 @@ from the end of an array:</p>
 <section id="the-lotkavolterra-model-revisited">
 <h3>The Lotka–Volterra model revisited<a class="headerlink" href="#the-lotkavolterra-model-revisited" title="Link to this heading">#</a></h3>
 <p>In the original Lotka–Volterra model, the resource population grows without bound when consumers are absent. Add logistic density dependence to make resource growth slow as the resource density <span class="math notranslate nohighlight">\(R\)</span> approaches its carrying capacity <span class="math notranslate nohighlight">\(K\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e22d274a-5cb3-4cbc-8030-d22ac332d04c">
-<span class="eqno">(3)<a class="headerlink" href="#equation-e22d274a-5cb3-4cbc-8030-d22ac332d04c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e81238dc-1d9b-430d-b70c-6497e4b19c13">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e81238dc-1d9b-430d-b70c-6497e4b19c13" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= rR\left(1 - \frac{R}{K}\right) - aCR\\
     \frac{dC}{dt} &amp;= -zC + eaCR
 \end{align}\]</div>
@@ -5865,8 +5852,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <section id="optional-extension-discrete-time-lv-model">
 <h3>Optional extension: discrete-time LV model<a class="headerlink" href="#optional-extension-discrete-time-lv-model" title="Link to this heading">#</a></h3>
 <p>Write a discrete-time version called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a84e6d5a-5809-43f3-b5d0-286494e872cc">
-<span class="eqno">(4)<a class="headerlink" href="#equation-a84e6d5a-5809-43f3-b5d0-286494e872cc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-38e710a1-66cd-4eac-90b0-459d7fdf510e">
+<span class="eqno">(4)<a class="headerlink" href="#equation-38e710a1-66cd-4eac-90b0-459d7fdf510e" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t \left(1 + r\left(1 - \frac{R_t}{K}\right) - aC_t\right)\\
     C_{t+1} &amp;= C_t \left(1 - z + eaR_t\right)
 \end{align}\]</div>
@@ -6619,12 +6606,12 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="s">"Hello, this is R!"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then try running it from your bash terminal (<em>not</em> from the Python terminal) (e.g., using <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">test_r.R</span></code>). This should return in your terminal:</p>
+<p>Then run it from your bash terminal (<em>not</em> from the Python terminal), starting at the coursework project root: <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/test_r.R</span></code>. This should return in your terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="s2">"Hello, this is R!"</span>
 </pre></div>
 </div>
-<p>Then try <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">--verbose</span> <span class="pre">test_r.R</span></code>. This should return something like:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="s1">'/usr/lib/r/bin/r --no-echo --no-restore --file=test_r.R'</span>
+<p>Then try <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">--verbose</span> <span class="pre">code/test_r.R</span></code>. This should return something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="s1">'/usr/lib/r/bin/r --no-echo --no-restore --file=code/test_r.R'</span>
 
 <span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="s2">"Hello, this is R!"</span>
 </pre></div>
@@ -6635,17 +6622,17 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <p>The location of <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> can differ between Unix/Linux systems. To locate it, run <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">-v</span> <span class="pre">Rscript</span></code> in the shell (not in Python). You can then use the returned path if necessary.</p>
 </div>
 <p>Now try:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rscript<span class="w"> </span>--verbose<span class="w"> </span>test_r.R<span class="w"> </span>&gt;<span class="w"> </span>../results/test_r.rout<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>../results/test_r_errFile.rout
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rscript<span class="w"> </span>--verbose<span class="w"> </span>code/test_r.R<span class="w"> </span>&gt;<span class="w"> </span>results/test_r.rout<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>results/test_r_errFile.rout
 </pre></div>
 </div>
-<p>Then check the contents of <code class="docutils literal notranslate"><span class="pre">test_r.rout</span></code> and <code class="docutils literal notranslate"><span class="pre">test_r_errFile.rout</span></code>. The former should contain the output of the R script, and the latter the additional information produced by the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> flag.</p>
+<p>Then check <code class="docutils literal notranslate"><span class="pre">results/test_r.rout</span></code> and <code class="docutils literal notranslate"><span class="pre">results/test_r_errFile.rout</span></code>. The former should contain the output of the R script, and the latter the additional information produced by the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> flag.</p>
 <p>Now try running this using subprocess instead:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../results/test_r.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">,</span> \
-     <span class="nb">open</span><span class="p">(</span><span class="s2">"../results/test_r_errFile.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_file</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"results/test_r.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">,</span> \
+     <span class="nb">open</span><span class="p">(</span><span class="s2">"results/test_r_errFile.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_file</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"test_r.R"</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"code/test_r.R"</span><span class="p">],</span>
         <span class="n">stdout</span><span class="o">=</span><span class="n">output_file</span><span class="p">,</span>
         <span class="n">stderr</span><span class="o">=</span><span class="n">error_file</span><span class="p">,</span>
         <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -6661,26 +6648,27 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../results/test_r.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">,</span> \
-     <span class="nb">open</span><span class="p">(</span><span class="s2">"../results/test_r_errFile.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"results/test_r.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">,</span> \
+     <span class="nb">open</span><span class="p">(</span><span class="s2">"results/test_r_errFile.rout"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_file</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"test_r.R"</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"code/test_r.R"</span><span class="p">],</span>
         <span class="n">stdout</span><span class="o">=</span><span class="n">output_file</span><span class="p">,</span>
         <span class="n">stderr</span><span class="o">=</span><span class="n">error_file</span><span class="p">,</span>
         <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Return code:"</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span>
+<span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now run <code class="docutils literal notranslate"><span class="pre">test_r.py</span></code> (or <code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">test_r.py</span></code> in IPython) and check <code class="docutils literal notranslate"><span class="pre">test_r.rout</span></code> and <code class="docutils literal notranslate"><span class="pre">test_r_errFile.rout</span></code>.</p>
+<p>From the project root, run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">code/test_r.py</span></code> (or <code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">code/test_r.py</span></code> in IPython) and check <code class="docutils literal notranslate"><span class="pre">results/test_r.rout</span></code> and <code class="docutils literal notranslate"><span class="pre">results/test_r_errFile.rout</span></code>.</p>
 <p>Also check what happens if you run (type directly in <code class="docutils literal notranslate"><span class="pre">ipython</span></code> or <code class="docutils literal notranslate"><span class="pre">python</span></code> console):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"NonExistScript.R"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Rscript"</span><span class="p">,</span> <span class="s2">"--verbose"</span><span class="p">,</span> <span class="s2">"code/NonExistScript.R"</span><span class="p">],</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
@@ -6724,7 +6712,7 @@ Python script. A simple example, where the output is a platform-dependent direct
 <h3>Workflow practical: R and filesystem automation<a class="headerlink" href="#workflow-practical-r-and-filesystem-automation" title="Link to this heading">#</a></h3>
 <section id="run-an-r-analysis-from-python">
 <h4>Run an R analysis from Python<a class="headerlink" href="#run-an-r-analysis-from-python" title="Link to this heading">#</a></h4>
-<p>Download <a class="reference download internal" download="" href="../_downloads/e0cf27a76a2fb862d644b7acbc319825/fmr.R"><code class="xref download docutils literal notranslate"><span class="pre">fmr.R</span></code></a> into <code class="docutils literal notranslate"><span class="pre">code/</span></code> and <a class="reference download internal" download="" href="../_downloads/99c92614aebde2c2107e79ae16c8f752/nagy_et_al_1999.csv"><code class="xref download docutils literal notranslate"><span class="pre">nagy_et_al_1999.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>. Read the R script, then write <code class="docutils literal notranslate"><span class="pre">run_fmr_r.py</span></code> that runs <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">fmr.R</span></code> from the coursework project’s <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory using <code class="docutils literal notranslate"><span class="pre">subprocess.run()</span></code> without <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>.</p>
+<p>Download <a class="reference download internal" download="" href="../_downloads/e0cf27a76a2fb862d644b7acbc319825/fmr.R"><code class="xref download docutils literal notranslate"><span class="pre">fmr.R</span></code></a> into <code class="docutils literal notranslate"><span class="pre">code/</span></code> and <a class="reference download internal" download="" href="../_downloads/99c92614aebde2c2107e79ae16c8f752/nagy_et_al_1999.csv"><code class="xref download docutils literal notranslate"><span class="pre">nagy_et_al_1999.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>. Read the R script, then write <code class="docutils literal notranslate"><span class="pre">run_fmr_r.py</span></code> that runs <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/fmr.R</span></code> from the coursework project root using <code class="docutils literal notranslate"><span class="pre">subprocess.run()</span></code> without <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>.</p>
 <p>Capture standard output and standard error as text, print both streams with labels, and print whether the command succeeded based on its return code. On success, verify that <code class="docutils literal notranslate"><span class="pre">results/fmr_plot.pdf</span></code> exists and is non-empty; on failure, exit with a non-zero status. Your wrapper is complete when a normal run reports success and deliberately using a nonexistent R script reports failure without a Python traceback.</p>
 </section>
 <section id="traverse-directories-with-os">
@@ -7022,8 +7010,7 @@ for efficient data crunching</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#align-dna-sequences">Align DNA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-oaks-problem">Missing oaks problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-make-the-oak-data-program-robust">Extension: make the oak-data program robust</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capstone-completion-checklist">Capstone completion checklist</a></li>
 </ul>
 </li>

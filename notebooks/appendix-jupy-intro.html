@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -757,14 +757,14 @@ jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
 </section>
 <section id="launching-running-a-jupyter-notebook">
 <h2>Launching/running a Jupyter Notebook<a class="headerlink" href="#launching-running-a-jupyter-notebook" title="Link to this heading">#</a></h2>
-<p>In Linux / Mac, Jupyter will start in the directory that you launch it from through terminal. So in your terminal first <code class="docutils literal notranslate"><span class="pre">cd</span></code> to your coursework project’s root <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory. Then, simply launch Jupyter (Linux / Mac):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook
+<p>Keep a coursework notebook in the <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a>, alongside <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code>. In Linux or macOS, change to that root in a terminal, confirm it with <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, activate the project’s Python environment, then launch the interface you installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab<span class="w">  </span><span class="c1"># or: jupyter notebook</span>
 </pre></div>
 </div>
-<p>This will initialize a new server instance (watch your active terminal) and launch a web browser with the Jupyter interface, including a menu at the top.</p>
+<p>This starts a local server and opens its browser interface. Keep the terminal open while you use it.</p>
 <p>Play around a bit. For starters,</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new notebook called <code class="docutils literal notranslate"><span class="pre">MyFirstJupyterNb.ipynb</span></code> using the menu in your <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory.</p>
-<p>Once you have created the new notebook, you can launch it next time by <code class="docutils literal notranslate"><span class="pre">cd</span></code>’ing to its location and then launching it by name:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new notebook called <code class="docutils literal notranslate"><span class="pre">MyFirstJupyterNb.ipynb</span></code> in the project root. Do not put it inside <code class="docutils literal notranslate"><span class="pre">code/</span></code>: keeping it beside the three project directories lets both scripts and notebooks use paths such as <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">results/figure.png</span></code>.</p>
+<p>The next time you work on it, return to the project root and launch it by name:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook<span class="w"> </span>MyFirstJupyterNb.ipynb
 </pre></div>
 </div>
@@ -804,7 +804,7 @@ jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
 <section id="using-jupyter-in-vs-code">
 <h2>Using Jupyter in VS Code<a class="headerlink" href="#using-jupyter-in-vs-code" title="Link to this heading">#</a></h2>
 <p>VS Code can keep notebooks, scripts and an integrated terminal in one project window. Follow <a class="reference internal" href="../appendices/vscode.html"><span class="std std-doc">VS Code for MQB</span></a> to install the Microsoft Python and Jupyter extensions, open a project folder, select the intended interpreter and choose a notebook kernel.</p>
-<p>A notebook’s kernel is separate from the terminal and can retain variables between runs. Check <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> in the first Python cell, save before changing kernels, and restart the kernel before a clean reproducibility run. The setup page explains this process; <a class="reference internal" href="#jupyter-kernels"><span class="std std-ref">Language Kernels</span></a> covers named Python and R kernels.</p>
+<p>Open the project root as the VS Code folder and keep the notebook itself in that root. A notebook’s kernel is separate from the terminal and can retain variables between runs. Check both <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> and <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code> in the first Python cell, save before changing kernels, and restart the kernel before a clean reproducibility run. The setup page explains this process; <a class="reference internal" href="#jupyter-kernels"><span class="std std-ref">Language Kernels</span></a> covers named Python and R kernels.</p>
 </section>
 <section id="key-elements-of-the-jupyter-nb-content">
 <h2>Key elements of the Jupyter nb content<a class="headerlink" href="#key-elements-of-the-jupyter-nb-content" title="Link to this heading">#</a></h2>
@@ -1040,17 +1040,18 @@ nbstripout<span class="w"> </span>--install
 </pre></div>
 </div>
 </li>
-<li><p><strong>restart and run all</strong>: Periodically test that your notebook runs from start to finish:</p>
+<li><p><strong>Restart and run all</strong>: For a single-language analysis notebook, periodically test that it runs from start to finish:</p>
 <ul class="simple">
 <li><p>Kernel → restart &amp; run All</p></li>
 </ul>
 </li>
-<li><p><strong>Check the working directory before using a relative path</strong>: A notebook kernel does not necessarily start at the project root. Follow the notebook’s instructions and inspect the location first. For a notebook explicitly started at the project root:</p>
+<li><p><strong>Check the working directory before using a relative path</strong>: A notebook kernel does not necessarily start at the project root. Keep your coursework notebook in the root, inspect the location in its first cell, and stop early if the expected project folders are absent:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="n">project_root</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"myfile.csv"</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"Start this notebook at the project root"</span><span class="p">)</span>
+<span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="n">project_root</span> <span class="o">/</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"code"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="s2">"results"</span><span class="p">)]</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">path</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">required</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+<span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"Open this notebook from the project root; missing: "</span> <span class="o">+</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">))</span>
 </pre></div>
 </div>
 </li>
@@ -1096,8 +1097,8 @@ nbstripout<span class="w"> </span>--install
 <ul>
 <li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">Cmd+S</span></code> frequently</strong>: Save your work regularly (or enable auto-save)</p></li>
 <li><p><strong>Terminal integration</strong>: macOS terminal commands work in notebook cells with <code class="docutils literal notranslate"><span class="pre">!</span></code> prefix:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
-<span class="err">!</span><span class="n">pwd</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w"> </span>-la
+<span class="o">!</span>pwd
 </pre></div>
 </div>
 </li>
@@ -1106,7 +1107,7 @@ nbstripout<span class="w"> </span>--install
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>For coursework submissions, always run “restart &amp; run All” before submitting to ensure your notebook executes correctly from top to bottom.</p>
+<p>For coursework submissions, restart the selected kernel and run all cells from top to bottom. This introductory page is an exception because it asks you to switch the whole notebook between Python and R for short demonstrations; apply the check to each of your own single-language analysis notebooks.</p>
 </div>
 </section>
 </section>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -669,6 +669,17 @@
 <section id="the-project">
 <h2>The Project<a class="headerlink" href="#the-project" title="Link to this heading">#</a></h2>
 <p>From the options provided below, you will choose an empirical dataset and a set of alternative models to fit to the data in that dataset.</p>
+<p>Treat <code class="docutils literal notranslate"><span class="pre">MiniProject/</span></code> as a self-contained project inside your coursework repository. Its root contains the run script and README, with <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code> beneath it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CMEECourseWork/
+└── MiniProject/
+    ├── README.md
+    ├── run_MiniProject.py  # or run_MiniProject.sh
+    ├── code/
+    ├── data/
+    └── results/
+</pre></div>
+</div>
+<p>From this point on, <strong>the project root means <code class="docutils literal notranslate"><span class="pre">MiniProject/</span></code></strong>. Start commands there, keep any exploratory notebook there too, and use paths such as <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">results/figure.pdf</span></code>. Your final pipeline should not depend on the parent coursework directory or on a path that exists only on your computer.</p>
 <p>The Miniproject must satisfy the following criteria (and follow the accompanying guidelines):</p>
 <ol class="arabic simple">
 <li><p><strong>It employs the biological computing tools described in the <a class="reference internal" href="../part-computing.html"><span class="std std-doc">Computing chapters</span></a> <em>as necessary</em></strong>: Shell (bash) scripting, Git, LaTeX, R, and Python. Using these tools, you will build a workflow that starts with the data and ends with a written report (in LaTeX). How you choose the different tools (e.g., how much Python vs R) is your choice; that is part of what will be assessed.</p></li>
@@ -801,6 +812,7 @@
 <section id="submission">
 <h2>Submission<a class="headerlink" href="#submission" title="Link to this heading">#</a></h2>
 <p>Add, commit, and push all your work to your Git repository using a directory called <code class="docutils literal notranslate"><span class="pre">MiniProject</span></code> within the coursework project root described in <a class="reference internal" href="unix.html#building-your-coursework-directory-structure"><span class="std std-ref">Building your coursework directory structure</span></a>, by the MiniProject deadline given to you.</p>
+<p>Before submission, open a fresh terminal at <code class="docutils literal notranslate"><span class="pre">MiniProject/</span></code> and run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">run_MiniProject.py</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_MiniProject.sh</span></code>, as appropriate. The assessor will use the same starting point. The run script should create all retained outputs under <code class="docutils literal notranslate"><span class="pre">results/</span></code> without relying on a previous working directory.</p>
 <p>Beyond the required top-level structure and run-script requirements, you may organise the internal workflow as you judge appropriate — this is part of what will be assessed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -966,11 +978,11 @@
 </section>
 <section id="the-data">
 <h4>The Data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h4>
-<p>The dataset is called <code class="docutils literal notranslate"><span class="pre">logistic_growth_data.csv</span></code>. It contains measurements of changes in biomass or the number of microbial cells over time. These data were collected through laboratory experiments worldwide. The field names are defined in a file called  <code class="docutils literal notranslate"><span class="pre">logistic_growth_meta_data.csv</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">PopBio</span></code> (abundance) and <code class="docutils literal notranslate"><span class="pre">Time</span></code>. Single population growth rate curves can be identified by unique  combinations of temperature, species, medium, citation, and replicate (concatenate them to create a new string variable that identifies unique growth curves).</p>
+<p>The dataset is called <a class="reference download internal" download="" href="../_downloads/64e0c76a89781109a88cd6c93c209de8/logistic_growth_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">logistic_growth_data.csv</span></code></a>. Its field names are defined in <a class="reference download internal" download="" href="../_downloads/1343675bd287e1bc6b3e576819940832/logistic_growth_meta_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">logistic_growth_meta_data.csv</span></code></a>. Download both files into <code class="docutils literal notranslate"><span class="pre">MiniProject/data/</span></code>. The data contain measurements of changes in biomass or the number of microbial cells over time, collected through laboratory experiments worldwide. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">PopBio</span></code> (abundance) and <code class="docutils literal notranslate"><span class="pre">Time</span></code>. Single population growth rate curves can be identified by unique combinations of temperature, species, medium, citation, and replicate (concatenate them to create a new string variable that identifies unique growth curves).</p>
 <p>Let’s have a look at the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/logistic_growth_data.csv"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/logistic_growth_data.csv"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Loaded </span><span class="si">{}</span><span class="s2"> columns."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -999,7 +1011,7 @@ Length: 10, dtype: str
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/logistic_growth_meta_data.csv"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/logistic_growth_meta_data.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1408,11 +1420,11 @@ Length: 285, dtype: str
 </section>
 <section id="id6">
 <h4>The Data<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
-<p>The dataset is called <code class="docutils literal notranslate"><span class="pre">cr_at.csv</span></code>. It contains measurements of rates of consumption of a single resource (e.g., prey, plants) species’ by a consumer species (e.g., predators, grazers). These data were collected through lab and field experiments across the world. The field names are defined in a file called <code class="docutils literal notranslate"><span class="pre">biotraits_template_description.pdf</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">N_TraitValue</span></code> (The number of resources consumed per consumer per unit time), and <code class="docutils literal notranslate"><span class="pre">resDensity</span></code> (the resource abundance). Individual functional response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values — each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one curve. Or you can reconstruct them as unique combinations of <code class="docutils literal notranslate"><span class="pre">Citation</span></code> (where the functional response dataset came from), <code class="docutils literal notranslate"><span class="pre">ConTaxa</span></code> (consumer species ID), <code class="docutils literal notranslate"><span class="pre">resTaxa</span></code> (resource species ID).</p>
+<p>The dataset is called <a class="reference download internal" download="" href="../_downloads/1924c0da374985b3c2c32db1ad829711/cr_at.csv"><code class="xref download docutils literal notranslate"><span class="pre">cr_at.csv</span></code></a>. Download it and the <a class="reference download internal" download="" href="../_downloads/ea84eb0a7f1263c985cb6deab3dd2195/biotraits_template_description.pdf"><code class="xref download docutils literal notranslate"><span class="pre">field</span> <span class="pre">descriptions</span></code></a> into <code class="docutils literal notranslate"><span class="pre">MiniProject/data/</span></code>. It contains measurements of rates of consumption of a single resource (e.g., prey or plants) by a consumer species (e.g., predators or grazers), collected through laboratory and field experiments across the world. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">N_TraitValue</span></code> (the number of resources consumed per consumer per unit time) and <code class="docutils literal notranslate"><span class="pre">ResDensity</span></code> (the resource abundance). Individual functional response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values—each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one curve. You can also reconstruct them as unique combinations of <code class="docutils literal notranslate"><span class="pre">Citation</span></code> (where the functional response dataset came from), <code class="docutils literal notranslate"><span class="pre">ConTaxa</span></code> (consumer species ID) and <code class="docutils literal notranslate"><span class="pre">ResTaxa</span></code> (resource species ID).</p>
 <p>Let’s have a look at the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/cr_at.csv"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/cr_at.csv"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Loaded </span><span class="si">{}</span><span class="s2"> columns."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -1989,32 +2001,32 @@ Length: 26, dtype: str
 <span id="id7"></span><h4>The Models<a class="headerlink" href="#miniproject-fr-models" title="Link to this heading">#</a></h4>
 <p><em>All the following parameters and variables are in SI units</em>.</p>
 <p>The fundamental measure of interest (the response variable) is consumption rate (<span class="math notranslate nohighlight">\(c\)</span>). This is expressed in terms of biomass quantity or number of individuals of resource consumed <em>per unit time per unit consumer</em> (so units of Mass (or Individuals) / Time).</p>
-<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. <a class="reference internal" href="#equation-eq-quad">(10)</a> and <a class="reference internal" href="#equation-eq-cubic">(11)</a> (replace <span class="math notranslate nohighlight">\(x\)</span> with resource abundance).</p>
+<p>Again, the simplest mathematical models you can use are the phenomenological quadratic and cubic polynomial models, that is eqns. <a class="reference internal" href="#equation-eq-quad">(11)</a> and <a class="reference internal" href="#equation-eq-cubic">(12)</a> (replace <span class="math notranslate nohighlight">\(x\)</span> with resource abundance).</p>
 <p>Then, there is the more mechanistic Holling Type II model (Holling, 1959):</p>
 <div class="math notranslate nohighlight" id="equation-eq-fr-ii">
-<span class="eqno">(8)<a class="headerlink" href="#equation-eq-fr-ii" title="Link to this equation">#</a></span>\[
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-fr-ii" title="Link to this equation">#</a></span>\[
       c = \frac{a x_r}{1 + h a x_r}
 \]</div>
 <p>Here, <span class="math notranslate nohighlight">\(x_r\)</span> is resource density (Mass / Area or Volume), <span class="math notranslate nohighlight">\(a\)</span> is consumer’s search rate (Area or Volume / Time ), and  <span class="math notranslate nohighlight">\(h\)</span> is handling time of the consumer for that resource (time taken to overpower and ingest it).</p>
 <p>Below is an example FR curve from the dataset you have been given with the Type II model fitted to it.</p>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/3_FR.svg" />
-<small>  <center> Example of the a Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(8)</a>) fitted to a functional response of a consumer on a resource.</p>
+<small>  <center> Example of the a Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(9)</a>) fitted to a functional response of a consumer on a resource.</p>
 </center> </small>
 <hr class="docutils" />
 <p>There is also the less-mechanistic “generalized” functional response model:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fr-gen">
-<span class="eqno">(9)<a class="headerlink" href="#equation-eq-fr-gen" title="Link to this equation">#</a></span>\[
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-fr-gen" title="Link to this equation">#</a></span>\[
       c = \frac{a x_r^{q + 1}}{1 + h a x_r^{q + 1}}
 \]</div>
-<p>Where everything is same as eqn. <a class="reference internal" href="#equation-eq-fr-ii">(8)</a>, but the additional parameter <span class="math notranslate nohighlight">\(q\)</span> (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter <span class="math notranslate nohighlight">\(q\)</span> which does not have a formal biological meaning.</p>
+<p>Where everything is same as eqn. <a class="reference internal" href="#equation-eq-fr-ii">(9)</a>, but the additional parameter <span class="math notranslate nohighlight">\(q\)</span> (dimensionless) is a shape parameter that allows the shape of the response to be more flexible/variable, from “Type I” to “Type III”. This model is less mechanistic because it includes a phenomenological parameter <span class="math notranslate nohighlight">\(q\)</span> which does not have a formal biological meaning.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Note that if <span class="math notranslate nohighlight">\(q=0\)</span>, eqn <a class="reference internal" href="#equation-eq-fr-gen">(9)</a> becomes same as the Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(8)</a>).</p>
+<p>Note that if <span class="math notranslate nohighlight">\(q=0\)</span>, eqn <a class="reference internal" href="#equation-eq-fr-gen">(10)</a> becomes same as the Type II model (eqn. <a class="reference internal" href="#equation-eq-fr-ii">(9)</a>).</p>
 </div>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/FR.svg" />
-<small> <center> The range of functional responses captured by the generalized functional response model (eqn. <a class="reference internal" href="#equation-eq-fr-gen">(9)</a>).</p>
+<small> <center> The range of functional responses captured by the generalized functional response model (eqn. <a class="reference internal" href="#equation-eq-fr-gen">(10)</a>).</p>
 </center>
 </small>
 <hr class="docutils" />
@@ -2040,11 +2052,11 @@ Length: 26, dtype: str
 </section>
 <section id="id9">
 <h4>The Data<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
-<p>The dataset is called <code class="docutils literal notranslate"><span class="pre">therm_resp_data.csv</span></code>. It contains a subset of the full “bio_traits” database. This subset contains hundreds of “thermal responses” for growth, respiration and photosynthesis rates in plants and bacteria (both aquatic and terrestrial). These data were collected through lab experiments across the world, and compiled by various people over the years. The field names are defined in a file called <code class="docutils literal notranslate"><span class="pre">biotraits_template_description.pdf</span></code>, also in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">OriginalTraitValue</span></code> (the trait values responding to temperature), and <code class="docutils literal notranslate"><span class="pre">ConTemp</span></code> (the temperature). Individual thermal response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values — each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one thermal performance curve.</p>
+<p>The dataset is called <a class="reference download internal" download="" href="../_downloads/1345cac7be46a240c6594df33d138e65/therm_resp_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">therm_resp_data.csv</span></code></a>. Download it and the <a class="reference download internal" download="" href="../_downloads/ea84eb0a7f1263c985cb6deab3dd2195/biotraits_template_description.pdf"><code class="xref download docutils literal notranslate"><span class="pre">field</span> <span class="pre">descriptions</span></code></a> into <code class="docutils literal notranslate"><span class="pre">MiniProject/data/</span></code>. The dataset is a subset of the full <code class="docutils literal notranslate"><span class="pre">bio_traits</span></code> database and contains hundreds of thermal responses for growth, respiration and photosynthesis rates in aquatic and terrestrial plants and bacteria. These data were collected through laboratory experiments across the world and compiled by several researchers. The two main fields of interest are <code class="docutils literal notranslate"><span class="pre">OriginalTraitValue</span></code> (the trait values responding to temperature) and <code class="docutils literal notranslate"><span class="pre">ConTemp</span></code> (the temperature). Individual thermal response curves can be identified by <code class="docutils literal notranslate"><span class="pre">ID</span></code> values—each <code class="docutils literal notranslate"><span class="pre">ID</span></code> corresponds to one thermal performance curve.</p>
 <p>Let’s have a look at the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/therm_resp_data.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/therm_resp_data.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Loaded </span><span class="si">{}</span><span class="s2"> columns."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -2630,17 +2642,17 @@ Length: 2, dtype: str
 <p><em>All the following parameters and variables are in SI units</em>.</p>
 <p>There are multiple models that might best describe these data. The simplest are the general quadratic and cubic polynomial models:</p>
 <div class="math notranslate nohighlight" id="equation-eq-quad">
-<span class="eqno">(10)<a class="headerlink" href="#equation-eq-quad" title="Link to this equation">#</a></span>\[
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-quad" title="Link to this equation">#</a></span>\[
     B = B_0 + B_1 x + B_2 x^2
 \]</div>
 <div class="math notranslate nohighlight" id="equation-eq-cubic">
-<span class="eqno">(11)<a class="headerlink" href="#equation-eq-cubic" title="Link to this equation">#</a></span>\[
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-cubic" title="Link to this equation">#</a></span>\[
     B = B_0 + B_1 x + B_2 x^2 + B_3 x^3
 \]</div>
 <p>These are phenomenological models, with the parameters <span class="math notranslate nohighlight">\(B_0\)</span>, <span class="math notranslate nohighlight">\(B_1\)</span>, <span class="math notranslate nohighlight">\(B_2\)</span>, and <span class="math notranslate nohighlight">\(B_3\)</span> lacking any mechanistic interpretation. <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, which in this case is temperature, <span class="math notranslate nohighlight">\(T\)</span>.
-Another phenomenological model option is the Briere model (equation <a class="reference internal" href="#equation-eq-briere1">(12)</a>):</p>
+Another phenomenological model option is the Briere model (equation <a class="reference internal" href="#equation-eq-briere1">(13)</a>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-briere1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-eq-briere1" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-briere1" title="Link to this equation">#</a></span>\[\begin{split}
 B = \left\{
         \begin{array}{ll}
             0 &amp; \quad T \leq T_0 \\
@@ -2650,9 +2662,9 @@ B = \left\{
     \right.
 \end{split}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(T\)</span> is temperature, <span class="math notranslate nohighlight">\(T_0\)</span> and <span class="math notranslate nohighlight">\(T_m\)</span> are the minimum and maximum feasible temperatures for the trait, below or above which the trait goes to zero, and <span class="math notranslate nohighlight">\(B_0\)</span> is a normalization constant. Example R code for fitting this model can be found <a class="reference internal" href="nlls.html#model-fitting-nlls-tpcs"><span class="std std-ref">here</span></a>.</p>
-<p>Briere et al. also proposed a more general version of equation <a class="reference internal" href="#equation-eq-briere1">(12)</a>, by adding a new parameter <span class="math notranslate nohighlight">\(m\)</span> to replace the square root term above:</p>
+<p>Briere et al. also proposed a more general version of equation <a class="reference internal" href="#equation-eq-briere1">(13)</a>, by adding a new parameter <span class="math notranslate nohighlight">\(m\)</span> to replace the square root term above:</p>
 <div class="math notranslate nohighlight" id="equation-eq-briere2">
-<span class="eqno">(13)<a class="headerlink" href="#equation-eq-briere2" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-briere2" title="Link to this equation">#</a></span>\[\begin{split}
 B = \left\{
         \begin{array}{ll}
             0 &amp; \quad T \leq T_0 \\
@@ -2663,7 +2675,7 @@ B = \left\{
 \end{split}\]</div>
 <p>In contrast, the Schoolfield model (Schoolfield et al. 1981) is a mechanistic option that is based on thermodynamics and enzyme kinetics:</p>
 <div class="math notranslate nohighlight" id="equation-eq-schoolf">
-<span class="eqno">(14)<a class="headerlink" href="#equation-eq-schoolf" title="Link to this equation">#</a></span>\[
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-schoolf" title="Link to this equation">#</a></span>\[
     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
     { 1 + e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})} + 
     e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
@@ -2675,21 +2687,21 @@ B = \left\{
 </div>
 <hr class="docutils" />
 <p><img alt="image" src="../_images/SchoolfEx.png" /></p>
-<p><small> <center> Example of the full Sharpe-Schoolfield model (equation <a class="reference internal" href="#equation-eq-schoolf">(14)</a>) fitted to the thermal response curve of a metabolic trait <span class="math notranslate nohighlight">\(x\)</span> with resource abundance. </center> </small></p>
+<p><small> <center> Example of the full Sharpe-Schoolfield model (equation <a class="reference internal" href="#equation-eq-schoolf">(15)</a>) fitted to the thermal response curve of a metabolic trait <span class="math notranslate nohighlight">\(x\)</span> with resource abundance. </center> </small></p>
 <hr class="docutils" />
 <p>In many cases, a simplified Schoolfield model would be more appropriate for thermal response data, because low-temperature inactivation is weak, or is undetectable in the data because low-temperature measurements were not made.</p>
 <div class="math notranslate nohighlight" id="equation-eq-schoolfh">
-<span class="eqno">(15)<a class="headerlink" href="#equation-eq-schoolfh" title="Link to this equation">#</a></span>\[
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-schoolfh" title="Link to this equation">#</a></span>\[
     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
     { 1 +  e^{\frac{E_h}{k} (\frac{1}{T_h} - \frac{1}{T})}}
 \]</div>
 <p>In other cases, a different simplified Schoolfield model would be more appropriate, because high-temperature inactivation was not detectable in the data because measurements were not made at sufficiently high temperatures:</p>
 <div class="math notranslate nohighlight" id="equation-eq-schoolfl">
-<span class="eqno">(16)<a class="headerlink" href="#equation-eq-schoolfl" title="Link to this equation">#</a></span>\[
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-schoolfl" title="Link to this equation">#</a></span>\[
     B = \frac{B_0 e^{\frac{-E}{k} (\frac{1}{T} - \frac{1}{283.15})}}
     { 1 +  e^{\frac{E_l}{k} (\frac{1}{T_l} - \frac{1}{T})}}
 \]</div>
-<p>Note that the cubic model (equation <a class="reference internal" href="#equation-eq-cubic">(11)</a>) has the same number of parameters as the reduced Schoolfield models (equations <a class="reference internal" href="#equation-eq-schoolfh">(15)</a> and <a class="reference internal" href="#equation-eq-schoolfl">(16)</a>). Also, the temperature parameter (<span class="math notranslate nohighlight">\(T\)</span>) of the cubic model (equation <a class="reference internal" href="#equation-eq-cubic">(11)</a>) is in <span class="math notranslate nohighlight">\(^\circ\)</span>C, whereas the temperature parameter in the Schoolfield model is in K.</p>
+<p>Note that the cubic model (equation <a class="reference internal" href="#equation-eq-cubic">(12)</a>) has the same number of parameters as the reduced Schoolfield models (equations <a class="reference internal" href="#equation-eq-schoolfh">(16)</a> and <a class="reference internal" href="#equation-eq-schoolfl">(17)</a>). Also, the temperature parameter (<span class="math notranslate nohighlight">\(T\)</span>) of the cubic model (equation <a class="reference internal" href="#equation-eq-cubic">(12)</a>) is in <span class="math notranslate nohighlight">\(^\circ\)</span>C, whereas the temperature parameter in the Schoolfield model is in K.</p>
 <p>For this option, do not stop at whether a mechanistic thermal-response model beats a polynomial by AIC/BIC. Use the fitted parameters, or the pattern of model support across curves, to answer the biological question you posed above in light of the <a class="reference internal" href="metabolic-basis.html"><span class="std std-doc">Metabolic basis chapter</span></a> and the downstream chapter most relevant to your chosen trait subset.</p>
 </section>
 </section>

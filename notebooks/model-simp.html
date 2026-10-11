@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -657,12 +657,13 @@
 <section id="an-example">
 <h2>An example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h2>
 <p>We’ll be using the mammal dataset for this practical, so once again:</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Make sure you have changed the working directory to your stats module <code class="docutils literal notranslate"><span class="pre">code</span></code> folder.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span>  Create a new blank script called <code class="docutils literal notranslate"><span class="pre">Mymodel_simp.R</span></code>.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span>  Load the mammals data into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start in your coursework <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a>.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">code/Mymodel_simp.R</span></code>. You will build it during the exercise; use <a class="reference download internal" download="" href="../_downloads/ad4fe395bbef41e0577f9ee1c805d30e/model_simp.R"><code class="xref download docutils literal notranslate"><span class="pre">the</span> <span class="pre">supplied</span> <span class="pre">model_simp.R</span></code></a> if you need to compare or recover a complete example.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Download <a class="reference download internal" download="" href="../_downloads/12bf96759efbc864550f6fec2f616742/mammal_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">mammal_data.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>, then load it into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
+<p>Run selected lines from your editor as you develop the analysis. When it is complete, run your script from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/Mymodel_simp.R</span></code>; the supplied example runs as <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/model_simp.R</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -940,7 +941,7 @@ which suggests that the slope of log C value with body mass differs between grou
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where <span class="math notranslate nohighlight">\(N\)</span> is the current step).</p>
 <p>It can be important to consider both <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables. It can be worth trying to remove things that look significant in one table but not the other — some terms can explain significant variation on the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table but the coefficients are not significant.</p>
 <p>remember to remove <em>terms</em>: with categorical variables, several coefficients in the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table may come from one term in the model and have to be removed together.</p>
-<p>When you have got your final model, save the model as an R data file: <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='myFinalModel.rda')</span></code>.</p>
+<p>When you have your final model, create the output directory if necessary and save the model there: <code class="docutils literal notranslate"><span class="pre">dir.create('results',</span> <span class="pre">showWarnings</span> <span class="pre">=</span> <span class="pre">FALSE)</span></code> followed by <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='results/myFinalModel.rda')</span></code>. Generated results belong under <code class="docutils literal notranslate"><span class="pre">results/</span></code>, leaving the supplied data unchanged.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="fn1-c1" role="doc-footnote">

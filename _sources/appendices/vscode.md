@@ -75,21 +75,23 @@ Use the editor's Python run control for a small script, then make the working di
 
 ## Jupyter notebooks: choose a kernel deliberately
 
-With the Microsoft Jupyter extension installed, open an existing `.ipynb` file or create a new notebook. A [kernel](terms.md#notebook-kernel) is the program that will run its cells. Select **Select Kernel** in the notebook’s upper-right corner, then choose the intended entry under **Python Environments** or **Jupyter Kernels**. A remembered kernel is a convenience, not evidence that it is correct for a new project.
+With the Microsoft Jupyter extension installed, keep the coursework notebook in the project root, alongside `code`, `data` and `results`. Open that root as the VS Code folder, then open the `.ipynb` file or create a new one there. A [kernel](terms.md#notebook-kernel) is the program that will run its cells. Select **Select Kernel** in the notebook’s upper-right corner, then choose the intended entry under **Python Environments** or **Jupyter Kernels**. A remembered kernel is a convenience, not evidence that it is correct for a new project.
 
 Run this in the first Python cell:
 
 ```python
 import sys
+from pathlib import Path
 print(sys.executable)
 print(sys.prefix)
+print(Path.cwd())
 ```
 
 Compare the result with the project interpreter selected for scripts. If it is wrong, use **Notebook: Select Notebook Kernel** and choose again. A Python environment can be offered as a notebook kernel without installing a separate browser Jupyter server into that environment; use {ref}`python-jupyter-install` only when you need the browser Notebook or JupyterLab interface.
 
 Save notebooks before switching kernels or closing VS Code. A kernel may continue to hold variables until it is restarted or stopped, so rerun the notebook from a clean kernel before treating an analysis as reproducible. See {ref}`jupyter-kernels` for named Python kernels and R notebook kernels.
 
-An open project folder, integrated terminal and notebook kernel can report different current directories. Run `Path.cwd()` in Python or `getwd()` in R and follow the notebook's stated starting-directory instructions. Do not assume that selecting a kernel has moved it to the project root.
+An open project folder, integrated terminal and notebook kernel can report different current directories. In Python, check that `Path.cwd()` contains the expected `code`, `data` and `results` directories; in R, make the same check with `getwd()` and `dir.exists()`. If it does not, stop and correct how you opened the project or notebook before running the analysis. Do not use `setwd()` inside shared work to conceal the mismatch, and do not assume that selecting a kernel has moved it to the project root.
 
 ## Using R in VS Code
 
@@ -143,7 +145,7 @@ Before beginning assessed work, use a scratch project with synthetic data:
 
 1. Open the project root and verify the terminal location.
 2. Run a short Python script using the selected project interpreter and print `sys.executable`.
-3. Open a small notebook, select its kernel and print `sys.executable` again.
+3. Create a small notebook in the project root, select its kernel, and print `sys.executable` and `Path.cwd()`. Confirm that `code`, `data` and `results` are visible from that location.
 4. If using R, create an R terminal, inspect `R.home()` and `.libPaths()`, source a small script and view a simple plot.
 
 If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.

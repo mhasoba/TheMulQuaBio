@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -1505,8 +1505,12 @@ you have realized by now that <code class="docutils literal notranslate"><span c
 <h3>Databases and R<a class="headerlink" href="#databases-and-r" title="Link to this heading">#</a></h3>
 <p>R can be used to link to and extract data from online databases such as PubMed and GenBank, or to manipulate and access your own. Computational Biology datasets are often quite large, and it makes sense to access their data by querying the databases instead of manually downloading them. So also, your own data may be complex and large, in which case you may want to organize and manage those data in a proper relational database.</p>
 <p>Practically all the data wrangling principles in the previous sections are a part and parcel of relational databases.</p>
-<p>There are many R packages that provide an interface to databases (SQLite, MySQL, Oracle, etc). Check out R packages <a class="reference external" href="http://cran.r-project.org/web/packages/DBI/index.html">DBI</a> and <a class="reference external" href="https://cran.r-project.org/web/packages/RMySQL/index.html">RMySQL</a> .</p>
-<p>R can also also be used to access, update and manage databases. In particular <code class="docutils literal notranslate"><span class="pre">SQLite</span></code> allows you to build, manipulate, and access databases easily. Try the script called <code class="docutils literal notranslate"><span class="pre">sql_in_r.R</span></code> available in the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory of MQB. Also have a look at <a class="reference internal" href="appendix-databases.html"><span class="std std-doc">this Appendix</span></a>.</p>
+<p>There are many R packages that provide an interface to databases such as SQLite, MySQL and Oracle. The example below uses <a class="reference external" href="https://cran.r-project.org/package=DBI">DBI</a> and <a class="reference external" href="https://cran.r-project.org/package=RSQLite">RSQLite</a>.</p>
+<p>Download <a class="reference download internal" download="" href="../_downloads/0f04e96c8d42e1f9f17915c41402716e/sql_in_r.R"><code class="xref download docutils literal notranslate"><span class="pre">sql_in_r.R</span></code></a> into <code class="docutils literal notranslate"><span class="pre">code/</span></code> and <a class="reference download internal" download="" href="../_downloads/59ec7433673f8cb5cd3df19f89be90c2/resource.csv"><code class="xref download docutils literal notranslate"><span class="pre">resource.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>. If necessary, install <code class="docutils literal notranslate"><span class="pre">DBI</span></code> and <code class="docutils literal notranslate"><span class="pre">RSQLite</span></code> once in your R environment. Then start at the coursework project root and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rscript<span class="w"> </span>code/sql_in_r.R
+</pre></div>
+</div>
+<p>The script creates <code class="docutils literal notranslate"><span class="pre">results/sql_in_r.sqlite</span></code>, builds two small tables, runs example queries and checks the number of imported records. It is safe to run again: the example tables are replaced rather than appended. See the <a class="reference internal" href="appendix-databases.html"><span class="std std-doc">database appendix</span></a> for the underlying relational-database and SQL ideas.</p>
 </section>
 </section>
 <section id="data-visualization">

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -648,17 +648,18 @@
 <p>The first thing to do is look at the data again.</p>
 <section id="exploring-the-data">
 <h3>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Create a new blank script called <code class="docutils literal notranslate"><span class="pre">mul_expl.R</span></code> in your <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory and add some introductory comments.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Load the data saved at the end of the <a class="reference internal" href="anova.html"><span class="std std-doc">anova chapter</span></a>:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start in your coursework project root. Create a new blank script called <code class="docutils literal notranslate"><span class="pre">code/mul_expl.R</span></code> and add some introductory comments.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Read the supplied mammal data and recreate the logged C-value column used in the <a class="reference internal" href="anova.html"><span class="std std-doc">ANOVA chapter</span></a>. Starting from the CSV keeps this analysis reproducible even if you have not run the previous chapter.</p>
+<p>When the script is complete, run it from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/mul_expl.R</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">'../data/mammals.rdata'</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">mammals</span><span class="o">$</span><span class="n">logCvalue</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">mammals</span><span class="o">$</span><span class="n">meanCvalue</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Look back at the end of the previous chapter to see how you saved the rData file. If <code class="docutils literal notranslate"><span class="pre">mammals.rdata</span></code> is missing, just import the data again using <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> and add the <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">C</span> <span class="pre">Value</span></code> column to the imported data frame again (go back to the <a class="reference internal" href="anova.html"><span class="std std-doc">anova chapter</span></a> and have a look if you have forgotten how).</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">ls()</span></code>, and then <code class="docutils literal notranslate"><span class="pre">str</span></code> to check that the data has loaded correctly:</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">str()</span></code> to check that the data and the new <code class="docutils literal notranslate"><span class="pre">logCvalue</span></code> column look as expected:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>

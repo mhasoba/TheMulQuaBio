@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -614,7 +614,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-square-test-with-the-mammals-data">The Chi-square test with the mammals data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data">Saving data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-derived-data">Saving derived data</a></li>
 </ul>
             </nav>
         </div>
@@ -651,6 +651,7 @@
 </div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Start in your coursework project root. Create this chapter’s script as <code class="docutils literal notranslate"><span class="pre">code/anova.R</span></code>; when it is complete, run the whole analysis with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/anova.R</span></code>.</p>
 <p>Analysis of Variance, is very often a good choice if your response (dependent) variable is continuous, and your  predictor (independent) variables is categorical.</p>
 <p>In this chapter, you will learn to perform an anova, that is, fit this linear model to the data. Specifically, you will learn to<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
 <ul class="simple">
@@ -775,7 +776,7 @@ F = \frac{\left(\frac{ESS}{n_c-1}\right)}{\left(\frac{RSS}{n-n_c}\right)}
 <p><span class="math notranslate nohighlight">\(\star\)</span> Use <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> to load the data in the data frame <code class="docutils literal notranslate"><span class="pre">mammals</span></code> and then <code class="docutils literal notranslate"><span class="pre">str</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> to examine the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1230,13 +1231,14 @@ omnivores tend not to be. Ah well… it’s OK. We will look at a better way to 
 <p><span class="math notranslate nohighlight">\(\star\)</span> Include and run the <span class="math notranslate nohighlight">\(\chi^2\)</span> test in your script.</p>
 </section>
 </section>
-<section id="saving-data">
-<h2>Saving data<a class="headerlink" href="#saving-data" title="Link to this heading">#</a></h2>
-<p>The last thing to do is to save a copy of the mammal data, including our new column of log data, for use in later chapters.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Use this code in your script to create the saved data in your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory :</p>
+<section id="saving-derived-data">
+<h2>Saving derived data<a class="headerlink" href="#saving-derived-data" title="Link to this heading">#</a></h2>
+<p>R can save an object, including columns you have added, so that you can load it again in a later session. This is useful for intermediate results, but it should not overwrite or replace the supplied CSV file. The following example saves the <code class="docutils literal notranslate"><span class="pre">mammals</span></code> data frame under <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Later chapters will still begin with the original CSV, so that each analysis can run independently.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Use this code in your script to create a saved copy under <code class="docutils literal notranslate"><span class="pre">results/</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">save</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s">'../data/mammals.rdata'</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dir.create</span><span class="p">(</span><span class="s">'results'</span><span class="p">,</span><span class="w"> </span><span class="n">showWarnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">save</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s">'results/mammals.rdata'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1355,7 +1357,7 @@ omnivores tend not to be. Ah well… it’s OK. We will look at a better way to 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-square-test-with-the-mammals-data">The Chi-square test with the mammals data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data">Saving data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-derived-data">Saving derived data</a></li>
 </ul>
   </nav></div>
 

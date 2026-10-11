@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -630,16 +630,18 @@
 </section>
 <section id="jupyter-notebooks-choose-a-kernel-deliberately">
 <h2>Jupyter notebooks: choose a kernel deliberately<a class="headerlink" href="#jupyter-notebooks-choose-a-kernel-deliberately" title="Link to this heading">#</a></h2>
-<p>With the Microsoft Jupyter extension installed, open an existing <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file or create a new notebook. A <a class="reference internal" href="terms.html#id9"><span class="std std-ref">kernel</span></a> is the program that will run its cells. Select <strong>Select Kernel</strong> in the notebook’s upper-right corner, then choose the intended entry under <strong>Python Environments</strong> or <strong>Jupyter Kernels</strong>. A remembered kernel is a convenience, not evidence that it is correct for a new project.</p>
+<p>With the Microsoft Jupyter extension installed, keep the coursework notebook in the project root, alongside <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code>. Open that root as the VS Code folder, then open the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file or create a new one there. A <a class="reference internal" href="terms.html#id9"><span class="std std-ref">kernel</span></a> is the program that will run its cells. Select <strong>Select Kernel</strong> in the notebook’s upper-right corner, then choose the intended entry under <strong>Python Environments</strong> or <strong>Jupyter Kernels</strong>. A remembered kernel is a convenience, not evidence that it is correct for a new project.</p>
 <p>Run this in the first Python cell:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Compare the result with the project interpreter selected for scripts. If it is wrong, use <strong>Notebook: Select Notebook Kernel</strong> and choose again. A Python environment can be offered as a notebook kernel without installing a separate browser Jupyter server into that environment; use <a class="reference internal" href="python-environments.html#python-jupyter-install"><span class="std std-ref">Add a Jupyter interface</span></a> only when you need the browser Notebook or JupyterLab interface.</p>
 <p>Save notebooks before switching kernels or closing VS Code. A kernel may continue to hold variables until it is restarted or stopped, so rerun the notebook from a clean kernel before treating an analysis as reproducible. See <a class="reference internal" href="../notebooks/appendix-jupy-intro.html#jupyter-kernels"><span class="std std-ref">Language Kernels</span></a> for named Python kernels and R notebook kernels.</p>
-<p>An open project folder, integrated terminal and notebook kernel can report different current directories. Run <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code> in Python or <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> in R and follow the notebook’s stated starting-directory instructions. Do not assume that selecting a kernel has moved it to the project root.</p>
+<p>An open project folder, integrated terminal and notebook kernel can report different current directories. In Python, check that <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code> contains the expected <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> directories; in R, make the same check with <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> and <code class="docutils literal notranslate"><span class="pre">dir.exists()</span></code>. If it does not, stop and correct how you opened the project or notebook before running the analysis. Do not use <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> inside shared work to conceal the mismatch, and do not assume that selecting a kernel has moved it to the project root.</p>
 </section>
 <section id="using-r-in-vs-code">
 <h2>Using R in VS Code<a class="headerlink" href="#using-r-in-vs-code" title="Link to this heading">#</a></h2>
@@ -680,7 +682,7 @@
 <ol class="arabic simple">
 <li><p>Open the project root and verify the terminal location.</p></li>
 <li><p>Run a short Python script using the selected project interpreter and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code>.</p></li>
-<li><p>Open a small notebook, select its kernel and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> again.</p></li>
+<li><p>Create a small notebook in the project root, select its kernel, and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> and <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code>. Confirm that <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> are visible from that location.</p></li>
 <li><p>If using R, create an R terminal, inspect <code class="docutils literal notranslate"><span class="pre">R.home()</span></code> and <code class="docutils literal notranslate"><span class="pre">.libPaths()</span></code>, source a small script and view a simple plot.</p></li>
 </ol>
 <p>If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.</p>

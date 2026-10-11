@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -827,8 +827,8 @@ keep in mind about databases:</p>
 <li><p>Quotes: there should be no quotes in the data</p></li>
 <li><p>Newlines: there should be no newlines</p></li>
 </ul>
-<p>Now build your first database in SQLite! We will use as example a global dataset on metabolic traits called <em>biotraits</em> that we are currently developing in our lab (should be in your <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory). This dataset contains 164 columns (fields). Thermal response curves for different traits and species are stored in rows. This means
-that site description or taxonomy are repeated as many times as temperatures are measured in the curve. You can imagine how much redundacy can be here!!!</p>
+<p>Now build your first database in SQLite! We will use as an example a global dataset on metabolic traits called <em>biotraits</em>. Download <a class="reference download internal" download="" href="../_downloads/a965fbbe1b4f71927e5d19ad204565b4/trait_info.csv"><code class="xref download docutils literal notranslate"><span class="pre">trait_info.csv</span></code></a>, <a class="reference download internal" download="" href="../_downloads/f3d3210ea56d9d4f43453b3ffbe401f3/consumer.csv"><code class="xref download docutils literal notranslate"><span class="pre">consumer.csv</span></code></a> and <a class="reference download internal" download="" href="../_downloads/08566887a9ac3711c3aa4e7a5b90bfec/tcp.csv"><code class="xref download docutils literal notranslate"><span class="pre">tcp.csv</span></code></a> into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory of your coursework project. This dataset contains 164 columns (fields). Thermal response curves for different traits and species are stored in rows. This means
+that site descriptions or taxonomy are repeated as many times as temperatures are measured in the curve. You can imagine how much redundancy there can be.</p>
 <p>For this reason, it is easier to migrate the dataset to SQL and split it into several tables:</p>
 <ul class="simple">
 <li><p><em>tcp</em>: Includes the thermal curve performance for each species and trait (as many rows per trait and species as temperatures have been measured within the tcp)</p></li>
@@ -841,9 +841,10 @@ curve).</p></li>
 </ul>
 <p>DataSource: Contains information about the data source (citation, contributors) (one row per thermal curve).</p>
 <p>So all these tables compose the <em>biotraits</em> <code class="docutils literal notranslate"><span class="pre">schema</span></code>.</p>
-<p>In an Linux/unix terminal, navigate to your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory:</p>
-<p>Now, launch a new database using sqlite:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite3<span class="w"> </span>biotraits.db
+<p>Open a Linux/Unix terminal at the root of your coursework project: the directory containing <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Keep the terminal there throughout this practical.</p>
+<p>Make the output directory if it does not already exist, then launch a new database using SQLite:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>results
+sqlite3<span class="w"> </span>results/biotraits.db
 </pre></div>
 </div>
 <p>This should return something like:</p>
@@ -851,29 +852,30 @@ curve).</p></li>
 <span class="n">Enter</span><span class="w"> </span><span class="ss">".help"</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">usage</span><span class="w"> </span><span class="n">hints</span><span class="p">.</span>
 </pre></div>
 </div>
-<p>This creates an empty database in your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p>This creates the database as <code class="docutils literal notranslate"><span class="pre">results/biotraits.db</span></code>, keeping the supplied CSV files unchanged in <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p>
 <p>You should now see the sqlite cursor (<code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span></code>), and will be entering your commands there.</p>
 <p>Now we need to create a table with some fields. Let’s start with the <em>trait_info</em> table (enter these one line at  a time, without the <code class="docutils literal notranslate"><span class="pre">...&gt;</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>trait_info<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>OriginalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>FinalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>OriginalTraitName<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>OriginalTraitDef<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>replicates<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>Habitat<span class="w">  </span>integer,<span class="w">               </span>
-<span class="w">   </span>...&gt;<span class="w">                                 </span>Climate<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>Location<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>LocationType<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>LocationDate<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>CoordinateType<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>Latitude<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                                 </span>Longitude<span class="w"> </span>integer<span class="o">)</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">trait_info</span><span class="p">;</span>
+<span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">trait_info</span><span class="w"> </span><span class="p">(</span><span class="n">Numbers</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">OriginalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">FinalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">OriginalTraitName</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">OriginalTraitDef</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">replicates</span><span class="w"> </span><span class="nb">integer</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">Habitat</span><span class="w">  </span><span class="nb">integer</span><span class="p">,</span><span class="w">               </span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">Climate</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="k">Location</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">LocationType</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">LocationDate</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">CoordinateType</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">Latitude</span><span class="w"> </span><span class="nb">real</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                 </span><span class="n">Longitude</span><span class="w"> </span><span class="nb">real</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Note that I am writing all SQL commands in upper case, but it is not necessary. I am using upper case here because SQL syntax is long and clunky, and it quickly becomes hard to spot (and edit) commands in long strings of complex queries.</p>
 <p>Now let’s import the dataset:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.mode</span> <span class="pre">csv</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.import</span> <span class="pre">trait_info.csv</span> <span class="pre">trait_info</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.import</span> <span class="pre">data/trait_info.csv</span> <span class="pre">trait_info</span></code></p>
 <p>So we built a table and imported a csv file into it. Now we can ask
 SQLite to show all the tables we currently have:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.tables</span></code></p>
@@ -887,33 +889,33 @@ to end a command):</p>
 <p>You should see something like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Numbers<span class="w">  </span>OriginalID<span class="w">  </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">           </span>...<span class="w"> </span>
 -------<span class="w">  </span>----------<span class="w">  </span>----------<span class="w">  </span>-------------------------<span class="w">   </span>...
-<span class="m">1</span><span class="w">        </span><span class="m">1</span><span class="w">           </span>MTD1<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">   </span>...
-<span class="m">4</span><span class="w">        </span><span class="m">2</span><span class="w">           </span>MTD2<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">   </span>...
-<span class="m">6</span><span class="w">        </span><span class="m">3</span><span class="w">           </span>MTD3<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">   </span>...
-<span class="m">9</span><span class="w">        </span><span class="m">4</span><span class="w">           </span>MTD4<span class="w">        </span>resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">   </span>...
-<span class="m">12</span><span class="w">       </span><span class="m">5</span><span class="w">           </span>MTD5<span class="w">        </span>resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">   </span>...
+<span class="m">1</span><span class="w">        </span><span class="m">1</span><span class="w">           </span>MTD1<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">   </span>...
+<span class="m">4</span><span class="w">        </span><span class="m">2</span><span class="w">           </span>MTD2<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">   </span>...
+<span class="m">6</span><span class="w">        </span><span class="m">3</span><span class="w">           </span>MTD3<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">   </span>...
+<span class="m">9</span><span class="w">        </span><span class="m">4</span><span class="w">           </span>MTD4<span class="w">        </span>Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">   </span>...
+<span class="m">12</span><span class="w">       </span><span class="m">5</span><span class="w">           </span>MTD5<span class="w">        </span>Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">   </span>...
 </pre></div>
 </div>
 <p>The main statement to select records from a table is
 <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.width</span> <span class="pre">40</span>&#160; <span class="pre">##</span> <span class="pre">NOTE:</span> <span class="pre">Control</span> <span class="pre">the</span> <span class="pre">width</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">DISTINCT</span> <span class="pre">OriginalTraitName</span> <span class="pre">FROM</span> <span class="pre">trait_info;</span> <span class="pre">#</span> <span class="pre">returns</span> <span class="pre">unique</span> <span class="pre">values</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">DISTINCT</span> <span class="pre">OriginalTraitName</span> <span class="pre">FROM</span> <span class="pre">trait_info;</span></code> — returns unique values</p>
 <p>Which gives:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">               </span>
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">               </span>
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">          </span>
 Mass-Specific<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">     </span>
 Voluntary<span class="w"> </span>Body<span class="w"> </span>Velocity<span class="w">                 </span>
 Forward<span class="w"> </span>Attack<span class="w"> </span>Distance<span class="w">                 </span>
 Foraging<span class="w"> </span>Velocity<span class="w">                       </span>
-resource<span class="w"> </span>reaction<span class="w"> </span>Distance<span class="w">                   </span>
+Resource<span class="w"> </span>Reaction<span class="w"> </span>Distance<span class="w">                   </span>
 ....
 </pre></div>
 </div>
 <p>Now try these:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>Habitat<span class="w"> </span>FROM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"resource Consumption rate"</span><span class="p">;</span><span class="w"> </span><span class="c1"># Sets a condition`</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Resource Consumption Rate'</span><span class="p">;</span>
 
 Habitat<span class="w">                                 </span>
 ----------------------------------------
@@ -921,13 +923,13 @@ freshwater<span class="w">                              </span>
 marine<span class="w">                                  </span>
 terrestrial<span class="w"> </span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span><span class="w">  </span><span class="c1"># returns number of rows</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span><span class="w">  </span>--<span class="w"> </span>returns<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>rows
 
 Count<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w">           </span>
 --------------------
 <span class="m">2336</span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Habitat,<span class="w"> </span>COUNT<span class="o">(</span>OriginalTraitName<span class="o">)</span><span class="w"> </span><span class="c1"># returns number of rows for each group</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Habitat,<span class="w"> </span>COUNT<span class="o">(</span>OriginalTraitName<span class="o">)</span><span class="w"> </span>--<span class="w"> </span>counts<span class="w"> </span>rows<span class="w"> </span><span class="k">in</span><span class="w"> </span>each<span class="w"> </span>group
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span>GROUP<span class="w"> </span>BY<span class="w"> </span>Habitat<span class="p">;</span>
 
 Habitat<span class="w">     </span>COUNT<span class="o">(</span>OriginalTraitName<span class="o">)</span>
@@ -937,14 +939,14 @@ freshwater<span class="w">  </span><span class="m">609</span><span class="w">   
 marine<span class="w">      </span><span class="m">909</span><span class="w">                     </span>
 terrestria<span class="w">  </span><span class="m">802</span><span class="w">   </span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span><span class="c1"># returns number of unique values</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span>--<span class="w"> </span>counts<span class="w"> </span>unique<span class="w"> </span>values
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span>
 
 COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span>
 ---------------------------------
 <span class="m">220</span><span class="w">   </span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span>TraitCount<span class="w"> </span><span class="c1"># Assigns alias to the variable</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span>AS<span class="w"> </span>TraitCount<span class="w"> </span>--<span class="w"> </span>gives<span class="w"> </span>the<span class="w"> </span>result<span class="w"> </span>a<span class="w"> </span>name
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span>
 
 TraitCount
@@ -961,20 +963,20 @@ freshwater<span class="w">  </span><span class="m">82</span><span class="w">    
 marine<span class="w">      </span><span class="m">95</span><span class="w">        </span>
 terrestria<span class="w">  </span><span class="m">96</span><span class="w">     </span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>*<span class="w"> </span><span class="c1"># WHAT TO SELECT</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span><span class="c1"># FROM WHERE</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"marine"</span><span class="w"> </span><span class="c1"># CONDITIONS</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"resource Consumption rate"</span><span class="p">;</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>*<span class="w"> </span>--<span class="w"> </span>what<span class="w"> </span>to<span class="w"> </span><span class="k">select</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span>--<span class="w"> </span>from<span class="w"> </span>where
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'marine'</span><span class="w"> </span>--<span class="w"> </span>conditions
+<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Resource Consumption Rate'</span><span class="p">;</span>
 
 Numbers<span class="w">     </span>OriginalID<span class="w">  </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">          </span>...
 ----------<span class="w">  </span>----------<span class="w">  </span>----------<span class="w">  </span>-------------------------<span class="w">  </span>...
-<span class="m">778</span><span class="w">         </span><span class="m">308</span><span class="w">         </span>MTD99<span class="w">       </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>...
-<span class="m">798</span><span class="w">         </span><span class="m">310</span><span class="w">         </span>MTD101<span class="w">      </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>...
-<span class="m">806</span><span class="w">         </span><span class="m">311</span><span class="w">         </span>MTD102<span class="w">      </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>...
-<span class="m">993</span><span class="w">         </span><span class="m">351</span><span class="w">         </span>MTD113<span class="w">      </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>...
+<span class="m">778</span><span class="w">         </span><span class="m">308</span><span class="w">         </span>MTD99<span class="w">       </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>...
+<span class="m">798</span><span class="w">         </span><span class="m">310</span><span class="w">         </span>MTD101<span class="w">      </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>...
+<span class="m">806</span><span class="w">         </span><span class="m">311</span><span class="w">         </span>MTD102<span class="w">      </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>...
+<span class="m">993</span><span class="w">         </span><span class="m">351</span><span class="w">         </span>MTD113<span class="w">      </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>...
 </pre></div>
 </div>
-<p>The structure of the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> command is as follows (<em>Note: <strong>all</strong> characters are case <strong>in</strong>sensitive</em>):</p>
+<p>The structure of the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> command is as follows. SQL keywords such as <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> are not case-sensitive, although text values and database settings can affect whether comparisons are case-sensitive:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SELECT<span class="w"> </span><span class="o">[</span>DISTINCT<span class="o">]</span><span class="w"> </span>field
 FROM<span class="w"> </span>table
 WHERE<span class="w"> </span>predicate
@@ -1011,8 +1013,8 @@ Numbers<span class="w">   </span>
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Numbers<span class="w"> </span>
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
 <span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"freshwater"</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Number<span class="w"> </span>&gt;<span class="w"> </span><span class="m">700</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Number<span class="w"> </span>&lt;<span class="w"> </span><span class="m">800</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Numbers<span class="w"> </span>&gt;<span class="w"> </span><span class="m">700</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Numbers<span class="w"> </span>&lt;<span class="w"> </span><span class="m">800</span><span class="p">;</span>
 
 Numbers<span class="w">   </span>
 ----------
@@ -1029,26 +1031,26 @@ Numbers<span class="w">   </span>
 <span class="m">748</span><span class="w">       </span>
 </pre></div>
 </div>
-<p>You can also match records using something like regular expressions. In SQL, when we use the command <code class="docutils literal notranslate"><span class="pre">LIKE</span></code>, the percent % symbol matches any sequence of zero or more characters and the underscore matches any single character. Similarly, <code class="docutils literal notranslate"><span class="pre">GLOB</span></code> uses the asterisk and the underscore.</p>
+<p>You can also match records using simple patterns. With <code class="docutils literal notranslate"><span class="pre">LIKE</span></code>, the percent sign (<code class="docutils literal notranslate"><span class="pre">%</span></code>) matches any sequence of zero or more characters and the underscore (<code class="docutils literal notranslate"><span class="pre">_</span></code>) matches any single character. SQLite’s <code class="docutils literal notranslate"><span class="pre">GLOB</span></code> uses an asterisk (<code class="docutils literal notranslate"><span class="pre">*</span></code>) and question mark (<code class="docutils literal notranslate"><span class="pre">?</span></code>) for the same jobs.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"_esource Consumption rate"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s1">'_esource Consumption Rate'</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">        </span>
 -------------------------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">          </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s1">'Resource%'</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">               </span>
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
-resource<span class="w"> </span>reaction<span class="w"> </span>Distance<span class="w">              </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">               </span>
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">          </span>
+Resource<span class="w"> </span>Reaction<span class="w"> </span>Distance<span class="w">              </span>
 resource<span class="w"> </span>Habitat<span class="w"> </span>Encounter<span class="w"> </span>rate<span class="w">         </span>
-resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
 resource<span class="w"> </span>Mobility<span class="w"> </span>Selection<span class="w">             </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Selection<span class="w">                 </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Capture<span class="w"> </span>Intent<span class="w"> </span>Acceptance<span class="w"> </span>
@@ -1057,16 +1059,16 @@ resource<span class="w"> </span>Escape<span class="w"> </span>response<span clas
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>GLOB<span class="w"> </span><span class="s2">"resource*"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>GLOB<span class="w"> </span><span class="s1">'Resource*'</span><span class="p">;</span>
 
 
 OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">               </span>
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
-resource<span class="w"> </span>reaction<span class="w"> </span>Distance<span class="w">              </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">               </span>
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">          </span>
+Resource<span class="w"> </span>Reaction<span class="w"> </span>Distance<span class="w">              </span>
 resource<span class="w"> </span>Habitat<span class="w"> </span>Encounter<span class="w"> </span>rate<span class="w">         </span>
-resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
 resource<span class="w"> </span>Mobility<span class="w"> </span>Selection<span class="w">             </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Selection<span class="w">                 </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Capture<span class="w"> </span>Intent<span class="w"> </span>Acceptance<span class="w"> </span>
@@ -1077,15 +1079,15 @@ resource<span class="w"> </span>Escape<span class="w"> </span>response<span clas
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
 <span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s1">'resource%'</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">               </span>
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
-resource<span class="w"> </span>reaction<span class="w"> </span>Distance<span class="w">              </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">               </span>
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">          </span>
+Resource<span class="w"> </span>Reaction<span class="w"> </span>Distance<span class="w">              </span>
 resource<span class="w"> </span>Habitat<span class="w"> </span>Encounter<span class="w"> </span>rate<span class="w">         </span>
-resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Probability<span class="w">        </span>
 resource<span class="w"> </span>Mobility<span class="w"> </span>Selection<span class="w">             </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Selection<span class="w">                 </span>
 resource<span class="w"> </span>Size<span class="w"> </span>Capture<span class="w"> </span>Intent<span class="w"> </span>Acceptance<span class="w"> </span>
@@ -1099,11 +1101,11 @@ resource<span class="w"> </span>Escape<span class="w"> </span>response<span clas
 
 OriginalTraitName<span class="w">          </span>Habitat<span class="w">   </span>
 -------------------------<span class="w">  </span>----------
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>freshwater
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>freshwater
-resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">  </span>freshwater
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
-resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>freshwater
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>freshwater
+Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate<span class="w">  </span>freshwater
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
+Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>OriginalTraitName,<span class="w"> </span>Habitat<span class="w"> </span>FROM<span class="w"> </span>
 <span class="w">   </span>...&gt;<span class="w"> </span>trait_info<span class="w"> </span>ORDER<span class="w"> </span>BY<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
@@ -1123,21 +1125,22 @@ multiple tables minimizing redundancies within them. And of course,
 querying data from those different tables at the same time will be
 necessary at some point.</p>
 <p>Let’s import then one more table to our database:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>consumer<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
-<span class="w">  </span>...&gt;<span class="w">                                </span>OriginalID<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>FinalID<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>consumer<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConCommon<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConKingdom<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConPhylum<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConClass<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConOrder<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConFamily<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConGenus<span class="w"> </span>text,
-<span class="w">  </span>...&gt;<span class="w">                                </span>ConSpecies<span class="w"> </span>text<span class="o">)</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">consumer</span><span class="p">;</span>
+<span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="p">(</span><span class="n">Numbers</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">OriginalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">FinalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">consumer</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConCommon</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConKingdom</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConPhylum</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConClass</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConOrder</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConFamily</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConGenus</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                                </span><span class="n">ConSpecies</span><span class="w"> </span><span class="nb">text</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>.import<span class="w"> </span>consumer.csv<span class="w"> </span>consumer
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>.import<span class="w"> </span>data/consumer.csv<span class="w"> </span>consumer
 </pre></div>
 </div>
 <p>Now we have two tables in our database:</p>
@@ -1152,12 +1155,12 @@ consumer<span class="w">   </span>trait_info
 
 FinalID<span class="w">     </span>consumer<span class="w">               </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">        </span>
 ----------<span class="w">  </span>---------------------<span class="w">  </span>----------<span class="w">  </span>-------------------------
-MTD1<span class="w">        </span>Chaoborus<span class="w"> </span>trivittatus<span class="w">  </span>MTD1<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate
-MTD2<span class="w">        </span>Chaoborus<span class="w"> </span>trivittatus<span class="w">  </span>MTD2<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate
-MTD3<span class="w">        </span>Chaoborus<span class="w"> </span>americanus<span class="w">   </span>MTD3<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate
-MTD4<span class="w">        </span>Stizostedion<span class="w"> </span>vitreum<span class="w">   </span>MTD4<span class="w">        </span>resource<span class="w"> </span>Mass<span class="w"> </span>Consumption
-MTD5<span class="w">        </span>Macrobrachium<span class="w"> </span>rosenbe<span class="w">  </span>MTD5<span class="w">        </span>resource<span class="w"> </span>Mass<span class="w"> </span>Consumption
-MTD6<span class="w">        </span>ranatra<span class="w"> </span>dispar<span class="w">         </span>MTD6<span class="w">        </span>resource<span class="w"> </span>Consumption<span class="w"> </span>rate
+MTD1<span class="w">        </span>Chaoborus<span class="w"> </span>trivittatus<span class="w">  </span>MTD1<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate
+MTD2<span class="w">        </span>Chaoborus<span class="w"> </span>trivittatus<span class="w">  </span>MTD2<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate
+MTD3<span class="w">        </span>Chaoborus<span class="w"> </span>americanus<span class="w">   </span>MTD3<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate
+MTD4<span class="w">        </span>Stizostedion<span class="w"> </span>vitreum<span class="w">   </span>MTD4<span class="w">        </span>Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption
+MTD5<span class="w">        </span>Macrobrachium<span class="w"> </span>rosenbe<span class="w">  </span>MTD5<span class="w">        </span>Resource<span class="w"> </span>Mass<span class="w"> </span>Consumption
+MTD6<span class="w">        </span>ranatra<span class="w"> </span>dispar<span class="w">         </span>MTD6<span class="w">        </span>Resource<span class="w"> </span>Consumption<span class="w"> </span>Rate
 MTD7<span class="w">        </span>Ceriodaphnia<span class="w"> </span>reticula<span class="w">  </span>MTD7<span class="w">        </span>Mass-Specific<span class="w"> </span>Mass<span class="w"> </span>Consum
 MTD8<span class="w">        </span>Polyphemus<span class="w"> </span>pediculus<span class="w">   </span>MTD8<span class="w">        </span>Voluntary<span class="w"> </span>Body<span class="w"> </span>Velocity<span class="w"> </span>
 
@@ -1166,58 +1169,40 @@ MTD8<span class="w">        </span>Polyphemus<span class="w"> </span>pediculus<s
 </div>
 <p>This example seems easy because both tables have the same number of rows. But the query is still as simple when we have tables with different rows.</p>
 <p>Let’s import the tcp table:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>FinalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitValue<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitUnit<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>LabGrowthTemp<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>LabGrowthTempUnit<span class="w"> </span>text,<span class="w">   </span>
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTemp<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTempUnit<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTempMethod<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConAcc<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConAccTemp<span class="w"> </span>integer<span class="o">)</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">tcp</span><span class="p">;</span>
+<span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="p">(</span><span class="n">Numbers</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">OriginalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">FinalID</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">OriginalTraitValue</span><span class="w"> </span><span class="nb">real</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">OriginalTraitUnit</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">LabGrowthTemp</span><span class="w"> </span><span class="nb">real</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">LabGrowthTempUnit</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">   </span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">ConTemp</span><span class="w"> </span><span class="nb">real</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">ConTempUnit</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">ConTempMethod</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">ConAcc</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w">                           </span><span class="n">ConAccTemp</span><span class="w"> </span><span class="nb">real</span><span class="p">);</span>
 
-sqlite&gt;<span class="w"> </span>.import<span class="w"> </span>tcp.csv<span class="w"> </span>tcp
-sqlite&gt;<span class="w"> </span>.tables
-consumer<span class="w">   </span>tcp<span class="w">        </span>trait_info
+<span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="n">import</span><span class="w"> </span><span class="k">data</span><span class="o">/</span><span class="n">tcp</span><span class="p">.</span><span class="n">csv</span><span class="w"> </span><span class="n">tcp</span>
+<span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="n">tables</span>
+<span class="n">consumer</span><span class="w">   </span><span class="n">tcp</span><span class="w">        </span><span class="n">trait_info</span>
 </pre></div>
 </div>
 <p>Now imagine we want to query the thermal performance curves that we have stored for the species Mytilus edulis. Using the FinalID to match the tables, the query can be as simple as:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>FinalID<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitValue<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitUnit<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>LabGrowthTemp<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>LabGrowthTempUnit<span class="w"> </span>text,<span class="w">   </span>
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTemp<span class="w"> </span>integer,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTempUnit<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConTempMethod<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConAcc<span class="w"> </span>text,
-<span class="w">   </span>...&gt;<span class="w">                           </span>ConAccTemp<span class="w"> </span>integer<span class="o">)</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">A1</span><span class="p">.</span><span class="n">ConTemp</span><span class="p">,</span><span class="w"> </span><span class="n">A1</span><span class="p">.</span><span class="n">OriginalTraitValue</span><span class="p">,</span><span class="w"> </span><span class="n">A2</span><span class="p">.</span><span class="n">OriginalTraitName</span><span class="p">,</span><span class="w"> </span><span class="n">A3</span><span class="p">.</span><span class="n">consumer</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">A1</span><span class="p">,</span><span class="w"> </span><span class="n">trait_info</span><span class="w"> </span><span class="n">A2</span><span class="p">,</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="n">A3</span>
+<span class="w">   </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A1</span><span class="p">.</span><span class="n">FinalID</span><span class="o">=</span><span class="n">A2</span><span class="p">.</span><span class="n">FinalID</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">A3</span><span class="p">.</span><span class="n">ConSpecies</span><span class="o">=</span><span class="s1">'Mytilus edulis'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">A3</span><span class="p">.</span><span class="n">FinalID</span><span class="o">=</span><span class="n">A2</span><span class="p">.</span><span class="n">FinalID</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
 
-sqlite&gt;<span class="w"> </span>.import<span class="w"> </span>tcp.csv<span class="w"> </span>tcp
-sqlite&gt;<span class="w"> </span>.tables
-consumer<span class="w">   </span>tcp<span class="w">        </span>trait_info
-
-<span class="w">                       </span>
-
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>A1.ConTemp,<span class="w"> </span>A1.OriginalTraitValue,<span class="w"> </span>A2.OriginalTraitName,<span class="w"> </span>A3.consumer
-<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>tcp<span class="w"> </span>A1,<span class="w"> </span>trait_info<span class="w"> </span>A2,<span class="w"> </span>consumer<span class="w"> </span>A3
-<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>A1.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>AND<span class="w"> </span>A3.ConSpecies<span class="o">=</span><span class="s2">"Mytilus edulis"</span><span class="w"> </span>AND<span class="w"> </span>A3.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">8</span>
-
-ConTemp<span class="w">     </span>OriginalTraitValue<span class="w">    </span>OriginalTraitName<span class="w">               </span>consumer<span class="w">            </span>
-----------<span class="w">  </span>--------------------<span class="w">  </span>------------------------------<span class="w">  </span>--------------------
-<span class="m">25</span><span class="w">          </span><span class="m">2</span>.707075<span class="w">              </span>Filtration<span class="w"> </span>rate<span class="w">                 </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">20</span><span class="w">          </span><span class="m">3</span>.40721<span class="w">               </span>Filtration<span class="w"> </span>rate<span class="w">                 </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">5</span><span class="w">           </span><span class="m">3</span>.419455<span class="w">              </span>Filtration<span class="w"> </span>rate<span class="w">                 </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">15</span><span class="w">          </span><span class="m">3</span>.711165<span class="w">              </span>Filtration<span class="w"> </span>rate<span class="w">                 </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">10</span><span class="w">          </span><span class="m">3</span>.875465<span class="w">              </span>Filtration<span class="w"> </span>rate<span class="w">                 </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">5</span><span class="w">           </span><span class="m">0</span>.34<span class="w">                  </span>In<span class="w"> </span>Vitro<span class="w"> </span>Gill<span class="w"> </span>Particle<span class="w"> </span>Transpo<span class="w">  </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">10</span><span class="w">          </span><span class="m">0</span>.46<span class="w">                  </span>In<span class="w"> </span>Vitro<span class="w"> </span>Gill<span class="w"> </span>Particle<span class="w"> </span>Transpo<span class="w">  </span>Mytilus<span class="w"> </span>edulis<span class="w">      </span>
-<span class="m">15</span><span class="w">          </span><span class="m">0</span>.595<span class="w">                 </span>In<span class="w"> </span>Vitro<span class="w"> </span>Gill<span class="w"> </span>Particle<span class="w"> </span>Transpo<span class="w">  </span>Mytilus<span class="w"> </span>edulis
+<span class="n">ConTemp</span><span class="w">     </span><span class="n">OriginalTraitValue</span><span class="w">    </span><span class="n">OriginalTraitName</span><span class="w">               </span><span class="n">consumer</span><span class="w">            </span>
+<span class="c1">----------  --------------------  ------------------------------  --------------------</span>
+<span class="mi">25</span><span class="w">          </span><span class="mi">2</span><span class="p">.</span><span class="mi">707075</span><span class="w">              </span><span class="n">Filtration</span><span class="w"> </span><span class="n">rate</span><span class="w">                 </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">20</span><span class="w">          </span><span class="mi">3</span><span class="p">.</span><span class="mi">40721</span><span class="w">               </span><span class="n">Filtration</span><span class="w"> </span><span class="n">rate</span><span class="w">                 </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">5</span><span class="w">           </span><span class="mi">3</span><span class="p">.</span><span class="mi">419455</span><span class="w">              </span><span class="n">Filtration</span><span class="w"> </span><span class="n">rate</span><span class="w">                 </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">15</span><span class="w">          </span><span class="mi">3</span><span class="p">.</span><span class="mi">711165</span><span class="w">              </span><span class="n">Filtration</span><span class="w"> </span><span class="n">rate</span><span class="w">                 </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">10</span><span class="w">          </span><span class="mi">3</span><span class="p">.</span><span class="mi">875465</span><span class="w">              </span><span class="n">Filtration</span><span class="w"> </span><span class="n">rate</span><span class="w">                 </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">14</span><span class="w">          </span><span class="mi">9</span><span class="w">                     </span><span class="n">Foraging</span><span class="w"> </span><span class="n">Gill</span><span class="w"> </span><span class="n">Beat</span><span class="w"> </span><span class="n">Rate</span><span class="w">         </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">20</span><span class="p">.</span><span class="mi">5</span><span class="w">        </span><span class="mi">14</span><span class="w">                    </span><span class="n">Foraging</span><span class="w"> </span><span class="n">Gill</span><span class="w"> </span><span class="n">Beat</span><span class="w"> </span><span class="n">Rate</span><span class="w">         </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span><span class="w">      </span>
+<span class="mi">8</span><span class="w">           </span><span class="mi">3</span><span class="w">                     </span><span class="n">Surface</span><span class="w"> </span><span class="n">Area</span><span class="o">-</span><span class="k">Specific</span><span class="w"> </span><span class="n">Foraging</span><span class="w">  </span><span class="n">Mytilus</span><span class="w"> </span><span class="n">edulis</span>
 </pre></div>
 </div>
 <p>So on and so forth (joining tables etc. would come next…). But if you want to keep practicing and learn more about sqlite commands, this is a very useful site: <a class="reference external" href="http://www.sqlite.org/sessions/sqlite.html">http://www.sqlite.org/sessions/sqlite.html</a>. You can

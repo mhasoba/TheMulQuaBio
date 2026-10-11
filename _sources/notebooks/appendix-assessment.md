@@ -57,7 +57,7 @@ Your coursework project repository will be checked for a clear, logical structur
     
 * The scripts are all up to the mark in terms of internal documentation (e.g., docstrings in the case of Python) and commenting.
     
-* There is a good `readme` file for the overall repository and for each of the weekly directories.
+* Maintain one root `README.md` for the coursework repository. Update it as the work grows so it explains the project and how to run and check its required scripts. Do not create weekly directories or per-week README files unless a released assignment brief explicitly requires them.
     
 * The `results` directory is empty (no pre-existing results).
     
@@ -233,7 +233,7 @@ The bootcamp coursework comprises four submissions: three formative submissions 
 | Submission | Focus | Type | Deadline | Feedback target |
 | --- | --- | --- | --- | --- |
 | 1 | Unix, shell and individual Git portfolio. | Formative | See course timetable/brief | See course timetable/brief |
-| 2 | Python I work and any corrections specified in the assignment brief. | Formative | See course timetable/brief | See course timetable/brief |
+| 2 | Python I work, using the Unix, shell and Git workflow established in Submission 1; any corrections specified in the assignment brief. | Formative | See course timetable/brief | See course timetable/brief |
 | 3 | R data workflow, reproducible figure and interpretation, as specified in the brief. | Formative | See course timetable/brief | See course timetable/brief |
 | 4 | Cumulative portfolio of required work from Submissions 1-3, plus only the Python II tasks listed in the final brief. | Summative | See course timetable/brief | See course timetable/brief |
 
