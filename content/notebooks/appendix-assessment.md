@@ -57,7 +57,7 @@ Your coursework project repository will be checked for a clear, logical structur
     
 * The scripts are all up to the mark in terms of internal documentation (e.g., docstrings in the case of Python) and commenting.
     
-* There is a good `readme` file for the overall repository and for each of the weekly directories.
+* Maintain one root `README.md` for the coursework repository. Update it as the work grows so it explains the project and how to run and check its required scripts. Do not create weekly directories or per-week README files unless a released assignment brief explicitly requires them.
     
 * The `results` directory is empty (no pre-existing results).
     
