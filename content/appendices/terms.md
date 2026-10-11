@@ -27,7 +27,7 @@ An **absolute path** gives the complete location, starting at the top of the fil
 (project-root)=
 ### Project root
 
-A **project root** is the main folder for one piece of coursework or project. It commonly contains folders such as `code`, `data` and `results`. Open this folder in VS Code and return to it before following project-level commands.
+A **project root** is the main folder for one piece of coursework or project. In MQB coursework it contains `README.md`, `code`, `data` and `results`. Unless an exercise names another starting directory, return to this root before running a script. A path such as `data/observations.csv` is then relative to the root, so the whole project can move without embedding one person's absolute path. Exercises about navigation, notebooks and HPC jobs may state a different starting directory explicitly.
 
 (path)=
 ### PATH
@@ -54,7 +54,7 @@ A Python **interpreter** is the program that runs Python code. A Python **enviro
 (notebook-kernel)=
 ### Notebook kernel
 
-A notebook **kernel** is the running program that executes notebook cells and keeps variables in memory. A Python interpreter selected for a script and a kernel selected for a notebook can be different, so check both when working in an editor.
+A notebook **kernel** is the running program that executes notebook cells and keeps variables in memory. A Python interpreter selected for a script and a kernel selected for a notebook can be different, so check both when working in an editor. A kernel also has a current directory; selecting it does not guarantee that relative paths start at the project root.
 
 (repository-and-remote)=
 ## Git and GitHub

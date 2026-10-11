@@ -6,7 +6,7 @@ The key to understanding the C language is to understand C's data types and what
 This might sound complicated at first, but as we'll see it is fairly straightforward for our purposes. 
 
 ## 2.1 Memory
-Programming of any kind revolves around the manipulation of information in memory. Typically, this is the machine's rAM (but can also include the CPU's registers). Data is fetched from rAM and sent to the CPU to be processed. "Data" in this case can be anything from a single integer value to an entire function or even program. When a program is being executed, it interacts with the operating system to allocate and de-allocate memory. This memory is not in a state of complete and utter chaos, but is structed in the form of addresses and areas "reserved" by the OS for your program's use. Thus, when you are writing an r or Python script and you import some data, you need to declare a variable to assign it to or attach it to your workspace. That way, your program now stores the address of that data in memory and gives it a name so that it can be retrieved.
+Programming of any kind revolves around manipulating information in memory. Typically, this is the machine's RAM, although it can also include the CPU's registers. Data are fetched from RAM and sent to the CPU for processing. Here, "data" can mean anything from a single integer to an entire function or program. While a program runs, it asks the operating system to allocate and release memory. This memory is organised into addresses and areas reserved for the program. When you write an R or Python script and import data, you assign those data to a variable so that the program can retrieve them later.
 
 ## 2.2 Data and Types
 
@@ -74,7 +74,7 @@ A single byte is typically what is called the **smallest addressable unit**. Aga
 
 We are familiar with the terms 32- and 64-bit when talking about computer architectures (and the headaches this can cause for legacy and cross-platform computing). This refers to the size of an int variable.
 
-On a 32-bit machine, the standard int size is 32 bits. The smallest addressable unit is the byte (typically 8 bits), so one 32-bit int will consist of 4 addressable units, all living physically next to each other in rAM. Similarly, a 64-bit int (on a 64-bit machine) will consist of 8 addressable units (or bytes).
+On a 32-bit machine, the standard `int` size is 32 bits. The smallest addressable unit is the byte (typically 8 bits), so one 32-bit `int` consists of four addressable units stored next to one another in RAM. Similarly, a 64-bit `int` consists of eight addressable units (or bytes).
 
 You should never write code that makes particular assumptions about the size of a variable. We will learn ways of avoiding these assumptions.
 

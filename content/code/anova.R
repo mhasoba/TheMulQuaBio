@@ -1,4 +1,4 @@
-# CHAPTEr 6. LINEAr MODELS: ANALYSIS OF VArIANCE
+# CHAPTER 6. LINEAR MODELS: ANALYSIS OF VARIANCE
 # load and check the data
 mammals <- read.csv('../data/mammal_data.csv')
 str(mammals)

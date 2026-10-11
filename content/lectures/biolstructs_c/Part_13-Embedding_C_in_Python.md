@@ -4,7 +4,7 @@
 One of the conveniences of "lower-level" languages like C/C++ is that they are "easily" called from the environments of other languages.
 This is useful for the computational biologist, as you might wish to leverage scientific libraries that have been compiled in C. 
 These might be very mature, well-tested, and highly performance optimised, and will therefore be useful in saving you time at the terminal and on the CPU. 
-As long as your C code has been pre-compiled for the architecture of the system calling it, it is possible to interface with that code from languages you're already familiar with, such as r or python. 
+As long as your C code has been pre-compiled for the architecture of the system calling it, it is possible to interface with that code from languages you're already familiar with, such as R or Python.
 Even easier is calling C code from C++ which just a few simple modifications to header files.
 
 ### Type coercion
@@ -13,7 +13,7 @@ We call the process of converting one language's data type into another's **type
 As we recall, an integer in C might have a width of four bytes on your system, but might have another size in python. 
 Another consideration is that some languages (such as r), might work primarily with floating point values, even when they are declared without a decimal.
 It is important to know if data supplied between two different languages are of the correct type.
-In this module, we will interface with two languages: r and python. 
+In this module, we will interface with two languages: R and Python.
 We will see that coercion in Python is very simple, while in R it is rather more complicated.
 
 

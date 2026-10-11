@@ -1,6 +1,6 @@
-# CHAPTEr 5. LINEAr MODELS: rEGrESSION
+# CHAPTER 5. LINEAR MODELS: REGRESSION
 
-# This script uses genome size and morphology data to explore regression in r
+# This script uses genome size and morphology data to explore regression in R
 
 # (1) Load the data
 genome <- read.csv('../data/genome_size.csv')

@@ -839,7 +839,7 @@ Minimize the {\it sum} of the {\it squared} {\it residuals:}
 	
 	\begin{center}
 	
-	{\LArGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
+	{\LARGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
 	
 	\vspace{5mm}
 	
@@ -880,7 +880,7 @@ Minimize the {\it sum} of the {\it squared} {\it residuals:}
 
 \begin{center}
 
-{\LArGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
+{\LARGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
 
 \vspace{5mm}
 
@@ -944,7 +944,7 @@ Minimize the {\it sum} of the {\it squared} {\it residuals:}
 
 \begin{center}
 
-{\LArGE $\mathbf{\hat{Y}} = \mathbf{X \beta }$}
+{\LARGE $\mathbf{\hat{Y}} = \mathbf{X \beta }$}
 
 \vspace{5mm}
 
@@ -1072,7 +1072,7 @@ Minimize the {\it sum} of the {\it squared} {\it residuals:}
     \item That is, the residuals have about the same spread irrespective of the fitted values 
     \item The three numbered points in each plot are the three most `badly behaved' data points.
     \begin{itemize}
-        \item Each number is the datum's row number in the r data frame 
+        \item Each number is the datum's row number in the R data frame
     \end{itemize}
 \end{itemize}
 
@@ -1178,15 +1178,15 @@ ESS = $\sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2$\\
 {\it ESS tells us how much of the variation in the dependent variable 
 our model was able to explain}
 
-\item {\bf residual sum of squares} (rSS): Sum of the squared 
+\item {\bf residual sum of squares} (RSS): Sum of the squared
 differences between the observed $y$ and the predicted $\hat{y}$ (residuals), or, \\
 
-rSS = $\sum_{i=1}^{n} (\hat{y}_i - y_i)^2$\\
+RSS = $\sum_{i=1}^{n} (\hat{y}_i - y_i)^2$\\
 
-{\it rSS tells us how much of the variation in the dependent variable 
+{\it RSS tells us how much of the variation in the dependent variable
 our model could not explain}
 
-\item Of course, TSS = ESS + rSS
+\item Of course, TSS = ESS + RSS
 
 \end{itemize}
 
@@ -1204,11 +1204,11 @@ our model could not explain}
 		\item The null model ($H_0$)
 		\item Nothing is going on
 		\item Biggest possible residuals
-		\item residual sum of squares (rSS) is as big as it can be
+		\item residual sum of squares (RSS) is as big as it can be
 		\vspace{1cm}
 		\item The saturated model
 		\item One coefficient per data point
-		\item rSS is zero - all the sums of squares are now explained (ESS)
+		\item RSS is zero - all the sums of squares are now explained (ESS)
 		\end{itemize}
 		
 \end{columns}
@@ -1239,7 +1239,7 @@ our model could not explain}
 
 	\matrix (ratio1) [right=of eq1,ampersand replacement=\&] {
 		\node (ESS) {ESS}; \node(div1) [right=of ESS] {/}; \node (Nc) [right= of div1]{$N_c$} ; \\ 
-		\node (rSS) 	{rSS}; \node(div2) [right=of rSS]{/}; \node (Nr) [right= of div2]{$N_r$} ;\\
+		\node (RSS) 	{RSS}; \node(div2) [right=of RSS]{/}; \node (Nr) [right= of div2]{$N_r$} ;\\
 	};
 
 	\draw (ESS.south west) -- (Nc.south east);
@@ -1261,8 +1261,8 @@ our model could not explain}
     \node (ESSGood)  [above=of ESS, yshift=8mm, xshift=-4mm] {Large ESS \\ is good};	
 	\draw [blue] (ESS.north) -- (ESS.north |- ESSGood.south);
     \pause 
-    \node (rSSGood)  [below=of rSS, yshift=-8mm, xshift=-4mm] {Small rSS \\ is good};	
-	\draw  [blue](rSS.south) -- (rSS.south |- rSSGood.north);
+    \node (RSSGood)  [below=of RSS, yshift=-8mm, xshift=-4mm] {Small RSS \\ is good};
+	\draw  [blue](RSS.south) -- (RSS.south |- RSSGood.north);
     \pause 
     \node (NcGood)  [above=of Nc, yshift=8mm, xshift=8mm, anchor=south west] {Fewer coefficients \\ is better};	
     \draw [blue] (Nc.north) |- (NcGood.west);
@@ -1420,7 +1420,7 @@ our model could not explain}
 
 \begin{itemize}[<+->]\itemsep6pt
 \item The null hypothesis ($H_0$): Nothing is going on (model is just $\beta_1$!)
-\item The residuals (and therefore, rSS) will get {\it smaller} as we include more terms to the model
+\item The residuals (and therefore, RSS) will get {\it smaller} as we include more terms to the model
 \item {\it How much smaller is enough?}
 \end{itemize}
 
@@ -1456,7 +1456,7 @@ our model could not explain}
 
 \begin{itemize}[<+->]\itemsep6pt
     \item Fitted another model ($H_2$) with continuous predictor $x$ and factor $f$
-    \item The rSS gets still smaller 
+    \item The RSS gets still smaller
     \item Is this {\it even} better than $H_1$?
 \end{itemize}
 
@@ -1548,7 +1548,7 @@ our model could not explain}
 	% \newcommand{\bb}{\node [circle,  fill=blue, inner sep=0.5mm]{} ;}
 	% \newcommand{\rr}{\node [circle,  fill=red, inner sep=0.5mm]{} ;}
 	% 
-	% \matrix (contrasts) [matrix of nodes, ampersand replacement=\&,  BEAMEr hijacks straight &
+	% \matrix (contrasts) [matrix of nodes, ampersand replacement=\&,  BEAMER hijacks straight &
 	                     % row sep=1mm, column sep=2.5mm, 
 	                     % nodes={circle, fill=black!35, inner sep=0.5mm}, nodes in empty cells]
 	% {
@@ -1621,7 +1621,7 @@ our model could not explain}
 %
 %\begin{center}
 %
-%{\LArGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
+%{\LARGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
 %
 %\vspace{5mm}
 %
@@ -1679,7 +1679,7 @@ our model could not explain}
 %
 %\begin{center}
 %
-%{\LArGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
+%{\LARGE $\mathbf{Y} = \mathbf{X \beta  +  \varepsilon}$}
 %
 %\vspace{5mm}
 %

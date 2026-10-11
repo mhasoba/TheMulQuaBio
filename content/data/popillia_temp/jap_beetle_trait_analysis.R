@@ -29,7 +29,7 @@ cons.mod <- gls(mean ~ PC1 + PC2 + PC3 + Temp
                 + PC1:Temp + PC2:Temp + PC3:Temp,
                 data=trait.merged.cons,
                 weights=varExp(form=~Temp * PC3),
-                method='rEML')
+                method='REML')
 
 plot(cons.mod)
 summary(cons.mod)
@@ -40,7 +40,7 @@ cons.modFull <- gls(mean ~ pctC + pctN + pctP + pct.water
                     + pct.water:Temp + pctProtein:Temp
                     + toughness:Temp,
                     data=trait.merged.cons,
-                    method='rEML')
+                    method='REML')
 
 
 
@@ -77,7 +77,7 @@ growth.modFull <- gls(mean ~ pctC + pctN + pctP + pct.water
                     + pct.water:Temp + pctProtein:Temp
                     + toughness:Temp,
                     data=trait.merged.growth,
-                    method='rEML',
+                    method='REML',
                       subset=Plant!='rosa multiflora')
 
 
@@ -113,7 +113,7 @@ xyplot(mean ~ PC3|as.factor(Temp), data=trait.merged.growth,
 )
 
 
-# MONTE CArLO POWEr SIMULATION FOr PC3:TEMP INTErACTION OF CONSUMPTION
+# MONTE CArLO POWER SIMULATION FOR PC3:TEMP INTErACTION OF CONSUMPTION
 yhat <- fitted(cons.mod)
 
 p.vals <- numeric(999)
@@ -124,7 +124,7 @@ for(i in 2:9999){
                   + PC1:Temp + PC2:Temp + PC3:Temp,
                   data=trait.merged.cons,
                   weights=varExp(form=~Temp * PC3),
-                  method='rEML'), silent=TrUE)
+                  method='REML'), silent=TRUE)
   p.vals[i] <- summary(sim.mod)$tTable[8,4]
 }
 

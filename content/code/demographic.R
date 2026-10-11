@@ -1,4 +1,4 @@
-# CMEE 2024 HPC exercises r code provided 
+# CMEE 2024 HPC exercises R code provided
 # Stochastic and deterministic demographic model
 
 deterministic_step <- function(state,projection_matrix){
@@ -7,9 +7,9 @@ deterministic_step <- function(state,projection_matrix){
 }
 
 deterministic_simulation <- function(initial_state,projection_matrix,simulation_length){
-  population_size <- numeric(simulation_length + 1) # list as long as sim length + 1 
+  population_size <- numeric(simulation_length + 1) # list as long as sim length + 1
   population_size[1] <- sum(initial_state) # first value = sum initial state
-  for (i in 1:simulation_length) { 
+  for (i in 1:simulation_length) {
     initial_state <- deterministic_step(initial_state, projection_matrix) # step through
     population_size[i + 1] <- sum(initial_state) # add to index
   }
@@ -38,7 +38,7 @@ survival_maturation <- function(state,growth_matrix){
 }
 
 random_draw <- function(probability_distribution) {
-  draw <- sample(1:length(probability_distribution), size = 1, prob = probability_distribution, replace = TrUE)
+  draw <- sample(1:length(probability_distribution), size = 1, prob = probability_distribution, replace = TRUE)
   return(draw)
 }
 
@@ -47,23 +47,23 @@ stochastic_recruitment <- function(reproduction_matrix,clutch_distribution){
   expected_clutch_size <- sum(clutch_distribution * (1:length(clutch_distribution))) # get mean clutch size
   recruitment_probability <- recruitment_rate / expected_clutch_size # recruitment probability
   if (recruitment_probability > 1) { # check probability
-    stop("Inconsistency in model parameters: recruitment probability cannot exceed 1.") 
+    stop("Inconsistency in model parameters: recruitment probability cannot exceed 1.")
   }
   return(recruitment_probability)
 }
 
 offspring_calc <- function(state, clutch_distribution, recruitment_probability) {
-  offspring = 0 
+  offspring = 0
   x = state[length(state)] # number of adults
   number_clutch = rbinom(1, x, recruitment_probability) # number of recruiting adults
-  
+
   if (number_clutch > 0) { # check for population collapse
     for (i in 1:number_clutch) {
       clutch = random_draw(clutch_distribution) # get clutch size
       offspring = offspring + clutch # sum number of offspring
     }
   }
-  
+
   return(offspring) # total number of offspring
 }
 
@@ -78,18 +78,18 @@ stochastic_simulation <- function(initial_state,growth_matrix,reproduction_matri
   population_size <- numeric(simulation_length + 1) # population of length sim + 1
   population_size[1] = sum(initial_state) # first value sum of initial state
   recruitment_probability = stochastic_recruitment(reproduction_matrix, clutch_distribution) # recruitment probability
-  
+
   for(i in 1:simulation_length){
     new_state = stochastic_step(initial_state, growth_matrix, reproduction_matrix, clutch_distribution, recruitment_probability) # one step of stochastic model
     population_size[i + 1] = sum(new_state) # update population time series
     if (sum(new_state) == 0){break} # stop if the population is zero
     initial_state = new_state # update for next iter
   }
-  
+
   if (length(population_size) < simulation_length + 1){ # fill remaining entries with 0
     population_size[(length(population_size) + 1):(simulation_length + 1)]
   }
-  
+
   return(population_size)
 }
 

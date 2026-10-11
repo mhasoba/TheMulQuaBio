@@ -11,14 +11,14 @@ abundance: real
 mass: real
 */
 
-CrEATE TABLE communities (
-    IDcommunity INTEGEr PrIMArY KEY,
-    IDsite INTEGEr,
-    year rEAL,
+CREATE TABLE communities (
+    IDcommunity INTEGER PRIMARY KEY,
+    IDsite INTEGER,
+    year REAL,
     IDspecies TEXT,
-    presence INTEGEr,
-    abundance rEAL,
-    mass rEAL);
+    presence INTEGER,
+    abundance REAL,
+    mass REAL);
     
 /* Now populate the table from the csv */
 .separator ","
@@ -35,11 +35,11 @@ title: text
 source: text
 */
 
-CrEATE TABLE reference (
+CREATE TABLE reference (
     IDref TEXT,
     refer TEXT,
     authors TEXT,
-    pubyear INTEGEr,
+    pubyear INTEGER,
     title TEXT,
     source TEXT);
     
@@ -58,12 +58,12 @@ sp text
 splevel integer
 */
 
-CrEATE TABLE species (
-    IDspecies TEXT PrIMArY KEY,
+CREATE TABLE species (
+    IDspecies TEXT PRIMARY KEY,
     family TEXT,
     genus TEXT,
     sp TEXT,
-    splevel INTEGEr);
+    splevel INTEGER);
     
 
 /* Now populate the table from the csv */
@@ -82,14 +82,14 @@ latitude real
 longitude real
 */
 
-CrEATE TABLE sites (
-    IDsite INTEGEr PrIMArY KEY,
+CREATE TABLE sites (
+    IDsite INTEGER PRIMARY KEY,
     IDreference TEXT,
     location TEXT,
     country TEXT,
     state TEXT,
-    latitude rEAL,
-    longitude rEAL);
+    latitude REAL,
+    longitude REAL);
     
 /* Now populate the table from the csv */
 .separator ","

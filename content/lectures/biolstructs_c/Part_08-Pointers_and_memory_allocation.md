@@ -125,21 +125,21 @@ int main(void)
 	int i = 0;
 	int *int_ptr = NULL;
 	
-	printf("The value of i BEFOrE indirection: %i\n", i);
+	printf("The value of i BEFORE indirection: %i\n", i);
 	
 	int_ptr = &i; // Assign address of i to int_ptr
 	
 	*int_ptr = 4; // Indirectly assign 4 to the memory of i via the pointer in int_ptr
 	
-	printf("The value of i AFTEr indirection: %i\n", i);
+	printf("The value of i AFTER indirection: %i\n", i);
 }
 ```
 
 You should get:
 
 ```
-The value of i BEFOrE indirection: 0
-The value of i AFTEr indirection: 4
+The value of i BEFORE indirection: 0
+The value of i AFTER indirection: 4
 ```
 
 ### Pointers in expressions

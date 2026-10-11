@@ -1,41 +1,44 @@
-################################################################
-################## Wrangling the Pound Hill Dataset ############
-################################################################
+# Wrangle the Pound Hill dataset.
+# Run from the coursework project root with:
+# Rscript code/data_wrang.R
 
-############# Load the dataset ###############
-# header = false because the raw data don't have real headers
-MyData <- as.matrix(read.csv("../data/pound_hill_data.csv", header = FALSE))
+# Load the data ----------------------------------------------------------
+# The first rows describe the sampling design, so do not use one as a header yet.
+MyData <- as.matrix(read.csv("data/pound_hill_data.csv", header = FALSE))
 
-# header = true because we do have metadata headers
-MyMetaData <- read.csv("../data/pound_hill_meta_data.csv", header = TrUE, sep = ";")
+# The metadata file does have a header and uses semicolons as separators.
+MyMetaData <- read.csv("data/pound_hill_meta_data.csv", header = TRUE, sep = ";")
 
-############# Inspect the dataset ###############
+# Inspect the data -------------------------------------------------------
 head(MyData)
 dim(MyData)
 str(MyData)
-fix(MyData) #you can also do this
-fix(MyMetaData)
+head(MyMetaData)
 
-############# Transpose ###############
-# To get those species into columns and treatments into rows 
+# Transpose so species become columns and sampled quadrats become rows.
 MyData <- t(MyData) 
 head(MyData)
 dim(MyData)
 
-############# replace species absences with zeros ###############
-MyData[MyData == ""] = 0
+# For this dataset, we have been told that blanks are observed absences.
+# That knowledge is what allows us to record them as zero rather than NA.
+MyData[MyData == ""] <- 0
 
-############# Convert raw matrix to data frame ###############
+# Convert the raw matrix to a data frame --------------------------------
 
-TempData <- as.data.frame(MyData[-1,],stringsAsFactors = F) #stringsAsFactors = F is important!
-colnames(TempData) <- MyData[1,] # assign column names from original data
+TempData <- as.data.frame(MyData[-1, ], stringsAsFactors = FALSE)
+colnames(TempData) <- MyData[1, ]
+rownames(TempData) <- NULL
 
-############# Convert from wide to long format  ###############
-require(reshape2) # load the reshape2 package
+# Convert from wide to long form ----------------------------------------
+library(reshape2)
 
-?melt #check out the melt function
-
-MyWrangledData <- melt(TempData, id=c("Cultivation", "Block", "Plot", "Quadrat"), variable.name = "Species", value.name = "Count")
+MyWrangledData <- melt(
+  TempData,
+  id = c("Cultivation", "Block", "Plot", "Quadrat"),
+  variable.name = "Species",
+  value.name = "Count"
+)
 
 MyWrangledData[, "Cultivation"] <- as.factor(MyWrangledData[, "Cultivation"])
 MyWrangledData[, "Block"] <- as.factor(MyWrangledData[, "Block"])
@@ -47,4 +50,8 @@ str(MyWrangledData)
 head(MyWrangledData)
 dim(MyWrangledData)
 
-############# Exploring the data (extend the script below)  ###############
+# Save a derived table while leaving the raw files unchanged.
+dir.create("results", showWarnings = FALSE)
+write.csv(MyWrangledData, "results/pound_hill_long.csv", row.names = FALSE)
+
+# Explore the data below this line.

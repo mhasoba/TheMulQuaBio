@@ -18,15 +18,15 @@
 
 This is an example document created using the Sweave system
 (\url{http://www.statistik.lmu.de/~leisch/Sweave/}).  Sweave is a
-tool for combining both \la-te-x\ documentation and r code within the
+tool for combining both \la-te-x\ documentation and R code within the
 same file.  For this document, the master file is \url{estimate.rnw}.
-This is processed by the Sweave system in r, which runs the r code to
+This is processed by the Sweave system in R, which runs the R code to
 generate textual/graphical output, and also creates a \la-te-x\ document.
 The \la-te-x\ document is then typeset to create the pdf document.  On
 unix/macintosh, the following commands should recreate the pdf file:
 
 \begin{verbatim}
-$ r CMD Sweave estimate.rnw
+$ R CMD Sweave estimate.rnw
 $ pdflatex estimate.tex
 \end{verbatim}
 
@@ -42,13 +42,13 @@ the ratio $d/n$ should approximate the ratio of the area of the
 dartboard to the enclosing square, $ \pi r^2 / 4 r^2 \equiv \pi/4$.
 From this, we can estimate $\pi \approx 4d/n$.
 
-We start with an example, using r to draw both the dartboard and the
+We start with an example, using R to draw both the dartboard and the
 surrounding square, together with $n=50$ darts.  The radius of the
 dartboard here is 1 unit, although the value is not important.
 
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{center}
-<<fig=TrUE>>=
+<<fig=TRUE>>=
 r <- 1
 n <- 50
 par(las=1)
@@ -100,7 +100,7 @@ as clearly the estimate will vary from run to run.  In the following
 plot, we compare the estimates of $\pi$ for three different values of $n$:
 
 \begin{center}
-<<fig=TrUE>>=
+<<fig=TRUE>>=
 ns <- 10^c(2,3,4)
 res <- lapply(ns, function(n) replicate(99, estimate.pi(n)))
 par(las=1, bty='n')

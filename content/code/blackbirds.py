@@ -1,7 +1,7 @@
 import re
 
 # read the file (using a different, more python 3 way, just for fun!)
-with open('../data/blackbirds.txt', 'r') as f:
+with open('data/blackbirds.txt', 'r') as f:
     text = f.read()
 
 # replace \t's and \n's with a spaces:
@@ -30,8 +30,8 @@ text = text.decode('ascii', 'ignore') # Now decode back to string
 # ['Animalia', 'Chordata ', 'Turdus boulboul']
 # ['Animalia', 'Chordata ', 'Agelaius assimilis']
 # ===============
-# 
+#
 # Solution 2:
 #
 #  [('Animalia', 'Chordata', 'Euphagus carolinus'), ('Animalia', 'Chordata', 'Euphagus cyanocephalus'), ('Animalia', 'Chordata', 'Turdus boulboul'), ('Animalia', 'Chordata', 'Agelaius assimilis')]
-# 
+#

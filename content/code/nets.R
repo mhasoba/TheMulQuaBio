@@ -14,7 +14,7 @@ links <- read.csv("../data/qmee_net_mat_edges.csv", header=T, as.is=T)
 nodes <- read.csv("../data/qmee_net_mat_nodes.csv", header=T, row.names = 1)
 
 #Create graph object
-net <- graph.adjacency(as.matrix(links), mode = "directed", weighted=TrUE, diag=F)
+net <- graph.adjacency(as.matrix(links), mode = "directed", weighted=TRUE, diag=F)
         
 #Test plot
 # plot(net, edge.arrow.size=1, edge.curved=.1,

@@ -1,11 +1,11 @@
 # Linear Modelling Practical
 
 # This script uses genome size and morphology data to explore
-# t tests and F tests in r
+# t tests and F tests in R
 
 
 ######################## (1) ##########################
-# LOAD THE DATA FrOM THE CSV TEXT FILE INTO A DATA FrAME:
+# LOAD THE DATA FROM THE CSV TEXT FILE INTO A DATA FRAME:
 genome <- read.csv('../data/genome_size.csv') #assumes that you are working from your Code directory
 
 ######################## (2) ##########################
@@ -15,33 +15,33 @@ head(genome)
 str(genome) # Check what the data columns contain
 
 tapply(genome$BodyWeight, genome$Suborder, mean) # take a quick mean
-tapply(genome$BodyWeight, genome$Suborder, mean, na.rm=TrUE)
+tapply(genome$BodyWeight, genome$Suborder, mean, na.rm=TRUE)
 tapply(genome$BodyWeight, genome$Suborder, length)
-tapply(genome$BodyWeight, genome$Suborder, var, na.rm=TrUE)
+tapply(genome$BodyWeight, genome$Suborder, var, na.rm=TRUE)
 
 #You can also remove NA's by subsetting (using weight as an example):
 BodyWt_no_NA <- subset(genome, !is.na(BodyWeight))
 str(BodyWt_no_NA) 
 
 ######################## (3) ##########################
-# LOOK AT A SUMMArY OF THE DATA:
+# LOOK AT A SUMMARY OF THE DATA:
 
 summary(genome) #Note that each column gets a separate summary!
 
 ######################## (4) ##########################
-# VISUALISE THE DISTrIBUTION OF THE SAMPLES OF YOUr FOCAL VArIABLE:
+# VISUALISE THE DISTRIBUTION OF THE SAMPLES OF YOUR FOCAL VARIABLE:
 
 hist(genome$genome_size, breaks=10)
 plot(density(genome$genome_size, bw=0.1))
 
 ######################## (5) ##########################
-# COMPArE TWO DISTrIBUTIONS OF FACTOrS OF INTErEST USING BOXPLOTS:
+# COMPARE TWO DISTRIBUTIONS OF FACTORS OF INTEREST USING BOXPLOTS:
 
 plot(genome_size ~ Suborder, data=genome) 
 #You can also use plot(Genome$genome_size ~ Genome$Suborder)   
 
 ######################## (6) ##########################
-# COMPArE THE TWO DISTrIBUTIONS USING DENSITY PLOTS:
+# COMPARE THE TWO DISTRIBUTIONS USING DENSITY PLOTS:
 
 # First, get two small datasets, one for each order
 Anisoptera <- subset(genome, Suborder=='Anisoptera') #The dragonflies
@@ -53,7 +53,7 @@ plot(density(Zygoptera$genome_size), xlim=c(0.1, 2.7), ylim=c(0,1.7))
 lines(density(Anisoptera$genome_size), col='red')
 
 ######################## (7) ##########################
-# PLOT ONE VArIABLE AGAINST ANOTHEr USING SCATTErPLOTS:
+# PLOT ONE VARIABLE AGAINST ANOTHER USING SCATTERPLOTS:
 
 hist(genome$TotalLength) #Check the distribution of your new variable of interest
 plot(genome_size ~ TotalLength, data = genome) #Now plot
@@ -61,7 +61,7 @@ plot(genome_size ~ TotalLength, data = genome) #Now plot
 plot(genome_size ~ BodyWeight, data = genome) #Another example, using weight instead 
 
 ######################## (8) ##########################
-# SEPArATE SCATTErS BY SUBOrDErS
+# SEPARATE SCATTERS BY SUBORDERS
 
 str(genome$Suborder) #Confirm that there are two levels under suborders 
 myColours <- c('red', 'blue') # So choose two colours
@@ -88,5 +88,5 @@ legend(40,2, legend=levels(genome$Suborder),
 dev.off() #Close the pdf file
 
 ######################## (10) ##########################
-# SAVE THE DATA AND YOUr NEW VArIABLES IN rDATA FOrMAT:
+# SAVE THE DATA AND YOUR NEW VARIABLES IN RDATA FORMAT:
 save(genome, myColours, mySymbols, file='../results/genome_size.rda')

@@ -50,7 +50,7 @@ lowerSE <- groupMeans - groupSE
 # centres of the bars are on the x-axis
 # - set the y axis limits to contain the error bars
 barMids <- barplot(groupMeans, ylim=c(0, max(upperSE)),
-                   ylab='log C value (pg)', beside=TrUE, col=c('white', 'grey70'))
+                   ylab='log C value (pg)', beside=TRUE, col=c('white', 'grey70'))
 
 arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3, len=0.1)
 
@@ -85,7 +85,7 @@ print(predVals)
 
 # add those points to the barplot
 barMids <- barplot(groupMeans, ylim=c(0, 1.4),
-                   ylab='log C value (pg)', beside=TrUE, col=c('white', 'grey70'))
+                   ylab='log C value (pg)', beside=TRUE, col=c('white', 'grey70'))
 
 arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3, len=0.1)
 points(barMids, predVals$predict, col='red', pch=12)

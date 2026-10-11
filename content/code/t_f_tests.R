@@ -1,7 +1,7 @@
-# CHAPTEr 4. T TESTS AND F TESTS
+# CHAPTER 4. T TESTS AND F TESTS
 
 # This script uses genome size and morphology data to explore 
-# t tests and F tests in r
+# t tests and F tests in R
 
 # (1) load the data from the CSV text file into a data frame
 genome <- read.csv('../data/genome_size.csv')

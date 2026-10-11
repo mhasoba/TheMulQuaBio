@@ -86,12 +86,11 @@ pwd
 
 ```bash
 mkdir -p code data results sandbox
-cd code
 pwd
 ```
 
 ::: {.checkpoint}
-**Checkpoint:** everyone should be in `code/` with the editor and terminal visible.
+**Checkpoint:** everyone should be at the coursework project root, with `code/`, `data/`, `results/` and `sandbox/` visible in the editor.
 :::
 
 ::: notes
@@ -99,7 +98,7 @@ Time: 04:15-09:15.
 
 This is a live setup step. Ask students to substitute their own coursework path
 if it differs. If somebody is lost, have them run `pwd`, then use the VS Code
-Explorer to open the `code/` directory inside the coursework project root.
+Explorer to open the coursework project root rather than one of its subdirectories.
 :::
 
 ## A script is a saved recipe {data-timing="60"}
@@ -264,12 +263,12 @@ chapter and practical material.
 Now make the file executable and run it directly:
 
 ```bash
-chmod u+x boilerplate.sh
-./boilerplate.sh
+chmod u+x code/boilerplate.sh
+./code/boilerplate.sh
 ```
 
-Here `./` names the file in the current directory. The current directory is not
-normally searched automatically for commands.
+Here `./code/boilerplate.sh` means “start here, then look under `code/`”. The
+current directory is not normally searched automatically for commands.
 
 ::: {.checkpoint}
 **Checkpoint:** both invocation methods should print the same message.
@@ -278,8 +277,8 @@ normally searched automatically for commands.
 ::: notes
 Time: 25:45-30:45.
 
-If direct execution fails, check `ls -l boilerplate.sh` and confirm that the
-terminal is still in `code/`. Do not turn this into a PATH detour yet.
+If direct execution fails, check `ls -l code/boilerplate.sh` and confirm that the
+terminal is at the project root. Do not turn this into a PATH detour yet.
 :::
 
 ## Add an explicit status {data-timing="240"}
@@ -298,7 +297,7 @@ nonzero = “Something went wrong”
 Check the status immediately:
 
 ```bash
-./boilerplate.sh
+./code/boilerplate.sh
 echo "$?"
 ```
 
@@ -317,8 +316,8 @@ exit 0
 Then save it as `boilerplate.sh` in `code/` and run:
 
 ```bash
-bash -n boilerplate.sh
-bash boilerplate.sh
+bash -n code/boilerplate.sh
+bash code/boilerplate.sh
 ```
 
 `bash -n` checks syntax without running the script. It does not check whether
@@ -332,7 +331,7 @@ input files or external commands exist.
 Time: 34:45-37:45.
 
 Ask students to predict the status before running `echo "$?"`. Keep this as a
-recovery route, not a second exercise students must type from scratch.
+catch-up example, not a second exercise students must type from scratch.
 :::
 
 ## Give the script some information {data-timing="75"}
@@ -403,9 +402,9 @@ Again, translate the code into a sentence. Each trip through the loop gives
 Before touching a converter, make data that can be destroyed without regret:
 
 ```bash
-mkdir -p ../sandbox/shell-demo
-printf 'species\tcount\noak\t12\n' > ../sandbox/shell-demo/test.txt
-cat ../sandbox/shell-demo/test.txt
+mkdir -p sandbox/shell-demo
+printf 'species\tcount\noak\t12\n' > sandbox/shell-demo/test.txt
+cat sandbox/shell-demo/test.txt
 ```
 
 ::: {.checkpoint}
@@ -415,7 +414,7 @@ cat ../sandbox/shell-demo/test.txt
 ::: notes
 Time: 43:45-48:45.
 
-Explain why disposable fixtures matter. Students should not debug a converter by
+Explain why disposable practice files matter. Students should not debug a converter by
 experimenting on the only copy of assessed or irreplaceable data.
 :::
 
@@ -434,8 +433,8 @@ exit 0
 Run it on the disposable input:
 
 ```bash
-bash tabtocsv.sh ../sandbox/shell-demo/test.txt
-cat ../sandbox/shell-demo/test.txt.csv
+bash code/tabtocsv.sh sandbox/shell-demo/test.txt
+cat sandbox/shell-demo/test.txt.csv
 ```
 
 ::: {.live-demo}
@@ -477,8 +476,8 @@ output first; students will investigate the implementation in the practical.
 Run the same command again:
 
 ```bash
-bash tabtocsv.sh ../sandbox/shell-demo/test.txt
-cat ../sandbox/shell-demo/test.txt.csv
+bash code/tabtocsv.sh sandbox/shell-demo/test.txt
+cat sandbox/shell-demo/test.txt.csv
 ```
 
 Why are rows duplicated? `>>` appends instead of replacing the output.
@@ -510,8 +509,8 @@ vanishes. Successful execution and correct data are different claims.
 Make a copy with a space in its name:
 
 ```bash
-cp ../sandbox/shell-demo/test.txt '../sandbox/shell-demo/field notes.txt'
-bash tabtocsv.sh '../sandbox/shell-demo/field notes.txt'
+cp sandbox/shell-demo/test.txt 'sandbox/shell-demo/field notes.txt'
+bash code/tabtocsv.sh 'sandbox/shell-demo/field notes.txt'
 echo "$?"
 ```
 
@@ -556,17 +555,17 @@ ask students to apply the checklist to the starter and compare approaches.
 predict → test on disposable data → inspect → improve
 :::
 
-Write `csvtospace.sh` to convert a comma-separated input to a space-separated output. Run it from `code/` and pass one readable input path.
+Write `csvtospace.sh` to convert a comma-separated input to a space-separated output. Run it from the project root and pass one readable input path.
 
 It must:
 
-- leave the input unchanged and write `../results/<input-filename>.txt` (for example, `1800.csv` produces `1800.csv.txt`),
-- create `../results/` if it does not exist and replace the generated output on reruns,
+- leave the input unchanged and write `results/<input-filename>.txt` (for example, `1800.csv` produces `1800.csv.txt`),
+- create `results/` if it does not exist and replace the generated output on reruns,
 - preserve repeated commas as repeated spaces so empty fields are not silently removed,
 - report missing, unreadable or invalid inputs to standard error and return a non-zero status, and
 - state the limitations of simple delimiter substitution.
 
-The supplied temperature CSVs do not contain quoted commas. This is not a general CSV parser: quoted commas are data, and fields containing spaces cannot be represented unambiguously in the space-separated output. Test with disposable copies, including an empty field, a path with spaces, a rerun, missing arguments and a nonexistent file. Check that the input is unchanged and the output is in `results/`. Keep the script in the coursework root `code/`; temporary fixtures belong in `sandbox/`.
+The supplied temperature CSVs do not contain quoted commas. This is not a general CSV parser: quoted commas are data, and fields containing spaces cannot be represented unambiguously in the space-separated output. Test with disposable copies, including an empty field, a path with spaces, a rerun, missing arguments and a nonexistent file. Check that the input is unchanged and the output is in `results/`. Keep the script in the coursework root `code/`; temporary practice files belong in `sandbox/`.
 
 This live session introduces the converter workflow. Use the shell-scripting notebook for the full practical instructions and test sequence; the lecture examples demonstrate the ideas without listing every exercise step.
 
@@ -585,27 +584,27 @@ make design decisions and document limitations.
 
 ## If you fall behind {data-timing="180"}
 
-Use the recovery route:
+If you need to catch up:
 
 ```bash
 pwd
-cd ~/Documents/CMEECourseWork/code
-bash -n boilerplate.sh
-bash boilerplate.sh
+cd ~/Documents/CMEECourseWork
+bash -n code/boilerplate.sh
+bash code/boilerplate.sh
 ```
 
 If your coursework path differs, use the VS Code Explorer or `pwd` to locate it.
 You can also recreate the disposable input:
 
 ```bash
-mkdir -p ../sandbox/shell-demo
-printf 'species\tcount\noak\t12\n' > ../sandbox/shell-demo/test.txt
+mkdir -p sandbox/shell-demo
+printf 'species\tcount\noak\t12\n' > sandbox/shell-demo/test.txt
 ```
 
 ::: notes
 Time: 80:15-83:15.
 
-Keep this slide visible while students catch up. A recovery route is part of the
+Keep this slide visible while students catch up. Time to catch up is part of the
 lecture design, not an admission that anyone has failed.
 :::
 

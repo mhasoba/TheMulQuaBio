@@ -136,7 +136,7 @@ Notice that you need to pass the number of elements within the array to the func
 
 ## Passing `NULL` arguments
 
-If a function requires arguments, then some value must be stated in the call---even if that function does not require those arguments for its execution. Unlike r or Python, most functions in C don't allow variable arguments as a default. Variable arguments is an advanced feature we won't cover here, however, it's possible to define functions that don't require all parameters. For instance, we could write a function that will double all values in an array, regardless of whether it is a floating point or integral value:
+If a function requires arguments, then some value must be stated in the call---even if that function does not require those arguments for its execution. Unlike R or Python, most functions in C don't allow variable arguments by default. Variable arguments are an advanced feature we won't cover here. However, it is possible to define functions that don't require all parameters. For instance, we could write a function that doubles all values in an array, regardless of whether it contains floating-point or integer values:
 
 ```C
 

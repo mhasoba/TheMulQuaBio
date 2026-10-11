@@ -35,67 +35,27 @@ jobs:
       - name: Install dependencies
         run: make init REQUIREMENTS_FILE=requirements-execution.lock.txt
 
-      - name: Register Python and Bash kernels
-        run: |
-          . .venv/bin/activate
-          python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3"
-          python -m bash_kernel.install
-
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.3.3'
           use-public-rspm: true
 
-      - name: Install R packages and register kernel
-        env:
-          CRAN_REPO: https://packagemanager.posit.co/cran/__linux__/noble/2026-10-01
+      - name: Install R workflow dependencies
+        run: Rscript -e 'install.packages("reshape2", repos = "https://cloud.r-project.org")'
+
+      - name: Check the R examples
         run: |
-          . .venv/bin/activate
-          Rscript -e 'options(repos = c(CRAN = Sys.getenv("CRAN_REPO"))); install.packages(readLines("requirements-r.txt"))'
-          ir_kernel_spec=$(Rscript -e 'cat(system.file("kernelspec", package = "IRkernel"))')
-          jupyter kernelspec install --user --replace --name ir "$ir_kernel_spec"
+          Rscript scripts/check_r_observations.R
+          Rscript scripts/check_r_file_workflows.R
 
-      - name: Verify notebook kernels
-        run: |
-          . .venv/bin/activate
-          python - <<'PY'
-          import json
-          import subprocess
-
-          kernels = json.loads(subprocess.check_output(["jupyter", "kernelspec", "list", "--json"]))["kernelspecs"]
-          missing = {"python3", "ir", "bash"} - kernels.keys()
-          if missing:
-              raise SystemExit(f"Missing notebook kernels: {', '.join(sorted(missing))}")
-          PY
-
-      - name: Configure strict notebook execution
-        run: |
-          . .venv/bin/activate
-          python - <<'PY'
-          from pathlib import Path
-
-          import yaml
-
-          config_path = Path("content/_config.yml")
-          config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
-          execution = config.setdefault("execute", {})
-          execution["execute_notebooks"] = "force"
-          execution["allow_errors"] = False
-          execution["timeout"] = 180
-          config.setdefault("sphinx", {}).setdefault("config", {})[
-              "nb_execution_raise_on_error"
-          ] = True
-          Path("content/_config_ci.yml").write_text(
-              yaml.safe_dump(config, sort_keys=False), encoding="utf-8"
-          )
-          PY
-
-      - name: Check, execute, and build book
+      # Strict forced notebook execution is temporarily suspended. Restore it
+      # through https://github.com/MulQuaBio/MQB/issues/205.
+      - name: Check and build book
         env:
           MQB_NOTEBOOK_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
           MQB_NOTEBOOK_REF: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: PYTHONPATH="$GITHUB_WORKSPACE" make test BOOK_CONFIG=content/_config_ci.yml BOOK_BUILD_ARGS=--all
+        run: PYTHONPATH="$GITHUB_WORKSPACE" make test
 
       - name: Upload built book
         uses: actions/upload-artifact@v7

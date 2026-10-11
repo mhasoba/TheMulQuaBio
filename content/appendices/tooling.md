@@ -9,6 +9,7 @@ If a setup page uses a word you do not know, look it up in [Key computing terms]
 - Choosing a Linux environment or configuring Ubuntu: [Linux Setup and Ubuntu Administration](ubuntu-admin.md)
 - Setting up macOS command-line tools: [macOS Tools and Homebrew](macos-tools.md)
 - Installing Python and managing project packages: [Python Installation and Environments](python-environments.md)
+- Installing R and using a personal package library: [R Installation and User Libraries](r-setup.md)
 - Working with Python, R and notebooks in an editor: [VS Code for MQB](vscode.md)
 - Setting up GitHub access and project remotes: [Git, GitHub and SSH Setup](git-ssh.md)
 - If you’re new to notebooks/Jupyter: [Jupyter / notebooks intro](../notebooks/appendix-jupy-intro)

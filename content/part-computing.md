@@ -2,6 +2,8 @@
 
 This part gets you comfortable with the command line, version control, and the core tools used throughout MQB.
 
+Unless an exercise explicitly says otherwise, start commands at the coursework project root: the directory containing `README.md`, `code/`, `data/` and `results/`. From there, run a script as `python code/script.py`, `Rscript code/script.R` or `bash code/script.sh`. Paths such as `data/input.csv` and `results/output.csv` are relative to that root. Exercises about directory navigation, notebooks and HPC jobs may name a different starting directory; follow the stated exception rather than guessing.
+
 ## You will learn
 
 - Navigate files/directories efficiently (terminal basics)
@@ -35,7 +37,7 @@ This part gets you comfortable with the command line, version control, and the c
 4. **Explain:** describe why the result answers the question and what each check detects.
 5. **Rerun:** start a fresh process from the documented project root and verify the same result with the same inputs.
 
-Try the [independent Python observations exercise](notebooks/python.ipynb#independent-exercise-summarise-observations-by-site). Core Python and R exercises begin with independent work; a prepared suggestion can be critiqued afterwards without an assistant account. Each released assignment brief controls its assessed tasks and AI permissions; teaching examples do not amend those rules.
+Try the [independent Python observations exercise](notebooks/python.ipynb#independent-exercise-summarise-observations-by-site). The Python and R exercises begin with your own attempt; afterwards, you can critique a prepared suggestion without an assistant account. Each released assignment brief controls its assessed tasks and AI permissions; teaching examples do not amend those rules.
 
 ## Where this goes next
 
