@@ -5,7 +5,7 @@ install.packages('sqldf')
 library(sqldf)
 
 # The command below opens a connection to the database.
-#If the database does not yet exist, one is created in the working directory of r.
+# If the database does not yet exist, one is created in R's working directory.
 db <- dbConnect(SQLite(), dbname='Test.sqlite')
 
 # Now let's enter some data to the table
@@ -41,10 +41,10 @@ dbGetQuery(db, "SELECT * FrOM consumer WHErE ConPhylum='Chordata'")
 
 # Tables can be also imported from csv files.
 # As example, let's use the biotraits dataset.
-# The easiest way is to read the csv files into r as data frames.
+# The easiest way is to read the csv files into R as data frames.
 # Then the data frames are imported into the database.
 
-resource <- read.csv("../data/resource.csv")  # read csv files into r
+resource <- read.csv("../data/resource.csv")  # read csv files into R
 
 # Import data frames into database
  dbWriteTable(conn = db, name = "resource", value = resource, row.names = FALSE)
@@ -56,7 +56,7 @@ resource <- read.csv("../data/resource.csv")  # read csv files into r
 
 # Before leaving rSQLite, there is a bit of tidying-up to do.
 # The connection to the database is closed, and as precaution
-# the three data frames are removed from r’s environment.
+# the three data frames are removed from R’s environment.
  dbDisconnect(db)            # Close connection
  rm(list = c("resource"))   # remove data frames
 

@@ -1,7 +1,7 @@
 # Linear Modelling Practical
 
 # This script uses genome size and morphology data to explore
-# t tests and F tests in r
+# t tests and F tests in R
 
 
 ######################## (1) ##########################

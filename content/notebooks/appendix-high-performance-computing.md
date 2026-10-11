@@ -47,15 +47,15 @@ matrix multiplications. They are highly efficient at processing many
 calculations simultaneously, making them ideal for scientific
 computations and machine learning applications.
 
-- **random Access Memory (rAM)** – Usually referred to as just "memory", rAM is the temporary storage that the
-CPU uses to hold data actively being processed. rAM allows for quick
+- **Random Access Memory (RAM)** – Usually referred to as just "memory", RAM is the temporary storage that the
+CPU uses to hold data actively being processed. RAM allows for quick
 access to data needed for computations, which is either deleted or
 deposited into NVM storage once completed.
 
 - **Non-Volatile Memory (NVM)** - Non-volatile memory refers to any form
 of memory that retains data even when the system is powered off. This
 includes storage devices like hard drives (HDDs), solid-state drives
-(SSDs), and flash drives. Unlike rAM, which is cleared when the system
+(SSDs), and flash drives. Unlike RAM, which is cleared when the system
 shuts down, NVM provides long-term data storage, allowing for the
 preservation of files, applications, and system states across power
 cycles.
@@ -273,7 +273,7 @@ particularly useful for tasks like cross-validation or Monte Carlo
 simulations, where each iteration is independent and benefits from being
 run in parallel.
 
--   In r, the `parallel` package gives us access to parallelisation
+-   In R, the `parallel` package gives us access to parallelisation
     functions, such as `mclapply` (multi-core `lapply`) Additional
     packages include future and foreach.
 
@@ -359,9 +359,9 @@ To get started, you will need 4 things:
 
 
 3.  **Necessary modules are set up in your remote are:** It will be
-    useful to ensure that Python and r are set up on your area of the
+    useful to ensure that Python and R are set up on your area of the
     HPC system at this stage. You will only need to do this once. To
-    install Python and r, you will need to first log in to the HPC
+    install Python and R, you will need to first log in to the HPC
     service (as covered in the above section), and then enter the
     following two lines into the command line within your area of the
     remote system:
@@ -370,11 +370,11 @@ To get started, you will need 4 things:
     module load anaconda3/personal
     anaconda-setup
     ```
-    This could take some time and may require you to respond “yes” when prompted. Once anaconda is fully installed, install r by entering
+    This could take some time and may require you to respond “yes” when prompted. Once Anaconda is fully installed, install R by entering
     ```bash
     conda install r
     ```
-    Once again, this could take some time and may require you to respond “yes” when prompted. Once both of these are installed, you should be able to enter python3 and code in Python on the cluster   node. However, in general you should only run code in either r or Python by submitting them within jobs (as covered in the lectures and in the instructions document). (You will notice that if    you attempt to launch r from your HPC node you will be given a stern message!)
+    Once again, this could take some time and may require you to respond “yes” when prompted. Once both of these are installed, you should be able to enter `python3` and code in Python on the cluster node. However, in general you should only run R or Python code by submitting it within jobs (as covered in the lectures and in the instructions document). You will notice that attempting to launch R from your HPC node produces a stern message.
 
 
 4.  **A method of file transfer:** Files are exchanged between your
@@ -396,15 +396,15 @@ You first must determine the task at hand. Are you running your own
 script or software that natively parallelises tasks? Is your job an
 array?
 
-Using arrays as an example, we would first want to make an r or Python
+Using arrays as an example, we would first want to make an R or Python
 script that takes in a job number and uses that to determine which task
-to perform. The `HPC_script.r/py` files below, when sourced, identify
+to perform. The `HPC_script.R` and `HPC_script.py` files below, when sourced, identify
 the job number (that is, the job number the Imperial HPC assigns to our
 code submission), run our code, and then save the outputs to the current
 working directory, with all file names being distinct (otherwise the
 different jobs will overwrite each other).
 
-**In r:**
+**In R:**
 
     seed_number <- as.numeric(Sys.getenv("PBS_ArrAY_INDEX")) # Find out the job number
 
@@ -453,14 +453,14 @@ Within this file, you will generally want to load any modules and
 packages, print any statements to check your progress within the job
 output files, and transfer files to and from the job to your working
 directory. **For your outputs to be created correctly, you must move
-your files to `$TMPDIr` to be processed, and then move files from this
-back to `$HOME`**. This is because `$TMPDIr` is where your files are
+your files to `$TMPDIR` to be processed, and then move files from this
+back to `$HOME`**. This is because `$TMPDIR` is where your files are
 run, whereas `$HOME` is where you interact with them!
 
 This can be summarised in the `run_script.sh` file below, where we are
 running the `HPC_script.R` file from above. Because the R script does
 not parallelise within it and does not load a significant amount of
-data, we will only request a single thread (`ncpus`) and 1GB of rAM
+data, we will only request a single thread (`ncpus`) and 1GB of RAM
 (`mem`):
 
     #!/bin/bash
@@ -469,15 +469,15 @@ data, we will only request a single thread (`ncpus`) and 1GB of rAM
 
     module load anaconda3/personal
 
-    echo "r is about to run"
+    echo "R is about to run"
 
-    cp $HOME/HPC_script.R $TMPDIr
+    cp $HOME/HPC_script.R $TMPDIR
 
-    r --vanilla < $TMPDIr/HPC_script.R
+    R --vanilla < $TMPDIR/HPC_script.R
 
-    mv $TMPDIr/output_* $HOME/output_files/
+    mv $TMPDIR/output_* $HOME/output_files/
 
-    echo "r has finished running"
+    echo "R has finished running"
 
 The Imperial HPC uses the PBS Pro job scheduler (documentation available
 [here](https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf)),

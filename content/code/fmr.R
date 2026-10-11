@@ -16,4 +16,4 @@ for(class in unique(nagy$Class)){
 }
 dev.off()
 
-cat("Finished in r!\n")
+cat("Finished in R!\n")

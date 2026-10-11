@@ -1,4 +1,4 @@
-# CMEE 2024 HPC exercises r code main pro forma
+# CMEE 2024 HPC exercises R code main pro forma
 # You don't HAVE to use this but it will be very helpful.
 # If you opt to write everything yourself from scratch please ensure you use
 # EXACTLY the same function and parameter names and beware that you may lose

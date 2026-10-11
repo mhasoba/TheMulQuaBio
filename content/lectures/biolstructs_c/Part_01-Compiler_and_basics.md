@@ -172,7 +172,7 @@ We won't go into the details of `printf()` here, because we haven't yet looked a
 ## Understanding the compiler (a bit more detail)
 
 The compiler is really at least three different programs: the **preprocessor**, the **compiler**, and the **linker**. 
-While these details aren't needed to compile very simple programs, understanding these details becomes useful later when you want to write C modules that are used by r and python.
+While these details aren't needed to compile very simple programs, understanding them becomes useful later when you want to write C modules that are used by R and Python.
 Therefore, we'll learn a bit about it now, but don't worry if this seems a bit complicated or opaque.
 
 ### The preprocessor

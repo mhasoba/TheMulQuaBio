@@ -1,6 +1,6 @@
 # 10. Array, pointer, and memory safety (Part 2)
 
-Because arrays, and the related properties of pointers, in C lack bounds checking, working with arrays can be perilous for C programmers. This is especially important in larger programs which may have complex data. However, given that you are likely to use C to extend r or Python code, you will likely also have intensive memory needs when using C. So it is useful to create a C library that allows you to customise your arrays and work safely with them. A solid, mature library of array utilities will help you use arrays reliably and problem free.
+Because arrays, and the related properties of pointers, in C lack bounds checking, working with arrays can be perilous for C programmers. This is especially important in larger programs that may have complex data. Given that you are likely to use C to extend R or Python code, you may also have intensive memory needs. It is therefore useful to create a C library that lets you customise your arrays and work with them safely. A solid, mature library of array utilities will help you use arrays reliably and without problems.
 
 ## Wrapping arrays in a struct
 

@@ -131,7 +131,7 @@ You can use the cast operator to convert any data type. However, the results are
 The cast operator only changes the interpretation of the variable, it does not change the memory width for that variable.
 Thus if you cast a large variable to a smaller type (say casting a `long int` to a `char`), and then assign it to a smaller variable, you would most likely experience data loss.
 
-## Why not use `double` or `float` as a default, like r does?
+## Why not use `double` or `float` as a default, like R does?
 
 You could and, in many cases, you will have to. However, the reality is that integer calculation is *much* faster than floating point calculation. You should always be careful of floating-point calculation in any computer program. read up on the problem of 'underflow' and know how to use programming tricks to avoid this problem.
 
