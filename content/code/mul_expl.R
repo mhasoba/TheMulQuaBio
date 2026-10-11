@@ -1,14 +1,19 @@
 # Linear Models, Multiple explanatory variables
-# load and check the data
+# Run from the coursework project root with:
+# Rscript code/mul_expl.R
 
-load('../data/mammals.rdata')
-ls()
+# Load the supplied data and recreate the derived column used in the ANOVA chapter.
+mammals <- read.csv('data/mammal_data.csv', stringsAsFactors = TRUE)
+mammals$logCvalue <- log(mammals$meanCvalue)
 str(mammals)
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/multiple_explanatory_variables.pdf', 11, 8.5)
 
 # subset down to complete data
 mammals <- subset(mammals, select=c(GroundDwelling, TrophicLevel, logCvalue))
 mammals <- na.omit(mammals)
-str(mammmals)
+str(mammals)
 
 # 1) boxplots using subset
 par(mfrow=c(1,2))
@@ -55,6 +60,7 @@ barMids <- barplot(groupMeans, ylim=c(0, max(upperSE)),
 arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3, len=0.1)
 
 # 4) creating the means plot figure
+library(gplots)
 par(mfrow=c(1,2), mar=c(3,3,1,1), mgp=c(1.8, 0.7, 0))
 plotmeans(logCvalue ~ TrophicLevel, data=mammals, subset=GroundDwelling=='Yes', connect=FALSE, ylim=c(0.8, 1.4))
 text(0.6,1.35, 'a)')
@@ -89,4 +95,6 @@ barMids <- barplot(groupMeans, ylim=c(0, 1.4),
 
 arrows(barMids, upperSE, barMids, lowerSE, ang=90, code=3, len=0.1)
 points(barMids, predVals$predict, col='red', pch=12)
+
+dev.off()
 

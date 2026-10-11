@@ -1,8 +1,14 @@
 # CHAPTER 6. LINEAR MODELS: ANALYSIS OF VARIANCE
+# Run from the coursework project root with:
+# Rscript code/anova.R
+
 # load and check the data
-mammals <- read.csv('../data/mammal_data.csv')
+mammals <- read.csv('data/mammal_data.csv', stringsAsFactors = TRUE)
 str(mammals)
 summary(mammals)
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/anova.pdf', 11, 8.5)
 
 # 1) Boxplots of C values by Trophic level
 plot(meanCvalue ~ TrophicLevel, data= mammals)
@@ -112,4 +118,9 @@ plot(TukeyGround)
 factorTable <- table(mammals$GroundDwelling, mammals$TrophicLevel )
 print(factorTable)
 chisq.test(factorTable)
+
+# Save a derived-data example without changing the supplied input data.
+save(mammals, file='results/mammals.rdata')
+
+dev.off()
 

@@ -5,13 +5,17 @@
 repository_root <- normalizePath(".")
 required_files <- c(
   "content/code/basic_io.R",
+  "content/code/anova.R",
   "content/code/data_wrang.R",
   "content/code/fmr.R",
+  "content/code/mul_expl.R",
+  "content/code/mul_expl_inter.R",
   "content/code/regress.R",
   "content/code/test_r.R",
   "content/code/test_r.py",
   "content/code/t_f_tests.R",
   "content/data/genome_size.csv",
+  "content/data/mammal_data.csv",
   "content/data/trees.csv",
   "content/data/nagy_et_al_1999.csv",
   "content/data/pound_hill_data.csv",
@@ -40,9 +44,12 @@ stopifnot(
       repository_root,
       "content/code",
       c(
+        "anova.R",
         "basic_io.R",
         "data_wrang.R",
         "fmr.R",
+        "mul_expl.R",
+        "mul_expl_inter.R",
         "regress.R",
         "test_r.R",
         "test_r.py",
@@ -58,6 +65,7 @@ stopifnot(
       "content/data",
       c(
         "genome_size.csv",
+        "mammal_data.csv",
         "trees.csv",
         "nagy_et_al_1999.csv",
         "pound_hill_data.csv",
@@ -108,6 +116,38 @@ stopifnot(file.exists(t_f_output), file.info(t_f_output)$size > 0)
 run_script("code/regress.R")
 regression_output <- file.path("results", "regression.pdf")
 stopifnot(file.exists(regression_output), file.info(regression_output)$size > 0)
+
+mammal_input <- read.csv(file.path("data", "mammal_data.csv"))
+stopifnot(
+  nrow(mammal_input) == 379L,
+  ncol(mammal_input) == 9L,
+  all(c("meanCvalue", "GroundDwelling", "TrophicLevel") %in% names(mammal_input))
+)
+
+run_script("code/anova.R")
+anova_output <- file.path("results", "anova.pdf")
+mammal_snapshot <- file.path("results", "mammals.rdata")
+stopifnot(
+  file.exists(anova_output),
+  file.info(anova_output)$size > 0,
+  file.exists(mammal_snapshot),
+  file.info(mammal_snapshot)$size > 0
+)
+snapshot_environment <- new.env(parent = emptyenv())
+loaded_objects <- load(mammal_snapshot, envir = snapshot_environment)
+stopifnot(
+  identical(loaded_objects, "mammals"),
+  "logCvalue" %in% names(snapshot_environment$mammals),
+  nrow(snapshot_environment$mammals) == nrow(mammal_input)
+)
+
+run_script("code/mul_expl.R")
+multiple_output <- file.path("results", "multiple_explanatory_variables.pdf")
+stopifnot(file.exists(multiple_output), file.info(multiple_output)$size > 0)
+
+run_script("code/mul_expl_inter.R")
+interaction_output <- file.path("results", "multiple_variables_interactions.pdf")
+stopifnot(file.exists(interaction_output), file.info(interaction_output)$size > 0)
 
 python_output <- system2(
   Sys.which("python3"),
