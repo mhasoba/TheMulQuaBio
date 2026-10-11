@@ -74,7 +74,7 @@ In a terminal, change to the **project root**, then run:
 Rscript code/r_setup_check.R
 ```
 
-The command should print `R setup check passed` and create `results/r_setup_check.png`. Starting every scripted analysis at the project root keeps paths such as `data/input.csv` and `results/figure.png` portable. Do not put a computer-specific `setwd()` in a shared script.
+The command should print `R setup check passed` and create `results/r_setup_check.png`. This is MQB's default script convention: start at the project root unless an exercise explicitly names another directory. Paths such as `data/input.csv` and `results/figure.png` are then portable. Do not put a computer-specific `setwd()` in a shared script.
 
 ## Troubleshooting evidence
 
