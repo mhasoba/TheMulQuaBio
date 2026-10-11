@@ -1,8 +1,14 @@
 # Multiple variables and interactions
-# load and check the data
-load('../data/mammals.rdata')
-ls()
+# Run from the coursework project root with:
+# Rscript code/mul_expl_inter.R
+
+# Load the supplied data and recreate the derived column used in the ANOVA chapter.
+mammals <- read.csv('data/mammal_data.csv', stringsAsFactors = TRUE)
+mammals$logCvalue <- log(mammals$meanCvalue)
 str(mammals)
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/multiple_variables_interactions.pdf', 11, 8.5)
 
 # 1) interaction model
 model <- lm(logCvalue ~ TrophicLevel * GroundDwelling, data= mammals)
@@ -26,7 +32,9 @@ print(predVals)
 
 # 3) analysis of covariance
 
-odonata <- read.csv('../data/genome_size.csv')
+odonata <- read.csv('data/genome_size.csv', stringsAsFactors = TRUE)
+odonata$genome_size <- as.numeric(as.character(odonata$GenomeSize))
+odonata$BodyWeight <- as.numeric(as.character(odonata$BodyWeight))
 odonata$logGS <- log(odonata$genome_size)
 odonata$logBW <- log(odonata$BodyWeight)
 
@@ -59,3 +67,5 @@ lines(AnisoPred$fit - AnisoPred$se.fit ~ span, col='black', lty=2)
 lines(ZygoPred$fit ~ span, col='red')
 lines(ZygoPred$fit + ZygoPred$se.fit ~ span, col='red', lty=2)
 lines(ZygoPred$fit - ZygoPred$se.fit ~ span, col='red', lty=2)
+
+dev.off()
