@@ -41,8 +41,13 @@ jobs:
           r-version: '4.3.3'
           use-public-rspm: true
 
-      - name: Check the R observations examples
-        run: Rscript scripts/check_r_observations.R
+      - name: Install R workflow dependencies
+        run: Rscript -e 'install.packages("reshape2", repos = "https://cloud.r-project.org")'
+
+      - name: Check the R examples
+        run: |
+          Rscript scripts/check_r_observations.R
+          Rscript scripts/check_r_file_workflows.R
 
       # Strict forced notebook execution is temporarily suspended. Restore it
       # through https://github.com/MulQuaBio/MQB/issues/205.
