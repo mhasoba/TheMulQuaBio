@@ -1,9 +1,8 @@
 import csv
 
-# read a file containing:
-# 'Species','Infraorder','Family','Distribution','Body mass male (Kg)'
-with open('../data/testcsv.csv','r') as f:
-    
+# Read a file containing:
+# 'Species', 'Infraorder', 'Family', 'Distribution', 'Body mass male (Kg)'
+with open('data/testcsv.csv', 'r', newline='') as f:
     csvread = csv.reader(f)
     temp = []
     for row in csvread:
@@ -11,10 +10,9 @@ with open('../data/testcsv.csv','r') as f:
         print(row)
         print("The species is", row[0])
 
-# write a file containing only species name and Body mass
-with open('../data/testcsv.csv','r') as f:
-    with open('../data/bodymass.csv','w') as g:
-
+# Write a new file containing only species name and body mass.
+with open('data/testcsv.csv', 'r', newline='') as f:
+    with open('results/bodymass.csv', 'w', newline='') as g:
         csvread = csv.reader(f)
         csvwrite = csv.writer(g)
         for row in csvread:

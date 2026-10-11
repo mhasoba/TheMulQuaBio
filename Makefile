@@ -17,3 +17,4 @@ check-content:
 	.venv/bin/python -m unittest discover -s scripts -p 'test_check*.py'
 	.venv/bin/python scripts/check_content.py
 	.venv/bin/python scripts/check_runtime_paths.py
+	.venv/bin/python scripts/check_foundational_workflows.py
