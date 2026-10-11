@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Management and Visualization &#8212; MulQuaBio</title>
+    <title>Data Management and Visualization in R &#8212; MulQuaBio</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Management and Visualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -575,7 +576,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Management and Visualization</h1>
+    <h1>Data Management and Visualization in R</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -667,33 +668,36 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-management-and-visualization">
-<h1>Data Management and Visualization<a class="headerlink" href="#data-management-and-visualization" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-management-and-visualization-in-r">
+<h1>Data Management and Visualization in R<a class="headerlink" href="#data-management-and-visualization-in-r" title="Link to this heading">#</a></h1>
 <div class="admonition-learning-goals admonition">
 <p class="admonition-title">Learning goals</p>
 <p><strong>By the end of this chapter you should be able to:</strong></p>
 <ul class="simple">
-<li><p>Apply data wrangling principles to clean and reshape messy biological datasets</p></li>
-<li><p>Import, manipulate, and export data in R using base R and tidyverse approaches</p></li>
-<li><p>Convert between wide and long data formats for different analytical purposes</p></li>
-<li><p>Create effective data visualizations using ggplot2 (scatter plots, box plots, histograms, etc.)</p></li>
-<li><p>Understand and apply principles of good data management and metadata</p></li>
-<li><p>Recognize and handle common data quality issues (missing values, inconsistent formats)</p></li>
-<li><p>Design relational databases for efficient data storage and retrieval</p></li>
+<li><p>Keep raw data, derived data, metadata and results in distinct and clearly named places</p></li>
+<li><p>Inspect a dataset’s structure, types and missing values before changing it</p></li>
+<li><p>Distinguish an observed zero from a missing observation and document how each is handled</p></li>
+<li><p>Clean, join and summarize biological data with a script whose steps you can follow and rerun</p></li>
+<li><p>Reshape data between wide and long forms when the biological question requires it</p></li>
+<li><p>Build publication quality plots</p></li>
+<li><p>Choose scales, labels and visual encodings that make a figure clear without distorting the data</p></li>
+<li><p>Save a derived table and a figure, then recreate both from the raw data after restarting R</p></li>
 </ul>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Prerequisites</p>
-<p><strong>Before starting this chapter, you should:</strong></p>
+<p>This chapter follows directly from <a class="reference internal" href="r.html"><span class="std std-doc">Biological Computing in R</span></a>. Before starting, you should be able to:</p>
 <ul class="simple">
-<li><p>Have basic familiarity with R (installing packages, running commands, using scripts)</p></li>
-<li><p>Have completed the <a class="reference internal" href="r.html"><span class="doc std std-doc">R chapter</span></a> in the Computing section</p></li>
-<li><p>Understand basic statistical concepts (mean, median, variance)</p></li>
-<li><p>Be comfortable working with file paths and directories</p></li>
+<li><p>run an R script from the root of a project containing <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> directories;</p></li>
+<li><p>create and inspect vectors and data frames, call functions, and interpret <code class="docutils literal notranslate"><span class="pre">NA</span></code>;</p></li>
+<li><p>read a CSV file, make a simple calculation and save an output; and</p></li>
+<li><p>explain the observations exercise’s distinction between missing counts and observed zeros.</p></li>
 </ul>
+<p>You will also use simple summaries such as the mean and median. They are introduced briefly where needed, but revisiting them beforehand may help.</p>
 </div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>This is the second of MQB’s two main R chapters. <a class="reference internal" href="r.html"><span class="std std-doc">Biological Computing in R</span></a> asked how to express, run and check a computation. We now turn to a new question: how do we make trustworthy data and insightful visualisations from raw observations? Bring your <code class="docutils literal notranslate"><span class="pre">observations_practice.R</span></code> script and its outputs with you. We will keep returning to the choices you made there as we move on to the richer Pound Hill dataset.</p>
 <p>Rapid advances in data collection and the digitization of historical records are generating vast and varied biological datasets. Genomic, ecosystem respiration, climatic, and animal-tracking data are prominent examples. Quantitative biology seeks to discover patterns in such data and fit mathematical models to them, but the reliability of those results depends on how observations are organized and transformed before analysis.</p>
 <p>Hadley Wickham captures the challenge of organizing data consistently:</p>
 <blockquote>
@@ -704,41 +708,48 @@
 <blockquote>
 <div><p><em>Clutter and confusion are failures of design, not attributes of information.</em> – Edward Tufte <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id8" title="Edward R. Tufte. Envisioning Information. Graphics Press, Cheshire, CT, 1990.">Tufte, 1990</a>]</span></p>
 </div></blockquote>
-<p>Effective visualization is therefore not merely decorative: its design should clarify relationships in the data without adding unnecessary distraction. This chapter follows that progression, introducing methods for data processing and storage before turning to exploration and visualization. Throughout, the emphasis is on reproducible workflows and, where datasets are large, computationally efficient techniques.</p>
+<p>Effective visualization is therefore not merely decorative: its design should clarify relationships in the data without adding unnecessary distraction. We will move from inspecting and tidying data to exploring them and making figures. Database design, very large datasets and the longer plotting examples are there for you to explore afterwards; they are not needed for the main lesson.</p>
 </section>
 <section id="data-wrangling">
 <h2>Data wrangling<a class="headerlink" href="#data-wrangling" title="Link to this heading">#</a></h2>
-<p>You are likely to spend far more time than you think dredging through data files manually – checking them, editing them, and reformatting them to make them useful for data exploration and analysis. It is often the case that you’ll have to deal with messy or incomplete data, either because of sampling challenges (e.g., “field” data), or because you got given data that was poorly recorded and maintained. The data we obtain from different data sources is often unusable at the beginning; for example you may need to:</p>
+<p>You are likely to spend far more time than you expect checking and reorganizing data before you can analyse them. Field observations may be incomplete, formats may have changed between sampling days, or somebody else may have recorded the data. Even your own notes can become surprisingly mysterious after a few months! You may need to:</p>
 <ul class="simple">
-<li><p>Identify the variables vs observations within the data—somebody else might have recorded the data, or you youself might have collected the data some time back!</p></li>
-<li><p>Fill in zeros (true measured or observed absences)</p></li>
-<li><p>Identify and add a value (e.g., <code class="docutils literal notranslate"><span class="pre">-999999</span></code>) to denote missing observations</p></li>
-<li><p>Derive or calculate new variables from the raw observations (e.g., convert measurements to SI units; kilograms, meters, seconds, etc.)</p></li>
-<li><p>Reshape/reformat your data into a layout that works best for analysis (e.g., for R itself);e.g., from wide to long data format for replicated (across plates, chambers, plots, sites, etc.) data</p></li>
-<li><p>Merge multiple datasets together into a single data sheet</p></li>
+<li><p>work out what each row, column and value represents;</p></li>
+<li><p>distinguish a measured zero from an observation that was never made;</p></li>
+<li><p>represent missing values consistently as <code class="docutils literal notranslate"><span class="pre">NA</span></code> in R, while preserving any original codes in the raw file;</p></li>
+<li><p>calculate new variables, such as measurements converted to SI units;</p></li>
+<li><p>reshape repeated measurements from wide to long form; or</p></li>
+<li><p>join information recorded in separate tables.</p></li>
 </ul>
-<p>This is not an exhaustive list. Doing so many different things to your raw data is both time-consuming and risky. Why risky? Because  to err is very human, and every new, tired mouse-click and/or keyboard-stab has a high probability of inducing an erroneous data point!</p>
+<p>This is not an exhaustive list. Every manual edit is an opportunity to change the wrong cell or lose track of what was done. A script gives you a record that can be read, checked and run again.</p>
 <p><img alt="image" src="../_images/Wrangling2.jpg" />
-<small> <center>(A (metaphorical) datum being wrangled into submission <br> Source: <a class="reference external" href="https://pathanruet.files.wordpress.com/2012/05/unix-tree.png">https://pathanruet.files.wordpress.com/2012/05/unix-tree.png</a>)</center></small></p>
+<small><center>A (metaphorical) datum being wrangled into submission.<br>Photograph: Stephen Dalton / <a class="reference external" href="https://danitadelimont.com/">Danita Delimont</a>, image reference <code class="docutils literal notranslate"><span class="pre">US38</span> <span class="pre">SDA003</span></code>.</center></small></p>
 <section id="some-data-wrangling-principles">
 <h3>Some data wrangling principles<a class="headerlink" href="#some-data-wrangling-principles" title="Link to this heading">#</a></h3>
-<p>So you would like a record of the data wrangling process (so that it  is repeatable and even reversible), and automate it to the extent  possible. To this end, here are some guidelines:</p>
+<p>Good data wrangling leaves a trail that you and somebody else can follow. A few habits make that much easier:</p>
 <ul class="simple">
-<li><p>Store data in universally (machine)-readable, non-proprietary formats; basically, use plain ASCII text for your file names, variable/field/column names, and data values. And make sure the data file’s “text encoding” is correct and standard  (e.g., <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code>).</p></li>
-<li><p>Keep a metadata file for each unique dataset (again, in  non-proprietary format).</p></li>
-<li><p>Minimize modifying raw data by hand—use scripts  instead—keep a copy of the data as they were recorded.</p></li>
-<li><p>Use meaningful names for your data and files and field (column) names</p></li>
-<li><p>When you add data, try not to add columns (widening the format); rather, design your tables/data-sheets so that you add only rows (lengthening the format)—and convert “wide format data” to “long format data” using  scripts, not by hand,</p></li>
-<li><p>All cells within a data column should contain only one type of information (i.e., either text (character), numeric, etc.).</p></li>
-<li><p>Ultimately, consider creating a relational database for your data (More on this below).</p></li>
+<li><p>Store tables in widely readable formats such as CSV, using UTF-8 text.</p></li>
+<li><p>Keep metadata with each dataset, including what the fields mean, their units and how missing values were recorded.</p></li>
+<li><p>Keep the raw files unchanged. Put cleaning and reshaping steps in a script, and save derived tables separately.</p></li>
+<li><p>Use short, meaningful names for files and columns, and use them consistently.</p></li>
+<li><p>Prefer one observation per row. When field recording requires a wide table, reshape it with code rather than copying and pasting cells.</p></li>
+<li><p>Keep one kind of information in each column, so that a numeric column does not also contain notes or units.</p></li>
+<li><p>Write derived tables and figures to <code class="docutils literal notranslate"><span class="pre">results/</span></code>, so that they can be recreated without altering <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
 </ul>
-<p>This is not an exhaustive list either— see the <a class="reference internal" href="#Readings-&amp;-Resources"><span class="xref myst">Readings &amp; Resources Section</span></a>.</p>
-<p>We will use the Pound Hill dataset collected by students in a past Silwood Field Course for understanding some of these  principles.</p>
-<p>To start with, we need to import the <em>raw</em> data file, for which, follow these steps:</p>
-<p>★ Copy the <code class="docutils literal notranslate"><span class="pre">pound_hill_data.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">pound_hill_meta_data.csv</span></code> files from the MQB repository’s <code class="docutils literal notranslate"><span class="pre">data</span></code> directory into your coursework project’s <code class="docutils literal notranslate"><span class="pre">data</span></code> directory, following the <a class="reference internal" href="unix.html#building-your-coursework-directory-structure"><span class="std std-ref">coursework-directory guidance</span></a>. Then load the data in R:</p>
+<p>This is not an exhaustive list either—see <a class="reference internal" href="#data-r-readings"><span class="std std-ref">Readings &amp; Resources</span></a> for more.</p>
+<p>We will explore these ideas using the Pound Hill dataset, collected by students on a past Silwood field course.</p>
+<p>Continue with the same coursework project and starting point used in the <a class="reference internal" href="r.html#your-analysis-workflow"><span class="std std-ref">R chapter</span></a>. Download the <a class="reference download internal" download="" href="../_downloads/c14bb22a50a570bbd12f60c9d0b64db2/pound_hill_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">Pound</span> <span class="pre">Hill</span> <span class="pre">data</span></code></a> and its <a class="reference download internal" download="" href="../_downloads/821be5002cdaa8255040b23e38313e5c/pound_hill_meta_data.csv"><code class="xref download docutils literal notranslate"><span class="pre">metadata</span></code></a> into your project’s <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. Start R from the <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a>, where <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> sit alongside one another. Before running the notebook examples, check that R is using that folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/pound_hill_data.csv"</span><span class="p">,</span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">getwd</span><span class="p">()</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">file.exists</span><span class="p">(</span><span class="s">"data/pound_hill_data.csv"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/pound_hill_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
 <span class="nf">class</span><span class="p">(</span><span class="n">MyData</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -753,18 +764,13 @@
 </div></div>
 </div>
 <ul class="simple">
-<li><p>Loading the data <code class="docutils literal notranslate"><span class="pre">as.matrix()</span></code>, and setting <code class="docutils literal notranslate"><span class="pre">header=FALSE</span></code> guarantees that the data are imported “as is” so that you can wrangle them. Otherwise <code class="docutils literal notranslate"><span class="pre">read.csv</span></code> will convert the first row to column headers.</p></li>
-<li><p>All the data will be converted to the character class in the resulting matrix called <code class="docutils literal notranslate"><span class="pre">MyData</span></code> because at least one of the entries is already character class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span> <span class="pre">=</span> <span class="pre">FALSE</span></code> tells R that the first row belongs to the data rather than treating it as column names. We will inspect and reorganize those rows ourselves.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">as.matrix()</span></code> gives every cell one common type. Because the first column contains species names, all values in <code class="docutils literal notranslate"><span class="pre">MyData</span></code> are character strings at this point. We will convert the counts only after reshaping the table.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As of R version 4.0.0 of R released in April 2020, the default for
-<code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span></code> <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-devel/NEWS.html">was changed to false</a> If you are using R version 3.x.x, you will need to add <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">FALSE</span></code> to the above command to prevent R from converting all columns of character type (strings) to the <code class="docutils literal notranslate"><span class="pre">factor</span></code> data type (this will create problems with subsequent data wrangling).</p>
-</div>
 <p>★ Now load the Metadata:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyMetaData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/pound_hill_meta_data.csv"</span><span class="p">,</span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">  </span><span class="n">sep</span><span class="o">=</span><span class="s">";"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyMetaData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/pound_hill_meta_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">";"</span><span class="p">)</span>
 <span class="nf">class</span><span class="p">(</span><span class="n">MyMetaData</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -780,9 +786,9 @@
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong>The text encoding of your data file:</strong> If you have a string (<code class="docutils literal notranslate"><span class="pre">character</span></code> data type) stored as a variable in your R workspace, or a file containing strings, the computer has to know what <a class="reference external" href="https://en.wikipedia.org/wiki/Character_encoding">character  encoding</a> it is in or it cannot interpret or display it to you correctly. Usually, the encoding will be UTF-8 or ASCII, which is easily handled by most computer languages. Sometimes you may run into (unexpected) bugs when importing and running scripts in <code class="docutils literal notranslate"><span class="pre">R</span></code> because your file has a non-standard text encoding. You will need to specify the encoding in that case, using the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument of <code class="docutils literal notranslate"><span class="pre">read.csv()</span></code> and <code class="docutils literal notranslate"><span class="pre">read.table()</span></code>. You can check the encoding of a file by using <code class="docutils literal notranslate"><span class="pre">file</span></code> in Linux/Mac. Try in your UNIX terminal:</p>
-<p><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-i</span> <span class="pre">../data/pound_hill_data.csv</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-i</span> <span class="pre">data/pound_hill_data.csv</span></code></p>
 <p>or, check encoding of all files in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory:</p>
-<p><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-i</span> <span class="pre">../data/*.csv</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-i</span> <span class="pre">data/*.csv</span></code></p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-I</span></code> instead of <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-i</span></code> in a Mac terminal.</p>
 </div>
 <p>Let’s see what the metadata look like:</p>
@@ -833,11 +839,8 @@
 </table>
 </div></div>
 </div>
-<p>Note that column names V1-V60 were generated automatically by R when you imported the data</p>
-<p>In RStudio you can also do <code class="docutils literal notranslate"><span class="pre">view(MyData)</span></code> at the R prompt or any other code editor, <code class="docutils literal notranslate"><span class="pre">fix(MyData)</span></code>. We won’t do anything with the metadata file in this session except inspect the information it contains.</p>
-<p>Now let’s implement some of the key data wrangling principles listed above on this dataset. You should keep a record of what you are doing to the data using a R script file. This is illustrated in the <code class="docutils literal notranslate"><span class="pre">DataWrang.R</span></code> script file.</p>
-<p>★ Copy the script <code class="docutils literal notranslate"><span class="pre">DataWrang.R</span></code> into your own R training directory’s <code class="docutils literal notranslate"><span class="pre">code</span></code> directory and open it.</p>
-<p>Go through the script carefully line by line, and make sure you understand what’s going on. Read the comments — add to them if you want.</p>
+<p>R generated the temporary names <code class="docutils literal notranslate"><span class="pre">V1</span></code> to <code class="docutils literal notranslate"><span class="pre">V60</span></code> because we deliberately imported the file without a header. Use <code class="docutils literal notranslate"><span class="pre">head()</span></code>, <code class="docutils literal notranslate"><span class="pre">dim()</span></code> and <code class="docutils literal notranslate"><span class="pre">str()</span></code> to inspect objects in a way that also works in a script. We will use the metadata now to understand the fields, even though it is not joined to the data table.</p>
+<p>Keep a record of every change in an R script. Download <a class="reference download internal" download="" href="../_downloads/8ba6cf87548250d0e33c510babbe8f2b/data_wrang.R"><code class="xref download docutils literal notranslate"><span class="pre">data_wrang.R</span></code></a> into your project’s <code class="docutils literal notranslate"><span class="pre">code</span></code> directory and read it alongside the examples below. Run it from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/data_wrang.R</span></code>. Add comments in your own words as you work through it.</p>
 <p>OK, so onward with our data wrangling.</p>
 <section id="keep-a-metadata-file-for-each-unique-dataset">
 <h4>Keep a metadata file for each unique dataset<a class="headerlink" href="#keep-a-metadata-file-for-each-unique-dataset" title="Link to this heading">#</a></h4>
@@ -845,12 +848,12 @@
 <p>Have a look at the metadata file for the Pound Hill dataset:</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>Boolean arguments in R</strong>: In <code class="docutils literal notranslate"><span class="pre">R</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> respectively. To see this, type</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="bp">T</span>
+<p><strong>Boolean values in R:</strong> Write <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> in full. R also recognizes <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code>, but they can be reassigned and make mistakes harder to spot. To see the boolean value itself, type</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
 </pre></div>
 </div>
 </div>
-<p>in the R commandline, and then see what R returns when you type <code class="docutils literal notranslate"><span class="pre">a</span></code>. Using <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> respectively is not necessarily good practice, but be aware that this option exists.</p>
+<p>in the R console, then type <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -881,12 +884,11 @@
 </section>
 <section id="minimize-modifying-raw-data-by-hand">
 <h4>Minimize modifying raw data by hand<a class="headerlink" href="#minimize-modifying-raw-data-by-hand" title="Link to this heading">#</a></h4>
-<p>When the dataset is large (e.g., 1000’s of rows), cleaning and exploring it can get tricky, and you are very likely to make many mistakes. You should record all the steps you used to process it with an R script rather than risking a manual and basically <em>irreproducible</em> processing. Most importantly, <em>avoid or minimize editing your raw data
-file</em>—make a copy (with a meaningful tag in the file name to indicate the date and author) before making hand edits.</p>
-<p>All blank cells in the data are <em>true absences</em>, in the sense that species was actually not present in that quadrat. So we can replace those blanks with zeros:</p>
+<p>Large datasets make manual cleaning especially error-prone. Record the steps in an R script and leave the raw file unchanged, so that you can start again if a decision turns out to be wrong.</p>
+<p>A blank is not automatically a zero. In the observations exercise, a blank count meant <code class="docutils literal notranslate"><span class="pre">NA</span></code> because nobody knew the value. For this particular Pound Hill exercise, we have been told that each blank records a quadrat where the species was looked for but not found. Only because we know that sampling detail can we turn these blanks into observed zeros. This decision should also be recorded in the metadata:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="p">[</span><span class="n">MyData</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">""</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="p">[</span><span class="n">MyData</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">""</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
 </pre></div>
 </div>
 </div>
@@ -900,7 +902,7 @@ file</em>—make a copy (with a meaningful tag in the file name to indicate the 
 <li><p>Long-form datasets are typically required for statistical analysis and visualization packages or commands in R (or Python, for that matter). For example, if you wanted to fit a linear model using R’s <code class="docutils literal notranslate"><span class="pre">lm()</span></code> command, with treatment (cultivation month) as the independent variable, you would need to structure your data in long form. Similarly, and if you wanted to plot histograms of species numbers by treatment using ggplot (coming up), you would also need these data in long format.</p></li>
 </ul>
 <p><em>OK, so let’s go from wide to long format already!</em></p>
-<p>You can switch between wide and long formats using <code class="docutils literal notranslate"><span class="pre">melt()</span></code> and <code class="docutils literal notranslate"><span class="pre">dcast()</span></code> from the <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> package, as illustrated in the script <code class="docutils literal notranslate"><span class="pre">DataWrang.R</span></code> available at <a class="reference external" href="https://github.com/MulQuaBio/MQB/tree/main/content/code">MQB repository</a>. But first, let’s transpose the data, because for a long format, the (nested) treatments variables should be in rows:</p>
+<p>You can switch between wide and long formats using <code class="docutils literal notranslate"><span class="pre">melt()</span></code> and <code class="docutils literal notranslate"><span class="pre">dcast()</span></code> from the <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> package, as illustrated in <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code>. But first, let’s transpose the data, because for a long format, the nested treatment variables should be in rows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">MyData</span><span class="p">)</span><span class="w"> </span>
@@ -938,7 +940,7 @@ file</em>—make a copy (with a meaningful tag in the file name to indicate the 
 <p>We need to fix this. Also, we would like to create a dataframe now, as this is needed by the R commands we will be using, and ultimately, any visualization and analysis we will be doing. To this end, let’s first create a temporary dataframe with just the data, without the column names:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">TempData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">-1</span><span class="p">,],</span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">TempData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">-1</span><span class="p">,],</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">TempData</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -961,7 +963,7 @@ file</em>—make a copy (with a meaningful tag in the file name to indicate the 
 </table>
 </div></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">F</span></code> is important here because we don’t want R to convert columns to the factor class without supervision. This might be a good idea in may cases, but let’s just do it manually later. This will also force you to think carefully about what data each of you columns contains.</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">FALSE</span></code> stops R from automatically converting text columns to factors. We will make any factor conversions ourselves later, after checking what each column contains.</p>
 <p>Now let’s assign the original column names to the temporary dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1475,7 +1477,7 @@ $ Count       &lt;int&gt; 4, 8, 3, 20, 6, 4, 0, 0, 0, 0, 1, 2, 5, 12, 2, 0, 0, 0
 </section>
 <section id="practical-data-wrangling-with-tidyverse">
 <h2>Practical: data wrangling with <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code><a class="headerlink" href="#practical-data-wrangling-with-tidyverse" title="Link to this heading">#</a></h2>
-<p>We used <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> in <code class="docutils literal notranslate"><span class="pre">DataWrang.R</span></code> for wrangling that dataset. Write a new script called <code class="docutils literal notranslate"><span class="pre">DataWrangTidy.R</span></code> that uses <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> (and specifically, <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> and <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>) for the same data wrangling steps. The best way to do this is to copy <code class="docutils literal notranslate"><span class="pre">DataWrang.R</span></code> and rename it <code class="docutils literal notranslate"><span class="pre">DataWrangTidy.R</span></code>. Then systematically redo the script from start to end, looking for a function in <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> and <code class="docutils literal notranslate"> <span class="pre">tidyr</span></code> that does the same thing in each wrangling step.</p>
+<p>We used <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> in <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code> for wrangling that dataset. Write a new script called <code class="docutils literal notranslate"><span class="pre">data_wrang_tidy.R</span></code> that uses <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> (and specifically <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> and <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>) for the same steps. Begin with a copy of <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code>, then work through it from start to finish, finding the corresponding <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> or <code class="docutils literal notranslate"><span class="pre">tidyr</span></code> operation at each step.</p>
 <p>For example, to convert from wide to long format, instead of using <code class="docutils literal notranslate"> <span class="pre">melt()</span></code> (or <code class="docutils literal notranslate"><span class="pre">dcast()</span></code>) from the <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> package, you can use <code class="docutils literal notranslate"><span class="pre">gather()</span></code> from <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>.</p>
 <p>Don’t forget the <a class="reference external" href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a>, an particular the <a class="reference external" href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">Data Transformation Cheatsheet</a>.</p>
 </section>
@@ -1556,7 +1558,7 @@ you have realized by now that <code class="docutils literal notranslate"><span c
 <p><span class="math notranslate nohighlight">\(\star\)</span> Copy <code class="docutils literal notranslate"><span class="pre">ecol_archives_e_089_51_d_1.csv</span></code> from the MQB <code class="docutils literal notranslate"><span class="pre">data</span></code> to your own data directory. Then, launch R and read in these data to a data frame (note the relative path):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyDF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/ecol_archives_e_089_51_d_1.csv"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyDF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/ecol_archives_e_089_51_d_1.csv"</span><span class="p">)</span>
 <span class="nf">dim</span><span class="p">(</span><span class="n">MyDF</span><span class="p">)</span><span class="w"> </span><span class="c1">#check the size of the data frame you loaded</span>
 </pre></div>
 </div>
@@ -1859,7 +1861,7 @@ distributions of the two variables.</p>
 <span class="w">    </span><span class="n">xlab</span><span class="o">=</span><span class="s">"log10(Body Mass (g))"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Count"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="c1"># Note 'rgb', fourth value is transparency</span>
 <span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Predator-prey size Overlap"</span><span class="p">)</span><span class="w"> </span>
-<span class="nf">hist</span><span class="p">(</span><span class="nf">log10</span><span class="p">(</span><span class="n">MyDF</span><span class="o">$</span><span class="n">Prey.mass</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span><span class="w"> </span><span class="c1"># Plot prey</span>
+<span class="nf">hist</span><span class="p">(</span><span class="nf">log10</span><span class="p">(</span><span class="n">MyDF</span><span class="o">$</span><span class="n">Prey.mass</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Plot prey</span>
 <span class="nf">legend</span><span class="p">(</span><span class="s">'topleft'</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">'Predators'</span><span class="p">,</span><span class="s">'Prey'</span><span class="p">),</span><span class="w">   </span><span class="c1"># Add legend</span>
 <span class="w">    </span><span class="n">fill</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)))</span><span class="w"> </span><span class="c1"># Define legend colors</span>
 </pre></div>
@@ -1960,13 +1962,13 @@ While they show less detail than a full distribution plot (since they hide the s
 clicking on the figure, doing “save as”, etc. So let’s save the figure as a PDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pdf</span><span class="p">(</span><span class="s">"../results/Pred_Prey_Overlay.pdf"</span><span class="p">,</span><span class="w"> </span><span class="c1"># Open blank pdf page using a relative path</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pdf</span><span class="p">(</span><span class="s">"results/Pred_Prey_Overlay.pdf"</span><span class="p">,</span><span class="w"> </span><span class="c1"># Open a PDF file under results/</span>
 <span class="w">    </span><span class="m">11.7</span><span class="p">,</span><span class="w"> </span><span class="m">8.3</span><span class="p">)</span><span class="w"> </span><span class="c1"># These numbers are page dimensions in inches</span>
 <span class="nf">hist</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">MyDF</span><span class="o">$</span><span class="n">Predator.mass</span><span class="p">),</span><span class="w"> </span><span class="c1"># Plot predator histogram (note 'rgb')</span>
 <span class="w">    </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Body Mass (g)"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Count"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Predator-Prey Size Overlap"</span><span class="p">)</span><span class="w"> </span>
 <span class="nf">hist</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">MyDF</span><span class="o">$</span><span class="n">Prey.mass</span><span class="p">),</span><span class="w"> </span><span class="c1"># Plot prey weights</span>
 <span class="w">    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span><span class="w">  </span><span class="c1"># Add to same plot = TRUE</span>
+<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">  </span><span class="c1"># Add to the same plot</span>
 <span class="nf">legend</span><span class="p">(</span><span class="s">'topleft'</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">'Predators'</span><span class="p">,</span><span class="s">'Prey'</span><span class="p">),</span><span class="w"> </span><span class="c1"># Add legend</span>
 <span class="w">    </span><span class="n">fill</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)))</span><span class="w"> </span>
 <span class="nf">graphics.off</span><span class="p">();</span><span class="w"> </span><span class="c1">#you can also use dev.off() </span>
@@ -1975,14 +1977,14 @@ clicking on the figure, doing “save as”, etc. So let’s save the figure as 
 </div>
 </div>
 <p>Always try to save results in a vector format, which can be scaled up to any size. For more on vector vs raster images/graphics, <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_graphics">see this</a>.</p>
-<p>Note that you are saving to the <code class="docutils literal notranslate"><span class="pre">results</span></code> directory now. This is a recommended project organization and workflow: store and retrieve data from a <code class="docutils literal notranslate"> <span class="pre">Data</span></code> directory, keep your code and work from a <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory, and save outputs to a <code class="docutils literal notranslate"><span class="pre">results</span></code> directory.</p>
+<p>The figure is saved under <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Keep source data in <code class="docutils literal notranslate"><span class="pre">data/</span></code>, scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, and generated tables and figures in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Because every command is run from the project root, the same paths work in this chapter and in the preceding R chapter.</p>
 <p>You can also try other graphic output formats. For example, <code class="docutils literal notranslate"><span class="pre">png()</span></code> (a raster format) instead of <code class="docutils literal notranslate"><span class="pre">pdf()</span></code>. As always, look at the help documentation of each of these commands!</p>
 </section>
 </section>
 <section id="practical-body-mass-distributions">
 <h2>Practical: body-mass distributions<a class="headerlink" href="#practical-body-mass-distributions" title="Link to this heading">#</a></h2>
 <p>Write a script that draws and saves three figures, each containing subplots of distributions of predator mass, prey mass, and the size ratio of prey mass over predator mass <em>by feeding interaction type</em>. Use logarithms of masses (or size ratios)for all three plots. In addition, the script should calculate the (log) mean and median predator mass, prey mass and predator-prey size-ratios to a csv file.</p>
-<p>Call the script <code class="docutils literal notranslate"><span class="pre">PP_Dists.R</span></code> and save it in the <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory — sourcing or running this script should result in three files called <code class="docutils literal notranslate"><span class="pre">Pred_Subplots.pdf</span></code>, <code class="docutils literal notranslate"> <span class="pre">Prey_Subplots.pdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">SizeRatio_Subplots.pdf</span></code> (the names should be self-explanatory), and a single csv file <code class="docutils literal notranslate"><span class="pre">PP_Results.csv</span></code> containing the mean and median log predator mass, prey mass, and predator-prey size ratio, by feeding type. The csv file should have appropriate headers (e.g., Feeding type, Mean, Median). (Hint: you will have to initialize a new dataframe or matrix in the script to first store the calculations)</p>
+<p>Call the script <code class="docutils literal notranslate"><span class="pre">PP_Dists.R</span></code> and save it in <code class="docutils literal notranslate"><span class="pre">code/</span></code>. Running it from the project root should create three files—<code class="docutils literal notranslate"><span class="pre">Pred_Subplots.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">Prey_Subplots.pdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">SizeRatio_Subplots.pdf</span></code>—and a CSV file called <code class="docutils literal notranslate"><span class="pre">PP_Results.csv</span></code> under <code class="docutils literal notranslate"><span class="pre">results/</span></code>. The CSV file should contain the mean and median log predator mass, prey mass, and predator-prey size ratio by feeding type, with clear column names. You will need to create a data frame or matrix to hold these calculations before writing them.</p>
 <p>The script should be self-sufficient and not need any external inputs. It should import the above predator-prey dataset from the appropriate directory, and save the graphic plots to the appropriate directory (Hint: use relative paths!).</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">par()</span></code> function to create the subplots. For calculating the body size statistics by feeding type, you can either use the “loopy” way — first obtaining a list of feeding types (look up the <code class="docutils literal notranslate"><span class="pre">unique</span></code> or <code class="docutils literal notranslate"><span class="pre">levels</span></code> functions) and then loop over them, using <code class="docutils literal notranslate"><span class="pre">subset</span></code> to extract the dataset by feeding type at each iteration, or the R-savvy way, by using <code class="docutils literal notranslate"><span class="pre">tapply</span></code> or <code class="docutils literal notranslate"><span class="pre">ddply</span></code> and avoiding looping altogether. You can also use tidyverse and <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> for the data manipulations.</p>
 </section>
@@ -2443,7 +2445,7 @@ idea of the spread:</p>
 <p>Finally, let’s save a pdf file of the figure (same approach as we <a class="reference internal" href="#Saving-your-graphics"><span class="xref myst">used before</span></a>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pdf</span><span class="p">(</span><span class="s">"../results/MyFirst-ggplot2-Figure.pdf"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pdf</span><span class="p">(</span><span class="s">"results/MyFirst-ggplot2-Figure.pdf"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="nf">qplot</span><span class="p">(</span><span class="n">Prey.mass</span><span class="p">,</span><span class="w"> </span><span class="n">Predator.mass</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyDF</span><span class="p">,</span><span class="n">log</span><span class="o">=</span><span class="s">"xy"</span><span class="p">,</span>
 <span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Relation between predator and prey mass"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log(Prey mass) (g)"</span><span class="p">,</span><span class="w"> </span>
@@ -2503,7 +2505,7 @@ idea of the spread:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the data</span>
-<span class="n">MyDF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/ecol_archives_e_089_51_d_1.csv"</span><span class="p">))</span>
+<span class="n">MyDF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/ecol_archives_e_089_51_d_1.csv"</span><span class="p">))</span>
 
 <span class="c1"># barplot</span>
 <span class="nf">qplot</span><span class="p">(</span><span class="n">Predator.lifestage</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyDF</span><span class="p">,</span><span class="w"> </span><span class="n">geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"bar"</span><span class="p">)</span>
@@ -2789,7 +2791,7 @@ idea of the spread:</p>
 </a>
 </div>
 </div>
-<p>For more fine-tuned faceting, look up the <code class="docutils literal notranslate"><span class="pre">facet_grid()</span></code> and <code class="docutils literal notranslate"><span class="pre">facet_wrap()</span></code> functions within <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>. Look up this variant of the <a class="reference external" href="http://www.cookbook-r.com/Graphs">R Cookbook</a> for more examples.</p>
+<p>For more fine-tuned faceting, look up the <code class="docutils literal notranslate"><span class="pre">facet_grid()</span></code> and <code class="docutils literal notranslate"><span class="pre">facet_wrap()</span></code> functions within <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>. The <a class="reference external" href="http://www.cookbook-r.com/Graphs">R Graphics Cookbook</a> has more examples.</p>
 </section>
 <section id="some-useful-ggplot-examples">
 <h3>Some useful ggplot examples<a class="headerlink" href="#some-useful-ggplot-examples" title="Link to this heading">#</a></h3>
@@ -3006,7 +3008,7 @@ idea of the spread:</p>
 <p>In this example, we will use the ggplot <code class="docutils literal notranslate"><span class="pre">geom</span></code> <code class="docutils literal notranslate"><span class="pre">text</span></code> to annotate a plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">"../data/results.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">"data/results.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3155,7 +3157,7 @@ Warning message:
 </section>
 <section id="ggthemes">
 <h3>ggthemes<a class="headerlink" href="#ggthemes" title="Link to this heading">#</a></h3>
-<p>The package <code class="docutils literal notranslate"><span class="pre">ggthemes</span></code> provides you some additional <code class="docutils literal notranslate"><span class="pre">geom</span></code>s, <code class="docutils literal notranslate"> <span class="pre">scale</span></code>s, and <code class="docutils literal notranslate"><span class="pre">theme</span></code>s for <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>. These include a theme based on Tufte’s <em>The Visual Display of Quantitative Information</em> (see <a class="reference internal" href="#Readings-&amp;-Resources"><span class="xref myst">suggested readings</span></a>).</p>
+<p>The package <code class="docutils literal notranslate"><span class="pre">ggthemes</span></code> provides you some additional <code class="docutils literal notranslate"><span class="pre">geom</span></code>s, <code class="docutils literal notranslate"> <span class="pre">scale</span></code>s, and <code class="docutils literal notranslate"><span class="pre">theme</span></code>s for <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>. These include a theme based on Tufte’s <em>The Visual Display of Quantitative Information</em> (see <a class="reference internal" href="#data-r-readings"><span class="std std-ref">Readings &amp; Resources</span></a>).</p>
 <p>Let’s try this package. First install it:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"ggthemes"</span><span class="p">)</span>
 </pre></div>
@@ -3198,7 +3200,7 @@ Write a script that generates this figure
 </center></small></p>
 <p><em>Guidelines</em>:</p>
 <ul class="simple">
-<li><p>Write a <code class="docutils literal notranslate"><span class="pre">R</span></code> script file called <code class="docutils literal notranslate"><span class="pre">PP_Regress.R</span></code> and save it in the <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory. Sourcing or running this
+<li><p>Write an R script called <code class="docutils literal notranslate"><span class="pre">PP_Regress.R</span></code> and save it in the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Running this
 script should result in one pdf file containing the following figure being saved in the <code class="docutils literal notranslate"><span class="pre">results</span></code> directory: (Hint: Use the <code class="docutils literal notranslate"><span class="pre">print()</span></code> command to write to the pdf)</p></li>
 <li><p>In addition, the script should calculate the regression results corresponding to the lines fitted in the figure and save it to a csv delimited table called (<code class="docutils literal notranslate"><span class="pre">PP_Regress_Results.csv</span></code>), in the <code class="docutils literal notranslate"><span class="pre">results</span></code> directory. (Hint: you will have to initialize a new dataframe in the script to first store the calculations and then <code class="docutils literal notranslate"><span class="pre">write.csv()</span></code> or <code class="docutils literal notranslate"><span class="pre">write.table()</span></code> it.)</p></li>
 <li><p>All that you are being asked for here is results of an analysis of Linear regression on subsets of the data corresponding to available Feeding Type <span class="math notranslate nohighlight">\(\times\)</span> Predator life Stage combination — not a multivariate linear model with these two as separate covariates!</p></li>
@@ -3231,7 +3233,7 @@ script should result in one pdf file containing the following figure being saved
 </section>
 </section>
 <section id="readings-resources">
-<h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Link to this heading">#</a></h2>
+<span id="data-r-readings"></span><h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Link to this heading">#</a></h2>
 <p>Check out <em>DataDataData!</em>, <em>Visualization</em> and <em>R</em>, under <a class="reference external" href="https://github.com/MulQuaBio/MQB/tree/main/content/readings"><em>readings</em> on the MQB repository</a>.</p>
 <section id="data-management-reformatting-and-cleaning">
 <h3>Data management, reformatting and cleaning<a class="headerlink" href="#data-management-reformatting-and-cleaning" title="Link to this heading">#</a></h3>

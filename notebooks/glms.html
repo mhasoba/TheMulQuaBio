@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -752,10 +753,10 @@
 <p>The data file is called <code class="docutils literal notranslate"><span class="pre">prac_data.csv</span></code> (so it’s a comma-separated values file), and is available from MQB’s  <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Save the <code class="docutils literal notranslate"><span class="pre">prac_data.csv</span></code> dataset into your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Create a new script called MyGLM.R in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Use the code below to load and check your data.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Start r and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Start R and change the working directory to <code class="docutils literal notranslate"><span class="pre">code</span></code>, and read in the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/prac_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">colonies</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/prac_data.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">colonies</span><span class="p">)</span>
 </pre></div>
@@ -916,7 +917,7 @@
 <ol class=list-inline><li>TRUE</li><li>TRUE</li><li>FALSE</li><li>FALSE</li><li>FALSE</li><li>TRUE</li><li>TRUE</li><li>TRUE</li><li>FALSE</li><li>FALSE</li><li>FALSE</li><li>TRUE</li></ol>
 </div></div>
 </div>
-<p>This is because concatenating the variable names <code class="docutils literal notranslate"><span class="pre">&quot;Control&quot;</span></code> and  <code class="docutils literal notranslate"><span class="pre">&quot;NG&quot;</span></code> using <code class="docutils literal notranslate"><span class="pre">c()</span></code> forces r to match only pairs in that sequence, and not just that, but also only search in successive blocks of two entries. That is why above, the sub-sequence <code class="docutils literal notranslate"><span class="pre">'Control'</span> <span class="pre">'NG'</span> <span class="pre">'NG'</span> <span class="pre">'Control'</span> <span class="pre">'NG'</span></code> still returns <code class="docutils literal notranslate"><span class="pre">TRUE</span> <span class="pre">TRUE</span> <span class="pre">FALSE</span> <span class="pre">FALSE</span> <span class="pre">FALSE</span></code>, as the second occurrence of the pair <code class="docutils literal notranslate"><span class="pre">'Control'</span> <span class="pre">'NG'</span></code> comes in an odd location, following a single <code class="docutils literal notranslate"><span class="pre">'NG'</span></code>.</p>
+<p>This is because concatenating the variable names <code class="docutils literal notranslate"><span class="pre">&quot;Control&quot;</span></code> and  <code class="docutils literal notranslate"><span class="pre">&quot;NG&quot;</span></code> using <code class="docutils literal notranslate"><span class="pre">c()</span></code> forces R to match only pairs in that sequence, and not just that, but also only search in successive blocks of two entries. That is why above, the sub-sequence <code class="docutils literal notranslate"><span class="pre">'Control'</span> <span class="pre">'NG'</span> <span class="pre">'NG'</span> <span class="pre">'Control'</span> <span class="pre">'NG'</span></code> still returns <code class="docutils literal notranslate"><span class="pre">TRUE</span> <span class="pre">TRUE</span> <span class="pre">FALSE</span> <span class="pre">FALSE</span> <span class="pre">FALSE</span></code>, as the second occurrence of the pair <code class="docutils literal notranslate"><span class="pre">'Control'</span> <span class="pre">'NG'</span></code> comes in an odd location, following a single <code class="docutils literal notranslate"><span class="pre">'NG'</span></code>.</p>
 <p>Now, let’s do the subsetting using <code class="docutils literal notranslate"><span class="pre">%in%</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -957,7 +958,7 @@
 </div>
 </div>
 </div>
-<p>You’ll see that, although we have removed two treatments, their names still appear in the list of levels in the <code class="docutils literal notranslate"><span class="pre">str</span></code> output. r retains a list of all the levels that were originally in a factor, even when those levels aren’t used any more. This will be annoying later, so
+<p>You’ll see that, although we have removed two treatments, their names still appear in the list of levels in the <code class="docutils literal notranslate"><span class="pre">str</span></code> output. R retains a list of all the levels that were originally in a factor, even when those levels aren’t used any more. This will be annoying later, so
 we’ll use the <code class="docutils literal notranslate"><span class="pre">droplevels</span></code> function to strip them out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1331,7 +1332,7 @@ colonies?</p>
 </section>
 <section id="reporting-the-model">
 <h3>Reporting the model<a class="headerlink" href="#reporting-the-model" title="Link to this heading">#</a></h3>
-<p>reporting complicated statistics is a difficult business. There is a lot of detail involved and you want the reader to understand what you have done well enough to repeat the analysis if needed. You also have to summarise and explain the results without pages of r output.</p>
+<p>reporting complicated statistics is a difficult business. There is a lot of detail involved and you want the reader to understand what you have done well enough to repeat the analysis if needed. You also have to summarise and explain the results without pages of R output.</p>
 <p>Here are some pointers:</p>
 <ul class="simple">
 <li><p>What does the data show? Present a graph or a table to show the data you are about to model. <em>Always</em> include a figure or table legend and <em>always</em> refer to that figure or legend from the text.</p></li>

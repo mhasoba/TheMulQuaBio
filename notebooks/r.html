@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -624,7 +625,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-and-pasting">Strings and Pasting</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-r-functions">Useful r functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-r-functions">Useful R functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-manipulating-strings">For manipulating strings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical">Mathematical</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical">Statistical</a></li>
@@ -636,7 +637,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-analysis-workflow">Your analysis workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-r-workspace-and-working-directory">The r Workspace and Working Directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-r-workspace-and-working-directory">The R workspace and working directory</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-exporting-data">Importing and Exporting Data</a><ul class="nav section-nav flex-column">
@@ -644,7 +645,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-to-and-saving-files">Writing to and saving files</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-code">Writing r code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-code">Writing R code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-r-code">Running R code</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-source">Using <code class="docutils literal notranslate"><span class="pre">source</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rscript">Using <code class="docutils literal notranslate"><span class="pre">Rscript</span></code></a></li>
@@ -662,8 +663,8 @@
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-functions">Writing r Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-r-function">Your first r function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-functions">Writing R Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-r-function">Your first R function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-conditionals">Functions with conditionals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-utility-function">An example utility function</a></li>
 </ul>
@@ -699,6 +700,13 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own">Building your own</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-observations-practice">The observations practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guided-read-inspect-and-decide-what-counts-as-valid">Guided: read, inspect, and decide what counts as valid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guided-validate-before-calculating">Guided: validate before calculating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-deduplicate-and-summarise">Independent: deduplicate and summarise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#critique-and-compare">Critique and compare</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-data-practicals">Climate-data practicals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-is-florida-getting-warmer">Practical: is Florida getting warmer?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-practical-autocorrelation-in-florida-weather">Group practical: autocorrelation in Florida weather</a></li>
@@ -728,17 +736,17 @@
 <p class="admonition-title">Learning goals</p>
 <p><strong>By the end of this chapter you should be able to:</strong></p>
 <ul class="simple">
-<li><p>Describe a simple algorithm and check its R implementation against an expected result</p></li>
-<li><p>Write and execute R scripts and understand R syntax</p></li>
-<li><p>Work with R data structures (vectors, matrices, data frames, lists)</p></li>
-<li><p>Import, manipulate, and export data in R</p></li>
-<li><p>Write and use functions in R</p></li>
-<li><p>Implement control flow (conditionals, loops) in R</p></li>
-<li><p>Use vectorization for efficient computation</p></li>
-<li><p>Create publication-quality graphics using base R and ggplot2</p></li>
-<li><p>Debug R code and understand error messages</p></li>
-<li><p>Use R packages and understand package management</p></li>
-<li><p>Develop reproducible data analysis workflows in R</p></li>
+<li><p>Turn a simple biological question into an algorithm and check the result against an expected answer</p></li>
+<li><p>Write and run a self-contained R script from the root of a project</p></li>
+<li><p>Create, inspect and subset vectors, matrices, data frames and lists</p></li>
+<li><p>Use vectorized operations to calculate with several values at once</p></li>
+<li><p>Import a table, inspect its types and missing values, check simple assumptions and write a result</p></li>
+<li><p>Write functions that take arguments and return useful values</p></li>
+<li><p>Choose appropriately between vectorization, conditionals and loops</p></li>
+<li><p>Diagnose common errors and add explicit checks for important assumptions</p></li>
+<li><p>Install packages in a user library and load the packages a script needs</p></li>
+<li><p>Make and save a clear base-R figure</p></li>
+<li><p>Organize code, data and results so that an analysis can be rerun in a fresh R session</p></li>
 </ul>
 </div>
 <div class="tip admonition">
@@ -750,21 +758,27 @@
 </ul>
 <p>No prior R, Python or statistics knowledge is assumed. Variables, functions, loops and the statistical context needed for the examples are introduced where they are used. You will need a working R installation for the exercises; setup and editor options are covered in <a class="reference internal" href="#getting-started-with-r">Getting started with R</a>.</p>
 </div>
+<div class="note admonition">
+<p class="admonition-title">How the two R chapters fit together</p>
+<p>This chapter is about learning to express and check a computation in R. Near the end, you will bring these skills together using a small table of biological observations. <a class="reference internal" href="data-r.html"><span class="std std-doc">Data management and visualization in R</span></a> carries on from there, asking what each row means, how a missing value differs from an observed zero, when to reshape a table, and how to make a figure that says what you intend. If you are taking both chapters in the same week, think of them as two parts of the same journey (to NiRvana!).</p>
+</div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>R is a free, open-source language and environment for statistical computing and graphics. It is particularly well suited to working with tabular data, fitting statistical models and producing reproducible visualizations.</p>
-<p>R forms one part of the multilingual workflow introduced in <a class="reference internal" href="../intro.html#why-multilingual"><span class="std std-ref">Why <em>Multilingual</em>?</span></a>. The <a class="reference internal" href="unix.html"><span class="std std-doc">Unix</span></a> and <a class="reference internal" href="shell-scripting.html"><span class="std std-doc">Shell scripting</span></a> chapters provide tools for managing files and coordinating programs; <a class="reference internal" href="python.html"><span class="std std-doc">Python</span></a> provides a general-purpose language for scientific programs and simulations; and R provides concise tools for data analysis, statistics and visualization. Code written in any of these languages can be tracked with <a class="reference internal" href="git.html"><span class="std std-doc">Git</span></a> and incorporated into reports written in <a class="reference internal" href="latex.html"><span class="std std-doc">LaTeX</span></a>.</p>
-<p>This chapter is self-contained. If you have already worked with another programming language, you will recognize ideas such as variables, functions, conditionals and loops, although R expresses some of them differently.</p>
+<p>R forms one part of the multilingual computing toolkit (recall <a class="reference internal" href="../intro.html#why-multilingual"><span class="std std-ref">Why <em>Multilingual</em>?</span></a>). The <a class="reference internal" href="unix.html"><span class="std std-doc">Unix</span></a> and <a class="reference internal" href="shell-scripting.html"><span class="std std-doc">Shell scripting</span></a> chapters provide tools for managing files and coordinating programs; <a class="reference internal" href="python.html"><span class="std std-doc">Python</span></a> provides a general-purpose language for scientific programs and simulations; and R provides concise tools for data analysis, statistics and visualization. Code written in any of these languages can be tracked with <a class="reference internal" href="git.html"><span class="std std-doc">Git</span></a> and incorporated into reports written in <a class="reference internal" href="latex.html"><span class="std std-doc">LaTeX</span></a>.</p>
+<p>This is where we learn the R needed for the rest of MQB. If you have already worked with another programming language, you will recognize ideas such as variables, functions, conditionals and loops, although R expresses some of them differently. In the next R chapter, you will use these skills to decide how biological data should be organized, checked and plotted.</p>
 <section id="from-an-algorithm-to-r">
 <h3>From an algorithm to R<a class="headerlink" href="#from-an-algorithm-to-r" title="Link to this heading">#</a></h3>
-<p>The <a class="reference internal" href="shell-scripting.html#from-a-task-to-an-algorithm"><span class="std std-ref">Shell scripting chapter</span></a> introduced an <strong>algorithm</strong> as a precise sequence of steps for solving a problem. The same algorithm can be implemented in different languages.</p>
+<p>The <a class="reference internal" href="shell-scripting.html#from-a-task-to-an-algorithm"><span class="std std-ref">Shell scripting chapter</span></a> introduced an <strong>algorithm</strong> as a precise sequence of steps for solving a problem (and more specifically, that can be encoded in way that a computer can execute it).</p>
+<p>The same algorithm can be implemented in different languages.</p>
 <p>Consider the plant heights 8, 12, 10 and 15 cm. We want to count how many exceed 10 cm. The expected answer is <strong>2</strong>. In R, the complete calculation can be written as:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">)</span>
 <span class="nf">sum</span><span class="p">(</span><span class="n">heights</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The comparison <code class="docutils literal notranslate"><span class="pre">heights</span> <span class="pre">&gt;</span> <span class="pre">10</span></code> checks every value and produces a logical vector. <code class="docutils literal notranslate"><span class="pre">sum()</span></code> then counts the <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> values. This is an example of <strong>vectorization</strong>, an important feature of R that we will develop throughout the chapter.</p>
-<p>The biological question, decision rule and expected result are independent of the language. What changes is how the algorithm is expressed. The <a class="reference internal" href="python.html#from-a-task-to-an-algorithm"><span class="std std-ref">Python chapter</span></a> uses the same example to make this distinction explicit.</p>
+<p>The biological question, decision rule and expected result are independent of the language.</p>
+<p><em>What changes is how the algorithm is expressed (the language and its syntax).</em> The <a class="reference internal" href="python.html#from-a-task-to-an-algorithm"><span class="std std-ref">Python chapter</span></a> uses the same example to make this explicit.</p>
 </section>
 <section id="why-r">
 <h3>Why R?<a class="headerlink" href="#why-r" title="Link to this heading">#</a></h3>
@@ -777,7 +791,8 @@
 <li><p>a large collection of community-developed packages; and</p></li>
 <li><p>scripts that preserve a reproducible record of an analysis.</p></li>
 </ul>
-<p>Because an R analysis is represented as code, it can be checked, revised and rerun when data or assumptions change. The same script can also form one component of a larger workflow coordinated by the shell or Python. R and its packages are available for all common operating systems through the <a class="reference external" href="https://cran.r-project.org">Comprehensive R Archive Network (CRAN)</a>.</p>
+<p>Because an R analysis is represented as code, it can be checked, revised and rerun when data or assumptions change. The same script can also form one component of a larger workflow coordinated by the shell or Python.</p>
+<p>R and its packages are available for all common operating systems through the <a class="reference external" href="https://cran.r-project.org">Comprehensive R Archive Network (CRAN)</a>.</p>
 </section>
 <section id="r-in-a-multilingual-workflow">
 <h3>R in a multilingual workflow<a class="headerlink" href="#r-in-a-multilingual-workflow" title="Link to this heading">#</a></h3>
@@ -806,13 +821,13 @@
 </tbody>
 </table>
 </div>
-<p>These are typical strengths rather than rigid boundaries. For example, both R and Python can analyse data, create figures and call other programs. The aim is to choose tools that make each part of an analysis clear, testable and reproducible. The <a class="reference internal" href="data-r.html"><span class="std std-doc">Data analysis and visualization in R</span></a> chapter builds on the programming foundations introduced here.</p>
+<p>These are typical strengths rather than rigid boundaries. For example, both R and Python can analyse data, create figures and call other programs. The aim is to choose tools that make each part of an analysis clear, testable and reproducible. Here we learn enough plotting to inspect and check a result; the <a class="reference internal" href="data-r.html"><span class="std std-doc">Data management and visualization in R</span></a> chapter develops data wrangling and the grammar of graphics in depth.</p>
 </section>
 </section>
 <section id="getting-started-with-r">
 <h2>Getting started with R<a class="headerlink" href="#getting-started-with-r" title="Link to this heading">#</a></h2>
-<p>First confirm that R is installed by running <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">--version</span></code> in a terminal. If it is not available, follow your institution’s setup guidance or the installation links provided by <a class="reference external" href="https://cran.r-project.org">CRAN</a>.</p>
-<p>You can work in the R console or use an integrated development environment (IDE). This book supports both Visual Studio Code and RStudio; neither is required to understand the language. See <a class="reference internal" href="../intro.html#to-ide-or-not-to-ide"><span class="std std-ref">To IDE or not to IDE</span></a> for the general role of an IDE and <a class="reference internal" href="../appendices/vscode.html#using-r-in-vs-code"><span class="std std-ref">Using R in VS Code</span></a> for the VS Code setup.</p>
+<p>First confirm that R is installed by running <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">--version</span></code> and <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">--version</span></code> in a terminal. If either command is unavailable, follow <a class="reference internal" href="../appendices/r-setup.html"><span class="std std-doc">R Installation and User Libraries</span></a>.</p>
+<p>You can work in the R console or use an integrated development environment (IDE). This book supports both Visual Studio Code and RStudio; neither is required to understand the language. See <a class="reference internal" href="../intro.html#to-ide-or-not-to-ide"><span class="std std-ref">To IDE or not to IDE</span></a> for the general role of an IDE, <a class="reference internal" href="../appendices/r-setup.html"><span class="std std-doc">R Installation and User Libraries</span></a> for the runtime, and <a class="reference internal" href="../appendices/vscode.html#using-r-in-vs-code"><span class="std std-ref">Using R in VS Code</span></a> for the VS Code setup.</p>
 <p>To start the command-line interface on Linux or macOS, type <code class="docutils literal notranslate"><span class="pre">R</span></code> in a terminal. On Windows, launch the R console from the installed application or open an R terminal in your chosen IDE. You should see a prompt similar to the following examples:</p>
 <hr class="docutils" />
 <figure class="align-default" id="r-linux-console">
@@ -872,7 +887,7 @@
 </tbody>
 </table>
 </div>
-<p>For reproducible scripts, start R in the project root and use relative paths rather than embedding a machine-specific path in <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>. See <a class="reference internal" href="unix.html#building-your-coursework-directory-structure"><span class="std std-ref">Building your coursework directory structure</span></a>.</p>
+<p>For reproducible scripts, start R in the project root and use <a class="reference internal" href="../appendices/terms.html#id3"><span class="std std-ref">relative paths</span></a>, such as <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code>. Avoid putting a path that only exists on your computer in <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>. See <a class="reference internal" href="unix.html#building-your-coursework-directory-structure"><span class="std std-ref">Building your coursework directory structure</span></a>.</p>
 </section>
 <section id="baby-steps">
 <h3>Baby steps<a class="headerlink" href="#baby-steps" title="Link to this heading">#</a></h3>
@@ -947,11 +962,11 @@
 <ol class=list-inline><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li></ol>
 </div></div>
 </div>
-<p>Note that any text after a “#” is ignored by r, like in many other languages — handy for commenting.</p>
-<p>*In general, please comment your code and scripts, for <em>everybody’s</em> sake. You will be amazed by how difficult it is to read and understand what a certain r script does (or any other script, for that matter) without judicious comments — even scripts you yourself wrote not so long ago!</p>
+<p>Note that any text after a <code class="docutils literal notranslate"><span class="pre">#</span></code> is ignored by R, as in many other languages — handy for commenting.</p>
+<p>*In general, please comment your code and scripts, for <em>everybody’s</em> sake. You will be amazed by how difficult it is to read and understand what a certain R script does (or any other script, for that matter) without judicious comments — even scripts you yourself wrote not so long ago!</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>The Concatenate function:</strong> <code class="docutils literal notranslate"><span class="pre">c()</span></code>(concatenate) is one of the most commonly used r functions because it is the default method for combining multiple arguments into a vector. To learn more about it, type <code class="docutils literal notranslate"><span class="pre">?c</span></code> at the R prompt and hit enter.</p>
+<p><strong>The Concatenate function:</strong> <code class="docutils literal notranslate"><span class="pre">c()</span></code>(concatenate) is one of the most commonly used R functions because it is the default method for combining multiple arguments into a vector. To learn more about it, type <code class="docutils literal notranslate"><span class="pre">?c</span></code> at the R prompt and hit enter.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -960,7 +975,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -972,7 +987,7 @@
 <div class="output text_html">2</div></div>
 </div>
 <p>Thus, a <em>vector</em> is like a single column or row in a <em>spreadsheet</em> (just like it is in <a class="reference internal" href="python.html"><span class="std std-doc">Python</span></a>). Multiple vectors can be combined to make a matrix (the full spreadsheet).</p>
-<p>This is one of many ways r stores and processes data. More on r data types and objects below.</p>
+<p>This is one of many ways R stores and processes data. More on R data types and objects below.</p>
 <p>A single value (any kind) is a vector object of length 1 by default. That’s why in the R console you see <code class="docutils literal notranslate"><span class="pre">[1]</span></code> before any single-value output (e.g., type <code class="docutils literal notranslate"><span class="pre">8</span></code>, and you will see <code class="docutils literal notranslate"><span class="pre">[1]</span> <span class="pre">8</span></code>).</p>
 <p>Some examples of operations on vectors:</p>
 <div class="cell docutils container">
@@ -1023,7 +1038,7 @@
 </section>
 <section id="variable-names-and-tabbing">
 <h3>Variable names and Tabbing<a class="headerlink" href="#variable-names-and-tabbing" title="Link to this heading">#</a></h3>
-<p>In r, you can name variables in the following way to keep track of related variables:</p>
+<p>In R, you can name variables in the following way to keep track of related variables:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">wing.width.cm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.2</span><span class="w"> </span><span class="c1">#Using dot notation</span>
@@ -1043,10 +1058,10 @@
 </pre></div>
 </div>
 <p>And then hit the <code class="docutils literal notranslate"><span class="pre">tab</span></code>key to reveal all variables in that  category. This is nice — variable names should be as obvious as possible. However, they should not be over-long either! Good style and readability is more important than just convenient variable names.</p>
-<p>In fact, r allows dots to be used in variable names of all objects (not just objects that are variables). For example, functions names can have dots in them as well, as you will see below with the <code class="docutils literal notranslate"><span class="pre">is.*</span></code> family (e.g., <code class="docutils literal notranslate"><span class="pre">is.infinite()</span></code>, <code class="docutils literal notranslate"><span class="pre">is.nan()</span></code>, etc.).</p>
+<p>In fact, R allows dots to be used in variable names of all objects (not just objects that are variables). For example, functions names can have dots in them as well, as you will see below with the <code class="docutils literal notranslate"><span class="pre">is.*</span></code> family (e.g., <code class="docutils literal notranslate"><span class="pre">is.infinite()</span></code>, <code class="docutils literal notranslate"><span class="pre">is.nan()</span></code>, etc.).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Following a consistent style for different elements of your r code (syntax, conditionals, functions, etc) is important. The tidyverse <a class="reference external" href="https://style.tidyverse.org/index.html">style guide</a>  is recommended. You should keep going back to different sections of the style guide as you learn new topics. Here, for starters, have a look at <a class="reference external" href="https://style.tidyverse.org/syntax.html">naming conventions</a>.</p>
+<p>Following a consistent style for different elements of your R code (syntax, conditionals, functions, etc) is important. The tidyverse <a class="reference external" href="https://style.tidyverse.org/index.html">style guide</a>  is recommended. You should keep going back to different sections of the style guide as you learn new topics. Here, for starters, have a look at <a class="reference external" href="https://style.tidyverse.org/syntax.html">naming conventions</a>.</p>
 </div>
 </section>
 <section id="operators">
@@ -1115,17 +1130,17 @@
 <span class="o">+</span><span class="w"> </span>
 </pre></div>
 </div>
-<p>Hit <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> (UNIX terminal or base r command line) or ESC (in RStudio) or keep typing!</p>
+<p>Hit <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> (UNIX terminal or base R command line) or ESC (in RStudio) or keep typing!</p>
 <ul class="simple">
 <li><p>Too many parentheses; for example, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">(2*3))</span></code></p></li>
 <li><p>Wrong or mismatched brackets (see next subsection)</p></li>
 <li><p>Mixing double and single quotes will also give you an error</p></li>
 </ul>
-<p>When things are taking too long and the R console seems frozen, try <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> (UNIX terminal or base r command line) or ESC (in RStudio) to force an exit from whatever is going on.</p>
+<p>When things are taking too long and the R console seems frozen, try <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> (UNIX terminal or base R command line) or ESC (in RStudio) to force an exit from whatever is going on.</p>
 </section>
 <section id="types-of-parentheses">
 <h3>Types of parentheses<a class="headerlink" href="#types-of-parentheses" title="Link to this heading">#</a></h3>
-<p>r has specific uses for different types of Parentheses type that you need to get used to:</p>
+<p>R has specific uses for different types of Parentheses type that you need to get used to:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Parentheses type</p></th>
@@ -1176,7 +1191,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <p>Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">TrUE</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
 </pre></div>
 </div>
 </div>
@@ -1188,7 +1203,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1248,7 +1263,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1267,7 +1282,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1290,8 +1305,8 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Beware of the difference between <code class="docutils literal notranslate"><span class="pre">NA</span></code> (<code class="docutils literal notranslate"><span class="pre">N</span></code>ot<code class="docutils literal notranslate"> <span class="pre">A</span></code>vailable) and <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (<code class="docutils literal notranslate"><span class="pre">N</span></code>ot<code class="docutils literal notranslate"> <span class="pre">a</span> <span class="pre">N</span></code>umber). r will use <code class="docutils literal notranslate"><span class="pre">NA</span></code>to represent/identify missing values in data or outputs, while <code class="docutils literal notranslate"><span class="pre">NaN</span></code>represent nonsense values (e.g., 0/0) that cannot be represented as a number or some other data type.</p>
-<p>See what r has to say about this: try <code class="docutils literal notranslate"><span class="pre">?is.nan</span></code>, <code class="docutils literal notranslate"><span class="pre">?is.na</span></code>, <code class="docutils literal notranslate"><span class="pre">?NA</span></code>, <code class="docutils literal notranslate"><span class="pre">?NaN</span></code>in the R commandline (one at a time!).</p>
+<p>Beware of the difference between <code class="docutils literal notranslate"><span class="pre">NA</span></code> (<code class="docutils literal notranslate"><span class="pre">N</span></code>ot<code class="docutils literal notranslate"> <span class="pre">A</span></code>vailable) and <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (<code class="docutils literal notranslate"><span class="pre">N</span></code>ot<code class="docutils literal notranslate"> <span class="pre">a</span> <span class="pre">N</span></code>umber). R will use <code class="docutils literal notranslate"><span class="pre">NA</span></code>to represent/identify missing values in data or outputs, while <code class="docutils literal notranslate"><span class="pre">NaN</span></code>represent nonsense values (e.g., 0/0) that cannot be represented as a number or some other data type.</p>
+<p>See what R has to say about this: try <code class="docutils literal notranslate"><span class="pre">?is.nan</span></code>, <code class="docutils literal notranslate"><span class="pre">?is.na</span></code>, <code class="docutils literal notranslate"><span class="pre">?NA</span></code>, <code class="docutils literal notranslate"><span class="pre">?NaN</span></code>in the R commandline (one at a time!).</p>
 <p>There are also <code class="docutils literal notranslate"><span class="pre">Inf</span></code> (Infinity, e.g., 1/0), and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (variable not set) value types. Look these up as well using <code class="docutils literal notranslate"><span class="pre">?</span></code>.</p>
 </div>
 <div class="cell docutils container">
@@ -1301,7 +1316,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1370,9 +1385,9 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
-<p><em>What just happened?!</em> r maps all values other than <code class="docutils literal notranslate"><span class="pre">0</span></code> to logical <code class="docutils literal notranslate"><span class="pre">True</span></code>, and <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>. This can be useful in some cases, for example, when you want to convert all your data to Presence-Absence only.</p>
+<p><em>What just happened?!</em> R maps all values other than <code class="docutils literal notranslate"><span class="pre">0</span></code> to logical <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, and <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This can be useful, for example, when you want to convert data to presence or absence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">as.logical</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
@@ -1382,7 +1397,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <div class="cell_output docutils container">
 <div class="output text_html">FALSE</div></div>
 </div>
-<p>Also, <em>keep an eye out for <a class="reference external" href="https://en.wikipedia.org/wiki/Scientific_notation">E notation</a> in outputs of r functions for statistical analyses, and learn to interpret numbers formatted this way.</em> r uses E notation in outputs of statistical tests to display  very large or small numbers. If you are not used to different  representations of long numbers, the E notation might be  confusing.</p>
+<p>Also, <em>keep an eye out for <a class="reference external" href="https://en.wikipedia.org/wiki/Scientific_notation">E notation</a> in outputs of R functions for statistical analyses, and learn to interpret numbers formatted this way.</em> R uses E notation in outputs of statistical tests to display  very large or small numbers. If you are not used to different  representations of long numbers, the E notation might be  confusing.</p>
 <p>Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1431,15 +1446,20 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>Boolean arguments in R</strong>: In <code class="docutils literal notranslate"><span class="pre">R</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TrUE</span></code> respectively. To see this, type</p>
-<p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;-</span> <span class="pre">T</span></code></p>
-<p>in the R commandline, and then see what r returns when you type <code class="docutils literal notranslate"><span class="pre">a</span></code>. Using <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> for boolean <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TrUE</span></code> respectively is not necessarily good practice, but be aware that this option exists.</p>
+<p><strong>Boolean values in R:</strong> Write <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> in full. R also recognizes <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code>, but these are ordinary variable names and can be reassigned. The full forms are safer and easier to read. For example:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
+</pre></div>
+</div>
+</div>
+<p>Type <code class="docutils literal notranslate"><span class="pre">a</span></code> in the R console to see the value stored in it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </section>
 </section>
 <section id="r-data-structures">
 <h2>R Data Structures<a class="headerlink" href="#r-data-structures" title="Link to this heading">#</a></h2>
-<p>r comes with different built-in structures (objects) for data storage and manipulation. Mastering these, and knowing which one to use when will help you write better, more efficient programs and also handle diverse datasets (numbers, counts, names, dates, etc):</p>
+<p>R comes with different built-in structures (objects) for data storage and manipulation. Mastering these, and knowing which one to use when will help you write better, more efficient programs and also handle diverse datasets (numbers, counts, names, dates, etc):</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p></p></th>
@@ -1467,13 +1487,13 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Data “structures” vs. “objects” in R</strong>: You will often see the terms “object” and “data structure” used in this and other chapters. These two have a very distinct meaning in object-oriented programming (OOP) languages like r and python. A data structure is just a “dumb” container for data (e.g., a vector). An object, on the other hand can be a data structure, but also any other variable or a function in your r environment. r, being an OOP language, converts everything in the current environment to an object so that it knows what to do with each such entity — each object type has its own set of rules for operations and manipulations that r uses when interpreting your commands.</p>
+<p><strong>Data “structures” vs. “objects” in R</strong>: You will often see the terms “object” and “data structure” in this and other chapters. A data structure is a way of organising data, such as a vector or data frame. In R, values, functions and fitted models can all be objects. Each kind of object has its own rules for the operations that R can perform on it.</p>
 </div>
 <section id="vectors">
 <h3>Vectors<a class="headerlink" href="#vectors" title="Link to this heading">#</a></h3>
 <p>The Vector, which you have already seen above in the R warmup, is a fundamental data structure in R. Scalars (single data values) are treated as vector of length 1.</p>
 <p><em>Basically, a vector is like a single cell, column or row in a spreadsheet, but with the constraint that all elements have tio be the same data type.</em></p>
-<p>★ Now get back into r (if you somehow quit r using <code class="docutils literal notranslate"><span class="pre">q()</span></code>or something else), and try this:</p>
+<p>★ Now get back into R (if you somehow quit R using <code class="docutils literal notranslate"><span class="pre">q()</span></code> or something else), and try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
@@ -1482,13 +1502,13 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">TrUE</div></div>
+<div class="output text_html">TRUE</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.02</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 <span class="n">v2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"bc"</span><span class="p">,</span><span class="w"> </span><span class="s">"def"</span><span class="p">,</span><span class="w"> </span><span class="s">"ghij"</span><span class="p">)</span>
-<span class="n">v3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">TrUE</span><span class="p">,</span><span class="w"> </span><span class="n">TrUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">v3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1517,13 +1537,13 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 .list-inline>li {display: inline-block}
 .list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
 </style>
-<ol class=list-inline><li>TrUE</li><li>TrUE</li><li>FALSE</li></ol>
+<ol class=list-inline><li>TRUE</li><li>TRUE</li><li>FALSE</li></ol>
 </div></div>
 </div>
-<p>r vectors can only store data of a single type (e.g., all numeric or all character). If you try to combine different types, r will homogenize everything to the same data type. To see this, try the following:</p>
+<p>R vectors can only store data of a single type (e.g., all numeric or all character). If you try to combine different types, R will homogenize everything to the same data type. To see this, try the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.02</span><span class="p">,</span><span class="w"> </span><span class="n">TrUE</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.02</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 <span class="n">v1</span>
 </pre></div>
 </div>
@@ -1537,7 +1557,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <ol class=list-inline><li>0.02</li><li>1</li><li>1</li></ol>
 </div></div>
 </div>
-<p>TrUE gets converted to 1 because vectors can contain only one data type, and the Integer class is higher in the heirarchy of data types than Boolean (so the latter by default gets converted to former).</p>
+<p>When R combines <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> with numbers in one vector, it converts <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> to 1 so that every element has the same data type.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.02</span><span class="p">,</span><span class="w"> </span><span class="s">"Mary"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
@@ -1605,8 +1625,8 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </section>
 <section id="matrices-and-arrays">
 <span id="r-matrices"></span><h3>Matrices and Arrays<a class="headerlink" href="#matrices-and-arrays" title="Link to this heading">#</a></h3>
-<p>A r “matrix” is a 2 dimensional vector (has both rows and columns) and a “array” can store data in more than two dimensions (e.g., a stack of 2-D matrices).</p>
-<p>r has many functions to build and manipulate matrices and arrays.</p>
+<p>An R “matrix” is a 2 dimensional vector (has both rows and columns) and a “array” can store data in more than two dimensions (e.g., a stack of 2-D matrices).</p>
+<p>R has many functions to build and manipulate matrices and arrays.</p>
 <p>Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1651,7 +1671,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <p>Now try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mat1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mat1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">mat1</span>
 </pre></div>
 </div>
@@ -1753,7 +1773,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </table>
 </div></div>
 </div>
-<p>Just like r vectors, r matrices and arrays have to be of a homogeneous type, and r will do the same sort of type homogenization you saw for r vectors above.</p>
+<p>Just like R vectors, R matrices and arrays have to be of a homogeneous type, and R will do the same sort of type homogenization you saw for R vectors above.</p>
 <p>Try inserting a text value in <code class="docutils literal notranslate"><span class="pre">mat1</span></code>and see what happens:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1785,7 +1805,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <p class="admonition-title">Note</p>
 <p>The outputs of many statistical functions in R are lists (e.g. linear model fitting using <code class="docutils literal notranslate"><span class="pre">lm()</span></code>), to return all relevant information in one output object. So you need to know how to unpack and manipulate lists.</p>
 </div>
-<p>As a budding multilingual quantitative biologist, you should not be perturbed by the fact that a <code class="docutils literal notranslate"><span class="pre">list</span></code> is a very different data structure in Python vs r. It will take some practice — the good thing is that this sort of inconsistency is less common than in human languages where the same word far too often means different things in different  languages!</p>
+<p>As a budding multilingual quantitative biologist, you should not be perturbed by the fact that a <code class="docutils literal notranslate"><span class="pre">list</span></code> is a very different data structure in Python vs R. It will take some practice — the good thing is that this sort of inconsistency is less common than in human languages where the same word far too often means different things in different  languages!</p>
 <p>Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2110,7 +2130,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </section>
 <section id="data-frames">
 <h3>Data frames<a class="headerlink" href="#data-frames" title="Link to this heading">#</a></h3>
-<p>This is a very important data structure in R. Unlike matrices and vectors, r data frames can store data in which each column contains a different data type (e.g., numbers, strings, boolean) or even a combination of data types, just like a standard spreadsheet. Indeed, dataframes were built to emulate some of the convenient properties of spreadsheets. Many statistical and plotting functions and packages in R naturally use data frames.</p>
+<p>This is a very important data structure in R. Unlike matrices and vectors, R data frames can store data in which each column contains a different data type (e.g., numbers, strings, boolean) or even a combination of data types, just like a standard spreadsheet. Indeed, dataframes were built to emulate some of the convenient properties of spreadsheets. Many statistical and plotting functions and packages in R naturally use data frames.</p>
 <p>Let’s build and manipulate a dataframe. First create three vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2130,7 +2150,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Col2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">LETTErS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Col2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">LETTERS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>
 <span class="n">Col2</span>
 </pre></div>
 </div>
@@ -2216,7 +2236,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Maybe you have guessed by now that r dataframes are actually a kind of list. That is, a r dataframe is in fact a <code class="docutils literal notranslate"><span class="pre">list</span></code> of equal-length <code class="docutils literal notranslate"><span class="pre">vector</span></code>s (a “rectangular” list).</p>
+<p>Maybe you have guessed by now that R data frames are actually a kind of list. That is, a R data frame is in fact a <code class="docutils literal notranslate"><span class="pre">list</span></code> of equal-length <code class="docutils literal notranslate"><span class="pre">vector</span></code>s (a “rectangular” list).</p>
 </div>
 <p>You can easily assign names to the columns of dataframes:</p>
 <div class="cell docutils container">
@@ -2280,7 +2300,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 </div>
 </div>
-<p>That gives an error, because r cannot handle spaces in column names easily.</p>
+<p>That gives an error, because R cannot handle spaces in column names easily.</p>
 <p>So replace that column name using the <code class="docutils literal notranslate"><span class="pre">colnames</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2321,7 +2341,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <ol class=list-inline><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ol>
 </div></div>
 </div>
-<p>That is, you asked r to return values of <code class="docutils literal notranslate"><span class="pre">MyDF</span></code> in all rows (therefore, nothing before the comma), and the first column (<code class="docutils literal notranslate"><span class="pre">1</span></code> after the comma).</p>
+<p>That is, you asked R to return values of <code class="docutils literal notranslate"><span class="pre">MyDF</span></code> in all rows (therefore, nothing before the comma), and the first column (<code class="docutils literal notranslate"><span class="pre">1</span></code> after the comma).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyDF</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>
@@ -2437,12 +2457,12 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>The Factor data type</strong>: r has a special data type called “factor”. Different values in this data type are called “levels”. This data type is used to identify “grouping variables” such as columns in a dataframe that contain  experimental treatments. This is convenient for statistical analyses using one of the many plotting and statistical commands or routines available in R, which have been written to interpret the <code class="docutils literal notranslate"><span class="pre">factor</span></code> data type as such and use it to automatically compare subgroups in the data. More on this later, when we delve into analyses (including visualization) in R.</p>
+<p><strong>The Factor data type</strong>: R has a special data type called “factor”. Different values in this data type are called “levels”. This data type is used to identify “grouping variables” such as columns in a dataframe that contain  experimental treatments. This is convenient for statistical analyses using one of the many plotting and statistical commands or routines available in R, which have been written to interpret the <code class="docutils literal notranslate"><span class="pre">factor</span></code> data type as such and use it to automatically compare subgroups in the data. More on this later, when we delve into analyses (including visualization) in R.</p>
 </div>
 </section>
 <section id="matrix-vs-dataframe">
 <h3>Matrix vs Dataframe<a class="headerlink" href="#matrix-vs-dataframe" title="Link to this heading">#</a></h3>
-<p>If dataframes are so nice, why use r matrices at all? The problem is that dataframes can be too slow when large numbers of mathematical calculations or operations (e.g., matrix - vector multiplications or other linear algebra operations) need to be performed. In such cases, you will need to convert a dataframe to a matrix. But for statistical analyses, plotting, and writing output of standard r analyses to a file, data frames are more convenient. Dataframes also allow you to refer to columns by name (using <code class="docutils literal notranslate"><span class="pre">$</span></code>), which is often convenient.</p>
+<p>If dataframes are so nice, why use R matrices at all? The problem is that dataframes can be too slow when large numbers of mathematical calculations or operations (e.g., matrix - vector multiplications or other linear algebra operations) need to be performed. In such cases, you will need to convert a dataframe to a matrix. But for statistical analyses, plotting, and writing output of standard R analyses to a file, data frames are more convenient. Dataframes also allow you to refer to columns by name (using <code class="docutils literal notranslate"><span class="pre">$</span></code>), which is often convenient.</p>
 <p>To see the difference in memory usage of matrices vs dataframes, try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2488,7 +2508,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">object.size</span><span class="p">(</span><span class="n">MyMat</span><span class="p">)</span><span class="w"> </span><span class="c1"># returns size of an r object (variable) in bytes</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">object.size</span><span class="p">(</span><span class="n">MyMat</span><span class="p">)</span><span class="w"> </span><span class="c1"># returns size of an R object (variable) in bytes</span>
 </pre></div>
 </div>
 </div>
@@ -2568,10 +2588,10 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Don’t forget, you can get help on a particular r command by prefixing it with <code class="docutils literal notranslate"><span class="pre">?</span></code>. For example, try:</p>
+<p>Don’t forget, you can get help on a particular R command by prefixing it with <code class="docutils literal notranslate"><span class="pre">?</span></code>. For example, try:</p>
 <p><code class="docutils literal notranslate"><span class="pre">?seq</span></code></p>
 </div>
-<p>You can also use <code class="docutils literal notranslate"><span class="pre">seq(from=1,to=10,</span> <span class="pre">by=0.5)</span> </code>Or<code class="docutils literal notranslate"> <span class="pre">seq(from=1,</span> <span class="pre">by=0.5,</span> <span class="pre">to=10)</span></code> with the same effect (try it). This explicit, “argument matching” approach is partly what makes r so popular and accessible to a wider range of users.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">seq(from</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">to</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">by</span> <span class="pre">=</span> <span class="pre">0.5)</span></code> or <code class="docutils literal notranslate"><span class="pre">seq(from</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">by</span> <span class="pre">=</span> <span class="pre">0.5,</span> <span class="pre">to</span> <span class="pre">=</span> <span class="pre">10)</span></code> with the same effect (try it). This explicit, “argument matching” approach is partly what makes R so popular and accessible to a wider range of users.</p>
 </section>
 <section id="accessing-parts-of-data-stuctures-indices-and-indexing">
 <span id="r-indices"></span><h3>Accessing parts of data stuctures: Indices and Indexing<a class="headerlink" href="#accessing-parts-of-data-stuctures-indices-and-indexing" title="Link to this heading">#</a></h3>
@@ -2698,7 +2718,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <p>For matrices, you need to use both row and column indices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mat1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1">#create a matrix</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mat1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1">#create a matrix</span>
 <span class="n">mat1</span>
 </pre></div>
 </div>
@@ -2790,7 +2810,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </section>
 <section id="recycling">
 <span id="r-recycling"></span><h3>Recycling<a class="headerlink" href="#recycling" title="Link to this heading">#</a></h3>
-<p>When vectors are of different lengths, r will recycle the shorter one to make a vector of the same length:</p>
+<p>When vectors are of different lengths, R will recycle the shorter one to make a vector of the same length:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span>
@@ -2844,7 +2864,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <ol class=list-inline><li>6</li><li>5</li><li>10</li><li>4</li></ol>
 </div></div>
 </div>
-<p>Strange! r just recycled <code class="docutils literal notranslate"><span class="pre">x</span></code> (repeated <code class="docutils literal notranslate"><span class="pre">1,2</span></code> twice) so that the two vectors could be summed! here’s another example:</p>
+<p>Strange! R just recycled <code class="docutils literal notranslate"><span class="pre">x</span></code> (repeated <code class="docutils literal notranslate"><span class="pre">1,2</span></code> twice) so that the two vectors could be summed! here’s another example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
@@ -2864,11 +2884,11 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <ol class=list-inline><li>6</li><li>5</li><li>10</li><li>4</li><li>2</li></ol>
 </div></div>
 </div>
-<p><em>Think about what happened here</em>. r is clearly not comfortable doing this, so it warns you! recycling could be convenient at times, but is dangerous!</p>
+<p><em>Think about what happened here</em>. R is clearly not comfortable doing this, so it warns you! recycling could be convenient at times, but is dangerous!</p>
 </section>
 <section id="basic-vector-matrix-operations">
 <h3>Basic vector-matrix operations<a class="headerlink" href="#basic-vector-matrix-operations" title="Link to this heading">#</a></h3>
-<p>You can perform the usual vector matrix operations on r <code class="docutils literal notranslate"><span class="pre">vectors</span></code></p>
+<p>You can perform the usual vector and matrix operations on R vectors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
@@ -3015,7 +3035,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <div class="output text_html">'Quercus, robur'</div></div>
 </div>
 <p>As you can see above, both double and single quotes work, but using double quotes is better because it will allow you to define strings that contain a single quotes, which is often necessary.</p>
-<p>And as is the case with so many r functions, pasting works on vectors:</p>
+<p>And as is the case with so many R functions, pasting works on vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">paste</span><span class="p">(</span><span class="s">'Year is:'</span><span class="p">,</span><span class="w"> </span><span class="m">1990</span><span class="o">:</span><span class="m">2000</span><span class="p">)</span>
@@ -3035,7 +3055,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </section>
 </section>
 <section id="useful-r-functions">
-<h2>Useful r functions<a class="headerlink" href="#useful-r-functions" title="Link to this heading">#</a></h2>
+<h2>Useful R functions<a class="headerlink" href="#useful-r-functions" title="Link to this heading">#</a></h2>
 <p>There are a number of very useful functions available by default (in the “base packages”). Some particularly useful ones are listed below.</p>
 <section id="for-manipulating-strings">
 <h3>For manipulating strings<a class="headerlink" href="#for-manipulating-strings" title="Link to this heading">#</a></h3>
@@ -3175,7 +3195,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </tbody>
 </table>
 </div>
-<p>★ <em>Try out the above commands in your r console by generating the appropriate data</em>. For example,</p>
+<p>★ <em>Try out the above commands in your R console by generating the appropriate data</em>. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">strsplit</span><span class="p">(</span><span class="s">"String; to; Split"</span><span class="p">,</span><span class="s">';'</span><span class="p">)</span><span class="c1"># Split the string at ';'</span>
@@ -3198,7 +3218,7 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <section id="generating-random-numbers">
 <span id="r-random-numbers"></span><h3>Generating random Numbers<a class="headerlink" href="#generating-random-numbers" title="Link to this heading">#</a></h3>
 <p>You will probably need to generate random numbers at some point as a quantitative biologist.</p>
-<p>r has many routines for generating random samples from various probability distributions. There are a number of random number distributions that you can sample or generate random numbers from:</p>
+<p>R has many routines for generating random samples from various probability distributions. There are a number of random number distributions that you can sample or generate random numbers from:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Function</p></th>
@@ -3272,18 +3292,18 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <ol class=list-inline><li>0.156703769128359</li><li>1.37381119149164</li><li>0.73067024376365</li><li>-1.35080092669852</li><li>-0.00851496085595985</li><li>0.320981862836429</li><li>-1.77814840855737</li><li>0.909503835073888</li><li>-0.919404336160487</li><li>-0.157714830888067</li><li>1.10199738945752</li></ol>
 </div></div>
 </div>
-<p>Thus, setting the seed allows you to reliably generate the identical sequence of “random” numbers. These numbers are not truly random, but have the properties of random numbers. Note also that pseudo-random number generators are periodic, which means that the sequence will eventually repeat itself. However, this  period is so long that it can be ignored for most practical purposes. So effectively, <code class="docutils literal notranslate"><span class="pre">rnorm</span></code> has an enormous list that it cycles through. The random seed starts the process, i.e., indicates where in the list to start. This is usually taken from the clock when you start r.</p>
+<p>Thus, setting the seed allows you to reliably generate the identical sequence of “random” numbers. These numbers are not truly random, but have the properties of random numbers. Note also that pseudo-random number generators are periodic, which means that the sequence will eventually repeat itself. However, this  period is so long that it can be ignored for most practical purposes. So effectively, <code class="docutils literal notranslate"><span class="pre">rnorm</span></code> has an enormous list that it cycles through. The random seed starts the process, i.e., indicates where in the list to start. This is usually taken from the clock when you start R.</p>
 <p>But why bother with random number seeds? Setting a particular seed can be useful when debugging programs (coming up below). Bugs in code can be hard to find — harder still if you are generating random numbers, so repeat runs of your code may or may not all trigger the same behavior. You can set the seed once at the beginning of the code — ensuring repeatability, retaining (pseudo) randomness. Once  debugged, if you want, you can remove the set seed line.</p>
 </section>
 </section>
 </section>
 <section id="your-analysis-workflow">
 <h2>Your analysis workflow<a class="headerlink" href="#your-analysis-workflow" title="Link to this heading">#</a></h2>
-<p>In using R for an analysis, you will likely use and create several files. As in the case of bash and Python-based projects, in R projects as well, you should keep your workflow well organized. For example, it is sensible to create a folder (directory) to keep all code files together. You can then set R to work from this directory, so that files are easy to find and run — this will be your “working directory” (more on this below). Also, you don’t want to mix code files with data and results files. So you should create separate directories for these as well.</p>
+<p>An R analysis usually reads data, runs code and creates several results. Keep these files in a clear project structure, just as you do for Bash and Python work. Store scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, source data in <code class="docutils literal notranslate"><span class="pre">data/</span></code> and generated output in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Start R at the project root so that all three directories have stable, predictable paths.</p>
 <p>Thus, your typical R analysis workflow will be:</p>
 <hr class="docutils" />
 <figure class="align-default" id="r-project-org">
-<a class="reference internal image-reference" href="../_images/RWorkflow.png"><img alt="r Project Organization" src="../_images/RWorkflow.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/RWorkflow.png"><img alt="R Project Organization" src="../_images/RWorkflow.png" style="width: 600px;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Your R project.</strong> Keeping it neat and organized is key to becoming a good R programmer.</span><a class="headerlink" href="#r-project-org" title="Link to this image">#</a></p>
@@ -3310,38 +3330,12 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework/sandbox"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Keep a root <code class="docutils literal notranslate"><span class="pre">README.md</span></code> describing your project and use a root <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to exclude generated files. When working with R scripts, run them from the project’s <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory; use paths such as <code class="docutils literal notranslate"><span class="pre">../data/</span></code> to read input files and <code class="docutils literal notranslate"><span class="pre">../results/</span></code> to save generated output.</p>
+<p>Keep a root <code class="docutils literal notranslate"><span class="pre">README.md</span></code> describing your project and use a root <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to exclude generated files. For the Week 3 observations exercise, begin at the project root: run <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/script.R</span></code>, read <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code>, and write <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code>. Starting in the same place each time makes paths predictable, whichever editor you use.</p>
 <section id="the-r-workspace-and-working-directory">
-<h3>The r Workspace and Working Directory<a class="headerlink" href="#the-r-workspace-and-working-directory" title="Link to this heading">#</a></h3>
-<p>r has a “workspace” – a current working environment that includes any user-defined data structures objects (vectors, matrices, data frames, lists) as well as other objects (e.g., functions). At the end of an r session, the user can save an image of the current workspace that is automatically reloaded the next time r is started. Your workspace is saved in your “Working Directory”, which has to be set manually.</p>
-<p>So before we go any further, let’s get sort out where your r “Working Directory” should be and how you should set it. r has a default location where it assumes your working directory is.</p>
-<ul class="simple">
-<li><p>In UNIX/Linux, it is whichever directory you are in when you launch r.</p></li>
-<li><p>In Mac, it is <code class="docutils literal notranslate"><span class="pre">/User/YourUserName</span></code> or similar.</p></li>
-<li><p>In Windows, it is <code class="docutils literal notranslate"><span class="pre">C:/Windows/system32</span></code>or similar.</p></li>
-</ul>
-<p>To see where your current working directory is, at the R command prompt, type:</p>
-<p><code class="docutils literal notranslate"><span class="pre">getwd()</span></code></p>
-<p>This tells you what the current <code class="docutils literal notranslate"><span class="pre">w</span></code>orking <code class="docutils literal notranslate"><span class="pre">d</span></code>irectory is.</p>
-<p>Now, set the working directory to be <code class="docutils literal notranslate"><span class="pre">MrrCourseworkcode</span></code>. For example, if you created <code class="docutils literal notranslate"><span class="pre">MrrCoursework</span></code>directly in your <code class="docutils literal notranslate"><span class="pre">H:\</span></code>, the you would use:</p>
-<p><code class="docutils literal notranslate"><span class="pre">setwd(&quot;H:/MrrCourseworkcode&quot;)</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">dir()</span></code> #check what’s in the current working directory</p>
-<p>On your own computer, you can also change R’s default to a particular working directory where you would like to start (easily done in RStudio):</p>
-<ul>
-<li><p>In Linux, you can do this by editing the <code class="docutils literal notranslate"><span class="pre">rprofile.site</span></code>site with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">gedit</span> <span class="pre">/etc/r/rprofile.site</span></code>. In that file, you would add your start-up parameters between the lines</p>
-<p><code class="docutils literal notranslate"><span class="pre">.First</span> <span class="pre">&lt;-</span> <span class="pre">function()</span> <span class="pre">cat(&quot;\n</span> <span class="pre">Welcome</span> <span class="pre">to</span> <span class="pre">r!\n\n&quot;)</span></code></p>
-</li>
-</ul>
-<p>and</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`.Last &lt;- function() cat("\n   Goodbye! \n\n")`.
-</pre></div>
-</div>
-<p>Between these two lines, insert:
-<code class="docutils literal notranslate"><span class="pre">setwd(&quot;/home/YourName/YourDirectoryPath&quot;)</span></code></p>
-<ul class="simple">
-<li><p>In Windows and Macs, you can find the <code class="docutils literal notranslate"><span class="pre">rprofile.site</span></code>file by searching for it. On Windows, it should be at <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\r\r-x.x.x\etc</span></code> directory, where <code class="docutils literal notranslate"><span class="pre">x.x.x</span></code> is your r version.</p></li>
-<li><p>If you are using RStudio, you can change the default working directory through the RStudio “Options” dialog.</p></li>
-</ul>
+<h3>The R workspace and working directory<a class="headerlink" href="#the-r-workspace-and-working-directory" title="Link to this heading">#</a></h3>
+<p>The workspace contains the objects you create during an R session. The <strong>working directory</strong> is the folder where R starts looking for a <a class="reference internal" href="../appendices/terms.html#id3"><span class="std std-ref">relative path</span></a>. For example, if the working directory is your project root, <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code> means the file <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> inside that project’s <code class="docutils literal notranslate"><span class="pre">data</span></code> folder. Use <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> to show the working directory and <code class="docutils literal notranslate"><span class="pre">dir()</span></code> to list what it contains.</p>
+<p>For a reproducible script, open a terminal at the project root and launch it explicitly, for example <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/analysis.R</span></code>. The script can then read <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and write <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code>. Do not edit the system-wide <code class="docutils literal notranslate"><span class="pre">Rprofile.site</span></code> or place a machine-specific <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> in shared code. Editors may offer project-opening controls, but confirm their location with <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> rather than assuming it.</p>
+<p>R can save and restore an <code class="docutils literal notranslate"><span class="pre">.RData</span></code> workspace, but a clean script should create the objects it needs from source code and input data. Avoid relying on objects silently restored from a previous session. See the clean check in <a class="reference internal" href="../appendices/r-setup.html#run-a-clean-project-check"><span class="std std-ref">R Installation and User Libraries</span></a>.</p>
 </section>
 </section>
 <section id="importing-and-exporting-data">
@@ -3353,7 +3347,14 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <p>Now, import the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/trees.csv"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">getwd</span><span class="p">()</span><span class="w"> </span><span class="c1"># This should be your coursework project root</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/trees.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3374,12 +3375,12 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </div></div>
 </div>
 <p>Your output may be somewhat different, depending on what what variables and other objects have been created in
-your r Workspace during the current r session. But the main thing is, you should be able to see a <code class="docutils literal notranslate"><span class="pre">MyData</span></code> in the list of objects printed.</p>
+your R workspace during the current R session. But the main thing is, you should be able to see a <code class="docutils literal notranslate"><span class="pre">MyData</span></code> in the list of objects printed.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can list only objects with a particular name pattern by using the <code class="docutils literal notranslate"><span class="pre">pattern</span></code> option of <code class="docutils literal notranslate"><span class="pre">ls()</span></code>. It works by using regular expressions, which you were introduced through the <code class="docutils literal notranslate"><span class="pre">grep</span></code> command in the <a class="reference internal" href="unix.html#using-grep"><span class="std std-ref">UNIX chapter</span></a>. We will delve deeper into regular expressions in the <a class="reference internal" href="python.html#python-ii-python-regex"><span class="std std-ref">python II Chapter</span></a>.</p>
 </div>
-<p>Note that the resulting <code class="docutils literal notranslate"><span class="pre">MyData</span></code> object in your workspace is a r dataframe:</p>
+<p>Note that the resulting <code class="docutils literal notranslate"><span class="pre">MyData</span></code> object in your workspace is a R data frame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">class</span><span class="p">(</span><span class="n">MyData</span><span class="p">)</span>
@@ -3391,10 +3392,9 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 <section id="relative-paths">
 <h3>Relative paths<a class="headerlink" href="#relative-paths" title="Link to this heading">#</a></h3>
-<p>Note the UNIX-like path to the file we used in the <code class="docutils literal notranslate"><span class="pre">read.csv()</span></code> command above (using forward slashes; Windows uses back slashes).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">../</span></code> in <code class="docutils literal notranslate"><span class="pre">read.csv(&quot;../data/trees.csv&quot;)</span></code> above signifies a “relative” path. That is, you are asking r to load data that lies in a different directory (folder) <em>relative</em> your current location (in this case, you are in your <code class="docutils literal notranslate"><span class="pre">Code</span></code>directory). In other, more technical words, <code class="docutils literal notranslate"><span class="pre">../data/trees.txt</span></code>points to a file named <code class="docutils literal notranslate"><span class="pre">trees.txt</span></code>located in the “parent” of the current directory.</p>
-<p><em>What is an absolute path?</em> — one that specifies the whole path on your computer, say from <code class="docutils literal notranslate"><span class="pre">C:\</span></code>”upwards” on Windows, <code class="docutils literal notranslate"><span class="pre">/Users/</span></code> upwards on Mac, and <code class="docutils literal notranslate"><span class="pre">/home/</span></code> upwards on Linux. Absolute paths are specific to each computer, so should be avoided. So to import data and export results, your script should <em>not</em> use absolute paths. Also, <em>AVOID putting a <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>command at the start of your r script</em>, because setting the working directory requires an absolute directory path, which will differ across computers, platforms, and users. Let the end users set the working directory on their machine themselves.</p>
-<p>Using relative paths in your r scripts and code will make your code computer-independent and easier for others to use your code. The relative path way should always be the way you load data in your analyses scripts — it will guarantee that your analysis works on every computer, not just your own or college computer.</p>
+<p>The path <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code> is a <a class="reference internal" href="../appendices/terms.html#id3"><span class="std std-ref">relative path</span></a>: it tells R to look for <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> inside the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder. Because we started at the project root, R looks in the right place. The same script can therefore work after the whole project is moved to another computer.</p>
+<p>The notation <code class="docutils literal notranslate"><span class="pre">..</span></code> means “the parent directory”. It is useful when you deliberately start inside a subdirectory: from <code class="docutils literal notranslate"><span class="pre">code/</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">../data/trees.csv</span></code> goes up to the project root and then into <code class="docutils literal notranslate"><span class="pre">data/</span></code>. We will keep that navigation idea in mind, but it is not our normal analysis setup; starting at the project root makes the input and output paths easier to read.</p>
+<p>An <strong>absolute path</strong> gives the complete location on one computer, starting from a drive such as <code class="docutils literal notranslate"><span class="pre">C:\</span></code> on Windows, <code class="docutils literal notranslate"><span class="pre">/Users/</span></code> on macOS or <code class="docutils literal notranslate"><span class="pre">/home/</span></code> on Linux. Do not put a personal absolute path or a <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> call in shared scripts. Instead, state where the script should be launched and let its relative paths describe the files inside the project.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you are using a computer from elsewhere in the EU, Excel may use a comma (e.g., <span class="math notranslate nohighlight">\(\pi=3,1416\)</span>) instead of a decimal point (<span class="math notranslate nohighlight">\(\pi=3.1416\)</span>). In this case, <code class="docutils literal notranslate"><span class="pre">csv</span></code>files may use a semi-colon to separate columns and you can use the alternative function <code class="docutils literal notranslate"><span class="pre">read.csv2()</span></code> to read them into the R workspace.</p>
@@ -3441,7 +3441,7 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span><span class="c1"># Import ignoring headers</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Import ignoring headers</span>
 </pre></div>
 </div>
 </div>
@@ -3473,7 +3473,7 @@ your r Workspace during the current r session. But the main thing is, you should
 <p>Or you can load data using the more general <code class="docutils literal notranslate"><span class="pre">read.table</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">"../data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">','</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1">#another way</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">"data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">','</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Another way</span>
 </pre></div>
 </div>
 </div>
@@ -3505,7 +3505,7 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="c1"># skip first 5 lines</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="c1"># Skip first 5 lines</span>
 </pre></div>
 </div>
 </div>
@@ -3516,14 +3516,14 @@ your r Workspace during the current r session. But the main thing is, you should
 <p>You can also save your data frames using <code class="docutils literal notranslate"><span class="pre">write.table</span></code> or <code class="docutils literal notranslate"><span class="pre">write.csv</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dir</span><span class="p">(</span><span class="s">"../results/"</span><span class="p">)</span><span class="w"> </span><span class="c1"># Check if it worked</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dir</span><span class="p">(</span><span class="s">"results/"</span><span class="p">)</span><span class="w"> </span><span class="c1"># Check if it worked</span>
 </pre></div>
 </div>
 </div>
@@ -3538,28 +3538,28 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">1</span><span class="p">,],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="n">append</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># append</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">append</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Append</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in write.table(MyData[1, ], file = "../results/MyData.csv", append = TrUE):
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in write.table(MyData[1, ], file = "results/MyData.csv", append = TRUE):
 “appending column names to file”
 </pre></div>
 </div>
 </div>
 </div>
-<p>You get a warning with here because r thinks it is strange that you are appending headers to a file that already has headers!</p>
+<p>You get a warning with here because R thinks it is strange that you are appending headers to a file that already has headers!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># write row names</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Write row names</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1"># ignore col names</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Omit column names</span>
 </pre></div>
 </div>
 </div>
@@ -3567,50 +3567,51 @@ your r Workspace during the current r session. But the main thing is, you should
 </section>
 </section>
 <section id="writing-r-code">
-<h2>Writing r code<a class="headerlink" href="#writing-r-code" title="Link to this heading">#</a></h2>
-<p>Typing in commands interactively in the R console is good for starters, but you will want to switch to putting your sequence of commands into a script file, and then ask r to run those commands.</p>
+<h2>Writing R code<a class="headerlink" href="#writing-r-code" title="Link to this heading">#</a></h2>
+<p>Typing in commands interactively in the R console is good for starters, but you will want to switch to putting your sequence of commands into a script file, and then ask R to run those commands.</p>
 <ul class="simple">
-<li><p>Open a new text file, call it <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code>, and save it to your <code class="docutils literal notranslate"><span class="pre">code</span></code>directory.</p></li>
+<li><p>Open a new text file, call it <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code>, and save it in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Keep your R session at the project root.</p></li>
 <li><p>Write the above input-output commands in it:</p></li>
 </ul>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># A simple script to illustrate r input-output.  </span>
-<span class="c1"># run line by line and check inputs outputs to understand what is happening  </span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># A simple R script illustrating file input and output.</span>
+<span class="c1"># Run from the coursework project root with:</span>
+<span class="c1"># Rscript code/basic_io.R</span>
 
-<span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"../data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># import with headers</span>
+<span class="n">MyData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"data/trees.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Import with headers</span>
 
-<span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">)</span><span class="w"> </span><span class="c1">#write it out as a new file</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">)</span><span class="w"> </span><span class="c1"># Write it as a new file</span>
 
-<span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">1</span><span class="p">,],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="n">append</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Append to it</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">append</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Append to it</span>
 
-<span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="o">=</span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># write row names</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Write row names</span>
 
-<span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"../results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1"># ignore column names</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">MyData</span><span class="p">,</span><span class="w"> </span><span class="s">"results/MyData.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1"># Omit column names</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Now place the cursor on the first line of code in the script file and run it by pressing the appropriate keyboard shortcut (e.g., PC: ctrl+r, Mac: command+enter, Linux: ctrl+enter are the usual shortcuts for doing this).</p></li>
+<li><p>Now place the cursor on the first line of code in the script file and run it by pressing the appropriate keyboard shortcut (e.g., PC: ctrl+r, Mac: command+enter, Linux: ctrl+enter are the usual shortcuts for doing this). Check <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> first if your editor does not keep the R session at the project root.</p></li>
 <li><p>Check after every line that you are getting the expected result.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Why no shebang in your first r script?</strong> Because we are learning r here mainly for writing scripts for data analysis &amp; visualization, and relatively simple numerical calculations &amp; modelling/simulation tasks. read <a class="reference external" href="https://www.r-bloggers.com/2019/11/r-scripts-as-command-line-tools/">this</a> and <a class="reference external" href="https://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/">this</a> for some more technical advice about r scripts.</p>
+<p><strong>Why no shebang in your first R script?</strong> Because we are learning R here mainly for writing scripts for data analysis &amp; visualization, and relatively simple numerical calculations &amp; modelling/simulation tasks. read <a class="reference external" href="https://www.r-bloggers.com/2019/11/r-scripts-as-command-line-tools/">this</a> and <a class="reference external" href="https://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/">this</a> for some more technical advice about R scripts.</p>
 </div>
 </section>
 <section id="running-r-code">
 <h2>Running R code<a class="headerlink" href="#running-r-code" title="Link to this heading">#</a></h2>
-<p>But even writing to a script file and running the code line-by-line or block-by-block is not your ultimate goal. What you would really like to do is to just run your full analysis and output all the results. There are two main approaches for running r script/code.</p>
+<p>But even writing to a script file and running the code line-by-line or block-by-block is not your ultimate goal. What you would really like to do is to just run your full analysis and output all the results. There are two main approaches for running R script/code.</p>
 <section id="using-source">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">source</span></code><a class="headerlink" href="#using-source" title="Link to this heading">#</a></h3>
-<p>You can run all the contents of a <code class="docutils literal notranslate"><span class="pre">*.R</span></code>script file from the R command line by using <code class="docutils literal notranslate"><span class="pre">source()</span></code>.</p>
-<p>★ Try sourcing <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code> (you will need to make sure you have <code class="docutils literal notranslate"><span class="pre">setwd</span></code> to your code directory):</p>
+<p>You can run all the contents of a <code class="docutils literal notranslate"><span class="pre">*.R</span></code> script file from the R command line by using <code class="docutils literal notranslate"><span class="pre">source()</span></code>. If the script says <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code>, R looks for that path from the session’s working directory.</p>
+<p>★ With the R session at the project root, try sourcing <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">"basic_io.r"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">"code/basic_io.R"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in write.table(MyData[1, ], file = "../results/MyData.csv", append = TrUE):
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in write.table(MyData[1, ], file = "results/MyData.csv", append = TRUE):
 “appending column names to file”
 </pre></div>
 </div>
@@ -3618,13 +3619,13 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 <p>That has run OK, warning and all.</p>
 <ul class="simple">
-<li><p>If you get errors, read and then try to fix them. The most common problem is likely to be that you have not <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> to the <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory of your coursework project.</p></li>
+<li><p>If you get an error saying that <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code> cannot be found, inspect <code class="docutils literal notranslate"><span class="pre">getwd()</span></code>. Return to the project root, then source <code class="docutils literal notranslate"><span class="pre">code/basic_io.R</span></code> again.</p></li>
 </ul>
-<p>Alternatively, you can run the script from wherever (e.g., the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory) by adding the directory path to the script file name, if the script file is not in your working directory and you don’t want to change your working directory. For example, you will need <code class="docutils literal notranslate"><span class="pre">source(&quot;../code/control.R&quot;)</span></code> if your working directory is <code class="docutils literal notranslate"><span class="pre">data/</span></code> and not <code class="docutils literal notranslate"><span class="pre">code/</span></code> (using a relative path).</p>
+<p>The path in <code class="docutils literal notranslate"><span class="pre">source(&quot;code/basic_io.R&quot;)</span></code> tells R where to find the script; it does not move R into the <code class="docutils literal notranslate"><span class="pre">code</span></code> folder. R still looks for <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code> from the project root. Keeping both interactive and command-line runs there means the same paths work in each case.</p>
 <p><em>Do not</em> put a <code class="docutils literal notranslate"><span class="pre">source()</span></code> command inside the script file you are sourcing, as it is then trying to run itself again and again and that’s just cruel!*</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The command <code class="docutils literal notranslate"><span class="pre">source()</span></code> has a <code class="docutils literal notranslate"><span class="pre">chdir</span></code> argument whose default value is FALSE. When set to TRUE, it will change the working directory to the directory of the file being sourced.</p>
+<p>The command <code class="docutils literal notranslate"><span class="pre">source()</span></code> has a <code class="docutils literal notranslate"><span class="pre">chdir</span></code> argument whose default value is <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. If you change it to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, R temporarily starts looking for files from the script’s folder. That would break <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code>, so leave <code class="docutils literal notranslate"><span class="pre">chdir</span></code> as <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> for this workflow.</p>
 </div>
 <p>Also, if you have <code class="docutils literal notranslate"><span class="pre">source</span></code>d a script successfully, you will see no output on the R console/terminal unless there was an error or warning, or if you explicitly asked for something to be printed. So it can be useful to add a line at the end of the script saying something like <code class="docutils literal notranslate"><span class="pre">print(&quot;Script</span> <span class="pre">complete!&quot;)</span></code>.</p>
 </section>
@@ -3635,32 +3636,32 @@ your r Workspace during the current r session. But the main thing is, you should
 <p>If you are on Linux, try using <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> to run <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code>:</p>
 <ul class="simple">
 <li><p>Exit from the R console using <code class="docutils literal notranslate"><span class="pre">ctrl+D</span></code>, or open a new bash terminal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> to the coursework project’s root <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory, where <code class="docutils literal notranslate"><span class="pre">basic_io.R</span></code> is saved</p></li>
-<li><p>Then run the script using <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">basic_io.R</span></code></p></li>
+<li><p>Change to the coursework project root, which contains <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code></p></li>
+<li><p>Run the script using <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/basic_io.R</span></code></p></li>
 </ul>
 <p>Also, please have a look at <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">Rscript</span></code> in a bash terminal.</p>
 </section>
 <section id="running-r-in-batch-mode">
 <h3>Running R in batch mode<a class="headerlink" href="#running-r-in-batch-mode" title="Link to this heading">#</a></h3>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>, there is another way to run your R script without opening the R console. In Mac or Linux, you can do so by typing:</p>
-<p><code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">CMD</span> <span class="pre">BATCH</span> <span class="pre">MyCode.R</span> <span class="pre">Myresults.rout</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">CMD</span> <span class="pre">BATCH</span> <span class="pre">code/MyCode.R</span> <span class="pre">results/Myresults.rout</span></code></p>
 <p>This will create a <code class="docutils literal notranslate"><span class="pre">Myresults.rout</span></code> file containing all the output. On Microsoft Windows, it’s more complicated — change the path to <code class="docutils literal notranslate"><span class="pre">R.exe</span></code> and output file as needed:</p>
-<p><code class="docutils literal notranslate"><span class="pre">&quot;C:\\Program</span> <span class="pre">Files\\R\\R-4.x.x\\bin\\R.exe&quot;</span> <span class="pre">CMD</span> <span class="pre">BATCH</span> <span class="pre">-vanilla</span> <span class="pre">-slave</span> <span class="pre">&quot;C:\\PathToMyresults\\results\\MyCode.R&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;C:\\Program</span> <span class="pre">Files\\R\\R-4.x.x\\bin\\R.exe&quot;</span> <span class="pre">CMD</span> <span class="pre">BATCH</span> <span class="pre">-vanilla</span> <span class="pre">-slave</span> <span class="pre">&quot;code\\MyCode.R&quot;</span> <span class="pre">&quot;results\\Myresults.rout&quot;</span></code></p>
 <p>Here, replace 4.x.x with the R version you have.</p>
 </section>
 </section>
 <section id="control-flow-tools">
 <h2>Control flow tools<a class="headerlink" href="#control-flow-tools" title="Link to this heading">#</a></h2>
-<p>In r, you can write “if-then”, and “else” statements, and “for” and “while” loops like any programming language to give you finer control over your program’s “control flow”. Such statements are useful to include in functions and scripts because you may only want to do certain calculations or other tasks, under certain conditions (e.g., <code class="docutils literal notranslate"><span class="pre">if</span></code> the dataset is from a particular year, do something different).</p>
+<p>In R, you can write “if-then”, and “else” statements, and “for” and “while” loops like any programming language to give you finer control over your program’s “control flow”. Such statements are useful to include in functions and scripts because you may only want to do certain calculations or other tasks, under certain conditions (e.g., <code class="docutils literal notranslate"><span class="pre">if</span></code> the dataset is from a particular year, do something different).</p>
 <p>Let’s look at some examples of these control flow tools in R.</p>
 <p>★ Type each of the following blocks of code in a script file called <code class="docutils literal notranslate"><span class="pre">control_flow.R</span></code> and save it in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. then run each block <em>separately</em> by sending or pasting into the R console.</p>
 <section id="if-statements">
 <h3><code class="docutils literal notranslate"><span class="pre">if</span></code> statements<a class="headerlink" href="#if-statements" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">TrUE</span>
-<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TrUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nf">print </span><span class="p">(</span><span class="s">"a is TrUE"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
+<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">print </span><span class="p">(</span><span class="s">"a is TRUE"</span><span class="p">)</span>
 <span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">print </span><span class="p">(</span><span class="s">"a is FALSE"</span><span class="p">)</span>
 <span class="p">}</span>
@@ -3668,13 +3669,12 @@ your r Workspace during the current r session. But the main thing is, you should
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] "a is TrUE"
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] "a is TRUE"
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that using <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(a)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(a</span> <span class="pre">==</span> <span class="pre">TrUE)</span></code> will also achieve the same result, because <code class="docutils literal notranslate"><span class="pre">a</span></code> is a Boolean variable. Compare with  <a class="reference internal" href="python.html#python-conditionals"><span class="std std-ref">Python conditionals</span></a>.</p>
-<p>In general, it is arguably a good idea to make explicit the <code class="docutils literal notranslate"><span class="pre">if</span></code> condition though.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">a</span></code> already contains a logical value, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(a)</span></code> tests it directly; there is no need to write <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(a</span> <span class="pre">==</span> <span class="pre">TRUE)</span></code>. Compare this with <a class="reference internal" href="python.html#python-conditionals"><span class="std std-ref">Python conditionals</span></a>.</p>
 <p>You can also write an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement on a single line:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3882,13 +3882,13 @@ i equals  9
 </section>
 </section>
 <section id="writing-r-functions">
-<h2>Writing r Functions<a class="headerlink" href="#writing-r-functions" title="Link to this heading">#</a></h2>
-<p>A function is a block of re-useable code that takes an input, does something with it (or to it!), and returns the result. Like any other programming language, r lets you write your own functions. All the “commands” that you have been using, such as <code class="docutils literal notranslate"><span class="pre">ls()</span></code>, <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">c()</span></code>, etc are basically functions. You will want to write your own function for every scenario where a particular task or set of analysis steps need to be performed again and again.<br />
-The syntax for r functions is quite simple, with each function accepting “arguments” and “returning” a value.</p>
+<h2>Writing R Functions<a class="headerlink" href="#writing-r-functions" title="Link to this heading">#</a></h2>
+<p>A function is a reusable block of code that takes an input, does something with it (or to it), and returns a result. Like other programming languages, R lets you write your own functions. The commands you have been using, such as <code class="docutils literal notranslate"><span class="pre">ls()</span></code>, <code class="docutils literal notranslate"><span class="pre">mean()</span></code> and <code class="docutils literal notranslate"><span class="pre">c()</span></code>, are functions. It is worth writing your own function whenever a task or set of analysis steps needs to be performed repeatedly.<br />
+The syntax for R functions is quite simple, with each function accepting “arguments” and “returning” a value.</p>
 <section id="your-first-r-function">
-<h3>Your first r function<a class="headerlink" href="#your-first-r-function" title="Link to this heading">#</a></h3>
+<h3>Your first R function<a class="headerlink" href="#your-first-r-function" title="Link to this heading">#</a></h3>
 <p>★ Type the following into a script file called  <code class="docutils literal notranslate"><span class="pre">boilerplate.R</span></code>and save it in your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># A boilerplate r script</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># A boilerplate R script</span>
 
 <span class="n">MyFunction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">Arg1</span><span class="p">,</span><span class="w"> </span><span class="n">Arg2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span>
@@ -3903,11 +3903,11 @@ The syntax for r functions is quite simple, with each function accepting “argu
 <span class="nf">MyFunction</span><span class="p">(</span><span class="s">"riki"</span><span class="p">,</span><span class="s">"Tiki"</span><span class="p">)</span><span class="w"> </span><span class="c1">#A different test</span>
 </pre></div>
 </div>
-<p>Note the curly brackets – these are necessary for r to know where the specification of the function starts and ends. Also, note the indentation. Not necessary (unlike Python), but recommended to make the code more readable.</p>
+<p>Note the curly brackets — R uses these to identify where the function body starts and ends. Also note the indentation. It is not required, but it makes the code easier to read.</p>
 <p>Now enter the R console and source the script:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">"boilerplate.r"</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">"boilerplate.R"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3930,7 +3930,7 @@ The syntax for r functions is quite simple, with each function accepting “argu
 <div class="cell_output docutils container">
 <div class="output text_html">'MyFunction'</div></div>
 </div>
-<p>Again, you output may be a bit different as you have been different things in your r workspace/session than I have. What matters is that you see <code class="docutils literal notranslate"><span class="pre">MyFunction</span></code> in the list of objects above.</p>
+<p>Again, you output may be a bit different as you have been different things in your R workspace/session than I have. What matters is that you see <code class="docutils literal notranslate"><span class="pre">MyFunction</span></code> in the list of objects above.</p>
 <p>Now try:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4019,7 +4019,7 @@ The syntax for r functions is quite simple, with each function accepting “argu
 <span class="c1">#</span>
 <span class="c1"># height = distance * tan(radians)</span>
 <span class="c1">#</span>
-<span class="c1"># ArGUMENTS</span>
+<span class="c1"># ARGUMENTS</span>
 <span class="c1"># degrees:   The angle of elevation of tree</span>
 <span class="c1"># distance:  The distance from base of tree (e.g., meters)</span>
 <span class="c1">#</span>
@@ -4065,7 +4065,7 @@ The syntax for r functions is quite simple, with each function accepting “argu
 <p>The goal of this practical is to make the <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code> script more general, so that it could be used for other datasets, not just <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code>.</p>
 <p>Guidelines:</p>
 <ul class="simple">
-<li><p>Write another r script called <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code> that takes a csv file name from the command line (e.g., <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span> <span class="pre">Trees.csv</span></code>) and outputs the result to a file just like <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code>above, but this time includes the input file name in the output file name as <code class="docutils literal notranslate"><span class="pre">InputFileName_treeheights.csv</span></code>. Note that you will have to strip the <code class="docutils literal notranslate"><span class="pre">.csv</span></code>or whatever the extension is from the filename, and also <code class="docutils literal notranslate"><span class="pre">../</span></code> etc., if you are using relative paths. (Hint: Command-line parameters are accessible within the R running environment via <code class="docutils literal notranslate"><span class="pre">commandArgs()</span></code> — so <code class="docutils literal notranslate"><span class="pre">help(commandArgs)</span></code> might be your starting point.)</p></li>
+<li><p>Write another R script called <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code> that takes a csv file name from the command line (e.g., <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span> <span class="pre">Trees.csv</span></code>) and outputs the result to a file just like <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code>above, but this time includes the input file name in the output file name as <code class="docutils literal notranslate"><span class="pre">InputFileName_treeheights.csv</span></code>. Note that you will have to strip the <code class="docutils literal notranslate"><span class="pre">.csv</span></code>or whatever the extension is from the filename, and also <code class="docutils literal notranslate"><span class="pre">../</span></code> etc., if you are using relative paths. (Hint: Command-line parameters are accessible within the R running environment via <code class="docutils literal notranslate"><span class="pre">commandArgs()</span></code> — so <code class="docutils literal notranslate"><span class="pre">help(commandArgs)</span></code> might be your starting point.)</p></li>
 <li><p>Write a unix shell script called <code class="docutils literal notranslate"><span class="pre">run_get_TreeHeight.sh</span></code> that tests <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code>. Include <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code>as your example file. Note that <code class="docutils literal notranslate"><span class="pre">source</span></code>will not work in this case as it does not allow scripts with arguments to be run; you will have to use <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>instead.</p></li>
 </ul>
 </section>
@@ -4076,7 +4076,7 @@ The syntax for r functions is quite simple, with each function accepting “argu
 </section>
 <section id="vectorization">
 <span id="r-vectorization"></span><h2>Vectorization<a class="headerlink" href="#vectorization" title="Link to this heading">#</a></h2>
-<p>r is relatively slow at cycling through a data structure such as a dataframe or matrix (e.g., by using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop) because it is a <em>high-level, interpreted computer language</em>.</p>
+<p>R is relatively slow at cycling through a data structure such as a dataframe or matrix (e.g., by using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop) because it is a <em>high-level, interpreted computer language</em>.</p>
 <p>That is, when you execute a command in R, it needs to “read” and interpret the necessary code from scratch every single time the command is called. On the other hand, compiled languages like C know exactly what the flow of the program is because the code is pre-interpreted and ready to go before execution (i.e., the code is “compiled”).</p>
 <p>For example, when you assign a new variable in R:</p>
 <div class="cell docutils container">
@@ -4089,13 +4089,13 @@ The syntax for r functions is quite simple, with each function accepting “argu
 <div class="cell_output docutils container">
 <div class="output text_html">'numeric'</div></div>
 </div>
-<p>r automatically figures out that <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is an floating point number, and finds a place in the system memory for it with <code class="docutils literal notranslate"><span class="pre">a</span></code> registered as a “pointer” to it.</p>
+<p>R automatically figures out that <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is an floating point number, and finds a place in the system memory for it with <code class="docutils literal notranslate"><span class="pre">a</span></code> registered as a “pointer” to it.</p>
 <p>In contrast, in C, for example, you would have to do so manually by giving <code class="docutils literal notranslate"><span class="pre">a</span></code> an address and space in memory:</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">a</span>
 <span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 </div>
-<p><em>Vectorization is an approach where you directly apply compiled, optimized code to run an operation on a vector, matrix, or an higher-dimensional data structure (like an r array), instead of performing the operation element-wise (each row or column element one at a time) on the data structure</em>.</p>
+<p><em>Vectorization is an approach where you directly apply compiled, optimized code to run an operation on a vector, matrix, or an higher-dimensional data structure (like an R array), instead of performing the operation element-wise (each row or column element one at a time) on the data structure</em>.</p>
 <p>Apart from computational efficiency vectorization makes writing code more concise, easy to read, and less error prone.</p>
 <p>Let’s try an example that illustrates this point.</p>
 <p>★ Type (save in <code class="docutils literal notranslate"><span class="pre">Code</span></code>) as <code class="docutils literal notranslate"><span class="pre">Vectorize1.R</span></code> the following script, and run it (it sums all elements of a matrix):</p>
@@ -4133,13 +4133,13 @@ The syntax for r functions is quite simple, with each function accepting “argu
 </div>
 </div>
 </div>
-<p>Note the <code class="docutils literal notranslate"><span class="pre">system.time</span></code> r function: it calculates how much time your code takes. This time will vary with every run, and every computer that this code is run on (so your times will be a bit different than what I got).</p>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">system.time</span></code> R function: it calculates how much time your code takes. This time will vary with every run, and every computer that this code is run on (so your times will be a bit different than what I got).</p>
 <p>Both <code class="docutils literal notranslate"><span class="pre">SumAllElements()</span></code> and <code class="docutils literal notranslate"><span class="pre">sum()</span></code> approaches are correct, and will give you the right answer. However, the inbuilt function <code class="docutils literal notranslate"><span class="pre">sum()</span></code>  is about 100 times faster than the other, because it uses vectorization, avoiding the amount of looping that <code class="docutils literal notranslate"><span class="pre">SumAllElements()</span></code> uses.</p>
-<p>In effect, of course, the computer still has to run loops. However, this running of the loops is encapsulated in a pre-complied program that r calls. These programs are written in more primitive (and therefore, faster) languages like Fortran and C. For example <code class="docutils literal notranslate"><span class="pre">sum</span></code> is actually written in C if you look under the hood.</p>
-<p>In r, even if you should try to avoid loops, in practice, it is often much easier to throw in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, and <em>then</em> “optimize” the code to avoid the loop if the running time is not satisfactory. Therefore, it is still essential that you to become familiar with loops and looping as you learned in the sections above.</p>
+<p>In effect, of course, the computer still has to run loops. However, this running of the loops is encapsulated in a pre-complied program that R calls. These programs are written in more primitive (and therefore, faster) languages like Fortran and C. For example <code class="docutils literal notranslate"><span class="pre">sum</span></code> is actually written in C if you look under the hood.</p>
+<p>In R, a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is often the clearest way to express a task. Start with readable, correct code, then optimise it only if its running time becomes a problem. You should therefore still become familiar with loops and looping, as in the sections above.</p>
 <section id="pre-allocation">
 <h3>Pre-allocation<a class="headerlink" href="#pre-allocation" title="Link to this heading">#</a></h3>
-<p>And if you are using loops, one operation that is slow in R (and somewhat slow in all languages) is memory allocation for a particular variable that will change during looping (e.g., a variable that is a dataframe). So writing a for loop that resizes a vector repeatedly makes r re-allocate memory repeatedly, which makes it slow. Try this:</p>
+<p>When using loops, repeatedly resizing an object can be slow because R must repeatedly allocate memory. For example, a loop that extends a vector on every iteration makes R re-allocate memory each time. Try this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">NoPreallocFun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4184,8 +4184,8 @@ The syntax for r functions is quite simple, with each function accepting “argu
 </div>
 </div>
 </div>
-<p>Here, in each repetition of the for loop, you can see that r has to re-size the vector and re-allocate (more) memory. It has to find the vector in memory, create a new vector that will fit more data, copy the old data over, insert the new data, and erase the old vector. This can get very slow as vectors get big.</p>
-<p>On the other hand, if you “pre-allocate” a vector that fits all the values, r doesn’t have to re-allocate memory each iteration. Here’s how you’d do that for the above case:</p>
+<p>Here, in each repetition of the for loop, you can see that R has to re-size the vector and re-allocate (more) memory. It has to find the vector in memory, create a new vector that will fit more data, copy the old data over, insert the new data, and erase the old vector. This can get very slow as vectors get big.</p>
+<p>On the other hand, if you “pre-allocate” a vector that fits all the values, R doesn’t have to re-allocate memory each iteration. Here’s how you’d do that for the above case:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">PreallocFun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4231,8 +4231,8 @@ The syntax for r functions is quite simple, with each function accepting “argu
 </div>
 </div>
 <p>★ Write the above two blocks of code into a script called <code class="docutils literal notranslate"><span class="pre">preallocate.R</span></code>. You can’t really see the difference in timing here using <code class="docutils literal notranslate"><span class="pre">system.time()</span></code> because the vector is really small (just 10 elements), and the <code class="docutils literal notranslate"><span class="pre">print()</span></code> commands take up most of the time. To really see the difference in efficiency between the two functions, increase the iterations in your script from 10 to 1000, and suppress the print commands. Make this modification to your script. The modified script should print just the outputs of the two <code class="docutils literal notranslate"><span class="pre">system.time()</span></code> calls.</p>
-<p>Fortunately, r has several functions that can operate on entire vectors and matrices without requiring looping (Vectorization). That is, vectorizing a computer program means you write it such that as many operations as possible are applied to whole data structure (vectors, matrices, dataframes, lists, etc) at one go, instead of its individual elements.</p>
-<p>You will learn about some important r functions that allow vectorization in the following sections.</p>
+<p>Fortunately, R has several functions that can operate on entire vectors and matrices without requiring looping (Vectorization). That is, vectorizing a computer program means you write it such that as many operations as possible are applied to whole data structure (vectors, matrices, dataframes, lists, etc) at one go, instead of its individual elements.</p>
+<p>You will learn about some important R functions that allow vectorization in the following sections.</p>
 </section>
 <section id="the-apply-family-of-functions">
 <h3>The <code class="docutils literal notranslate"><span class="pre">*apply</span></code> family of functions<a class="headerlink" href="#the-apply-family-of-functions" title="Link to this heading">#</a></h3>
@@ -4333,8 +4333,7 @@ The syntax for r functions is quite simple, with each function accepting “argu
 </div>
 </div>
 <p>Thus, the function <code class="docutils literal notranslate"><span class="pre">SomeOperation</span></code> takes as input <code class="docutils literal notranslate"><span class="pre">v</span></code>. Then if the sum of v is greater than zero, it multiplies that value by 100. So if <code class="docutils literal notranslate"><span class="pre">v</span></code> has positive and negative numbers, and the sum comes out to be positive, only then does it multiply all the values in <code class="docutils literal notranslate"><span class="pre">v</span></code> by 100 and return them.</p>
-<p>There are many other methods: <code class="docutils literal notranslate"><span class="pre">lapply</span></code>, <code class="docutils literal notranslate"><span class="pre">sapply</span></code>, <code class="docutils literal notranslate"><span class="pre">eapply</span></code>, etc. Each is best for a given data type. For example, <code class="docutils literal notranslate"><span class="pre">lapply</span></code> abd <code class="docutils literal notranslate"><span class="pre">sapply</span></code> are designed for r lists. Have a look at <a class="reference external" href="https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family">this Stackoveflow thread</a>
-for some guidelines.</p>
+<p>There are many other methods: <code class="docutils literal notranslate"><span class="pre">lapply</span></code>, <code class="docutils literal notranslate"><span class="pre">sapply</span></code>, <code class="docutils literal notranslate"><span class="pre">eapply</span></code>, etc. Each is suited to particular tasks or data structures. For example, <code class="docutils literal notranslate"><span class="pre">lapply</span></code> and <code class="docutils literal notranslate"><span class="pre">sapply</span></code> work with R lists. Have a look at <a class="reference external" href="https://stackoverflow.com/questions/3505701/grouping-functions-tapply-by-aggregate-and-the-apply-family">this Stack Overflow thread</a> for some guidelines.</p>
 <section id="a-vectorization-example">
 <h4>A vectorization example<a class="headerlink" href="#a-vectorization-example" title="Link to this heading">#</a></h4>
 <p>Let’s try an example of vectorization involving <code class="docutils literal notranslate"><span class="pre">lapply</span></code> and <code class="docutils literal notranslate"><span class="pre">sapply</span></code>. Both of these <em>apply</em> a function to <em>each element of a list</em>, but the former returns a list, while the latter returns a vector.</p>
@@ -4351,7 +4350,7 @@ for some guidelines.</p>
 <span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">pop_sample</span><span class="p">))</span>
 <span class="p">}</span>
 
-<span class="c1">## Calculate means using a FOr loop on a vector without preallocation:</span>
+<span class="c1">## Calculate means using a FOR loop on a vector without preallocation:</span>
 <span class="n">loopy_sample1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">popn</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">result1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">()</span><span class="w"> </span><span class="c1">#Initialize empty vector of size 1 </span>
 <span class="w">    </span><span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4360,7 +4359,7 @@ for some guidelines.</p>
 <span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">## To run "num" iterations of the experiment using a FOr loop on a vector with preallocation:</span>
+<span class="c1">## To run "num" iterations of the experiment using a FOR loop on a vector with preallocation:</span>
 <span class="n">loopy_sample2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">popn</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(,</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="c1">#Preallocate expected size</span>
 <span class="w">    </span><span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4369,7 +4368,7 @@ for some guidelines.</p>
 <span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">## To run "num" iterations of the experiment using a FOr loop on a list with preallocation:</span>
+<span class="c1">## To run "num" iterations of the experiment using a FOR loop on a list with preallocation:</span>
 <span class="n">loopy_sample3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">popn</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">result3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(</span><span class="s">"list"</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="c1">#Preallocate expected size</span>
 <span class="w">    </span><span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4805,7 +4804,7 @@ for examples.    There you will also see a comparison of speed of <code class="d
 <p>As we learned in the <a class="reference internal" href="python.html#python-errors"><span class="std std-ref">Python Chapter</span></a>, fixing errors and debugging is an integral part of programming! And just like Python, a variety of debugging tools and functions are available in R.</p>
 <section id="tracing-the-error-trail">
 <h3>Tracing the error trail<a class="headerlink" href="#tracing-the-error-trail" title="Link to this heading">#</a></h3>
-<p>When r encounters a runtime error, it will typically display the call “stack” (sequence) after the error occurs, helping you trace where the error happened.</p>
+<p>When R encounters a runtime error, it will typically display the call “stack” (sequence) after the error occurs, helping you trace where the error happened.</p>
 <p>Let’s try an example (type and run it using your code editor):</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -4884,7 +4883,7 @@ for examples.    There you will also see a comparison of speed of <code class="d
 </section>
 <section id="using-debug">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">debug()</span></code><a class="headerlink" href="#using-debug" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">debug()</span></code> function flags a function for debugging; r will enter the browser mode every time the function is called.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">debug()</span></code> function flags a function for debugging; R will enter the browser mode every time the function is called.</p>
 <p>Let’s define a function with a bug (type and run it):</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">buggy_function</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">unknown_variable</span>
@@ -4896,7 +4895,7 @@ for examples.    There you will also see a comparison of speed of <code class="d
 <p><code class="docutils literal notranslate"><span class="pre">debug(buggy_function)</span></code></p>
 <p>Now call the function:</p>
 <p><code class="docutils literal notranslate"><span class="pre">buggy_function(10)</span></code></p>
-<p>r will enter the browser mode at the beginning of <code class="docutils literal notranslate"><span class="pre">buggy_function()</span></code>. You can step through and inspect variables as you did in the <code class="docutils literal notranslate"><span class="pre">browser()</span></code> example above.</p>
+<p>R will enter the browser mode at the beginning of <code class="docutils literal notranslate"><span class="pre">buggy_function()</span></code>. You can step through and inspect variables as you did in the <code class="docutils literal notranslate"><span class="pre">browser()</span></code> example above.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you want to debug the function only once, use: <code class="docutils literal notranslate"><span class="pre">debugonce(buggy_function)</span></code></p>
@@ -4911,21 +4910,21 @@ for examples.    There you will also see a comparison of speed of <code class="d
 <p>We will not cover unit testing here, which we <a class="reference internal" href="python.html#python-errors"><span class="std std-ref">did in Python Chapter</span></a>). Unit testing in R is equally recommended, especially if you are going to develop complex code and packages.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>A very convenient tool for r unit testing is <a class="reference external" href="https://testthat.r-lib.org"><code class="docutils literal notranslate"><span class="pre">testthat</span></code></a>.</p>
+<p>A very convenient tool for R unit testing is <a class="reference external" href="https://testthat.r-lib.org"><code class="docutils literal notranslate"><span class="pre">testthat</span></code></a>.</p>
 </div>
 <p>In addition, you can use other “<a class="reference external" href="https://en.wikipedia.org/wiki/Defensive_programming">defensive programming</a>” methods in R to keep an eye on errors that might arise in special circumstances in an complex program. A good option for this is to convert warnings to errors using the <a class="reference external" href="https://stat.ethz.ch/r-manual/r-devel/library/base/html/stopifnot.html"><code class="docutils literal notranslate"><span class="pre">stopifnot()</span></code></a>. This is a bit like <code class="docutils literal notranslate"><span class="pre">try</span></code> (which we will cover below, and we also covered in <a class="reference internal" href="python.html#python-errors"><span class="std std-ref">Python Chapter</span></a>).</p>
 </section>
 <section id="catching-errors">
 <h3>“Catching” errors<a class="headerlink" href="#catching-errors" title="Link to this heading">#</a></h3>
-<p>Often, you don’t know if a simulation or a r function will work on a particular data or variable, or a value of a variable (can happen in many statistical functions).</p>
+<p>Often, you don’t know if a simulation or a R function will work on a particular data or variable, or a value of a variable (can happen in many statistical functions).</p>
 <p>Indeed, as most of you must have already experienced by now, there can be frustrating, puzzling bugs in programs that lead to mysterious errors. Often, the error and warning messages you get are un-understandable, especially in R!</p>
-<p>rather than having r throw you out of the code, you would rather catch the error and keep going. This can be done by using the <code class="docutils literal notranslate"><span class="pre">try</span></code> keyword.</p>
+<p>Rather than letting R stop the whole analysis, you may want to catch the error and continue. You can do this with <code class="docutils literal notranslate"><span class="pre">try()</span></code>.</p>
 <p>Let’s try <code class="docutils literal notranslate"><span class="pre">try</span></code>!</p>
 <p>First, let’s write a function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">doit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">temp_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrUE</span><span class="p">)</span>
+<span class="w">    </span><span class="n">temp_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="w">    </span><span class="kr">if</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">temp_x</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="c1">#only take mean if sample was sufficient</span>
 <span class="w">         </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">"Mean of this sample was:"</span><span class="p">,</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">temp_x</span><span class="p">))))</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span>
@@ -5007,7 +5006,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </div>
 </div>
 </div>
-<p>In this run, you again asked for the means of 15 samples, and again you (most likely) got less than that (see the above example output). With the <code class="docutils literal notranslate"><span class="pre">try</span></code> command, the errors are caught and <code class="docutils literal notranslate"><span class="pre">lapply()</span></code> continues through each iteration. The <code class="docutils literal notranslate"><span class="pre">silent</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">try()</span></code> command controls if the errors are printed into the terminal. By default, <code class="docutils literal notranslate"><span class="pre">silent</span> <span class="pre">=</span> <span class="pre">FALSE</span></code>, error messages are printed, and the argument <code class="docutils literal notranslate"><span class="pre">TrUE</span></code> can be used to suppress them. <em>Please don’t forget to  check the help on inbuilt r commands like <code class="docutils literal notranslate"><span class="pre">try</span></code>.</em></p>
+<p>In this run, you again asked for the means of 15 samples, and again you (most likely) got less than that (see the above example output). With the <code class="docutils literal notranslate"><span class="pre">try</span></code> command, the errors are caught and <code class="docutils literal notranslate"><span class="pre">lapply()</span></code> continues through each iteration. The <code class="docutils literal notranslate"><span class="pre">silent</span></code> argument of <code class="docutils literal notranslate"><span class="pre">try()</span></code> controls whether those errors are printed in the terminal. By default, <code class="docutils literal notranslate"><span class="pre">silent</span> <span class="pre">=</span> <span class="pre">FALSE</span></code>, so the messages are shown; use <code class="docutils literal notranslate"><span class="pre">silent</span> <span class="pre">=</span> <span class="pre">TRUE</span></code> to suppress them. <em>Remember to check the help for built-in R functions such as <code class="docutils literal notranslate"><span class="pre">try</span></code>.</em></p>
 <p>The errors are also stored in the object <code class="docutils literal notranslate"><span class="pre">result</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5126,26 +5125,52 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </section>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
-<p>The big strength of r is that users can easily build and share packages through <a class="reference external" href="https://cran.r-project.org">cran.r-project.org</a>.</p>
-<p>There are r packages for practically all statistical and mathematical analysis you might conceive, so check them out before reinventing the wheel. Visit <a class="reference external" href="https://cran.r-project.org">cran.r-project.org</a> and go to packages to see a list and a brief description.</p>
-<p>In Windows and Macs and Linux, you can install a package within r by using the <code class="docutils literal notranslate"><span class="pre">install.packages()</span></code>command.</p>
+<p>The big strength of R is that users can easily build and share packages through <a class="reference external" href="https://cran.r-project.org">cran.r-project.org</a>.</p>
+<p>There are R packages for practically all statistical and mathematical analysis you might conceive, so check them out before reinventing the wheel. Visit <a class="reference external" href="https://cran.r-project.org">cran.r-project.org</a> and go to packages to see a list and a brief description.</p>
+<p>In Windows and Macs and Linux, you can install a package within R by using the <code class="docutils literal notranslate"><span class="pre">install.packages()</span></code>command.</p>
 <p>For example:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">"tidyverse"</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>You can also install multiple packages by concatenating their names: <code class="docutils literal notranslate"><span class="pre">install.packages(c(&quot;pack1&quot;,&quot;pack2&quot;,&quot;pack3&quot;))</span></code>
 (three packages in this hypothetical example)</p>
-<p>In Ubuntu, you will have to launch a <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">r</span></code>session to get <code class="docutils literal notranslate"><span class="pre">install.packages()</span></code>to work properly. Otherwise, you be forced to install the package in a non-standard location on your drive that does not require <code class="docutils literal notranslate"><span class="pre">sudo</span></code> privileges (nor recommended).</p>
-<p>You can also use the RStudio GUI to install packages using your mouse and menu.</p>
-<p>In Ubuntu, you can also use the bash terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>r-cran-tidyverse
-</pre></div>
-</div>
+<p>Install packages from an ordinary R session into your personal library; do not launch R with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>. If R asks to create a personal library, answer yes. See <a class="reference internal" href="../appendices/r-setup.html#install-packages-without-running-r-as-administrator"><span class="std std-ref">R Installation and User Libraries</span></a> for checks and troubleshooting.</p>
+<p>You can also use the RStudio package interface, but it installs into the same R libraries: inspect <code class="docutils literal notranslate"><span class="pre">.libPaths()</span></code> when a package appears in one session but not another. Operating-system package managers are for system-managed packages and libraries, not a substitute for checking which R installation and user library you are using.</p>
 <p>★ Go ahead and install <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> if you don’t have it yet. We will be using it <a class="reference internal" href="data-r.html"><span class="std std-doc">soon</span></a>!</p>
 <section id="building-your-own">
 <h3>Building your own<a class="headerlink" href="#building-your-own" title="Link to this heading">#</a></h3>
-<p>You can combine your code, data sets and documentation to make a <em>bona fide</em> r package. You may wish to do this for particularly large projects that you think will be useful for others. read the <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/r-exts.html"><em>Writing r Extensions</em></a> manual and see <em>package.skeleton</em> to get started.</p>
-<p>The r tool set <a class="reference external" href="https://github.com/DomBennett/EcoDataTools">EcoDataTools</a> and the package <a class="reference external" href="https://github.com/quicklizard99/cheddar">cheddar</a> were written by Silwood Grad Students!</p>
+<p>You can combine your code, data sets and documentation to make a <em>bona fide</em> R package. You may wish to do this for particularly large projects that you think will be useful for others. read the <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/r-exts.html"><em>Writing R Extensions</em></a> manual and see <em>package.skeleton</em> to get started.</p>
+<p>The R tool set <a class="reference external" href="https://github.com/DomBennett/EcoDataTools">EcoDataTools</a> and the package <a class="reference external" href="https://github.com/quicklizard99/cheddar">cheddar</a> were written by Silwood Grad Students!</p>
+</section>
+</section>
+<section id="the-observations-practice">
+<span id="r-observations-practice"></span><h2>The observations practice<a class="headerlink" href="#the-observations-practice" title="Link to this heading">#</a></h2>
+<p>This is <strong>unassessed practice</strong>. It uses the same small table and the same rules as the Python exercise, so you can think about the choices being made rather than simply translate one language into another. Work in a disposable project containing <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>, and <code class="docutils literal notranslate"><span class="pre">results</span></code> directories. Download the <a class="reference download internal" download="" href="../_downloads/c4cbe787a8116cbc7dc0fd659f30f96e/bootcamp_observations.csv"><code class="xref download docutils literal notranslate"><span class="pre">ordinary</span> <span class="pre">observations</span></code></a>, <a class="reference download internal" download="" href="../_downloads/ea6e703504896acb3ad626379cca3c20/bootcamp_observations_boundary.csv"><code class="xref download docutils literal notranslate"><span class="pre">boundary</span> <span class="pre">observations</span></code></a>, and <a class="reference download internal" download="" href="../_downloads/132c2cd4b6616b5b610214075ac94612/bootcamp_observations_invalid.csv"><code class="xref download docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">observations</span></code></a> into the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. Save your work as <code class="docutils literal notranslate"><span class="pre">code/observations_practice.R</span></code>, then run it from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/observations_practice.R</span></code>.</p>
+<section id="guided-read-inspect-and-decide-what-counts-as-valid">
+<h3>Guided: read, inspect, and decide what counts as valid<a class="headerlink" href="#guided-read-inspect-and-decide-what-counts-as-valid" title="Link to this heading">#</a></h3>
+<p>Read every column as character data first so validation happens before conversion:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">observations</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span>
+<span class="w">  </span><span class="s">"data/bootcamp_observations.csv"</span><span class="p">,</span>
+<span class="w">  </span><span class="n">colClasses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"character"</span><span class="p">,</span><span class="w"> </span><span class="n">na.strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">check.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span>
+<span class="p">)</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this exercise, the columns must be <code class="docutils literal notranslate"><span class="pre">site,date,count</span></code>, in that order. Every row needs a site and date. An empty <code class="docutils literal notranslate"><span class="pre">count</span></code> means that the observation is missing; zero means that somebody looked and counted none; every other count must be a non-negative integer. The ordinary dataset deliberately contains one repeated row. Before writing any code, explain why a missing count and an observed zero must not be treated alike.</p>
+</section>
+<section id="guided-validate-before-calculating">
+<h3>Guided: validate before calculating<a class="headerlink" href="#guided-validate-before-calculating" title="Link to this heading">#</a></h3>
+<p>Write a <code class="docutils literal notranslate"><span class="pre">read_observations(path)</span></code> function. Check the exact column names, reject empty sites or dates, and use <code class="docutils literal notranslate"><span class="pre">grepl(&quot;^(0|[1-9][0-9]*)$&quot;,</span> <span class="pre">value)</span></code> on each non-missing count before converting it with <code class="docutils literal notranslate"><span class="pre">as.integer()</span></code>. Stop with an informative error when a rule fails. Run the function on <code class="docutils literal notranslate"><span class="pre">bootcamp_observations_invalid.csv</span></code> and confirm that it stops because <code class="docutils literal notranslate"><span class="pre">-1</span></code> is not a non-negative integer.</p>
+</section>
+<section id="independent-deduplicate-and-summarise">
+<h3>Independent: deduplicate and summarise<a class="headerlink" href="#independent-deduplicate-and-summarise" title="Link to this heading">#</a></h3>
+<p>Write <code class="docutils literal notranslate"><span class="pre">summarise_observations(data)</span></code> without looking at the Python solution. Remove exact duplicate rows once. For each site, report <code class="docutils literal notranslate"><span class="pre">total_known</span></code> (the sum of non-missing counts) and <code class="docutils literal notranslate"><span class="pre">missing_count</span></code> separately. If every count for a site is missing, <code class="docutils literal notranslate"><span class="pre">total_known</span></code> must be <code class="docutils literal notranslate"><span class="pre">NA</span></code>, not zero. Your results should be: A <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">1)</span></code>, B <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>, C <code class="docutils literal notranslate"><span class="pre">(NA,</span> <span class="pre">2)</span></code>, and D <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>, where each pair is <code class="docutils literal notranslate"><span class="pre">(total_known,</span> <span class="pre">missing_count)</span></code>. Add <code class="docutils literal notranslate"><span class="pre">stopifnot()</span></code> checks for these four examples.</p>
+<p>Create one reproducible base-R figure of known totals and save it under <code class="docutils literal notranslate"><span class="pre">results/</span></code>; make the all-missing case visible in the caption or annotation rather than silently plotting it as zero. Rerun the complete script in a fresh terminal.</p>
+</section>
+<section id="critique-and-compare">
+<h3>Critique and compare<a class="headerlink" href="#critique-and-compare" title="Link to this heading">#</a></h3>
+<p>Compare your R result with the <a class="reference internal" href="python.html#python-observations-practice"><span class="std std-ref">Integrated practical: summarising observations</span></a>. Which decisions should stay the same whichever language you use, and which arise from the way R or Python works? Identify one tempting approach that would incorrectly turn missing values into zeros, one that would count the repeated row twice, and one error message that would help somebody repair an invalid input file.</p>
 </section>
 </section>
 <section id="climate-data-practicals">
@@ -5153,7 +5178,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <section id="practical-is-florida-getting-warmer">
 <h3>Practical: is Florida getting warmer?<a class="headerlink" href="#practical-is-florida-getting-warmer" title="Link to this heading">#</a></h3>
 <p><em>This Practical assumes you have at least a basic understanding of <a class="reference internal" href="regress.html#regress-correlations"><span class="std std-ref">correlation coefficients</span></a> and <a class="reference internal" href="t-f-tests.html"><span class="std std-doc">p-values</span></a>.</em></p>
-<p>Your goal is to write an r script that will help answer the question: <em>Is Florida getting warmer</em>?</p>
+<p>Your goal is to write an R script that will help answer the question: <em>Is Florida getting warmer</em>?</p>
 <p>Call this script <code class="docutils literal notranslate"><span class="pre">Florida.R</span></code>.</p>
 <p>To answer the question, you need to calculate the <a class="reference internal" href="regress.html#regress-correlations"><span class="std std-ref">correlation coefficients</span></a> between temperature and time. However, you can’t use the standard p-value calculated for a correlation coefficient, because measurements of climatic variables in successive time-points in a time series (successive seconds, minutes, hours, months, years, etc.) are <em>not independent</em>. Therefore you will use a permutation analysis instead, by generating a distribution of random correlation coefficients and compare your observed coefficient with this random distribution.</p>
 <p>Some guidelines:</p>
@@ -5164,7 +5189,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
 
-<span class="nf">load</span><span class="p">(</span><span class="s">"../data/key_west_annual_mean_temperature.RData"</span><span class="p">)</span>
+<span class="nf">load</span><span class="p">(</span><span class="s">"data/key_west_annual_mean_temperature.RData"</span><span class="p">)</span>
 
 <span class="nf">ls</span><span class="p">()</span>
 </pre></div>
@@ -5234,7 +5259,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <section id="group-practical-autocorrelation-in-florida-weather">
 <h3>Group practical: autocorrelation in Florida weather<a class="headerlink" href="#group-practical-autocorrelation-in-florida-weather" title="Link to this heading">#</a></h3>
 <p><em>This Practical assumes you have at least a basic understanding of <a class="reference internal" href="regress.html#regress-correlations"><span class="std std-ref">correlation coefficients</span></a> and <a class="reference internal" href="t-f-tests.html"><span class="std std-doc">p-values</span></a>.</em></p>
-<p>Your goal is to write an r script (name it <code class="docutils literal notranslate"><span class="pre">TAutoCorr.R</span></code>) that will help answer the question: <em>Are temperatures of one year significantly correlated with the next year (successive years), across years in a given location</em>?</p>
+<p>Your goal is to write an R script (name it <code class="docutils literal notranslate"><span class="pre">TAutoCorr.R</span></code>) that will help answer the question: <em>Are temperatures of one year significantly correlated with the next year (successive years), across years in a given location</em>?</p>
 <p>To answer this question, you need to calculate the correlation between (n-1) pairs of years, where <span class="math notranslate nohighlight">\(n\)</span> is the total number of years. However, here again, you can’t use the standard p-value calculated for a correlation coefficient, because measurements of climatic variables in successive time-points in a time series (successive seconds, minutes, hours, months, years, etc.) are <em>not independent</em>.</p>
 <p>The general guidelines are:</p>
 <ul class="simple">
@@ -5255,12 +5280,12 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </section>
 <section id="readings-resources">
 <h2>Readings &amp; Resources<a class="headerlink" href="#readings-resources" title="Link to this heading">#</a></h2>
-<p>Check the readings under the R directory in the MQB repository. Also, search online for “r tutorial”, and plenty will pop up. Choose ones that seem the most intuitive to you. * <em>remember, all r packages come with pdf guides/documentation!</em></p>
+<p>Check the readings under the R directory in the MQB repository. Also, search online for “R tutorial”, and plenty will pop up. Choose ones that seem the most intuitive to you. * <em>remember, all R packages come with pdf guides/documentation!</em></p>
 <section id="r-as-a-programming-language">
 <h3>R as a Programming language<a class="headerlink" href="#r-as-a-programming-language" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>There are excellent websites besides cran. In particular, check out
-<a class="reference external" href="https://www.statmethods.net/">statmethods.net</a> and the <a class="reference external" href="https://en.wikibooks.org/wiki/r_Programming">r Wiki</a>.</p></li>
+<a class="reference external" href="https://www.statmethods.net/">statmethods.net</a> and the <a class="reference external" href="https://en.wikibooks.org/wiki/r_Programming">R Wiki</a>.</p></li>
 <li><p><a class="reference external" href="https://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/">https://blog.sellorm.com/2017/12/18/learn-to-write-command-line-utilities-in-r/</a></p></li>
 <li><p><a class="reference external" href="https://www.r-bloggers.com/2019/11/r-scripts-as-command-line-tools/">https://www.r-bloggers.com/2019/11/r-scripts-as-command-line-tools/</a></p></li>
 </ul>
@@ -5268,14 +5293,14 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <section id="mathematical-modelling-and-stats-in-r">
 <h3>Mathematical modelling and Stats in R<a class="headerlink" href="#mathematical-modelling-and-stats-in-r" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The Use r! series (all yellow books) by Springer are really good. In particular, consider: “A Beginner’s Guide to r”, “r by Example”, “Numerical Ecology With r”, “ggplot2” (coming up in the <a class="reference internal" href="data-r.html"><span class="std std-doc">Visualization Chapter</span></a>, “A Primer of Ecology with R”, “Nonlinear regression with R”, and “Analysis of Phylogenetics and Evolution with R”.</p></li>
+<li><p>The Use R! series (all yellow books) by Springer are really good. In particular, consider: “A Beginner’s Guide to R”, “R by Example”, “Numerical Ecology With R”, “ggplot2” (coming up in the <a class="reference internal" href="data-r.html"><span class="std std-doc">Visualization Chapter</span></a>, “A Primer of Ecology with R”, “Nonlinear Regression with R”, and “Analysis of Phylogenetics and Evolution with R”.</p></li>
 <li><p>For more focus on dynamical models: Soetaert &amp; Herman. 2009 “A practical guide to ecological modelling: using R as a simulation platform”.</p></li>
 </ul>
 </section>
 <section id="debugging">
 <h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://testthat.r-lib.org/"><code class="docutils literal notranslate"><span class="pre">testthat</span></code></a>: Unit Testing for r by Hadley Wickham (also developer of the <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> package, including <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>).</p></li>
+<li><p><a class="reference external" href="https://testthat.r-lib.org/"><code class="docutils literal notranslate"><span class="pre">testthat</span></code></a>: Unit testing for R by Hadley Wickham (also developer of the <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> package, including <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>).</p></li>
 <li><p><a class="reference external" href="https://adv-r.hadley.nz/debugging.html">Notes on debugging in R by Wickham</a></p></li>
 <li><p>A good <a class="reference external" href="https://data-flair.training/blogs/debugging-in-r-programming">overview of debugging methods in R with examples</a></p></li>
 <li><p><a class="reference external" href="http://www.biostat.jhsph.edu/~rpeng/docs/r-debug-tools.pdf">An introduction to the Interactive Debugging Tools in R</a> by roger D Peng.</p></li>
@@ -5284,7 +5309,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </section>
 <section id="sweave-and-knitr-and-beyond">
 <h3>Sweave and knitr, and beyond<a class="headerlink" href="#sweave-and-knitr-and-beyond" title="Link to this heading">#</a></h3>
-<p>There are tools built around r that allow you to write your Dissertation report or some other document such that it can be updated automatically if embedded data analyses or r simulations / calculations change. Instead of inserting a prefabricated graph or table into the report, the master document contains the R code necessary to obtain it. When run through r, all data analysis output (tables, graphs, etc.) is created on the fly and inserted into a final document like a pdf or html. The report will then be automatically updated if data or analysis change, which allows for truly reproducible research. To learn more about these tools, check out:</p>
+<p>Tools built around R allow you to write a dissertation or another document that updates automatically when an embedded analysis, simulation or calculation changes. Instead of inserting a prefabricated graph or table, the source document contains the R code needed to create it. When the document is rendered, the output is generated and inserted into the final PDF or HTML file. This supports a genuinely reproducible workflow. To learn more, see:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave and knitr</a> and <a class="reference external" href="http://yihui.name/knitr/">this</a></p></li>
 <li><p><a class="reference external" href="https://quarto.org/">Quarto</a></p></li>
@@ -5398,7 +5423,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-and-pasting">Strings and Pasting</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-r-functions">Useful r functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-r-functions">Useful R functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-manipulating-strings">For manipulating strings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical">Mathematical</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical">Statistical</a></li>
@@ -5410,7 +5435,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-analysis-workflow">Your analysis workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-r-workspace-and-working-directory">The r Workspace and Working Directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-r-workspace-and-working-directory">The R workspace and working directory</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-exporting-data">Importing and Exporting Data</a><ul class="nav section-nav flex-column">
@@ -5418,7 +5443,7 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-to-and-saving-files">Writing to and saving files</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-code">Writing r code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-code">Writing R code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-r-code">Running R code</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-source">Using <code class="docutils literal notranslate"><span class="pre">source</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rscript">Using <code class="docutils literal notranslate"><span class="pre">Rscript</span></code></a></li>
@@ -5436,8 +5461,8 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-functions">Writing r Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-r-function">Your first r function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-r-functions">Writing R Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-r-function">Your first R function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-conditionals">Functions with conditionals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-utility-function">An example utility function</a></li>
 </ul>
@@ -5471,6 +5496,13 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own">Building your own</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-observations-practice">The observations practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guided-read-inspect-and-decide-what-counts-as-valid">Guided: read, inspect, and decide what counts as valid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guided-validate-before-calculating">Guided: validate before calculating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-deduplicate-and-summarise">Independent: deduplicate and summarise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#critique-and-compare">Critique and compare</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-data-practicals">Climate-data practicals</a><ul class="nav section-nav flex-column">

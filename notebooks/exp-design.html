@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -70,7 +70,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic hypothesis testing" href="t-f-tests.html" />
-    <link rel="prev" title="Data Management and Visualization" href="data-r.html" />
+    <link rel="prev" title="Data Management and Visualization in R" href="data-r.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -646,7 +647,7 @@
 </div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>In this chapter you will learn how to use r to explore your data and determine appropriate statistical analyses.</p>
+<p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
 <p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
 <p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
 <p>(b) You might have somebody else’s data to analyse.</p>
@@ -751,7 +752,7 @@
 <li><p><strong>Discrete numeric</strong>: Integer (whole) numbers such as counts of individuals in a population, e.g., The number of bacteria in a ml of pond water. This is the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type in R.</p></li>
 <li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
 <li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference internal" href="data-r.html#Basic-plotting-commands"><span class="std std-ref">used previously</span></a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
-<li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TrUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
+<li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
 </ul>
 <p>While designing experiments or exploring data, you need to keep in mind that each data type will often be best-represented by a particular <em>statistical distribution</em>. For example, continuous numeric data are <em>often</em> normally distributed. On the other hand, count data are likely to be distributed according to the Poisson distribution.</p>
 <p>If you are lucky, you will mostly have to deal with data that are continuous or discrete numeric, which are the most straightforward to analyse using Linear models (more on that in subsequent chapters). However, some of the most interesting and important problems in biology involve proportion (percentage), categorical and binary data (e.g., Presence or absence of a disease symptom).</p>
@@ -770,7 +771,7 @@
 </section>
 <section id="sampling-from-distributions-in-r">
 <span id="exp-design-sampling-from-distributions-in-r"></span><h3>Sampling from distributions in R<a class="headerlink" href="#sampling-from-distributions-in-r" title="Link to this heading">#</a></h3>
-<p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling “experiment” . In particular, the following r commands are important:</p>
+<p>You can generate samples form many statistical distributions in R. This is a handy thing to know because this allows you to simulate a sampling “experiment” . In particular, the following R commands are important:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Command</p></th>
@@ -939,7 +940,7 @@
 <h3>A case study<a class="headerlink" href="#a-case-study" title="Link to this heading">#</a></h3>
 <p>As a case study, we will use data from a paper looking at the relationship between genome size and body size across species of dragonflies and damselflies (<a class="reference external" href="http://en.wikipedia.org/wiki/Odonata">Odonata</a>):</p>
 <blockquote>
-<div><p>Ardila-Garcia, AM &amp; Gregory, Tr (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
+<div><p>Ardila-Garcia, AM &amp; Gregory, TR (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
 </div></blockquote>
 <p>You will work with the script file <code class="docutils literal notranslate"><span class="pre">exp_design.R</span></code>, which performs exploratory analyses on the data in <code class="docutils literal notranslate"><span class="pre">genome_size.csv</span></code>. Let’s go through the code block by block.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Get the script <code class="docutils literal notranslate"><span class="pre">exp_design.R</span></code> from the MQB repository and put it in your own <code class="docutils literal notranslate"><span class="pre">Code</span></code> directory.</p>
@@ -948,13 +949,13 @@
 <p>Use the shift and arrow keys to select the code in block (2), including the comments. Now use the keyboard short cut (look back at the R Chapters if you don’t know how!) to run the highlighted block of code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/genome_size.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">genome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/genome_size.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">genome</span><span class="o">$</span><span class="n">genome_size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">genome</span><span class="o">$</span><span class="n">GenomeSize</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note the relative path <code class="docutils literal notranslate"><span class="pre">../</span></code>, which will work assuming that you are working from your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory (that is, you have set your working directory (using <code class="docutils literal notranslate"><span class="pre">setwd()</span></code>) to <code class="docutils literal notranslate"><span class="pre">code</span></code>). Also note the <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">T</span></code> flag, which <a class="reference external" href="https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/">is necessary in any r version &gt; 4.0.0</a>.</p>
+<p>Note the relative path <code class="docutils literal notranslate"><span class="pre">../</span></code>, which will work assuming that you are working from your <code class="docutils literal notranslate"><span class="pre">code</span></code> directory (that is, you have set your working directory using <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> to <code class="docutils literal notranslate"><span class="pre">code</span></code>). The <code class="docutils literal notranslate"><span class="pre">stringsAsFactors</span> <span class="pre">=</span> <span class="pre">TRUE</span></code> argument asks R to store text columns as factors. Since R 4.0.0, the default has been <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, so it is helpful to state the choice explicitly when the analysis expects factors. See the <a class="reference external" href="https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/">R Project explanation of this change</a>.</p>
 <p>This first line (block (1)) reads in the data, as you have learned previously.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Now run the code in block (2) line by line.</p>
 <div class="cell docutils container">
@@ -1012,7 +1013,7 @@
 </div>
 <p>Have a good look at the data. There are three factors (categorical variables): Suborder, splitting the species into dragonflies (Anisoptera) and damselflies (Zygoptera); Family, splitting the species further into 9 taxonomic families; and Species, giving the latin
 binomial for each species in the table. The remaining columns are measurements of genome size (in picograms) and measurements of body size and morphology (in grams, mm and mm<span class="math notranslate nohighlight">\(^2\)</span>). There are two columns ending with an N that show the sample size from which the observations for each species are taken and a column ending SE showing standard errors.</p>
-<p>One thing you should see in the output from <code class="docutils literal notranslate"><span class="pre">head</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code> is that there are some observations marked as <code class="docutils literal notranslate"><span class="pre">NA</span></code> – this is the way r shows <em>missing data</em>. It is important to check how much missing data there are in a dataset, so we’ll use another function that includes this information. Many r functions refuse to use variables containing missing data — this is just r being careful and you can add <code class="docutils literal notranslate"><span class="pre">na.rm=TrUE</span></code> into most functions to avoid this problem.</p>
+<p>One thing you should see in the output from <code class="docutils literal notranslate"><span class="pre">head</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code> is that some observations are marked as <code class="docutils literal notranslate"><span class="pre">NA</span></code> — this is how R represents <em>missing data</em>. It is important to check how much data are missing, so we’ll use another function that includes this information. Many R functions require you to say how missing values should be handled. For functions that support it, <code class="docutils literal notranslate"><span class="pre">na.rm</span> <span class="pre">=</span> <span class="pre">TRUE</span></code> asks R to remove missing values before doing the calculation.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> run the <code class="docutils literal notranslate"><span class="pre">summary</span></code> line from the script window (block 3).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1098,7 +1099,7 @@ binomial for each species in the table. The remaining columns are measurements o
 </div>
 </div>
 <p>In your code editor, change the values of <code class="docutils literal notranslate"><span class="pre">breaks</span></code> and <code class="docutils literal notranslate"><span class="pre">bw</span></code> (for example <code class="docutils literal notranslate"><span class="pre">breaks=5</span></code> and <code class="docutils literal notranslate"><span class="pre">bw=0.05</span></code>), and re-run these lines to see how this affects the graph. Basically, with both types of graph you can look at the data too coarsely or too finely.</p>
-<p>The graphs you’ve just created look at genome size. Add a copy of those two lines of code in the script and change them to look at the variable <code class="docutils literal notranslate"><span class="pre">TotalLength</span></code>. You will need to alter the <code class="docutils literal notranslate"><span class="pre">density</span></code> function to ignore missing values (<code class="docutils literal notranslate"><span class="pre">na.rm=TrUE</span></code>) and to play around with the bandwidth. You should get something like this:</p>
+<p>The graphs you’ve just created look at genome size. Add a copy of those two lines of code in the script and change them to look at the variable <code class="docutils literal notranslate"><span class="pre">TotalLength</span></code>. You will need to alter the <code class="docutils literal notranslate"><span class="pre">density</span></code> function to ignore missing values (<code class="docutils literal notranslate"><span class="pre">na.rm=TRUE</span></code>) and to play around with the bandwidth. You should get something like this:</p>
 <hr class="docutils" />
 <a class="reference internal image-reference" href="../_images/histTL1.png"><img alt="../_images/histTL1.png" src="../_images/histTL1.png" style="width: 300px;" />
 </a>
@@ -1108,9 +1109,9 @@ binomial for each species in the table. The remaining columns are measurements o
 <hr class="docutils" />
 <section id="take-a-quick-look-at-effects-of-certain-factors">
 <h3>Take a quick look at effects of certain factors<a class="headerlink" href="#take-a-quick-look-at-effects-of-certain-factors" title="Link to this heading">#</a></h3>
-<p>r has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the <span class="math notranslate nohighlight">\(y\)</span> axis and the explanatory variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
+<p>R has a special way of describing a model that defines the response variable and the explanatory variables (“factors”). This is called a ‘formula’ and is used to define linear models (more on these in a later chapters). The same structure is used in many plotting functions and will put the response variable on the <span class="math notranslate nohighlight">\(y\)</span> axis and the explanatory variable on the <span class="math notranslate nohighlight">\(x\)</span> axis. The structure is “response variable ~ explanatory variables”. We will look at multiple explanatory variables in a later chapter but an example with one explantory variable (factor) is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Genome</span> <span class="pre">Size</span> <span class="pre">~</span> <span class="pre">Suborder</span></code></p>
-<p>This formula tells r to model genome size ‘as a function of’ (<code class="docutils literal notranslate"><span class="pre">~</span></code>) the suborders of Odonata. When using this syntax in a <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> function, the result will be to plot genome size as a function of the suborders.</p>
+<p>This formula tells R to model genome size ‘as a function of’ (<code class="docutils literal notranslate"><span class="pre">~</span></code>) the suborders of Odonata. When using this syntax in a <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> function, the result will be to plot genome size as a function of the suborders.</p>
 <p>##’ Compare distribution of the variable across levels of a factor</p>
 <p>Although looking at the distribution of variables is a good first step, we often want to compare distributions. In this case, we might want to know how genome size varies between dragonflies and damselflies. The first way we will look at is using boxplots — these show the median and the 25% and 75% quantiles as a box, with whiskers extending to the minimum and maximum. More extreme outliers are plotted independently as points. The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function in R automatically generates a boxplot when the explanatory variable is a factor (i.e., provided you have the necessary grouping columns deignated to be the <code class="docutils literal notranslate"><span class="pre">factor</span></code> class; review the variable types and data structures sections of <a class="reference internal" href="r.html"><span class="std std-doc">the R Chapter</span></a> if this sounds like greek to you).</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Go to block 5 of the script and run the first line, looking at genome size between the two suborders:</p>
@@ -1242,7 +1243,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </a>
 </div>
 </div>
-<p>Thus each point gets the appropriate colour and symbol for its group. This is the magic of indexing: <code class="docutils literal notranslate"><span class="pre">myColours[Suborder]</span></code> and <code class="docutils literal notranslate"><span class="pre">mySymbols[Suborder]</span></code> automatically assign the two colors and two symbols to the two suborders, and r figuresd out that the grouping variable to use is <code class="docutils literal notranslate"><span class="pre">Suborder</span></code> because its the only one with two levels (index values).</p>
+<p>Thus each point gets the appropriate colour and symbol for its group. This is the magic of indexing: <code class="docutils literal notranslate"><span class="pre">myColours[Suborder]</span></code> and <code class="docutils literal notranslate"><span class="pre">mySymbols[Suborder]</span></code> automatically assign the two colors and two symbols to the two suborders, and R figures out that the grouping variable to use is <code class="docutils literal notranslate"><span class="pre">Suborder</span></code> because its the only one with two levels (index values).</p>
 <p>There are a lot of built in colours and plot symbols in R, so the next thing to experiment with is changing these to your own versions.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> In the R commandline, type in the function <code class="docutils literal notranslate"><span class="pre">colors()</span></code>.</p>
 <p>You’ll see a long list of options to choose from, so pick two to replace red and blue in the plot above.</p>
@@ -1317,7 +1318,7 @@ plot symbols. Close the file and then delete it from the folder.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Management and Visualization</p>
+        <p class="prev-next-title">Data Management and Visualization in R</p>
       </div>
     </a>
     <a class="right-next"

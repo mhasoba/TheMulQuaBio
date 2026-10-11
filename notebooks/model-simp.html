@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -661,7 +662,7 @@
 <p><span class="math notranslate nohighlight">\(\star\)</span>  Load the mammals data into a data frame called <code class="docutils literal notranslate"><span class="pre">mammals</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mammals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'../data/mammal_data.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -783,7 +784,7 @@ which suggests that the slope of log C value with body mass differs between grou
 <p>Now let’s simplify the model we fitted above. Model simplification is not as straightforward as just dropping terms. Each time you remove a term from a model, the model will change: the model will get worse, since some of the sums of squares are no longer explained, but the remaining variables may partly compensate for this loss of explanatory power. The main point is that if it gets only a little worse, its OK, as the tiny amount of additional variation explained by the term you removed is not really worth it.</p>
 <p>But how much is “tiny amount”? This is what we will learn now by using the <span class="math notranslate nohighlight">\(F\)</span>-test.   Again, remember: significance of the <span class="math notranslate nohighlight">\(F\)</span>-test used to compare a model and its simplified counterpart is a <em>bad</em> thing — it means that we’ve removed a term from the fitted model that makes the it <em>significantly</em> worse.</p>
 <p>The first question is: <em>what terms can you remove from a model</em>? Obviously, you only want to remove non-significant terms, but there is another rule – you cannot remove a main effect or an interaction while those main effects or interactions are present in a more complex interaction. For example, in the model <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">a:b</span> <span class="pre">+</span> <span class="pre">a:c</span> <span class="pre">+</span> <span class="pre">b:c</span></code>, you cannot drop <code class="docutils literal notranslate"><span class="pre">c</span></code> without dropping both <code class="docutils literal notranslate"><span class="pre">a:c</span></code> and <code class="docutils literal notranslate"><span class="pre">b:c</span></code>.</p>
-<p>The r function <code class="docutils literal notranslate"><span class="pre">drop.scope</span></code> tells you what you can drop from a model. Some examples:</p>
+<p>The R function <code class="docutils literal notranslate"><span class="pre">drop.scope</span></code> tells you what you can drop from a model. Some examples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">drop.scope</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -939,7 +940,7 @@ which suggests that the slope of log C value with body mass differs between grou
 <p><span class="math notranslate nohighlight">\(\star\)</span> Using the code above to guide you, try and find a minimal adequate model that you are happy with. In each step, the output of <code class="docutils literal notranslate"><span class="pre">anova(model,</span> <span class="pre">modelN)</span></code> should be non-significant (where <span class="math notranslate nohighlight">\(N\)</span> is the current step).</p>
 <p>It can be important to consider both <code class="docutils literal notranslate"><span class="pre">anova</span></code> and <code class="docutils literal notranslate"><span class="pre">summary</span></code> tables. It can be worth trying to remove things that look significant in one table but not the other — some terms can explain significant variation on the <code class="docutils literal notranslate"><span class="pre">anova</span></code> table but the coefficients are not significant.</p>
 <p>remember to remove <em>terms</em>: with categorical variables, several coefficients in the <code class="docutils literal notranslate"><span class="pre">summary</span></code> table may come from one term in the model and have to be removed together.</p>
-<p>When you have got your final model, save the model as an r data file: <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='myFinalModel.rda')</span></code>.</p>
+<p>When you have got your final model, save the model as an R data file: <code class="docutils literal notranslate"><span class="pre">save(modelN,</span> <span class="pre">file='myFinalModel.rda')</span></code>.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="fn1-c1" role="doc-footnote">

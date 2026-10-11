@@ -1,11 +1,11 @@
 (vscode-setup)=
 # VS Code for MQB
 
-Visual Studio Code (VS Code) is a multilingual editor that can work with Python scripts, R scripts, terminals and Jupyter notebooks in one project folder. It is an option, not a requirement: use RStudio where that better suits your R work. This page assumes that you already have the Python environment from {ref}`python-environments` and, for the R route, a working R installation. A separate R setup guide will cover installing R itself.
+Visual Studio Code (VS Code) is a multilingual editor that can work with Python scripts, R scripts, terminals and Jupyter notebooks in one project folder. It is an option, not a requirement: use RStudio where that better suits your R work. This page assumes that you already have the Python environment from {ref}`python-environments` and, for R, a working installation from {ref}`r-setup`.
 
 ## Before you start
 
-Keep each piece of coursework or project in its own folder, containing its code, data and results. Do not open the MQB book source or a `code` subfolder when you mean to work on a whole project: opening the [project root](terms.md#project-root) makes relative paths and the integrated terminal easier to understand.
+Keep each piece of coursework or project in its own folder, containing its code, data and results. Do not open the MQB book source or a `code` subfolder when you mean to work on a whole project: opening the [project root](terms.md#project-root) makes relative paths and the integrated terminal easier to understand. Unless an exercise explicitly says otherwise, run scripts from that root and use paths such as `data/input.csv` and `results/output.csv`.
 
 These are separate things:
 
@@ -89,6 +89,8 @@ Compare the result with the project interpreter selected for scripts. If it is w
 
 Save notebooks before switching kernels or closing VS Code. A kernel may continue to hold variables until it is restarted or stopped, so rerun the notebook from a clean kernel before treating an analysis as reproducible. See {ref}`jupyter-kernels` for named Python kernels and R notebook kernels.
 
+An open project folder, integrated terminal and notebook kernel can report different current directories. Run `Path.cwd()` in Python or `getwd()` in R and follow the notebook's stated starting-directory instructions. Do not assume that selecting a kernel has moved it to the project root.
+
 ## Using R in VS Code
 
 This route requires R to be installed and usable before VS Code is involved. In the integrated terminal, check:
@@ -131,7 +133,7 @@ If **R: Create R Terminal** cannot find R, first run `R --version` in the VS Cod
 }
 ```
 
-Use your installed version and path; do not paste the example unchanged. On macOS or Linux, resolve the path visible to VS Code's terminal before adding any extension setting. A dedicated R setup page will cover installation and user-library troubleshooting.
+Use your installed version and path; do not paste the example unchanged. On macOS or Linux, resolve the path visible to VS Code's terminal before adding any extension setting. See {ref}`r-setup` for installation and user-library troubleshooting.
 
 R debugging is separate from the R language extension and needs its own supported debugger and prerequisites. Do not claim a script has been debugged merely because it ran. An R `.ipynb` notebook uses an IRkernel chosen in the notebook kernel picker; it is distinct from sending code to an `.R` terminal.
 

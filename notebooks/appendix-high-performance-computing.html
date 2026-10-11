@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -238,7 +238,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -318,6 +318,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -613,14 +614,14 @@ handling large volumes of basic arithmetic operations, primarily through
 matrix multiplications. They are highly efficient at processing many
 calculations simultaneously, making them ideal for scientific
 computations and machine learning applications.</p></li>
-<li><p><strong>random Access Memory (rAM)</strong> – Usually referred to as just “memory”, rAM is the temporary storage that the
-CPU uses to hold data actively being processed. rAM allows for quick
+<li><p><strong>Random Access Memory (RAM)</strong> – Usually referred to as just “memory”, RAM is the temporary storage that the
+CPU uses to hold data actively being processed. RAM allows for quick
 access to data needed for computations, which is either deleted or
 deposited into NVM storage once completed.</p></li>
 <li><p><strong>Non-Volatile Memory (NVM)</strong> - Non-volatile memory refers to any form
 of memory that retains data even when the system is powered off. This
 includes storage devices like hard drives (HDDs), solid-state drives
-(SSDs), and flash drives. Unlike rAM, which is cleared when the system
+(SSDs), and flash drives. Unlike RAM, which is cleared when the system
 shuts down, NVM provides long-term data storage, allowing for the
 preservation of files, applications, and system states across power
 cycles.</p></li>
@@ -832,7 +833,7 @@ particularly useful for tasks like cross-validation or Monte Carlo
 simulations, where each iteration is independent and benefits from being
 run in parallel.</p>
 <ul class="simple">
-<li><p>In r, the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> package gives us access to parallelisation
+<li><p>In R, the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> package gives us access to parallelisation
 functions, such as <code class="docutils literal notranslate"><span class="pre">mclapply</span></code> (multi-core <code class="docutils literal notranslate"><span class="pre">lapply</span></code>) Additional
 packages include future and foreach.</p></li>
 <li><p>Python also has powerful libraries for parallel computing, such as
@@ -846,7 +847,7 @@ model to each <code class="docutils literal notranslate"><span class="pre">ID</s
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n &lt;- 10000   # Number of observations
 
 data &lt;- data.frame(
-  ID = sample(1:10, n, replace = TrUE),  # ID column to define 10 groups
+  ID = sample(1:10, n, replace = TRUE),  # ID column to define 10 groups
   y = rnorm(n),
   X = rnorm(n)
 )
@@ -913,9 +914,9 @@ form abc123), and entering your Imperial password when prompted:</p>
 <p>If this has been successful, you will see a message containing the title “Imperial College London research Computing Service”</p>
 </li>
 <li><p><strong>Necessary modules are set up in your remote are:</strong> It will be
-useful to ensure that Python and r are set up on your area of the
+useful to ensure that Python and R are set up on your area of the
 HPC system at this stage. You will only need to do this once. To
-install Python and r, you will need to first log in to the HPC
+install Python and R, you will need to first log in to the HPC
 service (as covered in the above section), and then enter the
 following two lines into the command line within your area of the
 remote system:</p>
@@ -923,11 +924,11 @@ remote system:</p>
 anaconda-setup
 </pre></div>
 </div>
-<p>This could take some time and may require you to respond “yes” when prompted. Once anaconda is fully installed, install r by entering</p>
+<p>This could take some time and may require you to respond “yes” when prompted. Once Anaconda is fully installed, install R by entering</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>r
 </pre></div>
 </div>
-<p>Once again, this could take some time and may require you to respond “yes” when prompted. Once both of these are installed, you should be able to enter python3 and code in Python on the cluster   node. However, in general you should only run code in either r or Python by submitting them within jobs (as covered in the lectures and in the instructions document). (You will notice that if    you attempt to launch r from your HPC node you will be given a stern message!)</p>
+<p>Once again, this could take some time and may require you to respond “yes” when prompted. Once both of these are installed, you should be able to enter <code class="docutils literal notranslate"><span class="pre">python3</span></code> and code in Python on the cluster node. However, in general you should only run R or Python code by submitting it within jobs (as covered in the lectures and in the instructions document). You will notice that attempting to launch R from your HPC node produces a stern message.</p>
 </li>
 <li><p><strong>A method of file transfer:</strong> Files are exchanged between your
 local machine and your area on the HPC system using Secure File
@@ -947,15 +948,15 @@ this, enter the following and enter your password when prompted:</p>
 <p>You first must determine the task at hand. Are you running your own
 script or software that natively parallelises tasks? Is your job an
 array?</p>
-<p>Using arrays as an example, we would first want to make an r or Python
+<p>Using arrays as an example, we would first want to make an R or Python
 script that takes in a job number and uses that to determine which task
-to perform. The <code class="docutils literal notranslate"><span class="pre">HPC_script.r/py</span></code> files below, when sourced, identify
+to perform. The <code class="docutils literal notranslate"><span class="pre">HPC_script.R</span></code> and <code class="docutils literal notranslate"><span class="pre">HPC_script.py</span></code> files below, when sourced, identify
 the job number (that is, the job number the Imperial HPC assigns to our
 code submission), run our code, and then save the outputs to the current
 working directory, with all file names being distinct (otherwise the
 different jobs will overwrite each other).</p>
-<p><strong>In r:</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>seed_number &lt;- as.numeric(Sys.getenv("PBS_ArrAY_INDEX")) # Find out the job number
+<p><strong>In R:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>seed_number &lt;- as.numeric(Sys.getenv("PBS_ARRAY_INDEX")) # Find out the job number
 
 set.seed(seed_number) # Set this as the random seed so that all runs have a unique seed
 
@@ -967,7 +968,7 @@ rm(output,seed_number) # remove our objects from the environment
 </pre></div>
 </div>
 <p><strong>Similarly, in Python:</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>seed_number = int(os.getenv("PBS_ArrAY_INDEX")) # Find out the job number
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>seed_number = int(os.getenv("PBS_ARRAY_INDEX")) # Find out the job number
 
 seed(seed_number) # Set this as the random seed so that all runs have a unique seed
 
@@ -994,20 +995,20 @@ path. This file must contain the following fields at the top:</p>
 </div>
 <p>This will determine the queue that your job gets put into. If your
 requested specifications do not fall within at least one queue, your job
-won’t run! Have a look at the <a class="reference external" href="https://icl-rcs-user-guide.readthedocs.io/en/latest/hpc/queues/job-sizing-guidance/">rCS job sizing
+won’t run! Have a look at the <a class="reference external" href="https://icl-rcs-user-guide.readthedocs.io/en/latest/hpc/queues/job-sizing-guidance/">RCS job sizing
 guidance</a>
 for more information.</p>
 <p>Within this file, you will generally want to load any modules and
 packages, print any statements to check your progress within the job
 output files, and transfer files to and from the job to your working
 directory. <strong>For your outputs to be created correctly, you must move
-your files to <code class="docutils literal notranslate"><span class="pre">$TMPDIr</span></code> to be processed, and then move files from this
-back to <code class="docutils literal notranslate"><span class="pre">$HOME</span></code></strong>. This is because <code class="docutils literal notranslate"><span class="pre">$TMPDIr</span></code> is where your files are
+your files to <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code> to be processed, and then move files from this
+back to <code class="docutils literal notranslate"><span class="pre">$HOME</span></code></strong>. This is because <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code> is where your files are
 run, whereas <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> is where you interact with them!</p>
 <p>This can be summarised in the <code class="docutils literal notranslate"><span class="pre">run_script.sh</span></code> file below, where we are
 running the <code class="docutils literal notranslate"><span class="pre">HPC_script.R</span></code> file from above. Because the R script does
 not parallelise within it and does not load a significant amount of
-data, we will only request a single thread (<code class="docutils literal notranslate"><span class="pre">ncpus</span></code>) and 1GB of rAM
+data, we will only request a single thread (<code class="docutils literal notranslate"><span class="pre">ncpus</span></code>) and 1GB of RAM
 (<code class="docutils literal notranslate"><span class="pre">mem</span></code>):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #PBS -l walltime=12:00:00
@@ -1015,20 +1016,20 @@ data, we will only request a single thread (<code class="docutils literal notran
 
 module load anaconda3/personal
 
-echo "r is about to run"
+echo "R is about to run"
 
-cp $HOME/HPC_script.R $TMPDIr
+cp $HOME/HPC_script.R $TMPDIR
 
-r --vanilla &lt; $TMPDIr/HPC_script.R
+R --vanilla &lt; $TMPDIR/HPC_script.R
 
-mv $TMPDIr/output_* $HOME/output_files/
+mv $TMPDIR/output_* $HOME/output_files/
 
-echo "r has finished running"
+echo "R has finished running"
 </pre></div>
 </div>
 <p>The Imperial HPC uses the PBS Pro job scheduler (documentation available
 <a class="reference external" href="https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf">here</a>),
-whereas other systems may use SLUrM (documentation available
+whereas other systems may use SLURM (documentation available
 <a class="reference external" href="https://slurm.schedmd.com/documentation.html">here</a>). To submit your
 job to the queue you will use the <code class="docutils literal notranslate"><span class="pre">qsub</span></code> command. If you are submitting
 an array job, as we are with <code class="docutils literal notranslate"><span class="pre">run_script.sh</span></code>, you want to use the <code class="docutils literal notranslate"><span class="pre">-J</span></code>

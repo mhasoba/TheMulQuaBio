@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -238,7 +238,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -318,6 +318,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -606,7 +607,7 @@
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Many of you will deal with complex data — and often, lots of it. Ecological and Evolutionary data are particularly complex because they contain large numbers of attributes, often measured in very different scales and units for individual taxa, populations, etc. In this scenario, storing the data in a database makes a lot of sense! You can
-easily include the database in your analysis workflow — indeed, that’s why people use databases. And you can use Python (and r) to build, manipulate and use your database.</p>
+easily include the database in your analysis workflow — indeed, that’s why people use databases. And you can use Python (and R) to build, manipulate and use your database.</p>
 <section id="relational-databases">
 <h3>Relational databases<a class="headerlink" href="#relational-databases" title="Link to this heading">#</a></h3>
 <p>A <em>relational</em> database is a collection of interlinked (<em>related</em>) tables that altogether store a complex dataset
@@ -804,10 +805,10 @@ keep in mind about databases:</p>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NULL</span></code></p></td>
 <td class="text-left"><p>The value is a NULL value</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INTEGEr</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INTEGER</span></code></p></td>
 <td class="text-left"><p>The value is a signed integer, stored in up to or 8 bytes</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">rEAL</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">REAL</span></code></p></td>
 <td class="text-left"><p>The value is a floating point value, stored as in 8 bytes</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TEXT</span></code></p></td>
@@ -853,7 +854,7 @@ curve).</p></li>
 <p>This creates an empty database in your <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <p>You should now see the sqlite cursor (<code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span></code>), and will be entering your commands there.</p>
 <p>Now we need to create a table with some fields. Let’s start with the <em>trait_info</em> table (enter these one line at  a time, without the <code class="docutils literal notranslate"><span class="pre">...&gt;</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CrEATE<span class="w"> </span>TABLE<span class="w"> </span>trait_info<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>trait_info<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
 <span class="w">   </span>...&gt;<span class="w">                                 </span>OriginalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                                 </span>FinalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                                 </span>OriginalTraitName<span class="w"> </span>text,
@@ -878,11 +879,11 @@ SQLite to show all the tables we currently have:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.tables</span></code></p>
 <p>Let’s run our first <em>Query</em> (note that you need a semicolon
 to end a command):</p>
-<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FrOM</span> <span class="pre">trait_info</span> <span class="pre">LIMIT</span> <span class="pre">5;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">trait_info</span> <span class="pre">LIMIT</span> <span class="pre">5;</span></code></p>
 <p>Let’s turn on some nicer formatting:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.mode</span> <span class="pre">column</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.header</span> <span class="pre">ON</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FrOM</span> <span class="pre">trait_info</span> <span class="pre">LIMIT</span> <span class="pre">5;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">trait_info</span> <span class="pre">LIMIT</span> <span class="pre">5;</span></code></p>
 <p>You should see something like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Numbers<span class="w">  </span>OriginalID<span class="w">  </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">           </span>...<span class="w"> </span>
 -------<span class="w">  </span>----------<span class="w">  </span>----------<span class="w">  </span>-------------------------<span class="w">   </span>...
@@ -896,7 +897,7 @@ to end a command):</p>
 <p>The main statement to select records from a table is
 <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">.width</span> <span class="pre">40</span>&#160; <span class="pre">##</span> <span class="pre">NOTE:</span> <span class="pre">Control</span> <span class="pre">the</span> <span class="pre">width</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">DISTINCT</span> <span class="pre">OriginalTraitName</span> <span class="pre">FrOM</span> <span class="pre">trait_info;</span> <span class="pre">#</span> <span class="pre">returns</span> <span class="pre">unique</span> <span class="pre">values</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlite&gt;</span> <span class="pre">SELECT</span> <span class="pre">DISTINCT</span> <span class="pre">OriginalTraitName</span> <span class="pre">FROM</span> <span class="pre">trait_info;</span> <span class="pre">#</span> <span class="pre">returns</span> <span class="pre">unique</span> <span class="pre">values</span></code></p>
 <p>Which gives:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
@@ -911,8 +912,8 @@ resource<span class="w"> </span>reaction<span class="w"> </span>Distance<span cl
 </pre></div>
 </div>
 <p>Now try these:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>Habitat<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"resource Consumption rate"</span><span class="p">;</span><span class="w"> </span><span class="c1"># Sets a condition`</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>Habitat<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"resource Consumption rate"</span><span class="p">;</span><span class="w"> </span><span class="c1"># Sets a condition`</span>
 
 Habitat<span class="w">                                 </span>
 ----------------------------------------
@@ -920,14 +921,14 @@ freshwater<span class="w">                              </span>
 marine<span class="w">                                  </span>
 terrestrial<span class="w"> </span>
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="p">;</span><span class="w">  </span><span class="c1"># returns number of rows</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span><span class="w">  </span><span class="c1"># returns number of rows</span>
 
 Count<span class="w"> </span><span class="o">(</span>*<span class="o">)</span><span class="w">           </span>
 --------------------
 <span class="m">2336</span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Habitat,<span class="w"> </span>COUNT<span class="o">(</span>OriginalTraitName<span class="o">)</span><span class="w"> </span><span class="c1"># returns number of rows for each group</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="w"> </span>GrOUP<span class="w"> </span>BY<span class="w"> </span>Habitat<span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span>GROUP<span class="w"> </span>BY<span class="w"> </span>Habitat<span class="p">;</span>
 
 Habitat<span class="w">     </span>COUNT<span class="o">(</span>OriginalTraitName<span class="o">)</span>
 ----------<span class="w">  </span>------------------------
@@ -937,21 +938,21 @@ marine<span class="w">      </span><span class="m">909</span><span class="w">   
 terrestria<span class="w">  </span><span class="m">802</span><span class="w">   </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span><span class="c1"># returns number of unique values</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span>
 
 COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span>
 ---------------------------------
 <span class="m">220</span><span class="w">   </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span>TraitCount<span class="w"> </span><span class="c1"># Assigns alias to the variable</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="p">;</span>
 
 TraitCount
 ----------
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Habitat,
 <span class="w">   </span>...&gt;<span class="w"> </span>COUNT<span class="o">(</span>DISTINCT<span class="w"> </span>OriginalTraitName<span class="o">)</span><span class="w"> </span>AS<span class="w"> </span>TN
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="w"> </span>GrOUP<span class="w"> </span>BY<span class="w"> </span>Habitat<span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span>GROUP<span class="w"> </span>BY<span class="w"> </span>Habitat<span class="p">;</span>
 
 Habitat<span class="w">     </span>TN<span class="w">        </span>
 ----------<span class="w">  </span>----------
@@ -961,8 +962,8 @@ marine<span class="w">      </span><span class="m">95</span><span class="w">    
 terrestria<span class="w">  </span><span class="m">96</span><span class="w">     </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>*<span class="w"> </span><span class="c1"># WHAT TO SELECT</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="w"> </span><span class="c1"># FrOM WHErE</span>
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"marine"</span><span class="w"> </span><span class="c1"># CONDITIONS</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span><span class="c1"># FROM WHERE</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"marine"</span><span class="w"> </span><span class="c1"># CONDITIONS</span>
 <span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span><span class="nv">OriginalTraitName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"resource Consumption rate"</span><span class="p">;</span>
 
 Numbers<span class="w">     </span>OriginalID<span class="w">  </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">          </span>...
@@ -975,17 +976,17 @@ Numbers<span class="w">     </span>OriginalID<span class="w">  </span>FinalID<sp
 </div>
 <p>The structure of the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> command is as follows (<em>Note: <strong>all</strong> characters are case <strong>in</strong>sensitive</em>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SELECT<span class="w"> </span><span class="o">[</span>DISTINCT<span class="o">]</span><span class="w"> </span>field
-FrOM<span class="w"> </span>table
-WHErE<span class="w"> </span>predicate
-GrOUP<span class="w"> </span>BY<span class="w"> </span>field
+FROM<span class="w"> </span>table
+WHERE<span class="w"> </span>predicate
+GROUP<span class="w"> </span>BY<span class="w"> </span>field
 HAVING<span class="w"> </span>predicate
-OrDEr<span class="w"> </span>BY<span class="w"> </span>field
+ORDER<span class="w"> </span>BY<span class="w"> </span>field
 LIMIT<span class="w"> </span>number
 <span class="p">;</span>
 </pre></div>
 </div>
 <p>Let’s try some more elaborate queries:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Numbers<span class="w"> </span>FrOM<span class="w"> </span>trait_info<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Numbers<span class="w"> </span>FROM<span class="w"> </span>trait_info<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
 
 Numbers<span class="w">   </span>
 ----------
@@ -996,8 +997,8 @@ Numbers<span class="w">   </span>
 <span class="m">12</span><span class="w">      </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Numbers<span class="w"> </span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>Numbers<span class="w"> </span>&gt;<span class="w"> </span><span class="m">100</span><span class="w"> </span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>Numbers<span class="w"> </span>&gt;<span class="w"> </span><span class="m">100</span><span class="w"> </span>
 <span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Numbers<span class="w"> </span>&lt;<span class="w"> </span><span class="m">200</span><span class="p">;</span>
 
 Numbers<span class="w">   </span>
@@ -1008,8 +1009,8 @@ Numbers<span class="w">   </span>
 <span class="m">115</span><span class="w">         </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>Numbers<span class="w"> </span>
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"freshwater"</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">Habitat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"freshwater"</span>
 <span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Number<span class="w"> </span>&gt;<span class="w"> </span><span class="m">700</span>
 <span class="w">   </span>...&gt;<span class="w"> </span>AND<span class="w"> </span>Number<span class="w"> </span>&lt;<span class="w"> </span><span class="m">800</span><span class="p">;</span>
 
@@ -1030,16 +1031,16 @@ Numbers<span class="w">   </span>
 </div>
 <p>You can also match records using something like regular expressions. In SQL, when we use the command <code class="docutils literal notranslate"><span class="pre">LIKE</span></code>, the percent % symbol matches any sequence of zero or more characters and the underscore matches any single character. Similarly, <code class="docutils literal notranslate"><span class="pre">GLOB</span></code> uses the asterisk and the underscore.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"_esource Consumption rate"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"_esource Consumption rate"</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">        </span>
 -------------------------
 resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span class="w">          </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
@@ -1055,8 +1056,8 @@ resource<span class="w"> </span>Encounter<span class="w"> </span>rate<span class
 resource<span class="w"> </span>Escape<span class="w"> </span>response<span class="w"> </span>Probability<span class="w"> </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>OriginalTraitName<span class="w"> </span>GLOB<span class="w"> </span><span class="s2">"resource*"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>GLOB<span class="w"> </span><span class="s2">"resource*"</span><span class="p">;</span>
 
 
 OriginalTraitName<span class="w">                       </span>
@@ -1075,8 +1076,8 @@ resource<span class="w"> </span>Escape<span class="w"> </span>response<span clas
 <span class="c1"># NOTE THAT GLOB IS CASE SENSITIVE, WHILE LIKE IS NOT</span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>DISTINCT<span class="w"> </span>OriginalTraitName
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>trait_info
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>trait_info
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIKE<span class="w"> </span><span class="s2">"resource%"</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">                       </span>
 ----------------------------------------
@@ -1093,7 +1094,7 @@ resource<span class="w"> </span>Escape<span class="w"> </span>response<span clas
 </pre></div>
 </div>
 <p>We can also order by any column:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>OriginalTraitName,<span class="w"> </span>Habitat<span class="w"> </span>FrOM<span class="w"> </span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>OriginalTraitName,<span class="w"> </span>Habitat<span class="w"> </span>FROM<span class="w"> </span>
 <span class="w">   </span>...&gt;<span class="w">  </span>trait_info<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">          </span>Habitat<span class="w">   </span>
@@ -1104,8 +1105,8 @@ resource<span class="w"> </span>Consumption<span class="w"> </span>rate<span cla
 resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
 resource<span class="w"> </span>Mass<span class="w"> </span>Consumption<span class="w">  </span>freshwater
 
-sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>OriginalTraitName,<span class="w"> </span>Habitat<span class="w"> </span>FrOM<span class="w"> </span>
-<span class="w">   </span>...&gt;<span class="w"> </span>trait_info<span class="w"> </span>OrDEr<span class="w"> </span>BY<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>OriginalTraitName,<span class="w"> </span>Habitat<span class="w"> </span>FROM<span class="w"> </span>
+<span class="w">   </span>...&gt;<span class="w"> </span>trait_info<span class="w"> </span>ORDER<span class="w"> </span>BY<span class="w"> </span>OriginalTraitName<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">5</span><span class="p">;</span>
 
 OriginalTraitName<span class="w">           </span>Habitat<span class="w">   </span>
 --------------------------<span class="w">  </span>----------
@@ -1122,7 +1123,7 @@ multiple tables minimizing redundancies within them. And of course,
 querying data from those different tables at the same time will be
 necessary at some point.</p>
 <p>Let’s import then one more table to our database:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CrEATE<span class="w"> </span>TABLE<span class="w"> </span>consumer<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>consumer<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
 <span class="w">  </span>...&gt;<span class="w">                                </span>OriginalID<span class="w"> </span>text,
 <span class="w">  </span>...&gt;<span class="w">                                </span>FinalID<span class="w"> </span>text,
 <span class="w">  </span>...&gt;<span class="w">                                </span>consumer<span class="w"> </span>text,
@@ -1146,8 +1147,8 @@ consumer<span class="w">   </span>trait_info
 </div>
 <p>These tables are connected by two different keys: <code class="docutils literal notranslate"><span class="pre">OriginalID</span></code> and <code class="docutils literal notranslate"><span class="pre">FinalID</span></code>. These are unique IDs for each thermal curve. For each <code class="docutils literal notranslate"><span class="pre">FinalID</span></code> we can get the trait name (<code class="docutils literal notranslate"><span class="pre">OriginalTraitName</span></code>) from the <code class="docutils literal notranslate"><span class="pre">trait_info</span></code> table and the corresponding species name (<code class="docutils literal notranslate"><span class="pre">ConSpecies</span></code>) from the <code class="docutils literal notranslate"><span class="pre">consumer</span></code> table.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>A1.FinalID,<span class="w"> </span>A1.consumer,<span class="w"> </span>A2.FinalID,<span class="w">  </span>A2.OriginalTraitName
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>consumer<span class="w"> </span>A1,<span class="w"> </span>trait_info<span class="w"> </span>A2
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>A1.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">8</span><span class="p">;</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>consumer<span class="w"> </span>A1,<span class="w"> </span>trait_info<span class="w"> </span>A2
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>A1.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">8</span><span class="p">;</span>
 
 FinalID<span class="w">     </span>consumer<span class="w">               </span>FinalID<span class="w">     </span>OriginalTraitName<span class="w">        </span>
 ----------<span class="w">  </span>---------------------<span class="w">  </span>----------<span class="w">  </span>-------------------------
@@ -1165,7 +1166,7 @@ MTD8<span class="w">        </span>Polyphemus<span class="w"> </span>pediculus<s
 </div>
 <p>This example seems easy because both tables have the same number of rows. But the query is still as simple when we have tables with different rows.</p>
 <p>Let’s import the tcp table:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CrEATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
 <span class="w">   </span>...&gt;<span class="w">                           </span>OriginalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                           </span>FinalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitValue<span class="w"> </span>integer,
@@ -1184,7 +1185,7 @@ consumer<span class="w">   </span>tcp<span class="w">        </span>trait_info
 </pre></div>
 </div>
 <p>Now imagine we want to query the thermal performance curves that we have stored for the species Mytilus edulis. Using the FinalID to match the tables, the query can be as simple as:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CrEATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sqlite&gt;<span class="w"> </span>CREATE<span class="w"> </span>TABLE<span class="w"> </span>tcp<span class="w"> </span><span class="o">(</span>Numbers<span class="w"> </span>integer<span class="w"> </span>primary<span class="w"> </span>key,
 <span class="w">   </span>...&gt;<span class="w">                           </span>OriginalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                           </span>FinalID<span class="w"> </span>text,
 <span class="w">   </span>...&gt;<span class="w">                           </span>OriginalTraitValue<span class="w"> </span>integer,
@@ -1204,8 +1205,8 @@ consumer<span class="w">   </span>tcp<span class="w">        </span>trait_info
 <span class="w">                       </span>
 
 sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>A1.ConTemp,<span class="w"> </span>A1.OriginalTraitValue,<span class="w"> </span>A2.OriginalTraitName,<span class="w"> </span>A3.consumer
-<span class="w">   </span>...&gt;<span class="w"> </span>FrOM<span class="w"> </span>tcp<span class="w"> </span>A1,<span class="w"> </span>trait_info<span class="w"> </span>A2,<span class="w"> </span>consumer<span class="w"> </span>A3
-<span class="w">   </span>...&gt;<span class="w"> </span>WHErE<span class="w"> </span>A1.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>AND<span class="w"> </span>A3.ConSpecies<span class="o">=</span><span class="s2">"Mytilus edulis"</span><span class="w"> </span>AND<span class="w"> </span>A3.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">8</span>
+<span class="w">   </span>...&gt;<span class="w"> </span>FROM<span class="w"> </span>tcp<span class="w"> </span>A1,<span class="w"> </span>trait_info<span class="w"> </span>A2,<span class="w"> </span>consumer<span class="w"> </span>A3
+<span class="w">   </span>...&gt;<span class="w"> </span>WHERE<span class="w"> </span>A1.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>AND<span class="w"> </span>A3.ConSpecies<span class="o">=</span><span class="s2">"Mytilus edulis"</span><span class="w"> </span>AND<span class="w"> </span>A3.FinalID<span class="o">=</span>A2.FinalID<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">8</span>
 
 ConTemp<span class="w">     </span>OriginalTraitValue<span class="w">    </span>OriginalTraitName<span class="w">               </span>consumer<span class="w">            </span>
 ----------<span class="w">  </span>--------------------<span class="w">  </span>------------------------------<span class="w">  </span>--------------------
@@ -1231,17 +1232,17 @@ store your queries and database management commands in an <code class="docutils 
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CrEATE TABLE tt (Val TEXT)"</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CREATE TABLE tt (Val TEXT)"</span><span class="p">)</span>
 
 <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
 <span class="n">z</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'a'</span><span class="p">,),</span> <span class="p">(</span><span class="s1">'ab'</span><span class="p">,),</span> <span class="p">(</span><span class="s1">'abc'</span><span class="p">,),</span> <span class="p">(</span><span class="s1">'b'</span><span class="p">,),</span> <span class="p">(</span><span class="s1">'c'</span><span class="p">,)]</span>
 
-<span class="n">c</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">"INSErT INTO tt VALUES (?)"</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">"INSERT INTO tt VALUES (?)"</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 
 <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
-<span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FrOM tt WHErE Val LIKE 'a%'"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM tt WHERE Val LIKE 'a%'"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>

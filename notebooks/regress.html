@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -704,7 +705,7 @@
 </section>
 <section id="exploring-the-data">
 <h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">#</a></h2>
-<p>In previous chapters we used <code class="docutils literal notranslate"><span class="pre">plot</span></code> to create a scatterplot between two variables. If you have a set of variables to explore, writing code for each plot is tiresome, so r provides a function <code class="docutils literal notranslate"><span class="pre">pairs</span></code>, which creates a grid of scatter plots between each pair of variables. All it needs is a dataset.</p>
+<p>In previous chapters we used <code class="docutils literal notranslate"><span class="pre">plot</span></code> to create a scatterplot between two variables. If you have a set of variables to explore, writing code for each plot is tiresome, so R provides a function <code class="docutils literal notranslate"><span class="pre">pairs</span></code>, which creates a grid of scatter plots between each pair of variables. All it needs is a dataset.</p>
 <p>First, plot all pairs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,8 +831,8 @@
 </div>
 <section id="correlations-in-r">
 <h3>Correlations in R<a class="headerlink" href="#correlations-in-r" title="Link to this heading">#</a></h3>
-<p>In r, we will use two functions to look at correlations. The first is <code class="docutils literal notranslate"><span class="pre">cor</span></code>, which can calculate correlations between pairs of variables, so is a good partner for <code class="docutils literal notranslate"><span class="pre">pairs</span></code> plots. The second is <code class="docutils literal notranslate"><span class="pre">cor.test</span></code>, which can only compare a single pair of variables, but uses a <span class="math notranslate nohighlight">\(t\)</span> test to assess whether the correlation is significant.</p>
-<p><span class="math notranslate nohighlight">\(\star\)</span> Try the following (and include it in your r script file):</p>
+<p>In R, we will use two functions to look at correlations. The first is <code class="docutils literal notranslate"><span class="pre">cor</span></code>, which can calculate correlations between pairs of variables, so is a good partner for <code class="docutils literal notranslate"><span class="pre">pairs</span></code> plots. The second is <code class="docutils literal notranslate"><span class="pre">cor.test</span></code>, which can only compare a single pair of variables, but uses a <span class="math notranslate nohighlight">\(t\)</span> test to assess whether the correlation is significant.</p>
+<p><span class="math notranslate nohighlight">\(\star\)</span> Try the following (and include it in your R script file):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">genome</span><span class="p">[,</span><span class="w"> </span><span class="n">morpho_vars</span><span class="p">],</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pairwise"</span><span class="p">)</span>
@@ -876,7 +877,7 @@ sample estimates:
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">use='pairwise'</span></code> tells r to omit observations with missing data and use complete pairs of observations. The first function confirms our impressions from the graphs: the correlations between genome size and morphology are positive but comparatively weak and the correlations between morphological measurements are positive and very strong (i.e. close to 1). The correlation test tells us that genome size and body length are positively correlated (r=0.34, <span class="math notranslate nohighlight">\(t\)</span> = 3.5507, df = 96, <span class="math notranslate nohighlight">\(p\)</span> = 0.0006).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">use='pairwise'</span></code> tells R to omit observations with missing data and use complete pairs of observations. The first function confirms our impressions from the graphs: the correlations between genome size and morphology are positive but comparatively weak and the correlations between morphological measurements are positive and very strong (i.e. close to 1). The correlation test tells us that genome size and body length are positively correlated (r=0.34, <span class="math notranslate nohighlight">\(t\)</span> = 3.5507, df = 96, <span class="math notranslate nohighlight">\(p\)</span> = 0.0006).</p>
 <p><em>remember this example when reporting correlations in your reports – all this information needs to be included</em></p>
 <p>Also, in case you are wondering about what the t-value in the <code class="docutils literal notranslate"><span class="pre">cor.test</span></code> signifies:</p>
 <p>The t-test is used within <code class="docutils literal notranslate"><span class="pre">cor.test</span></code> to establish if the correlation coefficient is significantly different from zero, that is, to test if there is a significant association between the two variables. If you recall from the previous Chapter, the t-test, in general, can be used to test if the mean of a sample is significantly different from some reference value (1-sample t-test). Here, the “mean of the sample” is the observed correlation coefficient, and the reference value is 0 (the null hypothesis, that there is no association).</p>
@@ -1039,7 +1040,7 @@ variables listed above:</p>
 <p>★ Add this model fitting command into your script and run it.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Note the long name (<code class="docutils literal notranslate"><span class="pre">nullModelDragon</span></code>) we used for the model. Short names are easier to type but calling r objects names like <code class="docutils literal notranslate"><span class="pre">mod1</span></code>, <code class="docutils literal notranslate"><span class="pre">mod2</span></code>, <code class="docutils literal notranslate"> <span class="pre">xxx</span></code> swiftly get confusing, so try and keep model names as explicit as possible.</p>
+<p>Note the long name (<code class="docutils literal notranslate"><span class="pre">nullModelDragon</span></code>) we used for the model. Short names are easier to type but calling R objects names like <code class="docutils literal notranslate"><span class="pre">mod1</span></code>, <code class="docutils literal notranslate"><span class="pre">mod2</span></code>, <code class="docutils literal notranslate"> <span class="pre">xxx</span></code> swiftly get confusing, so try and keep model names as explicit as possible.</p>
 </div>
 <p>Now we want to look at the output of the model. remember from the lecture that a model has <em>coefficients</em> (the <span class="math notranslate nohighlight">\(\beta\)</span> values in the equation of the model) and <em>terms</em> which are the explanatory variables in the model. We’ll look at the <em>coefficients</em> first:</p>
 <div class="cell docutils container">
@@ -1088,8 +1089,8 @@ F-statistic: 17.58 on 1 and 58 DF,  p-value: 9.539e-05
 </div>
 </div>
 </div>
-<p>There is a lot of information there: the model description (”<code class="docutils literal notranslate"><span class="pre">Call</span></code>”), a summary of the residuals, a table of coefficients and then information on residual standard error, r<span class="math notranslate nohighlight">\(^2\)</span>, and a <span class="math notranslate nohighlight">\(F\)</span> test.</p>
-<p>All of these will become clearer during this course (in particular, the meaning of Adjusted r-square will be explained in the <a class="reference internal" href="anova.html"><span class="std std-doc">anova chapter</span></a>) — for the moment, concentrate on the coefficients table:</p>
+<p>There is a lot of information there: the model description (”<code class="docutils literal notranslate"><span class="pre">Call</span></code>”), a summary of the residuals, a table of coefficients and then information on residual standard error, <span class="math notranslate nohighlight">\(R^2\)</span>, and a <span class="math notranslate nohighlight">\(F\)</span> test.</p>
+<p>All of these will become clearer during this course (in particular, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> will be explained in the <a class="reference internal" href="anova.html"><span class="std std-doc">anova chapter</span></a>) — for the moment, concentrate on the coefficients table:</p>
 <ul class="simple">
 <li><p>There are two rows in the coefficient table, one for each coefficient in <span class="math notranslate nohighlight">\(y=\beta_1 + \beta_2x\)</span> — these are the intercept and the slope of the line. The rest the details on each row are a <span class="math notranslate nohighlight">\(t\)</span>-test of whether the slope and intercept are significantly different from zero.</p>
 <ul>
@@ -1155,7 +1156,7 @@ Thus you can see that the regression slope is proportional to the correlation co
 <h3>The Sums of Squares<a class="headerlink" href="#the-sums-of-squares" title="Link to this heading">#</a></h3>
 <p>It is important that we fully understand the meaning of the <em>sums of squares</em> in the anova table.</p>
 <p>For this, we will fit an additional linear model, the <strong>The Null Model</strong>: <span class="math notranslate nohighlight">\(y = \beta_1\)</span>. This is the simplest linear model appropriate for these data, and says that nothing is going on; the response variable is just has variation around the mean, which cannot be explained by the predictor variable.</p>
-<p>The null model is written as an r formula as <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">1</span></code>. The code below fits this null model:</p>
+<p>The null model is written as an R formula as <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">1</span></code>. The code below fits this null model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">nullModelDragon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logBW</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome</span><span class="p">,</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Suborder</span><span class="w"> </span><span class="o">==</span><span class="w">  </span><span class="s">"Anisoptera"</span><span class="p">)</span>
@@ -1239,7 +1240,7 @@ Thus you can see that the regression slope is proportional to the correlation co
 </section>
 <section id="model-diagnostics">
 <span id="regress-diagnostics"></span><h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Link to this heading">#</a></h2>
-<p>Now that we have our models, we need to check that they are appropriate for the data. For this, we will inspect “diagnostic plots”. Producing diagnostic plots is easy in R — if you <code class="docutils literal notranslate"><span class="pre">plot</span></code> the model object, then r produces a set of diagnostic plots!</p>
+<p>Now that we have our models, we need to check that they are appropriate for the data. For this, we will inspect “diagnostic plots”. Producing diagnostic plots is easy in R — if you <code class="docutils literal notranslate"><span class="pre">plot</span></code> the model object, then R produces a set of diagnostic plots!</p>
 <p>★ Try the following code (and include in the R script file):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

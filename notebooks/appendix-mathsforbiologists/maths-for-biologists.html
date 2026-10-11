@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -1103,7 +1104,7 @@ Case 3  -  <span class="math notranslate nohighlight">\(\Delta &lt; 0\)</span></
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The similarities between the graphs for exponential and logarithmic functions are not coincidental. In fact, the graph for a logarithmic function with base <span class="math notranslate nohighlight">\(a\)</span> can be obtained by drawing the graph for an exponential function with base <span class="math notranslate nohighlight">\(a\)</span> and reflecting it in relation to the line <span class="math notranslate nohighlight">\(y = x\)</span>.  [MAKE COMMENT ON INVErSE FUNCTIONS]</p>
+<p>The similarities between the graphs for exponential and logarithmic functions are not coincidental. In fact, the graph for a logarithmic function with base <span class="math notranslate nohighlight">\(a\)</span> can be obtained by drawing the graph for an exponential function with base <span class="math notranslate nohighlight">\(a\)</span> and reflecting it in relation to the line <span class="math notranslate nohighlight">\(y = x\)</span>.  [MAKE COMMENT ON INVERSE FUNCTIONS]</p>
 <img alt="../../_images/log_base_02.png" src="../../_images/log_base_02.png" />
 <p>(here we use the common nomenclature <span class="math notranslate nohighlight">\(\mbox{log}_e x = \mbox{ln}\ x\)</span>).</p>
 </div>
@@ -2616,9 +2617,9 @@ S_n &amp;= \sum_{i = 0}^n a_i \end{align}\end{split}\]</div>
 <p class="admonition-title">Examples</p>
 <p>The following expressions are example of convergent series:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}&amp;\sum_{n=0}^\infty \frac{x^n}{n!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{r} \\
+\[\begin{split}\begin{align}&amp;\sum_{n=0}^\infty \frac{x^n}{n!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{R} \\
 &amp;\sum_{n=0}^\infty x^n \hspace{0.1cm}, \hspace{0.5cm} -1&lt;x&lt;1 \\
-&amp;\sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{r}\end{align}\end{split}\]</div>
+&amp;\sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} \hspace{0.1cm}, \hspace{0.5cm} x \in \mathbb{R}\end{align}\end{split}\]</div>
 </div>
 </section>
 <section id="calculating-areas">
@@ -3042,7 +3043,7 @@ S_n &amp;= \sum_{i = 0}^n a_i \end{align}\end{split}\]</div>
     \end{pmatrix}
     \end{split}\]</div>
  <br/>
-<p>(a) Making use of Python or r code, begin with a population distributed as <span class="math notranslate nohighlight">\((0,0,0,0,10)\)</span> individuals at time <span class="math notranslate nohighlight">\(t=0\)</span>, project the population at time <span class="math notranslate nohighlight">\(t=20\)</span>, and plot the total number over time. Plot the logarithm of the total population over time.</p>
+<p>(a) Making use of Python or R code, begin with a population distributed as <span class="math notranslate nohighlight">\((0,0,0,0,10)\)</span> individuals at time <span class="math notranslate nohighlight">\(t=0\)</span>, project the population at time <span class="math notranslate nohighlight">\(t=20\)</span>, and plot the total number over time. Plot the logarithm of the total population over time.</p>
  <br/>
 <p>(b) repeat the above but begin with <span class="math notranslate nohighlight">\((80,16,5,1,1)\)</span> individuals. How do these results compare to the results in (a) ?</p>
  <br/>

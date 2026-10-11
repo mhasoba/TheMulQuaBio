@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -741,7 +742,7 @@
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Need a working terminal? See <a class="reference internal" href="../appendices/ubuntu-admin.html#ubuntu-environment"><span class="std std-ref">Choose an environment</span></a> for Linux, macOS, Windows/WSL, ChromeOS and managed-machine routes, then <a class="reference internal" href="../appendices/ubuntu-admin.html#linux-terminal"><span class="std std-ref">Open a terminal and identify the shell</span></a>. Installing Ubuntu or changing your disk partitions is not required for these lessons.</p>
+<p>Need a working terminal? See <a class="reference internal" href="../appendices/ubuntu-admin.html#ubuntu-environment"><span class="std std-ref">Choose an environment</span></a> for instructions covering Linux, macOS, Windows/WSL, ChromeOS and managed machines, then <a class="reference internal" href="../appendices/ubuntu-admin.html#linux-terminal"><span class="std std-ref">Open a terminal and identify the shell</span></a>. Installing Ubuntu or changing your disk partitions is not required for these lessons.</p>
 </div>
 <p>Let’s look at the command prompt:</p>
 <ul class="simple">
@@ -1009,6 +1010,7 @@ ls<span class="w"> </span>-al
 <section id="building-your-coursework-directory-structure">
 <h2>Building your coursework directory structure<a class="headerlink" href="#building-your-coursework-directory-structure" title="Link to this heading">#</a></h2>
 <p>For CMEE coursework, use one <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code> directory in a suitable location in your home directory, such as Documents. Keep one project repository for the whole bootcamp instead of creating a new directory for each chapter or submission. At the project root, use <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code>, <code class="docutils literal notranslate"><span class="pre">results/</span></code> and an optional <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code>. Put scripts for all taught languages in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, keep inputs in <code class="docutils literal notranslate"><span class="pre">data/</span></code>, and use <code class="docutils literal notranslate"><span class="pre">results/</span></code> for generated outputs. <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code> is for disposable experiments, not assessed files you need to retain. Keep names lowercase exactly as shown, and bring the project under version control in the <a class="reference internal" href="git.html"><span class="std std-doc">Version Control chapter</span></a>.</p>
+<p>Unless an exercise explicitly names another location, return to this project root before running a script. From the root, commands such as <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">code/analysis.py</span></code>, <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/analysis.R</span></code> and <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/analysis.sh</span></code> can use <code class="docutils literal notranslate"><span class="pre">data/...</span></code> for inputs and <code class="docutils literal notranslate"><span class="pre">results/...</span></code> for outputs. Some exercises below deliberately move elsewhere so that you can practise navigation; they state the current directory when it matters.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>First rehearse the following file operations in a <strong>fresh temporary directory</strong>. The next cell creates one and enters it; everything through the search exercises should be done in this practice tree, not in existing coursework. Keep this terminal session open so its variables remain available. Do not copy real coursework into it or delete an existing coursework sandbox to repeat the lesson.</p>
@@ -1377,7 +1379,7 @@ cat<span class="w"> </span>ListrootDir.txt
 </section>
 <section id="wildcards">
 <h2>Wildcards<a class="headerlink" href="#wildcards" title="Link to this heading">#</a></h2>
-<p>We can use wildcards to match filenames. You should still be in the practice <code class="docutils literal notranslate"><span class="pre">CMEECourseWork/sandbox</span></code>; the next commands create and enter a new <code class="docutils literal notranslate"><span class="pre">TestWild</span></code> directory. These fixtures are empty files because here we are investigating <strong>names</strong>, not contents or sizes.</p>
+<p>We can use wildcards to match filenames. You should still be in the practice <code class="docutils literal notranslate"><span class="pre">CMEECourseWork/sandbox</span></code>; the next commands create and enter a new <code class="docutils literal notranslate"><span class="pre">TestWild</span></code> directory. These practice files are empty because here we are investigating <strong>names</strong>, not contents or sizes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>TestWild
@@ -1509,7 +1511,7 @@ spawannxs.txt       100%[===================&gt;]  13.15K  --.-KB/s    in 0.003s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>spawannxs.txt<span class="w"> </span><span class="c1">#You will see "head" in r and python as well</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>spawannxs.txt<span class="w"> </span><span class="c1">#You will see "head" in R and python as well</span>
 </pre></div>
 </div>
 </div>
@@ -1950,7 +1952,7 @@ ls<span class="w"> </span>-ls
 <li><p><code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">-n</span></code> sorts numerically by the leading block count, smallest first.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">-10</span></code> keeps up to ten lines. Under these controlled filename assumptions, these represent the files with the smallest allocated sizes, not necessarily the shortest contents.</p></li>
 </ul>
-<p>Before optimising, explore batching on a <strong>different task</strong>: displaying the paths of the text files in the earlier <code class="docutils literal notranslate"><span class="pre">TestWild</span></code> fixture.</p>
+<p>Before optimising, explore batching on a <strong>different task</strong>: displaying the paths of the text files in the earlier <code class="docutils literal notranslate"><span class="pre">TestWild</span></code> practice directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>../TestWild<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s1">'*.txt'</span><span class="w"> </span>-exec<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'path: %s\n'</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
 find<span class="w"> </span>../TestWild<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s1">'*.txt'</span><span class="w"> </span>-exec<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'path: %s\n'</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span>+
 </pre></div>
@@ -2025,7 +2027,13 @@ GCA
 <p>IUPAC ambiguity codes stand for possible DNA bases: <code class="docutils literal notranslate"><span class="pre">R</span></code> means A or G, <code class="docutils literal notranslate"><span class="pre">Y</span></code> means C or T, <code class="docutils literal notranslate"><span class="pre">M</span></code> means A or C, <code class="docutils literal notranslate"><span class="pre">W</span></code> means A or T, and <code class="docutils literal notranslate"><span class="pre">N</span></code> means any base. Other codes cover the remaining combinations. Keep these symbols when counting sequence length or searching for a literal motif; exclude them only from the four-base AT/GC calculation.</p>
 <p>GC content affects duplex melting behaviour under specified conditions, but thermal stability also depends on sequence, salt, and other factors. Do not infer that every thermophile has a GC-rich genome, or use one genome’s AT/GC ratio alone to diagnose its habitat.</p>
 <p>Work through all five questions in order. Together, they practice inspecting record structure, distinguishing text lines from sequence positions, counting motifs, and interpreting base composition.</p>
-<p>Automation comes next in the <a class="reference internal" href="shell-scripting.html"><span class="std std-doc">Shell Scripting chapter</span></a>.</p>
+<p>This practical deliberately starts in <code class="docutils literal notranslate"><span class="pre">code/</span></code> so that you practise using <code class="docutils literal notranslate"><span class="pre">..</span></code> to reach a sibling directory. That is the exception, not the usual project workflow. Before continuing, return to the project root and check that <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code> are visible:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>..
+<span class="nb">pwd</span>
+ls
+</pre></div>
+</div>
+<p>Automation comes next in the <a class="reference internal" href="shell-scripting.html"><span class="std std-doc">Shell Scripting chapter</span></a>, where you will run scripts from this project root.</p>
 </section>
 </section>
 </section>

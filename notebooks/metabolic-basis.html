@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -240,7 +240,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -320,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -752,17 +753,17 @@ A \propto l^2
 $<span class="math notranslate nohighlight">\(
     k = A e^{-\frac{E_a}{k_B T}},
 \)</span>$</p>
-<p>where <span class="math notranslate nohighlight">\(k\)</span> is the reaction rate, <span class="math notranslate nohighlight">\(k_0\)</span> is a constant, <span class="math notranslate nohighlight">\(E_a\)</span> is the activation energy, <span class="math notranslate nohighlight">\(k_B\)</span> is the Boltzmann constant, and <span class="math notranslate nohighlight">\(T\)</span> is temperature in Kelvin. This relationship explains the characteristic thermal performance curve observed in biological processes, where rates increase with temperature to an optimum before declining due to enzyme denaturation or other stress factors, as captured by later thermal-performance formulations (<span class="bibtex-citation" id="id10">[<a class="reference internal" href="../references.html#id5" title="Anthony I Dell, Samraat Pawar, and Van M Savage. Systematic variation in the temperature dependence of physiological and ecological traits. Proceedings of the National Academy of Sciences, 108(26):10591–10596, 2011.">Dell <em>et al.</em>, 2011</a>, <a class="reference internal" href="../references.html#id209" title="Robert M. Schoolfield, Peter J. H. Sharpe, and Charles E. Magnuson. Non-linear regression of biological temperature-dependent rate models based on absolute reaction-rate theory. Journal of Theoretical Biology, 88(4):719–731, 1981. doi:10.1016/0022-5193(81)90246-0.">Schoolfield <em>et al.</em>, 1981</a>]</span>) that we will consider below.
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is the reaction rate, <span class="math notranslate nohighlight">\(A\)</span> is a constant, <span class="math notranslate nohighlight">\(E_a\)</span> is the activation energy per molecule, <span class="math notranslate nohighlight">\(k_B\)</span> is the Boltzmann constant, and <span class="math notranslate nohighlight">\(T\)</span> is temperature in Kelvin. If activation energy is expressed per mole instead, the denominator uses the universal gas constant <span class="math notranslate nohighlight">\(R\)</span> rather than <span class="math notranslate nohighlight">\(k_B\)</span>. This relationship describes the increase in rate with temperature before enzyme denaturation or other stresses become important. Later thermal-performance formulations capture the subsequent decline (<span class="bibtex-citation" id="id10">[<a class="reference internal" href="../references.html#id5" title="Anthony I Dell, Samraat Pawar, and Van M Savage. Systematic variation in the temperature dependence of physiological and ecological traits. Proceedings of the National Academy of Sciences, 108(26):10591–10596, 2011.">Dell <em>et al.</em>, 2011</a>, <a class="reference internal" href="../references.html#id209" title="Robert M. Schoolfield, Peter J. H. Sharpe, and Charles E. Magnuson. Non-linear regression of biological temperature-dependent rate models based on absolute reaction-rate theory. Journal of Theoretical Biology, 88(4):719–731, 1981. doi:10.1016/0022-5193(81)90246-0.">Schoolfield <em>et al.</em>, 1981</a>]</span>).
 The <em>Arrhenius equation</em> and its variants (often collectively referred to as the “Boltzmann-Arrhenius” equation in certain contexts) are cornerstones of chemical kinetics. These formulations describe how reaction rates vary with temperature. For <em>enzyme kinetics</em>, the temperature dependence can also be described via modified forms of the Arrhenius equation, sometimes combined with effects such as protein denaturation at higher temperatures.
 Historically, this work can be traced back to <em>Jacobus Henricus van ‘t Hoff</em> (1852–1911), whose studies first quantified the temperature dependence of reaction rates <span class="bibtex-citation" id="id11">[<a class="reference internal" href="../references.html#id171" title="J. H. van 't Hoff. Études de dynamique chimique. Frederik Muller, Amsterdam, 1884.">van 't Hoff, 1884</a>]</span>. Building on van ‘t Hoff’s work, <em>Svante Arrhenius</em> (1859–1927) proposed a more explicit relationship that connected the rate constant <span class="math notranslate nohighlight">\(k\)</span> of a chemical reaction to an exponential function of temperature <span class="bibtex-citation" id="id12">[<a class="reference internal" href="../references.html#id170" title="Svante Arrhenius. Über die reaktionsgeschwindigkeit bei der inversion von rohrzucker durch säuren. Zeitschrift für Physikalische Chemie, 4(1):226–248, 1889. doi:10.1515/zpch-1889-0416.">Arrhenius, 1889</a>]</span>:
 $<span class="math notranslate nohighlight">\(
-    k = A \exp\left( -\frac{E_a}{rT} \right),
+    k = A \exp\left( -\frac{E_a}{RT} \right),
 \)</span>$</p>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( A \)</span> is the pre-exponential factor (or frequency factor),</p></li>
 <li><p><span class="math notranslate nohighlight">\( E_a \)</span> is the activation energy,</p></li>
-<li><p><span class="math notranslate nohighlight">\( r \)</span> is the universal gas constant, and</p></li>
+<li><p><span class="math notranslate nohighlight">\( R \)</span> is the universal gas constant, and</p></li>
 <li><p><span class="math notranslate nohighlight">\( T \)</span> is the absolute temperature in Kelvin.</p></li>
 </ul>
 <p>For <em>enzyme-catalyzed reactions</em>, temperature significantly affects the reaction velocity <span class="math notranslate nohighlight">\(v\)</span> or the turnover number (<em>catalytic rate constant</em> <span class="math notranslate nohighlight">\(k_{\mathrm{cat}}\)</span>). At “moderate” temperatures, higher temperature generally increases reaction rates, consistent with Arrhenius behavior. However, at higher temperatures, <em>thermal denaturation</em> of the enzyme reduces or abolishes its catalytic activity. Hence, more realistic models for enzyme kinetics must account for both the <em>Arrhenius increase in rate</em> and the <em>loss of enzyme activity</em> due to denaturation, which we will consider later below.</p>
@@ -793,14 +794,14 @@ $<span class="math notranslate nohighlight">\(
 <p>Using statistical mechanics arguments, TST yields the famous <em>Eyring (or Eyring–Polanyi) equation</em>, sometimes called the “absolute rate equation” <span class="bibtex-citation" id="id15">[<a class="reference internal" href="../references.html#id172" title="Henry Eyring. The activated complex in chemical reactions. The Journal of Chemical Physics, 3(2):107–115, 1935. doi:10.1063/1.1749604.">Eyring, 1935</a>, <a class="reference internal" href="../references.html#id173" title="M. Polanyi. Unknown title (please verify). Z. Phys. Chem. B, 28:309–318, 1935. Exact article title not found in open metadata during lookup; please verify from the journal issue/table of contents and add title (and DOI if present).">Polanyi, 1935</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-    k = \frac{k_B T}{h} \exp\Bigl(\tfrac{\Delta S^\ddagger}{r}\Bigr)\exp\Bigl(-\tfrac{\Delta H^\ddagger}{rT}\Bigr).
+    k = \frac{k_B T}{h} \exp\Bigl(\tfrac{\Delta S^\ddagger}{R}\Bigr)\exp\Bigl(-\tfrac{\Delta H^\ddagger}{RT}\Bigr).
 \]</div>
 <p>where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(k\)</span> is the rate constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\(k_B\)</span> is Boltzmann’s constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\(h\)</span> is Planck’s constant,</p></li>
-<li><p><span class="math notranslate nohighlight">\(r\)</span> is the gas constant,</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span> is the gas constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\(T\)</span> is the absolute temperature,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> is the <em>activation enthalpy</em>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> is the <em>activation entropy</em>.</p></li>
@@ -808,7 +809,7 @@ $<span class="math notranslate nohighlight">\(
 <p>The key result of TST is the <em>Eyring</em> (or <em>Eyring-Polanyi</em>) Equation, usually written as:</p>
 <div class="math notranslate nohighlight">
 \[
-    \displaystyle k = \kappa \frac{k_B    T}{h} \exp\Bigl( \frac{\Delta S^\ddagger}{r}\Bigr) \exp\Bigl( - \frac{\Delta H^\ddagger}{rT} \Bigr),
+    \displaystyle k = \kappa \frac{k_B    T}{h} \exp\Bigl( \frac{\Delta S^\ddagger}{R}\Bigr) \exp\Bigl( - \frac{\Delta H^\ddagger}{RT} \Bigr),
 \]</div>
 <p>where</p>
 <ul class="simple">
@@ -817,29 +818,29 @@ $<span class="math notranslate nohighlight">\(
 <li><p><span class="math notranslate nohighlight">\(h\)</span> is Planck’s constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> is the entropy of activation,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> is the enthalpy of activation, and</p></li>
-<li><p><span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are as before.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are as before.</p></li>
 </ul>
 <p>This equation is more often called the “<em>Eyring equation</em>” and offers a more explicitly thermodynamics-based perspective. It reduces to an Arrhenius-like form when you group constants appropriately.</p>
 <p>Through this equation, TST provides a <em>molecular-level interpretation</em> for the pre-exponential factor</p>
-<p><span class="math notranslate nohighlight">\(\frac{k_B T}{h} \exp \Delta S^\ddagger / r)\)</span>) and the exponential barrier term <span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (rT))\)</span>) in the rate expression.</p>
+<p><span class="math notranslate nohighlight">\(\frac{k_B T}{h} \exp(\Delta S^\ddagger / R)\)</span> and the exponential barrier term <span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (RT))\)</span> in the rate expression.</p>
 <p><span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> is the difference in <em>enthalpy</em> (heat content) between the transition state (activated complex) and the reactants. It represents the <em>energy barrier</em> that must be surmounted for the reaction to occur. A larger <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> means a higher barrier, which tends to <em>slow down</em> the reaction, especially at lower temperatures.</p>
-<p>In the factor <span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (rT))\)</span>, <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> appears in the <em>exponential</em> term with a <span class="math notranslate nohighlight">\(1/T\)</span> dependence.Consequently, the <em>higher</em> the activation enthalpy, the <em>more strongly</em> the rate constant depends on temperature (i.e., higher sensitivity in an Arrhenius-type plot).</p>
+<p>In the factor <span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (RT))\)</span>, <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> appears in the <em>exponential</em> term with a <span class="math notranslate nohighlight">\(1/T\)</span> dependence. Consequently, the <em>higher</em> the activation enthalpy, the <em>more strongly</em> the rate constant depends on temperature (i.e., higher sensitivity in an Arrhenius-type plot).</p>
 <p>Next, <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> is the difference in <em>entropy</em> between the transition state and the reactants. It reflects the <em>change in molecular disorder</em> when going from reactants to the activated complex. A <em>positive</em> <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> implies that forming the transition state is relatively more disordered than the reactants, favoring the reaction (larger rate constant). A <em>negative</em> <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> implies a more ordered transition state, which lowers the rate constant by decreasing the pre-exponential factor.</p>
-<p>Finally, <span class="math notranslate nohighlight">\(\exp \Delta S^\ddagger / r)\)</span> <em>multiplies</em> the basic frequency factor <span class="math notranslate nohighlight">\(\frac{k_B T}{h}\)</span>. Therefore, even if <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> is moderate, a large <em>positive</em> <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> can significantly enhance the reaction rate, whereas a negative <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> can suppress it.</p>
+<p>Finally, <span class="math notranslate nohighlight">\(\exp(\Delta S^\ddagger / R)\)</span> <em>multiplies</em> the basic frequency factor <span class="math notranslate nohighlight">\(\frac{k_B T}{h}\)</span>. Therefore, even if <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> is moderate, a large <em>positive</em> <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> can significantly enhance the reaction rate, whereas a negative <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span> can suppress it.</p>
 <section id="overall-temperature-dependence-of-the-rate">
 <h3>Overall Temperature Dependence of the rate<a class="headerlink" href="#overall-temperature-dependence-of-the-rate" title="Link to this heading">#</a></h3>
 <p>By combining <span class="math notranslate nohighlight">\(\Delta H^\ddagger\)</span> and <span class="math notranslate nohighlight">\(\Delta S^\ddagger\)</span>, TST clarifies <em>how and why</em> reaction rates depend on temperature:</p>
 <div class="math notranslate nohighlight">
 \[
-k(T) = \frac{k_B T}{h} \exp\Bigl(\tfrac{\Delta S^\ddagger}{r}\Bigr) \exp\Bigl(-\tfrac{\Delta H^\ddagger}{rT}\Bigr).
+k(T) = \frac{k_B T}{h} \exp\Bigl(\tfrac{\Delta S^\ddagger}{R}\Bigr) \exp\Bigl(-\tfrac{\Delta H^\ddagger}{RT}\Bigr).
 \]</div>
-<p>The <em><span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (rT))\)</span></em> term governs the <em>primary exponential sensitivity</em> of <span class="math notranslate nohighlight">\(k\)</span> to changes in temperature. The <em><span class="math notranslate nohighlight">\(\exp\)</span>\Delta S^\ddagger / r)$</em> term influences the <em>intrinsic magnitude</em> of the rate constant at any given temperature by encoding the “positional” or “configurational” freedom of the transition state.</p>
+<p>The <em><span class="math notranslate nohighlight">\(\exp(-\Delta H^\ddagger / (RT))\)</span></em> term governs the <em>primary exponential sensitivity</em> of <span class="math notranslate nohighlight">\(k\)</span> to changes in temperature. The <em><span class="math notranslate nohighlight">\(\exp(\Delta S^\ddagger / R)\)</span></em> term influences the <em>intrinsic magnitude</em> of the rate constant at any given temperature by encoding the “positional” or “configurational” freedom of the transition state.</p>
 <p>Experimentalists often plot <span class="math notranslate nohighlight">\(\ln(k/T)\)</span> versus <span class="math notranslate nohighlight">\(1/T\)</span>, known as an <em>Eyring plot</em>:</p>
 <div class="math notranslate nohighlight">
 \[
-    \ln \Bigl(\tfrac{k}{T}\Bigr) = -\frac{\Delta H^\ddagger}{r} \cdot \frac{1}{T} + \frac{\Delta S^\ddagger}{r} + \text{constant}.
+    \ln \Bigl(\tfrac{k}{T}\Bigr) = -\frac{\Delta H^\ddagger}{R} \cdot \frac{1}{T} + \frac{\Delta S^\ddagger}{R} + \text{constant}.
 \]</div>
-<!-- In this plot, The *slope* is $-\Delta H^\ddagger / r$, and the *intercept* is $1/T = 0$ (or the "vertical shift") is $\Delta S^\ddagger / r$.   
+<!-- In this plot, The *slope* is $-\Delta H^\ddagger / R$, and the *intercept* is $1/T = 0$ (or the "vertical shift") is $\Delta S^\ddagger / R$.   
 
 Hence, one can directly extract $\Delta H^\ddagger$ and $\Delta S^\ddagger$ from measured rate data at different temperatures to confirm or test validity of the model and the parameter estimates.
 
@@ -852,22 +853,22 @@ Hence, one can directly extract $\Delta H^\ddagger$ and $\Delta S^\ddagger$ from
 
 2. *Activation Enthalpy, $\Delta H^\ddagger$*  
    - Measures the *height* of the energy barrier.  
-   - Appears in the $\exp(-\Delta H^\ddagger / (rT))$ factor, dictating strong temperature dependence.
+   - Appears in the $\exp(-\Delta H^\ddagger / (RT))$ factor, dictating strong temperature dependence.
 
 3. *Activation Entropy, $\Delta S^\ddagger$*  
    - reflects the *ordering/disordering* when forming the transition state.  
-   - Enters as $\exp$\Delta S^\ddagger / r)$, setting the magnitude of the frequency factor.
+   - Enters as $\exp(\Delta S^\ddagger / R)$, setting the magnitude of the frequency factor.
 
 4. *Temperature Dependence*  
    - The Eyring equation, arising from TST, captures both the *enthalpic* (energy) and *entropic* (disorder) contributions to the rate constant's variation with temperature.  
 
-<p><em>Arrhenius plots</em> are generated by taking the natural log on both sides and plotting <span class="math notranslate nohighlight">\(\ln(k)\)</span> vs. <span class="math notranslate nohighlight">\(1/T\)</span> should yield a straight line with slope <span class="math notranslate nohighlight">\(-E_a/r\)</span> and intercept <span class="math notranslate nohighlight">\(\ln(A)\)</span>.</p>
+<p><em>Arrhenius plots</em> are generated by taking the natural log on both sides and plotting <span class="math notranslate nohighlight">\(\ln(k)\)</span> vs. <span class="math notranslate nohighlight">\(1/T\)</span> should yield a straight line with slope <span class="math notranslate nohighlight">\(-E_a/R\)</span> and intercept <span class="math notranslate nohighlight">\(\ln(A)\)</span>.</p>
 <p><em>Eyring Equation</em>:  A common linear form for plotting is:</p>
 <div class="math notranslate nohighlight">
 \[
-   \ln\Bigl(\tfrac{k}{T}\Bigr)  =  -\frac{\Delta H^\ddagger}{r} \frac{1}{T}  +  \ln\Bigl(\frac{k_B}{h}\Bigr)  +  \frac{\Delta S^\ddagger}{r}.
+   \ln\Bigl(\tfrac{k}{T}\Bigr)  =  -\frac{\Delta H^\ddagger}{R} \frac{1}{T}  +  \ln\Bigl(\frac{k_B}{h}\Bigr)  +  \frac{\Delta S^\ddagger}{R}.
 \]</div>
-<p>Thus, <span class="math notranslate nohighlight">\(\ln(k/T)\)</span> vs. <span class="math notranslate nohighlight">\(1/T\)</span> should be linear with slope <span class="math notranslate nohighlight">\(-\Delta H^\ddagger / r\)</span> and intercept <span class="math notranslate nohighlight">\(\ln(k_B/h) + \Delta S^\ddagger / r\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\ln(k/T)\)</span> vs. <span class="math notranslate nohighlight">\(1/T\)</span> should be linear with slope <span class="math notranslate nohighlight">\(-\Delta H^\ddagger / R\)</span> and intercept <span class="math notranslate nohighlight">\(\ln(k_B/h) + \Delta S^\ddagger / R\)</span>.</p>
 <!-- ## 4. Discussion
 
 1. *Arrhenius vs. Eyring*  

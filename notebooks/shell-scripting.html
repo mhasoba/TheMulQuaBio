@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
@@ -238,7 +238,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
@@ -318,6 +318,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
@@ -749,7 +750,7 @@
 </ul>
 <p>The shell coordinates. <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, <code class="docutils literal notranslate"><span class="pre">pdftotext</span></code>, ImageMagick and LaTeX do the specialised work.</p>
 <p>Use Python or R when the job needs to understand data, perform analysis, or build a complex in-memory result. A shell script can call either one.</p>
-<p>In this chapter we will start with simple examples, predict their behaviour, test them on disposable data, and identify what needs improving. Keep the assessed scripts in your coursework repository; the temporary fixtures used to investigate them are not submissions.</p>
+<p>In this chapter we will start with simple examples, predict their behaviour, test them on disposable data, and identify what needs improving. Keep the assessed scripts in your coursework repository; the temporary practice files you create while investigating them are not submissions.</p>
 </section>
 </section>
 <section id="your-first-shell-script">
@@ -830,22 +831,22 @@
 <section id="running-shell-scripts">
 <h2>Running shell scripts<a class="headerlink" href="#running-shell-scripts" title="Link to this heading">#</a></h2>
 <p>The simplest way to run this lesson’s script is:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>boilerplate.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/boilerplate.sh
 </pre></div>
 </div>
-<p>Read this as: <strong>ask Bash to run the commands in <code class="docutils literal notranslate"><span class="pre">boilerplate.sh</span></code>.</strong></p>
-<p>The file must be readable, but it does not need executable permission for this method. <code class="docutils literal notranslate"><span class="pre">sh</span> <span class="pre">boilerplate.sh</span></code> is not an interchangeable spelling: it selects the system’s <code class="docutils literal notranslate"><span class="pre">sh</span></code>, even when the script was written for Bash.</p>
+<p>Read this as: <strong>ask Bash to run the commands in <code class="docutils literal notranslate"><span class="pre">code/boilerplate.sh</span></code>.</strong> Start at the coursework project root, as you did at the end of the Unix chapter.</p>
+<p>The file must be readable, but it does not need executable permission for this method. <code class="docutils literal notranslate"><span class="pre">sh</span> <span class="pre">code/boilerplate.sh</span></code> is not an interchangeable spelling: it selects the system’s <code class="docutils literal notranslate"><span class="pre">sh</span></code>, even when the script was written for Bash.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Bash, dash and zsh are distinct shells with overlapping command languages. On macOS, you can run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">boilerplate.sh</span></code> from a zsh prompt: the child process interpreting the script is Bash. This does not change your login shell. Use Bash for the examples here and document any external programs your script needs.</p>
+<p>Bash, dash and zsh are distinct shells with overlapping command languages. On macOS, you can run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/boilerplate.sh</span></code> from a zsh prompt: the child process interpreting the script is Bash. This does not change your login shell. Use Bash for the examples here and document any external programs your script needs.</p>
 </div>
 <p>You can also make the file executable and run it directly:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>u+x<span class="w"> </span>boilerplate.sh
-./boilerplate.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>u+x<span class="w"> </span>code/boilerplate.sh
+./code/boilerplate.sh
 </pre></div>
 </div>
 <p>This method uses the shebang to choose Bash.</p>
-<p>Here <code class="docutils literal notranslate"><span class="pre">./</span></code> gives the path to the file in the current directory. The current directory is not normally searched automatically for commands. Either invocation method is valid; choose deliberately.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">./code/boilerplate.sh</span></code> means “start in this directory, then look in <code class="docutils literal notranslate"><span class="pre">code/</span></code>”. The current directory is not normally searched automatically for commands. Either invocation method is valid; choose deliberately.</p>
 <section id="finding-commands-with-path">
 <h3>Finding commands with PATH<a class="headerlink" href="#finding-commands-with-path" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">PATH</span></code> is an environment variable containing a colon-separated list of directories searched for executable commands. It is not a directory itself. Inspect it and the Bash command your shell resolves:</p>
@@ -865,16 +866,16 @@
 <p class="admonition-title">Note</p>
 <p>For external executables, the first matching directory in <code class="docutils literal notranslate"><span class="pre">PATH</span></code> normally wins; shell functions, aliases, builtins and cached command locations can also affect lookup. Use <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">-v</span></code> to inspect resolution. Avoid putting <code class="docutils literal notranslate"><span class="pre">.</span></code> in <code class="docutils literal notranslate"><span class="pre">PATH</span></code> or overwriting system variables accidentally.</p>
 </div>
-<p>Now run your first shell script. Navigate to the root-level <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory of your coursework project, where you saved <code class="docutils literal notranslate"><span class="pre">boilerplate.sh</span></code>. Check your location with <code class="docutils literal notranslate"><span class="pre">pwd</span></code> before continuing.</p>
+<p>Now run your first shell script. Return to the coursework <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a>, where <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code> sit alongside one another. Check your location with <code class="docutils literal notranslate"><span class="pre">pwd</span></code> before continuing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
-bash<span class="w"> </span>boilerplate.sh
+bash<span class="w"> </span>code/boilerplate.sh
 </pre></div>
 </div>
 </div>
 </div>
-<p>Remain in the coursework project’s root-level <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory for the following script examples unless explicitly told otherwise. From here, <code class="docutils literal notranslate"><span class="pre">../data</span></code> and <code class="docutils literal notranslate"><span class="pre">../results</span></code> refer to the corresponding directories at the project root, while <code class="docutils literal notranslate"><span class="pre">../sandbox</span></code> is available for disposable test files. Relative paths depend on the working directory, so check it with <code class="docutils literal notranslate"><span class="pre">pwd</span></code> before running a command.</p>
+<p>Remain at the coursework project root for the following script examples unless an exercise names another location. From here, a path such as <code class="docutils literal notranslate"><span class="pre">data/example.csv</span></code> starts in the project’s <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory and <code class="docutils literal notranslate"><span class="pre">results/example.csv</span></code> starts in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Use <code class="docutils literal notranslate"><span class="pre">pwd</span></code> whenever you are unsure where Bash will start looking.</p>
 </section>
 </section>
 <section id="variables-in-shell-scripts">
@@ -932,7 +933,7 @@ bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'printf "
 <section id="positional-and-special-parameters">
 <h3>Positional and special parameters<a class="headerlink" href="#positional-and-special-parameters" title="Link to this heading">#</a></h3>
 <p>A script can receive information after its filename:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>greet.sh<span class="w"> </span>oak
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/greet.sh<span class="w"> </span>oak
 </pre></div>
 </div>
 <p>Inside <code class="docutils literal notranslate"><span class="pre">greet.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">$1</span></code> means <strong>the first value supplied by the caller</strong>—here, <code class="docutils literal notranslate"><span class="pre">oak</span></code>. <code class="docutils literal notranslate"><span class="pre">$2</span></code> would mean the second value, and <code class="docutils literal notranslate"><span class="pre">$#</span></code> tells us how many values were supplied.</p>
@@ -1011,8 +1012,8 @@ bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'printf "
 </pre></div>
 </div>
 <p>Run it first without arguments, then with two arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>variables.sh
-bash<span class="w"> </span>variables.sh<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">"two words"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/variables.sh
+bash<span class="w"> </span>code/variables.sh<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">"two words"</span>
 </pre></div>
 </div>
 <p>Type the requested text and numbers each time. With no arguments, <code class="docutils literal notranslate"><span class="pre">$1</span></code> and <code class="docutils literal notranslate"><span class="pre">$2</span></code> expand to empty strings here. <code class="docutils literal notranslate"><span class="pre">printf</span></code> still processes its format once when <code class="docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code> supplies no values, so an empty <code class="docutils literal notranslate"><span class="pre">Argument:</span> <span class="pre">&lt;&gt;</span></code> line does not mean an empty argument was passed; compare <code class="docutils literal notranslate"><span class="pre">$#</span></code>.</p>
@@ -1025,7 +1026,7 @@ bash<span class="w"> </span>variables.sh<span class="w"> </span><span class="m">
 <span class="nb">printf</span><span class="w"> </span><span class="s1">'%s %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$greeting</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$user_name</span><span class="s2">"</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">USER</span></code> commonly holds the login name, but it may be unset or changed. <code class="docutils literal notranslate"><span class="pre">$USEr</span></code> and <code class="docutils literal notranslate"><span class="pre">$USERNAME</span></code> are different names, not aliases. Compare <code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">'%s\n'</span> <span class="pre">&quot;$USER&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">whoami</span></code> (the effective user); do not use an environment variable as proof of identity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">USER</span></code> commonly holds the login name, but it may be unset or changed. <code class="docutils literal notranslate"><span class="pre">$USER</span></code> and <code class="docutils literal notranslate"><span class="pre">$USERNAME</span></code> are different names, not aliases. Compare <code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">'%s\n'</span> <span class="pre">&quot;$USER&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">whoami</span></code> (the effective user); do not use an environment variable as proof of identity.</p>
 </section>
 </section>
 <section id="decisions-loops-and-useful-failures">
@@ -1056,13 +1057,13 @@ bash<span class="w"> </span>variables.sh<span class="w"> </span><span class="m">
 </div>
 <p>The argument-count test comes first. <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> inside the second test requires both comparisons to be true. <code class="docutils literal notranslate"><span class="pre">fi</span></code> ends an <code class="docutils literal notranslate"><span class="pre">if</span></code> block; an optional <code class="docutils literal notranslate"><span class="pre">else</span></code> introduces an alternative branch. For later file tasks, investigate <code class="docutils literal notranslate"><span class="pre">[[</span> <span class="pre">-f</span> <span class="pre">&quot;$1&quot;</span> <span class="pre">]]</span></code> (regular file) and <code class="docutils literal notranslate"><span class="pre">[[</span> <span class="pre">-r</span> <span class="pre">&quot;$1&quot;</span> <span class="pre">]]</span></code> (readable), but remember that successful tests do not guarantee a later operation will succeed.</p>
 <p>Predict and then inspect the status immediately after each call:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>CheckLabel.sh<span class="w"> </span>oak
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/CheckLabel.sh<span class="w"> </span>oak
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span>
-bash<span class="w"> </span>CheckLabel.sh
+bash<span class="w"> </span>code/CheckLabel.sh
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span>
-bash<span class="w"> </span>CheckLabel.sh<span class="w"> </span>birch
+bash<span class="w"> </span>code/CheckLabel.sh<span class="w"> </span>birch
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span>
-bash<span class="w"> </span>CheckLabel.sh<span class="w"> </span>oak<span class="w"> </span>pine
+bash<span class="w"> </span>code/CheckLabel.sh<span class="w"> </span>oak<span class="w"> </span>pine
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span>
 </pre></div>
 </div>
@@ -1130,7 +1131,7 @@ bash<span class="w"> </span>CheckLabel.sh<span class="w"> </span>oak<span class=
 <p>Now save this first attempt as <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> in your coursework <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. It matches the supplied starter’s behaviour.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This is a <strong>limited teaching starter</strong>, not a converter to trust with research data. For the first run, supply one readable file whose path has no spaces or wildcard characters, with one tab between fields and no quoted delimiters. Use only the disposable fixtures below. Keep input and output distinct; the output name is the input name with <code class="docutils literal notranslate"><span class="pre">.csv</span></code> appended. We will deliberately break these assumptions next.</p>
+<p>This is a <strong>limited teaching starter</strong>, not a converter to trust with research data. For the first run, supply one readable file whose path has no spaces or wildcard characters, with one tab between fields and no quoted delimiters. Use only the disposable practice files below. Keep input and output distinct; the output name is the input name with <code class="docutils literal notranslate"><span class="pre">.csv</span></code> appended. We will deliberately break these assumptions next.</p>
 </div>
 <section id="first-attempt-tabtocsv-sh">
 <h3>First attempt: <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code><a class="headerlink" href="#first-attempt-tabtocsv-sh" title="Link to this heading">#</a></h3>
@@ -1151,7 +1152,7 @@ cat<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><sp
 <span class="nb">exit</span>
 </pre></div>
 </div>
-<p>Stay in the coursework project’s root-level <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory, where you saved the script. The next cell creates a fresh temporary directory and a tiny input; keep this terminal session open so <code class="docutils literal notranslate"><span class="pre">$shell_practice</span></code> remains available. The script stays in the permanent coursework project, while test data and generated output stay in the disposable temporary directory.</p>
+<p>Stay at the coursework project root. The next cell creates a fresh temporary directory and a tiny input; keep this terminal session open so <code class="docutils literal notranslate"><span class="pre">$shell_practice</span></code> remains available. The script stays under <code class="docutils literal notranslate"><span class="pre">code/</span></code>, while test data and generated output stay in the disposable temporary directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">shell_practice</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="k">)</span>
@@ -1164,7 +1165,7 @@ cat<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><sp
 <p>Now run your script on it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt"</span>
 cat<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt.csv"</span>
 </pre></div>
 </div>
@@ -1174,11 +1175,11 @@ cat<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_prac
 <section id="predict-diagnose-improve">
 <h3>Predict, diagnose, improve<a class="headerlink" href="#predict-diagnose-improve" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">$1</span></code> is the first argument supplied to the script, not a general placeholder definition. The output lands beside the input because the starter appends <code class="docutils literal notranslate"><span class="pre">.csv</span></code> to that whole path. The resulting <code class="docutils literal notranslate"><span class="pre">.txt.csv</span></code> name is deliberately left for the extension-renaming exercise.</p>
-<p>Try these probes one at a time from the coursework project’s root-level <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory:</p>
+<p>Try these probes one at a time from the coursework project root:</p>
 <section id="reruns">
 <h4>Reruns<a class="headerlink" href="#reruns" title="Link to this heading">#</a></h4>
 <p>Run the script again on the same temporary input, then inspect the output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>code/tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt"</span>
 cat<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt.csv"</span>
 </pre></div>
 </div>
@@ -1205,7 +1206,7 @@ cat<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_prac
 <section id="a-space-in-the-path">
 <h4>A space in the path<a class="headerlink" href="#a-space-in-the-path" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/test.txt"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/field notes.txt"</span>
-bash<span class="w"> </span>tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/field notes.txt"</span>
+bash<span class="w"> </span>code/tabtocsv.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/field notes.txt"</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span>
 </pre></div>
 </div>
@@ -1255,10 +1256,10 @@ cat<span class="w"> </span><span class="s2">"</span><span class="nv">$3</span><s
 <p class="admonition-title">Warning</p>
 <p>The output must be distinct from both inputs and from any existing file you need. Redirection opens/truncates the output before <code class="docutils literal notranslate"><span class="pre">cat</span></code> reads its input; using an input path as the output can destroy data. Quoting paths does not check whether they refer to the same file. This starter does not validate that condition.</p>
 </div>
-<p>From <code class="docutils literal notranslate"><span class="pre">code/</span></code>, prepare fresh fixtures in the temporary directory and run the example:</p>
+<p>From the project root, prepare two fresh practice files in the temporary directory and run the example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">printf</span><span class="w"> </span><span class="s1">'oak\n'</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/first.txt"</span>
 <span class="nb">printf</span><span class="w"> </span><span class="s1">'pine\n'</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/second.txt"</span>
-bash<span class="w"> </span>ConcatenateTwoFiles.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/first.txt"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/second.txt"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/combined.txt"</span>
+bash<span class="w"> </span>code/ConcatenateTwoFiles.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/first.txt"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/second.txt"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/combined.txt"</span>
 </pre></div>
 </div>
 <p>Try a second run with the same three paths and inspect the result. Unlike the tab converter, this script starts by truncating its output; explain why rerunning does not duplicate the whole result. Do not test overlapping paths on valuable files.</p>
@@ -1275,8 +1276,9 @@ bash<span class="w"> </span>ConcatenateTwoFiles.sh<span class="w"> </span><span 
 <span class="k">done</span>
 </pre></div>
 </div>
-<p>From your <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory, save its path and make a fresh image-testing directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">script_dir</span><span class="o">=</span><span class="nv">$PWD</span>
+<p>This particular script works on images in the current directory, so it is a deliberate exception to the usual root-level launch. From the project root, save the script’s full path and make a fresh image-testing directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">project_root</span><span class="o">=</span><span class="nv">$PWD</span>
+<span class="nv">script_path</span><span class="o">=</span><span class="nv">$project_root</span>/code/tiff2_png.sh
 mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/images"</span>
 <span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$shell_practice</span><span class="s2">/images"</span>
 <span class="nb">pwd</span>
@@ -1290,7 +1292,7 @@ mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_pr
 <span class="k">done</span>
 </pre></div>
 </div>
-<p>This is a preview for inspection, not shell-escaped commands to paste. Check the names and destinations. If it prints literal <code class="docutils literal notranslate"><span class="pre">*.tif</span></code>, no files matched: do not run the conversion. With prepared copies and an available converter, run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">&quot;$script_dir/tiff2_png.sh&quot;</span></code> from this image directory, then return with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&quot;$script_dir&quot;</span></code>.</p>
+<p>This is a preview for inspection, not shell-escaped commands to paste. Check the names and destinations. If it prints literal <code class="docutils literal notranslate"><span class="pre">*.tif</span></code>, no files matched: do not run the conversion. With prepared copies and an available converter, run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">&quot;$script_path&quot;</span></code> from this image directory, then return with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&quot;$project_root&quot;</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The loop still has limitations to investigate: no matches, uppercase extensions, option-like filenames, output collisions, converter failures, and adding an optional directory argument. Existing PNGs may be overwritten. These are extension questions, not a claim that the starter already handles them or additional assessed submission requirements.</p>
@@ -1314,7 +1316,7 @@ mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_pr
 <li><p>These practicals progress from diagnosing a limited starter to specifying, testing and improving small scripts. Follow the stated input/output and working-directory conventions.</p></li>
 <li><p>Make sure your <strong>permanent</strong> coursework project root (e.g., <code class="docutils literal notranslate"><span class="pre">CMEECourseWork</span></code>) contains <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code>, generated <code class="docutils literal notranslate"><span class="pre">results/</span></code> and optional <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code>.</p></li>
 <li><p>Review the examples and their limitations. Keep scripts in the coursework project’s root <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory; temporary test directories belong in <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code>, not in the submission.</p></li>
-<li><p>Aim for reproducibility on other UNIX-like machines with Bash and required external commands installed. Record dependencies and where each script should be invoked. Relative paths are resolved from the <strong>working directory</strong>, not automatically from the script’s location. For these practicals, invoke from <code class="docutils literal notranslate"><span class="pre">code/</span></code> and read coursework data using paths under <code class="docutils literal notranslate"><span class="pre">../data/</span></code>.</p></li>
+<li><p>Aim for reproducibility on other UNIX-like machines with Bash and required external commands installed. Record dependencies and where each script should be run. For these practicals, start at the project root: <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/script.sh</span> <span class="pre">data/input.csv</span></code> finds the script under <code class="docutils literal notranslate"><span class="pre">code/</span></code> and the input under <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
 <li><p>Document scripts, their purpose, usage and test evidence in the repository’s root <code class="docutils literal notranslate"><span class="pre">README.md</span></code>.</p></li>
 <li><p>Keep every submitted script in the repository. An optional executable copy under <code class="docutils literal notranslate"><span class="pre">$HOME/.local/bin</span></code> is not a substitute.</p></li>
 </ul>
@@ -1323,18 +1325,18 @@ mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_pr
 <h3>Practical: improve existing scripts<a class="headerlink" href="#practical-improve-existing-scripts" title="Link to this heading">#</a></h3>
 <p>Some scripts need input arguments: <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> takes one input path; <code class="docutils literal notranslate"><span class="pre">ConcatenateTwoFiles.sh</span></code> takes <strong>two input paths and an output path</strong>. Running a starter without these can produce an error, wait for standard input or misleadingly appear to succeed.</p>
 <p>The goal is to make each script give clear feedback and exit unsuccessfully when required inputs are not provided. Use the separate <code class="docutils literal notranslate"><span class="pre">CheckLabel.sh</span></code> example to understand the control-flow pattern; apply it to the file tasks. Do not treat the small starters as finished reference solutions.</p>
-<p>For diagnosis, compare valid input, missing arguments, a nonexistent file, a filename containing spaces, a repeated run and input/output paths that might collide. Predict the result before each experiment and use only disposable copies. These probes explain the starters’ behavior; keep them in disposable fixtures and do not create extra files for them. If a limited script waits for terminal input, use <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> to interrupt it.</p>
+<p>To see where the starters fail, compare valid input, missing arguments, a nonexistent file, a filename containing spaces, a repeated run and input/output paths that might collide. Predict the result before each experiment and use only disposable copies. Keep these temporary test files out of your submission. If a limited script waits for terminal input, use <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> to interrupt it.</p>
 <section id="improve-tabtocsv-sh">
 <h4>Improve <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code><a class="headerlink" href="#improve-tabtocsv-sh" title="Link to this heading">#</a></h4>
 <p>The supplied <code class="docutils literal notranslate"><span class="pre">tabtocsv.sh</span></code> is an intentionally limited starter: it appends on reruns, squeezes adjacent tabs, expands an unquoted path and can report success after a failure. For this exercise, make an improved copy in your coursework <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory. Use these requirements for the improved copy:</p>
 <ul class="simple">
 <li><p>Accept exactly one readable tab-delimited input file. Support paths containing spaces.</p></li>
-<li><p>Leave the input unchanged. Write the result to <code class="docutils literal notranslate"><span class="pre">../results/&lt;input-filename&gt;.csv</span></code>; for example, <code class="docutils literal notranslate"><span class="pre">tab-example.tsv</span></code> produces <code class="docutils literal notranslate"><span class="pre">tab-example.tsv.csv</span></code> in <code class="docutils literal notranslate"><span class="pre">results/</span></code>.</p></li>
-<li><p>Create <code class="docutils literal notranslate"><span class="pre">../results/</span></code> if it does not exist. Replace the prior generated output on a rerun rather than appending duplicate rows.</p></li>
+<li><p>Leave the input unchanged. Write the result to <code class="docutils literal notranslate"><span class="pre">results/&lt;input-filename&gt;.csv</span></code>; for example, <code class="docutils literal notranslate"><span class="pre">tab-example.tsv</span></code> produces <code class="docutils literal notranslate"><span class="pre">tab-example.tsv.csv</span></code> in <code class="docutils literal notranslate"><span class="pre">results/</span></code>.</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">results/</span></code> if it does not exist. Replace the prior generated output on a rerun rather than appending duplicate rows.</p></li>
 <li><p>Preserve empty fields: consecutive tabs in the input must remain consecutive commas in the output. Do not squeeze repeated tabs.</p></li>
 <li><p>For a missing, unreadable or invalid input, print a useful error to standard error, return a non-zero status and do not report success.</p></li>
 </ul>
-<p>This is a simple delimiter conversion, not a general quoted-TSV parser. Test with a disposable fixture containing adjacent tabs, a path with spaces, a rerun, a missing argument and a nonexistent input. Check the output and confirm the input is unchanged.</p>
+<p>This is a simple delimiter conversion, not a general quoted-TSV parser. Try it with a disposable file containing adjacent tabs, then with a path containing spaces, a rerun, a missing argument and a nonexistent input. Check the output and confirm the input is unchanged.</p>
 </section>
 </section>
 <section id="practical-write-csvtospace-sh">
@@ -1342,11 +1344,11 @@ mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$shell_pr
 <p>Write a script that converts a comma-separated input into a space-separated output. Use these requirements for the new converter:</p>
 <ul class="simple">
 <li><p>Accept exactly one readable CSV input path and leave the input unchanged.</p></li>
-<li><p>Write to <code class="docutils literal notranslate"><span class="pre">../results/&lt;input-filename&gt;.txt</span></code>; for example, <code class="docutils literal notranslate"><span class="pre">1800.csv</span></code> produces <code class="docutils literal notranslate"><span class="pre">1800.csv.txt</span></code> in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Create <code class="docutils literal notranslate"><span class="pre">../results/</span></code> if it does not exist and replace the generated output on a rerun.</p></li>
+<li><p>Write to <code class="docutils literal notranslate"><span class="pre">results/&lt;input-filename&gt;.txt</span></code>; for example, <code class="docutils literal notranslate"><span class="pre">1800.csv</span></code> produces <code class="docutils literal notranslate"><span class="pre">1800.csv.txt</span></code> in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Create <code class="docutils literal notranslate"><span class="pre">results/</span></code> if it does not exist and replace the generated output on a rerun.</p></li>
 <li><p>Preserve repeated commas as repeated spaces so empty fields are not silently removed. Do not squeeze delimiters.</p></li>
 <li><p>For a missing, unreadable or invalid input, print a useful error to standard error, return a non-zero status and do not report success.</p></li>
 </ul>
-<p>Run it from <code class="docutils literal notranslate"><span class="pre">code/</span></code>, for example with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">csvtospace.sh</span> <span class="pre">../data/temperatures/1800.csv</span></code>. Test the supplied inputs, plus disposable cases with an empty field, a path containing spaces, a repeated run, a missing argument and a nonexistent file. Confirm that the source is unchanged and the output is in <code class="docutils literal notranslate"><span class="pre">results/</span></code>.</p>
+<p>Run it from the project root, for example with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/csvtospace.sh</span> <span class="pre">data/temperatures/1800.csv</span></code>. Test the supplied inputs, plus disposable cases with an empty field, a path containing spaces, a repeated run, a missing argument and a nonexistent file. Confirm that the source is unchanged and the output is in <code class="docutils literal notranslate"><span class="pre">results/</span></code>.</p>
 <p>This exercise uses simple comma substitution, not a general CSV parser. The supplied temperature files do not contain quoted commas; a comma inside a quoted field is data, and a space in a field cannot be represented unambiguously in a space-delimited output. Preserve repeated separators and state these limitations rather than assuming <code class="docutils literal notranslate"><span class="pre">tr</span></code> handles arbitrary CSV.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
