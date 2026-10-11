@@ -1,10 +1,20 @@
 # CHAPTER 4. T TESTS AND F TESTS
+# Run from the coursework project root with:
+# Rscript code/t_f_tests.R
 
 # This script uses genome size and morphology data to explore 
 # t tests and F tests in R
 
 # (1) load the data from the CSV text file into a data frame
-genome <- read.csv('../data/genome_size.csv')
+genome <- read.csv('data/genome_size.csv', stringsAsFactors = TRUE)
+if ("GenomeSize" %in% names(genome) && !("genome_size" %in% names(genome))) {
+    names(genome)[names(genome) == "GenomeSize"] <- "genome_size"
+}
+genome$genome_size <- as.numeric(as.character(genome$genome_size))
+genome$BodyWeight <- as.numeric(as.character(genome$BodyWeight))
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/t_f_tests.pdf', 11, 8.5)
 # double check that the data has loaded properly - does str() look right
 str(genome)
 
@@ -83,4 +93,6 @@ wilcox.test(genome$genome_size, mu=1.25)
 wilcox.test(genome$BodyWeight, mu=0.045)
 wilcox.test(genome_size ~ Suborder, data=genome)
 wilcox.test(logBodyWeight ~ Suborder, data=genome)
+
+dev.off()
 
