@@ -1,9 +1,20 @@
 # CHAPTER 5. LINEAR MODELS: REGRESSION
+# Run from the coursework project root with:
+# Rscript code/regress.R
 
 # This script uses genome size and morphology data to explore regression in R
 
 # (1) Load the data
-genome <- read.csv('../data/genome_size.csv')
+genome <- read.csv('data/genome_size.csv', stringsAsFactors = TRUE)
+if ("GenomeSize" %in% names(genome) && !("genome_size" %in% names(genome))) {
+    names(genome)[names(genome) == "GenomeSize"] <- "genome_size"
+}
+genome$genome_size <- as.numeric(as.character(genome$genome_size))
+genome$TotalLength <- as.numeric(as.character(genome$TotalLength))
+genome$BodyWeight <- as.numeric(as.character(genome$BodyWeight))
+
+dir.create('results', showWarnings = FALSE)
+pdf('results/regression.pdf', 11, 8.5)
 
 # (2) look at pairwise plots of all variables
 pairs(genome)
@@ -66,5 +77,5 @@ plot(logBW ~ logGS, data=genome, col=myCol[Suborder], xlab='log Genome Size (pg)
 abline(genomeSizeModelDragon, col='red')
 abline(genomeSizeModelDamsel, col='blue')
 
-
+dev.off()
 

@@ -7,8 +7,11 @@ required_files <- c(
   "content/code/basic_io.R",
   "content/code/data_wrang.R",
   "content/code/fmr.R",
+  "content/code/regress.R",
   "content/code/test_r.R",
   "content/code/test_r.py",
+  "content/code/t_f_tests.R",
+  "content/data/genome_size.csv",
   "content/data/trees.csv",
   "content/data/nagy_et_al_1999.csv",
   "content/data/pound_hill_data.csv",
@@ -36,7 +39,15 @@ stopifnot(
     file.path(
       repository_root,
       "content/code",
-      c("basic_io.R", "data_wrang.R", "fmr.R", "test_r.R", "test_r.py")
+      c(
+        "basic_io.R",
+        "data_wrang.R",
+        "fmr.R",
+        "regress.R",
+        "test_r.R",
+        "test_r.py",
+        "t_f_tests.R"
+      )
     ),
     file.path(project_root, "code"),
     overwrite = TRUE
@@ -46,6 +57,7 @@ stopifnot(
       repository_root,
       "content/data",
       c(
+        "genome_size.csv",
         "trees.csv",
         "nagy_et_al_1999.csv",
         "pound_hill_data.csv",
@@ -81,6 +93,21 @@ stopifnot(file.exists(basic_output), file.info(basic_output)$size > 0)
 run_script("code/fmr.R")
 fmr_output <- file.path("results", "fmr_plot.pdf")
 stopifnot(file.exists(fmr_output), file.info(fmr_output)$size > 0)
+
+genome_input <- read.csv(file.path("data", "genome_size.csv"))
+stopifnot(
+  nrow(genome_input) == 100L,
+  ncol(genome_input) == 16L,
+  all(c("GenomeSize", "BodyWeight", "Suborder") %in% names(genome_input))
+)
+
+run_script("code/t_f_tests.R")
+t_f_output <- file.path("results", "t_f_tests.pdf")
+stopifnot(file.exists(t_f_output), file.info(t_f_output)$size > 0)
+
+run_script("code/regress.R")
+regression_output <- file.path("results", "regression.pdf")
+stopifnot(file.exists(regression_output), file.info(regression_output)$size > 0)
 
 python_output <- system2(
   Sys.which("python3"),
