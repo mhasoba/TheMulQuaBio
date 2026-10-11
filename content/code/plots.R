@@ -638,14 +638,14 @@ pdf('NullSaturated.pdf', height=1.5*w, width=1.2*w)
 	abline(null, col='blue')
 	arrows(x, np, x, y, col='blue', code=0)
 	title(main=expression(y == beta[1]), line=1.2)
-	text(1, 3.5, sprintf("ESS = %0.2f\nrSS = %0.2f", 0,nullSS), adj=0)	
+	text(1, 3.5, sprintf("ESS = %0.2f\nRSS = %0.2f", 0,nullSS), adj=0)
 
 	mod <- lm(y ~ f2) 
 	plot(y ~ x, col='red', xlim=c(0.5,9.5), xaxt='n')
 	axis(1, at=1:9, labels=levels(f2))
 	arrows(x-0.5, y, x+0.5, y, col='blue', code=0)
 	title(main=expression(y == beta[1] + beta[2]*f[b] + ldots + beta[8]*f[h]), line=1.2)
-	text(1, 3.5, sprintf("ESS = %0.2f\nrSS = %0.2f", nullSS, 0), adj=0)	
+	text(1, 3.5, sprintf("ESS = %0.2f\nRSS = %0.2f", nullSS, 0), adj=0)
 
 dev.off()
 
@@ -662,7 +662,7 @@ pdf('Intermediate.pdf', height=0.75*w, width=1.2*w)
 	arrows(c(1,4,7), cf, c(3,6,9), cf, col=2, code=0 )
 	arrows(x, p, x, y, col='blue', code=0)
 	title(main=expression(y == beta[1] + beta[2]*f[b] + beta[3]*f[c]), line=1.2)
-	text(1, 3.5, sprintf("ESS = %0.2f\nrSS = %0.2f", nullSS-rss,rss), adj=0)		
+	text(1, 3.5, sprintf("ESS = %0.2f\nRSS = %0.2f", nullSS-rss,rss), adj=0)
 
 dev.off()
 
@@ -677,9 +677,9 @@ y <- matrix(rnorm(9 *N), ncol=9)
 null <- apply(y, 1, function(x) var(x) * 8)
 means <- t(apply(y, 1, function(x) rep(c(mean(x[1:3]), mean(x[4:6]), mean(x[7:9])), each=3)))
 
-rSS <- rowSums((y - means)^2)
-ESS <- null - rSS
-ratio <- (ESS/2)/(rSS/6)
+RSS <- rowSums((y - means)^2)
+ESS <- null - RSS
+ratio <- (ESS/2)/(RSS/6)
 
 idx <- c(which.min(ratio), which.min(abs(ratio - median(ratio))),  which.min(abs((ratio -12))))
 
@@ -706,7 +706,7 @@ pdf('F_extremes.pdf', height=2/3*w, width=2*w)
 		arrows(x, p, x, y[i,], col='blue', code=0)
 		title(main=expression(y == beta[1] + beta[2]*f[b] + beta[3]*f[c]), line=1.2)
 		
-		text(0.2, 1., sprintf("ESS = %0.2f\nrSS = %0.2f\nF = %0.2f", nullSS-rss, rss, anova(mod)[1,4]), adj=0)		
+		text(0.2, 1., sprintf("ESS = %0.2f\nRSS = %0.2f\nF = %0.2f", nullSS-rss, rss, anova(mod)[1,4]), adj=0)
 	
 	}
 
