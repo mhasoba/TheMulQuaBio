@@ -289,7 +289,7 @@ model to each `ID` group. First we can generate the data:
     n <- 10000   # Number of observations
 
     data <- data.frame(
-      ID = sample(1:10, n, replace = TrUE),  # ID column to define 10 groups
+      ID = sample(1:10, n, replace = TRUE),  # ID column to define 10 groups
       y = rnorm(n),
       X = rnorm(n)
     )
@@ -406,7 +406,7 @@ different jobs will overwrite each other).
 
 **In R:**
 
-    seed_number <- as.numeric(Sys.getenv("PBS_ArrAY_INDEX")) # Find out the job number
+    seed_number <- as.numeric(Sys.getenv("PBS_ARRAY_INDEX")) # Find out the job number
 
     set.seed(seed_number) # Set this as the random seed so that all runs have a unique seed
 
@@ -418,7 +418,7 @@ different jobs will overwrite each other).
 
 **Similarly, in Python:**
 
-    seed_number = int(os.getenv("PBS_ArrAY_INDEX")) # Find out the job number
+    seed_number = int(os.getenv("PBS_ARRAY_INDEX")) # Find out the job number
 
     seed(seed_number) # Set this as the random seed so that all runs have a unique seed
 
@@ -445,7 +445,7 @@ path. This file must contain the following fields at the top:
 
 This will determine the queue that your job gets put into. If your
 requested specifications do not fall within at least one queue, your job
-won’t run! Have a look at the [rCS job sizing
+won’t run! Have a look at the [RCS job sizing
 guidance](https://icl-rcs-user-guide.readthedocs.io/en/latest/hpc/queues/job-sizing-guidance/)
 for more information.
 
@@ -481,7 +481,7 @@ data, we will only request a single thread (`ncpus`) and 1GB of RAM
 
 The Imperial HPC uses the PBS Pro job scheduler (documentation available
 [here](https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf)),
-whereas other systems may use SLUrM (documentation available
+whereas other systems may use SLURM (documentation available
 [here](https://slurm.schedmd.com/documentation.html)). To submit your
 job to the queue you will use the `qsub` command. If you are submitting
 an array job, as we are with `run_script.sh`, you want to use the `-J`

@@ -1,6 +1,6 @@
-# DATA ANAYLSIS STEPS FOr JAPANESE BEETLE DATA
+# DATA ANAYLSIS STEPS FOR JAPANESE BEETLE DATA
 
-# OBTAINED PHYLOGENY OF PLANTS FrOM PHYLOMATIC (APG III). NODE AGES TAKEN FrOM WISKTrOM ET AL 2001. PHYLOGENY AND AGES rUN THrOUGH BLADJ (PHYLOCOM) TO ADJUST NODE AGE (INSTEAD OF ALL NODES BEING THE SAME DISTANCE APArT). NOTE: THErE WAS NO AGE FOr THE SEPArATE OF rUBUS FrOM rOSA
+# OBTAINED PHYLOGENY OF PLANTS FROM PHYLOMATIC (APG III). NODE AGES TAKEN FROM WISKTROM ET AL 2001. PHYLOGENY AND AGES RUN THROUGH BLADJ (PHYLOCOM) TO ADJUST NODE AGE (INSTEAD OF ALL NODES BEING THE SAME DISTANCE APART). NOTE: THERE WAS NO AGE FOR THE SEPARATE OF RUBUS FROM ROSA
 
 library(ape)
 library(Hmisc)
@@ -16,7 +16,7 @@ jap.feeding <- subset(jap_beet_no_choice, Consumption!='NA')
 jap.feeding$Food_Type <- factor(jap.feeding$Food_Type)
 jap.feeding$Temperature[which(jap.feeding$Temperature==33)] <- 35
 
-## rEAD IN PHYLOGENETIC TrEE CODE
+## READ IN PHYLOGENETIC TREE CODE
 source('/Users/Nate/Documents/FIU/research/JapBeetle_Temp_Herbivory/Data_Analysis/JapBeetle_PhyloGraph.r')
 
 ########### ANALYSIS OF NO-CHOICE ASSAYS ##################
@@ -24,7 +24,7 @@ source('/Users/Nate/Documents/FIU/research/JapBeetle_Temp_Herbivory/Data_Analysi
 prelim.mod <- lm(MassCorr_Consumption_Daily~as.factor(Temperature)*Food_Type, data=jap.feeding)
 anova(prelim.mod)
 
-## rUN THE WEIGHTED anova WHErE WEIGHTS ArE CALCULATED FOr EACH PLANT*TEMPErATUrE GrOUP
+## RUN THE WEIGHTED anova WHERE WEIGHTS ARE CALCULATED FOR EACH PLANT*TEMPErATUrE GROUP
 cons.mod.weighted <- gls(MassCorr_Consumption_Daily ~ as.factor(Temperature)*Food_Type,
                     data=jap.feeding,
                     weights=varIdent(form=~1|as.factor(Temperature)*Food_Type))
@@ -38,8 +38,8 @@ mass.mod.weighted <- gls(Herb_Growth ~ as.factor(Temperature)*Food_Type,
 source('/Users/Nate/Documents/FIU/research/JapBeetle_Temp_Herbivory/Figures/jap_beet_no_choice_Graphs.r')
 
 
-## POST-HOC TESTS FOr CONSUMPTION. THErE ArE 36 COMPArISONS IN EACH TEMP, 4 TEMPS = 144 COMPArISONS
-## CrITICAL P IS 0.0003. NOT COMPArING ACrOSS TEMPErATUrES.
+## POST-HOC TESTS FOR CONSUMPTION. THERE ARE 36 COMPArISONS IN EACH TEMP, 4 TEMPS = 144 COMPArISONS
+## CRITICAL P IS 0.0003. NOT COMPArING ACrOSS TEMPErATUrES.
 library(gdata)
 temp20 <- subset(jap.feeding, Temperature==20)
 p20 <- with(temp20, pairwise.t.test(MassCorr_Consumption_Daily, Food_Type, var.equal=F,
@@ -86,8 +86,8 @@ p35$FDr <- p35$rank * (0.05/144)
 p35$sig <- p35[,1] < p35$FDr
 
 
-## POST-HOC TESTS FOr GrOWTH THErE ArE 36 COMPArISONS IN EACH TEMP, 4 TEMPS = 144 COMPArISONS
-## CrITICAL P IS 0.0003. NOT COMPArING ACrOSS TEMPErATUrES.
+## POST-HOC TESTS FOR GrOWTH THERE ARE 36 COMPArISONS IN EACH TEMP, 4 TEMPS = 144 COMPArISONS
+## CRITICAL P IS 0.0003. NOT COMPArING ACrOSS TEMPErATUrES.
 temp20 <- subset(jap.feeding, Temperature==20)
 p20 <- with(temp20, pairwise.t.test(Herb_Growth, Food_Type, var.equal=F,
                                     p.adj='none'))
@@ -132,7 +132,7 @@ p35$rank <- order(p35[,1])
 p35$FDr <- p35$rank * (0.05/144)
 p35$sig <- p35[,1] < p35$FDr
 
-# VArIANCE ANALYSIS
+# VARIANCE ANALYSIS
 growth.data <- with(jap.feeding, aggregate(list('mean'=Herb_Growth), list('Plant'=Food_Type, 'Temp'=Temperature), mean, na.rm=T))
 cons.data <- with(jap.feeding, aggregate(list('mean'=MassCorr_Consumption_Daily), list('Plant'=Food_Type, 'Temp'=Temperature), mean, na.rm=T))
 

@@ -23,7 +23,7 @@ for(species in c('Heliodoxa rubinoides',
   print(paste('The species is', species))
 }
 
-for(l in LETTErS){
+for(l in LETTERS){
   print(l)
 }
 

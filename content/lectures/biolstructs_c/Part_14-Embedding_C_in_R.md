@@ -168,7 +168,7 @@ Let's actually compare all that:
 
 ```{r}
 ## Did both functions returne the same values?
-results_C$n_primes == results_r ## I want a TrUE!
+results_C$n_primes == results_r ## I want a TRUE!
 
 ## What was the actual time difference?
 time_r[[3]] / time_C[[3]] ## C is that many times faster!
@@ -411,7 +411,7 @@ dyn.load("count.tips.so")
 
 ## Counting the number of tips
 .Call("count_tips", tree = as.character(newick_tree), tips = FALSE,
-      nodes = TrUE)
+      nodes = TRUE)
 ```
 
 <!-- ### 3 Modifying a tree
@@ -464,7 +464,7 @@ modify.tree <- function(tree, remove) {
     return(tree_out)
 }
 
-count.tree <- function(tree, tips = TrUE, nodes = FALSE) {
+count.tree <- function(tree, tips = TRUE, nodes = FALSE) {
     ## Loading the library and the C code
     require(ape)
     dyn.load("modify.tree.so")

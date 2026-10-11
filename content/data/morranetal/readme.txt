@@ -1,4 +1,4 @@
-DATA FrOM 
+DATA FROM
 Levi T. Morran, Olivia G. Schmidt, Ian A. Gelarden, raymond C. Parrish II, Curtis M. Lively
 running with the red Queen: Host-Parasite Coevolution Selects for Biparental Sex
 Science 8 July 2011: 

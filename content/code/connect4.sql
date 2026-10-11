@@ -1,9 +1,9 @@
-SELECT * FrOM
+SELECT * FROM
 communities cc 
-INNEr JOIN sites ss
+INNER JOIN sites ss
 ON cc.IDsite = ss.IDsite
-INNEr JOIN species sp
+INNER JOIN species sp
 ON cc.IDspecies = sp.IDspecies
-INNEr JOIN reference rr
+INNER JOIN reference rr
 ON ss.IDreference = rr.IDref;
 

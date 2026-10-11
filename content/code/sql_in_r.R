@@ -12,31 +12,31 @@ db <- dbConnect(SQLite(), dbname='Test.sqlite')
 # Using the db connection to our database, the data are entered using SQL queries
 # The next command just create the table
 dbSendQuery(conn = db,
-            "CrEATE TABLE consumer
+            "CREATE TABLE consumer
        (OriginalID TEXT,
         ConKingdom TEXT,
         ConPhylum TEXT,
         ConSpecies TEXT)")
 
 # Once the table is created, we can enter the data.
-#INSErT specifies where the data is entered (here the School table).
+#INSERT specifies where the data is entered (here the School table).
 #VALUES contains the data
 
  dbSendQuery(conn = db,
-         "INSErT INTO consumer
+         "INSERT INTO consumer
          VALUES (1, 'Animalia', 'Arthropoda', 'Chaoborus trivittatus')")
  dbSendQuery(conn = db,
-         "INSErT INTO consumer
+         "INSERT INTO consumer
          VALUES (2, 'Animalia', 'Arthropoda', 'Chaoborus americanus')")
  dbSendQuery(conn = db,
-         "INSErT INTO consumer
+         "INSERT INTO consumer
          VALUES (3, 'Animalia', 'Chordata', 'Stizostedion vitreum')")
 
 
 # Once we have our table, we can query the results using:
 
-dbGetQuery(db, "SELECT * FrOM consumer")
-dbGetQuery(db, "SELECT * FrOM consumer WHErE ConPhylum='Chordata'")
+dbGetQuery(db, "SELECT * FROM consumer")
+dbGetQuery(db, "SELECT * FROM consumer WHERE ConPhylum='Chordata'")
 
 
 # Tables can be also imported from csv files.

@@ -38,7 +38,7 @@ survival_maturation <- function(state,growth_matrix){
 }
 
 random_draw <- function(probability_distribution) {
-  draw <- sample(1:length(probability_distribution), size = 1, prob = probability_distribution, replace = TrUE)
+  draw <- sample(1:length(probability_distribution), size = 1, prob = probability_distribution, replace = TRUE)
   return(draw)
 }
 

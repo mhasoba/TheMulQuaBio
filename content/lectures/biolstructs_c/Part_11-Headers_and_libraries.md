@@ -228,14 +228,14 @@ dataptr = NULL;
 We use this so often that we might like to create a shorthand for it. We can do this with a function-like macro:
 
 ```C
-#define CFrEE(x) {free(x); x = NULL;}
+#define CFREE(x) {free(x); x = NULL;}
 ```
 
 If we wish, we can write this on separate lines. 
 However, because preprocessor directives are terminated by carriage returns (newline), we need to escape them with a `\`:
 
 ```C
-#define CFrEE(x) { \ 
+#define CFREE(x) { \
                     free(x); \
                     x = NULL; \
                  }
@@ -246,7 +246,7 @@ Whatever is passed into the argument as 'x' in this case will be included in the
 returning to the example above, to free and clear a pointer, we would simply write:
 
 ```C
-CFrEE(dataptr)
+CFREE(dataptr)
 ```
 
 This will get expanded to:

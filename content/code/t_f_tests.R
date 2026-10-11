@@ -1,4 +1,4 @@
-# CHAPTEr 4. T TESTS AND F TESTS
+# CHAPTER 4. T TESTS AND F TESTS
 
 # This script uses genome size and morphology data to explore 
 # t tests and F tests in R

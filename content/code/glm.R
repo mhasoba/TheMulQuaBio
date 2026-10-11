@@ -1,4 +1,4 @@
-# GENErALISED LINEAr MODELS
+# GENERALISED LINEAR MODELS
 
 # 1) Load the data
 colonies <- read.csv("../data/prac_data.csv")
