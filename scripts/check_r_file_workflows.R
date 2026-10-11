@@ -6,7 +6,11 @@ repository_root <- normalizePath(".")
 required_files <- c(
   "content/code/basic_io.R",
   "content/code/data_wrang.R",
+  "content/code/fmr.R",
+  "content/code/test_r.R",
+  "content/code/test_r.py",
   "content/data/trees.csv",
+  "content/data/nagy_et_al_1999.csv",
   "content/data/pound_hill_data.csv",
   "content/data/pound_hill_meta_data.csv"
 )
@@ -29,7 +33,11 @@ on.exit(unlink(project_root, recursive = TRUE), add = TRUE)
 
 stopifnot(
   all(file.copy(
-    file.path(repository_root, "content/code", c("basic_io.R", "data_wrang.R")),
+    file.path(
+      repository_root,
+      "content/code",
+      c("basic_io.R", "data_wrang.R", "fmr.R", "test_r.R", "test_r.py")
+    ),
     file.path(project_root, "code"),
     overwrite = TRUE
   )),
@@ -37,7 +45,12 @@ stopifnot(
     file.path(
       repository_root,
       "content/data",
-      c("trees.csv", "pound_hill_data.csv", "pound_hill_meta_data.csv")
+      c(
+        "trees.csv",
+        "nagy_et_al_1999.csv",
+        "pound_hill_data.csv",
+        "pound_hill_meta_data.csv"
+      )
     ),
     file.path(project_root, "data"),
     overwrite = TRUE
@@ -64,6 +77,31 @@ on.exit(setwd(original_directory), add = TRUE)
 run_script("code/basic_io.R")
 basic_output <- file.path("results", "MyData.csv")
 stopifnot(file.exists(basic_output), file.info(basic_output)$size > 0)
+
+run_script("code/fmr.R")
+fmr_output <- file.path("results", "fmr_plot.pdf")
+stopifnot(file.exists(fmr_output), file.info(fmr_output)$size > 0)
+
+python_output <- system2(
+  Sys.which("python3"),
+  "code/test_r.py",
+  stdout = TRUE,
+  stderr = TRUE
+)
+python_status <- attr(python_output, "status")
+if (!is.null(python_status) && python_status != 0) {
+  stop(paste(python_output, collapse = "\n"), call. = FALSE)
+}
+stopifnot(
+  any(grepl("Return code: 0", python_output, fixed = TRUE)),
+  file.exists(file.path("results", "test_r.rout")),
+  file.exists(file.path("results", "test_r_errFile.rout")),
+  grepl(
+    "Hello, this is R!",
+    paste(readLines(file.path("results", "test_r.rout")), collapse = "\n"),
+    fixed = TRUE
+  )
+)
 
 run_script("code/data_wrang.R")
 wrangled_output <- read.csv(file.path("results", "pound_hill_long.csv"))
