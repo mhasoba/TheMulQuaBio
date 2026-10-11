@@ -43,10 +43,10 @@ span <- seq(rng[1], rng[2], length=100)
 
 # get the predicted values
 ZygoVals <- data.frame(logGS=span, Suborder='Zygoptera')
-ZygoPred <- predict(odonModel, newdata=ZygoVals, se.fit=TrUE)
+ZygoPred <- predict(odonModel, newdata=ZygoVals, se.fit=TRUE)
 
 AnisoVals <- data.frame(logGS=span, Suborder='Anisoptera')
-AnisoPred <- predict(odonModel, newdata=AnisoVals, se.fit=TrUE)
+AnisoPred <- predict(odonModel, newdata=AnisoVals, se.fit=TRUE)
 
 # plot the scatterplot of the data
 plot(logBW ~ logGS, data=odonata, col=Suborder)

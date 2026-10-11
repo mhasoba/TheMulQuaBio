@@ -5,7 +5,7 @@
 
 ######################## (1) ##########################
 # LOAD THE DATA FrOM THE CSV TEXT FILE INTO A DATA FrAME:
-genome <- read.csv('../data/genome_size.csv', , stringsAsFactors = T) #assumes that you are working from your Code directory
+genome <- read.csv('../data/genome_size.csv', stringsAsFactors = TRUE) #assumes that you are working from your Code directory
 
 ######################## (2) ##########################
 # LOOK AT AND MANIPULATE THE DATA:
@@ -14,9 +14,9 @@ head(genome)
 str(genome) # Check what the data columns contain
 
 tapply(genome$BodyWeight, genome$Suborder, mean) # take a quick mean
-tapply(genome$BodyWeight, genome$Suborder, mean, na.rm=TrUE)
+tapply(genome$BodyWeight, genome$Suborder, mean, na.rm=TRUE)
 tapply(genome$BodyWeight, genome$Suborder, length)
-tapply(genome$BodyWeight, genome$Suborder, var, na.rm=TrUE)
+tapply(genome$BodyWeight, genome$Suborder, var, na.rm=TRUE)
 
 #You can also remove NA's by subsetting (using weight as an example):
 BodyWt_no_NA <- subset(genome, !is.na(BodyWeight))
