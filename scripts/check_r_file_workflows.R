@@ -18,6 +18,8 @@ required_files <- c(
   "content/code/test_r.py",
   "content/code/t_f_tests.R",
   "content/data/genome_size.csv",
+  "content/data/aedes_fecund.csv",
+  "content/data/albatross_grow.csv",
   "content/data/mammal_data.csv",
   "content/data/prac_data.csv",
   "content/data/trees.csv",
@@ -71,6 +73,8 @@ stopifnot(
       repository_root,
       "content/data",
       c(
+        "aedes_fecund.csv",
+        "albatross_grow.csv",
         "genome_size.csv",
         "mammal_data.csv",
         "prac_data.csv",
@@ -139,6 +143,17 @@ stopifnot(
     experimental_design_environment$genome$genome_size,
     genome_input$GenomeSize
   )
+)
+
+albatross_input <- read.csv(file.path("data", "albatross_grow.csv"))
+aedes_input <- read.csv(file.path("data", "aedes_fecund.csv"))
+stopifnot(
+  nrow(albatross_input) == 100L,
+  ncol(albatross_input) == 7L,
+  all(c("age", "wt", "ID") %in% names(albatross_input)),
+  nrow(aedes_input) == 30L,
+  ncol(aedes_input) == 3L,
+  identical(names(aedes_input), c("T", "EFD", "ref"))
 )
 
 run_script("code/t_f_tests.R")
