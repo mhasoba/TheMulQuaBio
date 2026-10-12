@@ -1,0 +1,226 @@
+---
+pagetitle: "Biological Computing in R | Monday 12 October 2026"
+lang: en-GB
+format:
+  revealjs:
+    theme: simple
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.08
+    center: false
+    transition: none
+    slide-number: c/t
+    show-slide-number: all
+    incremental: false
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    embed-resources: true
+    auto-stretch: false
+execute:
+  enabled: false
+---
+
+## Biological Computing in R {data-timing="30"}
+
+### From a biological question to a checked result
+
+**Computing Bootcamp | Monday 12 October 2026**
+
+[MQB: Biological Computing in R](https://mulquabio.github.io/MQB/notebooks/r.html)
+
+::: notes
+10:20-10:20:30. Welcome students to the first R session. This introduction
+lasts 12 minutes, leaving eight minutes for questions within the lecture
+slot; it is not the whole morning's teaching. They do not need
+to type along or know R already. Assignment 2 has been released and was
+briefed immediately before this lecture; R practice is separate from it.
+:::
+
+## Why learn R? {data-timing="90"}
+
+R is a free, open-source language and environment for:
+
+- working with data;
+- statistical analysis and modelling;
+- making and explaining figures; and
+- keeping a rerunnable record of an analysis.
+
+**Which of these would help with a biological question you care about?**
+
+[MQB: Why R?](https://mulquabio.github.io/MQB/notebooks/r.html#why-r)
+
+::: notes
+10:20:30-10:22. R is especially convenient for tabular data, statistics and graphics. Invite one or two answers about students' biological interests. There is no need to introduce statistical models or graphics syntax here:
+these are reasons for learning the language, not assumed prerequisites.
+Free software still needs thoughtful use: a plausible figure or a
+successful run is not proof that the analysis is right.
+:::
+
+## Familiar ideas, a different language {data-timing="60"}
+
+You will recognise:
+
+**variables, functions, decisions, repetition and scripts**
+
+R expresses some of these differently from Python.
+
+We will learn the syntax a little at a time, starting with simple expressions.
+
+[MQB: Introduction](https://mulquabio.github.io/MQB/notebooks/r.html#introduction)
+
+::: notes
+10:22-10:23. Students bring their earlier computing practice, but do not
+need to remember every Python detail to start R. Emphasise the reusable
+habit: predict, run and explain. Do not suggest that an R vector is the
+same as a Python list, or that one language is universally better.
+:::
+
+## One workflow, several useful tools {data-timing="90"}
+
+| Work | Typical tool |
+|:--|:--|
+| Manage files and coordinate programs | Shell |
+| Write general scientific programs | Python |
+| Analyse data and create figures | R |
+| Record and share changes | Git |
+| Write a scientific report | LaTeX |
+
+These are **typical strengths**, not rigid boundaries.
+
+[MQB: R in a multilingual workflow](https://mulquabio.github.io/MQB/notebooks/r.html#r-in-a-multilingual-workflow)
+
+::: notes
+10:23-10:24:30. Walk through one analysis: organise input files, run a
+program, inspect or analyse its output, create a figure, and record the
+code used. Both Python and R can analyse data, make plots and call other
+programs. The point is choosing a clear and reproducible route, not
+learning a hierarchy of languages. Do not introduce Assignment 3 requirements.
+:::
+
+## What stays the same? {data-timing="90"}
+
+The language may change. These still need to be clear:
+
+- the biological question;
+- the input and its units;
+- the decisions and assumptions;
+- the expected result; and
+- how you check and rerun the calculation.
+
+**A script records your decisions; it does not make them correct automatically (that's your responsibility) - computers don't make mistakes!**
+
+::: notes
+10:24:30-10:26. Ask what should stay the same when translating a calculation
+from Python to R. Draw out the question, meaning of the data and expected
+answer. Move on to the editor and R session students will use today.
+:::
+
+## R in VS Code: quick show-and-tell {data-timing="90"}
+
+1. Open your **project root** and an `.R` script.
+2. In the Command Palette, choose **R: Create R Terminal**.
+3. Check `getwd()`, then send a selected line to R.
+4. Inspect the result and use help when you need it.
+
+**The R extension supports editing; the R session runs your code.**
+
+Watch the demonstration now; try it during the practice.
+
+[MQB: Using R in VS Code](https://mulquabio.github.io/MQB/appendices/vscode.html#using-r-in-vs-code)
+
+::: notes
+10:26-10:27:30. Pause the slides for the instructor's quick show-and-tell.
+Before class, have R, the REditorSupport R extension and its language-service
+support ready; this is not a live installation exercise. Open the project
+root in VS Code and show an .R script containing a simple expression.
+Use R: Create R Terminal and check getwd(). Show how to send a selected
+expression to R, using 2 + 2. If time permits, show ?sum. Distinguish
+the script editor from the R terminal. Keep this R session open for the
+hands-on practice. The later fresh Rscript run is still the
+reproducibility check. If extension integration fails, state the issue
+and use the ordinary R terminal rather than spending this slot installing
+packages. Do not require radian, httpgd or an R notebook.
+:::
+
+## Know which program is listening {data-timing="90"}
+
+| Where you type | Example | What happens |
+|:--|:--|:--|
+| Shell prompt in a terminal | `R` | Starts an R session |
+| R prompt (`>`) | `2 + 2` | Evaluates an R expression |
+| Shell prompt in a terminal | `Rscript code/r_basics.R` | Runs a saved script |
+
+**The editor, terminal, shell and R are not the same thing.**
+
+[MQB: Getting started with R](https://mulquabio.github.io/MQB/notebooks/r.html#getting-started-with-r)
+
+::: notes
+10:27:30-10:29. Point out the prompt in the VS Code show-and-tell. VS Code
+is the editor; its terminal can contain a shell or an R session. Rscript
+is a shell command, not an expression to paste at the R prompt.
+Students will create their basics script later, so do not
+run a nonexistent file in the demonstration. Keep the R session open.
+:::
+
+## From console experiments to a script {data-timing="90"}
+
+Start at your **project root**:
+
+```text
+code/       R scripts
+data/       input files
+results/    generated output
+```
+
+Later today, save your examples and run:
+
+```bash
+Rscript code/r_basics.R
+```
+
+A fresh R process checks that the script does not depend on old console objects.
+
+[MQB: Your analysis workflow](https://mulquabio.github.io/MQB/notebooks/r.html#your-analysis-workflow)
+
+::: notes
+10:29-10:30:30. Connect this layout to the project-root convention already
+used for shell and Python. The script path does not move the working
+directory into code/. Do not add a personal setwd path as a repair or
+rely on a saved workspace. Later, when moving expressions into a script,
+students will use explicit print calls where they want printed output.
+No CSV import, package installation or full analysis is needed now.
+:::
+
+## Your route for today {.smaller data-timing="90"}
+
+**Now:** [Getting started and R basics](https://mulquabio.github.io/MQB/notebooks/r.html#r-basics).
+
+**11:00-11:15:** break.
+
+**Then:** [types](https://mulquabio.github.io/MQB/notebooks/r.html#variable-types), [vectors](https://mulquabio.github.io/MQB/notebooks/r.html#vectors), [indexing](https://mulquabio.github.io/MQB/notebooks/r.html#accessing-parts-of-data-stuctures-indices-and-indexing), a first [data frame](https://mulquabio.github.io/MQB/notebooks/r.html#data-frames), and a script.
+
+**14:00-15:15:** practise, change examples, explain and rerun.
+
+**15:15-17:15:** individual Assignment 2 work and support.
+
+Before we start: **Where do you type an R expression? How will you run your script?**
+
+[Assignment 2: tree-survey practical](https://mulquabio.github.io/MQB/notebooks/python.html#practical-validating-tree-survey-records)
+
+::: notes
+10:30:30-10:32. Point to the chapter route in the teaching plan. Students do
+not need to finish the entire R chapter today. Functions, full CSV
+validation, systematic debugging and graphics come later in the week.
+Use the two exit questions: at the R prompt; Rscript code/r_basics.R
+from the project root at a shell prompt. Give space for questions, then
+open the chapter's Baby steps section for the hands-on block at 10:40.
+Use the remaining eight minutes for questions and setup clarification.
+Assignment 2 is already released, remains individual Python work, and
+has a protected two-hour block today. Refer students to the released
+notice for its Friday 17:00 BST deadline and AI-use policy; do not add R
+practice as an assessed requirement.
+:::
