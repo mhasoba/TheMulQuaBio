@@ -25,7 +25,7 @@ OAK_COUNT_FIELDS = ["species", "count"]
 
 
 def load_records(path: Path = INPUT_PATH) -> list[dict[str, str]]:
-    """Load survey records and check that the published columns are present."""
+    """Read the survey and check its column names."""
     with path.open(newline="", encoding="utf-8") as source:
         reader = csv.DictReader(source)
         if reader.fieldnames != INPUT_FIELDS:
@@ -40,20 +40,20 @@ def validate_record(
     source_row: int,
     accepted_ids: set[str],
 ) -> tuple[dict[str, str] | None, list[str]]:
-    """Return a cleaned record or its ordered rejection reasons."""
-    raise NotImplementedError("Complete the record validation")
+    """Clean one record, or return the reasons it cannot be used."""
+    raise NotImplementedError("Write the checks for one survey record")
 
 
 def process_records(
     rows: Iterable[dict[str, str]],
 ) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
-    """Separate accepted records from rejected-row reports."""
-    raise NotImplementedError("Complete the record-processing workflow")
+    """Sort records into accepted rows and issue reports."""
+    raise NotImplementedError("Write the loop that processes all records")
 
 
 def summarise_oaks(clean_records: Iterable[dict[str, str]]) -> list[dict[str, str]]:
     """Count accepted oak records by species."""
-    raise NotImplementedError("Complete the oak summary")
+    raise NotImplementedError("Count the accepted oak records")
 
 
 def write_csv(
@@ -61,7 +61,7 @@ def write_csv(
     fieldnames: list[str],
     rows: Iterable[dict[str, str]],
 ) -> None:
-    """Replace a CSV file with the supplied rows."""
+    """Write rows to a CSV file, replacing an older copy."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as destination:
         writer = csv.DictWriter(destination, fieldnames=fieldnames)
@@ -70,7 +70,7 @@ def write_csv(
 
 
 def main() -> None:
-    """Run the complete validation workflow."""
+    """Clean the survey and write the three result files."""
     clean_records, issues = process_records(load_records())
     oak_counts = summarise_oaks(clean_records)
 
