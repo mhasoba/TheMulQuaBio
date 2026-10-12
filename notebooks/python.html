@@ -717,7 +717,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-a-record-through-the-program">Follow a record through the program</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#see-how-the-pieces-fit-together">See how the pieces fit together</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
@@ -4777,11 +4777,11 @@ OUTPUT: known-count total (or unavailable) and missing-count number per site
 <li><p><a class="reference download internal" download="" href="../_downloads/f57be2b5adbb240b1d5be1f92d116551/clean_silwood_trees.py"><code class="xref download docutils literal notranslate"><span class="pre">Starter</span> <span class="pre">Python</span> <span class="pre">program</span></code></a> to <code class="docutils literal notranslate"><span class="pre">code/</span></code>.</p></li>
 </ul>
 <p>Do not edit the original survey. Your work belongs in the three marked functions in <code class="docutils literal notranslate"><span class="pre">code/clean_silwood_trees.py</span></code>; use the metadata rather than guessing how a doubtful record should be corrected. Keep file reading and output inside the program’s startup path, so that importing its functions for a test does not also run the program. The cleaned table can later be read and analysed in R—one well-defined data file linking the two languages. Counting oaks is simply the final summary of the accepted records.</p>
-<section id="follow-a-record-through-the-program">
-<h4>Follow a record through the program<a class="headerlink" href="#follow-a-record-through-the-program" title="Link to this heading">#</a></h4>
-<p>Before writing any code, pick one row from the survey and follow its journey through the starter. The supplied code takes care of getting records in and writing results out; your three unfinished functions make the decisions in between.</p>
+<section id="see-how-the-pieces-fit-together">
+<h4>See how the pieces fit together<a class="headerlink" href="#see-how-the-pieces-fit-together" title="Link to this heading">#</a></h4>
+<p>Before writing any code, read through the function names and their docstrings. You do not need to run the program or use a debugger at this point. The supplied code takes care of reading records and writing results; your three unfinished functions make the decisions in between.</p>
 <p><code class="docutils literal notranslate"><span class="pre">load_records</span></code> reads the CSV header and returns one dictionary per row. Its default is the supplied survey, but tests can give it a different file. Each row then reaches <code class="docutils literal notranslate"><span class="pre">validate_record</span></code>, together with its original row number and the identifiers accepted so far. This function returns either a cleaned record or <code class="docutils literal notranslate"><span class="pre">None</span></code>, plus any reasons for rejecting the row.</p>
-<p><code class="docutils literal notranslate"><span class="pre">process_records</span></code> repeats that step for the whole survey, gathering the accepted records in one list and the rejected rows in another. <code class="docutils literal notranslate"><span class="pre">summarise_oaks</span></code> works only with the records that made it through, producing the species counts for the third output. Finally, <code class="docutils literal notranslate"><span class="pre">main</span></code> joins these stages together and passes each result to the supplied <code class="docutils literal notranslate"><span class="pre">write_csv</span></code> helper. The main guard means this whole journey begins when you run the script, but not when your test script imports its functions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">process_records</span></code> will repeat that step for the whole survey, gathering the accepted records in one list and the rejected rows in another. <code class="docutils literal notranslate"><span class="pre">summarise_oaks</span></code> will work only with the records that made it through, producing the species counts for the third output. Finally, <code class="docutils literal notranslate"><span class="pre">main</span></code> joins these stages together and passes each result to the supplied <code class="docutils literal notranslate"><span class="pre">write_csv</span></code> helper. The main guard means this sequence begins when you run the script, but not when your test script imports its functions.</p>
 <p>The three <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code> lines show you exactly where your work goes. Until you replace them, running the starter will stop at the first unfinished function; that is expected. Leave the loader, writer and startup code in place. Before you begin, make sure you can say what each of your three functions receives and returns, then sketch the same flow as pseudocode in your README.</p>
 <p>The ideas used in the starter have already appeared in the chapter: <a class="reference internal" href="#hints-about-inputs-and-outputs">type hints</a>, <a class="reference internal" href="#let-the-script-find-the-project"><span class="xref myst">project paths</span></a>, <a class="reference internal" href="#using-column-names-instead-of-positions"><span class="xref myst">CSV rows as dictionaries</span></a>, <a class="reference internal" href="#a-number-that-converts-may-still-be-unusable"><span class="xref myst">checking converted numbers</span></a>, and <a class="reference internal" href="#python-main-guard"><span class="std std-ref">the main guard</span></a>. Return to any of these as you need them rather than trying to absorb the whole file at once.</p>
 </section>
@@ -5460,8 +5460,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Link to this heading">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf53d584-4a42-4e2e-96ff-9b8168a782f4">
-<span class="eqno">(2)<a class="headerlink" href="#equation-cf53d584-4a42-4e2e-96ff-9b8168a782f4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-17fc2181-7b8a-49a8-b571-df5faf43936d">
+<span class="eqno">(2)<a class="headerlink" href="#equation-17fc2181-7b8a-49a8-b571-df5faf43936d" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -5938,8 +5938,8 @@ from the end of an array:</p>
 <section id="the-lotkavolterra-model-revisited">
 <h3>The Lotka–Volterra model revisited<a class="headerlink" href="#the-lotkavolterra-model-revisited" title="Link to this heading">#</a></h3>
 <p>In the original Lotka–Volterra model, the resource population grows without bound when consumers are absent. Add logistic density dependence to make resource growth slow as the resource density <span class="math notranslate nohighlight">\(R\)</span> approaches its carrying capacity <span class="math notranslate nohighlight">\(K\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-129645d1-2042-45ab-8840-72a0a63714fa">
-<span class="eqno">(3)<a class="headerlink" href="#equation-129645d1-2042-45ab-8840-72a0a63714fa" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e9164c12-c4ad-43df-ba97-61cfb9397153">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e9164c12-c4ad-43df-ba97-61cfb9397153" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= rR\left(1 - \frac{R}{K}\right) - aCR\\
     \frac{dC}{dt} &amp;= -zC + eaCR
 \end{align}\]</div>
@@ -5970,8 +5970,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <section id="optional-extension-discrete-time-lv-model">
 <h3>Optional extension: discrete-time LV model<a class="headerlink" href="#optional-extension-discrete-time-lv-model" title="Link to this heading">#</a></h3>
 <p>Write a discrete-time version called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-73a4ff5f-b94f-4a67-ba44-b9ef8f9176c6">
-<span class="eqno">(4)<a class="headerlink" href="#equation-73a4ff5f-b94f-4a67-ba44-b9ef8f9176c6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-24853e40-fa15-40c2-83e9-c3d115b80940">
+<span class="eqno">(4)<a class="headerlink" href="#equation-24853e40-fa15-40c2-83e9-c3d115b80940" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t \left(1 + r\left(1 - \frac{R_t}{K}\right) - aC_t\right)\\
     C_{t+1} &amp;= C_t \left(1 - z + eaR_t\right)
 \end{align}\]</div>
@@ -7139,7 +7139,7 @@ for efficient data crunching</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-a-record-through-the-program">Follow a record through the program</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#see-how-the-pieces-fit-together">See how the pieces fit together</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
