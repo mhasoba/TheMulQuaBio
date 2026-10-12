@@ -1,6 +1,6 @@
 # Synthetic Silwood tree-survey metadata
 
-These are synthetic teaching records, not a campus inventory or a record of a real field survey. The location strings are synthetic exercise labels, not verified Silwood site locations, even where their spelling resembles real place names. The location and taxon labels define this assignment's data contract; do not use external sources to infer corrections.
+These are synthetic teaching records, not a campus inventory or a record of a real field survey. The location strings are synthetic exercise labels, not verified Silwood site locations, even where their spelling resembles real place names. The location and taxon labels define the accepted values for this exercise; do not use external sources to infer corrections.
 
 ## Columns
 
@@ -80,7 +80,7 @@ Collect every applicable reason for an invalid row. Use the following exact text
 
 Do not add a range reason when the value is missing or cannot be converted to a number. Do not add `invalid genus/species combination` unless both values are individually recognised.
 
-## Output contracts
+## Output files and formats
 
 Create outputs in `results/`, replacing files created by an earlier run.
 

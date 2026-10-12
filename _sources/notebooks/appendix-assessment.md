@@ -233,7 +233,7 @@ The bootcamp coursework comprises four submissions: three formative submissions 
 | Submission | Focus | Type | Deadline | Feedback target |
 | --- | --- | --- | --- | --- |
 | 1 | Unix, shell and individual Git portfolio. | Formative | See course timetable/brief | See course timetable/brief |
-| 2 | Python I work, using the Unix, shell and Git workflow established in Submission 1; any corrections specified in the assignment brief. | Formative | See course timetable/brief | See course timetable/brief |
+| 2 | The Python I practical named in the assignment notice, using the Unix, shell and Git workflow established in Submission 1. | Formative | See course timetable/notice | See course timetable/notice |
 | 3 | R data workflow, reproducible figure and interpretation, as specified in the brief. | Formative | See course timetable/brief | See course timetable/brief |
 | 4 | Cumulative portfolio of required work from Submissions 1-3, plus only the Python II tasks listed in the final brief. | Summative | See course timetable/brief | See course timetable/brief |
 
