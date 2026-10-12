@@ -131,31 +131,6 @@ plot(cars)
 
 The R extension can expose workspace, plot and help views when it is connected to the R terminal. Check a plot and an object before relying on those views; the exact layout depends on the extension version and session state. Ordinary plots do not require `httpgd`. `httpgd` is optional for an interactive plot viewer, and `radian` is optional; neither is required for MQB.
 
-### Add a keyboard shortcut to create an R terminal
-
-You can assign a shortcut to **R: Create R Terminal** instead of opening the Command Palette each time:
-
-1. Run **Preferences: Open Keyboard Shortcuts** from the Command Palette, or press **Ctrl+K**, then **Ctrl+S** on Linux or Windows (**Cmd+K**, then **Cmd+S** on macOS). These are two successive key combinations, not one simultaneous combination.
-2. Search for **R: Create R Terminal**.
-3. Select the **+** beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press **Ctrl+K**, then **Ctrl+Shift+R**, and confirm with **Enter**. On macOS, use **Cmd+K**, then **Cmd+Shift+R**.
-4. Right-click the entry and choose **Show Same Keybindings**. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.
-5. Return to your `.R` file and try the shortcut. Confirm that an R terminal opens and that the session watcher attaches before sending analysis code.
-
-Alternatively, run **Preferences: Open Keyboard Shortcuts (JSON)** and add this entry to your user `keybindings.json`:
-
-```json
-[
-  {
-    "key": "ctrl+k ctrl+shift+r",
-    "command": "r.createRTerm"
-  }
-]
-```
-
-If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means **Ctrl+K**, followed by **Ctrl+Shift+R**; on macOS use `"cmd+k cmd+shift+r"` instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid **Ctrl+K**, then **R**, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for `settings.json`. See the [VS Code keybinding guide](https://code.visualstudio.com/docs/configure/keybindings) and the [R extension's keyboard-shortcut documentation](https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts).
-
-Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use **R: Activate R Session** to select the intended session if necessary.
-
 ### Explore objects and data frames
 
 The **Workspace** viewer displays objects in the attached session's global environment, including data frames, vectors, lists and environments. Run this example in the connected R terminal:
@@ -187,6 +162,31 @@ If the Workspace viewer is empty or `View(df)` does not open the expected table,
 ```
 
 Merge these entries into your existing settings object rather than replacing it or adding a second pair of outer braces. The session watcher is enabled by default; global-environment watching supplies the workspace information and session-aware completion. Check workspace settings too if they override your user settings. After changing `r.sessionWatcher`, save your work and run **Developer: Reload Window** (or restart VS Code), then create an R terminal if no managed session reconnects. See the [session watcher documentation](https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher) and [extension settings](https://github.com/REditorSupport/vscode-R/wiki/Extension-settings) for details.
+
+### Add a keyboard shortcut to create an R terminal
+
+You can assign a shortcut to **R: Create R Terminal** instead of opening the Command Palette each time:
+
+1. Run **Preferences: Open Keyboard Shortcuts** from the Command Palette, or press **Ctrl+K**, then **Ctrl+S** on Linux or Windows (**Cmd+K**, then **Cmd+S** on macOS). These are two successive key combinations, not one simultaneous combination.
+2. Search for **R: Create R Terminal**.
+3. Select the **+** beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press **Ctrl+K**, then **Ctrl+Shift+R**, and confirm with **Enter**. On macOS, use **Cmd+K**, then **Cmd+Shift+R**.
+4. Right-click the entry and choose **Show Same Keybindings**. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.
+5. Return to your `.R` file and try the shortcut. Confirm that an R terminal opens and that the session watcher attaches before sending analysis code.
+
+Alternatively, run **Preferences: Open Keyboard Shortcuts (JSON)** and add this entry to your user `keybindings.json`:
+
+```json
+[
+  {
+    "key": "ctrl+k ctrl+shift+r",
+    "command": "r.createRTerm"
+  }
+]
+```
+
+If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means **Ctrl+K**, followed by **Ctrl+Shift+R**; on macOS use `"cmd+k cmd+shift+r"` instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid **Ctrl+K**, then **R**, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for `settings.json`. See the [VS Code keybinding guide](https://code.visualstudio.com/docs/configure/keybindings) and the [R extension's keyboard-shortcut documentation](https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts).
+
+Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use **R: Activate R Session** to select the intended session if necessary.
 
 ### Optional layouts and alternative viewers
 
