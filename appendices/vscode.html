@@ -540,7 +540,15 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-vs-code-as-a-git-gui">Use VS Code as a Git GUI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts-select-run-and-debug">Python scripts: select, run and debug</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-choose-a-kernel-deliberately">Jupyter notebooks: choose a kernel deliberately</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-r-in-vs-code">Using R in VS Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-r-in-vs-code">Using R in VS Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-and-connect-an-r-session">Start and connect an R session</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-keyboard-shortcut-to-create-an-r-terminal">Add a keyboard shortcut to create an R terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-objects-and-data-frames">Explore objects and data frames</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-viewer-settings">Check the viewer settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-layouts-and-alternative-viewers">Optional layouts and alternative viewers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-and-other-r-workflows">Troubleshooting and other R workflows</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-setup-check">A small setup check</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
 </ul>
@@ -645,6 +653,9 @@
 </section>
 <section id="using-r-in-vs-code">
 <h2>Using R in VS Code<a class="headerlink" href="#using-r-in-vs-code" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=REditorSupport.r">R extension by REditorSupport</a> provides an RStudio-like Environment pane and interactive data-frame viewer directly in VS Code. Version 3.0 introduced improved workspace browsing, recursive object expansion and on-demand data loading. Start with the current stable extension and its built-in viewers; additional viewer or layout extensions are not required for MQB.</p>
+<section id="start-and-connect-an-r-session">
+<h3>Start and connect an R session<a class="headerlink" href="#start-and-connect-an-r-session" title="Link to this heading">#</a></h3>
 <p>This route requires R to be installed and usable before VS Code is involved. In the integrated terminal, check:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>R<span class="w"> </span>--version
 </pre></div>
@@ -653,8 +664,8 @@
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"languageserver"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The extension may ask to install or update its session-support package; read the package prompt before accepting. <code class="docutils literal notranslate"><span class="pre">languageserver</span></code> provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.</p>
-<p>Open an <code class="docutils literal notranslate"><span class="pre">.R</span></code> file, run <strong>R: Create R Terminal</strong> from the Command Palette, and check the session before sending coursework code to it:</p>
+<p>The extension may ask to install or update its bundled <code class="docutils literal notranslate"><span class="pre">sess</span></code> session-support package; read the package prompt before accepting. <code class="docutils literal notranslate"><span class="pre">languageserver</span></code> provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.</p>
+<p>Open an <code class="docutils literal notranslate"><span class="pre">.R</span></code> file and open the Command Palette with <strong>Ctrl+Shift+P</strong> on Linux or Windows (<strong>Cmd+Shift+P</strong> on macOS). Run <strong>R: Create R Terminal</strong>. The extension’s session watcher should connect automatically, with the attached R process shown in the status bar. Select the <strong>R</strong> icon in the Activity Bar to open the <strong>Workspace</strong> viewer, then check the session before sending coursework code to it:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">R.home</span><span class="p">()</span>
 <span class="nf">.libPaths</span><span class="p">()</span>
 <span class="nf">Sys.which</span><span class="p">(</span><span class="s">"R"</span><span class="p">)</span>
@@ -666,15 +677,74 @@
 <span class="o">?</span><span class="n">mean</span>
 </pre></div>
 </div>
-<p>The R extension can expose workspace, plot and help views when it is connected to the R terminal. Check a plot and an object before relying on those views; the exact layout depends on the extension version and session state. Ordinary plots do not require <code class="docutils literal notranslate"><span class="pre">httpgd</span></code>. <code class="docutils literal notranslate"><span class="pre">httpgd</span></code> is optional for an interactive viewer, and <code class="docutils literal notranslate"><span class="pre">radian</span></code> is optional; neither is required for MQB.</p>
-<p>If <strong>R: Create R Terminal</strong> cannot find R, first run <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">--version</span></code> in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented <code class="docutils literal notranslate"><span class="pre">r.rterm.windows</span></code> value to the exact <code class="docutils literal notranslate"><span class="pre">R.exe</span></code> path, for example:</p>
+<p>The R extension can expose workspace, plot and help views when it is connected to the R terminal. Check a plot and an object before relying on those views; the exact layout depends on the extension version and session state. Ordinary plots do not require <code class="docutils literal notranslate"><span class="pre">httpgd</span></code>. <code class="docutils literal notranslate"><span class="pre">httpgd</span></code> is optional for an interactive plot viewer, and <code class="docutils literal notranslate"><span class="pre">radian</span></code> is optional; neither is required for MQB.</p>
+</section>
+<section id="add-a-keyboard-shortcut-to-create-an-r-terminal">
+<h3>Add a keyboard shortcut to create an R terminal<a class="headerlink" href="#add-a-keyboard-shortcut-to-create-an-r-terminal" title="Link to this heading">#</a></h3>
+<p>You can assign a shortcut to <strong>R: Create R Terminal</strong> instead of opening the Command Palette each time:</p>
+<ol class="arabic simple">
+<li><p>Run <strong>Preferences: Open Keyboard Shortcuts</strong> from the Command Palette, or press <strong>Ctrl+K</strong>, then <strong>Ctrl+S</strong> on Linux or Windows (<strong>Cmd+K</strong>, then <strong>Cmd+S</strong> on macOS). These are two successive key combinations, not one simultaneous combination.</p></li>
+<li><p>Search for <strong>R: Create R Terminal</strong>.</p></li>
+<li><p>Select the <strong>+</strong> beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press <strong>Ctrl+K</strong>, then <strong>Ctrl+Shift+R</strong>, and confirm with <strong>Enter</strong>. On macOS, use <strong>Cmd+K</strong>, then <strong>Cmd+Shift+R</strong>.</p></li>
+<li><p>Right-click the entry and choose <strong>Show Same Keybindings</strong>. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.</p></li>
+<li><p>Return to your <code class="docutils literal notranslate"><span class="pre">.R</span></code> file and try the shortcut. Confirm that an R terminal opens and that the session watcher attaches before sending analysis code.</p></li>
+</ol>
+<p>Alternatively, run <strong>Preferences: Open Keyboard Shortcuts (JSON)</strong> and add this entry to your user <code class="docutils literal notranslate"><span class="pre">keybindings.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+k ctrl+shift+r"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"r.createRTerm"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means <strong>Ctrl+K</strong>, followed by <strong>Ctrl+Shift+R</strong>; on macOS use <code class="docutils literal notranslate"><span class="pre">&quot;cmd+k</span> <span class="pre">cmd+shift+r&quot;</span></code> instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid <strong>Ctrl+K</strong>, then <strong>R</strong>, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for <code class="docutils literal notranslate"><span class="pre">settings.json</span></code>. See the <a class="reference external" href="https://code.visualstudio.com/docs/configure/keybindings">VS Code keybinding guide</a> and the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts">R extension’s keyboard-shortcut documentation</a>.</p>
+<p>Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use <strong>R: Activate R Session</strong> to select the intended session if necessary.</p>
+</section>
+<section id="explore-objects-and-data-frames">
+<h3>Explore objects and data frames<a class="headerlink" href="#explore-objects-and-data-frames" title="Link to this heading">#</a></h3>
+<p>The <strong>Workspace</strong> viewer displays objects in the attached session’s global environment, including data frames, vectors, lists and environments. Run this example in the connected R terminal:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mtcars</span>
+<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">mpg</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">wt</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">),</span>
+<span class="w">  </span><span class="n">coefficients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="m">3.4</span><span class="p">),</span>
+<span class="w">  </span><span class="n">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"experiment1"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nf">View</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expand <code class="docutils literal notranslate"><span class="pre">results</span></code> in the Workspace viewer, then expand <code class="docutils literal notranslate"><span class="pre">metadata</span></code> to inspect <code class="docutils literal notranslate"><span class="pre">name</span></code>. Lists, environments and data frames can be expanded recursively, so you can inspect nested objects without printing every component in the console.</p>
+<p><code class="docutils literal notranslate"><span class="pre">View(df)</span></code> opens an interactive table in an editor tab. Use the column headers to sort and the column filters to narrow the displayed rows; rows load on demand as you scroll. The column panel also lets you search, show, hide, pin and reorder columns. Calling <code class="docutils literal notranslate"><span class="pre">View(df)</span></code> again refreshes the existing tab. Viewing, sorting and filtering are inspection tools: keep the R commands that transform your data in your script so that the analysis remains reproducible.</p>
+</section>
+<section id="check-the-viewer-settings">
+<h3>Check the viewer settings<a class="headerlink" href="#check-the-viewer-settings" title="Link to this heading">#</a></h3>
+<p>If the Workspace viewer is empty or <code class="docutils literal notranslate"><span class="pre">View(df)</span></code> does not open the expected table, check that the intended R session is attached. Open <strong>Preferences: Open User Settings (JSON)</strong> from the Command Palette and ensure these settings are enabled:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">"r.rterm.windows"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"</span>
+<span class="w">  </span><span class="nt">"r.sessionWatcher"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"r.session.watchGlobalEnvironment"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Use your installed version and path; do not paste the example unchanged. On macOS or Linux, resolve the path visible to VS Code’s terminal before adding any extension setting. See <a class="reference internal" href="r-setup.html#r-setup"><span class="std std-ref">R Installation and User Libraries</span></a> for installation and user-library troubleshooting.</p>
+<p>Merge these entries into your existing settings object rather than replacing it or adding a second pair of outer braces. The session watcher is enabled by default; global-environment watching supplies the workspace information and session-aware completion. Check workspace settings too if they override your user settings. After changing <code class="docutils literal notranslate"><span class="pre">r.sessionWatcher</span></code>, save your work and run <strong>Developer: Reload Window</strong> (or restart VS Code), then create an R terminal if no managed session reconnects. See the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher">session watcher documentation</a> and <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Extension-settings">extension settings</a> for details.</p>
+</section>
+<section id="optional-layouts-and-alternative-viewers">
+<h3>Optional layouts and alternative viewers<a class="headerlink" href="#optional-layouts-and-alternative-viewers" title="Link to this heading">#</a></h3>
+<p>For most MQB work, use the R extension’s built-in Workspace and data viewers first. If you want the source editor, console, workspace, data and plots arranged more like RStudio, consider <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=oridwanbello.r-layout">R Lab</a>. It provides an RStudio-inspired three-pane layout; after installing it, run <strong>Toggle R Lab</strong> from the Command Palette. R Lab uses the R extension for static editor features but manages its own console and session watching, so do not assume its console shares the session created by <strong>R: Create R Terminal</strong>.</p>
+<p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ChengweiLi.r-enhanced-viewer">R Enhanced Viewer (REViewer)</a> is another optional extension for spreadsheet-like data-frame inspection, including multi-column sorting and filtering. Try the native viewer before adding it.</p>
+<p><a class="reference external" href="https://positron.posit.co/">Positron</a> is a separate VS Code-based IDE from Posit, the developers of RStudio, rather than a VS Code extension. It is designed for R and Python data science, with built-in variable exploration, data inspection, plots and consoles. Consider it if you want an integrated data-science layout and are willing to use a separate application; neither Positron nor R Lab is necessary to follow MQB.</p>
+</section>
+<section id="troubleshooting-and-other-r-workflows">
+<h3>Troubleshooting and other R workflows<a class="headerlink" href="#troubleshooting-and-other-r-workflows" title="Link to this heading">#</a></h3>
+<p>If <strong>R: Create R Terminal</strong> cannot find R, first run <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">--version</span></code> in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code> value to the exact <code class="docutils literal notranslate"><span class="pre">R.exe</span></code> path, for example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"r.executablePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use your installed version and path; do not paste the example unchanged. Version 3.x deprecates the older platform-specific <code class="docutils literal notranslate"><span class="pre">r.rpath.*</span></code> and <code class="docutils literal notranslate"><span class="pre">r.rterm.*</span></code> settings in favour of <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code> for vanilla R and <code class="docutils literal notranslate"><span class="pre">r.consolePath</span></code> for an optional alternative interactive console. On macOS or Linux, resolve the path visible to VS Code’s terminal before adding any extension setting. See <a class="reference internal" href="r-setup.html#r-setup"><span class="std std-ref">R Installation and User Libraries</span></a> for installation and user-library troubleshooting.</p>
 <p>R debugging is separate from the R language extension and needs its own supported debugger and prerequisites. Do not claim a script has been debugged merely because it ran. An R <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebook uses an IRkernel chosen in the notebook kernel picker; it is distinct from sending code to an <code class="docutils literal notranslate"><span class="pre">.R</span></code> terminal.</p>
+</section>
 </section>
 <section id="a-small-setup-check">
 <h2>A small setup check<a class="headerlink" href="#a-small-setup-check" title="Link to this heading">#</a></h2>
@@ -683,14 +753,15 @@
 <li><p>Open the project root and verify the terminal location.</p></li>
 <li><p>Run a short Python script using the selected project interpreter and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code>.</p></li>
 <li><p>Create a small notebook in the project root, select its kernel, and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> and <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code>. Confirm that <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">results</span></code> are visible from that location.</p></li>
-<li><p>If using R, create an R terminal, inspect <code class="docutils literal notranslate"><span class="pre">R.home()</span></code> and <code class="docutils literal notranslate"><span class="pre">.libPaths()</span></code>, source a small script and view a simple plot.</p></li>
+<li><p>If using R, create an R terminal, inspect <code class="docutils literal notranslate"><span class="pre">R.home()</span></code> and <code class="docutils literal notranslate"><span class="pre">.libPaths()</span></code>, source a small script and view a simple plot. Run the object example above, expand <code class="docutils literal notranslate"><span class="pre">results</span></code> in the Workspace viewer and confirm that <code class="docutils literal notranslate"><span class="pre">View(df)</span></code> opens a table you can sort and filter.</p></li>
 </ol>
 <p>If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.</p>
 </section>
 <section id="sources-and-verification">
 <span id="vscode-setup-resources"></span><h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html">VS Code guidance</a>; see <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the source revision and licence. MQB revision: 30 September 2026.</p>
+<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html">VS Code guidance</a>; see <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the source revision and licence. MQB revision: 12 October 2026.</p>
 <p>Operational references: <a class="reference external" href="https://code.visualstudio.com/docs/setup/setup-overview">VS Code installation</a>, <a class="reference external" href="https://code.visualstudio.com/docs/editing/workspaces/workspace-trust">workspace trust</a>, <a class="reference external" href="https://code.visualstudio.com/docs/languages/python">Python in VS Code</a>, <a class="reference external" href="https://code.visualstudio.com/docs/python/environments">Python environments</a>, <a class="reference external" href="https://code.visualstudio.com/docs/datascience/jupyter-kernel-management">Jupyter kernel selection</a>, <a class="reference external" href="https://code.visualstudio.com/docs/python/debugging">Python debugging</a>, and the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=REditorSupport.r">REditorSupport R extension</a>.</p>
+<p>R viewer guidance checked against the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/blob/master/CHANGELOG.md">v3.0 changelog</a>, <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface">Workspace viewer documentation</a>, <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers">interactive viewer documentation</a> and linked extension/Positron pages on 12 October 2026. This was a documentation check, not a runtime test of the viewers or optional applications.</p>
 <p>Verified locally on Linux on 30 September 2026: VS Code 1.139.1 and R 4.3.3 were available. No extension was installed into the maintainer’s editor profile, and no graphical editor, macOS, Windows or R-notebook workflow was runtime-tested. Check current official support and extension requirements on your own platform.</p>
 </section>
 </section>
@@ -766,7 +837,15 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-vs-code-as-a-git-gui">Use VS Code as a Git GUI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts-select-run-and-debug">Python scripts: select, run and debug</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-choose-a-kernel-deliberately">Jupyter notebooks: choose a kernel deliberately</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-r-in-vs-code">Using R in VS Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-r-in-vs-code">Using R in VS Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-and-connect-an-r-session">Start and connect an R session</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-keyboard-shortcut-to-create-an-r-terminal">Add a keyboard shortcut to create an R terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-objects-and-data-frames">Explore objects and data frames</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-viewer-settings">Check the viewer settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-layouts-and-alternative-viewers">Optional layouts and alternative viewers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-and-other-r-workflows">Troubleshooting and other R workflows</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-setup-check">A small setup check</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
 </ul>

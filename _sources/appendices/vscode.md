@@ -95,6 +95,10 @@ An open project folder, integrated terminal and notebook kernel can report diffe
 
 ## Using R in VS Code
 
+The [R extension by REditorSupport](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) provides an RStudio-like Environment pane and interactive data-frame viewer directly in VS Code. Version 3.0 introduced improved workspace browsing, recursive object expansion and on-demand data loading. Start with the current stable extension and its built-in viewers; additional viewer or layout extensions are not required for MQB.
+
+### Start and connect an R session
+
 This route requires R to be installed and usable before VS Code is involved. In the integrated terminal, check:
 
 ```bash
@@ -107,9 +111,9 @@ Install the **R** extension by REditorSupport. In an R console using the intende
 install.packages("languageserver")
 ```
 
-The extension may ask to install or update its session-support package; read the package prompt before accepting. `languageserver` provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.
+The extension may ask to install or update its bundled `sess` session-support package; read the package prompt before accepting. `languageserver` provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.
 
-Open an `.R` file, run **R: Create R Terminal** from the Command Palette, and check the session before sending coursework code to it:
+Open an `.R` file and open the Command Palette with **Ctrl+Shift+P** on Linux or Windows (**Cmd+Shift+P** on macOS). Run **R: Create R Terminal**. The extension's session watcher should connect automatically, with the attached R process shown in the status bar. Select the **R** icon in the Activity Bar to open the **Workspace** viewer, then check the session before sending coursework code to it:
 
 ```r
 R.home()
@@ -125,17 +129,84 @@ plot(cars)
 ?mean
 ```
 
-The R extension can expose workspace, plot and help views when it is connected to the R terminal. Check a plot and an object before relying on those views; the exact layout depends on the extension version and session state. Ordinary plots do not require `httpgd`. `httpgd` is optional for an interactive viewer, and `radian` is optional; neither is required for MQB.
+The R extension can expose workspace, plot and help views when it is connected to the R terminal. Check a plot and an object before relying on those views; the exact layout depends on the extension version and session state. Ordinary plots do not require `httpgd`. `httpgd` is optional for an interactive plot viewer, and `radian` is optional; neither is required for MQB.
 
-If **R: Create R Terminal** cannot find R, first run `R --version` in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented `r.rterm.windows` value to the exact `R.exe` path, for example:
+### Add a keyboard shortcut to create an R terminal
+
+You can assign a shortcut to **R: Create R Terminal** instead of opening the Command Palette each time:
+
+1. Run **Preferences: Open Keyboard Shortcuts** from the Command Palette, or press **Ctrl+K**, then **Ctrl+S** on Linux or Windows (**Cmd+K**, then **Cmd+S** on macOS). These are two successive key combinations, not one simultaneous combination.
+2. Search for **R: Create R Terminal**.
+3. Select the **+** beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press **Ctrl+K**, then **Ctrl+Shift+R**, and confirm with **Enter**. On macOS, use **Cmd+K**, then **Cmd+Shift+R**.
+4. Right-click the entry and choose **Show Same Keybindings**. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.
+5. Return to your `.R` file and try the shortcut. Confirm that an R terminal opens and that the session watcher attaches before sending analysis code.
+
+Alternatively, run **Preferences: Open Keyboard Shortcuts (JSON)** and add this entry to your user `keybindings.json`:
+
+```json
+[
+  {
+    "key": "ctrl+k ctrl+shift+r",
+    "command": "r.createRTerm"
+  }
+]
+```
+
+If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means **Ctrl+K**, followed by **Ctrl+Shift+R**; on macOS use `"cmd+k cmd+shift+r"` instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid **Ctrl+K**, then **R**, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for `settings.json`. See the [VS Code keybinding guide](https://code.visualstudio.com/docs/configure/keybindings) and the [R extension's keyboard-shortcut documentation](https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts).
+
+Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use **R: Activate R Session** to select the intended session if necessary.
+
+### Explore objects and data frames
+
+The **Workspace** viewer displays objects in the attached session's global environment, including data frames, vectors, lists and environments. Run this example in the connected R terminal:
+
+```r
+df <- mtcars
+results <- list(
+  model = lm(mpg ~ wt, data = df),
+  coefficients = c(1.2, 3.4),
+  metadata = list(name = "experiment1")
+)
+
+View(df)
+```
+
+Expand `results` in the Workspace viewer, then expand `metadata` to inspect `name`. Lists, environments and data frames can be expanded recursively, so you can inspect nested objects without printing every component in the console.
+
+`View(df)` opens an interactive table in an editor tab. Use the column headers to sort and the column filters to narrow the displayed rows; rows load on demand as you scroll. The column panel also lets you search, show, hide, pin and reorder columns. Calling `View(df)` again refreshes the existing tab. Viewing, sorting and filtering are inspection tools: keep the R commands that transform your data in your script so that the analysis remains reproducible.
+
+### Check the viewer settings
+
+If the Workspace viewer is empty or `View(df)` does not open the expected table, check that the intended R session is attached. Open **Preferences: Open User Settings (JSON)** from the Command Palette and ensure these settings are enabled:
 
 ```json
 {
-  "r.rterm.windows": "C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"
+  "r.sessionWatcher": true,
+  "r.session.watchGlobalEnvironment": true
 }
 ```
 
-Use your installed version and path; do not paste the example unchanged. On macOS or Linux, resolve the path visible to VS Code's terminal before adding any extension setting. See {ref}`r-setup` for installation and user-library troubleshooting.
+Merge these entries into your existing settings object rather than replacing it or adding a second pair of outer braces. The session watcher is enabled by default; global-environment watching supplies the workspace information and session-aware completion. Check workspace settings too if they override your user settings. After changing `r.sessionWatcher`, save your work and run **Developer: Reload Window** (or restart VS Code), then create an R terminal if no managed session reconnects. See the [session watcher documentation](https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher) and [extension settings](https://github.com/REditorSupport/vscode-R/wiki/Extension-settings) for details.
+
+### Optional layouts and alternative viewers
+
+For most MQB work, use the R extension's built-in Workspace and data viewers first. If you want the source editor, console, workspace, data and plots arranged more like RStudio, consider [R Lab](https://marketplace.visualstudio.com/items?itemName=oridwanbello.r-layout). It provides an RStudio-inspired three-pane layout; after installing it, run **Toggle R Lab** from the Command Palette. R Lab uses the R extension for static editor features but manages its own console and session watching, so do not assume its console shares the session created by **R: Create R Terminal**.
+
+[R Enhanced Viewer (REViewer)](https://marketplace.visualstudio.com/items?itemName=ChengweiLi.r-enhanced-viewer) is another optional extension for spreadsheet-like data-frame inspection, including multi-column sorting and filtering. Try the native viewer before adding it.
+
+[Positron](https://positron.posit.co/) is a separate VS Code-based IDE from Posit, the developers of RStudio, rather than a VS Code extension. It is designed for R and Python data science, with built-in variable exploration, data inspection, plots and consoles. Consider it if you want an integrated data-science layout and are willing to use a separate application; neither Positron nor R Lab is necessary to follow MQB.
+
+### Troubleshooting and other R workflows
+
+If **R: Create R Terminal** cannot find R, first run `R --version` in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented `r.executablePath` value to the exact `R.exe` path, for example:
+
+```json
+{
+  "r.executablePath": "C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"
+}
+```
+
+Use your installed version and path; do not paste the example unchanged. Version 3.x deprecates the older platform-specific `r.rpath.*` and `r.rterm.*` settings in favour of `r.executablePath` for vanilla R and `r.consolePath` for an optional alternative interactive console. On macOS or Linux, resolve the path visible to VS Code's terminal before adding any extension setting. See {ref}`r-setup` for installation and user-library troubleshooting.
 
 R debugging is separate from the R language extension and needs its own supported debugger and prerequisites. Do not claim a script has been debugged merely because it ran. An R `.ipynb` notebook uses an IRkernel chosen in the notebook kernel picker; it is distinct from sending code to an `.R` terminal.
 
@@ -146,15 +217,17 @@ Before beginning assessed work, use a scratch project with synthetic data:
 1. Open the project root and verify the terminal location.
 2. Run a short Python script using the selected project interpreter and print `sys.executable`.
 3. Create a small notebook in the project root, select its kernel, and print `sys.executable` and `Path.cwd()`. Confirm that `code`, `data` and `results` are visible from that location.
-4. If using R, create an R terminal, inspect `R.home()` and `.libPaths()`, source a small script and view a simple plot.
+4. If using R, create an R terminal, inspect `R.home()` and `.libPaths()`, source a small script and view a simple plot. Run the object example above, expand `results` in the Workspace viewer and confirm that `View(df)` opens a table you can sort and filter.
 
 If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.
 
 (vscode-setup-resources)=
 ## Sources and verification
 
-Adapted from the FoNS [VS Code guidance](https://imperial-fons-computing.github.io/vscode.html); see {ref}`setup-attribution` for the source revision and licence. MQB revision: 30 September 2026.
+Adapted from the FoNS [VS Code guidance](https://imperial-fons-computing.github.io/vscode.html); see {ref}`setup-attribution` for the source revision and licence. MQB revision: 12 October 2026.
 
 Operational references: [VS Code installation](https://code.visualstudio.com/docs/setup/setup-overview), [workspace trust](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust), [Python in VS Code](https://code.visualstudio.com/docs/languages/python), [Python environments](https://code.visualstudio.com/docs/python/environments), [Jupyter kernel selection](https://code.visualstudio.com/docs/datascience/jupyter-kernel-management), [Python debugging](https://code.visualstudio.com/docs/python/debugging), and the [REditorSupport R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r).
+
+R viewer guidance checked against the [v3.0 changelog](https://github.com/REditorSupport/vscode-R/blob/master/CHANGELOG.md), [Workspace viewer documentation](https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface), [interactive viewer documentation](https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers) and linked extension/Positron pages on 12 October 2026. This was a documentation check, not a runtime test of the viewers or optional applications.
 
 Verified locally on Linux on 30 September 2026: VS Code 1.139.1 and R 4.3.3 were available. No extension was installed into the maintainer's editor profile, and no graphical editor, macOS, Windows or R-notebook workflow was runtime-tested. Check current official support and extension requirements on your own platform.
