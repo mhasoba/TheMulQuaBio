@@ -671,8 +671,8 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-height-practicals">Tree-height practicals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-calculate-tree-heights">Practical: calculate tree heights</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-practical-generalize-the-tree-height-script">Group practical: generalize the tree-height script</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-implement-the-tree-height-script-in-python">Extension: implement the tree-height script in Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-group-practical-generalize-the-tree-height-script">Optional group practical: generalize the tree-height script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extension-implement-the-tree-height-script-in-python">Optional extension: implement the tree-height script in Python</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorization">Vectorization</a><ul class="nav section-nav flex-column">
@@ -4013,7 +4013,7 @@ The syntax for R functions is quite simple, with each function accepting “argu
 <section id="an-example-utility-function">
 <h3>An example utility function<a class="headerlink" href="#an-example-utility-function" title="Link to this heading">#</a></h3>
 <p>Now let’s write a script containing a more useful function:</p>
-<p>★ In your text editor type the following in a file called <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code>, and save it in your <code class="docutils literal notranslate"><span class="pre">code</span></code>directory:</p>
+<p>★ In your text editor, type the following in a file called <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code> and save it in your <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function calculates heights of trees given distance of each tree </span>
 <span class="c1"># from its base and angle to its top, using  the trigonometric formula </span>
 <span class="c1">#</span>
@@ -4045,12 +4045,13 @@ The syntax for R functions is quite simple, with each function accepting “argu
 </section>
 <section id="tree-height-practicals">
 <h2>Tree-height practicals<a class="headerlink" href="#tree-height-practicals" title="Link to this heading">#</a></h2>
+<p>The tree-height calculation brings together a function, measurements with units, a data frame and a saved result. Work through the first practical when it is part of your teaching route. The later versions are optional ways to make the same idea more general.</p>
 <section id="practical-calculate-tree-heights">
 <h3>Practical: calculate tree heights<a class="headerlink" href="#practical-calculate-tree-heights" title="Link to this heading">#</a></h3>
 <p>Modify the script <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code> so that it does the following:</p>
 <ul>
-<li><p>Loads <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> and calculates tree heights for all trees in the data. Note that the distances have been measured in meters. (Hint: use relative paths)).</p></li>
-<li><p>Creates a csv output file called <code class="docutils literal notranslate"><span class="pre">TreeHts.csv</span></code> in <code class="docutils literal notranslate"><span class="pre">results</span></code>that contains the calculated tree heights along with the original data in the following format (only first two rows and headers shown):</p>
+<li><p>Loads <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> and calculates tree heights for all trees in the data. Note that the distances have been measured in metres. (Hint: use a path relative to the project root.)</p></li>
+<li><p>Creates a CSV output file called <code class="docutils literal notranslate"><span class="pre">TreeHts.csv</span></code> in <code class="docutils literal notranslate"><span class="pre">results/</span></code> that contains the calculated tree heights along with the original data in the following format (only first two rows and headers shown):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">"Species"</span>,<span class="s2">"Distance.m"</span>,<span class="s2">"Angle.degrees"</span>,<span class="s2">"Tree.Height.m"</span>
 <span class="s2">"Populus tremula"</span>,31.6658337740228,41.2826361937914,27.8021161438536
 <span class="s2">"Quercus robur"</span>,45.984992608428,44.5359166583512,45.2460250644405
@@ -4060,17 +4061,17 @@ The syntax for R functions is quite simple, with each function accepting “argu
 </ul>
 <p>This script should work using either <code class="docutils literal notranslate"><span class="pre">source</span></code> or <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> in Linux / UNIX.</p>
 </section>
-<section id="group-practical-generalize-the-tree-height-script">
-<h3>Group practical: generalize the tree-height script<a class="headerlink" href="#group-practical-generalize-the-tree-height-script" title="Link to this heading">#</a></h3>
+<section id="optional-group-practical-generalize-the-tree-height-script">
+<h3>Optional group practical: generalize the tree-height script<a class="headerlink" href="#optional-group-practical-generalize-the-tree-height-script" title="Link to this heading">#</a></h3>
 <p>The goal of this practical is to make the <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code> script more general, so that it could be used for other datasets, not just <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code>.</p>
 <p>Guidelines:</p>
 <ul class="simple">
-<li><p>Write another R script called <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code> that takes a csv file name from the command line (e.g., <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span> <span class="pre">Trees.csv</span></code>) and outputs the result to a file just like <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code>above, but this time includes the input file name in the output file name as <code class="docutils literal notranslate"><span class="pre">InputFileName_treeheights.csv</span></code>. Note that you will have to strip the <code class="docutils literal notranslate"><span class="pre">.csv</span></code>or whatever the extension is from the filename, and also <code class="docutils literal notranslate"><span class="pre">../</span></code> etc., if you are using relative paths. (Hint: Command-line parameters are accessible within the R running environment via <code class="docutils literal notranslate"><span class="pre">commandArgs()</span></code> — so <code class="docutils literal notranslate"><span class="pre">help(commandArgs)</span></code> might be your starting point.)</p></li>
-<li><p>Write a unix shell script called <code class="docutils literal notranslate"><span class="pre">run_get_TreeHeight.sh</span></code> that tests <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code>. Include <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code>as your example file. Note that <code class="docutils literal notranslate"><span class="pre">source</span></code>will not work in this case as it does not allow scripts with arguments to be run; you will have to use <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>instead.</p></li>
+<li><p>Write another R script called <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code> that takes a CSV file name from the command line (e.g., <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span> <span class="pre">trees.csv</span></code>) and outputs the result to a file just like <code class="docutils literal notranslate"><span class="pre">TreeHeight.R</span></code> above, but this time includes the input file name in the output file name as <code class="docutils literal notranslate"><span class="pre">InputFileName_treeheights.csv</span></code>. You will have to strip <code class="docutils literal notranslate"><span class="pre">.csv</span></code> (or another extension) from the filename and deal sensibly with any relative path. Command-line parameters are available in R through <code class="docutils literal notranslate"><span class="pre">commandArgs()</span></code>, so <code class="docutils literal notranslate"><span class="pre">help(commandArgs)</span></code> is a useful starting point.</p></li>
+<li><p>Write a Unix shell script called <code class="docutils literal notranslate"><span class="pre">run_get_TreeHeight.sh</span></code> that tests <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code>. Include <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> as your example file. <code class="docutils literal notranslate"><span class="pre">source()</span></code> will not work for this test because it does not pass command-line arguments to the script; use <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> instead.</p></li>
 </ul>
 </section>
-<section id="extension-implement-the-tree-height-script-in-python">
-<h3>Extension: implement the tree-height script in Python<a class="headerlink" href="#extension-implement-the-tree-height-script-in-python" title="Link to this heading">#</a></h3>
+<section id="optional-extension-implement-the-tree-height-script-in-python">
+<h3>Optional extension: implement the tree-height script in Python<a class="headerlink" href="#optional-extension-implement-the-tree-height-script-in-python" title="Link to this heading">#</a></h3>
 <p>Assuming you have already worked through <a class="reference internal" href="python.html"><span class="std std-doc">Python Chapter</span></a>, write a Python version of <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.R</span></code> (call it <code class="docutils literal notranslate"><span class="pre">get_TreeHeight.py</span></code>). Include a test of this script into <code class="docutils literal notranslate"><span class="pre">run_get_TreeHeight.sh</span></code>.</p>
 </section>
 </section>
@@ -5469,8 +5470,8 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-height-practicals">Tree-height practicals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-calculate-tree-heights">Practical: calculate tree heights</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-practical-generalize-the-tree-height-script">Group practical: generalize the tree-height script</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-implement-the-tree-height-script-in-python">Extension: implement the tree-height script in Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-group-practical-generalize-the-tree-height-script">Optional group practical: generalize the tree-height script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extension-implement-the-tree-height-script-in-python">Optional extension: implement the tree-height script in Python</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorization">Vectorization</a><ul class="nav section-nav flex-column">

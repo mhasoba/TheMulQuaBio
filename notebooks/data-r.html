@@ -597,7 +597,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-data-exploration">On to data exploration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-then-came-tidyverse">And then came <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tidyverse-route">The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> route</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-data-wrangling-with-tidyverse">Practical: data wrangling with <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code></a></li>
@@ -619,9 +619,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-graphics">Saving your graphics</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrated-practical-from-checked-data-to-a-figure">Integrated practical: from checked data to a figure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-body-mass-distributions">Practical: body-mass distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beautiful-graphics-in-r">Beautiful graphics in R</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-plotting-with-qplot">Quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legacy-reference-quick-plotting-with-qplot">Legacy reference: quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplots">Scatterplots</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aesthetic-mappings">Aesthetic mappings</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-transparency">Setting transparency</a></li>
@@ -1115,10 +1116,10 @@ The following object is masked from ‘package:tidyr’:
 <h2>On to data exploration<a class="headerlink" href="#on-to-data-exploration" title="Link to this heading">#</a></h2>
 <p>Once you have wrangled the Pound Hill data to its long format, you are ready to go! You may want to start by examining and visualizing the basic properties of the data, such as the number of tree species (41) in the dataset, number of quadrats (replicates) per plot and cultivation treatment, etc.</p>
 <p>We will learn about visualization next. After that, you can return to this dataset and try out some visual data exploration. For example, a useful visualization would be to make a histogram of abundances of species, grouped by different factors. For example, you can look at distributions of species’ abundances grouped by the fundamental treatment, <code class="docutils literal notranslate"><span class="pre">Cultivation</span></code>.</p>
-<section id="and-then-came-tidyverse">
-<h3>And then came <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code><a class="headerlink" href="#and-then-came-tidyverse" title="Link to this heading">#</a></h3>
-<p>So if you think this is the end of the options you have for data wrangling in R, think again. There is a whole data science “ecosystem” you can use in R through the <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> package.  This meta-package includes <code class="docutils literal notranslate"><span class="pre">dplyr</span></code>, the next iteration of <code class="docutils literal notranslate"><span class="pre">plyr</span></code> that addresses the speed issues in the latter, and <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>, essentially a nicer wrapper to the <code class="docutils literal notranslate"> <span class="pre">reshape2</span></code> package with additional functions, and <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> (coming up later).</p>
-<p>Assuming you have installed <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> (see the end of the <a class="reference internal" href="r.html"><span class="std std-doc">R Chapter</span></a>), load it:</p>
+<section id="the-tidyverse-route">
+<h3>The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> route<a class="headerlink" href="#the-tidyverse-route" title="Link to this heading">#</a></h3>
+<p>Base R is not the only sensible way to wrangle data. The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> is a collection of packages that are designed to work together. Here we will use <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> to select, filter, group and summarise rows, <code class="docutils literal notranslate"><span class="pre">tidyr</span></code> to change the shape of a table, and later <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> to make figures.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> is installed (see the end of the <a class="reference internal" href="r.html"><span class="std std-doc">R Chapter</span></a>), load it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
@@ -1477,9 +1478,18 @@ $ Count       &lt;int&gt; 4, 8, 3, 20, 6, 4, 0, 0, 0, 0, 1, 2, 5, 12, 2, 0, 0, 0
 </section>
 <section id="practical-data-wrangling-with-tidyverse">
 <h2>Practical: data wrangling with <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code><a class="headerlink" href="#practical-data-wrangling-with-tidyverse" title="Link to this heading">#</a></h2>
-<p>We used <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> in <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code> for wrangling that dataset. Write a new script called <code class="docutils literal notranslate"><span class="pre">data_wrang_tidy.R</span></code> that uses <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> (and specifically <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> and <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>) for the same steps. Begin with a copy of <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code>, then work through it from start to finish, finding the corresponding <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> or <code class="docutils literal notranslate"><span class="pre">tidyr</span></code> operation at each step.</p>
-<p>For example, to convert from wide to long format, instead of using <code class="docutils literal notranslate"> <span class="pre">melt()</span></code> (or <code class="docutils literal notranslate"><span class="pre">dcast()</span></code>) from the <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> package, you can use <code class="docutils literal notranslate"><span class="pre">gather()</span></code> from <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>.</p>
-<p>Don’t forget the <a class="reference external" href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a>, an particular the <a class="reference external" href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">Data Transformation Cheatsheet</a>.</p>
+<p>The earlier <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code> script uses <code class="docutils literal notranslate"><span class="pre">reshape2</span></code>, which you will still meet in older ecological code. Now write a script called <code class="docutils literal notranslate"><span class="pre">data_wrang_tidy.R</span></code> that carries out the same work with <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> and <code class="docutils literal notranslate"><span class="pre">tidyr</span></code>. Begin with a copy of <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code>, work through it one step at a time, and compare the result after each change.</p>
+<p>For example, the current <code class="docutils literal notranslate"><span class="pre">tidyr</span></code> function for changing a table from wide to long form is <code class="docutils literal notranslate"><span class="pre">pivot_longer()</span></code>. The identifying columns stay in place, while the species columns become two new columns: one for the species name and one for its count:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">MyWrangledData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">TempData</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="n">tidyr</span><span class="o">::</span><span class="nf">pivot_longer</span><span class="p">(</span>
+<span class="w">    </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="n">Cultivation</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="p">,</span><span class="w"> </span><span class="n">Plot</span><span class="p">,</span><span class="w"> </span><span class="n">Quadrat</span><span class="p">),</span>
+<span class="w">    </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Species"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Count"</span>
+<span class="w">  </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Try this first on a small table whose shape you can check by eye. Then apply it to <code class="docutils literal notranslate"><span class="pre">TempData</span></code> and confirm the dimensions, names and values before continuing.</p>
+<p>The <a class="reference external" href="https://posit.co/resources/cheatsheets/">RStudio cheatsheets</a>, especially the <a class="reference external" href="https://posit.co/resources/cheatsheets/">data tidying and transformation sheets</a>, are useful while you work. Use them to find a function, but keep checking the shape and meaning of your data after every step.</p>
 </section>
 <section id="handling-big-data-in-r">
 <h2>Handling Big Data in R<a class="headerlink" href="#handling-big-data-in-r" title="Link to this heading">#</a></h2>
@@ -1985,6 +1995,19 @@ clicking on the figure, doing “save as”, etc. So let’s save the figure as 
 <p>You can also try other graphic output formats. For example, <code class="docutils literal notranslate"><span class="pre">png()</span></code> (a raster format) instead of <code class="docutils literal notranslate"><span class="pre">pdf()</span></code>. As always, look at the help documentation of each of these commands!</p>
 </section>
 </section>
+<section id="integrated-practical-from-checked-data-to-a-figure">
+<h2>Integrated practical: from checked data to a figure<a class="headerlink" href="#integrated-practical-from-checked-data-to-a-figure" title="Link to this heading">#</a></h2>
+<p>Return to the observations script you began in the R chapter. You have already inspected the input, checked the counts and removed the exact duplicate. Now carry that work through to a result that another person can rerun and understand.</p>
+<ol class="arabic simple">
+<li><p>Read the observations and produce the site summary from your checked data. Keep the raw CSV unchanged.</p></li>
+<li><p>Save the summary as <code class="docutils literal notranslate"><span class="pre">results/observations_by_site.csv</span></code>, with column names that make sense without looking back at the script.</p></li>
+<li><p>Draw a well-labelled figure of the observed totals by site, using either base R or <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>, and save it as <code class="docutils literal notranslate"><span class="pre">results/observations_by_site.pdf</span></code>.</p></li>
+<li><p>Make the distinction between zero observations and entirely missing observations visible in the figure or its caption. Do not turn the all-missing result into a zero.</p></li>
+<li><p>Add two or three sentences explaining what the figure shows and what the data do not allow you to conclude.</p></li>
+<li><p>Close R and run the whole script again from the project root with <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/observations_practice.R</span></code>. Check that it recreates both output files.</p></li>
+</ol>
+<p>If you finish early, make the same figure with the other plotting system. Compare the choices you had to make rather than asking which version is prettier.</p>
+</section>
 <section id="practical-body-mass-distributions">
 <h2>Practical: body-mass distributions<a class="headerlink" href="#practical-body-mass-distributions" title="Link to this heading">#</a></h2>
 <p>Write a script that draws and saves three figures, each containing subplots of distributions of predator mass, prey mass, and the size ratio of prey mass over predator mass <em>by feeding interaction type</em>. Use logarithms of masses (or size ratios)for all three plots. In addition, the script should calculate the (log) mean and median predator mass, prey mass and predator-prey size-ratios to a csv file.</p>
@@ -2003,11 +2026,11 @@ clicking on the figure, doing “save as”, etc. So let’s save the figure as 
 <p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> differs from other approaches as it attempts to provide a “grammar” for graphics in which each layer is the equivalent of a verb, subject etc. and a plot is the equivalent of a sentence. All graphs start with a layer showing the data, other layers and attributes/styles are added to modify the plot. Specifically, according to this grammar, a statistical graphic is a “mapping” from data to geometric objects (points, lines, bars; set using <code class="docutils literal notranslate"><span class="pre">geom</span></code>) with aesthetic attributes (colour, shape, size; set using <code class="docutils literal notranslate"><span class="pre">aes</span></code>).</p>
 <p>For more on the ideas underlying ggplot, see the book “ggplot2: Elegant Graphics for Data Analysis”, by H. Wickham (in your Reading directory). Also, the <a class="reference external" href="http://ggplot2.tidyverse.org/">ggplot2 website</a> is an excellent resource.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is not available on your computer, look up the section on installing packages in the <a class="reference internal" href="r.html"><span class="std std-doc">R Chapter</span></a>.</p>
-<p>ggplot can be used in two ways: with <code class="docutils literal notranslate"><span class="pre">qplot</span></code> (for <code class="docutils literal notranslate"><span class="pre">q</span></code>uick <code class="docutils literal notranslate"> <span class="pre">plot</span></code>ting) and <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> for fully customized plotting.</p>
+<p>For new work, build plots with <code class="docutils literal notranslate"><span class="pre">ggplot()</span></code>, aesthetic mappings and one or more geometries. This makes each part of the graphic explicit and gives you a route from a quick exploratory plot to a finished figure.</p>
 <p><em>Note that <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> only accepts data in data frames.</em></p>
-<section id="quick-plotting-with-qplot">
-<h3>Quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code><a class="headerlink" href="#quick-plotting-with-qplot" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">qplot</span></code> can be used to quickly produce graphics for exploratory data analysis, and as a base for more complex graphics. It uses syntax that is closer to the standard R plotting commands.</p>
+<section id="legacy-reference-quick-plotting-with-qplot">
+<h3>Legacy reference: quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code><a class="headerlink" href="#legacy-reference-quick-plotting-with-qplot" title="Link to this heading">#</a></h3>
+<p>Earlier versions of this chapter used <code class="docutils literal notranslate"><span class="pre">qplot()</span></code> as a bridge from base R graphics. It is now deprecated in <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>, so do not use this section as the starting point for new scripts. It remains here for the moment because you may encounter <code class="docutils literal notranslate"><span class="pre">qplot()</span></code> in older course or research code. For current work, read it only as a translation exercise and use the <a class="reference internal" href="#advanced-plotting-ggplot"><code class="docutils literal notranslate"><span class="pre">ggplot()</span></code> section below</a> to write your plots.</p>
 <p>We will use the same predator-prey body size dataset again – you will soon see how much nice the same types of plots you made above look when done with ggplot!</p>
 <p>First, load the package:</p>
 <div class="cell docutils container">
@@ -3347,7 +3370,7 @@ script should result in one pdf file containing the following figure being saved
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-data-exploration">On to data exploration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-then-came-tidyverse">And then came <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tidyverse-route">The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> route</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-data-wrangling-with-tidyverse">Practical: data wrangling with <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code></a></li>
@@ -3369,9 +3392,10 @@ script should result in one pdf file containing the following figure being saved
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-graphics">Saving your graphics</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrated-practical-from-checked-data-to-a-figure">Integrated practical: from checked data to a figure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-body-mass-distributions">Practical: body-mass distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beautiful-graphics-in-r">Beautiful graphics in R</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-plotting-with-qplot">Quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legacy-reference-quick-plotting-with-qplot">Legacy reference: quick plotting with <code class="docutils literal notranslate"><span class="pre">qplot</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplots">Scatterplots</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aesthetic-mappings">Aesthetic mappings</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-transparency">Setting transparency</a></li>

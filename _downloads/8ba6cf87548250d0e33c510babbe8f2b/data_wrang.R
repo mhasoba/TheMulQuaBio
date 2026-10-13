@@ -31,6 +31,8 @@ colnames(TempData) <- MyData[1, ]
 rownames(TempData) <- NULL
 
 # Convert from wide to long form ----------------------------------------
+# This script keeps the older reshape2 route because it is still common in
+# ecological code. For new work, the chapter introduces tidyr::pivot_longer().
 library(reshape2)
 
 MyWrangledData <- melt(
