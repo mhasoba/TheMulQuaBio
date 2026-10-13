@@ -70,7 +70,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction &amp; prerequisites" href="../part-basic-stats.html" />
-    <link rel="prev" title="Object-Oriented Programming" href="object-oriented-programming.html" />
+    <link rel="prev" title="Algorithms and performance" href="analysis-algorithms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -235,6 +235,7 @@
 <li class="toctree-l2"><a class="reference internal" href="object-oriented-programming.html">Object-Oriented Programming</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis-algorithms.html">Algorithms and performance</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Biological Computing in R</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
@@ -3945,11 +3946,11 @@ The syntax for R functions is quite simple, with each function accepting “argu
 </section>
 <section id="functions-with-conditionals">
 <h3>Functions with conditionals<a class="headerlink" href="#functions-with-conditionals" title="Link to this heading">#</a></h3>
-<p>Here are some examples of functions with conditionals:</p>
+<p>A conditional lets a function choose a result based on its input. Here, the caller supplies the integer to check, and the function returns a message:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Checks if an integer is even</span>
-<span class="n">is.even</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">is.even</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="s">'is even!'</span><span class="p">))</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
@@ -3964,10 +3965,59 @@ The syntax for R functions is quite simple, with each function accepting “argu
 <div class="cell_output docutils container">
 <div class="output text_html">'6 is even!'</div></div>
 </div>
+<p>What would change if we wrote <code class="docutils literal notranslate"><span class="pre">function(n</span> <span class="pre">=</span> <span class="pre">2)</span></code> instead? The <code class="docutils literal notranslate"><span class="pre">2</span></code> would become a <strong>default value</strong>: R would use it only when the caller omitted <code class="docutils literal notranslate"><span class="pre">n</span></code>. Let’s give this version a separate name so that we can compare the two without replacing our original function:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">is.even.default</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="s">'is even!'</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="s">'is odd!'</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">is.even.default</span><span class="p">()</span>
+<span class="nf">is.even.default</span><span class="p">(</span><span class="m">6</span><span class="p">)</span>
+<span class="nf">is.even.default</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The three calls return, respectively:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] "2 is even!"
+[1] "6 is even!"
+[1] "3 is odd!"
+</pre></div>
+</div>
+<p>Only the first call uses the default. The other two supply a value, which takes precedence over <code class="docutils literal notranslate"><span class="pre">2</span></code>. Both versions therefore give the same result when supplied with <code class="docutils literal notranslate"><span class="pre">6</span></code>. But try omitting the input to our original <code class="docutils literal notranslate"><span class="pre">function(n)</span></code> version at the R prompt:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">is.even</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Error in is.even() : argument "n" is missing, with no default
+</pre></div>
+</div>
+<p>This error occurs when the function tries to use the missing <code class="docutils literal notranslate"><span class="pre">n</span></code> in its condition.</p>
+<p>For this task, there is no good reason to assume that the number is 2. A default could hide a forgotten input and return a perfectly plausible answer to the wrong question! So we require the caller to supply <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>Defaults are more useful when an omitted argument has a clear, agreed meaning. Suppose we want to round a tree height for a report, normally to two decimal places:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">report_height</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">height_m</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">round</span><span class="p">(</span><span class="n">height_m</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digits</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">report_height</span><span class="p">(</span><span class="m">12.345</span><span class="p">)</span><span class="w">             </span><span class="c1"># Returns 12.35</span>
+<span class="nf">report_height</span><span class="p">(</span><span class="m">12.345</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># Returns 12.3</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">height_m</span></code> is required: we cannot report a measurement nobody supplied. The number of decimal places is an optional reporting choice, with a default the caller can override. This function returns a rounded number, not formatted text with a fixed number of decimal places. Keep the original precision for calculations; round when reporting the result.</p>
+<p><strong>Choosing defaults:</strong> use a default when omitting an argument has a clear, useful meaning. Require an explicit input when guessing it could hide a mistake or change the scientific interpretation. Put required inputs before optional settings, document defaults and units, and use named arguments such as <code class="docutils literal notranslate"><span class="pre">digits</span> <span class="pre">=</span> <span class="pre">1</span></code> when overriding a setting. A default is not a substitute for checking whether an input is valid.</p>
+<p>Be particularly careful with defaults for datasets, units, thresholds and missing-value handling. These can change the analysis, not just its presentation. For example, <code class="docutils literal notranslate"><span class="pre">mean(x,</span> <span class="pre">na.rm</span> <span class="pre">=</span> <span class="pre">TRUE)</span></code> removes missing values before calculating the mean; that should be a justified, explicit choice rather than a hidden convenience.</p>
+<p><strong>Predict, then try:</strong> after defining <code class="docutils literal notranslate"><span class="pre">report_height</span></code>, what will each call below do? Which use a default, which override it, and which should fail because a required input is missing? Try them one at a time at the R prompt; the errors are intentional.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">report_height</span><span class="p">(</span><span class="m">8.678</span><span class="p">)</span>
+<span class="nf">report_height</span><span class="p">(</span><span class="m">8.678</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="nf">report_height</span><span class="p">(</span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="nf">is.even</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now return to conditionals. The next function also requires the caller to supply the number being checked:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Checks if a number is a power of 2</span>
-<span class="n">is.power2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">is.power2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">log2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">1</span><span class="o">==</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="s">'is a power of 2!'</span><span class="p">))</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
@@ -5350,12 +5400,12 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="object-oriented-programming.html"
+       href="analysis-algorithms.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Object-Oriented Programming</p>
+        <p class="prev-next-title">Algorithms and performance</p>
       </div>
     </a>
     <a class="right-next"
