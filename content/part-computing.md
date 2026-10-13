@@ -11,6 +11,7 @@ Unless an exercise explicitly says otherwise, start commands at the coursework p
 - Use `git` to version-control your work and collaborate
 - Work with LaTeX for scientific writing
 - Get started with Python and R in a reproducible project setup
+- Understand how algorithms shape the problems that computation can solve
 
 ## Prerequisites
 
@@ -28,6 +29,9 @@ Unless an exercise explicitly says otherwise, start commands at the coursework p
 1. Start with [Unix](notebooks/unix)
 2. Then [Git](notebooks/git)
 3. Then pick your primary language: [Python](notebooks/python) and/or [R](notebooks/r)
+4. Use [Algorithms: solving problems with computation](notebooks/algorithms)
+   to compare solutions across languages and think about what becomes possible
+   as problems grow.
 
 ## Plan, implement, test, explain and rerun
 
@@ -45,3 +49,10 @@ Most later chapters assume you can:
 - run commands in a terminal,
 - manage files with relative paths,
 - and pull/update the course repo with `git`.
+
+Once you can express a solution in code, the next question is whether you have
+chosen a good way to solve the problem. [Algorithms: solving problems with
+computation](notebooks/algorithms) examines correctness, data
+structures, scientific feasibility, scaling and the wider consequences of
+algorithmic choices. The [performance appendix](appendices/performance.md)
+continues into profiling, memory and larger computing resources.
