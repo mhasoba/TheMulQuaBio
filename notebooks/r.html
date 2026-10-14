@@ -70,7 +70,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction &amp; prerequisites" href="../part-basic-stats.html" />
-    <link rel="prev" title="Algorithms and performance" href="analysis-algorithms.html" />
+    <link rel="prev" title="Object-Oriented Programming" href="object-oriented-programming.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -235,7 +235,6 @@
 <li class="toctree-l2"><a class="reference internal" href="object-oriented-programming.html">Object-Oriented Programming</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis-algorithms.html">Algorithms and performance</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Biological Computing in R</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
@@ -758,6 +757,7 @@
 <li><p>organizing scripts, data and results in a project directory.</p></li>
 </ul>
 <p>No prior R, Python or statistics knowledge is assumed. Variables, functions, loops and the statistical context needed for the examples are introduced where they are used. You will need a working R installation for the exercises; setup and editor options are covered in <a class="reference internal" href="#getting-started-with-r">Getting started with R</a>.</p>
+<p>Use your existing bootcamp project, or choose a learning project if you are studying R independently. See <a class="reference internal" href="../part-computing.html#organising-your-learning-project"><span class="std std-ref">Organising your learning project</span></a> and the R setup example under <a class="reference internal" href="#your-analysis-workflow">Your analysis workflow</a>. You do not need a separate R coursework directory, or prior Python or Git study, to begin.</p>
 </div>
 <div class="note admonition">
 <p class="admonition-title">How the two R chapters fit together</p>
@@ -3300,14 +3300,14 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 </section>
 <section id="your-analysis-workflow">
 <h2>Your analysis workflow<a class="headerlink" href="#your-analysis-workflow" title="Link to this heading">#</a></h2>
-<p>An R analysis usually reads data, runs code and creates several results. Keep these files in a clear project structure, just as you do for Bash and Python work. Store scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, source data in <code class="docutils literal notranslate"><span class="pre">data/</span></code> and generated output in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Start R at the project root so that all three directories have stable, predictable paths.</p>
+<p>An R analysis usually reads data, runs code and creates several results. Keep these files in a clear project structure, whether you use R alone or alongside Bash and Python. Store scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, source data in <code class="docutils literal notranslate"><span class="pre">data/</span></code> and generated output in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Start R at the project root so that all three directories have stable, predictable paths.</p>
 <p>Thus, your typical R analysis workflow will be:</p>
 <hr class="docutils" />
 <figure class="align-default" id="r-project-org">
 <a class="reference internal image-reference" href="../_images/RWorkflow.png"><img alt="R Project Organization" src="../_images/RWorkflow.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Your R project.</strong> Keeping it neat and organized is key to becoming a good R programmer.</span><a class="headerlink" href="#r-project-org" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>R within your project.</strong> Scripts come from <code class="docutils literal notranslate"><span class="pre">code/</span></code>, inputs from <code class="docutils literal notranslate"><span class="pre">data/</span></code>, and outputs go to <code class="docutils literal notranslate"><span class="pre">results/</span></code>. The same layout works for an R-only analysis or a multilingual project.</span><a class="headerlink" href="#r-project-org" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />
@@ -3319,19 +3319,23 @@ text), and Boolean (“logical”; <code class="docutils literal notranslate"><s
 <li><p><em>Graphics files</em>: R can export graphics in a wide range of formats. This can be done automatically from R code and we will look at this later, but you can also select a graphics window (e.g., in RStudio) and click <code class="docutils literal notranslate"><span class="pre">File</span></code> <span class="math notranslate nohighlight">\(\triangleright\)</span> <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">as...</span></code>.</p></li>
 <li><p><em>RData files</em>: You can save any data loaded or created in R, including outputs of statistical analyses and other things, into a single <code class="docutils literal notranslate"><span class="pre">RData</span></code> file. These are not plain text and can only be read by R, but can hold all the data from an analysis in a single handy location. We will not use these much in this course.</p></li>
 </ul>
-<p>So let’s build your R analysis project structure.</p>
-<p>Do the following:</p>
-<p>★ Create a sensibly named coursework project directory (e.g., <code class="docutils literal notranslate"><span class="pre">MyrCoursework</span></code>) in an appropriate location on your computer. If you are using a college Windows computer, you may need to create it in your <code class="docutils literal notranslate"><span class="pre">H:</span></code> drive. Avoid including spaces in file or directory names, as this will often create problems when you share your files with somebody else. Many software programs do not handle spaces in file/directory names well. Use underscores instead of spaces. For example, instead of <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">R</span> <span class="pre">Coursework</span></code>, use <code class="docutils literal notranslate"><span class="pre">My_R_Coursework</span></code> or <code class="docutils literal notranslate"><span class="pre">MyrCoursework</span></code>.</p>
-<p>★ Create <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>, and <code class="docutils literal notranslate"><span class="pre">results</span></code> subdirectories in the project root. You can also create <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> for temporary experiments. Remember, commands in all programming languages are case-sensitive when reading directory path names, so <code class="docutils literal notranslate"><span class="pre">code</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">Code</span></code>!</p>
-<p>You can create these directories using <code class="docutils literal notranslate"><span class="pre">dir.create()</span></code> within R (or, on Mac/Linux, with the usual <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> from the bash terminal):</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework"</span><span class="p">)</span>
-<span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework/code"</span><span class="p">)</span>
-<span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework/data"</span><span class="p">)</span>
-<span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework/results"</span><span class="p">)</span>
-<span class="nf">dir.create</span><span class="p">(</span><span class="s">"MyrCoursework/sandbox"</span><span class="p">)</span>
+<p>Do you already have a project with this layout? If you are following the bootcamp, continue in the <code class="docutils literal notranslate"><span class="pre">MQB_Bootcamp</span></code> project you created for Shell and Python. Keep your R scripts alongside the other scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>; do not create a separate R coursework project or rename your existing one.</p>
+<p>If you are studying R independently, reuse an appropriate existing project or create a new one with a meaningful name. <code class="docutils literal notranslate"><span class="pre">mqb_practice</span></code> below is only an example name. See <a class="reference internal" href="../part-computing.html#organising-your-learning-project"><span class="std std-ref">Organising your learning project</span></a> for the shared convention and assessment boundaries.</p>
+<p><strong>For a new project only:</strong> start R in the parent directory where you want the project to live, such as Documents. Check this location with <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> before creating anything. Do not run this block inside an existing coursework project: that would create an unnecessary nested project.</p>
+<p>Use the internal directory names exactly as shown. On case-sensitive file systems, <code class="docutils literal notranslate"><span class="pre">code</span></code> and <code class="docutils literal notranslate"><span class="pre">Code</span></code> are different paths. Simple outer folder names without spaces are convenient for these examples.</p>
+<p>The following uses R’s <code class="docutils literal notranslate"><span class="pre">dir.create()</span></code>; you can also make the same directories in your file manager or with Shell commands. If this example name already exists, stop and inspect that project rather than recreating it:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">file.exists</span><span class="p">(</span><span class="s">"mqb_practice"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">stop</span><span class="p">(</span><span class="s">"mqb_practice already exists; inspect it or choose an unused name."</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">"mqb_practice"</span><span class="p">)</span>
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">"mqb_practice/code"</span><span class="p">)</span>
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">"mqb_practice/data"</span><span class="p">)</span>
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">"mqb_practice/results"</span><span class="p">)</span>
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">"mqb_practice/sandbox"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Keep a root <code class="docutils literal notranslate"><span class="pre">README.md</span></code> describing your project and use a root <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to exclude generated files. For the Week 3 observations exercise, begin at the project root: run <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/script.R</span></code>, read <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code>, and write <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code>. Starting in the same place each time makes paths predictable, whichever editor you use.</p>
+<p>Creating directories does not move the R session into them. Open your chosen project root in your editor and start a new R session there; confirm with <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> and <code class="docutils literal notranslate"><span class="pre">dir()</span></code>. If you already have a suitable project, skip the creation block and begin here.</p>
+<p>Keep a root <code class="docutils literal notranslate"><span class="pre">README.md</span></code> describing your project. If you use Git, use a root <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to exclude generated files and other files that should not be tracked. From the root, run <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/script.R</span></code>, read <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code>, and write <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code>, replacing these example filenames with your own. This works whatever the outer project folder is called. The later observations exercise explicitly uses a separate disposable project; keep that practice separate from assessed work.</p>
 <section id="the-r-workspace-and-working-directory">
 <h3>The R workspace and working directory<a class="headerlink" href="#the-r-workspace-and-working-directory" title="Link to this heading">#</a></h3>
 <p>The workspace contains the objects you create during an R session. The <strong>working directory</strong> is the folder where R starts looking for a <a class="reference internal" href="../appendices/terms.html#id3"><span class="std std-ref">relative path</span></a>. For example, if the working directory is your project root, <code class="docutils literal notranslate"><span class="pre">data/trees.csv</span></code> means the file <code class="docutils literal notranslate"><span class="pre">trees.csv</span></code> inside that project’s <code class="docutils literal notranslate"><span class="pre">data</span></code> folder. Use <code class="docutils literal notranslate"><span class="pre">getwd()</span></code> to show the working directory and <code class="docutils literal notranslate"><span class="pre">dir()</span></code> to list what it contains.</p>
@@ -5221,7 +5225,12 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
 </section>
 <section id="critique-and-compare">
 <h3>Critique and compare<a class="headerlink" href="#critique-and-compare" title="Link to this heading">#</a></h3>
-<p>Compare your R result with the <a class="reference internal" href="python.html#python-observations-practice"><span class="std std-ref">Integrated practical: summarising observations</span></a>. Which decisions should stay the same whichever language you use, and which arise from the way R or Python works? Identify one tempting approach that would incorrectly turn missing values into zeros, one that would count the repeated row twice, and one error message that would help somebody repair an invalid input file.</p>
+<p>Compare your R result with the <a class="reference internal" href="python.html#python-observations-practice"><span class="std std-ref">Integrated practical: summarising observations</span></a>. Which decisions should stay the same whichever language you use, and which arise from the way R or Python works? Use the following examples to begin your critique:</p>
+<ul class="simple">
+<li><p><strong>Missing is not zero.</strong> Replacing every <code class="docutils literal notranslate"><span class="pre">NA</span></code> with <code class="docutils literal notranslate"><span class="pre">0</span></code> might seem to simplify the calculation, but it changes what the data mean. There is a subtler trap too: <code class="docutils literal notranslate"><span class="pre">sum(c(NA_integer_,</span> <span class="pre">NA_integer_),</span> <span class="pre">na.rm</span> <span class="pre">=</span> <span class="pre">TRUE)</span></code> returns <code class="docutils literal notranslate"><span class="pre">0</span></code>. Why is that misleading for site C, where neither count was observed? Explain when removing missing values is useful and what you must check before interpreting the sum. Which of your tests would catch an all-missing site being reported as zero?</p></li>
+<li><p><strong>A repeated row is not another observation.</strong> After count validation and conversion, site A’s counts in the ordinary file are <code class="docutils literal notranslate"><span class="pre">c(2L,</span> <span class="pre">NA_integer_,</span> <span class="pre">2L)</span></code>. Summing them with <code class="docutils literal notranslate"><span class="pre">na.rm</span> <span class="pre">=</span> <span class="pre">TRUE</span></code> before removing the exact duplicate gives <code class="docutils literal notranslate"><span class="pre">4</span></code>, rather than the expected <code class="docutils literal notranslate"><span class="pre">2</span></code>. Why would checking only the number of sites fail to detect this mistake? Identify a check that would detect it, and explain why removing duplicate count values alone is not the same as removing duplicate rows: two genuine observations can have the same count.</p></li>
+<li><p><strong>An error should help somebody locate the problem.</strong> Compare <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">input</span></code> with <code class="docutils literal notranslate"><span class="pre">bootcamp_observations_invalid.csv:</span> <span class="pre">CSV</span> <span class="pre">line</span> <span class="pre">2,</span> <span class="pre">column</span> <span class="pre">'count':</span> <span class="pre">found</span> <span class="pre">'-1';</span> <span class="pre">expected</span> <span class="pre">an</span> <span class="pre">empty</span> <span class="pre">field</span> <span class="pre">or</span> <span class="pre">a</span> <span class="pre">non-negative</span> <span class="pre">integer.</span></code> Here, CSV line 1 is the header. Which details would help you find the offending entry and understand the rule it breaks? Draft a similarly useful message for the <code class="docutils literal notranslate"><span class="pre">many</span></code> entry on CSV line 3. Report the problem rather than silently replacing the value or guessing a correction.</p></li>
+</ul>
 </section>
 </section>
 <section id="climate-data-practicals">
@@ -5400,12 +5409,12 @@ Error in doit(popn) : Couldn't calculate mean: too few unique values!
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="analysis-algorithms.html"
+       href="object-oriented-programming.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Algorithms and performance</p>
+        <p class="prev-next-title">Object-Oriented Programming</p>
       </div>
     </a>
     <a class="right-next"

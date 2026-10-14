@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Algorithms: solving problems with computation &#8212; MulQuaBio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cf591445" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/algorithms';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/@iframe-resizer/child@latest"></script>
+    <script src="../_static/sidebar-toggles.js?v=98d0e6e2"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction &amp; prerequisites" href="../part-basic-stats.html" />
+    <link rel="prev" title="Biological Computing in R" href="r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="MulQuaBio - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="MulQuaBio - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to The Multilingual Quantitative Biologist!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-computing.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unix.html">UNIX and Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell-scripting.html">Shell scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Version control with Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="latex.html">Scientific documents with <span class="math notranslate nohighlight">\(\LaTeX\)</span></a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python.html">Biological Computing in Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="object-oriented-programming.html">Object-Oriented Programming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="r.html">Biological Computing in R</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Algorithms: solving problems with computation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anova.html">Linear Models: Analysis of variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mul-expl.html">Linear Models: Multiple explanatory variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mul-expl-inter.html">Linear Models: Multiple variables with interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model-simp.html">Model simplification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced E&amp;E Modelling and Statistics Pre-work</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-prework.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqb-prework-exercises.html">EnE Modelling and Advanced Data Science Pre-work</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ecological &amp; Evolutionary Modelling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-eemodelling.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabolic-basis.html">The Metabolic Basis of Ecology and Evolutionary dynamics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="populations.html">Single Populations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="micrm-to-logistic.html">From consumer–resource dynamics to logistic growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="populations-practicals.html">Populations: Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">Species interactions</a></li>
+
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="competitive-dynamics.html">Competitive dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="competitive-dynamics-practicals.html">Competitive Dynamics: Practicals</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="predator-prey.html">Predator–prey dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="predator-prey-practicals.html">Predator–prey dynamics: Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="epidemiology.html">Epidemiological dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="epidemiology-practicals.html">Epidemiological dynamics: Practicals</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analyses and Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-advanced-stats.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glms.html">Generalised Linear Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="nlls.html">Model Fitting using Non-linear Least-squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlls-python.html">Nonlinear least squares (NLLS) in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbial-growth.html">Microbial Growth rates in R</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mle.html">Model Fitting using Maximum Likelihood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian.html">Bayesian inference for biological data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Assessments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-assignments.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix-assessment.html">MQB Coursework Assessment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rubrics/Computing_Bootcamp_Rubric.html">Computing Bootcamp Rubric</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix-mini-proj.html">The Computing Miniproject</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rubrics/Computing_MiniProject_Rubric.html">Computing MiniProject Rubric</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part-appendices.html">Introduction &amp; prerequisites</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendices/tooling.html">Tooling and Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/terms.html">Key computing terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/macos-tools.html">macOS Tools and Homebrew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/python-environments.html">Python Installation and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/r-setup.html">R Installation and User Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/vscode.html">VS Code for MQB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/git-ssh.html">Git, GitHub and SSH Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix-jupy-intro.html">Introduction to Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix-databases.html">Databases <span class="tocSkip"></span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/ubuntu-admin.html">Linux Setup and Ubuntu Administration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendices/data-python.html">Data Analysis in Python (Optional)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix-data-python.html">Data analyses  with Python &amp; Jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendices/maths.html">Maths and Quantitative Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix-maths.html">Mathematical models in Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix-mathsforbiologists/maths-for-biologists.html">Maths for Biologists</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendices/performance.html">Performance, Scaling, and Compute</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix-high-performance-computing.html">Introduction to High-Performance Computing (HPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/MulQuaBio/MQB" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/MulQuaBio/MQB/issues/new?title=Issue%20on%20page%20%2Fnotebooks/algorithms.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/algorithms.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Algorithms: solving problems with computation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-study-algorithms">Why study algorithms?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-solve-problems-that-could-not-otherwise-be-addressed">To solve problems that could not otherwise be addressed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-become-a-proficient-programmer">To become a proficient programmer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-intellectual-stimulation">For intellectual stimulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-understand-their-broad-impact">To understand their broad impact</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#they-may-unlock-the-secrets-of-lifeand-perhaps-the-universe">They may unlock the secrets of life—and perhaps the universe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-profit">For profit</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-algorithms-implementations-and-data-structures">Problems, algorithms, implementations and data structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-problem-more-than-one-solution">One problem, more than one solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-an-algorithm-suitable">What makes an algorithm suitable?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-measurements-to-scaling">From measurements to scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-can-change-what-science-is-feasible">Algorithms can change what science is feasible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-in-science-and-society">Algorithms in science and society</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-practical-workflow-for-comparing-algorithms">A practical workflow for comparing algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-and-further-material">Lecture and further material</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="algorithms-solving-problems-with-computation">
+<h1>Algorithms: solving problems with computation<a class="headerlink" href="#algorithms-solving-problems-with-computation" title="Link to this heading">#</a></h1>
+<p>Programming languages give us ways to express instructions. Algorithms are the
+ideas behind those instructions: precise procedures for solving specified
+problems. The distinction matters. Learning more syntax may help you write a
+longer program; learning to think algorithmically may help you discover that
+you did not need the longer program in the first place.</p>
+<p>Algorithms are not only about speed. They influence which scientific questions
+we can investigate, how clearly we reason about a problem, whether somebody
+else can check our work, and what becomes possible when the data grow. They
+also run search engines, route deliveries, recommend music and decide which
+advertisement follows you around the internet. Their impact is broad and
+far-reaching—sometimes wonderfully so, sometimes merely profitable, and often
+both.</p>
+<p>Several examples in this chapter—especially the route from 3-SUM measurements
+to cost models and orders of growth—draw on Sedgewick and Wayne’s <em>Algorithms</em>
+and its companion Section 1.4 material
+<span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id230" title="Robert Sedgewick and Kevin Wayne. Algorithms. Addison-Wesley Professional, 4 edition, 2011. ISBN 978-0-321-57351-3.">Sedgewick and Wayne, 2011</a>, <a class="reference internal" href="../references.html#id231" title="Robert Sedgewick and Kevin Wayne. 1.4 analysis of algorithms. Companion material for Algorithms, 4th edition, 2011. Includes the accompanying Princeton lecture slides; accessed 13 October 2026.">Sedgewick and Wayne, 2011</a>]</span>.</p>
+<div class="admonition-learning-goals admonition">
+<p class="admonition-title">Learning goals</p>
+<p>By the end of this chapter you should be able to:</p>
+<ul class="simple">
+<li><p>explain why algorithms matter beyond computational performance;</p></li>
+<li><p>distinguish a problem, an algorithm, a data structure and an implementation;</p></li>
+<li><p>state an algorithm’s inputs, outputs and assumptions;</p></li>
+<li><p>compare possible solutions using correctness, clarity, time and memory;</p></li>
+<li><p>explain how algorithmic choices can make new scientific questions feasible;</p></li>
+<li><p>interpret simple empirical and mathematical evidence about scaling; and</p></li>
+<li><p>justify an algorithmic choice without assuming that the fastest-looking code
+must be the best solution.</p></li>
+</ul>
+</div>
+<section id="why-study-algorithms">
+<h2>Why study algorithms?<a class="headerlink" href="#why-study-algorithms" title="Link to this heading">#</a></h2>
+<p>There are several good reasons—some noble, some practical and at least one that
+has made a few people extraordinarily rich.</p>
+<section id="to-solve-problems-that-could-not-otherwise-be-addressed">
+<h3>To solve problems that could not otherwise be addressed<a class="headerlink" href="#to-solve-problems-that-could-not-otherwise-be-addressed" title="Link to this heading">#</a></h3>
+<p>A better algorithm can turn an impossible calculation into an ordinary one.
+Genome assembly, searching biological databases, reconstructing evolutionary
+histories and running large ecological simulations all depend on organising the
+computation carefully, not merely on asking a faster computer to perform more
+of the same work.</p>
+<p>This does not mean that every biological problem has one magical fast
+algorithm. It means that how we formulate a computation can determine whether
+the scientific question is tractable at all.</p>
+</section>
+<section id="to-become-a-proficient-programmer">
+<h3>To become a proficient programmer<a class="headerlink" href="#to-become-a-proficient-programmer" title="Link to this heading">#</a></h3>
+<p>Syntax tells you how to express an instruction in Python, R or another
+language. Algorithms make you ask better questions before you write that
+instruction: What exactly is the problem? What information must be retained?
+Which operations are repeated? Can the same result be obtained more directly?</p>
+<p>A proficient programmer is not simply someone who can produce a great deal of
+code. Quite often, proficiency is visible in the code they realise they do not
+need to write.</p>
+</section>
+<section id="for-intellectual-stimulation">
+<h3>For intellectual stimulation<a class="headerlink" href="#for-intellectual-stimulation" title="Link to this heading">#</a></h3>
+<p>Designing an algorithm can be satisfying in much the same way as solving a
+puzzle or finding a concise mathematical argument. A complicated task is
+reduced to a set of precise steps, hidden assumptions are exposed, and an
+apparently unavoidable piece of work sometimes disappears altogether.</p>
+<p>Some people relax with crosswords. Others try to remove a factor of <span class="math notranslate nohighlight">\(n\)</span> from an
+algorithm. We shall not judge either group.</p>
+</section>
+<section id="to-understand-their-broad-impact">
+<h3>To understand their broad impact<a class="headerlink" href="#to-understand-their-broad-impact" title="Link to this heading">#</a></h3>
+<p>Algorithms shape transport, communication, medicine, finance, public services
+and much of everyday life online. They determine what information can be found,
+which patterns can be detected and which decisions can be automated. That
+influence makes them worth understanding even when we are not the people
+implementing them.</p>
+</section>
+<section id="they-may-unlock-the-secrets-of-lifeand-perhaps-the-universe">
+<h3>They may unlock the secrets of life—and perhaps the universe<a class="headerlink" href="#they-may-unlock-the-secrets-of-lifeand-perhaps-the-universe" title="Link to this heading">#</a></h3>
+<p>Modern biology relies on algorithms to compare sequences, assemble genomes,
+identify structures, infer relationships and analyse images. Other sciences use
+them to process signals from telescopes, particle detectors and simulations.
+Whether the universe will surrender all its secrets is uncertain, but it seems
+polite to give it a well-specified algorithm and a proper test!</p>
+</section>
+<section id="for-profit">
+<h3>For profit<a class="headerlink" href="#for-profit" title="Link to this heading">#</a></h3>
+<p>Efficient search, routing, recommendation, compression and trading algorithms
+have created considerable commercial value. Profit is therefore a genuine
+motivation for algorithm development. It is not, of course, evidence that an
+algorithm is scientifically valid, socially desirable or even especially “nice”!</p>
+</section>
+</section>
+<section id="problems-algorithms-implementations-and-data-structures">
+<h2>Problems, algorithms, implementations and data structures<a class="headerlink" href="#problems-algorithms-implementations-and-data-structures" title="Link to this heading">#</a></h2>
+<p>These terms describe different parts of the reasoning:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Problem</strong></p></td>
+<td><p>The question to be answered, including its inputs, required output and assumptions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Algorithm</strong></p></td>
+<td><p>A precise sequence of steps for solving that problem.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Data structure</strong></p></td>
+<td><p>A way of organising information so that useful operations can be performed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Implementation</strong></p></td>
+<td><p>An expression of the algorithm in a particular programming language and environment.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The same algorithm can be implemented in Python, R or another language. The
+same problem can also have several algorithms, and their choice of data
+structure may change how much work they require. Lists, vectors, dictionaries,
+sets and data frames are therefore not merely different boxes in which to place
+data: they support different operations and make different solutions natural.</p>
+</section>
+<section id="one-problem-more-than-one-solution">
+<h2>One problem, more than one solution<a class="headerlink" href="#one-problem-more-than-one-solution" title="Link to this heading">#</a></h2>
+<p>Suppose we have a collection of numbers and want to know how many pairs sum to
+zero. To make the problem precise, let us count pairs of positions <span class="math notranslate nohighlight">\((i,j)\)</span> for
+which <span class="math notranslate nohighlight">\(i &lt; j\)</span> and <span class="math notranslate nohighlight">\(x_i + x_j = 0\)</span>. Stating that index rule matters when values
+are repeated.</p>
+<p>One algorithm compares every possible pair:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>count = 0
+for each position i:
+    for each later position j:
+        if x[i] + x[j] equals zero:
+            increase count
+return count
+</pre></div>
+</div>
+<p>This is transparent and easy to check. It also performs
+<span class="math notranslate nohighlight">\(n(n-1)/2\)</span> pair comparisons for <span class="math notranslate nohighlight">\(n\)</span> values, so the amount of work grows roughly
+as <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
+<p>Another algorithm remembers values it has already encountered:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>start an empty collection of previously seen values
+for each value x:
+    look for -x among the previously seen values
+    update the count if it is present
+    remember x
+return count
+</pre></div>
+</div>
+<p>If the remembered values are stored in a structure with fast membership tests,
+this can require much less time on average. It also uses additional memory, and
+care is needed if repeated values should produce several index pairs. The
+lesson is not that sets are always better than loops. It is that a choice of
+data structure can make a different algorithm possible.</p>
+</section>
+<section id="what-makes-an-algorithm-suitable">
+<h2>What makes an algorithm suitable?<a class="headerlink" href="#what-makes-an-algorithm-suitable" title="Link to this heading">#</a></h2>
+<p>Speed matters, but it is not the first or only question.</p>
+<ol class="arabic simple">
+<li><p><strong>Correctness:</strong> does the algorithm solve the problem actually stated?</p></li>
+<li><p><strong>Assumptions:</strong> for which inputs should it work, and what happens outside
+that domain?</p></li>
+<li><p><strong>Clarity:</strong> can another person understand, test and maintain it?</p></li>
+<li><p><strong>Time:</strong> how does the amount of work change as the input grows?</p></li>
+<li><p><strong>Memory:</strong> what must be stored while the algorithm runs?</p></li>
+<li><p><strong>Practical context:</strong> are the expected data large enough for the more
+elaborate solution to be worthwhile?</p></li>
+</ol>
+<div class="note admonition">
+<p class="admonition-title">Optimise the right thing</p>
+<p>Donald Knuth famously warned that “premature optimization is the root of all
+evil” in <a class="reference external" href="https://doi.org/10.1145/356635.356640"><em>Structured Programming with go to
+Statements</em></a>. This does not mean that
+efficiency is unimportant. It means that small, speculative improvements
+should not distract us before we have a correct solution and evidence about
+where the real cost lies.</p>
+<p>First make the problem precise and test the result. Then measure. If
+performance matters, improve the algorithm—or the part of its implementation
+that the evidence identifies—not whichever loop happens to look untidy.</p>
+</div>
+<p>A fast wrong answer is still wrong—just sooner. Begin with independently
+expected results for small examples, and use the same checks for every
+implementation being compared.</p>
+</section>
+<section id="from-measurements-to-scaling">
+<h2>From measurements to scaling<a class="headerlink" href="#from-measurements-to-scaling" title="Link to this heading">#</a></h2>
+<p>Timing one run can tell us what happened once on one computer. It cannot, by
+itself, tell us how the algorithm will behave as the problem grows. A useful
+comparison therefore combines several kinds of evidence:</p>
+<ol class="arabic simple">
+<li><p>run equivalent implementations on the same inputs;</p></li>
+<li><p>check that they return the same independently expected results;</p></li>
+<li><p>repeat timings rather than relying on a single run;</p></li>
+<li><p>measure several input sizes;</p></li>
+<li><p>identify the important operation and predict how often it is repeated; and</p></li>
+<li><p>compare that prediction with the measurements.</p></li>
+</ol>
+<p>An <strong>order of growth</strong> describes how the dominant amount of work changes with
+input size. If doubling <span class="math notranslate nohighlight">\(n\)</span> roughly quadruples the work, quadratic growth is a
+plausible explanation; if it roughly doubles, linear growth may be more
+plausible. Real timings also contain interpreter, memory, operating-system and
+hardware effects, so measurements and mathematical analysis inform one another
+rather than serving as interchangeable proofs.</p>
+</section>
+<section id="algorithms-can-change-what-science-is-feasible">
+<h2>Algorithms can change what science is feasible<a class="headerlink" href="#algorithms-can-change-what-science-is-feasible" title="Link to this heading">#</a></h2>
+<p>Scientific computing is full of repeated work. Sometimes that work is
+unavoidable; sometimes it reflects how the problem was first formulated.</p>
+<ul class="simple">
+<li><p>Genome assembly methods use structured representations of sequence overlap
+rather than examining every possible reconstruction.</p></li>
+<li><p>Search and indexing structures allow large biological databases to be
+queried without inspecting every record in the same way for every question.</p></li>
+<li><p>Ecological simulations can sometimes reuse quantities that have not changed
+rather than recomputing the entire system at every step.</p></li>
+<li><p>Image-analysis algorithms can focus computation on informative structures
+rather than treating every possible pattern equally.</p></li>
+</ul>
+<p>These are broad examples, not universal complexity claims about whole fields.
+The underlying point is that an algorithm can change the scientific boundary:
+questions that were once too expensive to ask may become routine.</p>
+</section>
+<section id="algorithms-in-science-and-society">
+<h2>Algorithms in science and society<a class="headerlink" href="#algorithms-in-science-and-society" title="Link to this heading">#</a></h2>
+<p>The same reach creates responsibilities. An algorithm carries assumptions
+about what should be optimised, which data count and what errors matter. A
+commercially successful recommendation system and a scientifically defensible
+analysis are judged by rather different criteria, even if both are technically
+impressive.</p>
+<p>When an algorithm contributes to a scientific or social decision, ask:</p>
+<ul class="simple">
+<li><p>What objective has been encoded?</p></li>
+<li><p>Which observations are absent or poorly represented?</p></li>
+<li><p>How would we detect a plausible but wrong result?</p></li>
+<li><p>Who benefits when the algorithm succeeds, and who bears the cost when it
+fails?</p></li>
+</ul>
+<p>Algorithmic reasoning is therefore not merely a route to faster code. It is a
+way to make computational choices explicit enough to examine.</p>
+</section>
+<section id="a-practical-workflow-for-comparing-algorithms">
+<h2>A practical workflow for comparing algorithms<a class="headerlink" href="#a-practical-workflow-for-comparing-algorithms" title="Link to this heading">#</a></h2>
+<p>Use this order when comparing possible solutions:</p>
+<ol class="arabic simple">
+<li><p>State the problem, inputs, outputs and assumptions.</p></li>
+<li><p>Work out expected results for small examples.</p></li>
+<li><p>Describe each algorithm before concentrating on syntax.</p></li>
+<li><p>Implement and test both against the same expectations.</p></li>
+<li><p>Measure equivalent work over several input sizes.</p></li>
+<li><p>Predict how the important operation count grows.</p></li>
+<li><p>Compare the prediction with the measurements.</p></li>
+<li><p>Consider memory, clarity and realistic input sizes before choosing.</p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">Try it: compare two pair-search algorithms</p>
+<p>Implement the two pair-search algorithms above in a language of your choice.
+Begin with a small input for which you can count the qualifying index pairs by
+hand. Then use several larger inputs to investigate how their running times
+change. Explain the role of the data structure in the second algorithm and give
+one situation in which you would still choose the simpler first version.</p>
+</div>
+</section>
+<section id="lecture-and-further-material">
+<h2>Lecture and further material<a class="headerlink" href="#lecture-and-further-material" title="Link to this heading">#</a></h2>
+<p>The <a class="reference download internal" download="" href="../_downloads/ad40c39820735e1176787b2e00adf804/algorithms.html"><span class="xref download myst">Analysis of algorithms slides</span></a>
+develop these ideas through 3-SUM, empirical measurement, simple cost models,
+orders of growth and a worked 2-SUM comparison. The slides are a draft
+adaptation of Stanislav (Stanley) Modrak’s original lecture, itself adapted from
+Sedgewick and Wayne. Content, visual provenance and permissions remain under
+review.</p>
+<p>For implementation-specific profiling and vectorisation, return to the
+<a class="reference internal" href="python.html#the-need-for-speed-profiling-code"><span class="std std-ref">Python chapter</span></a> or the
+<a class="reference internal" href="r.html#vectorization"><span class="std std-ref">R vectorisation section</span></a>. For memory, numerical scaling,
+parallel computing and larger computing resources, continue to
+<a class="reference internal" href="../appendices/performance.html"><span class="std std-doc">Performance, Scaling, and Compute</span></a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="r.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Biological Computing in R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../part-basic-stats.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction &amp; prerequisites</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-study-algorithms">Why study algorithms?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-solve-problems-that-could-not-otherwise-be-addressed">To solve problems that could not otherwise be addressed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-become-a-proficient-programmer">To become a proficient programmer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-intellectual-stimulation">For intellectual stimulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-understand-their-broad-impact">To understand their broad impact</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#they-may-unlock-the-secrets-of-lifeand-perhaps-the-universe">They may unlock the secrets of life—and perhaps the universe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-profit">For profit</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-algorithms-implementations-and-data-structures">Problems, algorithms, implementations and data structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-problem-more-than-one-solution">One problem, more than one solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-an-algorithm-suitable">What makes an algorithm suitable?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-measurements-to-scaling">From measurements to scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-can-change-what-science-is-feasible">Algorithms can change what science is feasible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-in-science-and-society">Algorithms in science and society</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-practical-workflow-for-comparing-algorithms">A practical workflow for comparing algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-and-further-material">Lecture and further material</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MulQuaBio collective!
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

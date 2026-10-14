@@ -233,7 +233,6 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/object-oriented-programming.html">Object-Oriented Programming</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/analysis-algorithms.html">Algorithms and performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/r.html">Biological Computing in R</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Data Analyses and Statistics</span></p>
@@ -536,10 +535,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organising-your-learning-project">Organising your learning project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#you-will-learn">You will learn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-pre-work">Recommended pre-work</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-this-first">Do this first</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-route">Choosing a route</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-implement-test-explain-and-rerun">Plan, implement, test, explain and rerun</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-goes-next">Where this goes next</a></li>
 </ul>
@@ -556,7 +556,30 @@
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-prerequisites">
 <h1>Introduction &amp; prerequisites<a class="headerlink" href="#introduction-prerequisites" title="Link to this heading">#</a></h1>
 <p>This part gets you comfortable with the command line, version control, and the core tools used throughout MQB.</p>
-<p>Unless an exercise explicitly says otherwise, start commands at the coursework project root: the directory containing <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code>. From there, run a script as <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">code/script.py</span></code>, <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/script.R</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/script.sh</span></code>. Paths such as <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code> are relative to that root. Exercises about directory navigation, notebooks and HPC jobs may name a different starting directory; follow the stated exception rather than guessing.</p>
+<p>You can follow the computing chapters as a multilingual bootcamp or study just the parts you need. In either case, use the same approach to organising your work: a project with clearly separated code, inputs and outputs.</p>
+<section id="organising-your-learning-project">
+<h2>Organising your learning project<a class="headerlink" href="#organising-your-learning-project" title="Link to this heading">#</a></h2>
+<p>Should you make a new folder when you move from Shell to Python or R? Not just because you are changing language. These tools can contribute to the same analysis, so their scripts can live together in one project.</p>
+<ul class="simple">
+<li><p><strong>Following a multilingual computing bootcamp:</strong> create a <code class="docutils literal notranslate"><span class="pre">MQB_Bootcamp</span></code> project and repository across the computing chapters. Do not create a separate R or Python coursework project, or rename an existing project, simply because a chapter uses another example name.</p></li>
+<li><p><strong>Studying independently:</strong> create one learning project, or reuse an appropriate existing one. Choose a meaningful name; <code class="docutils literal notranslate"><span class="pre">mqb_practice</span></code> is one example. You can use it for Shell, R, Python or any combination of chapters. You do not need to complete the other languages or the Git chapter before starting; follow the prerequisites of the chapter you choose.</p></li>
+<li><p><strong>Disposable exercises:</strong> where an exercise explicitly asks for a temporary practice project, keep it separate from work you need to retain. This lets you experiment safely; it does not replace your permanent project.</p></li>
+<li><p><strong>Assessed work:</strong> the released brief controls repository names, layout and submission requirements. General examples in the book do not change those rules.</p></li>
+</ul>
+<p>The outer folder’s name can vary. What the examples normally depend on is this layout inside it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>your-project/
+├── README.md
+├── code/
+├── data/
+├── results/
+└── sandbox/       # optional, for disposable experiments
+</pre></div>
+</div>
+<p>Store scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, supplied inputs in <code class="docutils literal notranslate"><span class="pre">data/</span></code> and generated outputs in <code class="docutils literal notranslate"><span class="pre">results/</span></code>. For multilingual work, <code class="docutils literal notranslate"><span class="pre">.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.R</span></code> files can share <code class="docutils literal notranslate"><span class="pre">code/</span></code>. Keep inputs unchanged, and describe the purpose of the project and how to run it in <code class="docutils literal notranslate"><span class="pre">README.md</span></code>. If you use Git, keep a root <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> for generated files and other files that should not be tracked.</p>
+<p>Use the directory names exactly as shown: <code class="docutils literal notranslate"><span class="pre">code</span></code>, not <code class="docutils literal notranslate"><span class="pre">Code</span></code>. Many file systems distinguish these spellings. Simple project names without spaces make command-line examples easier to follow; existing names with spaces do not require renaming, but their paths need quoting.</p>
+<p>Unless an exercise explicitly says otherwise, start commands at the <strong>project root</strong>: the directory containing <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">code/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">results/</span></code>. From there, run a script as <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">code/script.py</span></code>, <code class="docutils literal notranslate"><span class="pre">Rscript</span> <span class="pre">code/script.R</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">code/script.sh</span></code>. Paths such as <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">results/output.csv</span></code> are relative to that root, not to a particular project name. Navigation exercises, notebooks and HPC jobs may name a different starting directory; follow the stated exception rather than guessing. Keep your learning project separate from the downloaded MQB book repository.</p>
+<p>If you already have a project with this layout, reuse it. For a new project, the <a class="reference internal" href="notebooks/unix.html#building-your-coursework-directory-structure"><span class="std std-ref">Unix directory exercise</span></a> demonstrates Shell commands and <a class="reference internal" href="notebooks/r.html#your-analysis-workflow"><span class="std std-ref">Your analysis workflow in R</span></a> shows the R equivalent. Neither requires you to create another project when switching language.</p>
+</section>
 <section id="you-will-learn">
 <h2>You will learn<a class="headerlink" href="#you-will-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -582,13 +605,15 @@
 <li><p>If you have never used version control: read the intro of <a class="reference internal" href="notebooks/git.html"><span class="doc std std-doc">Git</span></a>.</p></li>
 </ul>
 </section>
-<section id="do-this-first">
-<h2>Do this first<a class="headerlink" href="#do-this-first" title="Link to this heading">#</a></h2>
+<section id="choosing-a-route">
+<h2>Choosing a route<a class="headerlink" href="#choosing-a-route" title="Link to this heading">#</a></h2>
+<p>For the full computing route:</p>
 <ol class="arabic simple">
-<li><p>Start with <a class="reference internal" href="notebooks/unix.html"><span class="doc std std-doc">Unix</span></a></p></li>
-<li><p>Then <a class="reference internal" href="notebooks/git.html"><span class="doc std std-doc">Git</span></a></p></li>
-<li><p>Then pick your primary language: <a class="reference internal" href="notebooks/python.html"><span class="doc std std-doc">Python</span></a> and/or <a class="reference internal" href="notebooks/r.html"><span class="doc std std-doc">R</span></a></p></li>
+<li><p>Start with <a class="reference internal" href="notebooks/unix.html"><span class="doc std std-doc">Unix</span></a>.</p></li>
+<li><p>Learn to retain and inspect your history with <a class="reference internal" href="notebooks/git.html"><span class="doc std std-doc">Git</span></a>.</p></li>
+<li><p>Continue into <a class="reference internal" href="notebooks/shell-scripting.html"><span class="doc std std-doc">Shell scripting</span></a>, <a class="reference internal" href="notebooks/python.html"><span class="doc std std-doc">Python</span></a> and <a class="reference internal" href="notebooks/r.html"><span class="doc std std-doc">R</span></a>, following your course’s teaching sequence.</p></li>
 </ol>
+<p>For standalone study, go directly to the chapter you need and check its prerequisites. Return to Unix for unfamiliar file operations and to Git when you want version control; you do not need a separate project for each topic.</p>
 </section>
 <section id="plan-implement-test-explain-and-rerun">
 <h2>Plan, implement, test, explain and rerun<a class="headerlink" href="#plan-implement-test-explain-and-rerun" title="Link to this heading">#</a></h2>
@@ -607,7 +632,7 @@
 <ul class="simple">
 <li><p>run commands in a terminal,</p></li>
 <li><p>manage files with relative paths,</p></li>
-<li><p>and pull/update the course repo with <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
+<li><p>and, where an exercise uses version control, pull/update a repository with <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
 </ul>
 </section>
 </section>
@@ -678,10 +703,11 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organising-your-learning-project">Organising your learning project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#you-will-learn">You will learn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-pre-work">Recommended pre-work</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-this-first">Do this first</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-route">Choosing a route</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-implement-test-explain-and-rerun">Plan, implement, test, explain and rerun</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-goes-next">Where this goes next</a></li>
 </ul>
