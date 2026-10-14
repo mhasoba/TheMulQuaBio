@@ -1,4 +1,4 @@
-\documentclass[xcolor=x11names,compress]{article}
+\documentclass[tikz,border=5pt]{standalone}
 
 % \usepackage{svg}
 \usepackage{tikz}
@@ -7,14 +7,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\begin{center}
     \begin{tikzpicture}[bx/.style={draw=green!30!black, rectangle, very thick, rounded corners, 
                                    minimum height=20pt, minimum width=4cm, text depth=0pt},
                         zn/.style={rectangle, rounded corners, fill=black!10, minimum width=5 cm, minimum height=5cm},
                         lb/.style={right=0pt, yshift=7pt, font=\small, green!30!black},
                         every path/.style={-stealth, very thick, green!30!black}]
     
-        \node (r)       {\includegraphics[width=2cm]{rlogo.pdf}};                    
+        \node (r)       {\includegraphics[width=2cm]{Rlogo.pdf}};
         \node (inputs)  [zn, left= of r] {};
         \node (outputs) [zn, right= of r] {};
         \node (lab)     [lb, at=(inputs.north west), black] {Input files};
@@ -23,8 +22,8 @@
         \node (rin)     [bx, above=1cm of inputs.center, anchor=center] {MyScript.R};
         \node (data)    [bx, below=1cm of inputs.center, anchor=center] {MyData.csv};
         
-        \node (lab)     [lb, at=(rin.north west)] {R script file (from {\tt Code})};
-        \node (lab)     [lb, at=(data.north west)] {Text data file (from {\tt Data})} ;
+        \node (lab)     [lb, at=(rin.north west)] {R script file (from {\tt code/})};
+        \node (lab)     [lb, at=(data.north west)] {Text data file (from {\tt data/})} ;
     
         \node (results) [bx, at=(outputs.center)]{MyTextresults.txt};
         \node (image)   [bx, above=1.5cm of outputs.center, anchor=center]{MyGraphicresults.pdf};
@@ -42,6 +41,5 @@
         \draw (r) -- (results.west);
     
     \end{tikzpicture}
-    \end{center}
     
     \end{document}

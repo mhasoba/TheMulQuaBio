@@ -27,7 +27,9 @@ An **absolute path** gives the complete location, starting at the top of the fil
 (project-root)=
 ### Project root
 
-A **project root** is the main folder for one piece of coursework or project. In MQB coursework it contains `README.md`, `code`, `data` and `results`. Unless an exercise names another starting directory, return to this root before running a script. A path such as `data/observations.csv` is then relative to the root, so the whole project can move without embedding one person's absolute path. Exercises about navigation, notebooks and HPC jobs may state a different starting directory explicitly.
+A **project root** is the main folder for one project, whether coursework or independent study. In MQB examples it normally contains `README.md`, `code`, `data` and `results`. The outer folder's name is not part of the example's internal paths: bootcamp students can keep using `MQB_Bootcamp`, while independent learners choose their own name. Shell, Python and R scripts can share the same project. See [Organising your learning project](../part-computing.md#organising-your-learning-project).
+
+Unless an exercise names another starting directory, return to this root before running a script. A path such as `data/observations.csv` is then relative to the root, so the whole project can move without embedding one person's absolute path. Exercises about navigation, notebooks and HPC jobs may state a different starting directory explicitly.
 
 (path)=
 ### PATH
