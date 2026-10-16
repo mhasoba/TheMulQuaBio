@@ -14,17 +14,24 @@ Ubuntu is a Linux distribution: an operating system built from Linux and a set o
 | :--- | :--- |
 | Linux already installed | Use its terminal. Follow your distribution's documentation for software installation. |
 | macOS | Use Terminal for the Unix lessons; see {ref}`macos-tools` for optional additional tools. A Linux installation is not required. |
-| Windows | On a supported Windows system, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) provides a Linux environment without repartitioning. Use WSL 2 where supported and permitted by your institution. |
+| Windows computer | Use {ref}`ubuntu-wsl`, then follow the Linux instructions. |
 | ChromeOS | On supported devices, enable the [Linux development environment](https://support.google.com/chromebook/answer/9145439). It normally provides Debian, not Ubuntu. Managed devices may restrict this feature. |
 | A managed or unsuitable personal machine | Use an institution-provided Linux machine or approved remote environment. Ask your instructor for the supported access route. |
 | A need for an isolated Linux system | A virtual machine runs a guest OS within your host OS. Choose a maintained virtualisation tool and an image compatible with your CPU architecture; check current licensing and institutional policy. |
 
-Git Bash on Windows is useful for Git and some shell commands, but it is not an Ubuntu system and does not supply Ubuntu's APT environment. PowerShell is a different shell with different syntax. macOS utilities also differ from GNU/Linux utilities in some options and output.
+macOS utilities differ from GNU/Linux utilities in some options and output. Use the instructions for the system you are actually running.
+
+(ubuntu-wsl)=
+### Ubuntu through WSL
+
+On a Windows computer, [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) lets you run Ubuntu without repartitioning your disk. Follow Microsoft's current installation instructions, using WSL 2 where supported and permitted by your institution. Open the installed **Ubuntu** application, keep your project under its Linux home directory, and run the book's Linux commands there. Install Python, R and Git inside Ubuntu; do not mix them with native Windows installations.
+
+For VS Code, follow the official [WSL setup guide](https://code.visualstudio.com/docs/remote/wsl), which connects the editor to Ubuntu. Open the project in a WSL-connected window and check the connection indicator before selecting interpreters or installing language extensions. The commands then run inside Ubuntu. If WSL is unavailable on a managed machine, ask teaching staff for an approved Linux environment.
 
 (linux-terminal)=
 ## Open a terminal and identify the shell
 
-The **terminal** is the window; the **shell** interprets commands inside it. Ubuntu desktops commonly launch a terminal with `Ctrl + Alt + T`, or by searching for Terminal in the application menu. In Windows Terminal, choose your installed WSL distribution's profile, not a PowerShell tab. On ChromeOS, open Terminal after enabling Linux. In VS Code, use Terminal > New Terminal and check the selected profile and whether you are working locally or remotely.
+The **terminal** is the window; the **shell** interprets commands inside it. On an Ubuntu desktop, press `Ctrl + Alt + T` or search for Terminal in the application menu. On ChromeOS, open Terminal after enabling Linux. In VS Code, choose **Terminal → New Terminal**; if you use a remote Linux environment, check that the window is connected to it.
 
 On macOS, use Spotlight (`Cmd + Space`) to find Terminal. Recent macOS installations normally start zsh, whereas these chapters use Bash. Enter `bash` to start a Bash session, then run:
 
@@ -66,7 +73,7 @@ Try `Tab` and ordinary history recall first, in an interactive terminal rather t
 (bash-history-prefix)=
 ### Optional history-prefix search in Bash
 
-The FoNS guide calls this "auto-complete", but its example changes history search. Here we use **your own** Readline configuration, not `sudo` or an edit to `/etc/inputrc`.
+Want Up and Down to find earlier commands that begin with what you have typed? Configure history-prefix search in **your own** Readline file. This does not change Tab completion, and needs neither `sudo` nor an edit to the system's `/etc/inputrc`.
 
 1. Check `printf '%s\n' "${INPUTRC:-$HOME/.inputrc}"` in Bash. If `INPUTRC` is explicitly set, it overrides the usual path; understand that configuration before continuing with the default-path example below.
 2. If `~/.inputrc` exists, make a backup under an unused name and open it in your text editor. Keep its current settings. If you create it for the first time on Ubuntu, put `$include /etc/inputrc` at the top to retain system defaults. On another platform, include that file only if it exists. This is Readline syntax, not a shell command.
@@ -216,9 +223,7 @@ A `.deb` can run privileged installation scripts. Some providers offer to add th
 Do not remove your desktop's video player or other preinstalled software merely to practise. For a hands-on exercise, use a disposable VM: install one small optional package, inspect its files with `dpkg -L PACKAGE`, and remove that same package after checking the proposed changes. Stop if the plan removes essential or unrelated software. A VM snapshot can help undo the experiment; it is not a backup of your working data.
 
 (ubuntu-admin-resources)=
-## Sources and verification
-
-Adapted from the FoNS [Linux environment guide](https://imperial-fons-computing.github.io/linux.html) (environment choices, installation and shell conveniences) and [terminal guide](https://imperial-fons-computing.github.io/terminal.html), alongside MQB's relocated Ubuntu administration material. See {ref}`setup-attribution` for the source revision and full licence. MQB revision: 30 September 2026.
+## Further reading
 
 - [Ubuntu Desktop installation](https://ubuntu.com/desktop/docs/en/latest/tutorial/install-ubuntu-desktop/): current installation and hardware guidance.
 - [Ubuntu package management](https://ubuntu.com/server/docs/how-to/software/package-management/): APT, dpkg and repository configuration.
@@ -226,4 +231,4 @@ Adapted from the FoNS [Linux environment guide](https://imperial-fons-computing.
 - [Bash reference manual](https://www.gnu.org/software/bash/manual/bash.html) and local `man bash`: startup files, Readline and history.
 - [zsh line editor](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html): zsh keybindings and history widgets.
 
-The user-local Bash examples were checked on Linux in a temporary home directory. Installation, partitioning, repositories and package changes were reviewed against documentation, not performed on the reviewer's machine. zsh, macOS, Windows/WSL and ChromeOS setup were not runtime-tested. Return to the [Unix lesson](../notebooks/unix.ipynb) or [Shell Scripting](../notebooks/shell-scripting.ipynb) after any setup you need.
+See {ref}`setup-attribution` for the adapted material's attribution, licence and limits of the setup checks. Return to the [Unix lesson](../notebooks/unix.ipynb) or [Shell Scripting](../notebooks/shell-scripting.ipynb) after any setup you need.

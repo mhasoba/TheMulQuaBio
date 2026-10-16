@@ -1,9 +1,9 @@
 (python-environments)=
 # Python Installation and Environments
 
-A Python [interpreter](terms.md#python-environment-and-interpreter) is the program that runs Python code. Use a separate Python environment for your coursework or project so its packages are kept with that project. The default route here is a supported Python 3 interpreter, the standard-library `venv` tool and interpreter-bound `pip`. Anaconda is not required; {ref}`python-conda` describes an alternative when your course or project already uses conda.
+A Python [interpreter](terms.md#python-environment-and-interpreter) is the program that runs Python code. Different projects can need different package versions, so give each project its own environment. Here we use Python's built-in `venv` tool to create one, then install packages with `python -m pip` so they go to that environment's Python. Anaconda is not required; {ref}`python-conda` describes an alternative when your course or project already uses conda.
 
-These are **student runtime** instructions. The MQB repository's own `.venv` and `requirements.txt` support building the book; do not replace or upgrade them to follow this page. Work in your own coursework directory, keeping scripts, notebooks, data and results outside the environment directory.
+Work in your own learning project, not the downloaded MQB book repository. That repository's `.venv` and `requirements.txt` are for building the book; leave them alone. Keep your scripts, notebooks, data and results outside your project's environment directory.
 
 (python-interpreter)=
 ## Choose and check an interpreter
@@ -14,8 +14,6 @@ Use the Python version specified by your course or project when one is given. Ot
 | :--- | :--- |
 | Ubuntu/Linux | Check `python3 --version` first. Use your distribution's supported Python and `venv` package, or an institution-provided interpreter. Do not replace `/usr/bin/python3`. |
 | macOS | Do not assume Python is preinstalled or suitable for coursework. Use the official [python.org installer](https://www.python.org/downloads/macos/) or the Python formula from {ref}`macos-tools`; inspect existing installations before adding another. |
-| Native Windows | Follow Python's current [Windows installation guide](https://docs.python.org/3/using/windows.html). It now documents the Python install manager from python.org or the Microsoft Store. Distinguish that manager from the older `py` launcher; use `py --version` to check your selected interpreter. |
-| Windows/WSL or ChromeOS Linux | Choose the Linux environment first via {ref}`ubuntu-environment`, then use its Linux interpreter and paths. A Windows Python environment is not interchangeable with one inside WSL. ChromeOS's Linux container is usually Debian, not Ubuntu. |
 | Managed machine | Use the institution's supplied interpreter or ask IT for the required packages. Administrator access is not needed just to create an environment in a writable directory. |
 
 On Ubuntu, if Python or `venv` is missing, an authorised administrator can install the distribution packages below after reviewing {ref}`ubuntu-packages`. These are Ubuntu system-package commands, not `pip` commands:
@@ -27,7 +25,7 @@ sudo apt install python3 python3-venv
 
 Other distributions and separately installed Python versions may need differently named packages. Read any `ensurepip`/`venv` error rather than trying unrelated system changes.
 
-In a Linux/macOS terminal, inspect the interpreter you intend to use:
+In your terminal, check which Python will run:
 
 ```bash
 command -v python3
@@ -35,39 +33,30 @@ python3 --version
 python3 -c "import sys; print(sys.executable)"
 ```
 
-On native Windows, use `py --version` and `py -c "import sys; print(sys.executable)"`. With the new install manager, `py list` lists runtimes; the older launcher supports `py --list`. Follow the corresponding guide if commands resolve unexpectedly. You can always create an environment using the full path of a verified Python executable.
+The first and third commands should identify the Python installation you intend to use. If several versions are installed, you can use the full path of the chosen Python executable when creating the environment.
 
 (python-venv)=
 ## Create and activate one environment
 
 In your terminal, change to your **own coursework/project root**: the main folder for that piece of work, not its `code` subdirectory. Start outside another active environment (`deactivate` for `venv`, or `conda deactivate` for conda). The examples use `.venv` in this current directory. If it already exists, inspect and reuse it; do not recreate an unknown environment over the top of it.
 
-For **Bash or zsh on Linux/macOS/WSL**, create it once:
+In **Bash or zsh**, create it once:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-For **native Windows PowerShell**, create it once:
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-For Windows Command Prompt, activation is `.venv\Scripts\activate.bat`. Git Bash with Windows Python uses `source .venv/Scripts/activate`; it is not the same as WSL's Linux environment.
-
 Activation changes command lookup in the current terminal so that this project’s Python is used first. In each new terminal, return to the same project root and run **only the activation command**, not environment creation. For other shells, consult the [venv activation table](https://docs.python.org/3/library/venv.html#how-venvs-work).
 
-If PowerShell blocks activation, do not change machine-wide or persistent execution policy just for this lesson. Activation is optional: run the environment's Python directly instead:
+Activation is optional. From the project root, you can run the environment's Python directly:
 
-```powershell
-.\.venv\Scripts\python.exe -m pip --version
-.\.venv\Scripts\python.exe -c "import sys; print(sys.executable)"
+```bash
+.venv/bin/python -m pip --version
+.venv/bin/python -c "import sys; print(sys.executable)"
 ```
 
-Use that executable in place of `python` in subsequent commands when working without activation. On Linux/macOS the equivalent is `.venv/bin/python` from the project root. With a quoted PowerShell executable path, use the call operator `&`.
+Use `.venv/bin/python` in place of `python` in subsequent commands when working without activation.
 
 (python-identity)=
 ## Verify Python and pip agree
@@ -80,7 +69,7 @@ python -c "import sys; print(sys.executable); print(sys.prefix); print(sys.base_
 python -m pip --version
 ```
 
-For a `venv`, `sys.executable` and `sys.prefix` should point into your project’s `.venv`; these show the Python program and environment currently in use. `sys.base_prefix` identifies the underlying Python installation and should differ. The path printed by `python -m pip --version` should also be inside that environment. A changed terminal prompt alone is not proof. A notebook or editor may select a different interpreter independently; check `sys.executable` there too.
+For a `venv`, `sys.executable` and `sys.prefix` should point into your project’s `.venv`; these show the Python program and environment currently in use. `sys.base_prefix` identifies the underlying Python installation and should differ from `sys.prefix`. The path printed by `python -m pip --version` should also be inside that environment. A changed terminal prompt alone is not proof. A notebook or editor may select a different interpreter independently; check `sys.executable` there too.
 
 `python -m pip` asks the Python you just inspected to run `pip`, avoiding ambiguity between separate `pip`, `pip3` and Python installations. An *externally managed environment* error normally means you are trying to modify a distributor-managed Python rather than your project environment. Check the paths and activate or recreate the intended environment; do not work around it with `sudo pip`, `--break-system-packages` or a blanket `--user` installation.
 
@@ -91,7 +80,7 @@ A virtual environment separates Python packages, not permissions. Code run insid
 (python-packages)=
 ## Install the packages you need
 
-With identity checks passing, a small starting set for the Python lessons is:
+Once these commands all identify the intended environment, install the small starting set for the Python lessons:
 
 ```bash
 python -m pip install numpy matplotlib ipython
@@ -131,7 +120,7 @@ python --version
 
 Review the file before sharing: it can contain local paths or private package URLs. Record the Python version, operating system, relevant external tools and direct dependencies alongside it. `pip freeze` is a snapshot, not a cross-platform lockfile or a guarantee that an analysis is reproducible.
 
-Try recreation alongside the original, using the **same chosen base interpreter** and a new name such as `.venv-recreated`. On Linux/macOS, after recording dependencies:
+Try recreating the environment alongside the original, using the **same chosen base interpreter** and a new name such as `.venv-recreated`. After recording dependencies:
 
 ```bash
 deactivate
@@ -141,7 +130,7 @@ python -m pip install -r requirements-coursework.txt
 python -m pip check
 ```
 
-If `python3` now names a different base interpreter, use the verified original interpreter's path instead. Native Windows uses `py -m venv .venv-recreated` and the matching Windows activation command above. Repeat the identity/import checks and run a small trusted script or notebook before retiring the old environment. Keep the dependency record in your project; it is not the MQB book-build requirements file.
+If `python3` now names a different base interpreter, use the original interpreter's path instead. Repeat the Python, pip and import checks above, then run a small trusted script or notebook before retiring the old environment. Keep the dependency record in your project; it is not the MQB book-build requirements file.
 
 When finished, `deactivate` leaves the current `venv` without deleting it or stopping running notebooks. To remove an obsolete environment, first stop its kernels/servers, confirm the exact directory contains only the disposable environment, then remove that directory using your file manager. Do not delete a whole coursework folder. Remove obsolete kernel registrations separately as explained in the Jupyter appendix.
 
@@ -164,8 +153,11 @@ Review the solver's Python version and package plan before confirming; use the v
 Use `conda deactivate` when finished. For sharing/recreation, follow conda's environment export documentation; a conda environment file records information that `pip freeze` cannot capture.
 
 (python-setup-resources)=
-## Sources and verification
+## Further reading
 
-Adapted from the FoNS [Python installation and virtual environments](https://imperial-fons-computing.github.io/python.html#python-virtual-environments) and [Jupyter installation](https://imperial-fons-computing.github.io/jupyter.html#installing) guidance. See {ref}`setup-attribution` for source revision and MIT licence. MQB revision: 30 September 2026.
+- [PyPA pip and virtual environments guide](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/).
+- [Python's venv documentation](https://docs.python.org/3/library/venv.html).
+- [Externally managed Python environments](https://packaging.python.org/en/latest/specifications/externally-managed-environments/).
+- [Jupyter installation](https://jupyter.org/install).
 
-Operational references: [PyPA pip/venv guide](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/), [Python venv](https://docs.python.org/3/library/venv.html), [externally managed environments](https://packaging.python.org/en/latest/specifications/externally-managed-environments/), [Jupyter installation](https://jupyter.org/install) and the platform/conda sources linked above. Platform-specific procedures require checking current official support; Linux validation does not verify Windows, macOS or conda behaviour.
+See {ref}`setup-attribution` for the adapted material's attribution, licence and limits of the setup checks.

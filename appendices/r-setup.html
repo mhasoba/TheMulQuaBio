@@ -539,8 +539,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-r">Install R</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages-without-running-r-as-administrator">Install packages without running R as administrator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-clean-project-check">Run a clean project check</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-evidence">Troubleshooting evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
             </nav>
         </div>
@@ -558,7 +558,7 @@
 <p>If you are using a managed course computer, use its installed R first. Do not reinstall or upgrade managed software during a class unless teaching staff ask you to.</p>
 <section id="check-before-installing">
 <h2>Check before installing<a class="headerlink" href="#check-before-installing" title="Link to this heading">#</a></h2>
-<p>Open a terminal (PowerShell or Command Prompt on Windows) and run:</p>
+<p>Open a terminal and run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>R<span class="w"> </span>--version
 Rscript<span class="w"> </span>--version
 </pre></div>
@@ -569,7 +569,6 @@ Rscript<span class="w"> </span>--version
 <h2>Install R<a class="headerlink" href="#install-r" title="Link to this heading">#</a></h2>
 <p>Use the official <a class="reference external" href="https://cran.r-project.org/">Comprehensive R Archive Network (CRAN)</a> downloads.</p>
 <ul class="simple">
-<li><p><strong>Windows:</strong> use <a class="reference external" href="https://cran.r-project.org/bin/windows/base/">R for Windows</a> and accept the standard per-machine or managed-machine choices available to you. Open a new terminal after installation.</p></li>
 <li><p><strong>macOS:</strong> use <a class="reference external" href="https://cran.r-project.org/bin/macosx/">R for macOS</a> and choose the installer that matches your Mac and supported macOS version. Open a new terminal afterwards.</p></li>
 <li><p><strong>Ubuntu:</strong> follow the <a class="reference external" href="https://cran.r-project.org/bin/linux/ubuntu/">CRAN Ubuntu instructions</a> when you need CRAN’s current release. On a managed machine, ask the administrator. For a simple distribution-provided installation on a machine you administer, <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span></code> followed by <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">r-base</span></code> is sufficient, but the Ubuntu release may provide an older R version. See <a class="reference internal" href="ubuntu-admin.html#ubuntu-admin"><span class="std std-ref">Linux Setup and Ubuntu Administration</span></a> before changing repositories or system packages.</p></li>
 </ul>
@@ -590,7 +589,7 @@ Rscript<span class="w"> </span>--version
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dir.create</span><span class="p">(</span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">"R_LIBS_USER"</span><span class="p">),</span><span class="w"> </span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">showWarnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Do <strong>not</strong> start R with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, and do not make a system library writable to everyone. Administrator access may be needed to install R itself or a missing operating-system development library, but it is not the normal way to install an R package. Read the package’s actual error first; Windows users only need <a class="reference external" href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> when a package must be compiled from source.</p>
+<p>Do <strong>not</strong> start R with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, and do not make a system library writable to everyone. Administrator access may be needed to install R itself or a missing operating-system development library, but it is not the normal way to install an R package. If an installation fails, read the error before adding compilers or system libraries; it should identify the missing requirement.</p>
 </section>
 <section id="run-a-clean-project-check">
 <span id="r-setup-check"></span><h2>Run a clean project check<a class="headerlink" href="#run-a-clean-project-check" title="Link to this heading">#</a></h2>
@@ -614,8 +613,8 @@ Rscript<span class="w"> </span>--version
 </div>
 <p>The command should print <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">setup</span> <span class="pre">check</span> <span class="pre">passed</span></code> and create <code class="docutils literal notranslate"><span class="pre">results/r_setup_check.png</span></code>. This is MQB’s default script convention: start at the project root unless an exercise explicitly names another directory. Paths such as <code class="docutils literal notranslate"><span class="pre">data/input.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">results/figure.png</span></code> are then portable. Do not put a computer-specific <code class="docutils literal notranslate"><span class="pre">setwd()</span></code> in a shared script.</p>
 </section>
-<section id="troubleshooting-evidence">
-<h2>Troubleshooting evidence<a class="headerlink" href="#troubleshooting-evidence" title="Link to this heading">#</a></h2>
+<section id="when-something-goes-wrong">
+<h2>When something goes wrong<a class="headerlink" href="#when-something-goes-wrong" title="Link to this heading">#</a></h2>
 <p>When asking for help, copy the exact error and report your operating system plus the output of:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">R.version.string</span>
 <span class="nf">R.home</span><span class="p">()</span>
@@ -625,9 +624,14 @@ Rscript<span class="w"> </span>--version
 </div>
 <p>Also say whether the failure occurs in a terminal, RStudio, VS Code, or a notebook. An R notebook additionally needs the separate <a class="reference internal" href="../notebooks/appendix-jupy-intro.html#jupyter-r-kernel"><span class="std std-ref">The R kernel</span></a>; a Python environment does not install or isolate R packages.</p>
 </section>
-<section id="sources-and-verification">
-<h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>MQB guidance revised 10 October 2026 against the official <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html">R installation and administration manual</a>, CRAN platform downloads, the <a class="reference external" href="https://docs.posit.co/ide/user/">RStudio IDE user guide</a>, and Posit’s platform-support policy. The command-line workflow uses base R and is editor-independent. Platform installers and graphical editor discovery were not runtime-tested on this maintainer machine; use the linked current platform instructions if their screens differ.</p>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html">R installation and administration manual</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.posit.co/ide/user/">RStudio IDE user guide</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.posit.co/platform-support.html">Posit’s supported platforms</a>.</p></li>
+</ul>
+<p>Use the linked current installation instructions if their screens differ. The project check above uses base R and does not depend on an editor.</p>
 </section>
 </section>
 
@@ -701,8 +705,8 @@ Rscript<span class="w"> </span>--version
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-r">Install R</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages-without-running-r-as-administrator">Install packages without running R as administrator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-clean-project-check">Run a clean project check</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-evidence">Troubleshooting evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

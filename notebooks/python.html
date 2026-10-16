@@ -717,10 +717,12 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-cleaner">Complete the cleaner</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#see-how-the-pieces-fit-together">See how the pieces fit together</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-and-run-your-tests">Write and run your tests</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-a-record-of-your-approach">Keep a record of your approach</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-finish">Before you finish</a></li>
 </ul>
@@ -4781,15 +4783,20 @@ OUTPUT: known-count total (or unavailable) and missing-count number per site
 </section>
 <section id="practical-validating-tree-survey-records">
 <span id="python-tree-survey-practical"></span><h3>Practical: validating tree-survey records<a class="headerlink" href="#practical-validating-tree-survey-records" title="Link to this heading">#</a></h3>
-<p>This practical brings together functions, data structures, control flow, CSV handling and testing in one tree-record cleaning workflow. The survey is synthetic, but its mixture of spelling mistakes, missing entries, invalid measurements and duplicate identifiers reflects problems that often occur when people record data.</p>
-<p>Use the linked metadata whenever you need the exact validation rules or output format. If this practical is part of an assignment, the separate assignment notice will give you the deadline, submission arrangements and rules about outside help.</p>
+<p>This practical brings together functions, data structures, control flow, CSV handling and testing in one tree-record cleaning workflow. The survey is made up to illustrate a realistic mixture of spelling mistakes, missing entries, invalid measurements and duplicate identifiers that you will likely encounter in real data recorded by real people!</p>
+<p>Use the linked metadata whenever you need the exact validation rules or output format.</p>
 <p>Download the files into the root-level <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">code/</span></code> directories of the project you use for MQB practicals:</p>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/26380975385a2d5b132c78dc5181b451/silwood_trees_raw.csv"><code class="xref download docutils literal notranslate"><span class="pre">Tree-survey</span> <span class="pre">data</span></code></a> to <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
 <li><p><a class="reference download internal" download="" href="../_downloads/73cc7f279a62a82404a13a666a7f1acf/silwood_trees_metadata.md"><code class="xref download docutils literal notranslate"><span class="pre">Data</span> <span class="pre">metadata</span> <span class="pre">and</span> <span class="pre">validation</span> <span class="pre">rules</span></code></a> to <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p></li>
 <li><p><a class="reference download internal" download="" href="../_downloads/f57be2b5adbb240b1d5be1f92d116551/clean_silwood_trees.py"><code class="xref download docutils literal notranslate"><span class="pre">Starter</span> <span class="pre">Python</span> <span class="pre">program</span></code></a> to <code class="docutils literal notranslate"><span class="pre">code/</span></code>.</p></li>
 </ul>
-<p>Do not edit the original survey. Your work belongs in the three marked functions in <code class="docutils literal notranslate"><span class="pre">code/clean_silwood_trees.py</span></code>; use the metadata rather than guessing how a doubtful record should be corrected. Keep file reading and output inside the program’s startup path, so that importing its functions for a test does not also run the program. The cleaned table can later be read and analysed in R—one well-defined data file linking the two languages. Counting oaks is simply the final summary of the accepted records.</p>
+<section id="complete-the-cleaner">
+<h4>Complete the cleaner<a class="headerlink" href="#complete-the-cleaner" title="Link to this heading">#</a></h4>
+<p><strong>Edit your downloaded copy of <code class="docutils literal notranslate"><span class="pre">code/clean_silwood_trees.py</span></code> and keep that filename.</strong> It is an unfinished starter, not a finished program to submit unchanged. Complete its three marked functions: <code class="docutils literal notranslate"><span class="pre">validate_record</span></code>, <code class="docutils literal notranslate"><span class="pre">process_records</span></code> and <code class="docutils literal notranslate"><span class="pre">summarise_oaks</span></code>. Your completed version is the cleaner you will commit and push alongside your separate test script.</p>
+<p>Keep the original survey data, <code class="docutils literal notranslate"><span class="pre">data/silwood_trees_raw.csv</span></code>, unchanged. The instruction not to edit the data does <strong>not</strong> apply to the Python starter! Use the metadata rather than guessing how a doubtful record should be corrected.</p>
+<p>Keep reusable function definitions outside <code class="docutils literal notranslate"><span class="pre">main()</span></code> so that your test script can import them. The supplied <code class="docutils literal notranslate"><span class="pre">main()</span></code> calls the functions that read the survey and write the results; recall that the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> guard calls <code class="docutils literal notranslate"><span class="pre">main()</span></code> only when you run the script directly. Reading and writing helpers can also be defined outside <code class="docutils literal notranslate"><span class="pre">main()</span></code>—defining a function does not run it! Leave the supplied startup code in place: importing the module should not read the survey or create any result files.</p>
+</section>
 <section id="see-how-the-pieces-fit-together">
 <h4>See how the pieces fit together<a class="headerlink" href="#see-how-the-pieces-fit-together" title="Link to this heading">#</a></h4>
 <p>Before writing any code, read through the function names and their docstrings. You do not need to run the program or use a debugger at this point. The supplied code takes care of reading records and writing results; your three unfinished functions make the decisions in between.</p>
@@ -4798,17 +4805,22 @@ OUTPUT: known-count total (or unavailable) and missing-count number per site
 <p>The three <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code> lines show you exactly where your work goes. Until you replace them, running the starter will stop at the first unfinished function; that is expected. Leave the loader, writer and startup code in place. Before you begin, make sure you can say what each of your three functions receives and returns, then sketch the same flow as pseudocode in your README.</p>
 <p>The ideas used in the starter have already appeared in the chapter: <a class="reference internal" href="#hints-about-inputs-and-outputs">type hints</a>, <a class="reference internal" href="#let-the-script-find-the-project"><span class="xref myst">project paths</span></a>, <a class="reference internal" href="#using-column-names-instead-of-positions"><span class="xref myst">CSV rows as dictionaries</span></a>, <a class="reference internal" href="#a-number-that-converts-may-still-be-unusable"><span class="xref myst">checking converted numbers</span></a>, and <a class="reference internal" href="#python-main-guard"><span class="std std-ref">the main guard</span></a>. Return to any of these as you need them rather than trying to absorb the whole file at once.</p>
 </section>
+<section id="write-and-run-your-tests">
+<h4>Write and run your tests<a class="headerlink" href="#write-and-run-your-tests" title="Link to this heading">#</a></h4>
+<p>Create a separate file, <code class="docutils literal notranslate"><span class="pre">code/test_silwood_trees.py</span></code>, alongside the cleaner. Import the cleaner’s functions into this file and check them using small records made for the tests, rather than changing the survey itself. The three unfinished functions belong in the cleaner, not in this test script.</p>
+<p>Include ordinary text cleaning, missing and unrecognised values, valid and invalid measurements, measurements outside the allowed range, duplicate identifiers and rows with more than one problem. For the oak summary, check both an exact oak name and a near match, as well as the case where no oaks are accepted. Finally, check that importing the module does not start the program and that running it twice gives the same results. You have already met the testing needed here; the debugging and expected-error sections are there if you want to revisit them.</p>
+<p>From the project root, run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">code/test_silwood_trees.py</span></code> to run your checks. This tests your implementation; running the cleaner itself produces the three survey output files described below.</p>
 </section>
 <section id="what-your-program-should-produce">
-<h3>What your program should produce<a class="headerlink" href="#what-your-program-should-produce" title="Link to this heading">#</a></h3>
-<p>Build <code class="docutils literal notranslate"><span class="pre">code/test_silwood_trees.py</span></code> alongside your solution, using small records made for the tests rather than changing the survey itself. Include ordinary text cleaning, missing and unrecognised values, valid and invalid measurements, measurements outside the allowed range, duplicate identifiers and rows with more than one problem. For the oak summary, check both an exact oak name and a near match, as well as the case where no oaks are accepted. Finally, check that importing the module does not start the program and that running it twice gives the same results. You have already met the testing needed here; the debugging and expected-error sections are there if you want to revisit them.</p>
+<h4>What your program should produce<a class="headerlink" href="#what-your-program-should-produce" title="Link to this heading">#</a></h4>
 <p>From the project root, run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">code/clean_silwood_trees.py</span></code>. It should create (or replace) three files: <code class="docutils literal notranslate"><span class="pre">results/silwood_trees_clean.csv</span></code> for accepted records, <code class="docutils literal notranslate"><span class="pre">results/silwood_tree_issues.csv</span></code> for rejected rows and their reasons, and <code class="docutils literal notranslate"><span class="pre">results/oak_species_counts.csv</span></code> for the oak summary. Your program should create <code class="docutils literal notranslate"><span class="pre">results/</span></code> if it is missing. Check the metadata for the precise columns, order and wording. These files can always be regenerated, so you would not normally commit them.</p>
+</section>
 </section>
 <section id="keep-a-record-of-your-approach">
 <h3>Keep a record of your approach<a class="headerlink" href="#keep-a-record-of-your-approach" title="Link to this heading">#</a></h3>
 <p>Before you implement the functions, add a short plan to the root <code class="docutils literal notranslate"><span class="pre">README.md</span></code>. Name the input and outputs, then use Markdown pseudocode to show how rows become accepted records, issue reports and the oak summary. <a class="reference internal" href="#designing-an-algorithm-for-imperfect-data">Designing an algorithm for imperfect data</a> has a worked example. There is no need to copy the detailed rules from the metadata.</p>
 <p>Also record the commands for running and testing the program, what each output contains, one useful test and the fault it would reveal, any outside help you used, and any limitation you know about. Keep this concise: it should help you think through the program and help somebody else run it.</p>
-<p>Use the familiar MQB project layout: <code class="docutils literal notranslate"><span class="pre">README.md</span></code> and <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> at the root, scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, and the unchanged input and metadata in <code class="docutils literal notranslate"><span class="pre">data/</span></code>. Keep quick experiments in <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code>, and leave generated results, caches and temporary files out of Git. When you think you are finished, run the tests from the project root, run the cleaner twice, inspect all three outputs, check that the input has not changed, and try the commands exactly as you wrote them in the README.</p>
+<p>Use the familiar MQB project layout: <code class="docutils literal notranslate"><span class="pre">README.md</span></code> and <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> at the root, scripts in <code class="docutils literal notranslate"><span class="pre">code/</span></code>, and the unchanged input and metadata in <code class="docutils literal notranslate"><span class="pre">data/</span></code>. Commit and push your <strong>modified, completed</strong> <code class="docutils literal notranslate"><span class="pre">code/clean_silwood_trees.py</span></code> and your own <code class="docutils literal notranslate"><span class="pre">code/test_silwood_trees.py</span></code>, together with the unchanged input and metadata, your <code class="docutils literal notranslate"><span class="pre">README.md</span></code> and <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>. Keep quick experiments in <code class="docutils literal notranslate"><span class="pre">sandbox/</span></code>, and leave generated results, caches and temporary files out of Git. When you think you are finished, run the tests from the project root, run the cleaner twice, inspect all three outputs, check that the input has not changed, and try the commands exactly as you wrote them in the README.</p>
 <p>Before starting, revisit <a class="reference internal" href="#from-a-task-to-an-algorithm">From a task to an algorithm</a>, <a class="reference internal" href="#structuring-python-programs">Structuring Python programs</a>, <a class="reference internal" href="#handling-csv-files">Handling CSV files</a>, and <a class="reference internal" href="#python-separate-test-script"><span class="std std-ref">the separate test-script example</span></a>.</p>
 </section>
 <section id="before-you-finish">
@@ -5473,8 +5485,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Link to this heading">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-69fb7482-cbf5-4420-8c59-ac927c2e0357">
-<span class="eqno">(2)<a class="headerlink" href="#equation-69fb7482-cbf5-4420-8c59-ac927c2e0357" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-be98d0e3-344c-4a9b-977a-bc105e287d40">
+<span class="eqno">(2)<a class="headerlink" href="#equation-be98d0e3-344c-4a9b-977a-bc105e287d40" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -5951,8 +5963,8 @@ from the end of an array:</p>
 <section id="the-lotkavolterra-model-revisited">
 <h3>The Lotka–Volterra model revisited<a class="headerlink" href="#the-lotkavolterra-model-revisited" title="Link to this heading">#</a></h3>
 <p>In the original Lotka–Volterra model, the resource population grows without bound when consumers are absent. Add logistic density dependence to make resource growth slow as the resource density <span class="math notranslate nohighlight">\(R\)</span> approaches its carrying capacity <span class="math notranslate nohighlight">\(K\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-602732c3-b8ed-49f3-a447-13f52eb17d39">
-<span class="eqno">(3)<a class="headerlink" href="#equation-602732c3-b8ed-49f3-a447-13f52eb17d39" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e037861c-4884-4c90-8a1d-845992216463">
+<span class="eqno">(3)<a class="headerlink" href="#equation-e037861c-4884-4c90-8a1d-845992216463" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= rR\left(1 - \frac{R}{K}\right) - aCR\\
     \frac{dC}{dt} &amp;= -zC + eaCR
 \end{align}\]</div>
@@ -5983,8 +5995,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <section id="optional-extension-discrete-time-lv-model">
 <h3>Optional extension: discrete-time LV model<a class="headerlink" href="#optional-extension-discrete-time-lv-model" title="Link to this heading">#</a></h3>
 <p>Write a discrete-time version called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a83b3d6-661f-4774-8941-69dbadde971f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9a83b3d6-661f-4774-8941-69dbadde971f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-eb65ab0a-d5d2-44b5-a69f-e25f4de9ad77">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eb65ab0a-d5d2-44b5-a69f-e25f4de9ad77" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t \left(1 + r\left(1 - \frac{R_t}{K}\right) - aC_t\right)\\
     C_{t+1} &amp;= C_t \left(1 - z + eaR_t\right)
 \end{align}\]</div>
@@ -7152,10 +7164,12 @@ for efficient data crunching</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-align-fasta-sequences">Extension: align FASTA sequences</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-retain-tied-best-alignments">Extension: retain tied best alignments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-validating-tree-survey-records">Practical: validating tree-survey records</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-cleaner">Complete the cleaner</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#see-how-the-pieces-fit-together">See how the pieces fit together</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-and-run-your-tests">Write and run your tests</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-your-program-should-produce">What your program should produce</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-a-record-of-your-approach">Keep a record of your approach</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-finish">Before you finish</a></li>
 </ul>

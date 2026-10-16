@@ -6,12 +6,22 @@ Assessment may be through computer-based tests, exercises, practicals, projects,
 
 In computer-based tests, you will be expected to apply the concepts and techniques you have learned to address the questions by using appropriate computer code and interpreting the output.
 
+## Course-specific requirements
+
+The chapter exercises and practicals are learning activities, not a list of assessed submissions. Use your course handbook and released assignment briefs to check:
+
+* Which work is assessed, and whether it is individual or group work.
+* The deadlines, submission arrangements and files you must submit.
+* The rules on collaboration, outside help and AI use, including how to acknowledge assistance.
+
+Course-specific assessment instructions take precedence over the general guidance in this book. Examples and extensions in the chapters do not add to the requirements of an assignment.
+
 ## Assessment of exercises, practicals and projects
 
-Both the correctness and quality of your solutions, and whether you are following good programming and workflow practices, will be assessed: how well you have learned the principles and implementation of **keeping workflows/pipelines/software organised and reusable** and **good coding practices**, _irrespective of programming language_ (please refer back to the [Unix](unix.ipynb) and [Python](python.ipynb) chapters in particular).
+Assessment considers whether your solution is correct, how clearly you have written and explained it, and whether somebody else can run it. Keep code, inputs and outputs organised, write reusable functions where appropriate, and test the decisions your program makes. These principles apply whichever language you use; the [Unix](unix.ipynb) and [Python](python.ipynb) chapters give examples.
 
 ```{Note}
-Lowercase for directory names below is a suggestion—just be consistent with whatever you choose, such as [CamelCase](https://en.wikipedia.org/wiki/Camel_case); for example, you may choose to name your `code` directory `Code` instead.
+Use the shared [project layout](../part-computing.md#organising-your-learning-project), including lowercase `code/`, `data/` and `results/`. Many file systems distinguish `code` from `Code`; the documented commands use the lowercase names.
 ```
 
 The basic rules you must follow, irrespective of the submission or project's content, are:
@@ -28,15 +38,13 @@ The basic rules you must follow, irrespective of the submission or project's con
     
 * Most importantly, all scripts should run without errors, taking in data and spitting out the results as necessary.
     
-When necessary, more specific details for a chapter, practical or assignment will be provided in the relevant brief.
-
 ### Pre-submission checklist
 
 Do this after you finish an assignment, and before submission:
 
-* review and make sure you can run all the commands, code fragments, and named scripts you have built so far and get the expected outputs.
+* Run the commands and required scripts listed in your README from the project root, and check their outputs.
     
-* review your code files and annotate/comment code lines as much and as often as necessary using `#`.
+* Review your code for clear names and useful docstrings. Comment decisions that need explanation, rather than describing every line.
     
 * Check that required code, input data, and generated outputs follow the shared project layout and the current assignment brief.
     
@@ -51,15 +59,15 @@ An _example script_ is supplied, or built from demonstrated code fragments, to i
 
 Your coursework project repository will be checked for a clear, logical structure, and its required scripts will be tested and screened for good project structure and coding practice; in particular, that:
 
-* All in-class and assigned scripts are in the project root's `code/` directory.
+* Required implementation and test scripts are in the project root's `code/` directory.
     
 * All code/script files are functional (no errors, correct output) when run on the assessor's (Linux) computer.
     
-* The scripts are all up to the mark in terms of internal documentation (e.g., docstrings in the case of Python) and commenting.
+* Module and function documentation explains what the code does, and comments explain non-obvious decisions.
     
 * Maintain one root `README.md` for the coursework repository. Update it as the work grows so it explains the project and how to run and check its required scripts. Do not create weekly directories or per-week README files unless a released assignment brief explicitly requires them.
     
-* The `results` directory is empty (no pre-existing results).
+* Generated results are not committed unless the brief asks for them. Scripts create `results/` when needed.
     
 * All _valid_ script files in the `code` directory have an appropriate extension (`*.sh`, `*.py`, etc.).
     
@@ -68,18 +76,14 @@ Your coursework project repository will be checked for a clear, logical structur
 
 ### The Good, The Bad, and The Ugly
 
-This is a practical way to interpret the criteria above: what to aim for, what to avoid, and what to clean up before submission. Think of it as a quick quality check before your code struts onto the assessment stage.
+Use these examples to distinguish problems that stop a program working from those that make it harder to understand and maintain.
 
 #### The Good (what you must do consistently well)
 
-These are the core practices expected in all submissions; doing these well is the baseline for strong marks.
-
-*No drama, no mystery, just reproducible science and solid Git habits.*
-
-If your repository were a flat, this is the "looks tidy and smells like fresh coffee" version:
+These are the core practices expected in submissions:
 
 * Scripts run on Linux without errors and produce the expected outputs.
-* Files are organised clearly (for example, `code/`, `data/`, and an empty `results/` at submission time).
+* Files follow the shared project layout, and scripts can regenerate their outputs.
 * Readmes explain what scripts do and how to run them.
 * Code is readable, with meaningful names and helpful comments/docstrings.
 * Git history shows regular, descriptive commits and steady progress.
@@ -89,8 +93,6 @@ If your repository were a flat, this is the "looks tidy and smells like fresh co
 These are direct functional problems (errors, missing files, broken runs) and are usually avoidable with careful checks.
 
 *"It works on my machine" is not a genre we award marks for.*
-
-In short: the code equivalent of forgetting your keys, your wallet, and your laptop charger on the same day:
 
 * Runtime errors, missing input files, or broken commands.
 * Scripts that only run on one machine because of hard-coded paths.
@@ -102,10 +104,6 @@ In short: the code equivalent of forgetting your keys, your wallet, and your lap
 
 These are quality issues that may not crash code, but they reduce readability, maintainability, and assessor confidence.
 
-*The code runs, but the comments vanished and the folder structure went feral.*
-
-The code may run, but future-you (and your assessor) will need detective skills and strong tea:
-
 * Cluttered project structure or inconsistent naming.
 * `results/` filled with stale or unnecessary outputs.
 * Overly long, monolithic scripts with repeated code.
@@ -114,15 +112,11 @@ The code may run, but future-you (and your assessor) will need detective skills 
 
 Bad usually stops execution or correctness. Ugly usually harms communication and quality even when execution succeeds.
 
-Bad code can often be debugged; ugly workflow usually has to be excavated first, ideally with a brush, a map, and a lot of patience.
-
 #### Quick recovery checklist before submission
 
-* Fix all "Bad" issues first so everything runs correctly (no crashes, no mysteries).
-* Then clean up "Ugly" issues so your work is readable and assessable (and less likely to scare your future self).
+* Fix the "Bad" issues first so everything runs correctly.
+* Then address the "Ugly" issues so your work is readable and assessable.
 * Re-run from a clean clone to confirm full reproducibility.
-
-*Debug for survival, refactor for dignity, document for posterity.*
 
 
 ### Group work execution
@@ -247,7 +241,7 @@ A written summative assessment of your overall performance will be sent at the e
 
 Using the testing results, the assessor will exercise their judgment to deduct marks if the coursework project layout is disorganised, the code inadequately commented or insufficiently documented, the solution is not correct, or the written components of practicals are not up to the mark (see _The Weekly Feedback_ section).
 
-Feedback logs for each submission are provided to help you spot general and programming-language-specific issues. You may and should fix bugs and other problems they identify. The assessor will review how you addressed the feedback in the final assessment by Weeklyrerunning the required scripts from the coursework project. The final assessment is more holistic than formative feedback: it gives an overall summative picture of your work and what you can improve. Final marks follow the coursework criteria published for your course; ask your course or module instructor if those criteria are unclear.
+Feedback logs for each submission help you identify problems in your code and workflow. Use them to make corrections, then rerun your tests. In the final assessment, the assessor reruns the required scripts and reviews how you addressed the feedback. Final marks follow the coursework criteria published for your course; ask your course or module instructor if those criteria are unclear.
 
 ## Plagiarism
 

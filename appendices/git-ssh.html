@@ -544,8 +544,8 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#https-when-ssh-is-unavailable">HTTPS when SSH is unavailable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-and-inspect-a-remote">Add and inspect a remote</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnose-without-changing-an-account">Diagnose without changing an account</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-setup-without-changing-it">Check your setup without changing it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
             </nav>
         </div>
@@ -560,7 +560,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="git-github-and-ssh-setup">
 <span id="git-ssh-setup"></span><h1>Git, GitHub and SSH Setup<a class="headerlink" href="#git-github-and-ssh-setup" title="Link to this heading">#</a></h1>
 <p>Use this page to install and identify Git, set up access to GitHub, and connect a project to a <a class="reference internal" href="terms.html#id10"><span class="std std-ref">remote</span></a>: a named local connection to another repository. The <a class="reference internal" href="../notebooks/git.html"><span class="std std-doc">Git chapter</span></a> teaches repositories, commits, branches and collaboration; return there after this one-time setup.</p>
-<p>Git records the author name and email in every commit. SSH private keys and HTTPS tokens control access to remote repositories. Treat all three deliberately: a commit’s identity is visible in its history, while a private key or token must never be shared or committed.</p>
+<p>Git records the author name and email in every commit; collaborators can read them in the history. SSH private keys and HTTPS tokens control access to remote repositories and must never be shared or committed.</p>
 <section id="install-and-check-git">
 <h2>Install and check Git<a class="headerlink" href="#install-and-check-git" title="Link to this heading">#</a></h2>
 <p>Open a terminal and check whether Git is already available:</p>
@@ -581,10 +581,7 @@
 <tr class="row-odd"><td><p>macOS</p></td>
 <td><p>Install the Xcode Command Line Tools, the official Git installer, or the Git formula from <a class="reference internal" href="macos-tools.html#macos-tools"><span class="std std-ref">macOS Tools and Homebrew</span></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p>Windows</p></td>
-<td><p>Install <a class="reference external" href="https://git-scm.com/downloads/win">Git for Windows</a>, then use Git Bash or a terminal where <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code> works.</p></td>
-</tr>
-<tr class="row-odd"><td><p>Managed machine</p></td>
+<tr class="row-even"><td><p>Managed machine</p></td>
 <td><p>Use the provided Git client or ask IT before installing software.</p></td>
 </tr>
 </tbody>
@@ -634,7 +631,7 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 ssh-add<span class="w"> </span>~/.ssh/id_ed25519
 </pre></div>
 </div>
-<p>Substitute a deliberately chosen key name where applicable. Windows, managed devices, hardware keys and persistent agent configuration have platform-specific requirements; follow <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">GitHub’s current SSH instructions</a> rather than copying another operating system’s startup-file changes.</p>
+<p>If you chose a different key filename, use that in the <code class="docutils literal notranslate"><span class="pre">ssh-add</span></code> command. Managed devices, hardware keys and agents that start automatically can need different configuration; follow <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">GitHub’s current SSH instructions</a> rather than copying another operating system’s startup-file changes.</p>
 </section>
 <section id="add-only-the-public-key-to-github">
 <h3>Add only the public key to GitHub<a class="headerlink" href="#add-only-the-public-key-to-github" title="Link to this heading">#</a></h3>
@@ -680,8 +677,8 @@ git<span class="w"> </span>remote<span class="w"> </span>-v
 </div>
 <p>Use the actual current branch name shown by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--show-current</span></code>; do not assume every repository uses <code class="docutils literal notranslate"><span class="pre">main</span></code>. Here, <code class="docutils literal notranslate"><span class="pre">-u</span></code> remembers <code class="docutils literal notranslate"><span class="pre">origin</span> <span class="pre">main</span></code> as the default destination for later pushes from this branch. A push can make commits visible to collaborators, so inspect <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, and the remote name before running it.</p>
 </section>
-<section id="diagnose-without-changing-an-account">
-<h2>Diagnose without changing an account<a class="headerlink" href="#diagnose-without-changing-an-account" title="Link to this heading">#</a></h2>
+<section id="check-your-setup-without-changing-it">
+<h2>Check your setup without changing it<a class="headerlink" href="#check-your-setup-without-changing-it" title="Link to this heading">#</a></h2>
 <p>These checks do not contact GitHub or alter Git configuration:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--list<span class="w"> </span>--show-origin
 git<span class="w"> </span>remote<span class="w"> </span>-v
@@ -690,11 +687,14 @@ ssh<span class="w"> </span>-G<span class="w"> </span>git@github.com
 </div>
 <p>If Git cannot find your identity, set or correct the appropriate global or repository-local <code class="docutils literal notranslate"><span class="pre">user.name</span></code> and <code class="docutils literal notranslate"><span class="pre">user.email</span></code>. If <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;github.com</span></code> fails, read the exact error before regenerating keys or changing settings. Typical causes are a missing public key in GitHub, an agent without the intended private key, a changed host key, or a restricted network. Course staff or IT can help with managed-device and network policy; never send them a private key, passphrase or token.</p>
 </section>
-<section id="sources-and-verification">
-<span id="git-ssh-setup-resources"></span><h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/git.html">Git setup guidance</a>; see <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for source revision and licence. MQB revision: 30 September 2026.</p>
-<p>Operational references: <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git first-time setup</a>, <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">GitHub SSH setup</a>, <a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">GitHub SSH fingerprints</a>, <a class="reference external" href="https://docs.github.com/get-started/git-basics/why-is-git-always-asking-for-my-password">HTTPS authentication</a>, and <a class="reference external" href="https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port">SSH over port 443</a>.</p>
-<p>Validation uses an isolated local Git configuration and toy repository, plus <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-G</span></code> only; it does not contact GitHub, create keys, change an account, authenticate, or push.</p>
+<section id="further-reading">
+<span id="git-ssh-setup-resources"></span><h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git first-time setup</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">GitHub SSH setup</a> and <a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">host-key fingerprints</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.github.com/get-started/git-basics/why-is-git-always-asking-for-my-password">HTTPS authentication</a> and <a class="reference external" href="https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port">SSH over port 443</a>.</p></li>
+</ul>
+<p>See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the adapted material’s attribution, licence and limits of the setup checks.</p>
 </section>
 </section>
 
@@ -773,8 +773,8 @@ ssh<span class="w"> </span>-G<span class="w"> </span>git@github.com
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#https-when-ssh-is-unavailable">HTTPS when SSH is unavailable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-and-inspect-a-remote">Add and inspect a remote</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnose-without-changing-an-account">Diagnose without changing an account</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-setup-without-changing-it">Check your setup without changing it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

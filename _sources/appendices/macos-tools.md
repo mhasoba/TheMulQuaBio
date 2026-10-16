@@ -17,7 +17,7 @@ command -v brew
 
 Apple Silicon normally reports `arm64`; Intel reports `x86_64`. A terminal running under Rosetta can report `x86_64` on Apple Silicon, so also check Apple menu > About This Mac. Prefer native Apple Silicon tools; do not install Rosetta or a second Intel Homebrew just to follow these lessons.
 
-Consult Homebrew's current [installation requirements](https://docs.brew.sh/Installation) and [support tiers](https://docs.brew.sh/Support-Tiers) before installing. At the 30 September 2026 documentation check, supported macOS installations centred on Apple Silicon with macOS 15 or newer; Intel configurations were Tier 3. Support changes over time. Do not treat an old course note or a successful install on an unsupported OS as a compatibility guarantee.
+Check Homebrew's current [installation requirements](https://docs.brew.sh/Installation) and [support tiers](https://docs.brew.sh/Support-Tiers) for your macOS version and processor before installing. Support changes over time; an old course note or a successful install does not guarantee that your configuration is supported.
 
 For a machine outside the supported configurations, prefer a compatible official application installer, a supported remote environment, or advice from your institution's IT service. Do not disable OS security controls to force a package to install.
 
@@ -91,8 +91,9 @@ type -a git
 `PATH` order can select a Homebrew executable instead of an Apple-provided one. Do not delete or replace programs under system directories. macOS/BSD utilities and GNU utilities can accept different options; read the local manual and test scripts on their target platform. Installing Homebrew does not automatically make every command identical to Linux.
 
 (macos-resources)=
-## Sources and verification
+## Further reading
 
-Adapted from the FoNS [Homebrew](https://imperial-fons-computing.github.io/homebrew.html) and [terminal](https://imperial-fons-computing.github.io/terminal.html) guidance. See {ref}`setup-attribution` for the source revision and licence. MQB revision: 30 September 2026. Operational guidance was checked against the official Homebrew [installation documentation](https://docs.brew.sh/Installation), [manual](https://docs.brew.sh/Manpage) and [FAQ](https://docs.brew.sh/FAQ).
+- [Homebrew installation documentation](https://docs.brew.sh/Installation).
+- [Homebrew manual](https://docs.brew.sh/Manpage) and [FAQ](https://docs.brew.sh/FAQ).
 
-These instructions were reviewed from Linux, not runtime-tested on macOS. No installer or Homebrew package operation was run during that review. Check current support and institutional policy before making changes.
+See {ref}`setup-attribution` for the adapted material's attribution, licence and limits of the setup checks.

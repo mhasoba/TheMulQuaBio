@@ -3,7 +3,7 @@
 
 Use this page to install and identify Git, set up access to GitHub, and connect a project to a [remote](terms.md#repository-and-remote): a named local connection to another repository. The [Git chapter](../notebooks/git.ipynb) teaches repositories, commits, branches and collaboration; return there after this one-time setup.
 
-Git records the author name and email in every commit. SSH private keys and HTTPS tokens control access to remote repositories. Treat all three deliberately: a commit's identity is visible in its history, while a private key or token must never be shared or committed.
+Git records the author name and email in every commit; collaborators can read them in the history. SSH private keys and HTTPS tokens control access to remote repositories and must never be shared or committed.
 
 ## Install and check Git
 
@@ -19,7 +19,6 @@ Use a supported package or installer for your platform if it is missing:
 | --- | --- |
 | Ubuntu/Linux | Use your distribution package manager; Ubuntu guidance is in {ref}`ubuntu-packages`. |
 | macOS | Install the Xcode Command Line Tools, the official Git installer, or the Git formula from {ref}`macos-tools`. |
-| Windows | Install [Git for Windows](https://git-scm.com/downloads/win), then use Git Bash or a terminal where `git --version` works. |
 | Managed machine | Use the provided Git client or ask IT before installing software. |
 
 Do not use `sudo` or an administrator account merely to configure Git for yourself. VS Code's source-control interface uses the same Git installation; see {ref}`vscode-setup` for the editor workflow.
@@ -84,7 +83,7 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
 
-Substitute a deliberately chosen key name where applicable. Windows, managed devices, hardware keys and persistent agent configuration have platform-specific requirements; follow [GitHub's current SSH instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) rather than copying another operating system's startup-file changes.
+If you chose a different key filename, use that in the `ssh-add` command. Managed devices, hardware keys and agents that start automatically can need different configuration; follow [GitHub's current SSH instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) rather than copying another operating system's startup-file changes.
 
 ### Add only the public key to GitHub
 
@@ -144,7 +143,7 @@ git push -u origin main
 
 Use the actual current branch name shown by `git branch --show-current`; do not assume every repository uses `main`. Here, `-u` remembers `origin main` as the default destination for later pushes from this branch. A push can make commits visible to collaborators, so inspect `git status`, `git log --oneline`, and the remote name before running it.
 
-## Diagnose without changing an account
+## Check your setup without changing it
 
 These checks do not contact GitHub or alter Git configuration:
 
@@ -157,10 +156,10 @@ ssh -G git@github.com
 If Git cannot find your identity, set or correct the appropriate global or repository-local `user.name` and `user.email`. If `ssh -T git@github.com` fails, read the exact error before regenerating keys or changing settings. Typical causes are a missing public key in GitHub, an agent without the intended private key, a changed host key, or a restricted network. Course staff or IT can help with managed-device and network policy; never send them a private key, passphrase or token.
 
 (git-ssh-setup-resources)=
-## Sources and verification
+## Further reading
 
-Adapted from the FoNS [Git setup guidance](https://imperial-fons-computing.github.io/git.html); see {ref}`setup-attribution` for source revision and licence. MQB revision: 30 September 2026.
+- [Git first-time setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
+- [GitHub SSH setup](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) and [host-key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints).
+- [HTTPS authentication](https://docs.github.com/get-started/git-basics/why-is-git-always-asking-for-my-password) and [SSH over port 443](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port).
 
-Operational references: [Git first-time setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup), [GitHub SSH setup](https://docs.github.com/en/authentication/connecting-to-github-with-ssh), [GitHub SSH fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints), [HTTPS authentication](https://docs.github.com/get-started/git-basics/why-is-git-always-asking-for-my-password), and [SSH over port 443](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port).
-
-Validation uses an isolated local Git configuration and toy repository, plus `ssh -G` only; it does not contact GitHub, create keys, change an account, authenticate, or push.
+See {ref}`setup-attribution` for the adapted material's attribution, licence and limits of the setup checks.

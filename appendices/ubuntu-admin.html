@@ -535,7 +535,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-an-environment">Choose an environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-an-environment">Choose an environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubuntu-through-wsl">Ubuntu through WSL</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-identify-the-shell">Open a terminal and identify the shell</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-ubuntu-installation">Optional Ubuntu installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completion-and-command-history">Completion and command history</a><ul class="nav section-nav flex-column">
@@ -553,7 +556,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repositories-components-and-trust">Repositories, components and trust</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-a-downloaded-deb-only-when-needed">Install a downloaded .deb only when needed</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-packages-deliberately">Remove packages deliberately</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
             </nav>
         </div>
@@ -585,8 +588,8 @@
 <tr class="row-odd"><td class="text-left"><p>macOS</p></td>
 <td class="text-left"><p>Use Terminal for the Unix lessons; see <a class="reference internal" href="macos-tools.html#macos-tools"><span class="std std-ref">macOS Tools and Homebrew</span></a> for optional additional tools. A Linux installation is not required.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>Windows</p></td>
-<td class="text-left"><p>On a supported Windows system, <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a> provides a Linux environment without repartitioning. Use WSL 2 where supported and permitted by your institution.</p></td>
+<tr class="row-even"><td class="text-left"><p>Windows computer</p></td>
+<td class="text-left"><p>Use <a class="reference internal" href="#ubuntu-wsl"><span class="std std-ref">Ubuntu through WSL</span></a>, then follow the Linux instructions.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>ChromeOS</p></td>
 <td class="text-left"><p>On supported devices, enable the <a class="reference external" href="https://support.google.com/chromebook/answer/9145439">Linux development environment</a>. It normally provides Debian, not Ubuntu. Managed devices may restrict this feature.</p></td>
@@ -600,11 +603,16 @@
 </tbody>
 </table>
 </div>
-<p>Git Bash on Windows is useful for Git and some shell commands, but it is not an Ubuntu system and does not supply Ubuntu’s APT environment. PowerShell is a different shell with different syntax. macOS utilities also differ from GNU/Linux utilities in some options and output.</p>
+<p>macOS utilities differ from GNU/Linux utilities in some options and output. Use the instructions for the system you are actually running.</p>
+<section id="ubuntu-through-wsl">
+<span id="ubuntu-wsl"></span><h3>Ubuntu through WSL<a class="headerlink" href="#ubuntu-through-wsl" title="Link to this heading">#</a></h3>
+<p>On a Windows computer, <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a> lets you run Ubuntu without repartitioning your disk. Follow Microsoft’s current installation instructions, using WSL 2 where supported and permitted by your institution. Open the installed <strong>Ubuntu</strong> application, keep your project under its Linux home directory, and run the book’s Linux commands there. Install Python, R and Git inside Ubuntu; do not mix them with native Windows installations.</p>
+<p>For VS Code, follow the official <a class="reference external" href="https://code.visualstudio.com/docs/remote/wsl">WSL setup guide</a>, which connects the editor to Ubuntu. Open the project in a WSL-connected window and check the connection indicator before selecting interpreters or installing language extensions. The commands then run inside Ubuntu. If WSL is unavailable on a managed machine, ask teaching staff for an approved Linux environment.</p>
+</section>
 </section>
 <section id="open-a-terminal-and-identify-the-shell">
 <span id="linux-terminal"></span><h2>Open a terminal and identify the shell<a class="headerlink" href="#open-a-terminal-and-identify-the-shell" title="Link to this heading">#</a></h2>
-<p>The <strong>terminal</strong> is the window; the <strong>shell</strong> interprets commands inside it. Ubuntu desktops commonly launch a terminal with <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code>, or by searching for Terminal in the application menu. In Windows Terminal, choose your installed WSL distribution’s profile, not a PowerShell tab. On ChromeOS, open Terminal after enabling Linux. In VS Code, use Terminal &gt; New Terminal and check the selected profile and whether you are working locally or remotely.</p>
+<p>The <strong>terminal</strong> is the window; the <strong>shell</strong> interprets commands inside it. On an Ubuntu desktop, press <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code> or search for Terminal in the application menu. On ChromeOS, open Terminal after enabling Linux. In VS Code, choose <strong>Terminal → New Terminal</strong>; if you use a remote Linux environment, check that the window is connected to it.</p>
 <p>On macOS, use Spotlight (<code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">Space</span></code>) to find Terminal. Recent macOS installations normally start zsh, whereas these chapters use Bash. Enter <code class="docutils literal notranslate"><span class="pre">bash</span></code> to start a Bash session, then run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$BASH_VERSION</span><span class="s2">"</span>
 <span class="nb">pwd</span>
@@ -655,7 +663,7 @@
 <p>Try <code class="docutils literal notranslate"><span class="pre">Tab</span></code> and ordinary history recall first, in an interactive terminal rather than a notebook code cell. Read a recalled command before pressing Return. Do not put passwords or tokens in commands that may be recorded in shell history.</p>
 <section id="optional-history-prefix-search-in-bash">
 <span id="bash-history-prefix"></span><h3>Optional history-prefix search in Bash<a class="headerlink" href="#optional-history-prefix-search-in-bash" title="Link to this heading">#</a></h3>
-<p>The FoNS guide calls this “auto-complete”, but its example changes history search. Here we use <strong>your own</strong> Readline configuration, not <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or an edit to <code class="docutils literal notranslate"><span class="pre">/etc/inputrc</span></code>.</p>
+<p>Want Up and Down to find earlier commands that begin with what you have typed? Configure history-prefix search in <strong>your own</strong> Readline file. This does not change Tab completion, and needs neither <code class="docutils literal notranslate"><span class="pre">sudo</span></code> nor an edit to the system’s <code class="docutils literal notranslate"><span class="pre">/etc/inputrc</span></code>.</p>
 <ol class="arabic simple">
 <li><p>Check <code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">'%s\n'</span> <span class="pre">&quot;${INPUTRC:-$HOME/.inputrc}&quot;</span></code> in Bash. If <code class="docutils literal notranslate"><span class="pre">INPUTRC</span></code> is explicitly set, it overrides the usual path; understand that configuration before continuing with the default-path example below.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">~/.inputrc</span></code> exists, make a backup under an unused name and open it in your text editor. Keep its current settings. If you create it for the first time on Ubuntu, put <code class="docutils literal notranslate"><span class="pre">$include</span> <span class="pre">/etc/inputrc</span></code> at the top to retain system defaults. On another platform, include that file only if it exists. This is Readline syntax, not a shell command.</p></li>
@@ -724,7 +732,7 @@ bindkey<span class="w"> </span><span class="s1">'\eOB'</span><span class="w"> </
 <a class="reference internal image-reference" href="../_images/sudo.png"><img alt="sudo" src="../_images/sudo.png" style="width: 250px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">sudo</span></code> rules.</strong> <small>(Source: <a class="reference external" href="https://xkcd.com/149/">XKCD</a>)</small></span><a class="headerlink" href="#unix-sudo" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">sudo</span></code> rules.</strong> <small>(Source: <a class="reference external" href="https://xkcd.com/149/">XKCD</a>)</small></span><a class="headerlink" href="#unix-sudo" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -766,9 +774,8 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">remove</span> <span class="pre">PACKAGE</span></code> removes a named installed package but normally leaves its system configuration. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">purge</span> <span class="pre">PACKAGE</span></code> also removes package-managed configuration, not necessarily user-created files in home directories. Replace <code class="docutils literal notranslate"><span class="pre">PACKAGE</span></code> with a package you deliberately intend to remove; read the proposed dependency changes before confirming. <code class="docutils literal notranslate"><span class="pre">autoremove</span></code> deals with dependencies no longer needed and also deserves review.</p>
 <p>Do not remove your desktop’s video player or other preinstalled software merely to practise. For a hands-on exercise, use a disposable VM: install one small optional package, inspect its files with <code class="docutils literal notranslate"><span class="pre">dpkg</span> <span class="pre">-L</span> <span class="pre">PACKAGE</span></code>, and remove that same package after checking the proposed changes. Stop if the plan removes essential or unrelated software. A VM snapshot can help undo the experiment; it is not a backup of your working data.</p>
 </section>
-<section id="sources-and-verification">
-<span id="ubuntu-admin-resources"></span><h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/linux.html">Linux environment guide</a> (environment choices, installation and shell conveniences) and <a class="reference external" href="https://imperial-fons-computing.github.io/terminal.html">terminal guide</a>, alongside MQB’s relocated Ubuntu administration material. See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the source revision and full licence. MQB revision: 30 September 2026.</p>
+<section id="further-reading">
+<span id="ubuntu-admin-resources"></span><h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ubuntu.com/desktop/docs/en/latest/tutorial/install-ubuntu-desktop/">Ubuntu Desktop installation</a>: current installation and hardware guidance.</p></li>
 <li><p><a class="reference external" href="https://ubuntu.com/server/docs/how-to/software/package-management/">Ubuntu package management</a>: APT, dpkg and repository configuration.</p></li>
@@ -776,7 +783,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <li><p><a class="reference external" href="https://www.gnu.org/software/bash/manual/bash.html">Bash reference manual</a> and local <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">bash</span></code>: startup files, Readline and history.</p></li>
 <li><p><a class="reference external" href="https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html">zsh line editor</a>: zsh keybindings and history widgets.</p></li>
 </ul>
-<p>The user-local Bash examples were checked on Linux in a temporary home directory. Installation, partitioning, repositories and package changes were reviewed against documentation, not performed on the reviewer’s machine. zsh, macOS, Windows/WSL and ChromeOS setup were not runtime-tested. Return to the <a class="reference internal" href="../notebooks/unix.html"><span class="std std-doc">Unix lesson</span></a> or <a class="reference internal" href="../notebooks/shell-scripting.html"><span class="std std-doc">Shell Scripting</span></a> after any setup you need.</p>
+<p>See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the adapted material’s attribution, licence and limits of the setup checks. Return to the <a class="reference internal" href="../notebooks/unix.html"><span class="std std-doc">Unix lesson</span></a> or <a class="reference internal" href="../notebooks/shell-scripting.html"><span class="std std-doc">Shell Scripting</span></a> after any setup you need.</p>
 </section>
 </section>
 
@@ -846,7 +853,10 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-an-environment">Choose an environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-an-environment">Choose an environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubuntu-through-wsl">Ubuntu through WSL</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-identify-the-shell">Open a terminal and identify the shell</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-ubuntu-installation">Optional Ubuntu installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completion-and-command-history">Completion and command history</a><ul class="nav section-nav flex-column">
@@ -864,7 +874,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repositories-components-and-trust">Repositories, components and trust</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-a-downloaded-deb-only-when-needed">Install a downloaded .deb only when needed</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-packages-deliberately">Remove packages deliberately</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

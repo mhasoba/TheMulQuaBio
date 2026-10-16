@@ -550,7 +550,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-setup-check">A small setup check</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
             </nav>
         </div>
@@ -579,13 +579,13 @@
 <section id="install-vs-code-and-open-a-project">
 <h2>Install VS Code and open a project<a class="headerlink" href="#install-vs-code-and-open-a-project" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Install the current stable <a class="reference external" href="https://code.visualstudio.com/download">Visual Studio Code</a> for your operating system, or use the version provided on a managed course machine. Do not use an administrator account merely to install extensions for your own account.</p></li>
+<li><p>Install the current stable <a class="reference external" href="https://code.visualstudio.com/download">Visual Studio Code</a> for macOS or Linux, or use the version provided on a managed course machine. For Ubuntu through WSL, first follow <a class="reference internal" href="ubuntu-admin.html#ubuntu-wsl"><span class="std std-ref">Ubuntu through WSL</span></a> and connect the editor to Ubuntu. Do not use an administrator account merely to install extensions for your own account.</p></li>
 <li><p>Start VS Code and choose <strong>File → Open Folder…</strong>. Select the root of a disposable practice project or your own coursework project.</p></li>
 <li><p>Open <strong>Terminal → New Terminal</strong> and check where it starts:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
 </pre></div>
 </div>
-<p>On Windows PowerShell, use <code class="docutils literal notranslate"><span class="pre">Get-Location</span></code>. If this is not the folder you opened, use the terminal’s <code class="docutils literal notranslate"><span class="pre">cd</span></code> command deliberately rather than assuming an editor button has changed every process’s directory.</p>
+<p>The result should be the project root you opened. If it is not, use <code class="docutils literal notranslate"><span class="pre">cd</span></code> to move there before running scripts; an editor button does not necessarily change the terminal’s directory.</p>
 </li>
 <li><p>When VS Code asks whether you trust a folder, trust only work you obtained from a course, collaborator or source you understand. Restricted Mode can prevent extensions, tasks and debugging configurations from running unfamiliar code. Do not make a folder globally trusted just to remove the prompt.</p></li>
 </ol>
@@ -620,7 +620,7 @@
 <a class="reference internal image-reference" href="../_images/vscode-source-control.png"><img alt="VS Code Source Control view showing staged and unstaged files beside a side-by-side diff." src="../_images/vscode-source-control.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>Source Control view and diff editor.</strong> <small>(Source: <a class="reference external" href="https://code.visualstudio.com/docs/sourcecontrol/overview">VS Code documentation</a>; screenshot licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/us/">CC BY 3.0 US</a>.)</small></span><a class="headerlink" href="#vscode-source-control" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text"><strong>Source Control view and diff editor.</strong> <small>(Source: <a class="reference external" href="https://code.visualstudio.com/docs/sourcecontrol/overview">VS Code documentation</a>; screenshot licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/us/">CC BY 3.0 US</a>.)</small></span><a class="headerlink" href="#vscode-source-control" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -634,7 +634,7 @@
 </pre></div>
 </div>
 <p>The displayed executable should be inside the intended <code class="docutils literal notranslate"><span class="pre">.venv</span></code>. Also run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">--version</span></code> in the terminal; it should name that same environment. If it does not, return to <a class="reference internal" href="python-environments.html#python-identity"><span class="std std-ref">Verify Python and pip agree</span></a> rather than installing packages into an uncertain interpreter.</p>
-<p>Use the editor’s Python run control for a small script, then make the working directory explicit in your explanation of any input paths. To inspect a fault, set a breakpoint in the left margin and choose <strong>Python Debugger: Debug Python File</strong>, or use <strong>Run and Debug</strong>. The debugger normally uses the selected interpreter. A <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> is optional; do not copy a generic configuration until you know why the script needs it.</p>
+<p>Use the editor’s Python run control for a small script. Print <code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code> from <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> to check where it runs before using relative input paths. To inspect a fault, set a breakpoint in the left margin and choose <strong>Python Debugger: Debug Python File</strong>, or use <strong>Run and Debug</strong>. The debugger normally uses the selected interpreter. A <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> is optional; do not copy a generic configuration until you know why the script needs it.</p>
 </section>
 <section id="jupyter-notebooks-choose-a-kernel-deliberately">
 <h2>Jupyter notebooks: choose a kernel deliberately<a class="headerlink" href="#jupyter-notebooks-choose-a-kernel-deliberately" title="Link to this heading">#</a></h2>
@@ -665,7 +665,7 @@
 </pre></div>
 </div>
 <p>The extension may ask to install or update its bundled <code class="docutils literal notranslate"><span class="pre">sess</span></code> session-support package; read the package prompt before accepting. <code class="docutils literal notranslate"><span class="pre">languageserver</span></code> provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.</p>
-<p>Open an <code class="docutils literal notranslate"><span class="pre">.R</span></code> file and open the Command Palette with <strong>Ctrl+Shift+P</strong> on Linux or Windows (<strong>Cmd+Shift+P</strong> on macOS). Run <strong>R: Create R Terminal</strong>. The extension’s session watcher should connect automatically, with the attached R process shown in the status bar. Select the <strong>R</strong> icon in the Activity Bar to open the <strong>Workspace</strong> viewer, then check the session before sending coursework code to it:</p>
+<p>Open an <code class="docutils literal notranslate"><span class="pre">.R</span></code> file and open the Command Palette with <strong>Ctrl+Shift+P</strong> on Linux (<strong>Cmd+Shift+P</strong> on macOS). Run <strong>R: Create R Terminal</strong>. The extension’s session watcher should connect automatically, with the attached R process shown in the status bar. Select the <strong>R</strong> icon in the Activity Bar to open the <strong>Workspace</strong> viewer, then check the session before sending coursework code to it:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">R.home</span><span class="p">()</span>
 <span class="nf">.libPaths</span><span class="p">()</span>
 <span class="nf">Sys.which</span><span class="p">(</span><span class="s">"R"</span><span class="p">)</span>
@@ -710,7 +710,7 @@
 <h3>Add a keyboard shortcut to create an R terminal<a class="headerlink" href="#add-a-keyboard-shortcut-to-create-an-r-terminal" title="Link to this heading">#</a></h3>
 <p>You can assign a shortcut to <strong>R: Create R Terminal</strong> instead of opening the Command Palette each time:</p>
 <ol class="arabic simple">
-<li><p>Run <strong>Preferences: Open Keyboard Shortcuts</strong> from the Command Palette, or press <strong>Ctrl+K</strong>, then <strong>Ctrl+S</strong> on Linux or Windows (<strong>Cmd+K</strong>, then <strong>Cmd+S</strong> on macOS). These are two successive key combinations, not one simultaneous combination.</p></li>
+<li><p>Run <strong>Preferences: Open Keyboard Shortcuts</strong> from the Command Palette, or press <strong>Ctrl+K</strong>, then <strong>Ctrl+S</strong> on Linux (<strong>Cmd+K</strong>, then <strong>Cmd+S</strong> on macOS). These are two successive key combinations, not one simultaneous combination.</p></li>
 <li><p>Search for <strong>R: Create R Terminal</strong>.</p></li>
 <li><p>Select the <strong>+</strong> beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press <strong>Ctrl+K</strong>, then <strong>Ctrl+Shift+R</strong>, and confirm with <strong>Enter</strong>. On macOS, use <strong>Cmd+K</strong>, then <strong>Cmd+Shift+R</strong>.</p></li>
 <li><p>Right-click the entry and choose <strong>Show Same Keybindings</strong>. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.</p></li>
@@ -725,7 +725,7 @@
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means <strong>Ctrl+K</strong>, followed by <strong>Ctrl+Shift+R</strong>; on macOS use <code class="docutils literal notranslate"><span class="pre">&quot;cmd+k</span> <span class="pre">cmd+shift+r&quot;</span></code> instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid <strong>Ctrl+K</strong>, then <strong>R</strong>, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for <code class="docutils literal notranslate"><span class="pre">settings.json</span></code>. See the <a class="reference external" href="https://code.visualstudio.com/docs/configure/keybindings">VS Code keybinding guide</a> and the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts">R extension’s keyboard-shortcut documentation</a>.</p>
+<p>If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means <strong>Ctrl+K</strong>, followed by <strong>Ctrl+Shift+R</strong>; on macOS use <code class="docutils literal notranslate"><span class="pre">&quot;cmd+k</span> <span class="pre">cmd+shift+r&quot;</span></code> instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. This is a keyboard-shortcut configuration, not an entry for <code class="docutils literal notranslate"><span class="pre">settings.json</span></code>. See the <a class="reference external" href="https://code.visualstudio.com/docs/configure/keybindings">VS Code keybinding guide</a> and the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts">R extension’s keyboard-shortcut documentation</a>.</p>
 <p>Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use <strong>R: Activate R Session</strong> to select the intended session if necessary.</p>
 </section>
 <section id="optional-layouts-and-alternative-viewers">
@@ -736,19 +736,19 @@
 </section>
 <section id="troubleshooting-and-other-r-workflows">
 <h3>Troubleshooting and other R workflows<a class="headerlink" href="#troubleshooting-and-other-r-workflows" title="Link to this heading">#</a></h3>
-<p>If <strong>R: Create R Terminal</strong> cannot find R, first run <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">--version</span></code> in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code> value to the exact <code class="docutils literal notranslate"><span class="pre">R.exe</span></code> path, for example:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">"r.executablePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"</span>
-<span class="p">}</span>
+<p>If <strong>R: Create R Terminal</strong> cannot find R, run these commands in VS Code’s integrated terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>R
+R<span class="w"> </span>--version
 </pre></div>
 </div>
-<p>Use your installed version and path; do not paste the example unchanged. Version 3.x deprecates the older platform-specific <code class="docutils literal notranslate"><span class="pre">r.rpath.*</span></code> and <code class="docutils literal notranslate"><span class="pre">r.rterm.*</span></code> settings in favour of <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code> for vanilla R and <code class="docutils literal notranslate"><span class="pre">r.consolePath</span></code> for an optional alternative interactive console. On macOS or Linux, resolve the path visible to VS Code’s terminal before adding any extension setting. See <a class="reference internal" href="r-setup.html#r-setup"><span class="std std-ref">R Installation and User Libraries</span></a> for installation and user-library troubleshooting.</p>
+<p>The first command should print R’s full path, and the second should report its version. If R is missing here too, return to <a class="reference internal" href="r-setup.html#r-setup"><span class="std std-ref">R Installation and User Libraries</span></a>. If both work but the extension still cannot find R, open Settings, search for <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code>, and enter the full path printed by <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">-v</span> <span class="pre">R</span></code>. Do not copy a path from another computer.</p>
+<p>Version 3.x uses <code class="docutils literal notranslate"><span class="pre">r.executablePath</span></code> for R’s background processes and, by default, its interactive console. Set <code class="docutils literal notranslate"><span class="pre">r.consolePath</span></code> only if you deliberately use a different interactive console. These replace the older <code class="docutils literal notranslate"><span class="pre">r.rpath.*</span></code> and <code class="docutils literal notranslate"><span class="pre">r.rterm.*</span></code> settings; see the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Extension-settings">extension settings documentation</a>. If you use a remote Linux environment, configure the extension in that connected window, not in an unrelated local window.</p>
 <p>R debugging is separate from the R language extension and needs its own supported debugger and prerequisites. Do not claim a script has been debugged merely because it ran. An R <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebook uses an IRkernel chosen in the notebook kernel picker; it is distinct from sending code to an <code class="docutils literal notranslate"><span class="pre">.R</span></code> terminal.</p>
 </section>
 </section>
 <section id="a-small-setup-check">
 <h2>A small setup check<a class="headerlink" href="#a-small-setup-check" title="Link to this heading">#</a></h2>
-<p>Before beginning assessed work, use a scratch project with synthetic data:</p>
+<p>Before beginning an analysis, try these checks in a scratch project with a few made-up records:</p>
 <ol class="arabic simple">
 <li><p>Open the project root and verify the terminal location.</p></li>
 <li><p>Run a short Python script using the selected project interpreter and print <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code>.</p></li>
@@ -757,12 +757,14 @@
 </ol>
 <p>If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.</p>
 </section>
-<section id="sources-and-verification">
-<span id="vscode-setup-resources"></span><h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/vscode.html">VS Code guidance</a>; see <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the source revision and licence. MQB revision: 12 October 2026.</p>
-<p>Operational references: <a class="reference external" href="https://code.visualstudio.com/docs/setup/setup-overview">VS Code installation</a>, <a class="reference external" href="https://code.visualstudio.com/docs/editing/workspaces/workspace-trust">workspace trust</a>, <a class="reference external" href="https://code.visualstudio.com/docs/languages/python">Python in VS Code</a>, <a class="reference external" href="https://code.visualstudio.com/docs/python/environments">Python environments</a>, <a class="reference external" href="https://code.visualstudio.com/docs/datascience/jupyter-kernel-management">Jupyter kernel selection</a>, <a class="reference external" href="https://code.visualstudio.com/docs/python/debugging">Python debugging</a>, and the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=REditorSupport.r">REditorSupport R extension</a>.</p>
-<p>R viewer guidance checked against the <a class="reference external" href="https://github.com/REditorSupport/vscode-R/blob/master/CHANGELOG.md">v3.0 changelog</a>, <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface">Workspace viewer documentation</a>, <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers">interactive viewer documentation</a> and linked extension/Positron pages on 12 October 2026. This was a documentation check, not a runtime test of the viewers or optional applications.</p>
-<p>Verified locally on Linux on 30 September 2026: VS Code 1.139.1 and R 4.3.3 were available. No extension was installed into the maintainer’s editor profile, and no graphical editor, macOS, Windows or R-notebook workflow was runtime-tested. Check current official support and extension requirements on your own platform.</p>
+<section id="further-reading">
+<span id="vscode-setup-resources"></span><h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://code.visualstudio.com/docs/setup/setup-overview">VS Code installation</a> and <a class="reference external" href="https://code.visualstudio.com/docs/editing/workspaces/workspace-trust">workspace trust</a>.</p></li>
+<li><p><a class="reference external" href="https://code.visualstudio.com/docs/python/environments">Python environments</a>, <a class="reference external" href="https://code.visualstudio.com/docs/python/debugging">debugging</a> and <a class="reference external" href="https://code.visualstudio.com/docs/datascience/jupyter-kernel-management">Jupyter kernel selection</a>.</p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=REditorSupport.r">R extension</a>, <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface">Workspace viewer</a> and <a class="reference external" href="https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers">interactive viewers</a>.</p></li>
+</ul>
+<p>See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the adapted material’s attribution, licence and limits of the setup checks.</p>
 </section>
 </section>
 
@@ -847,7 +849,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-setup-check">A small setup check</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

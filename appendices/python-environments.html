@@ -542,7 +542,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-jupyter-interface">Add a Jupyter interface</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-and-recreate-an-environment">Record and recreate an environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-conda-route">Optional conda route</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
             </nav>
         </div>
@@ -556,8 +556,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="python-installation-and-environments">
 <span id="python-environments"></span><h1>Python Installation and Environments<a class="headerlink" href="#python-installation-and-environments" title="Link to this heading">#</a></h1>
-<p>A Python <a class="reference internal" href="terms.html#id8"><span class="std std-ref">interpreter</span></a> is the program that runs Python code. Use a separate Python environment for your coursework or project so its packages are kept with that project. The default route here is a supported Python 3 interpreter, the standard-library <code class="docutils literal notranslate"><span class="pre">venv</span></code> tool and interpreter-bound <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Anaconda is not required; <a class="reference internal" href="#python-conda"><span class="std std-ref">Optional conda route</span></a> describes an alternative when your course or project already uses conda.</p>
-<p>These are <strong>student runtime</strong> instructions. The MQB repository’s own <code class="docutils literal notranslate"><span class="pre">.venv</span></code> and <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> support building the book; do not replace or upgrade them to follow this page. Work in your own coursework directory, keeping scripts, notebooks, data and results outside the environment directory.</p>
+<p>A Python <a class="reference internal" href="terms.html#id8"><span class="std std-ref">interpreter</span></a> is the program that runs Python code. Different projects can need different package versions, so give each project its own environment. Here we use Python’s built-in <code class="docutils literal notranslate"><span class="pre">venv</span></code> tool to create one, then install packages with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span></code> so they go to that environment’s Python. Anaconda is not required; <a class="reference internal" href="#python-conda"><span class="std std-ref">Optional conda route</span></a> describes an alternative when your course or project already uses conda.</p>
+<p>Work in your own learning project, not the downloaded MQB book repository. That repository’s <code class="docutils literal notranslate"><span class="pre">.venv</span></code> and <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> are for building the book; leave them alone. Keep your scripts, notebooks, data and results outside your project’s environment directory.</p>
 <section id="choose-and-check-an-interpreter">
 <span id="python-interpreter"></span><h2>Choose and check an interpreter<a class="headerlink" href="#choose-and-check-an-interpreter" title="Link to this heading">#</a></h2>
 <p>Use the Python version specified by your course or project when one is given. Otherwise choose a stable, supported Python 3 release for which the packages you need provide compatible builds. Check the <a class="reference external" href="https://devguide.python.org/versions/">Python release status</a>; a newly released or prerelease interpreter is not automatically the best choice for an existing scientific project. Record the version you actually use.</p>
@@ -574,12 +574,6 @@
 <tr class="row-odd"><td class="text-left"><p>macOS</p></td>
 <td class="text-left"><p>Do not assume Python is preinstalled or suitable for coursework. Use the official <a class="reference external" href="https://www.python.org/downloads/macos/">python.org installer</a> or the Python formula from <a class="reference internal" href="macos-tools.html#macos-tools"><span class="std std-ref">macOS Tools and Homebrew</span></a>; inspect existing installations before adding another.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>Native Windows</p></td>
-<td class="text-left"><p>Follow Python’s current <a class="reference external" href="https://docs.python.org/3/using/windows.html">Windows installation guide</a>. It now documents the Python install manager from <a class="reference external" href="http://python.org">python.org</a> or the Microsoft Store. Distinguish that manager from the older <code class="docutils literal notranslate"><span class="pre">py</span></code> launcher; use <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">--version</span></code> to check your selected interpreter.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Windows/WSL or ChromeOS Linux</p></td>
-<td class="text-left"><p>Choose the Linux environment first via <a class="reference internal" href="ubuntu-admin.html#ubuntu-environment"><span class="std std-ref">Choose an environment</span></a>, then use its Linux interpreter and paths. A Windows Python environment is not interchangeable with one inside WSL. ChromeOS’s Linux container is usually Debian, not Ubuntu.</p></td>
-</tr>
 <tr class="row-even"><td class="text-left"><p>Managed machine</p></td>
 <td class="text-left"><p>Use the institution’s supplied interpreter or ask IT for the required packages. Administrator access is not needed just to create an environment in a writable directory.</p></td>
 </tr>
@@ -592,35 +586,29 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </pre></div>
 </div>
 <p>Other distributions and separately installed Python versions may need differently named packages. Read any <code class="docutils literal notranslate"><span class="pre">ensurepip</span></code>/<code class="docutils literal notranslate"><span class="pre">venv</span></code> error rather than trying unrelated system changes.</p>
-<p>In a Linux/macOS terminal, inspect the interpreter you intend to use:</p>
+<p>In your terminal, check which Python will run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>python3
 python3<span class="w"> </span>--version
 python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import sys; print(sys.executable)"</span>
 </pre></div>
 </div>
-<p>On native Windows, use <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">--version</span></code> and <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">sys;</span> <span class="pre">print(sys.executable)&quot;</span></code>. With the new install manager, <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">list</span></code> lists runtimes; the older launcher supports <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">--list</span></code>. Follow the corresponding guide if commands resolve unexpectedly. You can always create an environment using the full path of a verified Python executable.</p>
+<p>The first and third commands should identify the Python installation you intend to use. If several versions are installed, you can use the full path of the chosen Python executable when creating the environment.</p>
 </section>
 <section id="create-and-activate-one-environment">
 <span id="python-venv"></span><h2>Create and activate one environment<a class="headerlink" href="#create-and-activate-one-environment" title="Link to this heading">#</a></h2>
 <p>In your terminal, change to your <strong>own coursework/project root</strong>: the main folder for that piece of work, not its <code class="docutils literal notranslate"><span class="pre">code</span></code> subdirectory. Start outside another active environment (<code class="docutils literal notranslate"><span class="pre">deactivate</span></code> for <code class="docutils literal notranslate"><span class="pre">venv</span></code>, or <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> for conda). The examples use <code class="docutils literal notranslate"><span class="pre">.venv</span></code> in this current directory. If it already exists, inspect and reuse it; do not recreate an unknown environment over the top of it.</p>
-<p>For <strong>Bash or zsh on Linux/macOS/WSL</strong>, create it once:</p>
+<p>In <strong>Bash or zsh</strong>, create it once:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 </pre></div>
 </div>
-<p>For <strong>native Windows PowerShell</strong>, create it once:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
-<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</pre></div>
-</div>
-<p>For Windows Command Prompt, activation is <code class="docutils literal notranslate"><span class="pre">.venv\Scripts\activate.bat</span></code>. Git Bash with Windows Python uses <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">.venv/Scripts/activate</span></code>; it is not the same as WSL’s Linux environment.</p>
 <p>Activation changes command lookup in the current terminal so that this project’s Python is used first. In each new terminal, return to the same project root and run <strong>only the activation command</strong>, not environment creation. For other shells, consult the <a class="reference external" href="https://docs.python.org/3/library/venv.html#how-venvs-work">venv activation table</a>.</p>
-<p>If PowerShell blocks activation, do not change machine-wide or persistent execution policy just for this lesson. Activation is optional: run the environment’s Python directly instead:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span> <span class="p">-</span><span class="n">-version</span>
-<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-c</span> <span class="s2">"import sys; print(sys.executable)"</span>
+<p>Activation is optional. From the project root, you can run the environment’s Python directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--version
+.venv/bin/python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import sys; print(sys.executable)"</span>
 </pre></div>
 </div>
-<p>Use that executable in place of <code class="docutils literal notranslate"><span class="pre">python</span></code> in subsequent commands when working without activation. On Linux/macOS the equivalent is <code class="docutils literal notranslate"><span class="pre">.venv/bin/python</span></code> from the project root. With a quoted PowerShell executable path, use the call operator <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">.venv/bin/python</span></code> in place of <code class="docutils literal notranslate"><span class="pre">python</span></code> in subsequent commands when working without activation.</p>
 </section>
 <section id="verify-python-and-pip-agree">
 <span id="python-identity"></span><h2>Verify Python and pip agree<a class="headerlink" href="#verify-python-and-pip-agree" title="Link to this heading">#</a></h2>
@@ -630,7 +618,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--version
 </pre></div>
 </div>
-<p>For a <code class="docutils literal notranslate"><span class="pre">venv</span></code>, <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> and <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code> should point into your project’s <code class="docutils literal notranslate"><span class="pre">.venv</span></code>; these show the Python program and environment currently in use. <code class="docutils literal notranslate"><span class="pre">sys.base_prefix</span></code> identifies the underlying Python installation and should differ. The path printed by <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">--version</span></code> should also be inside that environment. A changed terminal prompt alone is not proof. A notebook or editor may select a different interpreter independently; check <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> there too.</p>
+<p>For a <code class="docutils literal notranslate"><span class="pre">venv</span></code>, <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> and <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code> should point into your project’s <code class="docutils literal notranslate"><span class="pre">.venv</span></code>; these show the Python program and environment currently in use. <code class="docutils literal notranslate"><span class="pre">sys.base_prefix</span></code> identifies the underlying Python installation and should differ from <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code>. The path printed by <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">--version</span></code> should also be inside that environment. A changed terminal prompt alone is not proof. A notebook or editor may select a different interpreter independently; check <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> there too.</p>
 <p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span></code> asks the Python you just inspected to run <code class="docutils literal notranslate"><span class="pre">pip</span></code>, avoiding ambiguity between separate <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">pip3</span></code> and Python installations. An <em>externally managed environment</em> error normally means you are trying to modify a distributor-managed Python rather than your project environment. Check the paths and activate or recreate the intended environment; do not work around it with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">--break-system-packages</span></code> or a blanket <code class="docutils literal notranslate"><span class="pre">--user</span></code> installation.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -639,7 +627,7 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 </section>
 <section id="install-the-packages-you-need">
 <span id="python-packages"></span><h2>Install the packages you need<a class="headerlink" href="#install-the-packages-you-need" title="Link to this heading">#</a></h2>
-<p>With identity checks passing, a small starting set for the Python lessons is:</p>
+<p>Once these commands all identify the intended environment, install the small starting set for the Python lessons:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>matplotlib<span class="w"> </span>ipython
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>check
 python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import numpy, matplotlib; print(numpy.__version__); print(matplotlib.__version__)"</span>
@@ -682,7 +670,7 @@ python<span class="w"> </span>--version
 </pre></div>
 </div>
 <p>Review the file before sharing: it can contain local paths or private package URLs. Record the Python version, operating system, relevant external tools and direct dependencies alongside it. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span></code> is a snapshot, not a cross-platform lockfile or a guarantee that an analysis is reproducible.</p>
-<p>Try recreation alongside the original, using the <strong>same chosen base interpreter</strong> and a new name such as <code class="docutils literal notranslate"><span class="pre">.venv-recreated</span></code>. On Linux/macOS, after recording dependencies:</p>
+<p>Try recreating the environment alongside the original, using the <strong>same chosen base interpreter</strong> and a new name such as <code class="docutils literal notranslate"><span class="pre">.venv-recreated</span></code>. After recording dependencies:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
 python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv-recreated
 <span class="nb">source</span><span class="w"> </span>.venv-recreated/bin/activate
@@ -690,7 +678,7 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>check
 </pre></div>
 </div>
-<p>If <code class="docutils literal notranslate"><span class="pre">python3</span></code> now names a different base interpreter, use the verified original interpreter’s path instead. Native Windows uses <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">.venv-recreated</span></code> and the matching Windows activation command above. Repeat the identity/import checks and run a small trusted script or notebook before retiring the old environment. Keep the dependency record in your project; it is not the MQB book-build requirements file.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">python3</span></code> now names a different base interpreter, use the original interpreter’s path instead. Repeat the Python, pip and import checks above, then run a small trusted script or notebook before retiring the old environment. Keep the dependency record in your project; it is not the MQB book-build requirements file.</p>
 <p>When finished, <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> leaves the current <code class="docutils literal notranslate"><span class="pre">venv</span></code> without deleting it or stopping running notebooks. To remove an obsolete environment, first stop its kernels/servers, confirm the exact directory contains only the disposable environment, then remove that directory using your file manager. Do not delete a whole coursework folder. Remove obsolete kernel registrations separately as explained in the Jupyter appendix.</p>
 </section>
 <section id="optional-conda-route">
@@ -706,10 +694,15 @@ conda<span class="w"> </span>list
 <p>Review the solver’s Python version and package plan before confirming; use the version required by your project when specified. Do not install coursework packages into <code class="docutils literal notranslate"><span class="pre">base</span></code> or nest an activated <code class="docutils literal notranslate"><span class="pre">venv</span></code> inside conda. Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">notebook</span> <span class="pre">ipykernel</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">jupyterlab</span> <span class="pre">ipykernel</span></code> in the chosen environment for Jupyter. If pip is genuinely needed, install <code class="docutils literal notranslate"><span class="pre">pip</span></code> into that environment with conda and use <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span></code>; follow conda’s <a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-environments.html#using-pip-in-an-environment">guidance on mixing package managers</a>. Prefer recreating an environment to repeatedly alternating conda and pip mutations.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> when finished. For sharing/recreation, follow conda’s environment export documentation; a conda environment file records information that <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span></code> cannot capture.</p>
 </section>
-<section id="sources-and-verification">
-<span id="python-setup-resources"></span><h2>Sources and verification<a class="headerlink" href="#sources-and-verification" title="Link to this heading">#</a></h2>
-<p>Adapted from the FoNS <a class="reference external" href="https://imperial-fons-computing.github.io/python.html#python-virtual-environments">Python installation and virtual environments</a> and <a class="reference external" href="https://imperial-fons-computing.github.io/jupyter.html#installing">Jupyter installation</a> guidance. See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for source revision and MIT licence. MQB revision: 30 September 2026.</p>
-<p>Operational references: <a class="reference external" href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/">PyPA pip/venv guide</a>, <a class="reference external" href="https://docs.python.org/3/library/venv.html">Python venv</a>, <a class="reference external" href="https://packaging.python.org/en/latest/specifications/externally-managed-environments/">externally managed environments</a>, <a class="reference external" href="https://jupyter.org/install">Jupyter installation</a> and the platform/conda sources linked above. Platform-specific procedures require checking current official support; Linux validation does not verify Windows, macOS or conda behaviour.</p>
+<section id="further-reading">
+<span id="python-setup-resources"></span><h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/">PyPA pip and virtual environments guide</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/venv.html">Python’s venv documentation</a>.</p></li>
+<li><p><a class="reference external" href="https://packaging.python.org/en/latest/specifications/externally-managed-environments/">Externally managed Python environments</a>.</p></li>
+<li><p><a class="reference external" href="https://jupyter.org/install">Jupyter installation</a>.</p></li>
+</ul>
+<p>See <a class="reference internal" href="tooling.html#setup-attribution"><span class="std std-ref">Setup Guide Attribution</span></a> for the adapted material’s attribution, licence and limits of the setup checks.</p>
 </section>
 </section>
 
@@ -786,7 +779,7 @@ conda<span class="w"> </span>list
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-jupyter-interface">Add a Jupyter interface</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-and-recreate-an-environment">Record and recreate an environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-conda-route">Optional conda route</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-verification">Sources and verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 
