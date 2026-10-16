@@ -171,7 +171,9 @@ Many IDEs have graphical user interfaces (GUIs, or "gooeys") with features such 
 
 ### Assessment
 
-Your computing coursework may be assessed. If you have been told that it will, please see [this Appendix](./notebooks/appendix-assessment.md) if you are a *Masters student*. If you are an *Undergrad student*, you may have a computer based test, the format for which will be explained to you elsewhere.
+The exercises and practicals in this book support both taught courses and independent study. Your course handbook and released assignment briefs specify which work is assessed, the deadlines and submission arrangements, and the rules on collaboration, outside help and AI use. Chapter examples and extensions do not add to those assessment requirements.
+
+Read the [assessment appendix](./notebooks/appendix-assessment.md) for general guidance on coursework, reproducible workflows and academic integrity. Course-specific assessment instructions take precedence over the general guidance in this book.
 
 ---
 
