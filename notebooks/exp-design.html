@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Experimental design and Data exploration &#8212; MulQuaBio</title>
+    <title>Experimental design and data exploration &#8212; MulQuaBio</title>
   
   
   
@@ -241,7 +241,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data-r.html">Data Management and Visualization in R</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Experimental design and Data exploration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Experimental design and data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anova.html">Linear Models: Analysis of variance</a></li>
@@ -576,7 +576,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Experimental design and Data exploration</h1>
+    <h1>Experimental design and data exploration</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -623,7 +623,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="experimental-design-and-data-exploration">
-<h1>Experimental design and Data exploration<a class="headerlink" href="#experimental-design-and-data-exploration" title="Link to this heading">#</a></h1>
+<h1>Experimental design and data exploration<a class="headerlink" href="#experimental-design-and-data-exploration" title="Link to this heading">#</a></h1>
 <div class="admonition-learning-goals admonition">
 <p class="admonition-title">Learning goals</p>
 <p><strong>By the end of this chapter you should be able to:</strong></p>
@@ -632,33 +632,26 @@
 <li><p>Identify experimental units, treatments, controls, and response variables in a study design</p></li>
 <li><p>Explain the critical roles of replication, randomisation, and blocking</p></li>
 <li><p>Recognise and avoid common design pitfalls: pseudoreplication, confounding, inadequate controls</p></li>
-<li><p>Calculate sample size requirements for statistical power</p></li>
+<li><p>Explain how sample size affects precision and statistical power</p></li>
+<li><p>Use exploratory summaries and plots to check data in the light of the study design</p></li>
 <li><p>Critique real-world experimental designs for validity and inferential strength</p></li>
 </ul>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Prerequisites</p>
-<p><strong>Before starting this chapter, you should:</strong></p>
+<p>This chapter follows <a class="reference internal" href="data-r.html"><span class="std std-doc">Data management and visualisation in R</span></a>. Before starting, you should be able to:</p>
 <ul class="simple">
-<li><p>Have covered data manipulation and plotting in R (see <a class="reference internal" href="data-r.html"><span class="doc std std-doc">Data wrangling in R</span></a>)</p></li>
-<li><p>Understand mean, variance, and standard error</p></li>
-<li><p>Have a conceptual grasp of sampling and population inference</p></li>
+<li><p>import and inspect a dataset without altering the raw file;</p></li>
+<li><p>calculate simple summaries and make basic plots in R; and</p></li>
+<li><p>distinguish a measured zero from a missing observation.</p></li>
 </ul>
 </div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>In this chapter you will learn how to use R to explore your data and determine appropriate statistical analyses.</p>
-<p>Ideally, you would like to design experiments (manipulations and/or observations) that are appropriate for the question you want to answer. However, you still need to explore you data to determine what kind of statistical analyses are appropriate for your data, because:</p>
-<p>(a) Your experiments or observations may not go as planned (do they ever?), and</p>
-<p>(b) You might have somebody else’s data to analyse.</p>
-<p>By the time you have worked through this chapter, you should be able to:</p>
-<ul class="simple">
-<li><p>Provided sufficient information is available, be able to judge whether the sampling design used to generate a particular dataset was appropriate</p></li>
-<li><p>Calculate basic statistical measures on your data to determine its properties.</p></li>
-<li><p>Determine if your sample sizes are adequate, especially for a specific statistical test.</p></li>
-</ul>
-<p>We are going to start off with the simplest of scenarios for statistical testing — that you want to determine whether a sample, or a pair of samples meet some expectation (hypothesis) or not.</p>
-<p>First, some let’s revisit some key concepts and terminology.</p>
+<p>In <a class="reference internal" href="data-r.html"><span class="std std-doc">the previous chapter</span></a>, you turned raw observations into checked tables and informative figures. That workflow can reveal a pattern, but it cannot tell you on its own what population the pattern represents, whether a treatment caused it, or which observations count as independent evidence. Those questions depend on how the data were generated.</p>
+<p>The Pound Hill practical gave us a glimpse of this. We calculated richness for each quadrat, but compared cultivation treatments using plots because cultivation was assigned at the plot level. Treating every quadrat as an independent treatment replicate would make the evidence look stronger than it is. That is a question of experimental design, not an R command.</p>
+<p>We now move from describing data to reasoning about inference. We will connect biological questions to hypotheses, populations, samples, experimental units and response variables; examine replication, randomisation and sample size; and then use exploratory summaries and plots to ask whether the observed data fit the question and design. Experiments rarely go exactly to plan (do they ever?), and you may also inherit data collected by somebody else, so both stages matter.</p>
+<p>Let us begin with the statistical language needed to make those links precise.</p>
 <section id="some-statistical-parlance">
 <span id="exp-design-some-statistical-parlance"></span><h3>Some statistical parlance<a class="headerlink" href="#some-statistical-parlance" title="Link to this heading">#</a></h3>
 <p>The following terms are important for you to get familiar with:</p>
@@ -751,7 +744,7 @@
 <li><p><strong>Continuous numeric</strong>: Data that can take decimal values (real numbers) such as human height or weight. These may be unbounded (any value between negative infinity to positive infinity), or bounded (e.g., between or zero and some upper positive number) like human weight. This is the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
 <li><p><strong>Discrete numeric</strong>: Integer (whole) numbers such as counts of individuals in a population, e.g., The number of bacteria in a ml of pond water. This is the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type in R.</p></li>
 <li><p><strong>Percentage (proportion)</strong>: A particular kind of numeric data that is strictly bounded between 0 and 100. The fact that you can never get samples of percentages that exceed these bounds makes such data tricky to analyse. This also falls under the <code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">real</span></code> data type in R.</p></li>
-<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference internal" href="data-r.html#Basic-plotting-commands"><span class="std std-ref">used previously</span></a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
+<li><p><strong>Categorical</strong>: Consisting of a fixed number of discrete categories. These are typically stored as a <em>factor</em> in R, with the categories stored as <em>levels</em> in character (string) data type format. For example, the factor “Type.of.feeding.interaction” from the predator-prey dataset you have <a class="reference internal" href="data-r.html#data-exploration-with-basic-plotting"><span class="std std-ref">used previously</span></a> had five levels: “insectivorous”, “piscivorous”, “planktivorous”, “predacious”, and “predacious/piscivorous”.</p></li>
 <li><p><strong>Binary (presence/absence)</strong>: A special type of categorical data are binary, where only two categories/states/values are possible: (1, 0) (or “present”, “absent”) (e.g., a disease symptom). These may be stored as integer, character, or boolean (<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>/<code class="docutils literal notranslate"><span class="pre">FALSE</span></code>) in R.</p></li>
 </ul>
 <p>While designing experiments or exploring data, you need to keep in mind that each data type will often be best-represented by a particular <em>statistical distribution</em>. For example, continuous numeric data are <em>often</em> normally distributed. On the other hand, count data are likely to be distributed according to the Poisson distribution.</p>
@@ -912,29 +905,24 @@
 </a>
 </div>
 </div>
-<p>rule 2 above states that if I was to repeat even <span class="math notranslate nohighlight">\(n = 5\)</span> sufficient number of times, you would get a good <em>estimate</em> of mean (= 0) and standard deviation (= 1) of the normal distribution we sampled from. Try doing it. You can take increasing numbers of samples of 5, take their mean, and check how close to get to 0 as you increase your number of samples of 5.</p>
-<p>If you give due regard to the two rules of experimental design above, and consider the type of distribution your population of interest follows, you will have taken some basic, important steps towards designing an effective study.</p>
-<p>A more rigorous method for designing experiments is to perform a <a class="reference external" href="https://en.wikipedia.org/wiki/Power_(statistics)">power analysis</a>. Power analyses allow you to estimate the minimum sample size required to be able to detect (while minimizing Type I error) an effect of a given size. Covering this is outside the scope of the current course, but you might want to have a look at <a class="reference external" href="https://www.statmethods.net/stats/power.html">this resource</a>.</p>
-<p>OK, so you have performed your experiments or field sampling, or some data have fallen into your lap. Let’s move on to data exploration.</p>
+<p>Rule 2 above states that if you repeat even <span class="math notranslate nohighlight">\(n = 5\)</span> a sufficient number of times, the distribution of sample means will centre on the population mean (= 0). Try it: draw an increasing number of samples of five, calculate the mean of each sample, and see what happens to the distribution of those means.</p>
+<p>Larger samples can improve precision, but sample size cannot rescue a study whose observations are not independent or whose treatments are confounded. Replication, randomisation and the identity of the experimental unit still determine what the study can test.</p>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Power_(statistics)">power analysis</a> asks how likely a proposed design is to detect an effect of a specified size at a chosen significance level. It can help you reason about sample size, but only after the effect, variability and structure of the design have been stated. A full treatment is outside the scope of this chapter.</p>
+<p>Once the data have been collected, the design does not disappear. It tells you which rows are independent, which are subsamples, and which comparisons answer the original question. With that structure in mind, we can move on to data exploration.</p>
 </section>
 <section id="data-exploration">
 <h2>Data exploration<a class="headerlink" href="#data-exploration" title="Link to this heading">#</a></h2>
 <section id="some-general-tips">
 <h3>Some general tips<a class="headerlink" href="#some-general-tips" title="Link to this heading">#</a></h3>
-<p>Statistics is a bit of an art.</p>
-<p>That is why <em>a priori</em> visualization is important, and directly cutting to the (statistical) chase can often leave one floundering with confusing coefficient estimates and model fits (or over-fits) and overall uncertainty about whether you have picked the right statistical test.</p>
+<p>You already know how to make and save plots. Here we use them for a different purpose: to interrogate the data before fitting a model. Exploration is not a hunt for whichever test makes the result significant. It is a check that the variables, observations and patterns are compatible with the question and the design.</p>
+<p>Start with a few questions:</p>
 <ul class="simple">
-<li><p>So no matter what, always first look at the distribution of the response (the “raw data”). If you see multi-modality (multiple peaks), it might mean that some process or effect is generating it. So, in the dragonfly-damselfly example below, a preliminary visualization of the densities of genome size immediately tell you that there are actually two populations (e.g., two levels of  effects, or a process that generates the two populations with different central tendencies <span class="math notranslate nohighlight">\(\mu_A\)</span> and <span class="math notranslate nohighlight">\(\mu_B\)</span>).</p></li>
-<li><p>If it is a regression-type problem, look at the marginal distributions (distributions of the x and y variables) - similar insights can be gained.</p></li>
-<li><p>Also, one can look at the distributions within the effects to look for consistency of both shape (sample of the underlying population’s distribution type) and spread (sample of the underlying population’s variance).</p>
-<ul>
-<li><p>If there is consistency in both, the battle is pretty much won, because normal or not, there are statistical methods (glms, for example) that can be used.</p></li>
-<li><p>If there is consistency in distribution type but not in variance, half the battle is won. Unequal variances very often tend to be a problem with unbalanced sampling (across effects/treatments), so you can throw in mixed effects (so, GLMMs) which allows you to use empirical information (the data) across effects to help correct for it.</p></li>
-<li><p>And also, very often, tests are robust to unequal variances (you would need to find a statistical paper, or do your own simulations to support this - so very often better to stick with mixed effects).</p></li>
-<li><p>If there is consistency in variance but not shape, or inconsistency in both, then you have a harder problem, and may have to resort to transforming some data and not others (not ideal, to be avoided).</p></li>
+<li><p>What is the response variable, and what values can it take? Look for missing values, impossible values, outliers, skew and multiple modes. A second peak may indicate an unrecognised group or process, but the plot alone cannot tell you which.</p></li>
+<li><p>How does the response vary among the groups defined by the design? Compare both the centres and the spreads; a mean without the underlying observations can hide a great deal.</p></li>
+<li><p>If the question concerns two continuous variables, inspect their individual distributions and their relationship. Look for curvature, changing spread and influential observations rather than assuming a straight line.</p></li>
+<li><p>Which points are genuinely independent? Plotting every subsample is useful, but it does not turn subsamples into treatment replicates.</p></li>
 </ul>
-</li>
-</ul>
+<p>These checks can expose problems and suggest plausible models. They do not replace the biological hypothesis or the sampling design, and they do not prove that a particular statistical distribution generated the data.</p>
 </section>
 <section id="a-case-study">
 <h3>A case study<a class="headerlink" href="#a-case-study" title="Link to this heading">#</a></h3>
@@ -942,7 +930,7 @@
 <blockquote>
 <div><p>Ardila-Garcia, AM &amp; Gregory, TR (2009) ‘An exploration of genome size diversity in dragonflies and damselflies (Insecta: Odonata)’ Journal of Zoology, 278, 163 - 173</p>
 </div></blockquote>
-<p>You will work with the script file <code class="docutils literal notranslate"><span class="pre">exp_design.R</span></code>, which performs exploratory analyses on the data in <code class="docutils literal notranslate"><span class="pre">genome_size.csv</span></code>. Let’s go through the code block by block.</p>
+<p>You will work with the script file <code class="docutils literal notranslate"><span class="pre">exp_design.R</span></code>, which performs exploratory analyses on <code class="docutils literal notranslate"><span class="pre">genome_size.csv</span></code>. The plotting commands should be familiar from the previous chapter; concentrate here on the reasoning. Each row represents a species-level estimate, not an individual insect, so ask what the plots can reveal and what the data cannot resolve. We will go through the code block by block.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Start in your coursework <a class="reference internal" href="../appendices/terms.html#id4"><span class="std std-ref">project root</span></a>. Download <a class="reference download internal" download="" href="../_downloads/d0245983008143130ac2d56e9c4138f3/exp_design.R"><code class="xref download docutils literal notranslate"><span class="pre">exp_design.R</span></code></a> into <code class="docutils literal notranslate"><span class="pre">code/</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Download <a class="reference download internal" download="" href="../_downloads/1d74c8f8e9944a3839c69f823208511c/genome_size.csv"><code class="xref download docutils literal notranslate"><span class="pre">genome_size.csv</span></code></a> into <code class="docutils literal notranslate"><span class="pre">data/</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(\star\)</span> Open the script <code class="docutils literal notranslate"><span class="pre">exp_design.R</span></code> in RStudio (or some other text editor).</p>
@@ -1273,7 +1261,7 @@ object in R — if you use <code class="docutils literal notranslate"><span clas
 </section>
 <section id="from-data-exploration-to-statistical-analysis">
 <h2>From data exploration to statistical analysis<a class="headerlink" href="#from-data-exploration-to-statistical-analysis" title="Link to this heading">#</a></h2>
-<p>After you have performed your data exploration, you are in a position to make an informed decision about what statistical analyses to perform. Here is a decision tree that you can use, and which includes the methods you will learn in the following chapters:</p>
+<p>Data exploration narrows the set of sensible analyses, but it does not choose a test mechanically. Return first to the biological question and the design: identify the response, the explanatory variable, the experimental unit and any grouping or blocking. Then use the response type and the patterns you found to judge which model assumptions are plausible. The decision tree below connects those choices to methods developed in the following chapters.</p>
 <hr class="docutils" />
 <a class="bg-primary reference internal image-reference" href="../_images/yr1_2_flowchart.svg"><img alt="../_images/yr1_2_flowchart.svg" class="bg-primary" src="../_images/yr1_2_flowchart.svg" style="width: 900px;" />
 </a>

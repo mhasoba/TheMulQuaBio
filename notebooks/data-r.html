@@ -69,7 +69,7 @@
     <script src="../_static/sidebar-toggles.js?v=98d0e6e2"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Experimental design and Data exploration" href="exp-design.html" />
+    <link rel="next" title="Experimental design and data exploration" href="exp-design.html" />
     <link rel="prev" title="Introduction &amp; prerequisites" href="../part-basic-stats.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -241,7 +241,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../part-basic-stats.html">Introduction &amp; prerequisites</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Management and Visualization in R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and Data exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exp-design.html">Experimental design and data exploration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="t-f-tests.html">Basic hypothesis testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regress.html">Linear Models: regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anova.html">Linear Models: Analysis of variance</a></li>
@@ -647,6 +647,11 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization-practicals">Data-visualization practicals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-cultivation-timing-and-plant-species-richness-at-pound-hill">Practical: cultivation timing and plant species richness at Pound Hill</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-analysis">Build the analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-that-it-is-reproducible">Check that it is reproducible</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-visualize-regression-analyses">Practical: visualize regression analyses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-map-population-data">Practical: map population data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-practical-regression-analysis-by-location">Group practical: regression analysis by location</a></li>
@@ -658,6 +663,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Data visualization</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-next">Where next?</a></li>
 </ul>
             </nav>
         </div>
@@ -1114,8 +1120,8 @@ The following object is masked from ‘package:tidyr’:
 </section>
 <section id="on-to-data-exploration">
 <h2>On to data exploration<a class="headerlink" href="#on-to-data-exploration" title="Link to this heading">#</a></h2>
-<p>Once you have wrangled the Pound Hill data to its long format, you are ready to go! You may want to start by examining and visualizing the basic properties of the data, such as the number of tree species (41) in the dataset, number of quadrats (replicates) per plot and cultivation treatment, etc.</p>
-<p>We will learn about visualization next. After that, you can return to this dataset and try out some visual data exploration. For example, a useful visualization would be to make a histogram of abundances of species, grouped by different factors. For example, you can look at distributions of species’ abundances grouped by the fundamental treatment, <code class="docutils literal notranslate"><span class="pre">Cultivation</span></code>.</p>
+<p>Once you have wrangled the Pound Hill data to long form, each row identifies one plant species count in a particular quadrat. Before plotting anything, check the structure of the sampling: how many plant species, quadrats and plots are present, and how are the plots distributed among cultivation treatments?</p>
+<p>We will now learn how to summarise and visualise these data. After the visualisation sections below, you will return to Pound Hill in the <a class="reference internal" href="#pound-hill-richness-practical"><span class="std std-ref">Pound Hill richness practical</span></a> and connect the complete workflow: import and inspect, reshape, summarise at the appropriate sampling levels, save a table and figure, and interpret the result.</p>
 <section id="the-tidyverse-route">
 <h3>The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> route<a class="headerlink" href="#the-tidyverse-route" title="Link to this heading">#</a></h3>
 <p>Base R is not the only sensible way to wrangle data. The <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> is a collection of packages that are designed to work together. Here we will use <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> to select, filter, group and summarise rows, <code class="docutils literal notranslate"><span class="pre">tidyr</span></code> to change the shape of a table, and later <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> to make figures.</p>
@@ -3217,6 +3223,37 @@ Warning message:
 </section>
 <section id="data-visualization-practicals">
 <h2>Data-visualization practicals<a class="headerlink" href="#data-visualization-practicals" title="Link to this heading">#</a></h2>
+<section id="practical-cultivation-timing-and-plant-species-richness-at-pound-hill">
+<span id="pound-hill-richness-practical"></span><h3>Practical: cultivation timing and plant species richness at Pound Hill<a class="headerlink" href="#practical-cultivation-timing-and-plant-species-richness-at-pound-hill" title="Link to this heading">#</a></h3>
+<p>The Pound Hill data are now tidy, but tidying was not our ultimate scientific goal! We want to use them to answer a clear question:</p>
+<blockquote>
+<div><p><strong>How does mean plant species richness per quadrat vary among the March, May and October cultivation treatments?</strong></p>
+</div></blockquote>
+<p>Species richness is the number of species observed, not the total number of individual plants. For a single quadrat, you can therefore calculate richness by counting how many species have <code class="docutils literal notranslate"><span class="pre">Count</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+<p>There is one more piece of reasoning to get right before you start. Quadrats are nested within plots, and plots are assigned to cultivation treatments. The plots, rather than all the individual quadrats, provide the treatment-level replication. The number of sampled quadrats also differs among plots. First calculate richness for each quadrat, then calculate the mean quadrat richness for each plot. Otherwise, a plot with more sampled quadrats would quietly exert more influence on your treatment comparison.</p>
+<section id="build-the-analysis">
+<h4>Build the analysis<a class="headerlink" href="#build-the-analysis" title="Link to this heading">#</a></h4>
+<p>Create <code class="docutils literal notranslate"><span class="pre">code/pound_hill_analysis.R</span></code>. You may begin with the working wrangling steps in <code class="docutils literal notranslate"><span class="pre">data_wrang.R</span></code>, but the new script should run as a complete analysis from the project root. Use base R or <code class="docutils literal notranslate"><span class="pre">dplyr</span></code>/<code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>; the important thing is that you understand and check each transformation.</p>
+<ol class="arabic simple">
+<li><p>Import the Pound Hill data and metadata. Inspect their dimensions, column types and first few rows. Keep both raw files unchanged.</p></li>
+<li><p>Use the metadata to justify converting blank species counts to observed zeros, then reshape the counts to long form. Do not assume that a blank means zero in another dataset.</p></li>
+<li><p>Check the result before analysing it. Confirm that counts are numeric and non-negative, and determine the number of distinct species, quadrats and plots. A quadrat is identified by its cultivation, block, plot and quadrat labels together; <code class="docutils literal notranslate"><span class="pre">Q1</span></code> alone is not a unique sampling unit.</p></li>
+<li><p>Make a quadrat-level table containing <code class="docutils literal notranslate"><span class="pre">Cultivation</span></code>, <code class="docutils literal notranslate"><span class="pre">Block</span></code>, <code class="docutils literal notranslate"><span class="pre">Plot</span></code>, <code class="docutils literal notranslate"><span class="pre">Quadrat</span></code> and <code class="docutils literal notranslate"><span class="pre">Richness</span></code>. For each quadrat, <code class="docutils literal notranslate"><span class="pre">Richness</span></code> is the number of species whose count is greater than zero.</p></li>
+<li><p>From that table, make a plot-level summary containing <code class="docutils literal notranslate"><span class="pre">Cultivation</span></code>, <code class="docutils literal notranslate"><span class="pre">Block</span></code>, <code class="docutils literal notranslate"><span class="pre">Plot</span></code> and <code class="docutils literal notranslate"><span class="pre">MeanRichness</span></code>. Each of the 12 plots should appear exactly once. Save it as <code class="docutils literal notranslate"><span class="pre">results/pound_hill_plot_richness.csv</span></code>.</p></li>
+<li><p>Draw a figure comparing plot-level mean richness among the three cultivation treatments. Show the individual plot values rather than only a bar or treatment mean. Label the axes so that somebody can understand the response and treatment without reading your code, and save the figure as <code class="docutils literal notranslate"><span class="pre">results/pound_hill_plot_richness.pdf</span></code>.</p></li>
+<li><p>At the end of the script, add two or three commented sentences interpreting the figure. Which treatment has the highest typical richness? How variable are the plots within treatments? Does the figure alone show that cultivation timing caused the differences? What else would you need to know about the design?</p></li>
+</ol>
+</section>
+<section id="check-that-it-is-reproducible">
+<h4>Check that it is reproducible<a class="headerlink" href="#check-that-it-is-reproducible" title="Link to this heading">#</a></h4>
+<p>Close R, then run the analysis from the project root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rscript<span class="w"> </span>code/pound_hill_analysis.R
+</pre></div>
+</div>
+<p>Inspect the saved table and figure, then run the same command again. It should replace them cleanly and produce the same results without relying on objects left in your workspace. Stop when the script, table, figure and interpretation form one rerunnable analysis.</p>
+<p>If you finish early, repeat the plot-level summary for total abundance, calculated as the sum of species counts in each quadrat. Compare its pattern with richness. Why might the two responses tell different ecological stories?</p>
+</section>
+</section>
 <section id="practical-visualize-regression-analyses">
 <h3>Practical: visualize regression analyses<a class="headerlink" href="#practical-visualize-regression-analyses" title="Link to this heading">#</a></h3>
 <p>In this practical, you will write script that draws and saves a pdf file of the following figure, and writes the accompanying regression results to a formatted table in csv. Note that as the plot suggests, that the analysis must be subsetted by the <code class="docutils literal notranslate"><span class="pre">Predator.lifestage</span></code> field of the dataset.</p>
@@ -3291,6 +3328,10 @@ script should result in one pdf file containing the following figure being saved
 </ul>
 </section>
 </section>
+<section id="where-next">
+<h2>Where next?<a class="headerlink" href="#where-next" title="Link to this heading">#</a></h2>
+<p>You can now take a dataset from raw files to a checked table and an informative figure. The Pound Hill analysis also leaves us with a harder question: what can we infer from the pattern? Answering that depends on how the observations were sampled, which units received the treatment, and whether the comparison is replicated and independent. We take up those questions in <a class="reference internal" href="exp-design.html"><span class="std std-doc">Experimental design and data exploration</span></a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -3337,7 +3378,7 @@ script should result in one pdf file containing the following figure being saved
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Experimental design and Data exploration</p>
+        <p class="prev-next-title">Experimental design and data exploration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3420,6 +3461,11 @@ script should result in one pdf file containing the following figure being saved
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization-practicals">Data-visualization practicals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-cultivation-timing-and-plant-species-richness-at-pound-hill">Practical: cultivation timing and plant species richness at Pound Hill</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-analysis">Build the analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-that-it-is-reproducible">Check that it is reproducible</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-visualize-regression-analyses">Practical: visualize regression analyses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-map-population-data">Practical: map population data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-practical-regression-analysis-by-location">Group practical: regression analysis by location</a></li>
@@ -3431,6 +3477,7 @@ script should result in one pdf file containing the following figure being saved
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Data visualization</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-next">Where next?</a></li>
 </ul>
   </nav></div>
 
