@@ -7,7 +7,7 @@ If you are using a managed course computer, use its installed R first. Do not re
 
 ## Check before installing
 
-Open a terminal (PowerShell or Command Prompt on Windows) and run:
+Open a terminal and run:
 
 ```bash
 R --version
@@ -20,7 +20,6 @@ If both commands report a version, continue to {ref}`r-setup-check`. If an edito
 
 Use the official [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) downloads.
 
-- **Windows:** use [R for Windows](https://cran.r-project.org/bin/windows/base/) and accept the standard per-machine or managed-machine choices available to you. Open a new terminal after installation.
 - **macOS:** use [R for macOS](https://cran.r-project.org/bin/macosx/) and choose the installer that matches your Mac and supported macOS version. Open a new terminal afterwards.
 - **Ubuntu:** follow the [CRAN Ubuntu instructions](https://cran.r-project.org/bin/linux/ubuntu/) when you need CRAN's current release. On a managed machine, ask the administrator. For a simple distribution-provided installation on a machine you administer, `sudo apt update` followed by `sudo apt install r-base` is sufficient, but the Ubuntu release may provide an older R version. See {ref}`ubuntu-admin` before changing repositories or system packages.
 
@@ -47,7 +46,7 @@ If R asks to create a personal library, answer **yes**. This is the normal, reco
 dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
 ```
 
-Do **not** start R with `sudo`, and do not make a system library writable to everyone. Administrator access may be needed to install R itself or a missing operating-system development library, but it is not the normal way to install an R package. Read the package's actual error first; Windows users only need [Rtools](https://cran.r-project.org/bin/windows/Rtools/) when a package must be compiled from source.
+Do **not** start R with `sudo`, and do not make a system library writable to everyone. Administrator access may be needed to install R itself or a missing operating-system development library, but it is not the normal way to install an R package. If an installation fails, read the error before adding compilers or system libraries; it should identify the missing requirement.
 
 (r-setup-check)=
 ## Run a clean project check
@@ -76,7 +75,7 @@ Rscript code/r_setup_check.R
 
 The command should print `R setup check passed` and create `results/r_setup_check.png`. This is MQB's default script convention: start at the project root unless an exercise explicitly names another directory. Paths such as `data/input.csv` and `results/figure.png` are then portable. Do not put a computer-specific `setwd()` in a shared script.
 
-## Troubleshooting evidence
+## When something goes wrong
 
 When asking for help, copy the exact error and report your operating system plus the output of:
 
@@ -89,6 +88,10 @@ Sys.which(c("R", "Rscript"))
 
 Also say whether the failure occurs in a terminal, RStudio, VS Code, or a notebook. An R notebook additionally needs the separate {ref}`jupyter-r-kernel`; a Python environment does not install or isolate R packages.
 
-## Sources and verification
+## Further reading
 
-MQB guidance revised 10 October 2026 against the official [R installation and administration manual](https://cran.r-project.org/doc/manuals/r-release/R-admin.html), CRAN platform downloads, the [RStudio IDE user guide](https://docs.posit.co/ide/user/), and Posit's platform-support policy. The command-line workflow uses base R and is editor-independent. Platform installers and graphical editor discovery were not runtime-tested on this maintainer machine; use the linked current platform instructions if their screens differ.
+- [R installation and administration manual](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).
+- [RStudio IDE user guide](https://docs.posit.co/ide/user/).
+- [Posit's supported platforms](https://docs.posit.co/platform-support.html).
+
+Use the linked current installation instructions if their screens differ. The project check above uses base R and does not depend on an editor.

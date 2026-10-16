@@ -17,7 +17,7 @@ Selecting a Python interpreter does not automatically select an existing noteboo
 
 ## Install VS Code and open a project
 
-1. Install the current stable [Visual Studio Code](https://code.visualstudio.com/download) for your operating system, or use the version provided on a managed course machine. Do not use an administrator account merely to install extensions for your own account.
+1. Install the current stable [Visual Studio Code](https://code.visualstudio.com/download) for macOS or Linux, or use the version provided on a managed course machine. For Ubuntu through WSL, first follow {ref}`ubuntu-wsl` and connect the editor to Ubuntu. Do not use an administrator account merely to install extensions for your own account.
 2. Start VS Code and choose **File → Open Folder…**. Select the root of a disposable practice project or your own coursework project.
 3. Open **Terminal → New Terminal** and check where it starts:
 
@@ -25,7 +25,7 @@ Selecting a Python interpreter does not automatically select an existing noteboo
    pwd
    ```
 
-   On Windows PowerShell, use `Get-Location`. If this is not the folder you opened, use the terminal's `cd` command deliberately rather than assuming an editor button has changed every process's directory.
+   The result should be the project root you opened. If it is not, use `cd` to move there before running scripts; an editor button does not necessarily change the terminal's directory.
 4. When VS Code asks whether you trust a folder, trust only work you obtained from a course, collaborator or source you understand. Restricted Mode can prevent extensions, tasks and debugging configurations from running unfamiliar code. Do not make a folder globally trusted just to remove the prompt.
 
 Install only the extensions that you need from the Extensions view. For MQB, the usual minimum is:
@@ -71,7 +71,7 @@ print(sys.prefix)
 
 The displayed executable should be inside the intended `.venv`. Also run `python -m pip --version` in the terminal; it should name that same environment. If it does not, return to {ref}`python-identity` rather than installing packages into an uncertain interpreter.
 
-Use the editor's Python run control for a small script, then make the working directory explicit in your explanation of any input paths. To inspect a fault, set a breakpoint in the left margin and choose **Python Debugger: Debug Python File**, or use **Run and Debug**. The debugger normally uses the selected interpreter. A `launch.json` is optional; do not copy a generic configuration until you know why the script needs it.
+Use the editor's Python run control for a small script. Print `Path.cwd()` from `pathlib` to check where it runs before using relative input paths. To inspect a fault, set a breakpoint in the left margin and choose **Python Debugger: Debug Python File**, or use **Run and Debug**. The debugger normally uses the selected interpreter. A `launch.json` is optional; do not copy a generic configuration until you know why the script needs it.
 
 ## Jupyter notebooks: choose a kernel deliberately
 
@@ -113,7 +113,7 @@ install.packages("languageserver")
 
 The extension may ask to install or update its bundled `sess` session-support package; read the package prompt before accepting. `languageserver` provides code analysis, completion and diagnostics. It does not run your analysis or replace a working R session.
 
-Open an `.R` file and open the Command Palette with **Ctrl+Shift+P** on Linux or Windows (**Cmd+Shift+P** on macOS). Run **R: Create R Terminal**. The extension's session watcher should connect automatically, with the attached R process shown in the status bar. Select the **R** icon in the Activity Bar to open the **Workspace** viewer, then check the session before sending coursework code to it:
+Open an `.R` file and open the Command Palette with **Ctrl+Shift+P** on Linux (**Cmd+Shift+P** on macOS). Run **R: Create R Terminal**. The extension's session watcher should connect automatically, with the attached R process shown in the status bar. Select the **R** icon in the Activity Bar to open the **Workspace** viewer, then check the session before sending coursework code to it:
 
 ```r
 R.home()
@@ -167,7 +167,7 @@ Merge these entries into your existing settings object rather than replacing it 
 
 You can assign a shortcut to **R: Create R Terminal** instead of opening the Command Palette each time:
 
-1. Run **Preferences: Open Keyboard Shortcuts** from the Command Palette, or press **Ctrl+K**, then **Ctrl+S** on Linux or Windows (**Cmd+K**, then **Cmd+S** on macOS). These are two successive key combinations, not one simultaneous combination.
+1. Run **Preferences: Open Keyboard Shortcuts** from the Command Palette, or press **Ctrl+K**, then **Ctrl+S** on Linux (**Cmd+K**, then **Cmd+S** on macOS). These are two successive key combinations, not one simultaneous combination.
 2. Search for **R: Create R Terminal**.
 3. Select the **+** beside the command, or double-click its keybinding entry, and enter your preferred shortcut. For example, press **Ctrl+K**, then **Ctrl+Shift+R**, and confirm with **Enter**. On macOS, use **Cmd+K**, then **Cmd+Shift+R**.
 4. Right-click the entry and choose **Show Same Keybindings**. If the shortcut conflicts with a command you use, choose another combination rather than overwriting it unintentionally.
@@ -184,7 +184,7 @@ Alternatively, run **Preferences: Open Keyboard Shortcuts (JSON)** and add this 
 ]
 ```
 
-If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means **Ctrl+K**, followed by **Ctrl+Shift+R**; on macOS use `"cmd+k cmd+shift+r"` instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. Avoid **Ctrl+K**, then **R**, which already reveals the active file in Windows Explorer on Windows. This is a keyboard-shortcut configuration, not an entry for `settings.json`. See the [VS Code keybinding guide](https://code.visualstudio.com/docs/configure/keybindings) and the [R extension's keyboard-shortcut documentation](https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts).
+If the file already contains shortcuts, add the object inside the existing array, separated from other entries by a comma; do not replace your existing bindings or add a second outer array. The example chord means **Ctrl+K**, followed by **Ctrl+Shift+R**; on macOS use `"cmd+k cmd+shift+r"` instead. Check for conflicts even with this example, since extensions and personal keymaps can add bindings. This is a keyboard-shortcut configuration, not an entry for `settings.json`. See the [VS Code keybinding guide](https://code.visualstudio.com/docs/configure/keybindings) and the [R extension's keyboard-shortcut documentation](https://github.com/REditorSupport/vscode-R/wiki/Keyboard-shortcuts).
 
 Each use creates a new R terminal and session; it does not focus, restart or clear an existing session. To continue working with existing objects, select their terminal instead. Check which session is attached if you have several R terminals open, and use **R: Activate R Session** to select the intended session if necessary.
 
@@ -198,21 +198,22 @@ For most MQB work, use the R extension's built-in Workspace and data viewers fir
 
 ### Troubleshooting and other R workflows
 
-If **R: Create R Terminal** cannot find R, first run `R --version` in the VS Code integrated terminal. On Windows, the extension normally discovers a standard CRAN installation from the registry. Only if that fails, set the documented `r.executablePath` value to the exact `R.exe` path, for example:
+If **R: Create R Terminal** cannot find R, run these commands in VS Code's integrated terminal:
 
-```json
-{
-  "r.executablePath": "C:\\Program Files\\R\\R-4.3.3\\bin\\x64\\R.exe"
-}
+```bash
+command -v R
+R --version
 ```
 
-Use your installed version and path; do not paste the example unchanged. Version 3.x deprecates the older platform-specific `r.rpath.*` and `r.rterm.*` settings in favour of `r.executablePath` for vanilla R and `r.consolePath` for an optional alternative interactive console. On macOS or Linux, resolve the path visible to VS Code's terminal before adding any extension setting. See {ref}`r-setup` for installation and user-library troubleshooting.
+The first command should print R's full path, and the second should report its version. If R is missing here too, return to {ref}`r-setup`. If both work but the extension still cannot find R, open Settings, search for `r.executablePath`, and enter the full path printed by `command -v R`. Do not copy a path from another computer.
+
+Version 3.x uses `r.executablePath` for R's background processes and, by default, its interactive console. Set `r.consolePath` only if you deliberately use a different interactive console. These replace the older `r.rpath.*` and `r.rterm.*` settings; see the [extension settings documentation](https://github.com/REditorSupport/vscode-R/wiki/Extension-settings). If you use a remote Linux environment, configure the extension in that connected window, not in an unrelated local window.
 
 R debugging is separate from the R language extension and needs its own supported debugger and prerequisites. Do not claim a script has been debugged merely because it ran. An R `.ipynb` notebook uses an IRkernel chosen in the notebook kernel picker; it is distinct from sending code to an `.R` terminal.
 
 ## A small setup check
 
-Before beginning assessed work, use a scratch project with synthetic data:
+Before beginning an analysis, try these checks in a scratch project with a few made-up records:
 
 1. Open the project root and verify the terminal location.
 2. Run a short Python script using the selected project interpreter and print `sys.executable`.
@@ -222,12 +223,10 @@ Before beginning assessed work, use a scratch project with synthetic data:
 If any of these checks identifies a different interpreter, R installation or working directory than expected, stop and correct that mismatch before installing packages or running coursework. Record the OS, VS Code version, interpreter/R version and relevant extensions when reporting a setup problem to teaching staff.
 
 (vscode-setup-resources)=
-## Sources and verification
+## Further reading
 
-Adapted from the FoNS [VS Code guidance](https://imperial-fons-computing.github.io/vscode.html); see {ref}`setup-attribution` for the source revision and licence. MQB revision: 12 October 2026.
+- [VS Code installation](https://code.visualstudio.com/docs/setup/setup-overview) and [workspace trust](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust).
+- [Python environments](https://code.visualstudio.com/docs/python/environments), [debugging](https://code.visualstudio.com/docs/python/debugging) and [Jupyter kernel selection](https://code.visualstudio.com/docs/datascience/jupyter-kernel-management).
+- [R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r), [Workspace viewer](https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface) and [interactive viewers](https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers).
 
-Operational references: [VS Code installation](https://code.visualstudio.com/docs/setup/setup-overview), [workspace trust](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust), [Python in VS Code](https://code.visualstudio.com/docs/languages/python), [Python environments](https://code.visualstudio.com/docs/python/environments), [Jupyter kernel selection](https://code.visualstudio.com/docs/datascience/jupyter-kernel-management), [Python debugging](https://code.visualstudio.com/docs/python/debugging), and the [REditorSupport R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r).
-
-R viewer guidance checked against the [v3.0 changelog](https://github.com/REditorSupport/vscode-R/blob/master/CHANGELOG.md), [Workspace viewer documentation](https://github.com/REditorSupport/vscode-R/wiki/Sidebar-user-interface), [interactive viewer documentation](https://github.com/REditorSupport/vscode-R/wiki/Interactive-viewers) and linked extension/Positron pages on 12 October 2026. This was a documentation check, not a runtime test of the viewers or optional applications.
-
-Verified locally on Linux on 30 September 2026: VS Code 1.139.1 and R 4.3.3 were available. No extension was installed into the maintainer's editor profile, and no graphical editor, macOS, Windows or R-notebook workflow was runtime-tested. Check current official support and extension requirements on your own platform.
+See {ref}`setup-attribution` for the adapted material's attribution, licence and limits of the setup checks.

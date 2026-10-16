@@ -13,6 +13,8 @@ programming/computing technologies. That is, we are treating this course as any 
 
 If you do not use Git, you can download the code, data, notes, and other course materials from the [repository](https://github.com/MulQuaBio/MQB): select **Code**, then **Download ZIP**. Unzip the archive to access the files you need.
 
+The computing examples use macOS or Linux. Start with [Tooling and Environments](appendices/tooling.md) to check your software or choose a suitable Linux environment.
+
 ---
 
 ```{figure} ./notebooks/graphics/programming.png
