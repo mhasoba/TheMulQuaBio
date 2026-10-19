@@ -17,7 +17,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install validation dependencies
+        run: make init
+
+      - name: Run fast content and stored-output checks
+        run: |
+          make check-content
+          make check-notebooks
+
   build:
+    needs: validate
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
@@ -32,8 +57,14 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-execution.lock.txt
 
-      - name: Install dependencies
+      - name: Install notebook execution dependencies
         run: make init REQUIREMENTS_FILE=requirements-execution.lock.txt
+
+      - name: Register Python and Bash kernels
+        run: |
+          . .venv/bin/activate
+          python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3"
+          python -m bash_kernel.install
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -41,21 +72,25 @@ jobs:
           r-version: '4.3.3'
           use-public-rspm: true
 
-      - name: Install R workflow dependencies
-        run: Rscript -e 'install.packages("reshape2", repos = "https://cloud.r-project.org")'
+      - name: Install R dependencies and register the kernel
+        env:
+          CRAN_REPO: https://packagemanager.posit.co/cran/__linux__/noble/2026-10-01
+        run: |
+          . .venv/bin/activate
+          Rscript -e 'options(repos = c(CRAN = Sys.getenv("CRAN_REPO"))); install.packages(readLines("requirements-r.txt"))'
+          ir_kernel_spec=$(Rscript -e 'cat(system.file("kernelspec", package = "IRkernel"))')
+          jupyter kernelspec install --sys-prefix --replace --name ir "$ir_kernel_spec"
 
       - name: Check the R examples
         run: |
           Rscript scripts/check_r_observations.R
           Rscript scripts/check_r_file_workflows.R
 
-      # Strict forced notebook execution is temporarily suspended. Restore it
-      # through https://github.com/MulQuaBio/MQB/issues/205.
-      - name: Check and build book
+      - name: Execute notebooks and build book
         env:
           MQB_NOTEBOOK_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
           MQB_NOTEBOOK_REF: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: PYTHONPATH="$GITHUB_WORKSPACE" make test
+        run: PYTHONPATH="$GITHUB_WORKSPACE" make test-strict
 
       - name: Upload built book
         uses: actions/upload-artifact@v7

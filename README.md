@@ -134,6 +134,18 @@ make test
 referenced paths in the book source; run `make check-content` to run this check
 without building the book.
 
+Notebook outputs are checked separately:
+
+```bash
+make check-notebooks
+```
+
+Before a release, use `make test-strict`. This executes every notebook referenced
+by `_toc.yml`, rejects unexpected cell errors, audits the stored outputs, and then
+builds the complete HTML book. The mixed Python/R Jupyter introduction is executed
+cell-by-cell with the appropriate kernel. Run notebook commands from the repository
+root; the executor supplies the book's `content/` directory as their runtime root.
+
 If you prefer to activate the environment explicitly:
 
 ```bash
