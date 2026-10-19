@@ -688,7 +688,10 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-unit-testing-approaches">Other unit testing approaches</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#paranoid-programming-pause-before-the-failure">Paranoid programming: pause before the failure</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-expected-errors">Handling expected errors</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-number-that-converts-may-still-be-unusable">A number that converts may still be unusable</a></li>
 </ul>
@@ -4241,6 +4244,24 @@ In<span class="w"> </span><span class="o">[]</span>:<span class="w"> </span>%pdb
 Automatic<span class="w"> </span>pdb<span class="w"> </span>calling<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>turned<span class="w"> </span>OFF
 </pre></div>
 </div>
+<section id="paranoid-programming-pause-before-the-failure">
+<h4>Paranoid programming: pause before the failure<a class="headerlink" href="#paranoid-programming-pause-before-the-failure" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">%pdb</span></code> example starts the debugger after an exception. You can also stop just before a suspected failure and inspect the values that lead to it. In <code class="docutils literal notranslate"><span class="pre">code/debugme.py</span></code>, temporarily put a breakpoint between the subtraction and division:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">breakpoint</span><span class="p">()</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">code/debugme.py</span></code> again from IPython. The condition lets earlier loop iterations run; the built-in <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> pauses when <code class="docutils literal notranslate"><span class="pre">y</span></code> first becomes zero. At the debugger prompt, use <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">y</span></code>. What value will the next line try to divide by? Enter <code class="docutils literal notranslate"><span class="pre">q</span></code> to stop without executing that division. Remove the temporary breakpoint when you finish investigating.</p>
+<p>If you have the separate <code class="docutils literal notranslate"><span class="pre">ipdb</span></code> package installed in the Python environment running the script, you can use its IPython-style debugger at the same point. Replace <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> in the conditional block with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>            <span class="kn">import</span><span class="w"> </span><span class="nn">ipdb</span>
+            <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The same inspection commands work there. <code class="docutils literal notranslate"><span class="pre">ipdb</span></code> is an alternative for this exercise, not a package you need to install to use <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> or IPython’s <code class="docutils literal notranslate"><span class="pre">%pdb</span></code>.</p>
+<p>You can inspect the same problem in VS Code: set a breakpoint on the division line and examine the variables before continuing. See the <a class="reference internal" href="../appendices/vscode.html#python-scripts-select-run-and-debug"><span class="std std-ref">VS Code Python debugging guide</span></a>. A breakpoint helps explain a failure; a repeatable test checks whether your eventual change gives the intended result.</p>
+</section>
 </section>
 <section id="handling-expected-errors">
 <h3>Handling expected errors<a class="headerlink" href="#handling-expected-errors" title="Link to this heading">#</a></h3>
@@ -5485,8 +5506,8 @@ from the end of an array:</p>
 <section id="the-lotka-volterra-model">
 <h5>The Lotka-Volterra model<a class="headerlink" href="#the-lotka-volterra-model" title="Link to this heading">#</a></h5>
 <p>Now let’s try numerical integration in Python for solving a classical model in biology — the Lotka-Volterra (LV) model for a predator-prey system in two-dimensional space (e.g., on land). The LV model is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-229d5568-6a5c-40f4-b58c-5ca1cd02749a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-229d5568-6a5c-40f4-b58c-5ca1cd02749a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fdfbecf2-b105-48d3-8ed2-c830400938d7">
+<span class="eqno">(2)<a class="headerlink" href="#equation-fdfbecf2-b105-48d3-8ed2-c830400938d7" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= r R - a C R  \nonumber \\
     \frac{dC}{dt} &amp;= - z C + e a C R
 \end{align}\]</div>
@@ -5963,8 +5984,8 @@ from the end of an array:</p>
 <section id="the-lotkavolterra-model-revisited">
 <h3>The Lotka–Volterra model revisited<a class="headerlink" href="#the-lotkavolterra-model-revisited" title="Link to this heading">#</a></h3>
 <p>In the original Lotka–Volterra model, the resource population grows without bound when consumers are absent. Add logistic density dependence to make resource growth slow as the resource density <span class="math notranslate nohighlight">\(R\)</span> approaches its carrying capacity <span class="math notranslate nohighlight">\(K\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5574e63c-208e-41f0-bc45-0a7dda498da3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5574e63c-208e-41f0-bc45-0a7dda498da3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-313035e1-54d0-40c0-bc80-6b3ce996146c">
+<span class="eqno">(3)<a class="headerlink" href="#equation-313035e1-54d0-40c0-bc80-6b3ce996146c" title="Permalink to this equation">#</a></span>\[\begin{align}
     \frac{dR}{dt} &amp;= rR\left(1 - \frac{R}{K}\right) - aCR\\
     \frac{dC}{dt} &amp;= -zC + eaCR
 \end{align}\]</div>
@@ -5995,8 +6016,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"
 <section id="extension-discrete-time-lv-model">
 <h3>Extension: discrete-time LV model<a class="headerlink" href="#extension-discrete-time-lv-model" title="Link to this heading">#</a></h3>
 <p>Write a discrete-time version called <code class="docutils literal notranslate"><span class="pre">LV3.py</span></code>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9727b284-3b35-4796-859d-f4989249e65c">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9727b284-3b35-4796-859d-f4989249e65c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2872acdf-3149-4800-9d25-020432380a6c">
+<span class="eqno">(4)<a class="headerlink" href="#equation-2872acdf-3149-4800-9d25-020432380a6c" title="Permalink to this equation">#</a></span>\[\begin{align}
     R_{t+1} &amp;= R_t \left(1 + r\left(1 - \frac{R_t}{K}\right) - aC_t\right)\\
     C_{t+1} &amp;= C_t \left(1 - z + eaR_t\right)
 \end{align}\]</div>
@@ -7135,7 +7156,10 @@ for efficient data crunching</p></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-unit-testing-approaches">Other unit testing approaches</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#paranoid-programming-pause-before-the-failure">Paranoid programming: pause before the failure</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-expected-errors">Handling expected errors</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-number-that-converts-may-still-be-unusable">A number that converts may still be unusable</a></li>
 </ul>

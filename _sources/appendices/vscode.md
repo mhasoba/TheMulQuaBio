@@ -1,7 +1,7 @@
 (vscode-setup)=
 # VS Code for MQB
 
-Visual Studio Code (VS Code) is a multilingual editor that can work with Python scripts, R scripts, terminals and Jupyter notebooks in one project folder. It is an option, not a requirement: use RStudio where that better suits your R work. This page assumes that you already have the Python environment from {ref}`python-environments` and, for R, a working installation from {ref}`r-setup`.
+Visual Studio Code (VS Code) is a multilingual editor that can work with Python scripts, R scripts, terminals and Jupyter notebooks in one project folder. It is an option, not a requirement: use RStudio where that better suits your R work. This page assumes that you have a working Python installation as described in {ref}`python-environments` and, for R, a working installation from {ref}`r-setup`.
 
 ## Before you start
 
@@ -59,19 +59,13 @@ Before sharing work, check the current branch in the status bar and make sure th
 
 ## Python scripts: select, run and debug
 
-Create or activate a project environment using {ref}`python-venv` before selecting it in VS Code. Open a `.py` file, then select the interpreter shown in the status bar (the strip along the bottom of the window) or run **Python: Select Interpreter** from the Command Palette (VS Code’s searchable command menu). Choose the `.venv` belonging to the project, not simply the first Python version in the list.
+VS Code needs to know which Python interpreter should run your script. You do not need to create a virtual environment just to run or debug it. A project environment is useful when you need to install packages for that project; use an existing course environment if one has been provided.
 
-Check the selected interpreter in both the editor and a new integrated terminal:
+1. **Choose Python.** Open a `.py` file and run **Python: Select Interpreter** from the Command Palette (VS Code’s searchable command menu), or select the interpreter shown in the status bar. Choose the Python that has the packages your script needs. If your project already has a `.venv`, choose that interpreter.
+2. **Run the script.** Use the editor's Python run control, or run `python code/your_script.py` in the integrated terminal from the project root. If the script uses relative paths such as `data/input.csv`, check its working directory by temporarily adding `from pathlib import Path` and `print(Path.cwd())` to the script. Remove these lines after the check.
+3. **Debug a fault.** Set a breakpoint by clicking in the left margin beside a line of code. Choose **Python Debugger: Debug Python File** from the run control's menu, or use **Run and Debug**. When execution pauses, inspect the variables and step through the next lines. The debugger normally uses the interpreter selected in step 1; no `launch.json` is needed for this basic workflow.
 
-```python
-import sys
-print(sys.executable)
-print(sys.prefix)
-```
-
-The displayed executable should be inside the intended `.venv`. Also run `python -m pip --version` in the terminal; it should name that same environment. If it does not, return to {ref}`python-identity` rather than installing packages into an uncertain interpreter.
-
-Use the editor's Python run control for a small script. Print `Path.cwd()` from `pathlib` to check where it runs before using relative input paths. To inspect a fault, set a breakpoint in the left margin and choose **Python Debugger: Debug Python File**, or use **Run and Debug**. The debugger normally uses the selected interpreter. A `launch.json` is optional; do not copy a generic configuration until you know why the script needs it.
+If the script reports a missing package, or runs differently in the editor and terminal, check which Python each is using. Temporarily print `sys.executable` in the script (after `import sys`) and compare it with `python -c "import sys; print(sys.executable)"` in the terminal. Select the intended interpreter again or activate it in a new terminal. Before installing packages, follow {ref}`python-identity`; if you need an isolated place to install them, follow {ref}`python-venv`.
 
 ## Jupyter notebooks: choose a kernel deliberately
 
