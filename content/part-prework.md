@@ -91,7 +91,7 @@ If you want a quick refresher on the “basic stats” pipeline first (design �
 - If you are about to start **E&E Modelling**, prioritise sections **2–4** (calculus, linear algebra, differential equations) in the exercises.
 - If you are about to start **Advanced Data Analyses and Statistics**, prioritise sections **2, 5, and 6** (calculus, probability, optimisation/likelihood).
 - If you are preparing for **Bayesian modelling**, prioritise sections **5 and 6** (probability + likelihood/optimisation), then skim **2** (calculus) as needed.
-- If you are preparing for **Machine Learning**, prioritise sections **5 and 6** (probability + optimisation/likelihood), and make sure you can follow the optional Python checks.
+- If you are preparing for **Machine Learning**, prioritise sections **5 and 6** (probability + optimisation/likelihood), and make sure you can follow the Python checks.
 
 ## Do this first
 
