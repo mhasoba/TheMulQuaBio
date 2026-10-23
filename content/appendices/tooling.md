@@ -17,6 +17,7 @@ If a setup page uses a word you do not know, look it up in [Key computing terms]
 - Installing Python and managing project packages: [Python Installation and Environments](python-environments.md)
 - Installing R and using a personal package library: [R Installation and User Libraries](r-setup.md)
 - Working with Python, R and notebooks in an editor: [VS Code for MQB](vscode.md)
+- Setting up and testing GitHub Copilot: [Getting started with GitHub Copilot in VS Code](vscode-copilot.md)
 - Setting up GitHub access and project remotes: [Git, GitHub and SSH Setup](git-ssh.md)
 - If you’re new to notebooks/Jupyter: [Jupyter / notebooks intro](../notebooks/appendix-jupy-intro)
 

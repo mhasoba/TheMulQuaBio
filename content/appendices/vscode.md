@@ -15,6 +15,8 @@ These are separate things:
 
 Selecting a Python interpreter does not automatically select an existing notebook kernel, and launching an R terminal does not create an R notebook kernel.
 
+For GitHub Copilot access and setup, see [Getting started with GitHub Copilot in VS Code](vscode-copilot.md).
+
 ## Install VS Code and open a project
 
 1. Install the current stable [Visual Studio Code](https://code.visualstudio.com/download) for macOS or Linux, or use the version provided on a managed course machine. For Ubuntu through WSL, first follow {ref}`ubuntu-wsl` and connect the editor to Ubuntu. Do not use an administrator account merely to install extensions for your own account.
